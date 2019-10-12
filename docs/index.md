@@ -30,7 +30,15 @@ Just go to your favorite project that has lots of docstrings but missing auto-ge
 
 ```bash
 cd ~/my/project
-handsdown -o docs
+
+# output buolt MD files to docs/*
+handsdown
+
+# or provide custom output: output_dir/*
+handsdown -o output_dir
+
+# generate docs only for my_module, but no migrations, plz
+handsdown my_module --exclude my_module/migrations
 ```
 
 Navigate to `docs/index.md` to check your new documentation!
@@ -38,18 +46,22 @@ Navigate to `docs/index.md` to check your new documentation!
 ### 🧩 As a module
 
 ```python
-from handsdown.handsdown import Handsdown
-handsdown = Handsdown(
-    input_path=Path('path/to/my/repo'),
-    output_path=Path('path/to/output'),
+from handsdown import Generator
+from handsdown import PathFinder
+repo_path = Path.cwd()
+
+handsdown_generator = Generator(
+    input_path=repo_path,
+    output_path=repo_path / 'output',
+    source_paths=PathFinder(repo_path, "**/*.py").list()
 )
 
 # generate all docs at once
-handsdown.generate()
+handsdown_generator.generate()
 
 # or generate one doc
-output_file_path = handsdown.generate_doc(Path('path/to/my/repo/source.py'))
-output_file_path # Path('path/to/output/source.md')
+output_file_path = handsdown_generator.generate_doc(repo_path / 'source.py')
+output_file_path # Path('output/source.md')
 ```
 
 ## 🔧 Installation

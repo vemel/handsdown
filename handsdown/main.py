@@ -1,8 +1,22 @@
+"""
+Main CLI entrypoint for `handsdown`
+
+#### Attributes
+
+- `EXCLUDE_EXPRS` - Path glob expressions to always exclude.
+  By default: `build/*`, `tests/*`, `test/*` are excluded.
+- `SOURCES_GLOB_EXPR` - Glob expr to lokkup python source files: `**/*.py`
+"""
+
 import logging
 
 from handsdown.generator import Generator
 from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import get_cli_parser
+
+
+EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*"]
+SOURCES_GLOB = "**/*.py"
 
 
 def get_logger(level: int) -> logging.Logger:
@@ -43,14 +57,11 @@ def main() -> None:
 
     logger = get_logger(level=log_level)
 
-    path_finder = PathFinder(root=args.input_path, glob_expr="**/*.py").exclude(
-        "__main__.py"
+    path_finder = (
+        PathFinder(root=args.input_path, glob_expr=SOURCES_GLOB)
+        .exclude(*EXCLUDE_EXPRS, *args.exclude)
+        .include(*args.include)
     )
-    if args.include:
-        path_finder = path_finder.include(*args.include)
-
-    if args.exclude:
-        path_finder = path_finder.exclude(*args.exclude)
 
     generator = Generator(
         input_path=args.input_path,
