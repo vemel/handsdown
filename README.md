@@ -1,8 +1,8 @@
-# Handsdown 🙌
+# 🙌 Handsdown - Python documentation generator
 
 Python docstring-based documentation generator for lazy people.
 
-## Features
+## 🔬 Features
 
 - 👓 PEP257, Google and RST docstrings support. All of them are converted to a valid markdown.
 - 🐈 Github-friendly. Use your local markdown viewer or open docs [right on Github](docs/index.md)
@@ -14,9 +14,9 @@ Python docstring-based documentation generator for lazy people.
 - #️⃣ Create cross-references easily `handsdown.handsdown.Handsdown.replace_links` (check [index.md](docs/index.md#features))
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
-## Usage
+## 🎉 Usage
 
-### From command line
+### 💻 From command line
 
 Just go to your favorite project that has lots of docstrings but missing auto-generated docs and let `handsdown` do the thing.
 
@@ -27,7 +27,7 @@ handsdown -o docs
 
 Navigate to `docs/index.md` to check your new documentation!
 
-### As a module
+### 🧩 As a module
 
 ```python
 from handsdown.handsdown import Handsdown
@@ -44,7 +44,7 @@ output_file_path = handsdown.generate_doc(Path('path/to/my/repo/source.py'))
 output_file_path # Path('path/to/output/source.md')
 ```
 
-## Installation
+## 🔧 Installation
 
 Install using pip
 
