@@ -14,8 +14,8 @@ class IndentTrimmer:
         Examples:
 
             ```python
-            IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
-            # ' asd\nasd\n  asd\n'
+            IndentTrimmer.trim_text('  asd\\n asd\\n   asd\\n')
+            # ' asd\\nasd\\n  asd\\n'
             ```
 
         Arguments:
