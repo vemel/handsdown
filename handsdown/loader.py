@@ -148,7 +148,10 @@ class Loader:
         """
         inspect_module = self.import_module(import_string)
 
-        obj_names = pyclbr.readmodule_ex(import_string)
+        try:
+            obj_names = pyclbr.readmodule_ex(import_string)
+        except AttributeError as e:
+            raise LoaderError(f"Cannot get items from module {import_string} : {e}")
         for obj_name in obj_names:
             if obj_name.startswith("__"):
                 continue
