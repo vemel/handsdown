@@ -19,7 +19,7 @@ Python docstring-based documentation generator for lazy people.
 - 📦 Nice list of all modules in [Modules](docs/index.md#modules)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Links to source code from every doc section.
-- #️⃣ Create cross-references easily [Handsdown.replace_links](./handsdown_handsdown.md#handsdownreplace_links) (check [index.md](docs/index.md#features))
+- #️⃣ Create cross-references easily `handsdown.handsdown.Handsdown.replace_links` (check [index.md](docs/index.md#features))
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🎉 Usage
@@ -62,11 +62,33 @@ pip install handsdown
 
 ## Modules
 
+- Build
+  - Lib
+    - Handsdown
+      - [Main](./build_lib_handsdown___main__.md)
+      - [Cli parser](./build_lib_handsdown_cli_parser.md)
+      - [Generator](./build_lib_handsdown_generator.md)
+      - [Handsdown](./build_lib_handsdown_handsdown.md)
+      - [Indent trimmer](./build_lib_handsdown_indent_trimmer.md)
+      - [Loader](./build_lib_handsdown_loader.md)
+      - [Main](./build_lib_handsdown_main.md)
+      - [Path finder](./build_lib_handsdown_path_finder.md)
+      - [Processors](./build_lib_handsdown_processors_index.md)
+        - [Base](./build_lib_handsdown_processors_base.md)
+        - [Pep257](./build_lib_handsdown_processors_pep257.md)
+        - [Rst](./build_lib_handsdown_processors_rst.md)
+        - [Smart](./build_lib_handsdown_processors_smart.md)
+      - [Signature](./build_lib_handsdown_signature.md)
+      - [Utils](./build_lib_handsdown_utils.md)
 - Handsdown
-  - [Handsdown](./handsdown_handsdown.md)
+  - [Main](./handsdown___main__.md)
+  - [Cli parser](./handsdown_cli_parser.md)
+  - [Generator](./handsdown_generator.md)
   - [Indent trimmer](./handsdown_indent_trimmer.md)
   - [Loader](./handsdown_loader.md)
-  - Processors
+  - [Main](./handsdown_main.md)
+  - [Path finder](./handsdown_path_finder.md)
+  - [Processors](./handsdown_processors_index.md)
     - [Base](./handsdown_processors_base.md)
     - [Pep257](./handsdown_processors_pep257.md)
     - [Rst](./handsdown_processors_rst.md)

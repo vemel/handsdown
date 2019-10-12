@@ -1,6 +1,6 @@
-# Handsdown: Loader
+# Build: Lib: Handsdown: Loader
 
-- [Handsdown: Loader](#handsdown-loader)
+- [Build: Lib: Handsdown: Loader](#build-lib-handsdown-loader)
   - [LoaderError](#loadererror)
   - [Loader](#loader)
     - [Loader().get_module_objects](#loaderget_module_objects)
@@ -9,18 +9,18 @@
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
 
-> Auto-generated documentation for [handsdown.loader](../handsdown/loader.py) module.
+> Auto-generated documentation for [build.lib.handsdown.loader](../build/lib/handsdown/loader.py) module.
 
 ## LoaderError
 
-[🔍 find in source code](../handsdown/loader.py#L17)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L17)
 
 ```python
 class LoaderError(*args, **kwargs)
 ```
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L21)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L21)
 
 ```python
 class Loader(import_paths: Iterable[pathlib.Path]) -> None
@@ -41,7 +41,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L136)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L136)
 
 ```python
 def get_module_objects(import_string: str) -> Generator[Tuple[str, Any, int], NoneType, NoneType]
@@ -59,7 +59,7 @@ A generator that yields tuples of (`name`, `object`, `level`).
 
 ### Loader.get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L57)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L57)
 
 ```python
 def get_object_docstring(obj: Any) -> str
@@ -76,7 +76,7 @@ A string with object docsting.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L40)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L40)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -94,7 +94,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L190)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L187)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -109,7 +109,7 @@ A line number.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L70)
+[🔍 find in source code](../build/lib/handsdown/loader.py#L70)
 
 ```python
 def import_module(import_string: str) -> Any

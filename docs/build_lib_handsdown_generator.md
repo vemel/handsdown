@@ -1,21 +1,30 @@
-# Handsdown: Handsdown
+# Build: Lib: Handsdown: Generator
 
-- [Handsdown: Handsdown](#handsdown-handsdown)
-  - [Handsdown](#handsdown)
-    - [Handsdown().cleanup_old_docs](#handsdowncleanup_old_docs)
-    - [Handsdown().generate](#handsdowngenerate)
-    - [Handsdown().generate_doc](#handsdowngenerate_doc)
-    - [Handsdown().replace_links](#handsdownreplace_links)
+- [Build: Lib: Handsdown: Generator](#build-lib-handsdown-generator)
+  - [GeneratorError](#generatorerror)
+  - [Generator](#generator)
+    - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
+    - [Generator().generate](#generatorgenerate)
+    - [Generator().generate_doc](#generatorgenerate_doc)
+    - [Generator().replace_links](#generatorreplace_links)
 
-> Auto-generated documentation for [handsdown.handsdown](../handsdown/handsdown.py) module.
+> Auto-generated documentation for [build.lib.handsdown.generator](../build/lib/handsdown/generator.py) module.
 
-## Handsdown
+## GeneratorError
 
-[🔍 find in source code](../handsdown/handsdown.py#L13)
+[🔍 find in source code](../build/lib/handsdown/generator.py#L12)
 
 ```python
-class Handsdown(
+class GeneratorError(*args, **kwargs)
+```
+## Generator
+
+[🔍 find in source code](../build/lib/handsdown/generator.py#L16)
+
+```python
+class Generator(
     input_path: pathlib.Path,
+    source_paths: Iterable[pathlib.Path],
     logger: Union[logging.Logger, NoneType] = None,
     docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None,
     loader: Union[handsdown.loader.Loader, NoneType] = None,
@@ -32,9 +41,9 @@ Main doc generator.
 - `loader` - Loader for python modules.
 - `output_path` - Path to folder with auto-generated docs to output.
 
-### Handsdown().cleanup_old_docs
+### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/handsdown.py#L69)
+[🔍 find in source code](../build/lib/handsdown/generator.py#L62)
 
 ```python
 def cleanup_old_docs(preserve_paths: Iterable[pathlib.Path]) -> None
@@ -45,18 +54,18 @@ Remove old docs generated for this module.
 
 - `preserve_paths` - All doc files generated paths that should not be deleted.
 
-### Handsdown().generate
+### Generator().generate
 
-[🔍 find in source code](../handsdown/handsdown.py#L160)
+[🔍 find in source code](../build/lib/handsdown/generator.py#L167)
 
 ```python
 def generate() -> None
 ```
 Generate all module docs at once.
 
-### Handsdown().generate_doc
+### Generator().generate_doc
 
-[🔍 find in source code](../handsdown/handsdown.py#L109)
+[🔍 find in source code](../build/lib/handsdown/generator.py#L109)
 
 ```python
 def generate_doc(file_path: pathlib.Path) -> Union[pathlib.Path, NoneType]
@@ -71,9 +80,9 @@ Generate one module doc at once. If `file_path` has nothing to document - return
 
 A path to generated MD file or None.
 
-### Handsdown().replace_links
+### Generator().replace_links
 
-[🔍 find in source code](../handsdown/handsdown.py#L208)
+[🔍 find in source code](../build/lib/handsdown/generator.py#L209)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
