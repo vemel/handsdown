@@ -18,13 +18,14 @@ Python docstring-based documentation generator for lazy people.
 
 ### From command line
 
-Just got to your favorite project that has docstring but missing auto-generated docs and let `handsdown` do the thing.
+Just go to your favorite project that has lots of docstrings but missing auto-generated docs and let `handsdown` do the thing.
 
 ```bash
+cd ~/my/project
 handsdown -o docs
 ```
 
-Navigate to `docs/index.md` to see the result.
+Navigate to `docs/index.md` to check your new documentation!
 
 ### As a module
 
