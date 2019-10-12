@@ -122,7 +122,8 @@ class Loader:
                 inspect_object, cls._get_inspect_predicate(obj_name)
             ):
                 title = f"{obj_name}().{method_name}"
-                if isinstance(inspect_method, (staticmethod, classmethod)):
+                class_method = inspect_object.__dict__[method_name]
+                if isinstance(class_method, (staticmethod, classmethod)):
                     title = f"{obj_name}.{method_name}"
 
                 yield (title, inspect_method, 1)
