@@ -10,27 +10,41 @@ from typing import Iterable, Text, List, Any, Tuple, Optional, Callable, Dict
 
 from handsdown.loader import Loader
 from handsdown.processors.smart import SmartDocstringProcessor
+from handsdown.processors.base import BaseDocstringProcessor
 
 
 class Handsdown:
     """
-    Doc generator.
+    Main doc generator.
 
     Arguments:
         repo_path -- Path to repo to generate docs.
+        logger -- Logger instance.
+        docstring_processor -- Docstring converter to Markdown.
+        loader -- Loader for python modules.
+        docs_path -- Path to folder with auto-generated docs to output.
     """
 
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
 
     def __init__(
-        self, repo_path: Path, logger: Optional[logging.Logger] = None
+        self,
+        repo_path: Path,
+        logger: Optional[logging.Logger] = None,
+        docstring_processor: BaseDocstringProcessor = SmartDocstringProcessor,
+        loader: Loader = Loader,
+        docs_path: Optional[Path] = None,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
         self._repo_path = repo_path
-        self._docs_path = self._repo_path / "docs"
-        self._docs_path.mkdir(exist_ok=True)
-        self._loader = Loader()
-        self._docstring_processor = SmartDocstringProcessor()
+        self._docs_path = docs_path if docs_path is not None else (repo_path / "docs")
+
+        if not self._docs_path.exists():
+            self._logger.info(f"Creating folder {self._docs_path}")
+            self._docs_path.mkdir()
+
+        self._loader = loader()
+        self._docstring_processor = docstring_processor()
         self._module_md_map: Dict[Text, Text] = {}
         self._docstring_links_re: re.Pattern = re.compile("")
         self._signature_links_re: re.Pattern = re.compile("")
@@ -181,7 +195,7 @@ class Handsdown:
                 module_objects=module_objects, source_path=relative_file_path
             )
 
-            toc_lines = self._build_toc_lines(header_lines + content_lines)
+            toc_lines = self._build_toc_lines("\n".join(header_lines + content_lines))
             md_lines = []
             md_lines.extend(header_lines[:2])
             md_lines.extend(toc_lines)
@@ -292,6 +306,17 @@ class Handsdown:
     def _get_formatted_docstring(
         self, source_path: Path, module_object: Any
     ) -> Optional[Text]:
+        """
+        Get object docstring and convert it to a valid markdown using
+        `handsdown.processors.base.BaseDocstringProcessor`.
+
+        Arguments:
+            source_path -- Path to object source file.
+            module_object -- Object to inspect.
+
+        Returns:
+            A module docstring with valid markdown.
+        """
         current_md_name = self._get_md_name(source_path)
         docstring = self._loader.get_object_docstring(module_object)
         if not docstring:
@@ -322,7 +347,7 @@ class Handsdown:
 
     def _generate_index_md_content(self, source_paths: Iterable[Path]) -> Text:
         """
-        Get new `docs/index.md` file content.
+        Get new `index.md` file content. Copy content from `README.md` and add ToC.
 
         Returns:
             A string with new file content.
@@ -359,23 +384,37 @@ class Handsdown:
 
             last_path_parts = path_parts
 
-        toc_lines = self._build_toc_lines(lines)
-        lines.insert(1, "")
+        toc_lines = self._build_toc_lines("\n".join(lines))
         lines.insert(1, "\n".join(toc_lines))
+        lines.insert(1, "")
 
         return "\n".join(lines)
 
-    def _get_anchor(self, title):
+    def _get_anchor(self, title: Text) -> Text:
+        """
+        Convert title to Github-compatible anchor link.
+
+        Returns:
+            A test of anchor link.
+        """
         title = title.lower().replace(" ", "-")
         result = self._anchor_re.sub("", title)
         return result
 
-    def _build_toc_lines(
-        self, file_lines: Iterable[Text], max_depth: int = 3
-    ) -> List[Text]:
+    def _build_toc_lines(self, content: Text, max_depth: int = 3) -> List[Text]:
+        """
+        Generate Table of Contents for markdown text.
+
+        Arguments:
+            content -- Markdown string.
+            max_depth -- Add headers to ToC only up to this level.
+
+        Returns:
+            A list of ToC lines.
+        """
         toc_lines = []
         in_codeblock = False
-        for line in file_lines:
+        for line in content.split("\n"):
             line = line.strip()
             if line.count("```") > 1:
                 continue
