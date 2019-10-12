@@ -42,7 +42,7 @@ class PathFinder:
         """
         Add `fnmatch` expression to white list.
         If white list is empty - no white list filtration applied.
-        If expression does not have `*` character, appends `/*` to it.
+        If expression does not have `*` or `.` characters, appends `/*` to it.
 
         Arguments:
             fn_exrps - One or more `fnmatch` expressions.
@@ -53,7 +53,7 @@ class PathFinder:
         include_exprs = []
         include_exprs.extend(self.include_exprs)
         for fn_exrp in fn_exrps:
-            if "*" not in fn_exrp:
+            if "*" not in fn_exrp and "." not in fn_exrp:
                 fn_exrp = f"{fn_exrp}/*"
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
@@ -62,7 +62,7 @@ class PathFinder:
         """
         Add `fnmatch` expression to black list.
         If black list is empty - no black list filtration applied.
-        If expression does not have `*` character, appends `/*` to it.
+        If expression does not have `*` or `.` characters, appends `/*` to it.
 
         Arguments:
             fn_exrps - One or more `fnmatch` expressions.
@@ -73,7 +73,7 @@ class PathFinder:
         exclude_exprs = []
         exclude_exprs.extend(self.exclude_exprs)
         for fn_exrp in fn_exrps:
-            if "*" not in fn_exrp:
+            if "*" not in fn_exrp and "." not in fn_exrp:
                 fn_exrp = f"{fn_exrp}/*"
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
@@ -111,6 +111,7 @@ class PathFinder:
                 continue
             if self._match_exclude(relative_path):
                 continue
+
             yield path
 
     def list(self) -> List[Path]:
