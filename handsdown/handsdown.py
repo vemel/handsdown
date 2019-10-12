@@ -162,9 +162,10 @@ class Handsdown:
         self._logger.debug(f"Removing orphaned docs")
         self.cleanup_old_docs(generated_files)
 
-        self._logger.debug(f"Generating index.md")
+        index_md_path = Path(self._docs_path, "index.md")
+        self._logger.info(f"Generating {index_md_path.relative_to(self._repo_path)}")
         index_md_content = self._generate_index_md_content(processed_paths)
-        Path(self._docs_path, "index.md").write_text(index_md_content)
+        index_md_path.write_text(index_md_content)
 
     @staticmethod
     def _get_title_from_import_string(import_string: Text) -> Text:
