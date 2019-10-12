@@ -104,7 +104,11 @@ class Loader:
             A generator that yields tuples of (`name`, `object`, `level`).
         """
         inspect_module = cls.import_module(import_string)
-        for obj_name in pyclbr.readmodule_ex(import_string):
+        try:
+            obj_names = pyclbr.readmodule_ex(import_string)
+        except AttributeError:
+            return
+        for obj_name in obj_names:
             if obj_name.startswith("__"):
                 continue
 

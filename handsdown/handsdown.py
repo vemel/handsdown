@@ -1,5 +1,6 @@
 import re
 import logging
+import fnmatch
 from pathlib import Path
 from typing import Iterable, Text, List, Any, Tuple, Optional, Dict, Pattern
 
@@ -14,24 +15,28 @@ class Handsdown:
     Main doc generator.
 
     Arguments:
-        repo_path -- Path to repo to generate docs.
+        input_path -- Path to repo to generate docs.
         logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
-        docs_path -- Path to folder with auto-generated docs to output.
+        output_path -- Path to folder with auto-generated docs to output.
     """
+
+    ignore_paths = ["build/**", "docs/**", "dist/**"]
 
     def __init__(
         self,
-        repo_path: Path,
+        input_path: Path,
         logger: Optional[logging.Logger] = None,
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
-        docs_path: Optional[Path] = None,
+        output_path: Optional[Path] = None,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
-        self._repo_path = repo_path
-        self._docs_path = docs_path if docs_path is not None else (repo_path / "docs")
+        self._repo_path = input_path
+        self._docs_path = (
+            output_path if output_path is not None else (input_path / "docs")
+        )
 
         if not self._docs_path.exists():
             self._logger.info(f"Creating folder {self._docs_path}")
@@ -42,8 +47,24 @@ class Handsdown:
         self._docstring_links_re: Pattern = re.compile("")
         self._signature_links_re: Pattern = re.compile("")
 
-        self._source_paths = sorted(self._repo_path.glob("**/*.py"))
+        self._source_paths = self._get_source_paths()
         self._module_md_map = self._build_module_md_map()
+
+    def _is_source_path_ignored(self, source_path: Path) -> bool:
+        for ignore_path in self.ignore_paths:
+            if fnmatch.fnmatch(source_path, ignore_path):
+                return True
+
+        return False
+
+    def _get_source_paths(self):
+        source_paths = []
+        for source_path in self._repo_path.glob("**/*.py"):
+            if self._is_source_path_ignored(source_path.relative_to(self._repo_path)):
+                continue
+
+            source_paths.append(source_path)
+        return sorted(source_paths)
 
     def cleanup_old_docs(self, preserve_paths: Iterable[Path]) -> None:
         """

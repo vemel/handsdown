@@ -11,15 +11,17 @@ def abs_path(path: Text) -> Path:
 
 
 def get_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        "handsdown", description="Docstring-based python documentation generator."
+    )
     parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(
-        "-r",
-        "--repo-path",
-        help="Path to your project",
+        "-i",
+        "--input-path",
+        help="Path to project root folder",
         default=Path.cwd(),
         type=abs_path,
     )
@@ -60,7 +62,7 @@ def main() -> None:
     logger = get_logger(level=log_level)
 
     generator = Handsdown(
-        repo_path=args.repo_path, logger=logger, docs_path=args.output_path
+        input_path=args.input_path, logger=logger, output_path=args.output_path
     )
     generator.generate()
 
