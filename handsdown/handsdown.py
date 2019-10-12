@@ -22,7 +22,7 @@ class Handsdown:
         output_path -- Path to folder with auto-generated docs to output.
     """
 
-    ignore_paths = ["build/**", "docs/**", "dist/**"]
+    ignore_paths = ["build/**", "docs/**", "dist/**", "test/**", "tests/**"]
 
     def __init__(
         self,
@@ -42,7 +42,7 @@ class Handsdown:
             self._logger.info(f"Creating folder {self._docs_path}")
             self._docs_path.mkdir()
 
-        self._loader = loader or Loader
+        self._loader = loader or Loader([self._repo_path])
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
         self._docstring_links_re: Pattern = re.compile("")
         self._signature_links_re: Pattern = re.compile("")
@@ -198,7 +198,7 @@ class Handsdown:
         first_import_part = import_parts[0]
         while md_file_name.startswith(first_import_part):
             import_parts = import_parts[1:]
-            md_file_name = md_file_name[(len(first_import_part) + 1):]
+            md_file_name = md_file_name[(len(first_import_part) + 1) :]
             if not import_parts:
                 break
             first_import_part = import_parts[0]

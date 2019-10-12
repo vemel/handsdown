@@ -1,9 +1,12 @@
 import importlib
+from pathlib import Path
+import sys
 import pyclbr
 import inspect
 from unittest.mock import patch
 from collections import defaultdict
-from typing import Optional, Text, Any, Callable, Generator, Tuple
+import typing
+from typing import Optional, Text, Any, Callable, Generator, Tuple, Iterable
 
 from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
@@ -11,8 +14,21 @@ from handsdown.indent_trimmer import IndentTrimmer
 
 class Loader:
     """
-    A utility class that is responsible for working with python source code.
+    Loader for python source code.
+
+    Examples:
+
+        ```python
+        loader = Loader(['path/to/my_module/'])
+        my_module_utils = loader.import_module('my_module.utils')
+        ```
+
+    Arguments:
+        import_paths -- List of import paths for `import_module` lookup.
     """
+
+    def __init__(self, import_paths: Iterable[Path]) -> None:
+        self._import_paths = import_paths
 
     @staticmethod
     def get_object_signature(obj: Any) -> Optional[Text]:
@@ -44,10 +60,11 @@ class Loader:
         """
         return IndentTrimmer.trim_text(cls._get_docstring(obj))
 
-    @staticmethod
-    def import_module(import_string: Text) -> Any:
+    def import_module(self, import_string: Text) -> Any:
         """
-        Path os.environ to avoid failing on undefined variables.
+        Import module using `import_paths` list. Clean up path afterwards.
+        Patch `os.environ` to avoid failing on undefined variables.
+        Set `typing.TYPE_CHECKING` to `True` while importing.
 
         Arguments:
             import_string -- Module import string.
@@ -55,8 +72,22 @@ class Loader:
         Returns:
             Imported module object.
         """
+        temp_import_paths = []
+        for import_path in self._import_paths:
+            if import_path not in sys.path:
+                sys.path.append(import_path.as_posix())
+                temp_import_paths.append(import_path.as_posix())
+
+        real_type_checking = typing.TYPE_CHECKING
+        typing.TYPE_CHECKING = True
+
         with patch("os.environ", defaultdict(lambda: "env")):
             module = importlib.import_module(import_string)
+
+        typing.TYPE_CHECKING = real_type_checking
+
+        for import_path in temp_import_paths:
+            sys.path.remove(import_path)
 
         return module
 
@@ -89,9 +120,8 @@ class Loader:
 
         return predicate
 
-    @classmethod
     def get_module_objects(
-        cls, import_string: Text
+        self, import_string: Text
     ) -> Generator[Tuple[Text, Any, int], None, None]:
         """
         Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
@@ -103,7 +133,9 @@ class Loader:
         Returns:
             A generator that yields tuples of (`name`, `object`, `level`).
         """
-        inspect_module = cls.import_module(import_string)
+        inspect_module = self.import_module(import_string)
+        if not inspect_module:
+            return
         try:
             obj_names = pyclbr.readmodule_ex(import_string)
         except AttributeError:
@@ -119,7 +151,7 @@ class Loader:
             yield (obj_name, inspect_object, 0)
 
             for method_name, inspect_method in inspect.getmembers(
-                inspect_object, cls._get_inspect_predicate(obj_name)
+                inspect_object, self._get_inspect_predicate(obj_name)
             ):
                 title = f"{obj_name}().{method_name}"
                 class_method = inspect_object.__dict__[method_name]
