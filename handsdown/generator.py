@@ -87,6 +87,9 @@ class Generator:
             relative_file_path = file_path.relative_to(self._repo_path)
             file_import = self._get_file_import_string(relative_file_path)
 
+            if not file_import:
+                continue
+
             md_name = self._get_md_name(relative_file_path)
             try:
                 module_objects = list(self._loader.get_module_objects(file_import))
@@ -119,6 +122,9 @@ class Generator:
         relative_file_path = file_path.relative_to(self._repo_path)
         file_import = self._get_file_import_string(relative_file_path)
 
+        if not file_import:
+            return None
+
         try:
             inspect_module = self._loader.import_module(file_import)
             module_objects = list(self._loader.get_module_objects(file_import))
@@ -129,7 +135,7 @@ class Generator:
         docstring = self._loader.get_object_docstring(inspect_module)
 
         if not module_objects and not docstring:
-            self._logger.debug(f"Skipping {relative_file_path}")
+            self._logger.debug(f"Skipping {relative_file_path}: nothing to document")
             return None
 
         md_name = self._get_md_name(relative_file_path)
