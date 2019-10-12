@@ -1,6 +1,9 @@
 import inspect
 import enum
 import re
+import importlib
+from unittest.mock import patch
+from collections import defaultdict
 from typing import get_type_hints, Type, Optional, Text, Any, Dict
 from types import MappingProxyType
 
@@ -14,10 +17,10 @@ class ProxyDefaultValue:
     "Helper class to represent function parameter default value in signature"
     _hex_code_re = re.compile(r" at 0x[a-f0-9]+")
 
-    def __init__(self, original: Type):
+    def __init__(self, original: Type) -> None:
         self._original = original
 
-    def __repr__(self):
+    def __repr__(self) -> Text:
         if isinstance(self._original, enum.Enum):
             return f"{self._original.value}"
             # return f'{self._original.__class__.__name__}.{self._original.value}'
@@ -31,21 +34,23 @@ class ProxyDefaultValue:
 class ProxyParameter(inspect.Parameter):
     "Helper class to represent function parameters in signature"
 
-    def __init__(self, type_hint: Optional[Type], *args, **kwargs):
+    def __init__(self, type_hint: Optional[Type], *args: Any, **kwargs: Any) -> None:
         super(ProxyParameter, self).__init__(*args, **kwargs)
         if isinstance(self._annotation, str) and type_hint:
             self._annotation = type_hint
         if self._default is not inspect._empty:  # pylint: disable=protected-access
             self._default = ProxyDefaultValue(self._default)
 
-    def __str__(self):
+    def __str__(self) -> Text:
         parent_value = super(ProxyParameter, self).__str__()
         if not Config.BREAK_LINES:
             return parent_value
         return f"\n    {parent_value}"
 
     @classmethod
-    def create(cls, parameter: inspect.Parameter, type_hint: Optional[Type]):
+    def create(
+        cls, parameter: inspect.Parameter, type_hint: Optional[Type]
+    ) -> ProxyParameter:
         """
         Create `ProxyParameter` for original `inspect.Parameter`
 
@@ -97,18 +102,25 @@ class Loader:
         return self._trim(self._get_docstring(obj))
 
     @staticmethod
-    def _get_docstring(function):
-        if isinstance(function, (staticmethod, classmethod)):
-            return function.__func__.__doc__ or ""
-        elif hasattr(function, "__name__") or isinstance(function, property):
-            return function.__doc__ or ""
-        elif hasattr(function, "__call__"):
-            return function.__call__.__doc__ or ""
-        else:
-            return function.__doc__ or ""
+    def safe_import_module(import_string: Text) -> Any:
+        with patch("os.environ", defaultdict(lambda: "env")):
+            module = importlib.import_module(import_string)
+
+        return module
 
     @staticmethod
-    def _trim(docstring):
+    def _get_docstring(obj: Any) -> Text:
+        if isinstance(obj, (staticmethod, classmethod)):
+            return obj.__func__.__doc__ or ""
+        if hasattr(obj, "__name__") or isinstance(obj, property):
+            return obj.__doc__ or ""
+        if hasattr(obj, "__call__"):
+            return obj.__call__.__doc__ or ""
+
+        return obj.__doc__ or ""
+
+    @staticmethod
+    def _trim(docstring: Text) -> Text:
         if not docstring:
             return ""
 
@@ -132,14 +144,13 @@ class Loader:
 
     def _get_type_hints(self, func: Any) -> Dict[Text, Any]:
         type_hints = get_type_hints(func)
-        NoneType = type(None)
         for key, value in type_hints.items():
-            if value is NoneType:
+            if value is type(None):
                 type_hints[key] = None
 
         return type_hints
 
-    def _enrich_signature(self, signature, type_hints):
+    def _enrich_signature(self, signature: Any, type_hints: Dict[Text, Any]) -> None:
         clean_parameters = {}
         for key, value in signature.parameters.items():
             if key == "self":

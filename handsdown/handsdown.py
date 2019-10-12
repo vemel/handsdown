@@ -6,7 +6,7 @@ import logging
 from pathlib import Path
 from collections import defaultdict
 from unittest.mock import patch
-from typing import Iterable, Text, List, Any, Tuple, Optional, Callable, Dict
+from typing import Iterable, Text, List, Any, Tuple, Optional, Callable, Dict, Pattern
 
 from handsdown.loader import Loader
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -31,8 +31,8 @@ class Handsdown:
         self,
         repo_path: Path,
         logger: Optional[logging.Logger] = None,
-        docstring_processor: BaseDocstringProcessor = SmartDocstringProcessor,
-        loader: Loader = Loader,
+        docstring_processor: Optional[BaseDocstringProcessor] = None,
+        loader: Optional[Loader] = None,
         docs_path: Optional[Path] = None,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
@@ -43,11 +43,11 @@ class Handsdown:
             self._logger.info(f"Creating folder {self._docs_path}")
             self._docs_path.mkdir()
 
-        self._loader = loader()
-        self._docstring_processor = docstring_processor()
+        self._loader = loader or Loader()
+        self._docstring_processor = docstring_processor or SmartDocstringProcessor()
         self._module_md_map: Dict[Text, Text] = {}
-        self._docstring_links_re: re.Pattern = re.compile("")
-        self._signature_links_re: re.Pattern = re.compile("")
+        self._docstring_links_re: Pattern = re.compile("")
+        self._signature_links_re: Pattern = re.compile("")
 
     @staticmethod
     def _get_predicate(object_name: Text) -> Callable[[Any], bool]:
@@ -129,8 +129,7 @@ class Handsdown:
             relative_file_path = file_path.relative_to(self._repo_path)
             file_import = self._get_file_import_string(relative_file_path)
 
-            with patch("os.environ", defaultdict(lambda: "env")):
-                inspect_module = importlib.import_module(file_import)
+            inspect_module = self._loader.safe_import_module(file_import)
 
             md_name = self._get_md_name(relative_file_path)
             module_objects = self._get_module_objects(inspect_module, file_import)
@@ -144,7 +143,7 @@ class Handsdown:
 
         return module_md_map
 
-    def generate(self, source_paths: Iterable[Path]) -> Text:
+    def generate(self, source_paths: Iterable[Path]) -> None:
         """
         Generate module docs.
 
@@ -216,7 +215,7 @@ class Handsdown:
         title = import_string.split(".")[-1]
         return title
 
-    def _replace_links(self, file_path: Path):
+    def _replace_links(self, file_path: Path) -> None:
         content = file_path.read_text()
         file_changed = False
         for match in re.findall(self._docstring_links_re, content):
@@ -325,7 +324,7 @@ class Handsdown:
         sections = self._docstring_processor.build_sections(docstring)
         signature = self._loader.get_object_signature(module_object)
         if signature:
-            existing_titles = []
+            existing_titles: List[Text] = []
             for match in re.findall(self._signature_links_re, signature):
                 if match not in self._module_md_map:
                     continue
@@ -357,7 +356,7 @@ class Handsdown:
         if readme_path.exists():
             lines.extend(readme_path.read_text().split("\n"))
         lines.append("\n## Modules\n")
-        last_path_parts = []
+        last_path_parts: Tuple[Text, ...] = tuple()
         for source_path in source_paths:
             md_name = self._get_md_name(source_path)
             path_parts = source_path.parts
@@ -376,8 +375,9 @@ class Handsdown:
                     title = self._get_title_from_md_content(
                         (self._docs_path / md_name).read_text()
                     )
-                    title = title.split(": ")[-1]
-                    lines.append(f"{indent}- [{title}](./{md_name})")
+                    if title:
+                        title = title.split(": ")[-1]
+                        lines.append(f"{indent}- [{title}](./{md_name})")
                 else:
                     title = self._get_title_from_path(Path(path_part))
                     lines.append(f"{indent}- {title}")

@@ -8,15 +8,22 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
     """
     This class implements the preprocessor for PEP257 and Google style.
     """
+
     line_re_map = {
-        re.compile(r'^\s*(?P<param>\S+):\s+(?P<desc>.+)$'): '- `{param}` - {desc}',
-        re.compile(r'^\s*(?P<param>\S+)\s+(?P<type>\S+):\s+(?P<desc>.+)$'): '- `{param}` *{type}* - {desc}',
-        re.compile(r'^\s*(?P<param>\S+)\s+\((?P<type>\S+)\):\s+(?P<desc>.+)$'): '- `{param}` *{type}* - {desc}',
-        re.compile(r'^\s*(?P<param>\S+)\s+--\s+(?P<desc>.+)$'): '- `{param}` - {desc}',
+        re.compile(r"^\s*(?P<param>\S+):\s+(?P<desc>.+)$"): "- `{param}` - {desc}",
         re.compile(
-            r'^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$'): '- `{param}` *{type}* - {desc}',
+            r"^\s*(?P<param>\S+)\s+(?P<type>\S+):\s+(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
         re.compile(
-            r'^\s*(?P<param>\S+)\s+\{(?P<type>\S+)\}\s+--\s+(?P<desc>.+)$'): '- `{param}` *{type}* - {desc}',
+            r"^\s*(?P<param>\S+)\s+\((?P<type>\S+)\):\s+(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
+        re.compile(r"^\s*(?P<param>\S+)\s+--\s+(?P<desc>.+)$"): "- `{param}` - {desc}",
+        re.compile(
+            r"^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
+        re.compile(
+            r"^\s*(?P<param>\S+)\s+\{(?P<type>\S+)\}\s+--\s+(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
     }
 
     def _parse_line(self, line: Text) -> Optional[Text]:

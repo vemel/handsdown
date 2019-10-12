@@ -1,48 +1,49 @@
-import re
-
 from abc import abstractmethod
 from collections import defaultdict
-from typing import Text, Iterable, Optional, Dict, List
+from typing import Text, Iterable, Optional, Dict, List, Pattern
+
+from handsdown.type_defs import SectionMap
 
 
 class BaseDocstringProcessor:
     """
     This class implements the preprocessor for PEP257 and Google style.
     """
-    def __init__(self):
-        self.current_section_name = None
-        self.sections = defaultdict(list)
+
+    def __init__(self) -> None:
+        self.current_section_name: Text = ""
+        self.sections: SectionMap = defaultdict(list)
         self.in_codeblock = False
 
-    line_re_map: Dict[re.Pattern, Text] = {}
+    line_re_map: Dict[Pattern, Text] = {}
 
     section_name_map = {
-        'Args:': 'Arguments',
-        'Arguments:': 'Arguments',
-        'Attributes:': 'Attributes',
-        'Example:': 'Examples',
-        'Examples:': 'Examples',
-        'Keyword Args:': 'Arguments',
-        'Keyword Arguments:': 'Arguments',
-        'Methods:': 'Methods',
-        'Note:': 'Notes',
-        'Notes:': 'Notes',
-        'Other Parameters:': 'Arguments',
-        'Parameters:': 'Arguments',
-        'Return:': 'Returns',
-        'Returns:': 'Returns',
-        'Raises:': 'Raises',
-        'References:': 'References',
-        'See Also:': 'See Also',
-        'Todo:': 'Todo',
-        'Warning:': 'Warnings',
-        'Warnings:': 'Warnings',
-        'Warns:': 'Warns',
-        'Yield:': 'Yields',
-        'Yields:': 'Yields',
+        "Args:": "Arguments",
+        "Arguments:": "Arguments",
+        "Attributes:": "Attributes",
+        "Example:": "Examples",
+        "Examples:": "Examples",
+        "Keyword Args:": "Arguments",
+        "Keyword Arguments:": "Arguments",
+        "Methods:": "Methods",
+        "Note:": "Notes",
+        "Notes:": "Notes",
+        "Other Parameters:": "Arguments",
+        "Parameters:": "Arguments",
+        "Return:": "Returns",
+        "Returns:": "Returns",
+        "Raises:": "Raises",
+        "References:": "References",
+        "See Also:": "See Also",
+        "Todo:": "Todo",
+        "Warning:": "Warnings",
+        "Warnings:": "Warnings",
+        "Warns:": "Warns",
+        "Yield:": "Yields",
+        "Yields:": "Yields",
     }
 
-    def build_sections(self, content: Text) -> Dict[Text, List[Text]]:
+    def build_sections(self, content: Text) -> SectionMap:
         """
         Parse docstring and split it to sections with arrays of strings.
 
@@ -53,16 +54,16 @@ class BaseDocstringProcessor:
             A dictionary where key is a section name and value is a list of string sof this
             section.
         """
-        self.current_section_name = None
-        sections = defaultdict(list)
+        self.current_section_name = ""
+        sections: SectionMap = defaultdict(list)
         self.in_codeblock = False
 
-        for line in content.split('\n'):
+        for line in content.split("\n"):
             indent = self._get_line_indent(line)
-            line = self._parse_line(self._strip_indent(line, indent).rstrip())
-            if line is None:
+            parsed_line = self._parse_line(self._strip_indent(line, indent).rstrip())
+            if parsed_line is None:
                 continue
-            for line_part in line.split('\n'):
+            for line_part in parsed_line.split("\n"):
                 sections[self.current_section_name].append(f'{" " * indent}{line_part}')
 
         return sections
@@ -84,20 +85,20 @@ class BaseDocstringProcessor:
                 continue
 
             if section_name:
-                lines.extend([f'#### {section_name}', ''])
+                lines.extend([f"#### {section_name}", ""])
 
             section_indent = self._get_lines_indent(section_lines)
             for line in section_lines:
                 if not line.strip():
-                    lines.append('')
+                    lines.append("")
                     continue
 
                 lines.append(self._strip_indent(line, section_indent))
 
             if lines[-1]:
-                lines.append('')
+                lines.append("")
 
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
     @abstractmethod
     def _parse_line(self, line: Text) -> Optional[Text]:

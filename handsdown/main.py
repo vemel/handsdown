@@ -19,7 +19,7 @@ def get_logger(level: int) -> logging.Logger:
     return logger
 
 
-def main():
+def main() -> None:
     logger = get_logger(logging.DEBUG)
 
     repo_path = Path.cwd()
