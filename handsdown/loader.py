@@ -13,6 +13,10 @@ from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import OSEnvironMock
 
 
+class LoaderError(Exception):
+    pass
+
+
 class Loader:
     """
     Loader for python source code.
@@ -84,7 +88,10 @@ class Loader:
         typing.TYPE_CHECKING = True
 
         with patch("os.environ", self._environ_mock):
-            module = importlib.import_module(import_string)
+            try:
+                module = importlib.import_module(import_string)
+            except Exception as e:
+                raise LoaderError(f"Cannot import {import_string}: {e}")
 
         typing.TYPE_CHECKING = real_type_checking
 
@@ -136,12 +143,8 @@ class Loader:
             A generator that yields tuples of (`name`, `object`, `level`).
         """
         inspect_module = self.import_module(import_string)
-        if not inspect_module:
-            return
-        try:
-            obj_names = pyclbr.readmodule_ex(import_string)
-        except AttributeError:
-            return
+
+        obj_names = pyclbr.readmodule_ex(import_string)
         for obj_name in obj_names:
             if obj_name.startswith("__"):
                 continue
@@ -156,7 +159,11 @@ class Loader:
                 inspect_object, self._get_inspect_predicate(obj_name)
             ):
                 title = f"{obj_name}().{method_name}"
-                class_method = inspect_object.__dict__[method_name]
+                try:
+                    class_method = inspect_object.__dict__[method_name]
+                except KeyError:
+                    continue
+
                 if isinstance(class_method, (staticmethod, classmethod)):
                     title = f"{obj_name}.{method_name}"
 

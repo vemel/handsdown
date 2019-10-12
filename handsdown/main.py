@@ -4,6 +4,7 @@ import argparse
 from typing import Text
 
 from handsdown.generator import Generator
+from handsdown.path_finder import PathFinder
 
 
 def abs_path(path: Text) -> Path:
@@ -24,6 +25,12 @@ def get_parser() -> argparse.ArgumentParser:
         help="Path to project root folder",
         default=Path.cwd(),
         type=abs_path,
+    )
+    parser.add_argument(
+        "--exclude", nargs="*", help="Path expressions to exclude", default=[]
+    )
+    parser.add_argument(
+        "include", nargs="*", help="Path expressions to include", default=[]
     )
     parser.add_argument(
         "-o",
@@ -61,8 +68,18 @@ def main() -> None:
 
     logger = get_logger(level=log_level)
 
+    path_finder = PathFinder(root=args.input_path, glob_expr="**/*.py")
+    if args.include:
+        path_finder = path_finder.include(*args.include)
+
+    if args.exclude:
+        path_finder = path_finder.exclude(*args.exclude)
+
     generator = Generator(
-        input_path=args.input_path, logger=logger, output_path=args.output_path
+        input_path=args.input_path,
+        logger=logger,
+        output_path=args.output_path,
+        source_paths=path_finder.list(),
     )
     generator.generate()
 

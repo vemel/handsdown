@@ -1,13 +1,16 @@
 import re
 import logging
-import fnmatch
 from pathlib import Path
-from typing import Iterable, Text, List, Any, Tuple, Optional, Dict, Pattern
+from typing import Iterable, Text, List, Any, Tuple, Optional, Dict
 
-from handsdown.loader import Loader
+from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.utils import get_anchor_link, generate_toc_lines
+
+
+class GeneratorError(Exception):
+    pass
 
 
 class Generator:
@@ -27,6 +30,7 @@ class Generator:
     def __init__(
         self,
         input_path: Path,
+        source_paths: Iterable[Path],
         logger: Optional[logging.Logger] = None,
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
@@ -44,27 +48,16 @@ class Generator:
 
         self._loader = loader or Loader([self._repo_path])
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
-        self._docstring_links_re: Pattern = re.compile("")
-        self._signature_links_re: Pattern = re.compile("")
 
-        self._source_paths = self._get_source_paths()
+        self._source_paths = sorted(source_paths)
         self._module_md_map = self._build_module_md_map()
 
-    def _is_source_path_ignored(self, source_path: Path) -> bool:
-        for ignore_path in self.ignore_paths:
-            if fnmatch.fnmatch(source_path, ignore_path):
-                return True
+        package_names = {i.split(".")[0] for i in self._module_md_map}
 
-        return False
-
-    def _get_source_paths(self):
-        source_paths = []
-        for source_path in self._repo_path.glob("**/*.py"):
-            if self._is_source_path_ignored(source_path.relative_to(self._repo_path)):
-                continue
-
-            source_paths.append(source_path)
-        return sorted(source_paths)
+        self._docstring_links_re = re.compile(f'`(?:{"|".join(package_names)})\\.\\S+`')
+        self._signature_links_re = re.compile(
+            f' ((?:{"|".join(package_names)})\\.[^() :,]+)'
+        )
 
     def cleanup_old_docs(self, preserve_paths: Iterable[Path]) -> None:
         """
@@ -95,7 +88,11 @@ class Generator:
             file_import = self._get_file_import_string(relative_file_path)
 
             md_name = self._get_md_name(relative_file_path)
-            module_objects = list(self._loader.get_module_objects(file_import))
+            try:
+                module_objects = list(self._loader.get_module_objects(file_import))
+            except LoaderError as e:
+                self._logger.warning(f"LoaderError: {e}")
+                continue
 
             module_md_map[file_import] = md_name
             for module_object_name, _, _ in module_objects:
@@ -122,9 +119,13 @@ class Generator:
         relative_file_path = file_path.relative_to(self._repo_path)
         file_import = self._get_file_import_string(relative_file_path)
 
-        inspect_module = self._loader.import_module(file_import)
+        try:
+            inspect_module = self._loader.import_module(file_import)
+            module_objects = list(self._loader.get_module_objects(file_import))
+        except LoaderError as e:
+            self._logger.warning(f"LoaderError: {e}")
+            return None
 
-        module_objects = list(self._loader.get_module_objects(file_import))
         docstring = self._loader.get_object_docstring(inspect_module)
 
         if not module_objects and not docstring:
@@ -166,12 +167,6 @@ class Generator:
         )
         processed_paths: List[Path] = []
         generated_files: List[Path] = []
-        package_names = {i.split(".")[0] for i in self._module_md_map}
-
-        self._docstring_links_re = re.compile(f'`(?:{"|".join(package_names)})\\.\\S+`')
-        self._signature_links_re = re.compile(
-            f' ((?:{"|".join(package_names)})\\.[^() :,]+)'
-        )
 
         for file_path in self._source_paths:
             doc_file_path = self.generate_doc(file_path)
