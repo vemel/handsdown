@@ -1,7 +1,36 @@
 from pathlib import Path
 import logging
+import argparse
+from typing import Text
 
 from handsdown.handsdown import Handsdown
+
+
+def abs_path(path: Text) -> Path:
+    return Path(path).absolute()
+
+
+def get_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-d", "--debug", action="store_true", help="Show debug messages"
+    )
+    parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
+    parser.add_argument(
+        "-r",
+        "--repo-path",
+        help="Path to your project",
+        default=Path.cwd(),
+        type=abs_path,
+    )
+    parser.add_argument(
+        "-o",
+        "--output-path",
+        help="Path to output folder",
+        default=Path.cwd() / "docs",
+        type=abs_path,
+    )
+    return parser
 
 
 def get_logger(level: int) -> logging.Logger:
@@ -20,12 +49,20 @@ def get_logger(level: int) -> logging.Logger:
 
 
 def main() -> None:
-    logger = get_logger(logging.DEBUG)
+    parser = get_parser()
+    args = parser.parse_args()
+    log_level = logging.INFO
+    if args.debug:
+        log_level = logging.DEBUG
+    if args.quiet:
+        log_level = logging.CRITICAL
 
-    repo_path = Path.cwd()
-    file_paths = sorted(repo_path.glob("**/*.py"))
-    generator = Handsdown(repo_path=Path.cwd(), logger=logger)
-    generator.generate(file_paths)
+    logger = get_logger(level=log_level)
+
+    generator = Handsdown(
+        repo_path=args.repo_path, logger=logger, docs_path=args.output_path
+    )
+    generator.generate()
 
 
 if __name__ == "__main__":

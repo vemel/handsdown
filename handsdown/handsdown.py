@@ -1,12 +1,7 @@
-import importlib
-import inspect
-import pyclbr
 import re
 import logging
 from pathlib import Path
-from collections import defaultdict
-from unittest.mock import patch
-from typing import Iterable, Text, List, Any, Tuple, Optional, Callable, Dict, Pattern
+from typing import Iterable, Text, List, Any, Tuple, Optional, Dict, Pattern
 
 from handsdown.loader import Loader
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -44,61 +39,11 @@ class Handsdown:
 
         self._loader = loader or Loader()
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
-        self._module_md_map: Dict[Text, Text] = {}
         self._docstring_links_re: Pattern = re.compile("")
         self._signature_links_re: Pattern = re.compile("")
 
-    @staticmethod
-    def _get_predicate(object_name: Text) -> Callable[[Any], bool]:
-        def predicate(method: Any) -> bool:
-            if not inspect.isroutine(method) or not method.__doc__:
-                return False
-
-            parent_name = method.__qualname__.split(".")[0]
-            method_name = method.__qualname__.split(".")[-1]
-
-            # skip magic methods
-            if method.__qualname__ == parent_name:
-                return False
-
-            # skip private methods
-            if method_name.startswith("_"):
-                return False
-
-            # skip inherited methods
-            if parent_name != object_name:
-                return False
-
-            # skip built-in inherited methods
-            if object_name not in repr(method):
-                return False
-
-            return True
-
-        return predicate
-
-    def _get_module_objects(
-        self, inspect_module: Any, import_string: Text
-    ) -> List[Tuple[Text, Any, int]]:
-        result = []
-        for object_name in pyclbr.readmodule_ex(import_string):
-            if object_name.startswith("__"):
-                continue
-
-            inspect_object = getattr(inspect_module, object_name)
-            if not inspect.isclass(inspect_object) and inspect_object.__doc__ is None:
-                continue
-            result.append((object_name, inspect_object, 0))
-            for method_name, inspect_method in inspect.getmembers(
-                inspect_object, self._get_predicate(object_name)
-            ):
-                title = f"{object_name}().{method_name}"
-                if isinstance(inspect_method, (staticmethod, classmethod)):
-                    title = f"{object_name}.{method_name}"
-
-                result.append((title, inspect_method, 1))
-
-        return result
+        self._source_paths = sorted(self._repo_path.glob("**/*.py"))
+        self._module_md_map = self._build_module_md_map()
 
     def cleanup_old_docs(self, preserve_paths: Iterable[Path]) -> None:
         """
@@ -119,19 +64,17 @@ class Handsdown:
                 self._logger.info(f"Deleting orphaned doc file {md_name}")
                 doc_path.unlink()
 
-    def _build_module_md_map(self, source_paths: Iterable[Path]) -> Dict[Text, Text]:
+    def _build_module_md_map(self) -> Dict[Text, Text]:
         module_md_map: Dict[Text, Text] = {}
-        for file_path in source_paths:
+        for file_path in self._source_paths:
             if not (file_path.parent / "__init__.py").exists():
                 continue
 
             relative_file_path = file_path.relative_to(self._repo_path)
             file_import = self._get_file_import_string(relative_file_path)
 
-            inspect_module = self._loader.safe_import_module(file_import)
-
             md_name = self._get_md_name(relative_file_path)
-            module_objects = self._get_module_objects(inspect_module, file_import)
+            module_objects = list(self._loader.get_module_objects(file_import))
 
             module_md_map[file_import] = md_name
             for module_object_name, _, _ in module_objects:
@@ -142,7 +85,49 @@ class Handsdown:
 
         return module_md_map
 
-    def generate(self, source_paths: Iterable[Path]) -> None:
+    def generate_doc(self, file_path: Path) -> Optional[Path]:
+        if not (file_path.parent / "__init__.py").exists():
+            return None
+
+        relative_file_path = file_path.relative_to(self._repo_path)
+        file_import = self._get_file_import_string(relative_file_path)
+
+        inspect_module = self._loader.safe_import_module(file_import)
+
+        module_objects = list(self._loader.get_module_objects(file_import))
+        docstring = inspect_module.__doc__
+
+        if not module_objects and not docstring:
+            self._logger.debug(f"Skipping {relative_file_path}")
+            return None
+
+        md_name = self._get_md_name(relative_file_path)
+        target_file = self._docs_path / md_name
+        relative_doc_path = target_file.relative_to(self._repo_path)
+        self._logger.info(
+            f"Generating doc {relative_doc_path} for {relative_file_path}"
+        )
+
+        header_lines = self._generate_module_doc_header_lines(
+            inspect_module=inspect_module, source_path=relative_file_path
+        )
+
+        content_lines = self._generate_module_doc_lines(
+            module_objects=module_objects, source_path=relative_file_path
+        )
+
+        toc_lines = generate_toc_lines("\n".join(header_lines + content_lines))
+        md_lines = []
+        md_lines.extend(header_lines[:2])
+        md_lines.extend(toc_lines)
+        md_lines.append("")
+        md_lines.extend(header_lines[2:])
+        md_lines.extend(content_lines)
+
+        target_file.write_text("\n".join(md_lines))
+        return target_file
+
+    def generate(self) -> None:
         """
         Generate module docs.
 
@@ -152,9 +137,11 @@ class Handsdown:
         Returns:
             A string with new file content.
         """
+        self._logger.debug(
+            f"Generating docs for {self._repo_path.name} to {self._docs_path.relative_to(self._repo_path.parent)}"
+        )
         processed_paths: List[Path] = []
         generated_files: List[Path] = []
-        self._module_md_map = self._build_module_md_map(source_paths)
         package_names = {i.split(".")[0] for i in self._module_md_map}
 
         self._docstring_links_re = re.compile(f'`(?:{"|".join(package_names)})\\.\\S+`')
@@ -162,50 +149,20 @@ class Handsdown:
             f' ((?:{"|".join(package_names)})\\.[^() :,]+)'
         )
 
-        for file_path in source_paths:
-            if not (file_path.parent / "__init__.py").exists():
+        for file_path in self._source_paths:
+            doc_file_path = self.generate_doc(file_path)
+            if not doc_file_path:
                 continue
 
             relative_file_path = file_path.relative_to(self._repo_path)
-            file_import = self._get_file_import_string(relative_file_path)
-
-            with patch("os.environ", defaultdict(lambda: "env")):
-                inspect_module = importlib.import_module(file_import)
-
-            module_objects = self._get_module_objects(inspect_module, file_import)
-            docstring = inspect_module.__doc__
-
-            if not module_objects and not docstring:
-                continue
-
-            md_name = self._get_md_name(relative_file_path)
-            target_file = self._docs_path / md_name
             processed_paths.append(relative_file_path)
-            generated_files.append(target_file)
+            generated_files.append(doc_file_path)
+            self._replace_links(doc_file_path)
 
-            self._logger.debug(f"Generating {md_name}")
-
-            header_lines = self._generate_module_doc_header_lines(
-                inspect_module=inspect_module, source_path=relative_file_path
-            )
-
-            content_lines = self._generate_module_doc_lines(
-                module_objects=module_objects, source_path=relative_file_path
-            )
-
-            toc_lines = generate_toc_lines("\n".join(header_lines + content_lines))
-            md_lines = []
-            md_lines.extend(header_lines[:2])
-            md_lines.extend(toc_lines)
-            md_lines.append("")
-            md_lines.extend(header_lines[2:])
-            md_lines.extend(content_lines)
-
-            target_file.write_text("\n".join(md_lines))
-            self._replace_links(target_file)
-
+        self._logger.debug(f"Removing orphaned docs")
         self.cleanup_old_docs(generated_files)
 
+        self._logger.debug(f"Generating index.md")
         index_md_content = self._generate_index_md_content(processed_paths)
         Path(self._docs_path, "index.md").write_text(index_md_content)
 
@@ -282,14 +239,14 @@ class Handsdown:
         for module_object_name, module_object, level in module_objects:
             lines.append(f'{"#" * (level + 2)} {module_object_name}\n')
 
+            source_line_number = self._loader.get_source_line_number(module_object)
+            lines.append(
+                f"[🔍 find in source code](../{source_path}#L{source_line_number})\n"
+            )
+
             signature = self._loader.get_object_signature(module_object)
 
             if signature:
-                source_code_info = inspect.findsource(module_object)
-                source_line_number = source_code_info[1] + 1
-                lines.append(
-                    f"[🔍 find in source code](../{source_path}#L{source_line_number})\n"
-                )
                 lines.append(f"```python\n{signature}\n```")
 
             formatted_docstring = self._get_formatted_docstring(
@@ -346,6 +303,9 @@ class Handsdown:
     def _generate_index_md_content(self, source_paths: Iterable[Path]) -> Text:
         """
         Get new `index.md` file content. Copy content from `README.md` and add ToC.
+
+        Arguments:
+            source_paths -- List of source paths to include to `Modules` section.
 
         Returns:
             A string with new file content.
