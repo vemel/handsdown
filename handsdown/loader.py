@@ -1,4 +1,5 @@
 import importlib
+from importlib.machinery import ModuleSpec
 from pathlib import Path
 import sys
 import pyclbr
@@ -92,6 +93,9 @@ class Loader:
                 module = importlib.import_module(import_string)
             except Exception as e:
                 raise LoaderError(f"Cannot import {import_string}: {e}")
+
+        if module.__spec__ is None:
+            module.__spec__ = ModuleSpec(name="__main__", loader=None, origin=None)
 
         typing.TYPE_CHECKING = real_type_checking
 
