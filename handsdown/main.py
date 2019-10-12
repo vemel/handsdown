@@ -3,7 +3,7 @@ import logging
 import argparse
 from typing import Text
 
-from handsdown.handsdown import Handsdown
+from handsdown.generator import Generator
 
 
 def abs_path(path: Text) -> Path:
@@ -61,7 +61,7 @@ def main() -> None:
 
     logger = get_logger(level=log_level)
 
-    generator = Handsdown(
+    generator = Generator(
         input_path=args.input_path, logger=logger, output_path=args.output_path
     )
     generator.generate()

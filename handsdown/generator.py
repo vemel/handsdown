@@ -10,7 +10,7 @@ from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.utils import get_anchor_link, generate_toc_lines
 
 
-class Handsdown:
+class Generator:
     """
     Main doc generator.
 
