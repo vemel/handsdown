@@ -1,9 +1,15 @@
 import re
 
+from collections import UserDict
 from typing import Text, List
 
 
 anchor_re = re.compile(r"[^a-z0-9_-]+")
+
+
+class OSEnvironMock(UserDict):
+    def __missing__(self, key):
+        return "env"
 
 
 def get_anchor_link(title: Text) -> Text:

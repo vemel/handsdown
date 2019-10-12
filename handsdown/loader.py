@@ -4,12 +4,13 @@ import sys
 import pyclbr
 import inspect
 from unittest.mock import patch
-from collections import defaultdict
 import typing
+import os
 from typing import Optional, Text, Any, Callable, Generator, Tuple, Iterable
 
 from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils import OSEnvironMock
 
 
 class Loader:
@@ -29,6 +30,7 @@ class Loader:
 
     def __init__(self, import_paths: Iterable[Path]) -> None:
         self._import_paths = import_paths
+        self._environ_mock = OSEnvironMock(os.environ)
 
     @staticmethod
     def get_object_signature(obj: Any) -> Optional[Text]:
@@ -81,7 +83,7 @@ class Loader:
         real_type_checking = typing.TYPE_CHECKING
         typing.TYPE_CHECKING = True
 
-        with patch("os.environ", defaultdict(lambda: "env")):
+        with patch("os.environ", self._environ_mock):
             module = importlib.import_module(import_string)
 
         typing.TYPE_CHECKING = real_type_checking
