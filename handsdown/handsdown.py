@@ -37,7 +37,7 @@ class Handsdown:
             self._logger.info(f"Creating folder {self._docs_path}")
             self._docs_path.mkdir()
 
-        self._loader = loader or Loader()
+        self._loader = loader or Loader
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
         self._docstring_links_re: Pattern = re.compile("")
         self._signature_links_re: Pattern = re.compile("")
@@ -92,10 +92,10 @@ class Handsdown:
         relative_file_path = file_path.relative_to(self._repo_path)
         file_import = self._get_file_import_string(relative_file_path)
 
-        inspect_module = self._loader.safe_import_module(file_import)
+        inspect_module = self._loader.import_module(file_import)
 
         module_objects = list(self._loader.get_module_objects(file_import))
-        docstring = inspect_module.__doc__
+        docstring = self._loader.get_object_docstring(inspect_module)
 
         if not module_objects and not docstring:
             self._logger.debug(f"Skipping {relative_file_path}")

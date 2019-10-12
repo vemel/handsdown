@@ -11,10 +11,11 @@ from handsdown.indent_trimmer import IndentTrimmer
 
 class Loader:
     """
-    Expects absolute identifiers to import with #import_object_with_scope().
+    A utility class that is responsible for working with python source code.
     """
 
-    def get_object_signature(self, obj: Any) -> Optional[Text]:
+    @staticmethod
+    def get_object_signature(obj: Any) -> Optional[Text]:
         """
         Get class, method or function signature. If object is not callable -
         returns None.
@@ -30,7 +31,8 @@ class Loader:
 
         return SignatureBuilder(obj).build()
 
-    def get_object_docstring(self, obj: Any) -> Text:
+    @classmethod
+    def get_object_docstring(cls, obj: Any) -> Text:
         """
         Get trimmed object docstring or an empty string.
 
@@ -40,10 +42,19 @@ class Loader:
         Returns:
             A string with object docsting.
         """
-        return IndentTrimmer.trim_text(self._get_docstring(obj))
+        return IndentTrimmer.trim_text(cls._get_docstring(obj))
 
     @staticmethod
-    def safe_import_module(import_string: Text) -> Any:
+    def import_module(import_string: Text) -> Any:
+        """
+        Path os.environ to avoid failing on undefined variables.
+
+        Arguments:
+            import_string -- Module import string.
+
+        Returns:
+            Imported module object.
+        """
         with patch("os.environ", defaultdict(lambda: "env")):
             module = importlib.import_module(import_string)
 
@@ -82,7 +93,17 @@ class Loader:
     def get_module_objects(
         cls, import_string: Text
     ) -> Generator[Tuple[Text, Any, int], None, None]:
-        inspect_module = cls.safe_import_module(import_string)
+        """
+        Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
+        `object` - object iteslf. `level` - deepness of the object. Maximum `level` is 1.
+
+        Arguments:
+            import_string -- Module import string.
+
+        Returns:
+            A generator that yields tuples of (`name`, `object`, `level`).
+        """
+        inspect_module = cls.import_module(import_string)
         for obj_name in pyclbr.readmodule_ex(import_string):
             if obj_name.startswith("__"):
                 continue
