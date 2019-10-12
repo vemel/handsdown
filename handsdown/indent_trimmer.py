@@ -51,7 +51,7 @@ class IndentTrimmer:
             lines -- List of lines.
 
         Returns:
-            A list of liens with trimmed indent.
+            A list of lines with trimmed indent.
         """
         indent = cls._get_lines_indent(lines)
         new_lines = []

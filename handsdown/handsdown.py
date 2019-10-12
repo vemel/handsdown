@@ -107,6 +107,15 @@ class Handsdown:
         return module_md_map
 
     def generate_doc(self, file_path: Path) -> Optional[Path]:
+        """
+        Generate one module doc at once. If `file_path` has nothing to document - return `None`.
+
+        Arguments:
+            file_path -- Path to source file.
+
+        Returns:
+            A path to generated MD file or None.
+        """
         if not (file_path.parent / "__init__.py").exists():
             return None
 
@@ -150,13 +159,7 @@ class Handsdown:
 
     def generate(self) -> None:
         """
-        Generate module docs.
-
-        Arguments:
-            package_names -- package names to include.
-
-        Returns:
-            A string with new file content.
+        Generate all module docs at once.
         """
         self._logger.debug(
             f"Generating docs for {self._repo_path.name} to {self._docs_path.relative_to(self._repo_path.parent)}"
@@ -178,7 +181,7 @@ class Handsdown:
             relative_file_path = file_path.relative_to(self._repo_path)
             processed_paths.append(relative_file_path)
             generated_files.append(doc_file_path)
-            self._replace_links(doc_file_path)
+            self.replace_links(doc_file_path)
 
         self._logger.debug(f"Removing orphaned docs")
         self.cleanup_old_docs(generated_files)
@@ -187,13 +190,38 @@ class Handsdown:
         self._logger.info(f"Generating {index_md_path.relative_to(self._repo_path)}")
         index_md_content = self._generate_index_md_content(processed_paths)
         index_md_path.write_text(index_md_content)
+        self.replace_links(index_md_path)
 
     @staticmethod
-    def _get_title_from_import_string(import_string: Text) -> Text:
-        title = import_string.split(".")[-1]
-        return title
+    def _get_title_from_import_string(import_string: Text, md_file_name: Text) -> Text:
+        import_parts = import_string.split(".")
+        first_import_part = import_parts[0]
+        while md_file_name.startswith(first_import_part):
+            import_parts = import_parts[1:]
+            md_file_name = md_file_name[(len(first_import_part) + 1):]
+            if not import_parts:
+                break
+            first_import_part = import_parts[0]
 
-    def _replace_links(self, file_path: Path) -> None:
+        return ".".join(import_parts)
+
+    def replace_links(self, file_path: Path) -> None:
+        """
+        Replace all import strings with Markdown links. Only import strings that present in this
+        package are replaced, so not dead linsk should be generated.
+
+        ```python
+        my_md = Path('doc.md')
+        my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
+        handsdown.replace_links(my_md)
+
+        my_md.read_text()
+        # 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
+        ```
+
+        Arguments:
+            file_path -- Path to MD document file.
+        """
         content = file_path.read_text()
         file_changed = False
         for match in re.findall(self._docstring_links_re, content):
@@ -205,7 +233,7 @@ class Handsdown:
             if md_file_name == file_path.name:
                 continue
 
-            title = self._get_title_from_import_string(module_name)
+            title = self._get_title_from_import_string(module_name, md_file_name)
             anchor_link = get_anchor_link(title)
             link = f"[{title}](./{md_file_name}#{anchor_link})"
             content = content.replace(match, link)
@@ -311,7 +339,7 @@ class Handsdown:
                 if md_name == current_md_name:
                     continue
 
-                title = self._get_title_from_import_string(match)
+                title = self._get_title_from_import_string(match, md_name)
                 if title in existing_titles:
                     continue
 

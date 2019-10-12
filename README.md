@@ -1,17 +1,18 @@
-# Handsdown
+# Handsdown 🙌
 
-Python docstring-based documentation generator for lazy people. It generates Github-friendly Markdown
-documents for PEP257, Google and RST docstrings.
+Python docstring-based documentation generator for lazy people.
 
 ## Features
 
-- PEP257, Google aand RST docstrings support. All of them are converted to a valid markdown.
-- Github-friendly. Use your local markdown viewer or open docs [right on Github](docs/index.md)
-- Signatures for every class, function and method.
-- Support for type annotations. Even for the ones from the `__future__`!
-- Nice list of all modules in [Modules](docs/index.md#modules)
-- Gather all scattered `README.md` in submodules to one place
-- Links to source code from every doc section.
+- 👓 PEP257, Google and RST docstrings support. All of them are converted to a valid markdown.
+- 🐈 Github-friendly. Use your local markdown viewer or open docs [right on Github](docs/index.md)
+- 📚 Signatures for every class, function and method.
+- 🚀 Support for type annotations. Even for the ones from the `__future__`!
+- 📦 Nice list of all modules in [Modules](docs/index.md#modules)
+- 🔎 Gather all scattered `README.md` in submodules to one place
+- 🚧 Links to source code from every doc section.
+- #️⃣ Create cross-references easily `handsdown.handsdown.Handsdown.replace_links`
+- 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## Usage
 
