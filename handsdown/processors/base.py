@@ -1,8 +1,9 @@
 from abc import abstractmethod
 from collections import defaultdict
-from typing import Text, Iterable, Optional, Dict, List, Pattern
+from typing import Text, Optional, Dict, List, Pattern
 
 from handsdown.type_defs import SectionMap
+from handsdown.indent_trimmer import IndentTrimmer
 
 
 class BaseDocstringProcessor:
@@ -59,8 +60,10 @@ class BaseDocstringProcessor:
         self.in_codeblock = False
 
         for line in content.split("\n"):
-            indent = self._get_line_indent(line)
-            parsed_line = self._parse_line(self._strip_indent(line, indent).rstrip())
+            indent = IndentTrimmer.get_line_indent(line)
+            parsed_line = self._parse_line(
+                IndentTrimmer.trim_line(line, indent).rstrip()
+            )
             if parsed_line is None:
                 continue
             for line_part in parsed_line.split("\n"):
@@ -87,13 +90,8 @@ class BaseDocstringProcessor:
             if section_name:
                 lines.extend([f"#### {section_name}", ""])
 
-            section_indent = self._get_lines_indent(section_lines)
-            for line in section_lines:
-                if not line.strip():
-                    lines.append("")
-                    continue
-
-                lines.append(self._strip_indent(line, section_indent))
+            section_lines = IndentTrimmer.trim_lines(section_lines)
+            lines.extend(section_lines)
 
             if lines[-1]:
                 lines.append("")
@@ -103,19 +101,3 @@ class BaseDocstringProcessor:
     @abstractmethod
     def _parse_line(self, line: Text) -> Optional[Text]:
         pass
-
-    @staticmethod
-    def _strip_indent(line: Text, indent: int) -> Text:
-        if not line[:indent].strip():
-            return line[indent:]
-
-        return line
-
-    @staticmethod
-    def _get_line_indent(line: Text) -> int:
-        return len(line) - len(line.lstrip())
-
-    @classmethod
-    def _get_lines_indent(cls, lines: Iterable[Text]) -> int:
-        indents = [cls._get_line_indent(i) for i in lines if i.strip()]
-        return min(indents, default=0)

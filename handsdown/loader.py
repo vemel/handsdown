@@ -4,6 +4,7 @@ from collections import defaultdict
 from typing import Optional, Text, Any
 
 from handsdown.signature import SignatureBuilder
+from handsdown.indent_trimmer import IndentTrimmer
 
 
 class Loader:
@@ -37,7 +38,7 @@ class Loader:
         Returns:
             A string with object docsting.
         """
-        return self._trim(self._get_docstring(obj))
+        return IndentTrimmer.trim_text(self._get_docstring(obj))
 
     @staticmethod
     def safe_import_module(import_string: Text) -> Any:
@@ -56,26 +57,3 @@ class Loader:
             return obj.__call__.__doc__ or ""
 
         return obj.__doc__ or ""
-
-    @staticmethod
-    def _trim(docstring: Text) -> Text:
-        if not docstring:
-            return ""
-
-        lines = docstring.split("\n")
-        indent = 0
-
-        for line in lines[1:]:
-            if not line.strip():
-                continue
-
-            indent = len(line) - len(line.lstrip())
-            break
-
-        result = []
-        for line in docstring.split("\n"):
-            if not line[:indent].strip():
-                line = line[indent:]
-            result.append(line)
-
-        return "\n".join(result)
