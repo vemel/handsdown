@@ -112,4 +112,3 @@ class IndentTrimmer:
     @staticmethod
     def _get_line_indent(line: Text) -> int:
         return len(line) - len(line.lstrip())
-

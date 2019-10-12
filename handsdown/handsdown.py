@@ -11,6 +11,7 @@ from typing import Iterable, Text, List, Any, Tuple, Optional, Callable, Dict, P
 from handsdown.loader import Loader
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
+from handsdown.utils import get_anchor_link, generate_toc_lines
 
 
 class Handsdown:
@@ -24,8 +25,6 @@ class Handsdown:
         loader -- Loader for python modules.
         docs_path -- Path to folder with auto-generated docs to output.
     """
-
-    _anchor_re = re.compile(r"[^a-z0-9_-]+")
 
     def __init__(
         self,
@@ -194,7 +193,7 @@ class Handsdown:
                 module_objects=module_objects, source_path=relative_file_path
             )
 
-            toc_lines = self._build_toc_lines("\n".join(header_lines + content_lines))
+            toc_lines = generate_toc_lines("\n".join(header_lines + content_lines))
             md_lines = []
             md_lines.extend(header_lines[:2])
             md_lines.extend(toc_lines)
@@ -228,7 +227,7 @@ class Handsdown:
                 continue
 
             title = self._get_title_from_import_string(module_name)
-            anchor_link = self._get_anchor(title)
+            anchor_link = get_anchor_link(title)
             link = f"[{title}](./{md_file_name}#{anchor_link})"
             content = content.replace(match, link)
             file_changed = True
@@ -338,7 +337,7 @@ class Handsdown:
                     continue
 
                 existing_titles.append(title)
-                anchor_link = self._get_anchor(title)
+                anchor_link = get_anchor_link(title)
                 sections["See also"].append(f"- [{title}](./{md_name}#{anchor_link})")
 
         formatted_docstring = self._docstring_processor.render_sections(sections)
@@ -384,64 +383,11 @@ class Handsdown:
 
             last_path_parts = path_parts
 
-        toc_lines = self._build_toc_lines("\n".join(lines))
+        toc_lines = generate_toc_lines("\n".join(lines))
         lines.insert(1, "\n".join(toc_lines))
         lines.insert(1, "")
 
         return "\n".join(lines)
-
-    def _get_anchor(self, title: Text) -> Text:
-        """
-        Convert title to Github-compatible anchor link.
-
-        Returns:
-            A test of anchor link.
-        """
-        title = title.lower().replace(" ", "-")
-        result = self._anchor_re.sub("", title)
-        return result
-
-    def _build_toc_lines(self, content: Text, max_depth: int = 3) -> List[Text]:
-        """
-        Generate Table of Contents for markdown text.
-
-        Arguments:
-            content -- Markdown string.
-            max_depth -- Add headers to ToC only up to this level.
-
-        Returns:
-            A list of ToC lines.
-        """
-        toc_lines = []
-        in_codeblock = False
-        for line in content.split("\n"):
-            line = line.strip()
-            if line.count("```") > 1:
-                continue
-
-            if line.startswith("```"):
-                in_codeblock = not in_codeblock
-
-            if in_codeblock:
-                continue
-
-            if not line.startswith("#"):
-                continue
-
-            header_symbols = line.split(" ")[0]
-            if header_symbols.replace("#", ""):
-                continue
-
-            header_level = len(header_symbols)
-            if header_level > max_depth:
-                continue
-
-            title = line.split(" ", 1)[-1].strip()
-            anchor = self._get_anchor(title)
-            link = f"[{title}](#{anchor})"
-            toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
-
-        return toc_lines
 
     @staticmethod
     def _get_md_name(path: Path) -> Text:
