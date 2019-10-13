@@ -4,6 +4,10 @@
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
   - [ModuleRecordList](#modulerecordlist)
+    - [ModuleRecordList().add](#modulerecordlistadd)
+    - [ModuleRecordList().find_object](#modulerecordlistfind_object)
+    - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
+    - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
 > Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.module_record](..//home/vlad/work/vemel/handsdown/handsdown/module_record.py) module.
 
@@ -64,3 +68,60 @@ Representation of an imported module.
 ```python
 class ModuleRecordList()
 ```
+Aggregation of `ModuleRecord` objects.
+
+### ModuleRecordList().add
+
+[🔍 find in source code](../handsdown/module_record.py#L89)
+
+```python
+def add(module_record: handsdown.module_record.ModuleRecord) -> None
+```
+Add new `ModuleRecord`.
+
+#### Arguments
+
+- `module_record` - A new `ModuleRecord`
+
+### ModuleRecordList().find_object
+
+[🔍 find in source code](../handsdown/module_record.py#L59)
+
+```python
+def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
+```
+Find object by it's import string.
+
+#### Arguments
+
+- `import_string` - Object import string.
+
+#### Returns
+
+Found object or None.
+
+### ModuleRecordList().get_output_file_names
+
+[🔍 find in source code](../handsdown/module_record.py#L71)
+
+```python
+def get_output_file_names() -> Set[str]
+```
+Get all output MD file names.
+
+#### Returns
+
+A set of output names as strings.
+
+### ModuleRecordList().get_package_names
+
+[🔍 find in source code](../handsdown/module_record.py#L80)
+
+```python
+def get_package_names() -> Set[str]
+```
+Get top level import strings.
+
+#### Returns
+
+A set of top level imports as strings.

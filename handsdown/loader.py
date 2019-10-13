@@ -62,6 +62,18 @@ class Loader:
         return f"{'_'.join(name_parts)}.md"
 
     def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
+        """
+        Build `ModuleRecord` for given `source_path`.
+
+        Arguments:
+            source_path -- Absolute path to source file.
+
+        Returns:
+            A new `ModuleRecord` instance or None if there is ntohing to import.
+
+        Raises:
+            LoaderError -- If module or any of it's objects cannot be imported.
+        """
         if not (source_path.parent / "__init__.py").exists():
             return None
 
@@ -147,9 +159,11 @@ class Loader:
 
     def import_module(self, file_path: Path) -> Any:
         """
-        Import module using `import_paths` list. Clean up path afterwards.
-        Patch `os.environ` to avoid failing on undefined variables.
-        Set `typing.TYPE_CHECKING` to `True` while importing.
+        Import module using `import_paths` list. Clean up all patches afterwards.
+
+        - Patch `sys.path` to add current repo to it.
+        - Patch `os.environ` to avoid failing on undefined variables.
+        - Patch `typing.TYPE_CHECKING` to `True`.
 
         Arguments:
             file_path -- Abslute path to source file.
@@ -212,15 +226,13 @@ class Loader:
         self, module_record: ModuleRecord
     ) -> Generator[ModuleObjectRecord, None, None]:
         """
-        Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
-        `object` - object iteslf. `level` - deepness of the object. Maximum `level` is 1.
+        Get `ModuleObjectRecord` for every object in a module.
 
         Arguments:
-            module -- Module to inspect.
-            file_path -- Absolute path to source file.
+            module_record -- `ModuleRecord` instance.
 
         Returns:
-            A generator that yields tuples of (`name`, `object`, `level`).
+            A generator that yields `ModuleObjectRecord` instances.
         """
         import_string = module_record.import_string
         obj_names = pyclbr.readmodule_ex(import_string)
@@ -285,7 +297,7 @@ class Loader:
         obj -- Object to inspect.
 
         Returns:
-            A line number.
+            A line number as an integer, starting for 1.
         """
         source_code_info = inspect.findsource(obj)
         return source_code_info[1] + 1
