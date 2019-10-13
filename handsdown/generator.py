@@ -205,6 +205,9 @@ class Generator:
         for match in re.findall(self._docstring_links_re, content):
             module_name = match.replace("`", "")
             module_object_record = self._module_records.find_object(module_name)
+            if module_object_record is None:
+                continue
+
             md_name = module_object_record.output_file_name
             if md_name == file_path.name:
                 continue
