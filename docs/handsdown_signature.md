@@ -17,6 +17,7 @@
 ```python
 class Config(*args, **kwargs)
 ```
+
 ## ProxyDefaultValue
 
 [🔍 find in source code](../handsdown/signature.py#L15)
@@ -24,6 +25,7 @@ class Config(*args, **kwargs)
 ```python
 class ProxyDefaultValue(original: Type) -> None
 ```
+
 "
     Proxy class to represent function parameter default value in signature
 
@@ -38,6 +40,7 @@ class ProxyDefaultValue(original: Type) -> None
 ```python
 class ProxyParameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any) -> None
 ```
+
 Helper class to represent function parameters in signature
 
 ### ProxyParameter.create
@@ -50,6 +53,7 @@ def create(
     type_hint: Union[Type, NoneType],
 ) -> handsdown.signature.ProxyParameter
 ```
+
 Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 
 #### Arguments
@@ -68,6 +72,7 @@ Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 ```python
 class SignatureBuilder(obj: Any)
 ```
+
 Renderer for object signature. Support lazy type annotations and tries
 to beautify result by splitting lines.
 
@@ -82,6 +87,7 @@ to beautify result by splitting lines.
 ```python
 def build() -> str
 ```
+
 Render signature to string.
 
 #### Returns

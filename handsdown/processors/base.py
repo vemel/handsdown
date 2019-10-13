@@ -90,6 +90,9 @@ class BaseDocstringProcessor:
             if section_name:
                 lines.extend([f"#### {section_name}", ""])
 
+            while section_lines and not section_lines[0].strip():
+                section_lines = section_lines[1:]
+
             section_lines = IndentTrimmer.trim_lines(section_lines)
             lines.extend(section_lines)
 

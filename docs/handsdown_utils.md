@@ -14,6 +14,7 @@
 ```python
 class OSEnvironMock(*args, **kwargs)
 ```
+
 ## get_anchor_link
 
 [🔍 find in source code](../handsdown/utils.py#L15)
@@ -21,6 +22,7 @@ class OSEnvironMock(*args, **kwargs)
 ```python
 def get_anchor_link(title: str) -> str
 ```
+
 Convert title to Github-compatible anchor link.
 
 #### Returns
@@ -34,6 +36,7 @@ A test of anchor link.
 ```python
 def generate_toc_lines(content: str, max_depth: int = 3) -> List[str]
 ```
+
 Generate Table of Contents for markdown text.
 
 #### Arguments

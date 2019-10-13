@@ -26,6 +26,7 @@ class ModuleObjectRecord(
     title: str,
 )
 ```
+
 Representation of an imported module object.
 
 #### Arguments
@@ -51,6 +52,7 @@ class ModuleRecord(
     objects: List[handsdown.module_record.ModuleObjectRecord],
 )
 ```
+
 Representation of an imported module.
 
 #### Arguments
@@ -68,6 +70,7 @@ Representation of an imported module.
 ```python
 class ModuleRecordList()
 ```
+
 Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().add
@@ -77,6 +80,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
 ```
+
 Add new [ModuleRecord](#modulerecord).
 
 #### Arguments
@@ -94,6 +98,7 @@ Add new [ModuleRecord](#modulerecord).
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
 ```
+
 Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
 
 #### Arguments
@@ -115,6 +120,7 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 ```python
 def get_output_file_names() -> Set[str]
 ```
+
 Get all output MD file names.
 
 #### Returns
@@ -128,6 +134,7 @@ A set of output names as strings.
 ```python
 def get_package_names() -> Set[str]
 ```
+
 Get top level import strings.
 
 #### Returns

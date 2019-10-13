@@ -18,6 +18,7 @@
 ```python
 class LoaderError(*args, **kwargs)
 ```
+
 ## Loader
 
 [🔍 find in source code](../handsdown/loader.py#L21)
@@ -25,10 +26,10 @@ class LoaderError(*args, **kwargs)
 ```python
 class Loader(root_path: pathlib.Path) -> None
 ```
+
 Loader for python source code.
 
 #### Examples
-
 
 ```python
 loader = Loader(Path('path/to/my_module/'))
@@ -48,6 +49,7 @@ def get_module_record(
     source_path: pathlib.Path,
 ) -> Union[handsdown.module_record.ModuleRecord, NoneType]
 ```
+
 Build `ModuleRecord` for given `source_path`.
 
 #### Arguments
@@ -73,6 +75,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 ```python
 def get_object_docstring(obj: Any) -> str
 ```
+
 Get trimmed object docstring or an empty string.
 
 #### Arguments
@@ -90,6 +93,7 @@ A string with object docsting.
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
 ```
+
 Get class, method or function signature. If object is not callable -
 returns None.
 
@@ -108,6 +112,7 @@ A string with object signature or None.
 ```python
 def get_source_line_number(obj: Any) -> int
 ```
+
 Get line number in source file where `obj` is declared.
 
 - `obj` - Object to inspect.
@@ -123,6 +128,7 @@ A line number as an integer, starting for 1.
 ```python
 def import_module(file_path: pathlib.Path) -> Any
 ```
+
 Import module using `import_paths` list. Clean up all patches afterwards.
 
 - Patch `sys.path` to add current repo to it.

@@ -21,6 +21,7 @@ Main CLI entrypoint for `handsdown`
 ```python
 def get_logger(level: int) -> logging.Logger
 ```
+
 Get stdout stream logger.
 
 #### Arguments
@@ -38,4 +39,5 @@ A `logging.Logger` instance.
 ```python
 def main() -> None
 ```
+
 Main entrypoint for CLI.

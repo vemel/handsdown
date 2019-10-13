@@ -12,4 +12,5 @@
 ```python
 class PEP257DocstringProcessor() -> None
 ```
+
 This class implements the preprocessor for PEP257 and Google style.

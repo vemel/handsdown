@@ -13,6 +13,7 @@
 ```python
 def abs_path(path: str) -> pathlib.Path
 ```
+
 Make path absolute.
 
 #### Arguments
@@ -30,6 +31,7 @@ An absolute path.
 ```python
 def get_cli_parser() -> argparse.ArgumentParser
 ```
+
 Get CLI arguments parser.
 
 #### Returns

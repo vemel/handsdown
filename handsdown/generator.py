@@ -278,10 +278,12 @@ class Generator:
             signature = self._loader.get_object_signature(module_record_object.object)
 
             if signature:
-                lines.append(f"```python\n{signature}\n```")
+                lines.append(f"```python\n{signature}\n```\n")
 
             formatted_docstring = self._get_formatted_docstring(
-                module_record=module_record, inspect_object=module_record_object.object
+                module_record=module_record,
+                inspect_object=module_record_object.object,
+                signature=signature,
             )
             if formatted_docstring:
                 lines.extend(formatted_docstring.split("\n"))
@@ -293,6 +295,7 @@ class Generator:
         self,
         inspect_object: Any,
         module_record: Union[ModuleRecord, ModuleObjectRecord],
+        signature: Optional[Text] = None,
     ) -> Optional[Text]:
         """
         Get object docstring and convert it to a valid markdown using
@@ -301,6 +304,7 @@ class Generator:
         Arguments:
             source_path -- Path to object source file.
             module_object -- Object to inspect.
+            signature -- Object signature if exists.
 
         Returns:
             A module docstring with valid markdown.
@@ -311,7 +315,6 @@ class Generator:
             return None
 
         sections = self._docstring_processor.build_sections(docstring)
-        signature = self._loader.get_object_signature(inspect_object)
         if signature:
             related_objects = self._get_objects_from_signature(signature)
             for related_object in related_objects:

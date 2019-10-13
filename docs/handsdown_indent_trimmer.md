@@ -16,6 +16,7 @@
 ```python
 class IndentTrimmer(*args, **kwargs)
 ```
+
 Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
@@ -25,10 +26,10 @@ Utility class for removing indentation for sections and lines.
 ```python
 def get_line_indent(line: str) -> int
 ```
+
 Get indent length of the line.
 
 #### Examples
-
 
 ```python
 IndentTrimmer.get_line_indent('   test') # 3
@@ -50,10 +51,10 @@ A number of indentation characters in a beginning of the line.
 ```python
 def trim_line(line: str, indent: int) -> str
 ```
+
 Trim indent from line if it is empty.
 
 #### Examples
-
 
 ```python
 IndentTrimmer.trim_line('     test', 2) # '   test'
@@ -76,10 +77,10 @@ A line with removed indent.
 ```python
 def trim_lines(lines: Iterable[str]) -> List[str]
 ```
+
 Trim minimum indent from each line of text.
 
 #### Examples
-
 
 ```python
 IndentTrimmer.trim_lines([
@@ -109,10 +110,10 @@ A list of lines with trimmed indent.
 ```python
 def trim_text(text: str) -> str
 ```
+
 Trim minimum indent from each line of text.
 
 #### Examples
-
 
 ```python
 IndentTrimmer.trim_text('  asd\n asd\n   asd\n')

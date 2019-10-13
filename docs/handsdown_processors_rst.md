@@ -12,4 +12,5 @@
 ```python
 class RSTDocstringProcessor() -> None
 ```
+
 This class implements the preprocessor for restructured text.

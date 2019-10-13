@@ -13,6 +13,7 @@
 ```python
 class SmartDocstringProcessor() -> None
 ```
+
 This class implements the preprocessor for restructured text and google.
 
 ### SmartDocstringProcessor().build_sections
@@ -22,4 +23,5 @@ This class implements the preprocessor for restructured text and google.
 ```python
 def build_sections(content: str) -> DefaultDict[str, List[str]]
 ```
+
 Preprocessors a given section into it's components.

@@ -16,6 +16,7 @@
 ```python
 class GeneratorError(*args, **kwargs)
 ```
+
 ## Generator
 
 [🔍 find in source code](../handsdown/generator.py#L17)
@@ -31,6 +32,7 @@ class Generator(
     raise_import_errors: bool = False,
 )
 ```
+
 Main doc generator.
 
 #### Arguments
@@ -53,6 +55,7 @@ Main doc generator.
 ```python
 def cleanup_old_docs() -> None
 ```
+
 Remove old docs generated for this module.
 
 #### Arguments
@@ -66,6 +69,7 @@ Remove old docs generated for this module.
 ```python
 def generate() -> None
 ```
+
 Generate all module docs at once.
 
 ### Generator().replace_links
@@ -75,6 +79,7 @@ Generate all module docs at once.
 ```python
 def replace_links(file_path: pathlib.Path) -> None
 ```
+
 Replace all import strings with Markdown links. Only import strings that present in this
 package are replaced, so not dead linsk should be generated.
 

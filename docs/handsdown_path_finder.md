@@ -15,10 +15,10 @@
 ```python
 class PathFinder(root: pathlib.Path, glob_expr: str) -> None
 ```
+
 Find matching paths inside `root` path.
 
 #### Examples
-
 
 ```python
 path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
@@ -39,6 +39,7 @@ path_finder.exclude('*new*').list() # ['my.txt']
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
+
 Add `fnmatch` expression to black list.
 If black list is empty - no black list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
@@ -62,6 +63,7 @@ A copy of itself.
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
+
 Add `fnmatch` expression to white list.
 If white list is empty - no white list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
@@ -85,6 +87,7 @@ A copy of itself.
 ```python
 def list() -> List[pathlib.Path]
 ```
+
 Return all matching paths as a list.
 
 #### Returns
