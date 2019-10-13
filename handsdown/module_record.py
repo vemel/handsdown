@@ -52,7 +52,7 @@ class ModuleRecordList:
     Aggregation of `ModuleRecord` objects.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.data: List[ModuleRecord] = []
         self.import_string_map: Dict[Text, Any] = {}
 

@@ -27,15 +27,15 @@ class PathFinder:
     def __init__(self, root: Path, glob_expr: Text) -> None:
         self._root = root
         self._glob_expr = glob_expr
-        self.include_exprs = []
-        self.exclude_exprs = []
+        self.include_exprs: List[Text] = []
+        self.exclude_exprs: List[Text] = []
 
     def _copy(
         self, include_exprs: Iterable[Text], exclude_exprs: Iterable[Text]
     ) -> PathFinder:
         new_copy = PathFinder(root=self._root, glob_expr=self._glob_expr)
-        new_copy.include_exprs = include_exprs
-        new_copy.exclude_exprs = exclude_exprs
+        new_copy.include_exprs = list(include_exprs)
+        new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy
 
     def include(self, *fn_exrps: Text) -> PathFinder:
@@ -82,8 +82,9 @@ class PathFinder:
         if not self.include_exprs:
             return True
 
+        posix_path = path.as_posix()
         for include_expr in self.include_exprs:
-            if fnmatch.fnmatch(path, include_expr):
+            if fnmatch.fnmatch(posix_path, include_expr):
                 return True
 
         return False
@@ -92,8 +93,9 @@ class PathFinder:
         if not self.exclude_exprs:
             return False
 
+        posix_path = path.as_posix()
         for exclude_expr in self.exclude_exprs:
-            if fnmatch.fnmatch(path, exclude_expr):
+            if fnmatch.fnmatch(posix_path, exclude_expr):
                 return True
 
         return False

@@ -49,7 +49,7 @@ class Generator:
             self._docs_path.mkdir()
 
         self._raise_import_errors = raise_import_errors
-        self._loader = loader or Loader(root_path=self._repo_path, logger=logger)
+        self._loader = loader or Loader(root_path=self._repo_path, logger=self._logger)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
@@ -61,7 +61,7 @@ class Generator:
             f'[ \\[]((?:{"|".join(package_names)})\\.[^() :,]+)'
         )
 
-    def _build_module_record_list(self):
+    def _build_module_record_list(self) -> ModuleRecordList:
         result = ModuleRecordList()
         for source_path in self._source_paths:
             try:
@@ -129,7 +129,6 @@ class Generator:
         md_lines.extend(content_lines)
 
         target_file.write_text("\n".join(md_lines))
-        return target_file
 
     def generate(self) -> None:
         """
@@ -166,7 +165,7 @@ class Generator:
 
         return ".".join(import_parts)
 
-    def _replace_local_links(self, module_record: ModuleRecord):
+    def _replace_local_links(self, module_record: ModuleRecord) -> None:
         output_file_name = self._docs_path / module_record.output_file_name
         content = output_file_name.read_text()
         file_changed = False

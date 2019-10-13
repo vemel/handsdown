@@ -8,7 +8,7 @@ anchor_re = re.compile(r"[^a-z0-9_-]+")
 
 
 class OSEnvironMock(UserDict):
-    def __missing__(self, key):
+    def __missing__(self, key: Text) -> Text:
         return "env"
 
 

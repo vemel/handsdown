@@ -112,7 +112,7 @@ class Loader:
 
         return module_record
 
-    def _setup_django(self):
+    def _setup_django(self) -> None:
         self._os_environ_patch.start()
         self._sys_path_patch.start()
         django = importlib.import_module("django")
