@@ -49,7 +49,7 @@ class Generator:
             self._docs_path.mkdir()
 
         self._raise_import_errors = raise_import_errors
-        self._loader = loader or Loader(self._repo_path)
+        self._loader = loader or Loader(root_path=self._repo_path, logger=logger)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)

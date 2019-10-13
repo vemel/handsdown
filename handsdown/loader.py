@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import pyclbr
 import inspect
+import logging
 from unittest.mock import patch
 import os
 from typing import Optional, Text, Any, Callable, Generator
@@ -35,7 +36,8 @@ class Loader:
 
     DJANGO_SETTINGS_ENV_VAR = "DJANGO_SETTINGS_MODULE"
 
-    def __init__(self, root_path: Path) -> None:
+    def __init__(self, root_path: Path, logger: logging.Logger) -> None:
+        self._logger = logger
         self._root_path = root_path
         self._sys_path_dirty = False
         self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
@@ -133,8 +135,7 @@ class Loader:
 
         return SignatureBuilder(obj).build()
 
-    @classmethod
-    def get_object_docstring(cls, obj: Any) -> Text:
+    def get_object_docstring(self, obj: Any) -> Text:
         """
         Get trimmed object docstring or an empty string.
 
@@ -144,10 +145,14 @@ class Loader:
         Returns:
             A string with object docsting.
         """
-        docstring = cls._get_docstring(obj)
+        docstring = self._get_docstring(obj)
 
         # Fix multiline docstrings starting with no newline after quotes
         if "\n" in docstring and docstring[0] != "\n":
+            short_docstring = docstring[:30].replace("\n", "\\n")
+            self._logger.warning(
+                f'Docstring "{short_docstring}" does not start with newline, trying to fix...'
+            )
             lines = docstring.split("\n")
             next_line_index = 1
             next_line = lines[next_line_index]
