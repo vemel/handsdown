@@ -7,7 +7,7 @@
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
     - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
 
-> Auto-generated documentation for [handsdown.indent_trimmer](..//home/vlad/work/vemel/handsdown/handsdown/indent_trimmer.py) module.
+> Auto-generated documentation for [handsdown.indent_trimmer](../handsdown/indent_trimmer.py) module.
 
 ## IndentTrimmer
 

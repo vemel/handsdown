@@ -227,6 +227,7 @@ class Generator:
     ) -> List[Text]:
         import_string = module_record.import_string
         source_path = module_record.source_path
+        relative_source_path = source_path.relative_to(self._repo_path)
         lines = []
 
         # Grab README.md content for __init__.py if it exists
@@ -248,15 +249,13 @@ class Generator:
             lines.append("")
 
         if not lines or not lines[0].startswith("# "):
-            page_title = self._get_title_from_path(
-                source_path.relative_to(self._repo_path)
-            )
+            page_title = self._get_title_from_path(relative_source_path)
             lines.insert(0, "")
             lines.insert(0, f"# {page_title}")
 
         lines.insert(
             1,
-            f"> Auto-generated documentation for [{import_string}](../{source_path}) module.",
+            f"> Auto-generated documentation for [{import_string}](../{relative_source_path}) module.",
         )
         lines.insert(1, "")
 

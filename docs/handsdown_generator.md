@@ -7,7 +7,7 @@
     - [Generator().generate](#generatorgenerate)
     - [Generator().replace_links](#generatorreplace_links)
 
-> Auto-generated documentation for [handsdown.generator](..//home/vlad/work/vemel/handsdown/handsdown/generator.py) module.
+> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
 
 ## GeneratorError
 

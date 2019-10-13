@@ -8,7 +8,7 @@
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
-> Auto-generated documentation for [handsdown.signature](..//home/vlad/work/vemel/handsdown/handsdown/signature.py) module.
+> Auto-generated documentation for [handsdown.signature](../handsdown/signature.py) module.
 
 ## Config
 
