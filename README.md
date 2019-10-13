@@ -1,6 +1,6 @@
 # 🙌 Handsdown - Python documentation generator
 
-Python docstring-based documentation generator for lazy people.
+Python docstring-based documentation generator for lazy perfectionists.
 
 ## 🔬 Features
 
@@ -11,7 +11,7 @@ Python docstring-based documentation generator for lazy people.
 - 📦 Nice list of all modules in [Modules](docs/index.md#modules)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Links to source code from every doc section.
-- #️⃣ Create cross-references easily `handsdown.generator.Generator.replace_links` (check [index.md](docs/index.md#features))
+- #️⃣ Create links easily as `handsdown.generator.Generator.replace_links` (check [index.md](docs/index.md#features))
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🎉 Usage
@@ -52,10 +52,16 @@ handsdown_generator = Generator(
 handsdown_generator.generate()
 ```
 
-## 🔧 Installation
+## 🐶 Installation
 
 Install using pip
 
 ```bash
 pip install handsdown
 ```
+
+## 🔧 Development
+
+- Install [pipenv](https://pypi.org/project/pipenv/)
+- Run `pipenv install -d`
+- Use `black` formatter in your IDE
