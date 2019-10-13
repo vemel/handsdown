@@ -39,17 +39,17 @@ class Generator:
         raise_import_errors: bool = False,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
-        self._repo_path = input_path
-        self._docs_path = (
+        self._root_path = input_path
+        self._output_path = (
             output_path if output_path is not None else (input_path / "docs")
         )
 
-        if not self._docs_path.exists():
-            self._logger.info(f"Creating folder {self._docs_path}")
-            self._docs_path.mkdir()
+        if not self._output_path.exists():
+            self._logger.info(f"Creating folder {self._output_path}")
+            self._output_path.mkdir()
 
         self._raise_import_errors = raise_import_errors
-        self._loader = loader or Loader(root_path=self._repo_path, logger=self._logger)
+        self._loader = loader or Loader(root_path=self._root_path, logger=self._logger)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
@@ -71,7 +71,7 @@ class Generator:
                     raise
 
                 self._logger.warning(
-                    f"Skipping {source_path.relative_to(self._repo_path)} due to import error: {e}"
+                    f"Skipping {source_path.relative_to(self._root_path)} due to import error: {e}"
                 )
 
             if module_record:
@@ -87,7 +87,7 @@ class Generator:
             preserve_paths -- All doc files generated paths that should not be deleted.
         """
         preserve_file_names = self._module_records.get_output_file_names()
-        for doc_path in self._docs_path.glob("*.md"):
+        for doc_path in self._output_path.glob("*.md"):
             md_name = doc_path.name
             if md_name in preserve_file_names:
                 continue
@@ -109,9 +109,9 @@ class Generator:
             A path to generated MD file or None.
         """
         md_name = module_record.output_file_name
-        target_file = self._docs_path / md_name
-        relative_doc_path = target_file.relative_to(self._repo_path)
-        relative_file_path = module_record.source_path.relative_to(self._repo_path)
+        target_file = self._output_path / md_name
+        relative_doc_path = target_file.relative_to(self._root_path)
+        relative_file_path = module_record.source_path.relative_to(self._root_path)
         self._logger.info(
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
@@ -135,20 +135,20 @@ class Generator:
         Generate all module docs at once.
         """
         self._logger.debug(
-            f"Generating docs for {self._repo_path.name} to {self._docs_path.relative_to(self._repo_path.parent)}"
+            f"Generating docs for {self._root_path.name} to {self._output_path.relative_to(self._root_path.parent)}"
         )
 
         for module_record in self._module_records:
             self._generate_doc(module_record)
-            output_file_path = self._docs_path / module_record.output_file_name
+            output_file_path = self._output_path / module_record.output_file_name
             self._replace_local_links(module_record)
             self.replace_links(output_file_path)
 
         self._logger.debug(f"Removing orphaned docs")
         self.cleanup_old_docs()
 
-        index_md_path = Path(self._docs_path, "index.md")
-        self._logger.info(f"Generating {index_md_path.relative_to(self._repo_path)}")
+        index_md_path = Path(self._output_path, "index.md")
+        self._logger.info(f"Generating {index_md_path.relative_to(self._root_path)}")
         index_md_path.write_text(self._generate_index_md_content())
         self.replace_links(index_md_path)
 
@@ -166,7 +166,7 @@ class Generator:
         return ".".join(import_parts)
 
     def _replace_local_links(self, module_record: ModuleRecord) -> None:
-        output_file_name = self._docs_path / module_record.output_file_name
+        output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
         file_changed = False
         for obj in module_record.objects:
@@ -226,7 +226,7 @@ class Generator:
     ) -> List[Text]:
         import_string = module_record.import_string
         source_path = module_record.source_path
-        relative_source_path = source_path.relative_to(self._repo_path)
+        relative_source_path = source_path.relative_to(self._root_path)
         lines = []
 
         # Grab README.md content for __init__.py if it exists
@@ -271,7 +271,7 @@ class Generator:
             )
 
             source_path = module_record_object.source_path
-            relative_path = source_path.relative_to(self._repo_path)
+            relative_path = source_path.relative_to(self._root_path)
             lines.append(
                 f"[🔍 find in source code](../{relative_path}#L{module_record_object.source_line_number})\n"
             )
@@ -330,7 +330,7 @@ class Generator:
                 anchor_link = get_anchor_link(title)
                 sections["See also"].append(f"- [{title}]({md_link}#{anchor_link})")
                 self._logger.debug(
-                    f'Adding link "{title}" to {self._docs_path / output_file_name} "See also" section'
+                    f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'
                 )
 
         formatted_docstring = self._docstring_processor.render_sections(sections)
@@ -358,14 +358,14 @@ class Generator:
             A string with new file content.
         """
         lines = []
-        readme_path = Path(self._repo_path / "README.md")
+        readme_path = Path(self._root_path / "README.md")
         if readme_path.exists():
             lines.extend(readme_path.read_text().split("\n"))
         lines.append("\n## Modules\n")
         last_path_parts: Tuple[Text, ...] = tuple()
         for module_record in self._module_records:
             md_name = module_record.output_file_name
-            relative_path = module_record.source_path.relative_to(self._repo_path)
+            relative_path = module_record.source_path.relative_to(self._root_path)
             path_parts = relative_path.parts
 
             if path_parts[-1] == "__init__.py":
@@ -380,7 +380,7 @@ class Generator:
                 indent = "  " * part_index
                 if part_index == len(path_parts) - 1:
                     title = self._get_title_from_md_content(
-                        (self._docs_path / md_name).read_text()
+                        (self._output_path / md_name).read_text()
                     )
                     if title:
                         title = title.split(": ")[-1]
@@ -398,7 +398,7 @@ class Generator:
         return "\n".join(lines)
 
     def _get_md_name(self, path: Path) -> Text:
-        relative_path = path.relative_to(self._repo_path)
+        relative_path = path.relative_to(self._root_path)
         name_parts = []
         for part in relative_path.parts:
             if part == "__init__.py":
