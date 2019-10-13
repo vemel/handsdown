@@ -11,7 +11,7 @@ Python docstring-based documentation generator for lazy people.
 - 📦 Nice list of all modules in [Modules](docs/index.md#modules)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Links to source code from every doc section.
-- #️⃣ Create cross-references easily `handsdown.handsdown.Handsdown.replace_links` (check [index.md](docs/index.md#features))
+- #️⃣ Create cross-references easily `handsdown.generator.Generator.replace_links` (check [index.md](docs/index.md#features))
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🎉 Usage
@@ -50,10 +50,6 @@ handsdown_generator = Generator(
 
 # generate all docs at once
 handsdown_generator.generate()
-
-# or generate one doc
-output_file_path = handsdown_generator.generate_doc(repo_path / 'source.py')
-output_file_path # Path('output/source.md')
 ```
 
 ## 🔧 Installation

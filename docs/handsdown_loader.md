@@ -9,18 +9,18 @@
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
 
-> Auto-generated documentation for [handsdown.loader](../handsdown/loader.py) module.
+> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.loader](..//home/vlad/work/vemel/handsdown/handsdown/loader.py) module.
 
 ## LoaderError
 
-[🔍 find in source code](../handsdown/loader.py#L16)
+[🔍 find in source code](../handsdown/loader.py#L17)
 
 ```python
 class LoaderError(*args, **kwargs)
 ```
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L20)
+[🔍 find in source code](../handsdown/loader.py#L21)
 
 ```python
 class Loader(root_path: pathlib.Path) -> None
@@ -41,17 +41,21 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L149)
+[🔍 find in source code](../handsdown/loader.py#L213)
 
 ```python
-def get_module_objects(import_string: str) -> Generator[Tuple[str, Any, int], NoneType, NoneType]
+def get_module_objects(
+    module: Any,
+    file_path: str,
+) -> Generator[Tuple[str, Any, int], NoneType, NoneType]
 ```
 Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
 `object` - object iteslf. `level` - deepness of the object. Maximum `level` is 1.
 
 #### Arguments
 
-- `import_string` - Module import string.
+- `module` - Module to inspect.
+- `file_path` - Absolute path to source file.
 
 #### Returns
 
@@ -59,7 +63,7 @@ A generator that yields tuples of (`name`, `object`, `level`).
 
 ### Loader.get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L74)
+[🔍 find in source code](../handsdown/loader.py#L126)
 
 ```python
 def get_object_docstring(obj: Any) -> str
@@ -76,7 +80,7 @@ A string with object docsting.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L57)
+[🔍 find in source code](../handsdown/loader.py#L109)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -94,7 +98,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L203)
+[🔍 find in source code](../handsdown/loader.py#L267)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -109,10 +113,10 @@ A line number.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L87)
+[🔍 find in source code](../handsdown/loader.py#L150)
 
 ```python
-def import_module(import_string: str) -> Any
+def import_module(file_path: pathlib.Path) -> Any
 ```
 Import module using `import_paths` list. Clean up path afterwards.
 Patch `os.environ` to avoid failing on undefined variables.
@@ -120,7 +124,7 @@ Set `typing.TYPE_CHECKING` to `True` while importing.
 
 #### Arguments
 
-- `import_string` - Module import string.
+- `file_path` - Abslute path to source file.
 
 #### Returns
 

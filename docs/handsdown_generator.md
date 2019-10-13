@@ -5,21 +5,20 @@
   - [Generator](#generator)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
     - [Generator().generate](#generatorgenerate)
-    - [Generator().generate_doc](#generatorgenerate_doc)
     - [Generator().replace_links](#generatorreplace_links)
 
-> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
+> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.generator](..//home/vlad/work/vemel/handsdown/handsdown/generator.py) module.
 
 ## GeneratorError
 
-[🔍 find in source code](../handsdown/generator.py#L12)
+[🔍 find in source code](../handsdown/generator.py#L13)
 
 ```python
 class GeneratorError(*args, **kwargs)
 ```
 ## Generator
 
-[🔍 find in source code](../handsdown/generator.py#L16)
+[🔍 find in source code](../handsdown/generator.py#L17)
 
 ```python
 class Generator(
@@ -29,6 +28,7 @@ class Generator(
     docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None,
     loader: Union[handsdown.loader.Loader, NoneType] = None,
     output_path: Union[pathlib.Path, NoneType] = None,
+    raise_import_errors: bool = False,
 )
 ```
 Main doc generator.
@@ -41,12 +41,17 @@ Main doc generator.
 - `loader` - Loader for python modules.
 - `output_path` - Path to folder with auto-generated docs to output.
 
+#### See also
+
+- [BaseDocstringProcessor](./handsdown_processors_base.md#basedocstringprocessor)
+- [Loader](./handsdown_loader.md#loader)
+
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#L62)
+[🔍 find in source code](../handsdown/generator.py#L82)
 
 ```python
-def cleanup_old_docs(preserve_paths: Iterable[pathlib.Path]) -> None
+def cleanup_old_docs() -> None
 ```
 Remove old docs generated for this module.
 
@@ -56,33 +61,16 @@ Remove old docs generated for this module.
 
 ### Generator().generate
 
-[🔍 find in source code](../handsdown/generator.py#L167)
+[🔍 find in source code](../handsdown/generator.py#L139)
 
 ```python
 def generate() -> None
 ```
 Generate all module docs at once.
 
-### Generator().generate_doc
-
-[🔍 find in source code](../handsdown/generator.py#L109)
-
-```python
-def generate_doc(file_path: pathlib.Path) -> Union[pathlib.Path, NoneType]
-```
-Generate one module doc at once. If `file_path` has nothing to document - return `None`.
-
-#### Arguments
-
-- `file_path` - Path to source file.
-
-#### Returns
-
-A path to generated MD file or None.
-
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L209)
+[🔍 find in source code](../handsdown/generator.py#L173)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None

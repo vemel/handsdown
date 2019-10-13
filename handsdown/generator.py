@@ -1,12 +1,13 @@
 import re
 import logging
 from pathlib import Path
-from typing import Iterable, Text, List, Any, Tuple, Optional, Dict
+from typing import Iterable, Text, List, Any, Tuple, Optional
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.utils import get_anchor_link, generate_toc_lines
+from handsdown.module_record import ModuleRecord, ModuleObjectRecord, ModuleRecordList
 
 
 class GeneratorError(Exception):
@@ -35,6 +36,7 @@ class Generator:
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
         output_path: Optional[Path] = None,
+        raise_import_errors: bool = False,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
         self._repo_path = input_path
@@ -46,27 +48,45 @@ class Generator:
             self._logger.info(f"Creating folder {self._docs_path}")
             self._docs_path.mkdir()
 
+        self._raise_import_errors = raise_import_errors
         self._loader = loader or Loader(self._repo_path)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
-        self._module_md_map = self._build_module_md_map()
+        self._module_records = self._build_module_record_list()
 
-        package_names = {i.split(".")[0] for i in self._module_md_map}
-
+        package_names = self._module_records.get_package_names()
         self._docstring_links_re = re.compile(f'`(?:{"|".join(package_names)})\\.\\S+`')
         self._signature_links_re = re.compile(
-            f' ((?:{"|".join(package_names)})\\.[^() :,]+)'
+            f'[ \\[]((?:{"|".join(package_names)})\\.[^() :,]+)'
         )
 
-    def cleanup_old_docs(self, preserve_paths: Iterable[Path]) -> None:
+    def _build_module_record_list(self):
+        result = ModuleRecordList()
+        for source_path in self._source_paths:
+            try:
+                module_record = self._loader.get_module_record(source_path)
+            except LoaderError as e:
+                if self._raise_import_errors:
+                    raise
+
+                self._logger.warning(
+                    f"Skipping {source_path.relative_to(self._repo_path)} due to import error: {e}"
+                )
+
+            if module_record:
+                result.add(module_record)
+
+        return result
+
+    def cleanup_old_docs(self) -> None:
         """
         Remove old docs generated for this module.
 
         Arguments:
             preserve_paths -- All doc files generated paths that should not be deleted.
         """
-        preserve_file_names = [i.name for i in preserve_paths]
+        preserve_file_names = self._module_records.get_output_file_names()
         for doc_path in self._docs_path.glob("*.md"):
             md_name = doc_path.name
             if md_name in preserve_file_names:
@@ -78,35 +98,7 @@ class Generator:
                 self._logger.info(f"Deleting orphaned doc file {md_name}")
                 doc_path.unlink()
 
-    def _build_module_md_map(self) -> Dict[Text, Text]:
-        module_md_map: Dict[Text, Text] = {}
-        for file_path in self._source_paths:
-            if not (file_path.parent / "__init__.py").exists():
-                continue
-
-            relative_file_path = file_path.relative_to(self._repo_path)
-            file_import = self._get_file_import_string(relative_file_path)
-
-            if not file_import:
-                continue
-
-            md_name = self._get_md_name(relative_file_path)
-            try:
-                module_objects = list(self._loader.get_module_objects(file_import))
-            except LoaderError as e:
-                self._logger.warning(f"LoaderError: {e}")
-                continue
-
-            module_md_map[file_import] = md_name
-            for module_object_name, _, _ in module_objects:
-                module_object_name = module_object_name.replace("(", "").replace(
-                    ")", ""
-                )
-                module_md_map[f"{file_import}.{module_object_name}"] = md_name
-
-        return module_md_map
-
-    def generate_doc(self, file_path: Path) -> Optional[Path]:
+    def _generate_doc(self, module_record: ModuleRecord) -> None:
         """
         Generate one module doc at once. If `file_path` has nothing to document - return `None`.
 
@@ -116,41 +108,21 @@ class Generator:
         Returns:
             A path to generated MD file or None.
         """
-        if not (file_path.parent / "__init__.py").exists():
-            return None
-
-        relative_file_path = file_path.relative_to(self._repo_path)
-        file_import = self._get_file_import_string(relative_file_path)
-
-        if not file_import:
-            return None
-
-        try:
-            inspect_module = self._loader.import_module(file_import)
-            module_objects = list(self._loader.get_module_objects(file_import))
-        except LoaderError as e:
-            self._logger.warning(f"LoaderError: {e}")
-            return None
-
-        docstring = self._loader.get_object_docstring(inspect_module)
-
-        if not module_objects and not docstring:
-            self._logger.debug(f"Skipping {relative_file_path}: nothing to document")
-            return None
-
-        md_name = self._get_md_name(relative_file_path)
+        md_name = module_record.output_file_name
         target_file = self._docs_path / md_name
         relative_doc_path = target_file.relative_to(self._repo_path)
+        relative_file_path = module_record.source_path.relative_to(self._repo_path)
         self._logger.info(
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
         header_lines = self._generate_module_doc_header_lines(
-            inspect_module=inspect_module, source_path=relative_file_path
+            inspect_module=module_record.module, source_path=module_record.source_path
         )
 
         content_lines = self._generate_module_doc_lines(
-            module_objects=module_objects, source_path=relative_file_path
+            module_record_objects=module_record.objects,
+            source_path=module_record.source_path,
         )
 
         toc_lines = generate_toc_lines("\n".join(header_lines + content_lines))
@@ -171,26 +143,18 @@ class Generator:
         self._logger.debug(
             f"Generating docs for {self._repo_path.name} to {self._docs_path.relative_to(self._repo_path.parent)}"
         )
-        processed_paths: List[Path] = []
-        generated_files: List[Path] = []
 
-        for file_path in self._source_paths:
-            doc_file_path = self.generate_doc(file_path)
-            if not doc_file_path:
-                continue
-
-            relative_file_path = file_path.relative_to(self._repo_path)
-            processed_paths.append(relative_file_path)
-            generated_files.append(doc_file_path)
-            self.replace_links(doc_file_path)
+        for module_record in self._module_records:
+            self._generate_doc(module_record)
+            output_file_path = self._docs_path / module_record.output_file_name
+            self.replace_links(output_file_path)
 
         self._logger.debug(f"Removing orphaned docs")
-        self.cleanup_old_docs(generated_files)
+        self.cleanup_old_docs()
 
         index_md_path = Path(self._docs_path, "index.md")
         self._logger.info(f"Generating {index_md_path.relative_to(self._repo_path)}")
-        index_md_content = self._generate_index_md_content(processed_paths)
-        index_md_path.write_text(index_md_content)
+        index_md_path.write_text(self._generate_index_md_content())
         self.replace_links(index_md_path)
 
     @staticmethod
@@ -227,17 +191,16 @@ class Generator:
         file_changed = False
         for match in re.findall(self._docstring_links_re, content):
             module_name = match.replace("`", "")
-            if module_name not in self._module_md_map:
+            module_object_record = self._module_records.find_object(module_name)
+            md_name = module_object_record.output_file_name
+            if md_name == file_path.name:
                 continue
 
-            md_file_name = self._module_md_map[module_name]
-            if md_file_name == file_path.name:
-                continue
-
-            title = self._get_title_from_import_string(module_name, md_file_name)
+            title = module_object_record.title
             anchor_link = get_anchor_link(title)
-            link = f"[{title}](./{md_file_name}#{anchor_link})"
+            link = f"[{title}](./{md_name}#{anchor_link})"
             content = content.replace(match, link)
+            self._logger.debug(f'Adding link "{title}" to {file_path.name}')
             file_changed = True
 
         if file_changed:
@@ -268,7 +231,9 @@ class Generator:
             lines.append("")
 
         if not lines or not lines[0].startswith("# "):
-            page_title = self._get_title_from_path(source_path)
+            page_title = self._get_title_from_path(
+                source_path.relative_to(self._repo_path)
+            )
             lines.insert(0, "")
             lines.insert(0, f"# {page_title}")
 
@@ -284,24 +249,26 @@ class Generator:
         return lines
 
     def _generate_module_doc_lines(
-        self, module_objects: List[Tuple[Text, Any, int]], source_path: Path
+        self, module_record_objects: List[ModuleObjectRecord], source_path: Path
     ) -> List[Text]:
         lines = []
-        for module_object_name, module_object, level in module_objects:
-            lines.append(f'{"#" * (level + 2)} {module_object_name}\n')
-
-            source_line_number = self._loader.get_source_line_number(module_object)
+        for module_record_object in module_record_objects:
             lines.append(
-                f"[🔍 find in source code](../{source_path}#L{source_line_number})\n"
+                f'{"#" * (module_record_object.level + 2)} {module_record_object.title}\n'
             )
 
-            signature = self._loader.get_object_signature(module_object)
+            relative_path = source_path.relative_to(self._repo_path)
+            lines.append(
+                f"[🔍 find in source code](../{relative_path}#L{module_record_object.source_line_number})\n"
+            )
+
+            signature = self._loader.get_object_signature(module_record_object.object)
 
             if signature:
                 lines.append(f"```python\n{signature}\n```")
 
             formatted_docstring = self._get_formatted_docstring(
-                source_path=source_path, module_object=module_object
+                source_path=source_path, module_object=module_record_object.object
             )
             if formatted_docstring:
                 lines.extend(formatted_docstring.split("\n"))
@@ -331,27 +298,31 @@ class Generator:
         sections = self._docstring_processor.build_sections(docstring)
         signature = self._loader.get_object_signature(module_object)
         if signature:
-            existing_titles: List[Text] = []
+            added_module_object_records: List[ModuleObjectRecord] = []
             for match in re.findall(self._signature_links_re, signature):
-                if match not in self._module_md_map:
+                module_object_record = self._module_records.find_object(match)
+                if (
+                    not module_object_record
+                    or module_object_record in added_module_object_records
+                ):
                     continue
 
-                md_name = self._module_md_map[match]
+                md_name = module_object_record.output_file_name
                 if md_name == current_md_name:
                     continue
 
-                title = self._get_title_from_import_string(match, md_name)
-                if title in existing_titles:
-                    continue
-
-                existing_titles.append(title)
+                added_module_object_records.append(module_object_record)
+                title = module_object_record.title
                 anchor_link = get_anchor_link(title)
                 sections["See also"].append(f"- [{title}](./{md_name}#{anchor_link})")
+                self._logger.debug(
+                    f'Adding link "{title}" to {current_md_name} "See also" section'
+                )
 
         formatted_docstring = self._docstring_processor.render_sections(sections)
         return formatted_docstring.strip("\n")
 
-    def _generate_index_md_content(self, source_paths: Iterable[Path]) -> Text:
+    def _generate_index_md_content(self) -> Text:
         """
         Get new `index.md` file content. Copy content from `README.md` and add ToC.
 
@@ -367,9 +338,10 @@ class Generator:
             lines.extend(readme_path.read_text().split("\n"))
         lines.append("\n## Modules\n")
         last_path_parts: Tuple[Text, ...] = tuple()
-        for source_path in source_paths:
-            md_name = self._get_md_name(source_path)
-            path_parts = source_path.parts
+        for module_record in self._module_records:
+            md_name = module_record.output_file_name
+            relative_path = module_record.source_path.relative_to(self._repo_path)
+            path_parts = relative_path.parts
 
             if path_parts[-1] == "__init__.py":
                 path_parts = path_parts[:-1]
@@ -400,10 +372,10 @@ class Generator:
 
         return "\n".join(lines)
 
-    @staticmethod
-    def _get_md_name(path: Path) -> Text:
+    def _get_md_name(self, path: Path) -> Text:
+        relative_path = path.relative_to(self._repo_path)
         name_parts = []
-        for part in path.parts:
+        for part in relative_path.parts:
             if part == "__init__.py":
                 part = "index"
             stem = part.split(".")[0]
@@ -425,13 +397,12 @@ class Generator:
 
         return f"{'.'.join(name_parts)}"
 
-    @staticmethod
-    def _get_title_from_path(path: Path) -> Text:
+    def _get_title_from_path(self, path: Path) -> Text:
         """
         Converts `pathlib.Path` to a human readable title.
 
         Arguments:
-            path: Relative path to file or folder
+            path -- Relative path to file or folder
 
         Returns:
             Human readable title.

@@ -19,7 +19,7 @@ Python docstring-based documentation generator for lazy people.
 - 📦 Nice list of all modules in [Modules](docs/index.md#modules)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Links to source code from every doc section.
-- #️⃣ Create cross-references easily `handsdown.handsdown.Handsdown.replace_links` (check [index.md](docs/index.md#features))
+- #️⃣ Create cross-references easily [Generator().replace_links](./handsdown_generator.md#generatorreplace_links) (check [index.md](docs/index.md#features))
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🎉 Usage
@@ -58,10 +58,6 @@ handsdown_generator = Generator(
 
 # generate all docs at once
 handsdown_generator.generate()
-
-# or generate one doc
-output_file_path = handsdown_generator.generate_doc(repo_path / 'source.py')
-output_file_path # Path('output/source.md')
 ```
 
 ## 🔧 Installation
@@ -74,13 +70,14 @@ pip install handsdown
 
 ## Modules
 
-- Handsdown
+- [Handsdown](./handsdown_index.md)
   - [Main](./handsdown___main__.md)
   - [Cli parser](./handsdown_cli_parser.md)
   - [Generator](./handsdown_generator.md)
   - [Indent trimmer](./handsdown_indent_trimmer.md)
   - [Loader](./handsdown_loader.md)
   - [Main](./handsdown_main.md)
+  - [Module record](./handsdown_module_record.md)
   - [Path finder](./handsdown_path_finder.md)
   - [Processors](./handsdown_processors_index.md)
     - [Base](./handsdown_processors_base.md)
@@ -88,4 +85,5 @@ pip install handsdown
     - [Rst](./handsdown_processors_rst.md)
     - [Smart](./handsdown_processors_smart.md)
   - [Signature](./handsdown_signature.md)
+  - [Type defs](./handsdown_type_defs.md)
   - [Utils](./handsdown_utils.md)

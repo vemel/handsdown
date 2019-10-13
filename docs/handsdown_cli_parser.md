@@ -4,7 +4,7 @@
   - [abs_path](#abs_path)
   - [get_cli_parser](#get_cli_parser)
 
-> Auto-generated documentation for [handsdown.cli_parser](../handsdown/cli_parser.py) module.
+> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.cli_parser](..//home/vlad/work/vemel/handsdown/handsdown/cli_parser.py) module.
 
 ## abs_path
 

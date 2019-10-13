@@ -2,7 +2,7 @@
 
 - [Handsdown: Processors](#handsdown-processors)
 
-> Auto-generated documentation for [handsdown.processors](../handsdown/processors/__init__.py) module.
+> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.processors](..//home/vlad/work/vemel/handsdown/handsdown/processors/__init__.py) module.
 
 
 Docstrings processors.

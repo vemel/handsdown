@@ -11,6 +11,7 @@ from typing import Optional, Text, Any, Callable, Generator, Tuple
 from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import OSEnvironMock
+from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 
 
 class LoaderError(Exception):
@@ -45,6 +46,57 @@ class Loader:
 
         if os.environ.get(self.DJANGO_SETTINGS_ENV_VAR):
             self._setup_django()
+
+    def get_md_name(self, path: Path) -> Text:
+        relative_path = path.relative_to(self._root_path)
+        name_parts = []
+        for part in relative_path.parts:
+            if part == "__init__.py":
+                part = "index"
+            stem = part.split(".")[0]
+            name_parts.append(stem)
+
+        if not name_parts:
+            return "stub.md"
+
+        return f"{'_'.join(name_parts)}.md"
+
+    def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
+        if not (source_path.parent / "__init__.py").exists():
+            return None
+
+        if source_path.name == "__init__.py" and source_path.parent == self._root_path:
+            return None
+
+        file_import = self.get_import_string(source_path)
+        output_file_name = self.get_md_name(source_path)
+
+        try:
+            inspect_module = self.import_module(source_path)
+            module_objects = list(self.get_module_objects(inspect_module, source_path))
+        except Exception as e:
+            raise LoaderError(f"Cannot import {source_path.name}: {e}")
+
+        module_record = ModuleRecord(
+            module=inspect_module,
+            output_file_name=output_file_name,
+            source_path=source_path,
+            import_string=file_import,
+            objects=[],
+        )
+        for module_object_name, module_object, level in module_objects:
+            module_record.objects.append(
+                ModuleObjectRecord(
+                    import_string=module_object_name.replace("(", "").replace(")", ""),
+                    level=level,
+                    object=module_object,
+                    title=module_object_name,
+                    source_path=source_path,
+                    output_file_name=output_file_name,
+                    source_line_number=self.get_source_line_number(module_object),
+                )
+            )
+        return module_record
 
     def _setup_django(self):
         self._os_environ_patch.start()
@@ -84,14 +136,25 @@ class Loader:
         """
         return IndentTrimmer.trim_text(cls._get_docstring(obj))
 
-    def import_module(self, import_string: Text) -> Any:
+    def get_import_string(self, path: Path) -> Text:
+        relative_path = path.relative_to(self._root_path)
+        name_parts = []
+        for part in relative_path.parts:
+            stem = part.split(".")[0]
+            if stem == "__init__":
+                continue
+            name_parts.append(stem)
+
+        return f"{'.'.join(name_parts)}"
+
+    def import_module(self, file_path: Path) -> Any:
         """
         Import module using `import_paths` list. Clean up path afterwards.
         Patch `os.environ` to avoid failing on undefined variables.
         Set `typing.TYPE_CHECKING` to `True` while importing.
 
         Arguments:
-            import_string -- Module import string.
+            file_path -- Abslute path to source file.
 
         Returns:
             Imported module object.
@@ -100,6 +163,7 @@ class Loader:
         self._os_environ_patch.start()
         self._type_checking_patch.start()
 
+        import_string = self.get_import_string(file_path)
         try:
             module = importlib.import_module(import_string)
         except Exception as e:
@@ -147,20 +211,20 @@ class Loader:
         return predicate
 
     def get_module_objects(
-        self, import_string: Text
+        self, module: Any, file_path: Text
     ) -> Generator[Tuple[Text, Any, int], None, None]:
         """
         Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
         `object` - object iteslf. `level` - deepness of the object. Maximum `level` is 1.
 
         Arguments:
-            import_string -- Module import string.
+            module -- Module to inspect.
+            file_path -- Absolute path to source file.
 
         Returns:
             A generator that yields tuples of (`name`, `object`, `level`).
         """
-        inspect_module = self.import_module(import_string)
-
+        import_string = self.get_import_string(file_path)
         try:
             obj_names = pyclbr.readmodule_ex(import_string)
         except AttributeError as e:
@@ -169,7 +233,7 @@ class Loader:
             if obj_name.startswith("__"):
                 continue
 
-            inspect_object = getattr(inspect_module, obj_name)
+            inspect_object = getattr(module, obj_name)
             if not inspect.isclass(inspect_object) and inspect_object.__doc__ is None:
                 continue
 

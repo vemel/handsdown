@@ -5,7 +5,7 @@
   - [get_anchor_link](#get_anchor_link)
   - [generate_toc_lines](#generate_toc_lines)
 
-> Auto-generated documentation for [handsdown.utils](../handsdown/utils.py) module.
+> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.utils](..//home/vlad/work/vemel/handsdown/handsdown/utils.py) module.
 
 ## OSEnvironMock
 
