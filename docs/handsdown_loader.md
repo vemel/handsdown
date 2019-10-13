@@ -60,7 +60,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 #### Raises
 
-- `LoaderError` - If module or any of it's objects cannot be imported.
+- [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
 
 #### See also
 

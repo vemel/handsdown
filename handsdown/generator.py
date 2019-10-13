@@ -142,6 +142,7 @@ class Generator:
         for module_record in self._module_records:
             self._generate_doc(module_record)
             output_file_path = self._docs_path / module_record.output_file_name
+            self._replace_local_links(module_record)
             self.replace_links(output_file_path)
 
         self._logger.debug(f"Removing orphaned docs")
@@ -164,6 +165,23 @@ class Generator:
             first_import_part = import_parts[0]
 
         return ".".join(import_parts)
+
+    def _replace_local_links(self, module_record: ModuleRecord):
+        output_file_name = self._docs_path / module_record.output_file_name
+        content = output_file_name.read_text()
+        file_changed = False
+        for obj in module_record.objects:
+            search_str = f"`{obj.title}`"
+            if search_str in content:
+                title = obj.title
+                anchor_link = get_anchor_link(title)
+                link = f"[{title}](#{anchor_link})"
+                content = content.replace(search_str, link)
+                self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
+                file_changed = True
+
+        if file_changed:
+            output_file_name.write_text(content)
 
     def replace_links(self, file_path: Path) -> None:
         """

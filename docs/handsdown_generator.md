@@ -70,7 +70,7 @@ Generate all module docs at once.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L168)
+[🔍 find in source code](../handsdown/generator.py#L186)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None

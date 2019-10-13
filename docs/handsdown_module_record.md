@@ -68,7 +68,7 @@ Representation of an imported module.
 ```python
 class ModuleRecordList()
 ```
-Aggregation of `ModuleRecord` objects.
+Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().add
 
@@ -77,11 +77,11 @@ Aggregation of `ModuleRecord` objects.
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
 ```
-Add new `ModuleRecord`.
+Add new [ModuleRecord](#modulerecord).
 
 #### Arguments
 
-- `module_record` - A new `ModuleRecord`
+- `module_record` - A new [ModuleRecord](#modulerecord)
 
 #### See also
 
@@ -94,7 +94,7 @@ Add new `ModuleRecord`.
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
 ```
-Find `ModuleObjectRecord` by it's import string.
+Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
 
 #### Arguments
 
@@ -102,7 +102,7 @@ Find `ModuleObjectRecord` by it's import string.
 
 #### Returns
 
-Found `ModuleObjectRecord` instance or None.
+Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 #### See also
 

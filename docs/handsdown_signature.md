@@ -50,7 +50,7 @@ def create(
     type_hint: Union[Type, NoneType],
 ) -> handsdown.signature.ProxyParameter
 ```
-Create `ProxyParameter` for original `inspect.Parameter`
+Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 
 #### Arguments
 
