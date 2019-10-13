@@ -144,7 +144,15 @@ class Loader:
         Returns:
             A string with object docsting.
         """
-        return IndentTrimmer.trim_text(cls._get_docstring(obj))
+        docstring = cls._get_docstring(obj)
+
+        # Fix multiline docstrings starting with no newline after quotes
+        if "\n" in docstring and docstring[0] != "\n":
+            lines = docstring.split("\n")
+            indent = IndentTrimmer.get_line_indent(lines[1])
+            docstring = f"\n{' ' * indent}{docstring}"
+
+        return IndentTrimmer.trim_text(docstring)
 
     def get_import_string(self, path: Path) -> Text:
         relative_path = path.relative_to(self._root_path)

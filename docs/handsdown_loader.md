@@ -107,7 +107,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L292)
+[🔍 find in source code](../handsdown/loader.py#L300)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -123,7 +123,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L160)
+[🔍 find in source code](../handsdown/loader.py#L168)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any

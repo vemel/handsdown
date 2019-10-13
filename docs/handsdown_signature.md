@@ -26,12 +26,11 @@ class Config(*args, **kwargs)
 class ProxyDefaultValue(original: Type) -> None
 ```
 
-"
-    Proxy class to represent function parameter default value in signature
+Proxy class to represent function parameter default value in signature
 
-    Arguments:
-        original -- Original value.
-    
+#### Arguments
+
+- `original` - Original value.
 
 ## ProxyParameter
 

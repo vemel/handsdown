@@ -13,7 +13,7 @@ class Config:
 
 
 class ProxyDefaultValue:
-    """"
+    """
     Proxy class to represent function parameter default value in signature
 
     Arguments:
