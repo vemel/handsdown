@@ -6,6 +6,24 @@ class IndentTrimmer:
     Utility class for removing indentation for sections and lines.
     """
 
+    @staticmethod
+    def trim_empty_lines(text: Text) -> Text:
+        """
+        Trim empty lines in the begging and the end of the text.
+
+        Examples:
+
+            ```python
+            text = '\\n  \\n test\\ntest2\\n \\n '
+            IndentTrimmer.trim_empty_lines(text)
+            # ' test\\ntest2'
+            ```
+
+        Returns:
+            A stripped string.
+        """
+        return text.strip("\n ")
+
     @classmethod
     def trim_text(cls, text: Text) -> Text:
         """

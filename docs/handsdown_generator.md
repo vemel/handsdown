@@ -3,7 +3,7 @@
 - [Handsdown: Generator](#handsdown-generator)
   - [Generator](#generator)
     - [Generator()._generate_doc](#generator_generate_doc)
-    - [Generator()._generate_index_md_content](#generator_generate_index_md_content)
+    - [Generator()._generate_index_md](#generator_generate_index_md)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)
     - [Generator()._get_title_from_path](#generator_get_title_from_path)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
@@ -65,27 +65,19 @@ A path to generated MD file or None.
 
 - [ModuleRecord](./handsdown_module_record.md#modulerecord)
 
-### Generator()._generate_index_md_content
+### Generator()._generate_index_md
 
-[🔍 find in source code](../handsdown/generator.py#L324)
+[🔍 find in source code](../handsdown/generator.py#L295)
 
 ```python
-def _generate_index_md_content() -> str
+def _generate_index_md() -> None
 ```
 
-Get new `index.md` file content. Copy content from `README.md` and add ToC.
-
-#### Arguments
-
-- `source_paths` - List of source paths to include to `Modules` section.
-
-#### Returns
-
-A string with new file content.
+Generate new `index.md`. Copy content from `README.md` and add ToC.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L270)
+[🔍 find in source code](../handsdown/generator.py#L241)
 
 ```python
 def _get_formatted_docstring(
@@ -113,7 +105,7 @@ A module docstring with valid markdown.
 
 ### Generator()._get_title_from_path
 
-[🔍 find in source code](../handsdown/generator.py#L387)
+[🔍 find in source code](../handsdown/generator.py#L353)
 
 ```python
 def _get_title_from_path(path: pathlib.Path) -> str
@@ -145,7 +137,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate
 
-[🔍 find in source code](../handsdown/generator.py#L133)
+[🔍 find in source code](../handsdown/generator.py#L136)
 
 ```python
 def generate() -> None
@@ -155,7 +147,7 @@ Generate all module docs at once.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L172)
+[🔍 find in source code](../handsdown/generator.py#L175)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None

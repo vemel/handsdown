@@ -3,6 +3,7 @@
 - [Handsdown: Indent trimmer](#handsdown-indent-trimmer)
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
+    - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
     - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
     - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
@@ -21,7 +22,7 @@ Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L87)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L105)
 
 ```python
 def get_line_indent(line: str) -> int
@@ -44,9 +45,31 @@ IndentTrimmer.get_line_indent('test') # 0
 
 A number of indentation characters in a beginning of the line.
 
+### IndentTrimmer.trim_empty_lines
+
+[🔍 find in source code](../handsdown/indent_trimmer.py#L9)
+
+```python
+def trim_empty_lines(text: str) -> str
+```
+
+Trim empty lines in the begging and the end of the text.
+
+#### Examples
+
+```python
+text = '\n  \n test\ntest2\n \n '
+IndentTrimmer.trim_empty_lines(text)
+# ' test\ntest2'
+```
+
+#### Returns
+
+A stripped string.
+
 ### IndentTrimmer.trim_line
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L63)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L81)
 
 ```python
 def trim_line(line: str, indent: int) -> str
@@ -72,7 +95,7 @@ A line with removed indent.
 
 ### IndentTrimmer.trim_lines
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L30)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L48)
 
 ```python
 def trim_lines(lines: Iterable[str]) -> List[str]
@@ -105,7 +128,7 @@ A list of lines with trimmed indent.
 
 ### IndentTrimmer.trim_text
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L9)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L27)
 
 ```python
 def trim_text(text: str) -> str
