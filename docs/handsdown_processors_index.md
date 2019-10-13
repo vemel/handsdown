@@ -4,7 +4,6 @@
 
 > Auto-generated documentation for [handsdown.processors](../handsdown/processors/__init__.py) module.
 
-
 Docstrings processors.
 
 - [PEP257DocstringProcessor](./handsdown_processors_pep257.md#pep257docstringprocessor)

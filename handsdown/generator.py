@@ -216,14 +216,6 @@ class Generator:
         relative_source_path = source_path.relative_to(self._root_path)
         lines = []
 
-        # Grab README.md content for __init__.py if it exists
-        if source_path.name == "__init__.py":
-            if (source_path.parent / "README.md").exists():
-                for line in (source_path.parent / "README.md").read_text().split("\n"):
-                    lines.append(line.rstrip())
-
-            lines.append("")
-
         formatted_docstring = self._get_formatted_docstring(module_record=module_record)
         if formatted_docstring:
             docstring_lines = formatted_docstring.split("\n")

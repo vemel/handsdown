@@ -67,7 +67,7 @@ A path to generated MD file or None.
 
 ### Generator()._generate_index_md_content
 
-[🔍 find in source code](../handsdown/generator.py#L332)
+[🔍 find in source code](../handsdown/generator.py#L324)
 
 ```python
 def _generate_index_md_content() -> str
@@ -85,7 +85,7 @@ A string with new file content.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L278)
+[🔍 find in source code](../handsdown/generator.py#L270)
 
 ```python
 def _get_formatted_docstring(
@@ -113,7 +113,7 @@ A module docstring with valid markdown.
 
 ### Generator()._get_title_from_path
 
-[🔍 find in source code](../handsdown/generator.py#L395)
+[🔍 find in source code](../handsdown/generator.py#L387)
 
 ```python
 def _get_title_from_path(path: pathlib.Path) -> str

@@ -102,9 +102,18 @@ class Loader:
         except Exception as e:
             raise LoaderError(f"Cannot import {source_path.name}: {e}")
 
+        docstring_parts = []
+        docstring = self._get_object_docstring(inspect_module)
+        if docstring:
+            docstring_parts.append(docstring)
+        if source_path.name == "__init__.py":
+            readme_md_path = source_path.parent / "README.md"
+            if readme_md_path.exists():
+                docstring_parts.append(readme_md_path.read_text())
+
         module_record = ModuleRecord(
             module=inspect_module,
-            docstring=self._get_object_docstring(inspect_module),
+            docstring="\n\n".join(docstring_parts),
             output_file_name=output_file_name,
             source_path=source_path,
             import_string=file_import,
@@ -243,11 +252,16 @@ class Loader:
             if inspect.isclass(obj):
                 return True
 
-            if inspect.isfunction(obj):
-                return True
-
             # skip built-in methods
             if inspect.ismethod(obj) and parent:
+                if obj.__name__ in parent.__dict__:
+                    return True
+
+            # skip inherited functions
+            if inspect.isfunction(obj):
+                if not parent:
+                    return True
+
                 if obj.__name__ in parent.__dict__:
                     return True
 
