@@ -1,7 +1,7 @@
 import re
 import logging
 from pathlib import Path
-from typing import Iterable, Text, List, Tuple, Optional, Union
+from typing import Iterable, Text, List, Optional, Union
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -152,19 +152,6 @@ class Generator:
         index_md_path.write_text(self._generate_index_md_content())
         self.replace_links(index_md_path)
 
-    @staticmethod
-    def _get_title_from_import_string(import_string: Text, md_file_name: Text) -> Text:
-        import_parts = import_string.split(".")
-        first_import_part = import_parts[0]
-        while md_file_name.startswith(first_import_part):
-            import_parts = import_parts[1:]
-            md_file_name = md_file_name[(len(first_import_part) + 1) :]
-            if not import_parts:
-                break
-            first_import_part = import_parts[0]
-
-        return ".".join(import_parts)
-
     def _replace_local_links(self, module_record: ModuleRecord) -> None:
         output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
@@ -246,7 +233,7 @@ class Generator:
             lines.append("")
 
         if not lines or not lines[0].startswith("# "):
-            page_title = self._get_title_from_path(relative_source_path)
+            page_title = ": ".join(module_record.get_title_parts())
             lines.insert(0, "")
             lines.insert(0, f"# {page_title}")
 
@@ -357,34 +344,22 @@ class Generator:
         if readme_path.exists():
             lines.extend(readme_path.read_text().split("\n"))
         lines.append("\n## Modules\n")
-        last_path_parts: Tuple[Text, ...] = tuple()
+        last_title_parts: List[Text] = []
         for module_record in self._module_records:
             md_name = module_record.output_file_name
-            relative_path = module_record.source_path.relative_to(self._root_path)
-            path_parts = relative_path.parts
-
-            if path_parts[-1] == "__init__.py":
-                path_parts = path_parts[:-1]
-
-            for part_index, path_part in enumerate(path_parts):
+            title_parts = module_record.get_title_parts()
+            for index, title_part in enumerate(title_parts[:-1]):
                 if (
-                    len(last_path_parts) > part_index
-                    and path_part == last_path_parts[part_index]
+                    len(last_title_parts) > index
+                    and last_title_parts[index] == title_part
                 ):
                     continue
-                indent = "  " * part_index
-                if part_index == len(path_parts) - 1:
-                    title = self._get_title_from_md_content(
-                        (self._output_path / md_name).read_text()
-                    )
-                    if title:
-                        title = title.split(": ")[-1]
-                        lines.append(f"{indent}- [{title}](./{md_name})")
-                else:
-                    title = self._get_title_from_path(Path(path_part))
-                    lines.append(f"{indent}- {title}")
+                indent = "  " * index
+                lines.append(f"{indent}- {title_part}")
 
-            last_path_parts = path_parts
+            last_title_parts = title_parts
+            indent = "  " * (len(title_parts) - 1)
+            lines.append(f"{indent}- [{title_parts[-1]}](./{md_name})")
 
         toc_lines = generate_toc_lines("\n".join(lines))
         lines.insert(1, "\n".join(toc_lines))

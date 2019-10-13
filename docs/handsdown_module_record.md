@@ -69,7 +69,7 @@ Representation of an imported module.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#L54)
+[🔍 find in source code](../handsdown/module_record.py#L58)
 
 ```python
 class ModuleRecordList() -> None
@@ -79,7 +79,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#L93)
+[🔍 find in source code](../handsdown/module_record.py#L97)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -93,7 +93,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#L63)
+[🔍 find in source code](../handsdown/module_record.py#L67)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
@@ -107,7 +107,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().get_output_file_names
 
-[🔍 find in source code](../handsdown/module_record.py#L75)
+[🔍 find in source code](../handsdown/module_record.py#L79)
 
 ```python
 def get_output_file_names() -> Set[str]
@@ -117,7 +117,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#L84)
+[🔍 find in source code](../handsdown/module_record.py#L88)
 
 ```python
 def get_package_names() -> Set[str]

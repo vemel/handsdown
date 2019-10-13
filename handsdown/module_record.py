@@ -50,6 +50,25 @@ class ModuleRecord:
     objects: List[ModuleObjectRecord]
     docstring: Optional[Text]
 
+    def get_title_parts(self) -> List[Text]:
+        """
+        Get parts of module title from module import string.
+
+        Examples:
+
+            ```python
+            ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
+            # ['My module', 'Utils', 'parsers']
+            ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
+            # ['My module', 'Main']
+            ```
+
+        Returns:
+            A list of title parts as strings.
+        """
+        parts = self.import_string.split(".")
+        return [i.replace("_", " ").strip().capitalize() for i in parts]
+
 
 class ModuleRecordList:
     """

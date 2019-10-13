@@ -86,7 +86,7 @@ Main doc generator.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L185)
+[🔍 find in source code](../handsdown/generator.py#L172)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
