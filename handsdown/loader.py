@@ -5,7 +5,6 @@ import sys
 import pyclbr
 import inspect
 from unittest.mock import patch
-import typing
 import os
 from typing import Optional, Text, Any, Callable, Generator, Tuple
 
@@ -33,20 +32,27 @@ class Loader:
         import_paths -- List of import paths for `import_module` lookup.
     """
 
-    def __init__(self, root_path: Path, setup_django=False) -> None:
+    DJANGO_SETTINGS_ENV_VAR = "DJANGO_SETTINGS_MODULE"
+
+    def __init__(self, root_path: Path) -> None:
         self._root_path = root_path
         self._sys_path_dirty = False
         self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
+        self._type_checking_patch = patch("typing.TYPE_CHECKING", True)
         self._sys_path_patch = patch(
             "sys.path", sys.path + [self._root_path.as_posix()]
         )
 
-        if setup_django:
+        if os.environ.get(self.DJANGO_SETTINGS_ENV_VAR):
             self._setup_django()
 
     def _setup_django(self):
+        self._os_environ_patch.start()
+        self._sys_path_patch.start()
         django = importlib.import_module("django")
         django.setup()
+        self._os_environ_patch.stop()
+        self._sys_path_patch.stop()
 
     @staticmethod
     def get_object_signature(obj: Any) -> Optional[Text]:
@@ -92,9 +98,7 @@ class Loader:
         """
         self._sys_path_patch.start()
         self._os_environ_patch.start()
-
-        real_type_checking = typing.TYPE_CHECKING
-        typing.TYPE_CHECKING = True
+        self._type_checking_patch.start()
 
         try:
             module = importlib.import_module(import_string)
@@ -103,11 +107,10 @@ class Loader:
 
         self._sys_path_patch.stop()
         self._os_environ_patch.stop()
+        self._type_checking_patch.stop()
 
         if module.__spec__ is None:
             module.__spec__ = ModuleSpec(name="__main__", loader=None, origin=None)
-
-        typing.TYPE_CHECKING = real_type_checking
 
         return module
 

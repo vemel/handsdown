@@ -13,17 +13,17 @@
 
 ## LoaderError
 
-[🔍 find in source code](../handsdown/loader.py#L18)
+[🔍 find in source code](../handsdown/loader.py#L16)
 
 ```python
 class LoaderError(*args, **kwargs)
 ```
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L22)
+[🔍 find in source code](../handsdown/loader.py#L20)
 
 ```python
-class Loader(root_path: pathlib.Path, setup_django=False) -> None
+class Loader(root_path: pathlib.Path) -> None
 ```
 Loader for python source code.
 
@@ -41,7 +41,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L147)
+[🔍 find in source code](../handsdown/loader.py#L149)
 
 ```python
 def get_module_objects(import_string: str) -> Generator[Tuple[str, Any, int], NoneType, NoneType]
@@ -59,7 +59,7 @@ A generator that yields tuples of (`name`, `object`, `level`).
 
 ### Loader.get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L69)
+[🔍 find in source code](../handsdown/loader.py#L74)
 
 ```python
 def get_object_docstring(obj: Any) -> str
@@ -76,7 +76,7 @@ A string with object docsting.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L52)
+[🔍 find in source code](../handsdown/loader.py#L57)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -94,7 +94,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L201)
+[🔍 find in source code](../handsdown/loader.py#L203)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -109,7 +109,7 @@ A line number.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L82)
+[🔍 find in source code](../handsdown/loader.py#L87)
 
 ```python
 def import_module(import_string: str) -> Any

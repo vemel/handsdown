@@ -90,7 +90,10 @@ class SignatureBuilder:
 
     @staticmethod
     def _get_type_hints(func: Any) -> Dict[Text, Any]:
-        type_hints = get_type_hints(func)
+        try:
+            type_hints = get_type_hints(func)
+        except NameError:
+            return {}
         for key, value in type_hints.items():
             if value is type(None):
                 type_hints[key] = None
