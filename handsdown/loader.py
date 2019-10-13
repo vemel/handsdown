@@ -149,7 +149,13 @@ class Loader:
         # Fix multiline docstrings starting with no newline after quotes
         if "\n" in docstring and docstring[0] != "\n":
             lines = docstring.split("\n")
-            indent = IndentTrimmer.get_line_indent(lines[1])
+            next_line_index = 1
+            next_line = lines[next_line_index]
+            while not next_line.strip() and next_line_index < len(lines) - 1:
+                next_line_index += 1
+                next_line = lines[next_line_index]
+
+            indent = IndentTrimmer.get_line_indent(next_line)
             docstring = f"\n{' ' * indent}{docstring}"
 
         return IndentTrimmer.trim_text(docstring)
