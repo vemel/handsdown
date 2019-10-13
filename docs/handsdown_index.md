@@ -53,45 +53,51 @@ Main doc generator.
 def cleanup_old_docs() -> None
 ```
 
-Remove old docs generated for this module.
+Main doc generator.
 
 #### Arguments
 
-- `preserve_paths` - All doc files generated paths that should not be deleted.
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.
 
 ### Generator().generate
 
-[🔍 find in source code](../handsdown/__init__.py#L134)
+[🔍 find in source code](../handsdown/__init__.py#L133)
 
 ```python
 def generate() -> None
 ```
 
-Generate all module docs at once.
+Main doc generator.
+
+#### Arguments
+
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/__init__.py#L186)
+[🔍 find in source code](../handsdown/__init__.py#L185)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
 ```
 
-Replace all import strings with Markdown links. Only import strings that present in this
-package are replaced, so not dead linsk should be generated.
-
-```python
-my_md = Path('doc.md')
-my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
-handsdown.replace_links(my_md)
-
-my_md.read_text()
-# 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
-```
+Main doc generator.
 
 #### Arguments
 
-- `file_path` - Path to MD document file.
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.
 
 ## PathFinder
 
@@ -125,17 +131,21 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Add `fnmatch` expression to black list.
-If black list is empty - no black list filtration applied.
-If expression does not have `*` or `.` characters, appends `/*` to it.
+Find matching paths inside `root` path.
+
+#### Examples
+
+```python
+path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
+path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
+path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
+path_finder.exclude('*new*').list() # ['my.txt']
+```
 
 #### Arguments
 
-fn_exrps - One or more `fnmatch` expressions.
-
-#### Returns
-
-A copy of itself.
+- `root` - Path to root folder.
+- `glob_expr` - `glob` expression to lookup in `root`
 
 #### See also
 
@@ -149,17 +159,21 @@ A copy of itself.
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Add `fnmatch` expression to white list.
-If white list is empty - no white list filtration applied.
-If expression does not have `*` or `.` characters, appends `/*` to it.
+Find matching paths inside `root` path.
+
+#### Examples
+
+```python
+path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
+path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
+path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
+path_finder.exclude('*new*').list() # ['my.txt']
+```
 
 #### Arguments
 
-fn_exrps - One or more `fnmatch` expressions.
-
-#### Returns
-
-A copy of itself.
+- `root` - Path to root folder.
+- `glob_expr` - `glob` expression to lookup in `root`
 
 #### See also
 
@@ -167,17 +181,27 @@ A copy of itself.
 
 ### PathFinder().list
 
-[🔍 find in source code](../handsdown/__init__.py#L117)
+[🔍 find in source code](../handsdown/__init__.py#L119)
 
 ```python
 def list() -> List[pathlib.Path]
 ```
 
-Return all matching paths as a list.
+Find matching paths inside `root` path.
 
-#### Returns
+#### Examples
 
-A list of all matched paths.
+```python
+path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
+path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
+path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
+path_finder.exclude('*new*').list() # ['my.txt']
+```
+
+#### Arguments
+
+- `root` - Path to root folder.
+- `glob_expr` - `glob` expression to lookup in `root`
 
 ## LoaderError
 

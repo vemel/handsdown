@@ -27,22 +27,7 @@ Utility class for removing indentation for sections and lines.
 def get_line_indent(line: str) -> int
 ```
 
-Get indent length of the line.
-
-#### Examples
-
-```python
-IndentTrimmer.get_line_indent('   test') # 3
-IndentTrimmer.get_line_indent('test') # 0
-```
-
-#### Arguments
-
-- `line` - Line of text.
-
-#### Returns
-
-A number of indentation characters in a beginning of the line.
+Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.trim_line
 
@@ -52,23 +37,7 @@ A number of indentation characters in a beginning of the line.
 def trim_line(line: str, indent: int) -> str
 ```
 
-Trim indent from line if it is empty.
-
-#### Examples
-
-```python
-IndentTrimmer.trim_line('     test', 2) # '   test'
-IndentTrimmer.trim_line('     test', 6) # 'test'
-IndentTrimmer.trim_line('     test', 1) # '    test'
-```
-
-#### Arguments
-
-- `line` - A line of text.
-
-#### Returns
-
-A line with removed indent.
+Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.trim_lines
 
@@ -78,30 +47,7 @@ A line with removed indent.
 def trim_lines(lines: Iterable[str]) -> List[str]
 ```
 
-Trim minimum indent from each line of text.
-
-#### Examples
-
-```python
-IndentTrimmer.trim_lines([
-    '  asd',
-    ' asd',
-    '   asd',
-)
-# [
-#     ' asd',
-#     'asd',
-#     '  asd',
-# ]
-```
-
-#### Arguments
-
-- `lines` - List of lines.
-
-#### Returns
-
-A list of lines with trimmed indent.
+Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.trim_text
 
@@ -111,19 +57,4 @@ A list of lines with trimmed indent.
 def trim_text(text: str) -> str
 ```
 
-Trim minimum indent from each line of text.
-
-#### Examples
-
-```python
-IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
-# ' asd\nasd\n  asd\n'
-```
-
-#### Arguments
-
-- `text` - Multiline text.
-
-#### Returns
-
-A text with trimmed indent.
+Utility class for removing indentation for sections and lines.

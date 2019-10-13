@@ -53,12 +53,7 @@ def create(
 ) -> handsdown.signature.ProxyParameter
 ```
 
-Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
-
-#### Arguments
-
-- `parameter` - original `inspect.Parameter`
-- `type_hint` - resoled type hint that should replace a lazy annotation
+Helper class to represent function parameters in signature
 
 #### See also
 
@@ -87,8 +82,9 @@ to beautify result by splitting lines.
 def build() -> str
 ```
 
-Render signature to string.
+Renderer for object signature. Support lazy type annotations and tries
+to beautify result by splitting lines.
 
-#### Returns
+#### Arguments
 
-A string with functions signature.
+- `obj` - Object to inspect.

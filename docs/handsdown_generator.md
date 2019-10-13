@@ -56,42 +56,48 @@ Main doc generator.
 def cleanup_old_docs() -> None
 ```
 
-Remove old docs generated for this module.
+Main doc generator.
 
 #### Arguments
 
-- `preserve_paths` - All doc files generated paths that should not be deleted.
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.
 
 ### Generator().generate
 
-[🔍 find in source code](../handsdown/generator.py#L134)
+[🔍 find in source code](../handsdown/generator.py#L133)
 
 ```python
 def generate() -> None
 ```
 
-Generate all module docs at once.
+Main doc generator.
+
+#### Arguments
+
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L186)
+[🔍 find in source code](../handsdown/generator.py#L185)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
 ```
 
-Replace all import strings with Markdown links. Only import strings that present in this
-package are replaced, so not dead linsk should be generated.
-
-```python
-my_md = Path('doc.md')
-my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
-handsdown.replace_links(my_md)
-
-my_md.read_text()
-# 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
-```
+Main doc generator.
 
 #### Arguments
 
-- `file_path` - Path to MD document file.
+- `input_path` - Path to repo to generate docs.
+- `logger` - Logger instance.
+- `docstring_processor` - Docstring converter to Markdown.
+- `loader` - Loader for python modules.
+- `output_path` - Path to folder with auto-generated docs to output.

@@ -16,6 +16,7 @@ class ModuleObjectRecord:
         import_string -- Module import string.
         level -- 0 for classes and functions, 1 for methods.
         title -- Object human-readable title.
+        docstring -- Object docstring.
     """
 
     source_path: Path
@@ -25,6 +26,7 @@ class ModuleObjectRecord:
     import_string: Text
     level: int
     title: Text
+    docstring: Optional[Text]
 
 
 @dataclass
@@ -38,6 +40,7 @@ class ModuleRecord:
         module -- Imported module.
         import_string -- Module import string.
         objects -- List of objects in the module.
+        docstring -- Module docstring.
     """
 
     source_path: Path
@@ -45,6 +48,7 @@ class ModuleRecord:
     module: Any
     import_string: Text
     objects: List[ModuleObjectRecord]
+    docstring: Optional[Text]
 
 
 class ModuleRecordList:

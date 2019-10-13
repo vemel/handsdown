@@ -24,6 +24,7 @@ class ModuleObjectRecord(
     import_string: str,
     level: int,
     title: str,
+    docstring: Union[str, NoneType],
 )
 ```
 
@@ -38,10 +39,11 @@ Representation of an imported module object.
 - `import_string` - Module import string.
 - `level` - 0 for classes and functions, 1 for methods.
 - `title` - Object human-readable title.
+- `docstring` - Object docstring.
 
 ## ModuleRecord
 
-[🔍 find in source code](../handsdown/module_record.py#L31)
+[🔍 find in source code](../handsdown/module_record.py#L33)
 
 ```python
 class ModuleRecord(
@@ -50,6 +52,7 @@ class ModuleRecord(
     module: Any,
     import_string: str,
     objects: List[handsdown.module_record.ModuleObjectRecord],
+    docstring: Union[str, NoneType],
 )
 ```
 
@@ -62,30 +65,27 @@ Representation of an imported module.
 - `module` - Imported module.
 - `import_string` - Module import string.
 - `objects` - List of objects in the module.
+- `docstring` - Module docstring.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#L50)
+[🔍 find in source code](../handsdown/module_record.py#L54)
 
 ```python
-class ModuleRecordList()
+class ModuleRecordList() -> None
 ```
 
 Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#L89)
+[🔍 find in source code](../handsdown/module_record.py#L93)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
 ```
 
-Add new [ModuleRecord](#modulerecord).
-
-#### Arguments
-
-- `module_record` - A new [ModuleRecord](#modulerecord)
+Aggregation of [ModuleRecord](#modulerecord) objects.
 
 #### See also
 
@@ -93,21 +93,13 @@ Add new [ModuleRecord](#modulerecord).
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#L59)
+[🔍 find in source code](../handsdown/module_record.py#L63)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
 ```
 
-Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
-
-#### Arguments
-
-- `import_string` - Object import string.
-
-#### Returns
-
-Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
+Aggregation of [ModuleRecord](#modulerecord) objects.
 
 #### See also
 
@@ -115,28 +107,20 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 ### ModuleRecordList().get_output_file_names
 
-[🔍 find in source code](../handsdown/module_record.py#L71)
+[🔍 find in source code](../handsdown/module_record.py#L75)
 
 ```python
 def get_output_file_names() -> Set[str]
 ```
 
-Get all output MD file names.
-
-#### Returns
-
-A set of output names as strings.
+Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#L80)
+[🔍 find in source code](../handsdown/module_record.py#L84)
 
 ```python
 def get_package_names() -> Set[str]
 ```
 
-Get top level import strings.
-
-#### Returns
-
-A set of top level imports as strings.
+Aggregation of [ModuleRecord](#modulerecord) objects.

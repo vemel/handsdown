@@ -99,6 +99,7 @@ class Loader:
 
         module_record = ModuleRecord(
             module=inspect_module,
+            docstring=self._get_object_docstring(inspect_module),
             output_file_name=output_file_name,
             source_path=source_path,
             import_string=file_import,
@@ -145,7 +146,7 @@ class Loader:
 
         return SignatureBuilder(obj).build()
 
-    def get_object_docstring(self, obj: Any) -> Text:
+    def _get_object_docstring(self, obj: Any) -> Text:
         """
         Get trimmed object docstring or an empty string.
 
@@ -275,6 +276,7 @@ class Loader:
                 import_string=obj_name,
                 level=0,
                 object=inspect_object,
+                docstring=self._get_object_docstring(inspect_object),
                 title=obj_name,
                 source_path=module_record.source_path,
                 output_file_name=module_record.output_file_name,
@@ -298,6 +300,7 @@ class Loader:
                     import_string=import_string,
                     level=1,
                     object=inspect_method,
+                    docstring=self._get_object_docstring(inspect_object),
                     title=title,
                     source_path=module_record.source_path,
                     output_file_name=module_record.output_file_name,

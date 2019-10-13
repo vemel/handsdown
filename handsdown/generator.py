@@ -1,7 +1,7 @@
 import re
 import logging
 from pathlib import Path
-from typing import Iterable, Text, List, Any, Tuple, Optional, Union
+from typing import Iterable, Text, List, Tuple, Optional, Union
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -112,7 +112,7 @@ class Generator:
         target_file = self._output_path / md_name
         relative_doc_path = target_file.relative_to(self._root_path)
         relative_file_path = module_record.source_path.relative_to(self._root_path)
-        self._logger.info(
+        self._logger.debug(
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
@@ -237,9 +237,7 @@ class Generator:
 
             lines.append("")
 
-        formatted_docstring = self._get_formatted_docstring(
-            inspect_object=module_record.module, module_record=module_record
-        )
+        formatted_docstring = self._get_formatted_docstring(module_record=module_record)
         if formatted_docstring:
             docstring_lines = formatted_docstring.split("\n")
             for line in docstring_lines:
@@ -282,9 +280,7 @@ class Generator:
                 lines.append(f"```python\n{signature}\n```\n")
 
             formatted_docstring = self._get_formatted_docstring(
-                module_record=module_record,
-                inspect_object=module_record_object.object,
-                signature=signature,
+                module_record=module_record_object, signature=signature
             )
             if formatted_docstring:
                 lines.extend(formatted_docstring.split("\n"))
@@ -294,7 +290,6 @@ class Generator:
 
     def _get_formatted_docstring(
         self,
-        inspect_object: Any,
         module_record: Union[ModuleRecord, ModuleObjectRecord],
         signature: Optional[Text] = None,
     ) -> Optional[Text]:
@@ -311,7 +306,7 @@ class Generator:
             A module docstring with valid markdown.
         """
         output_file_name = module_record.output_file_name
-        docstring = self._loader.get_object_docstring(inspect_object)
+        docstring = module_record.docstring
         if not docstring:
             return None
 
