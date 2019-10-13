@@ -1,7 +1,7 @@
 import re
 import logging
 from pathlib import Path
-from typing import Iterable, Text, List, Any, Tuple, Optional
+from typing import Iterable, Text, List, Any, Tuple, Optional, Union
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -116,14 +116,9 @@ class Generator:
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
-        header_lines = self._generate_module_doc_header_lines(
-            inspect_module=module_record.module, source_path=module_record.source_path
-        )
+        header_lines = self._generate_module_doc_header_lines(module_record)
 
-        content_lines = self._generate_module_doc_lines(
-            module_record_objects=module_record.objects,
-            source_path=module_record.source_path,
-        )
+        content_lines = self._generate_module_doc_lines(module_record)
 
         toc_lines = generate_toc_lines("\n".join(header_lines + content_lines))
         md_lines = []
@@ -207,9 +202,10 @@ class Generator:
             file_path.write_text(content)
 
     def _generate_module_doc_header_lines(
-        self, inspect_module: Any, source_path: Path
+        self, module_record: ModuleRecord
     ) -> List[Text]:
-        import_string = self._get_file_import_string(source_path)
+        import_string = module_record.import_string
+        source_path = module_record.source_path
         lines = []
 
         # Grab README.md content for __init__.py if it exists
@@ -221,7 +217,7 @@ class Generator:
             lines.append("")
 
         formatted_docstring = self._get_formatted_docstring(
-            source_path=source_path, module_object=inspect_module
+            inspect_object=module_record.module, module_record=module_record
         )
         if formatted_docstring:
             docstring_lines = formatted_docstring.split("\n")
@@ -248,15 +244,14 @@ class Generator:
 
         return lines
 
-    def _generate_module_doc_lines(
-        self, module_record_objects: List[ModuleObjectRecord], source_path: Path
-    ) -> List[Text]:
+    def _generate_module_doc_lines(self, module_record: ModuleRecord) -> List[Text]:
         lines = []
-        for module_record_object in module_record_objects:
+        for module_record_object in module_record.objects:
             lines.append(
                 f'{"#" * (module_record_object.level + 2)} {module_record_object.title}\n'
             )
 
+            source_path = module_record_object.source_path
             relative_path = source_path.relative_to(self._repo_path)
             lines.append(
                 f"[🔍 find in source code](../{relative_path}#L{module_record_object.source_line_number})\n"
@@ -268,7 +263,7 @@ class Generator:
                 lines.append(f"```python\n{signature}\n```")
 
             formatted_docstring = self._get_formatted_docstring(
-                source_path=source_path, module_object=module_record_object.object
+                module_record=module_record, inspect_object=module_record_object.object
             )
             if formatted_docstring:
                 lines.extend(formatted_docstring.split("\n"))
@@ -277,7 +272,9 @@ class Generator:
         return lines
 
     def _get_formatted_docstring(
-        self, source_path: Path, module_object: Any
+        self,
+        inspect_object: Any,
+        module_record: Union[ModuleRecord, ModuleObjectRecord],
     ) -> Optional[Text]:
         """
         Get object docstring and convert it to a valid markdown using
@@ -290,37 +287,43 @@ class Generator:
         Returns:
             A module docstring with valid markdown.
         """
-        current_md_name = self._get_md_name(source_path)
-        docstring = self._loader.get_object_docstring(module_object)
+        output_file_name = module_record.output_file_name
+        docstring = self._loader.get_object_docstring(inspect_object)
         if not docstring:
             return None
 
         sections = self._docstring_processor.build_sections(docstring)
-        signature = self._loader.get_object_signature(module_object)
+        signature = self._loader.get_object_signature(inspect_object)
         if signature:
-            added_module_object_records: List[ModuleObjectRecord] = []
-            for match in re.findall(self._signature_links_re, signature):
-                module_object_record = self._module_records.find_object(match)
-                if (
-                    not module_object_record
-                    or module_object_record in added_module_object_records
-                ):
+            related_objects = self._get_objects_from_signature(signature)
+            for related_object in related_objects:
+                if related_object is module_record:
                     continue
 
-                md_name = module_object_record.output_file_name
-                if md_name == current_md_name:
-                    continue
+                md_link = ""
+                if related_object.output_file_name != output_file_name:
+                    md_link = f"./{related_object.output_file_name}"
 
-                added_module_object_records.append(module_object_record)
-                title = module_object_record.title
+                title = related_object.title
                 anchor_link = get_anchor_link(title)
-                sections["See also"].append(f"- [{title}](./{md_name}#{anchor_link})")
+                sections["See also"].append(f"- [{title}]({md_link}#{anchor_link})")
                 self._logger.debug(
-                    f'Adding link "{title}" to {current_md_name} "See also" section'
+                    f'Adding link "{title}" to {self._docs_path / output_file_name} "See also" section'
                 )
 
         formatted_docstring = self._docstring_processor.render_sections(sections)
         return formatted_docstring.strip("\n")
+
+    def _get_objects_from_signature(self, signature: Text) -> List[ModuleObjectRecord]:
+        result: List[ModuleObjectRecord] = []
+        for match in re.findall(self._signature_links_re, signature):
+            module_object_record = self._module_records.find_object(match)
+            if not module_object_record or module_object_record in result:
+                continue
+
+            result.append(module_object_record)
+
+        return result
 
     def _generate_index_md_content(self) -> Text:
         """

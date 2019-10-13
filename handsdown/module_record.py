@@ -58,13 +58,13 @@ class ModuleRecordList:
 
     def find_object(self, import_string: Text) -> Optional[ModuleObjectRecord]:
         """
-        Find object by it's import string.
+        Find `ModuleObjectRecord` by it's import string.
 
         Arguments:
             import_string -- Object import string.
 
         Returns:
-            Found object or None.
+            Found `ModuleObjectRecord` instance or None.
         """
         return self.import_string_map.get(import_string)
 

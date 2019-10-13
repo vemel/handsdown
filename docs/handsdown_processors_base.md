@@ -5,7 +5,7 @@
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
     - [BaseDocstringProcessor().render_sections](#basedocstringprocessorrender_sections)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.processors.base](..//home/vlad/work/vemel/handsdown/handsdown/processors/base.py) module.
+> Auto-generated documentation for [handsdown.processors.base](..//home/vlad/work/vemel/handsdown/handsdown/processors/base.py) module.
 
 ## BaseDocstringProcessor
 

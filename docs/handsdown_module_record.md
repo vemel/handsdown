@@ -9,7 +9,7 @@
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.module_record](..//home/vlad/work/vemel/handsdown/handsdown/module_record.py) module.
+> Auto-generated documentation for [handsdown.module_record](..//home/vlad/work/vemel/handsdown/handsdown/module_record.py) module.
 
 ## ModuleObjectRecord
 
@@ -83,6 +83,10 @@ Add new `ModuleRecord`.
 
 - `module_record` - A new `ModuleRecord`
 
+#### See also
+
+- [ModuleRecord](#modulerecord)
+
 ### ModuleRecordList().find_object
 
 [🔍 find in source code](../handsdown/module_record.py#L59)
@@ -90,7 +94,7 @@ Add new `ModuleRecord`.
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
 ```
-Find object by it's import string.
+Find `ModuleObjectRecord` by it's import string.
 
 #### Arguments
 
@@ -98,7 +102,11 @@ Find object by it's import string.
 
 #### Returns
 
-Found object or None.
+Found `ModuleObjectRecord` instance or None.
+
+#### See also
+
+- [ModuleObjectRecord](#moduleobjectrecord)
 
 ### ModuleRecordList().get_output_file_names
 

@@ -8,7 +8,7 @@
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.signature](..//home/vlad/work/vemel/handsdown/handsdown/signature.py) module.
+> Auto-generated documentation for [handsdown.signature](..//home/vlad/work/vemel/handsdown/handsdown/signature.py) module.
 
 ## Config
 
@@ -56,6 +56,10 @@ Create `ProxyParameter` for original `inspect.Parameter`
 
 - `parameter` - original `inspect.Parameter`
 - `type_hint` - resoled type hint that should replace a lazy annotation
+
+#### See also
+
+- [ProxyParameter](#proxyparameter)
 
 ## SignatureBuilder
 

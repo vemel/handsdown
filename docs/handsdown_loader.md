@@ -9,7 +9,7 @@
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.loader](..//home/vlad/work/vemel/handsdown/handsdown/loader.py) module.
+> Auto-generated documentation for [handsdown.loader](..//home/vlad/work/vemel/handsdown/handsdown/loader.py) module.
 
 ## LoaderError
 

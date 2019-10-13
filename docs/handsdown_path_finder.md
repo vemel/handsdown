@@ -6,7 +6,7 @@
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.path_finder](..//home/vlad/work/vemel/handsdown/handsdown/path_finder.py) module.
+> Auto-generated documentation for [handsdown.path_finder](..//home/vlad/work/vemel/handsdown/handsdown/path_finder.py) module.
 
 ## PathFinder
 
@@ -51,6 +51,10 @@ fn_exrps - One or more `fnmatch` expressions.
 
 A copy of itself.
 
+#### See also
+
+- [PathFinder](#pathfinder)
+
 ### PathFinder().include
 
 [🔍 find in source code](../handsdown/path_finder.py#L41)
@@ -69,6 +73,10 @@ fn_exrps - One or more `fnmatch` expressions.
 #### Returns
 
 A copy of itself.
+
+#### See also
+
+- [PathFinder](#pathfinder)
 
 ### PathFinder().list
 

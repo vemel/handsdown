@@ -7,7 +7,7 @@
     - [Generator().generate](#generatorgenerate)
     - [Generator().replace_links](#generatorreplace_links)
 
-> Auto-generated documentation for [/.home.vlad.work.vemel.handsdown.handsdown.generator](..//home/vlad/work/vemel/handsdown/handsdown/generator.py) module.
+> Auto-generated documentation for [handsdown.generator](..//home/vlad/work/vemel/handsdown/handsdown/generator.py) module.
 
 ## GeneratorError
 
@@ -61,7 +61,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate
 
-[🔍 find in source code](../handsdown/generator.py#L139)
+[🔍 find in source code](../handsdown/generator.py#L134)
 
 ```python
 def generate() -> None
@@ -70,7 +70,7 @@ Generate all module docs at once.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L173)
+[🔍 find in source code](../handsdown/generator.py#L168)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
