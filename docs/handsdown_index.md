@@ -53,15 +53,11 @@ Main doc generator.
 def cleanup_old_docs() -> None
 ```
 
-Main doc generator.
+Remove old docs generated for this module.
 
 #### Arguments
 
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+- `preserve_paths` - All doc files generated paths that should not be deleted.
 
 ### Generator().generate
 
@@ -71,15 +67,7 @@ Main doc generator.
 def generate() -> None
 ```
 
-Main doc generator.
-
-#### Arguments
-
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+Generate all module docs at once.
 
 ### Generator().replace_links
 
@@ -89,15 +77,21 @@ Main doc generator.
 def replace_links(file_path: pathlib.Path) -> None
 ```
 
-Main doc generator.
+Replace all import strings with Markdown links. Only import strings that present in this
+package are replaced, so not dead linsk should be generated.
+
+```python
+my_md = Path('doc.md')
+my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
+handsdown.replace_links(my_md)
+
+my_md.read_text()
+# 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
+```
 
 #### Arguments
 
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+- `file_path` - Path to MD document file.
 
 ## PathFinder
 
@@ -131,21 +125,17 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Find matching paths inside `root` path.
-
-#### Examples
-
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
+Add `fnmatch` expression to black list.
+If black list is empty - no black list filtration applied.
+If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+fn_exrps - One or more `fnmatch` expressions.
+
+#### Returns
+
+A copy of itself.
 
 #### See also
 
@@ -159,21 +149,17 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Find matching paths inside `root` path.
-
-#### Examples
-
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
+Add `fnmatch` expression to white list.
+If white list is empty - no white list filtration applied.
+If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+fn_exrps - One or more `fnmatch` expressions.
+
+#### Returns
+
+A copy of itself.
 
 #### See also
 
@@ -187,21 +173,11 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def list() -> List[pathlib.Path]
 ```
 
-Find matching paths inside `root` path.
+Return all matching paths as a list.
 
-#### Examples
+#### Returns
 
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
-
-#### Arguments
-
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+A list of all matched paths.
 
 ## LoaderError
 

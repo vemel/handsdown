@@ -250,24 +250,24 @@ class Generator:
 
     def _generate_module_doc_lines(self, module_record: ModuleRecord) -> List[Text]:
         lines = []
-        for module_record_object in module_record.objects:
+        for module_object_record in module_record.objects:
             lines.append(
-                f'{"#" * (module_record_object.level + 2)} {module_record_object.title}\n'
+                f'{"#" * (module_object_record.level + 2)} {module_object_record.title}\n'
             )
 
-            source_path = module_record_object.source_path
+            source_path = module_object_record.source_path
             relative_path = source_path.relative_to(self._root_path)
             lines.append(
-                f"[🔍 find in source code](../{relative_path}#L{module_record_object.source_line_number})\n"
+                f"[🔍 find in source code](../{relative_path}#L{module_object_record.source_line_number})\n"
             )
 
-            signature = self._loader.get_object_signature(module_record_object.object)
+            signature = self._loader.get_object_signature(module_object_record.object)
 
             if signature:
                 lines.append(f"```python\n{signature}\n```\n")
 
             formatted_docstring = self._get_formatted_docstring(
-                module_record=module_record_object, signature=signature
+                module_record=module_object_record, signature=signature
             )
             if formatted_docstring:
                 lines.extend(formatted_docstring.split("\n"))

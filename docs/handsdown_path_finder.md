@@ -40,21 +40,17 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Find matching paths inside `root` path.
-
-#### Examples
-
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
+Add `fnmatch` expression to black list.
+If black list is empty - no black list filtration applied.
+If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+fn_exrps - One or more `fnmatch` expressions.
+
+#### Returns
+
+A copy of itself.
 
 #### See also
 
@@ -68,21 +64,17 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
 ```
 
-Find matching paths inside `root` path.
-
-#### Examples
-
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
+Add `fnmatch` expression to white list.
+If white list is empty - no white list filtration applied.
+If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+fn_exrps - One or more `fnmatch` expressions.
+
+#### Returns
+
+A copy of itself.
 
 #### See also
 
@@ -96,18 +88,8 @@ path_finder.exclude('*new*').list() # ['my.txt']
 def list() -> List[pathlib.Path]
 ```
 
-Find matching paths inside `root` path.
+Return all matching paths as a list.
 
-#### Examples
+#### Returns
 
-```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
-```
-
-#### Arguments
-
-- `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+A list of all matched paths.

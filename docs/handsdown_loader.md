@@ -7,6 +7,7 @@
     - [Loader.get_object_signature](#loaderget_object_signature)
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
+    - [Loader().setup](#loadersetup)
 
 > Auto-generated documentation for [handsdown.loader](../handsdown/loader.py) module.
 
@@ -43,7 +44,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L73)
+[🔍 find in source code](../handsdown/loader.py#L79)
 
 ```python
 def get_module_record(
@@ -51,18 +52,19 @@ def get_module_record(
 ) -> Union[handsdown.module_record.ModuleRecord, NoneType]
 ```
 
-Loader for python source code.
-
-#### Examples
-
-```python
-loader = Loader(Path('path/to/my_module/'))
-my_module_utils = loader.import_module('my_module.utils')
-```
+Build `ModuleRecord` for given `source_path`.
 
 #### Arguments
 
-- `import_paths` - List of import paths for `import_module` lookup.
+- `source_path` - Absolute path to source file.
+
+#### Returns
+
+A new `ModuleRecord` instance or None if there is ntohing to import.
+
+#### Raises
+
+- [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
 
 #### See also
 
@@ -70,63 +72,70 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L132)
+[🔍 find in source code](../handsdown/loader.py#L138)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
 ```
 
-Loader for python source code.
-
-#### Examples
-
-```python
-loader = Loader(Path('path/to/my_module/'))
-my_module_utils = loader.import_module('my_module.utils')
-```
+Get class, method or function signature. If object is not callable -
+returns None.
 
 #### Arguments
 
-- `import_paths` - List of import paths for `import_module` lookup.
+- `obj` - Object to inspect.
+
+#### Returns
+
+A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L321)
+[🔍 find in source code](../handsdown/loader.py#L327)
 
 ```python
 def get_source_line_number(obj: Any) -> int
 ```
 
-Loader for python source code.
+Get line number in source file where `obj` is declared.
 
-#### Examples
+- `obj` - Object to inspect.
 
-```python
-loader = Loader(Path('path/to/my_module/'))
-my_module_utils = loader.import_module('my_module.utils')
-```
+#### Returns
 
-#### Arguments
-
-- `import_paths` - List of import paths for `import_module` lookup.
+A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L190)
+[🔍 find in source code](../handsdown/loader.py#L196)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
 ```
 
-Loader for python source code.
+Import module using `import_paths` list. Clean up all patches afterwards.
 
-#### Examples
-
-```python
-loader = Loader(Path('path/to/my_module/'))
-my_module_utils = loader.import_module('my_module.utils')
-```
+- Patch `sys.path` to add current repo to it.
+- Patch `os.environ` to avoid failing on undefined variables.
+- Patch `typing.TYPE_CHECKING` to `True`.
 
 #### Arguments
 
-- `import_paths` - List of import paths for `import_module` lookup.
+- `file_path` - Abslute path to source file.
+
+#### Returns
+
+Imported module object.
+
+### Loader().setup
+
+[🔍 find in source code](../handsdown/loader.py#L52)
+
+```python
+def setup() -> None
+```
+
+Setup local frameworks if needed.
+
+Frameworks supported:
+- `Django` (if `DJANGO_SETTINGS_MODULE` env variable is defined)

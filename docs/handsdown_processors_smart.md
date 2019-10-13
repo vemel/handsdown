@@ -24,4 +24,4 @@ This class implements the preprocessor for restructured text and google.
 def build_sections(content: str) -> DefaultDict[str, List[str]]
 ```
 
-This class implements the preprocessor for restructured text and google.
+Preprocessors a given section into it's components.

@@ -25,7 +25,16 @@ This class implements the preprocessor for PEP257 and Google style.
 def build_sections(content: str) -> DefaultDict[str, List[str]]
 ```
 
-This class implements the preprocessor for PEP257 and Google style.
+Parse docstring and split it to sections with arrays of strings.
+
+#### Arguments
+
+content - Object docstring.
+
+#### Returns
+
+A dictionary where key is a section name and value is a list of string sof this
+section.
 
 ### BaseDocstringProcessor().render_sections
 
@@ -35,4 +44,12 @@ This class implements the preprocessor for PEP257 and Google style.
 def render_sections(sections: Dict[str, List[str]]) -> str
 ```
 
-This class implements the preprocessor for PEP257 and Google style.
+Render sections produced by `render_sections` to a string.
+
+#### Arguments
+
+sections - Built sections.
+
+#### Returns
+
+Markdown string.

@@ -49,7 +49,13 @@ class Loader:
         )
         self.setup()
 
-    def setup(self):
+    def setup(self) -> None:
+        """
+        Setup local frameworks if needed.
+
+        Frameworks supported:
+        - `Django` (if `DJANGO_SETTINGS_MODULE` env variable is defined)
+        """
         if os.environ.get(self.DJANGO_SETTINGS_ENV_VAR):
             self._logger.info(
                 f"Found {self.DJANGO_SETTINGS_ENV_VAR} env variable, trying to setup django apps"
@@ -300,7 +306,7 @@ class Loader:
                     import_string=import_string,
                     level=1,
                     object=inspect_method,
-                    docstring=self._get_object_docstring(inspect_object),
+                    docstring=self._get_object_docstring(inspect_method),
                     title=title,
                     source_path=module_record.source_path,
                     output_file_name=module_record.output_file_name,

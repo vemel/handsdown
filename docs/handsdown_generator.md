@@ -56,15 +56,11 @@ Main doc generator.
 def cleanup_old_docs() -> None
 ```
 
-Main doc generator.
+Remove old docs generated for this module.
 
 #### Arguments
 
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+- `preserve_paths` - All doc files generated paths that should not be deleted.
 
 ### Generator().generate
 
@@ -74,15 +70,7 @@ Main doc generator.
 def generate() -> None
 ```
 
-Main doc generator.
-
-#### Arguments
-
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+Generate all module docs at once.
 
 ### Generator().replace_links
 
@@ -92,12 +80,18 @@ Main doc generator.
 def replace_links(file_path: pathlib.Path) -> None
 ```
 
-Main doc generator.
+Replace all import strings with Markdown links. Only import strings that present in this
+package are replaced, so not dead linsk should be generated.
+
+```python
+my_md = Path('doc.md')
+my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
+handsdown.replace_links(my_md)
+
+my_md.read_text()
+# 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
+```
 
 #### Arguments
 
-- `input_path` - Path to repo to generate docs.
-- `logger` - Logger instance.
-- `docstring_processor` - Docstring converter to Markdown.
-- `loader` - Loader for python modules.
-- `output_path` - Path to folder with auto-generated docs to output.
+- `file_path` - Path to MD document file.
