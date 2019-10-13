@@ -2,7 +2,6 @@ import importlib
 from importlib.machinery import ModuleSpec
 from pathlib import Path
 import sys
-import pyclbr
 import inspect
 import logging
 from unittest.mock import patch
@@ -224,34 +223,30 @@ class Loader:
         return module
 
     @staticmethod
-    def _get_inspect_predicate(object_name: Text) -> Callable[[Any], bool]:
-        def predicate(method: Any) -> bool:
-            if not inspect.isroutine(method) or not method.__doc__:
+    def _get_inspect_predicate(
+        module: Any, parent: Any = None
+    ) -> Callable[[Any], bool]:
+        def predicate(obj: Any) -> bool:
+            # skip objects without docstrings
+            if not obj.__doc__:
                 return False
 
-            if not hasattr(method, "__qualname__"):
-                return False
+            # skip objects from different modules
+            if hasattr(obj, "__module__"):
+                if obj.__module__ != module.__name__:
+                    return False
 
-            parent_name = method.__qualname__.split(".")[0]
-            method_name = method.__qualname__.split(".")[-1]
+            if inspect.isclass(obj):
+                return True
 
-            # skip magic methods
-            if method.__qualname__ == parent_name:
-                return False
+            if inspect.isfunction(obj):
+                return True
 
-            # skip private methods
-            if method_name.startswith("_"):
-                return False
+            if inspect.ismethod(obj) and parent:
+                if obj.__name__ in parent.__dict__:
+                    return True
 
-            # skip inherited methods
-            if parent_name != object_name:
-                return False
-
-            # skip built-in inherited methods
-            if object_name not in repr(method):
-                return False
-
-            return True
+            return False
 
         return predicate
 
@@ -268,39 +263,41 @@ class Loader:
             A generator that yields `ModuleObjectRecord` instances.
         """
         import_string = module_record.import_string
-        obj_names = pyclbr.readmodule_ex(import_string)
+        inspect_module = module_record.module
 
-        for obj_name in obj_names:
-            if obj_name.startswith("__"):
-                continue
+        members = inspect.getmembers(
+            inspect_module, self._get_inspect_predicate(inspect_module)
+        )
+        members.sort(key=lambda x: x[0])
 
-            inspect_object = getattr(module_record.module, obj_name)
-            if not inspect.isclass(inspect_object) and inspect_object.__doc__ is None:
-                continue
-
+        for object_name, inspect_object in members:
             yield ModuleObjectRecord(
-                import_string=obj_name,
+                import_string=object_name,
                 level=0,
                 object=inspect_object,
                 docstring=self._get_object_docstring(inspect_object),
-                title=obj_name,
+                title=object_name,
                 source_path=module_record.source_path,
                 output_file_name=module_record.output_file_name,
                 source_line_number=self.get_source_line_number(inspect_object),
             )
 
-            for method_name, inspect_method in inspect.getmembers(
-                inspect_object, self._get_inspect_predicate(obj_name)
-            ):
-                try:
-                    class_method = inspect_object.__dict__[method_name]
-                except KeyError:
-                    continue
+            if not inspect.isclass(inspect_object):
+                continue
 
-                import_string = f"{obj_name}.{method_name}"
-                title = f"{obj_name}().{method_name}"
+            object_members = inspect.getmembers(
+                inspect_object,
+                self._get_inspect_predicate(inspect_module, inspect_object),
+            )
+            object_members.sort(key=lambda x: x[0])
+
+            for method_name, inspect_method in object_members:
+                class_method = inspect_object.__dict__[method_name]
+
+                import_string = f"{object_name}.{method_name}"
+                title = f"{object_name}().{method_name}"
                 if isinstance(class_method, (staticmethod, classmethod)):
-                    title = f"{obj_name}.{method_name}"
+                    title = f"{object_name}.{method_name}"
 
                 yield ModuleObjectRecord(
                     import_string=import_string,

@@ -5,6 +5,7 @@
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
   - [ModuleRecordList](#modulerecordlist)
+    - [ModuleRecordList().__iter__](#modulerecordlist__iter__)
     - [ModuleRecordList().add](#modulerecordlistadd)
     - [ModuleRecordList().find_object](#modulerecordlistfind_object)
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
@@ -100,6 +101,24 @@ class ModuleRecordList() -> None
 ```
 
 Aggregation of [ModuleRecord](#modulerecord) objects.
+
+### ModuleRecordList().__iter__
+
+[🔍 find in source code](../handsdown/module_record.py#L124)
+
+```python
+def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
+```
+
+Iterate over all added [ModuleRecord](#modulerecord) entries.
+
+#### Returns
+
+A generator iterating over [ModuleRecord](#modulerecord) entries.
+
+#### See also
+
+- [ModuleRecord](#modulerecord)
 
 ### ModuleRecordList().add
 

@@ -1,7 +1,6 @@
 # Handsdown: Signature
 
 - [Handsdown: Signature](#handsdown-signature)
-  - [Config](#config)
   - [ProxyDefaultValue](#proxydefaultvalue)
   - [ProxyParameter](#proxyparameter)
     - [ProxyParameter.create](#proxyparametercreate)
@@ -9,14 +8,6 @@
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
 > Auto-generated documentation for [handsdown.signature](../handsdown/signature.py) module.
-
-## Config
-
-[🔍 find in source code](../handsdown/signature.py#L10)
-
-```python
-class Config(*args, **kwargs)
-```
 
 ## ProxyDefaultValue
 

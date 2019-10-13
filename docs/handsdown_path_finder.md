@@ -2,6 +2,7 @@
 
 - [Handsdown: Path finder](#handsdown-path-finder)
   - [PathFinder](#pathfinder)
+    - [PathFinder().__iter__](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
@@ -31,6 +32,20 @@ path_finder.exclude('*new*').list() # ['my.txt']
 
 - `root` - Path to root folder.
 - `glob_expr` - `glob` expression to lookup in `root`
+
+### PathFinder().__iter__
+
+[🔍 find in source code](../handsdown/path_finder.py#L103)
+
+```python
+def __iter__() -> Generator[pathlib.Path, NoneType, NoneType]
+```
+
+Iterate over matched paths respecting `include` and `exclude` patterns.
+
+#### Returns
+
+A generator of matched paths.
 
 ### PathFinder().exclude
 
