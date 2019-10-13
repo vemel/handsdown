@@ -148,7 +148,7 @@ class Generator:
         self.cleanup_old_docs()
 
         index_md_path = Path(self._output_path, "index.md")
-        self._logger.info(f"Generating {index_md_path.relative_to(self._root_path)}")
+        self._logger.debug(f"Generating {index_md_path.relative_to(self._root_path)}")
         index_md_path.write_text(self._generate_index_md_content())
         self.replace_links(index_md_path)
 
