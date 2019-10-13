@@ -68,6 +68,7 @@ def main() -> None:
         logger=logger,
         output_path=args.output_path,
         source_paths=path_finder.list(),
+        raise_import_errors=args.panic,
     )
     generator.generate()
 

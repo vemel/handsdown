@@ -29,6 +29,9 @@ def get_cli_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"
     )
+    parser.add_argument(
+        "-p", "--panic", action="store_true", help="Panic and die on import error"
+    )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(
         "-i",
