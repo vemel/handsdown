@@ -78,7 +78,7 @@ pip install handsdown
 
 ## Modules
 
-- [Handsdown](./handsdown_index.md)
+- Handsdown
   - [Main](./handsdown___main__.md)
   - [Cli parser](./handsdown_cli_parser.md)
   - [Generator](./handsdown_generator.md)
@@ -93,5 +93,4 @@ pip install handsdown
     - [Rst](./handsdown_processors_rst.md)
     - [Smart](./handsdown_processors_smart.md)
   - [Signature](./handsdown_signature.md)
-  - [Type defs](./handsdown_type_defs.md)
   - [Utils](./handsdown_utils.md)

@@ -121,6 +121,10 @@ class Loader:
         for module_object_record in module_object_records:
             module_record.objects.append(module_object_record)
 
+        # skip modules without objects and docstring
+        if not module_record.objects and not module_record.docstring:
+            return None
+
         return module_record
 
     def _setup_django(self) -> None:
@@ -242,6 +246,7 @@ class Loader:
             if inspect.isfunction(obj):
                 return True
 
+            # skip built-in methods
             if inspect.ismethod(obj) and parent:
                 if obj.__name__ in parent.__dict__:
                     return True
