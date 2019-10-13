@@ -6,7 +6,7 @@ import pyclbr
 import inspect
 from unittest.mock import patch
 import os
-from typing import Optional, Text, Any, Callable, Generator, Tuple
+from typing import Optional, Text, Any, Callable, Generator
 
 from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
@@ -73,7 +73,6 @@ class Loader:
 
         try:
             inspect_module = self.import_module(source_path)
-            module_objects = list(self.get_module_objects(inspect_module, source_path))
         except Exception as e:
             raise LoaderError(f"Cannot import {source_path.name}: {e}")
 
@@ -84,18 +83,17 @@ class Loader:
             import_string=file_import,
             objects=[],
         )
-        for module_object_name, module_object, level in module_objects:
-            module_record.objects.append(
-                ModuleObjectRecord(
-                    import_string=module_object_name.replace("(", "").replace(")", ""),
-                    level=level,
-                    object=module_object,
-                    title=module_object_name,
-                    source_path=source_path,
-                    output_file_name=output_file_name,
-                    source_line_number=self.get_source_line_number(module_object),
-                )
+
+        try:
+            module_object_records = list(self._discover_module_objects(module_record))
+        except Exception as e:
+            raise LoaderError(
+                f"Cannot import module objects from {source_path.name}: {e}"
             )
+
+        for module_object_record in module_object_records:
+            module_record.objects.append(module_object_record)
+
         return module_record
 
     def _setup_django(self):
@@ -210,9 +208,9 @@ class Loader:
 
         return predicate
 
-    def get_module_objects(
-        self, module: Any, file_path: Text
-    ) -> Generator[Tuple[Text, Any, int], None, None]:
+    def _discover_module_objects(
+        self, module_record: ModuleRecord
+    ) -> Generator[ModuleObjectRecord, None, None]:
         """
         Yield (`name`, `object`, `level`) for every object in a module. `name` is object name.
         `object` - object iteslf. `level` - deepness of the object. Maximum `level` is 1.
@@ -224,34 +222,49 @@ class Loader:
         Returns:
             A generator that yields tuples of (`name`, `object`, `level`).
         """
-        import_string = self.get_import_string(file_path)
-        try:
-            obj_names = pyclbr.readmodule_ex(import_string)
-        except AttributeError as e:
-            raise LoaderError(f"Cannot get items from module {import_string} : {e}")
+        import_string = module_record.import_string
+        obj_names = pyclbr.readmodule_ex(import_string)
+
         for obj_name in obj_names:
             if obj_name.startswith("__"):
                 continue
 
-            inspect_object = getattr(module, obj_name)
+            inspect_object = getattr(module_record.module, obj_name)
             if not inspect.isclass(inspect_object) and inspect_object.__doc__ is None:
                 continue
 
-            yield (obj_name, inspect_object, 0)
+            yield ModuleObjectRecord(
+                import_string=obj_name,
+                level=0,
+                object=inspect_object,
+                title=obj_name,
+                source_path=module_record.source_path,
+                output_file_name=module_record.output_file_name,
+                source_line_number=self.get_source_line_number(inspect_object),
+            )
 
             for method_name, inspect_method in inspect.getmembers(
                 inspect_object, self._get_inspect_predicate(obj_name)
             ):
-                title = f"{obj_name}().{method_name}"
                 try:
                     class_method = inspect_object.__dict__[method_name]
                 except KeyError:
                     continue
 
+                import_string = f"{obj_name}.{method_name}"
+                title = f"{obj_name}().{method_name}"
                 if isinstance(class_method, (staticmethod, classmethod)):
                     title = f"{obj_name}.{method_name}"
 
-                yield (title, inspect_method, 1)
+                yield ModuleObjectRecord(
+                    import_string=import_string,
+                    level=1,
+                    object=inspect_method,
+                    title=title,
+                    source_path=module_record.source_path,
+                    output_file_name=module_record.output_file_name,
+                    source_line_number=self.get_source_line_number(inspect_method),
+                )
 
     @staticmethod
     def _get_docstring(obj: Any) -> Text:
