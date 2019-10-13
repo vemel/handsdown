@@ -47,8 +47,13 @@ class Loader:
         self._sys_path_patch = patch(
             "sys.path", sys.path + [self._root_path.as_posix()]
         )
+        self.setup()
 
+    def setup(self):
         if os.environ.get(self.DJANGO_SETTINGS_ENV_VAR):
+            self._logger.info(
+                f"Found {self.DJANGO_SETTINGS_ENV_VAR} env variable, trying to setup django apps"
+            )
             self._setup_django()
 
     def get_md_name(self, path: Path) -> Text:
@@ -115,8 +120,11 @@ class Loader:
     def _setup_django(self) -> None:
         self._os_environ_patch.start()
         self._sys_path_patch.start()
-        django = importlib.import_module("django")
-        django.setup()
+        try:
+            django = importlib.import_module("django")
+            getattr(django, "setup")()
+        except Exception as e:
+            self._logger.warning(f"Cannot setup django: {e}")
         self._os_environ_patch.stop()
         self._sys_path_patch.stop()
 
@@ -197,10 +205,7 @@ class Loader:
         self._type_checking_patch.start()
 
         import_string = self.get_import_string(file_path)
-        try:
-            module = importlib.import_module(import_string)
-        except Exception as e:
-            raise LoaderError(f"Cannot import {import_string}: {e}")
+        module = importlib.import_module(import_string)
 
         self._sys_path_patch.stop()
         self._os_environ_patch.stop()
