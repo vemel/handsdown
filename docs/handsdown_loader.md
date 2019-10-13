@@ -19,9 +19,11 @@
 class LoaderError(*args, **kwargs)
 ```
 
+Main error for [Loader](#loader) class.
+
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L22)
+[🔍 find in source code](../handsdown/loader.py#L24)
 
 ```python
 class Loader(root_path: pathlib.Path, logger: logging.Logger) -> None
@@ -42,7 +44,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L66)
+[🔍 find in source code](../handsdown/loader.py#L68)
 
 ```python
 def get_module_record(
@@ -70,7 +72,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader().get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L138)
+[🔍 find in source code](../handsdown/loader.py#L140)
 
 ```python
 def get_object_docstring(obj: Any) -> str
@@ -88,7 +90,7 @@ A string with object docsting.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L121)
+[🔍 find in source code](../handsdown/loader.py#L123)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -107,7 +109,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L311)
+[🔍 find in source code](../handsdown/loader.py#L313)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -123,7 +125,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L179)
+[🔍 find in source code](../handsdown/loader.py#L181)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any

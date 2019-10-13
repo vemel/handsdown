@@ -16,7 +16,9 @@ from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 
 
 class LoaderError(Exception):
-    pass
+    """
+    Main error for `Loader` class.
+    """
 
 
 class Loader:
