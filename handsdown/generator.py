@@ -46,7 +46,7 @@ class Generator:
             self._logger.info(f"Creating folder {self._docs_path}")
             self._docs_path.mkdir()
 
-        self._loader = loader or Loader([self._repo_path])
+        self._loader = loader or Loader(self._repo_path)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)

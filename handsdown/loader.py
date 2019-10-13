@@ -7,7 +7,7 @@ import inspect
 from unittest.mock import patch
 import typing
 import os
-from typing import Optional, Text, Any, Callable, Generator, Tuple, Iterable
+from typing import Optional, Text, Any, Callable, Generator, Tuple
 
 from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
@@ -25,7 +25,7 @@ class Loader:
     Examples:
 
         ```python
-        loader = Loader(['path/to/my_module/'])
+        loader = Loader(Path('path/to/my_module/'))
         my_module_utils = loader.import_module('my_module.utils')
         ```
 
@@ -33,9 +33,20 @@ class Loader:
         import_paths -- List of import paths for `import_module` lookup.
     """
 
-    def __init__(self, import_paths: Iterable[Path]) -> None:
-        self._import_paths = import_paths
-        self._environ_mock = OSEnvironMock(os.environ)
+    def __init__(self, root_path: Path, setup_django=False) -> None:
+        self._root_path = root_path
+        self._sys_path_dirty = False
+        self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
+        self._sys_path_patch = patch(
+            "sys.path", sys.path + [self._root_path.as_posix()]
+        )
+
+        if setup_django:
+            self._setup_django()
+
+    def _setup_django(self):
+        django = importlib.import_module("django")
+        django.setup()
 
     @staticmethod
     def get_object_signature(obj: Any) -> Optional[Text]:
@@ -79,28 +90,24 @@ class Loader:
         Returns:
             Imported module object.
         """
-        temp_import_paths = []
-        for import_path in self._import_paths:
-            if import_path not in sys.path:
-                sys.path.append(import_path.as_posix())
-                temp_import_paths.append(import_path.as_posix())
+        self._sys_path_patch.start()
+        self._os_environ_patch.start()
 
         real_type_checking = typing.TYPE_CHECKING
         typing.TYPE_CHECKING = True
 
-        with patch("os.environ", self._environ_mock):
-            try:
-                module = importlib.import_module(import_string)
-            except Exception as e:
-                raise LoaderError(f"Cannot import {import_string}: {e}")
+        try:
+            module = importlib.import_module(import_string)
+        except Exception as e:
+            raise LoaderError(f"Cannot import {import_string}: {e}")
+
+        self._sys_path_patch.stop()
+        self._os_environ_patch.stop()
 
         if module.__spec__ is None:
             module.__spec__ = ModuleSpec(name="__main__", loader=None, origin=None)
 
         typing.TYPE_CHECKING = real_type_checking
-
-        for import_path in temp_import_paths:
-            sys.path.remove(import_path)
 
         return module
 
@@ -108,6 +115,9 @@ class Loader:
     def _get_inspect_predicate(object_name: Text) -> Callable[[Any], bool]:
         def predicate(method: Any) -> bool:
             if not inspect.isroutine(method) or not method.__doc__:
+                return False
+
+            if not hasattr(method, "__qualname__"):
                 return False
 
             parent_name = method.__qualname__.split(".")[0]
