@@ -1,5 +1,5 @@
 import re
-from typing import Text, Optional
+from typing import Text, Optional, List
 from pathlib import Path
 
 from handsdown.indent_trimmer import IndentTrimmer
@@ -38,11 +38,11 @@ class MDDocument:
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
     _section_separator = "\n\n"
 
-    def __init__(self, content: Text = ""):
-        self._sections = []
+    def __init__(self, content: Text = "") -> None:
+        self._sections: List[Text] = []
         self._content = ""
-        self.title = None
-        self.toc_section = None
+        self.title: Optional[Text] = None
+        self.toc_section: Optional[Text] = None
         if content:
             self.append(content)
 
@@ -109,7 +109,7 @@ class MDDocument:
 
         return f"[{title}](#{anchor})"
 
-    def _build_content(self):
+    def _build_content(self) -> Text:
         sections = []
         if self.title:
             sections.append(f"# {self.title}")
