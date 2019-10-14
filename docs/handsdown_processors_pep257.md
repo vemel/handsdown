@@ -1,9 +1,9 @@
-# Handsdown: Processors: Pep257
+# Pep257
 
-- [Handsdown: Processors: Pep257](#handsdown-processors-pep257)
+- [Pep257](#pep257)
   - [PEP257DocstringProcessor](#pep257docstringprocessor)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.processors.pep257](../handsdown/processors/pep257.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / `Pep257` module ([pep257.py](../handsdown/processors/pep257.py))
 
 ## PEP257DocstringProcessor
 

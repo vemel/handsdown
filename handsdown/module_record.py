@@ -51,7 +51,7 @@ class ModuleRecord:
     source_path: Path
     output_file_name: Text
     module: Any
-    title: Optional[Text]
+    title: Text
     import_string: Text
     objects: List[ModuleObjectRecord]
     docstring: Optional[Text]
@@ -154,6 +154,7 @@ class ModuleRecordList:
             module_record -- A new `ModuleRecord`
         """
         self.data.append(module_record)
+        self.import_string_map[module_record.import_string] = module_record
         for obj in module_record.objects:
             import_string = f"{module_record.import_string}.{obj.import_string}"
             self.import_string_map[import_string] = obj

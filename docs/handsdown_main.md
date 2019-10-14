@@ -1,10 +1,10 @@
-# Handsdown: Main
+# Main
 
-- [Handsdown: Main](#handsdown-main)
+- [Main](#main)
   - [get_logger](#get_logger)
   - [main](#main)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.main](../handsdown/main.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / `Main` module ([main.py](../handsdown/main.py))
 
 Main CLI entrypoint for `handsdown`
 

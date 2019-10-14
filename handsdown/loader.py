@@ -12,6 +12,7 @@ from handsdown.signature import SignatureBuilder
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import OSEnvironMock
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
+from handsdown.utils import get_title_from_path_part
 
 
 class LoaderError(Exception):
@@ -118,7 +119,7 @@ class Loader:
 
         module_record = ModuleRecord(
             module=inspect_module,
-            title=None,
+            title=get_title_from_path_part(file_import.split(".")[-1]),
             docstring="\n\n".join(docstring_parts),
             output_file_name=output_file_name,
             source_path=source_path,

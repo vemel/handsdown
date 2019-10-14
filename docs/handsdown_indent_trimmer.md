@@ -1,6 +1,6 @@
-# Handsdown: IndentTrimmer
+# IndentTrimmer
 
-- [Handsdown: IndentTrimmer](#handsdown-indenttrimmer)
+- [IndentTrimmer](#indenttrimmer)
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
@@ -8,7 +8,7 @@
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
     - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.indent_trimmer](../handsdown/indent_trimmer.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [IndentTrimmer](#indenttrimmer) module ([indent_trimmer.py](../handsdown/indent_trimmer.py))
 
 ## IndentTrimmer
 

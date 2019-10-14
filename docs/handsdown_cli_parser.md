@@ -4,7 +4,7 @@
   - [abs_path](#abs_path)
   - [get_cli_parser](#get_cli_parser)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.cli_parser](../handsdown/cli_parser.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / `Cli Parser` module ([cli_parser.py](../handsdown/cli_parser.py))
 
 ## abs_path
 

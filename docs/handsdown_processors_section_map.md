@@ -1,11 +1,11 @@
-# Handsdown: Processors: SectionMap
+# SectionMap
 
-- [Handsdown: Processors: SectionMap](#handsdown-processors-sectionmap)
+- [SectionMap](#sectionmap)
   - [SectionMap](#sectionmap)
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.processors.section_map](../handsdown/processors/section_map.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / [SectionMap](#sectionmap) module ([section_map.py](../handsdown/processors/section_map.py))
 
 ## SectionMap
 

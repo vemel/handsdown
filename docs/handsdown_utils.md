@@ -1,10 +1,10 @@
-# Handsdown: Utils
+# Utils
 
-- [Handsdown: Utils](#handsdown-utils)
+- [Utils](#utils)
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.utils](../handsdown/utils.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / `Utils` module ([utils.py](../handsdown/utils.py))
 
 ## OSEnvironMock
 

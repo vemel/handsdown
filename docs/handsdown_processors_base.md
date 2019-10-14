@@ -1,10 +1,10 @@
-# Handsdown: Processors: Base
+# Base
 
-- [Handsdown: Processors: Base](#handsdown-processors-base)
+- [Base](#base)
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.processors.base](../handsdown/processors/base.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / `Base` module ([base.py](../handsdown/processors/base.py))
 
 ## BaseDocstringProcessor
 

@@ -1,6 +1,6 @@
-# Handsdown: ModuleRecord
+# ModuleRecord
 
-- [Handsdown: ModuleRecord](#handsdown-modulerecord)
+- [ModuleRecord](#modulerecord)
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)
@@ -12,7 +12,7 @@
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.module_record](../handsdown/module_record.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [ModuleRecord](#modulerecord) module ([module_record.py](../handsdown/module_record.py))
 
 ## ModuleObjectRecord
 
@@ -55,7 +55,7 @@ class ModuleRecord(
     source_path: pathlib.Path,
     output_file_name: str,
     module: Any,
-    title: Union[str, NoneType],
+    title: str,
     import_string: str,
     objects: List[handsdown.module_record.ModuleObjectRecord],
     docstring: Union[str, NoneType],
@@ -137,7 +137,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().__iter__
 
-[🔍 find in source code](../handsdown/module_record.py#L161)
+[🔍 find in source code](../handsdown/module_record.py#L162)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]

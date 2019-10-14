@@ -1,8 +1,8 @@
-# Handsdown: Processors
+# Processors
 
-- [Handsdown: Processors](#handsdown-processors)
+- [Processors](#processors)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.processors](../handsdown/processors/__init__.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / `Processors` module ([__init__.py](../handsdown/processors/__init__.py))
 
 Docstrings processors.
 

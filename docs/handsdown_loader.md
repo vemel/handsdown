@@ -1,6 +1,6 @@
-# Handsdown: Loader
+# Loader
 
-- [Handsdown: Loader](#handsdown-loader)
+- [Loader](#loader)
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)
@@ -12,11 +12,11 @@
     - [Loader().setup](#loadersetup)
   - [LoaderError](#loadererror)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.loader](../handsdown/loader.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / [Loader](#loader) module ([loader.py](../handsdown/loader.py))
 
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L23)
+[🔍 find in source code](../handsdown/loader.py#L24)
 
 ```python
 class Loader(root_path: pathlib.Path, logger: logging.Logger)
@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L302)
+[🔍 find in source code](../handsdown/loader.py#L303)
 
 ```python
 def _discover_module_objects(
@@ -62,7 +62,7 @@ A generator that yields `ModuleObjectRecord` instances.
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L194)
+[🔍 find in source code](../handsdown/loader.py#L195)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -80,7 +80,7 @@ A string with object docsting.
 
 ### Loader()._setup_django
 
-[🔍 find in source code](../handsdown/loader.py#L152)
+[🔍 find in source code](../handsdown/loader.py#L153)
 
 ```python
 def _setup_django() -> None
@@ -95,7 +95,7 @@ Patches applied during apps initialization:
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L82)
+[🔍 find in source code](../handsdown/loader.py#L83)
 
 ```python
 def get_module_record(
@@ -123,7 +123,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L177)
+[🔍 find in source code](../handsdown/loader.py#L178)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -142,7 +142,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L376)
+[🔍 find in source code](../handsdown/loader.py#L377)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -158,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L235)
+[🔍 find in source code](../handsdown/loader.py#L236)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
@@ -182,7 +182,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../handsdown/loader.py#L53)
+[🔍 find in source code](../handsdown/loader.py#L54)
 
 ```python
 def setup() -> None
@@ -195,7 +195,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](../handsdown/loader.py#L17)
+[🔍 find in source code](../handsdown/loader.py#L18)
 
 ```python
 class LoaderError(*args, **kwargs)

@@ -102,16 +102,59 @@ class MDDocument:
 
         return True
 
+    @staticmethod
+    def render_link(title: Text, link: Text) -> Text:
+        """
+        Render Markdown link.
+
+        Examples:
+
+            ```python
+            MDDocument.render_link('my title', 'doc.md#test') # [my title](doc.md#test)
+            ```
+
+        Arguments:
+            title -- Link text.
+            link -- Link target.
+
+        Returns:
+            A string with Markdown link.
+        """
+        return f"[{title}]({link})"
+
     @classmethod
-    def render_link(cls, title: Text, anchor: Text = "", md_name: Text = "") -> Text:
+    def render_doc_link(
+        cls, title: Text, anchor: Text = "", md_name: Text = ""
+    ) -> Text:
+        """
+        Render Markdown link to a local MD document.
+
+        Examples:
+
+            ```python
+            MDDocument.render_doc_link('my title', anchor='My anchor') # [my title](#my-anchor)
+            MDDocument.render_doc_link('my title', md_name='doc.md') # [my title](./doc.md)
+            MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
+            # [my title](./doc.md#my-anchor)
+            ```
+
+        Arguments:
+            title -- Link text.
+            anchor -- Unescaped or exacped anchor tag.
+            md_name -- Name of local MD document.
+
+        Returns:
+            A string with Markdown link.
+        """
+        link = ""
         if anchor:
             anchor = cls.get_anchor(anchor)
         if anchor:
-            anchor = f"#{anchor}"
+            link = f"#{anchor}"
         if md_name:
-            return f"[{title}](./{md_name}{anchor})"
+            link = f"./{md_name}{link}"
 
-        return f"[{title}]({anchor})"
+        return cls.render_link(title, link)
 
     def _build_content(self) -> Text:
         sections = []
@@ -162,7 +205,7 @@ class MDDocument:
         """
         toc_lines = []
         if self.title:
-            link = self.render_link(self.title, anchor=self.title)
+            link = self.render_doc_link(self.title, anchor=self.title)
             toc_lines.append(f"- {link}")
 
         in_codeblock = False
@@ -189,7 +232,7 @@ class MDDocument:
                 continue
 
             title = line.split(" ", 1)[-1].strip()
-            link = self.render_link(title, anchor=title)
+            link = self.render_doc_link(title, anchor=title)
             toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
 
         return "\n".join(toc_lines)

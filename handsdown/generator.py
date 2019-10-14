@@ -161,12 +161,13 @@ class Generator:
         content_lines = self._generate_module_doc_lines(module_record)
 
         md_doc = MDDocument()
-        index_link = MDDocument.render_link(
-            self._project_name, anchor=self.INDEX_MODULES_NAME, md_name=self.INDEX_NAME
+        source_link = MDDocument.render_link(
+            f"{module_record.source_path.name}",
+            f"{self._root_relative_path / relative_file_path}",
         )
+        breadscrumbs = self._build_breadcrumbs_string(module_record)
         md_doc.append(
-            f"> Auto-generated {index_link} documentation for [{module_record.import_string}]"
-            f"({self._root_relative_path}/{relative_file_path}) module."
+            f"> Auto-generated documentation for {breadscrumbs} module ({source_link})"
         )
 
         if docstring:
@@ -180,10 +181,37 @@ class Generator:
         md_doc.append("\n".join(content_lines))
 
         if not md_doc.title:
-            md_doc.title = ": ".join(module_record.get_title_parts())
+            md_doc.title = module_record.title
 
         md_doc.ensure_toc_exists()
         md_doc.write(self._output_path / md_name)
+
+    def _build_breadcrumbs_string(self, module_record: ModuleRecord) -> Text:
+        breadcrumbs: List[Text] = []
+
+        import_string_parts = module_record.get_import_string_parts()
+        parent_import_parts: List[Text] = []
+        for part in import_string_parts[:-1]:
+            parent_import_parts.append(part)
+            parent_import = ".".join(parent_import_parts)
+            parend_module_record = self._module_records.find_object(parent_import)
+            if not parend_module_record:
+                breadcrumbs.append(f"`{get_title_from_path_part(part)}`")
+                continue
+
+            breadcrumbs.append(
+                MDDocument.render_doc_link(
+                    parend_module_record.title,
+                    md_name=parend_module_record.output_file_name,
+                )
+            )
+
+        breadcrumbs[0] = MDDocument.render_doc_link(
+            self._project_name, anchor=self.INDEX_MODULES_NAME, md_name=self.INDEX_NAME
+        )
+        breadcrumbs.append(f"`{module_record.title}`")
+
+        return " / ".join(breadcrumbs)
 
     def generate_docs(self) -> None:
         """
@@ -217,7 +245,7 @@ class Generator:
             search_str = f"`{obj.title}`"
             if search_str in content:
                 title = obj.title
-                link = MDDocument.render_link(title, anchor=title)
+                link = MDDocument.render_doc_link(title, anchor=title)
                 content = content.replace(search_str, link)
                 self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
                 file_changed = True
@@ -255,7 +283,7 @@ class Generator:
                 continue
 
             title = module_object_record.title
-            link = MDDocument.render_link(title, anchor=title, md_name=md_name)
+            link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
             content = content.replace(match, link)
             self._logger.debug(f'Adding link "{title}" to {file_path.name}')
             file_changed = True
@@ -325,7 +353,7 @@ class Generator:
                     md_name = related_object.output_file_name
 
                 title = related_object.title
-                link = MDDocument.render_link(title, anchor=title, md_name=md_name)
+                link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
                 section_map.add_line("See also", f"- {link}")
                 self._logger.debug(
                     f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'

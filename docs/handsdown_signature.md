@@ -1,6 +1,6 @@
-# Handsdown: Signature
+# Signature
 
-- [Handsdown: Signature](#handsdown-signature)
+- [Signature](#signature)
   - [Config](#config)
   - [ProxyDefaultValue](#proxydefaultvalue)
   - [ProxyParameter](#proxyparameter)
@@ -8,7 +8,7 @@
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
-> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.signature](../handsdown/signature.py) module.
+> Auto-generated documentation for [Handsdown](./README.md#modules) / `Signature` module ([signature.py](../handsdown/signature.py))
 
 ## Config
 
