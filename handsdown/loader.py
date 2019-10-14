@@ -166,7 +166,7 @@ class Loader:
             django = importlib.import_module("django")
             getattr(django, "setup")()
         except Exception as e:
-            self._logger.warning(f"Cannot setup django: {e}")
+            self._logger.warning(f"Cannot setup django apps: {e}")
         else:
             self._logger.info(f"Django apps are initialized")
 
