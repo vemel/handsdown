@@ -74,7 +74,7 @@ class MDDocument:
             self.toc_section = self.generate_toc_section()
 
     @classmethod
-    def get_anchor_link(cls, title: Text) -> Text:
+    def get_anchor(cls, title: Text) -> Text:
         """
         Convert title to Github-compatible anchor link.
 
@@ -102,12 +102,16 @@ class MDDocument:
 
         return True
 
-    def _render_link(self, title: Text, md_name: Optional[Text] = None) -> Text:
-        anchor = self.get_anchor_link(title)
+    @classmethod
+    def render_link(cls, title: Text, anchor: Text = "", md_name: Text = "") -> Text:
+        if anchor:
+            anchor = cls.get_anchor(anchor)
+        if anchor:
+            anchor = f"#{anchor}"
         if md_name:
-            return f"[{title}](./{md_name}#{anchor})"
+            return f"[{title}](./{md_name}{anchor})"
 
-        return f"[{title}](#{anchor})"
+        return f"[{title}]({anchor})"
 
     def _build_content(self) -> Text:
         sections = []
@@ -158,7 +162,8 @@ class MDDocument:
         """
         toc_lines = []
         if self.title:
-            toc_lines.append(f"- {self._render_link(self.title)}")
+            link = self.render_link(self.title, anchor=self.title)
+            toc_lines.append(f"- {link}")
 
         in_codeblock = False
         for line in self._content.split("\n"):
@@ -184,7 +189,7 @@ class MDDocument:
                 continue
 
             title = line.split(" ", 1)[-1].strip()
-            link = self._render_link(title)
+            link = self.render_link(title, anchor=title)
             toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
 
         return "\n".join(toc_lines)

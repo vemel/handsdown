@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Text, Set, List, Generator, Dict, Optional
 
+from handsdown.utils import get_title_from_path_part
+
 
 @dataclass
 class ModuleObjectRecord:
@@ -96,7 +98,7 @@ class ModuleRecord:
         parts = self.get_import_string_parts()
         result = []
         for part in parts:
-            part = part.replace("_", " ").strip().capitalize()
+            part = get_title_from_path_part(part)
             result.append(part)
 
         if self.title and result:

@@ -6,11 +6,11 @@
     - [MDDocument().ensure_toc_exists](#mddocumentensure_toc_exists)
     - [MDDocument.extract_title](#mddocumentextract_title)
     - [MDDocument().generate_toc_section](#mddocumentgenerate_toc_section)
-    - [MDDocument.get_anchor_link](#mddocumentget_anchor_link)
+    - [MDDocument.get_anchor](#mddocumentget_anchor)
     - [MDDocument.is_toc](#mddocumentis_toc)
     - [MDDocument().write](#mddocumentwrite)
 
-> Auto-generated documentation for [handsdown.md_document](../handsdown/md_document.py) module.
+> Auto-generated [Handsdown](./README.md) documentation for [handsdown.md_document](../handsdown/md_document.py) module.
 
 ## MDDocument
 
@@ -50,7 +50,7 @@ Path('output.md').read_text()
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L132)
+[🔍 find in source code](../handsdown/md_document.py#L136)
 
 ```python
 def append(content: str) -> None
@@ -76,7 +76,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L192)
+[🔍 find in source code](../handsdown/md_document.py#L197)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -99,7 +99,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L149)
+[🔍 find in source code](../handsdown/md_document.py#L153)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -115,12 +115,12 @@ Generate Table of Contents MD content.
 
 A string with ToC.
 
-### MDDocument.get_anchor_link
+### MDDocument.get_anchor
 
 [🔍 find in source code](../handsdown/md_document.py#L76)
 
 ```python
-def get_anchor_link(title: str) -> str
+def get_anchor(title: str) -> str
 ```
 
 Convert title to Github-compatible anchor link.
@@ -145,7 +145,7 @@ True the section is ToC.
 
 ### MDDocument().write
 
-[🔍 find in source code](../handsdown/md_document.py#L122)
+[🔍 find in source code](../handsdown/md_document.py#L126)
 
 ```python
 def write(path: pathlib.Path) -> None

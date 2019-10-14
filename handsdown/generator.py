@@ -8,6 +8,7 @@ from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord, ModuleRecordList
 from handsdown.md_document import MDDocument
+from handsdown.utils import get_title_from_path_part
 
 
 class GeneratorError(Exception):
@@ -53,6 +54,8 @@ class Generator:
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
         self._output_path = output_path
+        self._project_name = get_title_from_path_part(input_path.name)
+        self._index_path = Path(self._output_path, self.INDEX_NAME)
 
         try:
             output_relative_path = self._output_path.relative_to(self._root_path)
@@ -156,8 +159,9 @@ class Generator:
         content_lines = self._generate_module_doc_lines(module_record)
 
         md_doc = MDDocument()
+        index_link = MDDocument.render_link(self._project_name, md_name=self.INDEX_NAME)
         md_doc.append(
-            f"> Auto-generated documentation for [{module_record.import_string}]"
+            f"> Auto-generated {index_link} documentation for [{module_record.import_string}]"
             f"({self._root_relative_path}/{relative_file_path}) module."
         )
 
@@ -193,13 +197,13 @@ class Generator:
 
     def generate_index(self) -> None:
         """
-        Generate `index.md` file with content from `README>.md` and `Modules` section that
-        contains I Tree of all modules in the project.
+        Generate `index.md` file with title from `<root>/README.md` and `Modules` section that
+        contains a Tree of all modules in the project.
         """
-        index_md_path = Path(self._output_path, self.INDEX_NAME)
-        self._logger.debug(f"Generating {index_md_path.relative_to(self._root_path)}")
-        self._generate_index_md()
-        self.replace_links(index_md_path)
+        self._logger.debug(
+            f"Generating {self._index_path.relative_to(self._root_path)}"
+        )
+        self._generate_index()
 
     def _replace_local_links(self, module_record: ModuleRecord) -> None:
         output_file_name = self._output_path / module_record.output_file_name
@@ -209,8 +213,7 @@ class Generator:
             search_str = f"`{obj.title}`"
             if search_str in content:
                 title = obj.title
-                anchor_link = MDDocument.get_anchor_link(title)
-                link = f"[{title}](#{anchor_link})"
+                link = MDDocument.render_link(title, anchor=title)
                 content = content.replace(search_str, link)
                 self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
                 file_changed = True
@@ -248,8 +251,7 @@ class Generator:
                 continue
 
             title = module_object_record.title
-            anchor_link = MDDocument.get_anchor_link(title)
-            link = f"[{title}](./{md_name}#{anchor_link})"
+            link = MDDocument.render_link(title, anchor=title, md_name=md_name)
             content = content.replace(match, link)
             self._logger.debug(f'Adding link "{title}" to {file_path.name}')
             file_changed = True
@@ -314,15 +316,13 @@ class Generator:
                 if related_object is module_record:
                     continue
 
-                md_link = ""
+                md_name = ""
                 if related_object.output_file_name != output_file_name:
-                    md_link = f"./{related_object.output_file_name}"
+                    md_name = related_object.output_file_name
 
                 title = related_object.title
-                anchor_link = MDDocument.get_anchor_link(title)
-                section_map.add_line(
-                    "See also", f"- [{title}]({md_link}#{anchor_link})"
-                )
+                link = MDDocument.render_link(title, anchor=title, md_name=md_name)
+                section_map.add_line("See also", f"- {link}")
                 self._logger.debug(
                     f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'
                 )
@@ -341,15 +341,18 @@ class Generator:
 
         return result
 
-    def _generate_index_md(self) -> None:
+    def _generate_index(self) -> None:
         """
         Generate new `index.md`. Copy content from `README.md` and add ToC.
         """
         md_doc = MDDocument()
         readme_path = Path(self._root_path / "README.md")
         if readme_path.exists():
-            md_doc.append(readme_path.read_text())
+            title, _ = MDDocument.extract_title(readme_path.read_text())
+            if title:
+                md_doc.title = title
 
+        md_doc.append(f"> Auto-generated `{self._project_name}` documentation index.")
         md_doc.append("## Modules")
 
         lines = []

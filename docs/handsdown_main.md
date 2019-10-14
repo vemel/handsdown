@@ -4,7 +4,7 @@
   - [get_logger](#get_logger)
   - [main](#main)
 
-> Auto-generated documentation for [handsdown.main](../handsdown/main.py) module.
+> Auto-generated [Handsdown](./README.md) documentation for [handsdown.main](../handsdown/main.py) module.
 
 Main CLI entrypoint for `handsdown`
 
