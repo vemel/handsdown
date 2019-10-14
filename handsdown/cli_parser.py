@@ -1,3 +1,6 @@
+"""
+# CLI Parser
+"""
 import argparse
 from pathlib import Path
 from typing import Text
@@ -45,6 +48,14 @@ def get_cli_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "include", nargs="*", help="Path expressions to include", default=[]
+    )
+    parser.add_argument(
+        "-f",
+        "--files",
+        nargs="*",
+        default=[],
+        type=abs_path,
+        help="List of source files to use for generation. If empty - all are used.",
     )
     parser.add_argument(
         "-o",

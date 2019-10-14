@@ -72,9 +72,13 @@ def main() -> None:
             source_paths=path_finder.list(),
             raise_errors=args.panic,
         )
-        generator.generate_docs()
-        generator.generate_index()
-        generator.cleanup_old_docs()
+        if args.files:
+            for path in args.files:
+                generator.generate_doc(path)
+        else:
+            generator.generate_docs()
+            generator.generate_index()
+            generator.cleanup_old_docs()
     except GeneratorError as e:
         logger.error(e)
         sys.exit(1)
