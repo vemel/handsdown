@@ -190,7 +190,7 @@ class MDDocument:
         return "\n".join(toc_lines)
 
     @staticmethod
-    def extract_title(content) -> Tuple[Text, Text]:
+    def extract_title(content: Text) -> Tuple[Text, Text]:
         """
         Extract title from the first line of content.
         If title is present -  return a title and a remnaing content.
