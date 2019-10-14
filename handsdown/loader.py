@@ -4,7 +4,7 @@ from pathlib import Path
 import sys
 import inspect
 import logging
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 import os
 from typing import Optional, Text, Any, Callable, Generator
 
@@ -43,6 +43,8 @@ class Loader:
         self._sys_path_dirty = False
         self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
         self._type_checking_patch = patch("typing.TYPE_CHECKING", True)
+        self._logging_logger_patch = patch("logging.Logger", MagicMock())
+        self._logging_config_patch = patch("logging.config.dictConfig", MagicMock())
         self._sys_path_patch = patch(
             "sys.path", sys.path + [self._root_path.as_posix()]
         )
@@ -55,9 +57,11 @@ class Loader:
         Frameworks supported:
         - `Django` (if `DJANGO_SETTINGS_MODULE` env variable is defined)
         """
-        if os.environ.get(self.DJANGO_SETTINGS_ENV_VAR):
+        django_settings_env_var = os.environ.get(self.DJANGO_SETTINGS_ENV_VAR)
+        if django_settings_env_var:
             self._logger.info(
-                f"Found {self.DJANGO_SETTINGS_ENV_VAR} env variable, trying to setup django apps"
+                f"Found {self.DJANGO_SETTINGS_ENV_VAR} env variable,"
+                f" trying to setup django apps with {django_settings_env_var} settings"
             )
             self._setup_django()
 
@@ -146,15 +150,29 @@ class Loader:
         return module_record
 
     def _setup_django(self) -> None:
+        """
+        Initialize Django apps in order to safely import Django models.
+        Patches applied during apps initialization:
+
+        - Patch `os.environ` to avoid failing on undefined variables.
+        - Patch `sys.path` to add current repo to it.
+        - Patch `logging.config.dictConfig`.
+        """
         self._os_environ_patch.start()
         self._sys_path_patch.start()
+        self._logging_config_patch.start()
+
         try:
             django = importlib.import_module("django")
             getattr(django, "setup")()
         except Exception as e:
             self._logger.warning(f"Cannot setup django: {e}")
+        else:
+            self._logger.info(f"Django apps are initialized")
+
         self._os_environ_patch.stop()
         self._sys_path_patch.stop()
+        self._logging_config_patch.stop()
 
     @staticmethod
     def get_object_signature(obj: Any) -> Optional[Text]:
@@ -221,6 +239,8 @@ class Loader:
         - Patch `sys.path` to add current repo to it.
         - Patch `os.environ` to avoid failing on undefined variables.
         - Patch `typing.TYPE_CHECKING` to `True`.
+        - Patch `logging.Logger`.
+        - Patch `logging.config.dictConfig`.
 
         Arguments:
             file_path -- Abslute path to source file.
@@ -231,6 +251,8 @@ class Loader:
         self._sys_path_patch.start()
         self._os_environ_patch.start()
         self._type_checking_patch.start()
+        self._logging_logger_patch.start()
+        self._logging_config_patch.start()
 
         import_string = self.get_import_string(file_path)
         module = importlib.import_module(import_string)
@@ -238,6 +260,8 @@ class Loader:
         self._sys_path_patch.stop()
         self._os_environ_patch.stop()
         self._type_checking_patch.stop()
+        self._logging_logger_patch.stop()
+        self._logging_config_patch.stop()
 
         if module.__spec__ is None:
             module.__spec__ = ModuleSpec(name="__main__", loader=None, origin=None)

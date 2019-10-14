@@ -4,6 +4,7 @@
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)
+    - [Loader()._setup_django](#loader_setup_django)
     - [Loader().get_module_record](#loaderget_module_record)
     - [Loader.get_object_signature](#loaderget_object_signature)
     - [Loader.get_source_line_number](#loaderget_source_line_number)
@@ -36,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L278)
+[🔍 find in source code](../handsdown/loader.py#L302)
 
 ```python
 def _discover_module_objects(
@@ -61,7 +62,7 @@ A generator that yields `ModuleObjectRecord` instances.
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L176)
+[🔍 find in source code](../handsdown/loader.py#L194)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -77,9 +78,24 @@ Get trimmed object docstring or an empty string.
 
 A string with object docsting.
 
+### Loader()._setup_django
+
+[🔍 find in source code](../handsdown/loader.py#L152)
+
+```python
+def _setup_django() -> None
+```
+
+Initialize Django apps in order to safely import Django models.
+Patches applied during apps initialization:
+
+- Patch `os.environ` to avoid failing on undefined variables.
+- Patch `sys.path` to add current repo to it.
+- Patch `logging.config.dictConfig`.
+
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L78)
+[🔍 find in source code](../handsdown/loader.py#L82)
 
 ```python
 def get_module_record(
@@ -107,7 +123,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L159)
+[🔍 find in source code](../handsdown/loader.py#L177)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -126,7 +142,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L352)
+[🔍 find in source code](../handsdown/loader.py#L376)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -142,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L217)
+[🔍 find in source code](../handsdown/loader.py#L235)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
@@ -153,6 +169,8 @@ Import module using `import_paths` list. Clean up all patches afterwards.
 - Patch `sys.path` to add current repo to it.
 - Patch `os.environ` to avoid failing on undefined variables.
 - Patch `typing.TYPE_CHECKING` to `True`.
+- Patch `logging.Logger`.
+- Patch `logging.config.dictConfig`.
 
 #### Arguments
 
@@ -164,7 +182,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../handsdown/loader.py#L51)
+[🔍 find in source code](../handsdown/loader.py#L53)
 
 ```python
 def setup() -> None

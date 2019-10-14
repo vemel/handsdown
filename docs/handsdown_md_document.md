@@ -79,7 +79,7 @@ Check if ToC exists in the document or create one.
 [🔍 find in source code](../handsdown/md_document.py#L192)
 
 ```python
-def extract_title(content) -> Tuple[str, str]
+def extract_title(content: str) -> Tuple[str, str]
 ```
 
 Extract title from the first line of content.
