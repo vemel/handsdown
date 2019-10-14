@@ -259,10 +259,7 @@ class Loader:
 
             # skip inherited functions
             if inspect.isfunction(obj):
-                if not parent:
-                    return True
-
-                if obj.__name__ in parent.__dict__:
+                if not parent or obj.__name__ in parent.__dict__:
                     return True
 
             return False
