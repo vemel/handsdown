@@ -9,8 +9,9 @@ Main CLI entrypoint for `handsdown`
 """
 
 import logging
+import sys
 
-from handsdown.generator import Generator
+from handsdown.generator import Generator, GeneratorError
 from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import get_cli_parser
 
@@ -63,16 +64,20 @@ def main() -> None:
         .include(*args.include)
     )
 
-    generator = Generator(
-        input_path=args.input_path,
-        logger=logger,
-        output_path=args.output_path,
-        source_paths=path_finder.list(),
-        raise_import_errors=args.panic,
-    )
-    generator.generate_docs()
-    generator.generate_index()
-    generator.cleanup_old_docs()
+    try:
+        generator = Generator(
+            input_path=args.input_path,
+            logger=logger,
+            output_path=args.output_path,
+            source_paths=path_finder.list(),
+            raise_import_errors=args.panic,
+        )
+        generator.generate_docs()
+        generator.generate_index()
+        generator.cleanup_old_docs()
+    except GeneratorError as e:
+        logger.error(e)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -33,18 +33,21 @@ class Generator:
     def __init__(
         self,
         input_path: Path,
+        output_path: Path,
         source_paths: Iterable[Path],
         logger: Optional[logging.Logger] = None,
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
-        output_path: Optional[Path] = None,
         raise_import_errors: bool = False,
     ) -> None:
         self._logger = logger or logging.Logger("handsdown")
         self._root_path = input_path
-        self._output_path = (
-            output_path if output_path is not None else (input_path / "docs")
-        )
+        self._output_path = output_path
+
+        try:
+            self._output_path.relative_to(self._root_path)
+        except ValueError as e:
+            raise GeneratorError(f"Output path should be inside input path: {e}")
 
         if not self._output_path.exists():
             self._logger.info(f"Creating folder {self._output_path}")

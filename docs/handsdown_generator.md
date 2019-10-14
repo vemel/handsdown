@@ -20,11 +20,11 @@
 ```python
 class Generator(
     input_path: pathlib.Path,
+    output_path: pathlib.Path,
     source_paths: Iterable[pathlib.Path],
     logger: Union[logging.Logger, NoneType] = None,
     docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None,
     loader: Union[handsdown.loader.Loader, NoneType] = None,
-    output_path: Union[pathlib.Path, NoneType] = None,
     raise_import_errors: bool = False,
 )
 ```
@@ -46,7 +46,7 @@ Main doc generator.
 
 ### Generator()._generate_index_md
 
-[🔍 find in source code](../handsdown/generator.py#L314)
+[🔍 find in source code](../handsdown/generator.py#L317)
 
 ```python
 def _generate_index_md() -> None
@@ -56,7 +56,7 @@ Generate new `index.md`. Copy content from `README.md` and add ToC.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L258)
+[🔍 find in source code](../handsdown/generator.py#L261)
 
 ```python
 def _get_formatted_docstring(
@@ -84,7 +84,7 @@ A module docstring with valid markdown.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#L84)
+[🔍 find in source code](../handsdown/generator.py#L87)
 
 ```python
 def cleanup_old_docs() -> None
@@ -94,7 +94,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../handsdown/generator.py#L104)
+[🔍 find in source code](../handsdown/generator.py#L107)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -112,7 +112,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#L151)
+[🔍 find in source code](../handsdown/generator.py#L154)
 
 ```python
 def generate_docs() -> None
@@ -122,7 +122,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L165)
+[🔍 find in source code](../handsdown/generator.py#L168)
 
 ```python
 def generate_index() -> None
@@ -133,7 +133,7 @@ contains I Tree of all modules in the project.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L192)
+[🔍 find in source code](../handsdown/generator.py#L195)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
