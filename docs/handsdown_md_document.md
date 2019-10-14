@@ -19,7 +19,7 @@
 class MDDocument(content: str = '')
 ```
 
-MD file wrapper. Controls docuemnt title and Table of Contents.
+MD file wrapper. Controls document title and Table of Contents.
 
 #### Examples
 

@@ -7,7 +7,7 @@ from handsdown.indent_trimmer import IndentTrimmer
 
 class MDDocument:
     """
-    MD file wrapper. Controls docuemnt title and Table of Contents.
+    MD file wrapper. Controls document title and Table of Contents.
 
     Examples:
 
