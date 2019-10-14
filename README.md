@@ -50,14 +50,20 @@ from handsdown import Generator
 from handsdown import PathFinder
 repo_path = Path.cwd()
 
-handsdown_generator = Generator(
+handsdown = Generator(
     input_path=repo_path,
     output_path=repo_path / 'output',
     source_paths=PathFinder(repo_path, "**/*.py").list()
 )
 
 # generate all docs at once
-handsdown_generator.generate()
+handsdown.generate_docs()
+
+# or generate just for one doc
+handsdown.generate_doc(repo_path / 'my_module' / 'source.py')
+
+# and generate index.md file
+handsdown.generate_index()
 ```
 
 ## 🐶 Installation

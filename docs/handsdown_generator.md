@@ -2,19 +2,20 @@
 
 - [Handsdown: Generator](#handsdown-generator)
   - [Generator](#generator)
-    - [Generator()._generate_doc](#generator_generate_doc)
     - [Generator()._generate_index_md](#generator_generate_index_md)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)
-    - [Generator()._get_title_from_path](#generator_get_title_from_path)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
-    - [Generator().generate](#generatorgenerate)
+    - [Generator().generate_doc](#generatorgenerate_doc)
+    - [Generator().generate_docs](#generatorgenerate_docs)
+    - [Generator().generate_index](#generatorgenerate_index)
     - [Generator().replace_links](#generatorreplace_links)
+  - [GeneratorError](#generatorerror)
 
 > Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
 
 ## Generator
 
-[🔍 find in source code](../handsdown/generator.py#L17)
+[🔍 find in source code](../handsdown/generator.py#L19)
 
 ```python
 class Generator(input_path: pathlib.Path, source_paths: Iterable[pathlib.Path], logger: Union[logging.Logger, NoneType] = None, docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None, loader: Union[handsdown.loader.Loader, NoneType] = None, output_path: Union[pathlib.Path, NoneType] = None, raise_import_errors: bool = False,
@@ -36,31 +37,9 @@ Main doc generator.
 - [BaseDocstringProcessor](./handsdown_processors_base.md#basedocstringprocessor)
 - [Loader](./handsdown_loader.md#loader)
 
-### Generator()._generate_doc
-
-[🔍 find in source code](../handsdown/generator.py#L101)
-
-```python
-def _generate_doc(module_record: handsdown.module_record.ModuleRecord) -> None
-```
-
-Generate one module doc at once. If `file_path` has nothing to document - return `None`.
-
-#### Arguments
-
-- `file_path` - Path to source file.
-
-#### Returns
-
-A path to generated MD file or None.
-
-#### See also
-
-- [ModuleRecord](./handsdown_module_record.md#modulerecord)
-
 ### Generator()._generate_index_md
 
-[🔍 find in source code](../handsdown/generator.py#L295)
+[🔍 find in source code](../handsdown/generator.py#L312)
 
 ```python
 def _generate_index_md() -> None
@@ -70,7 +49,7 @@ Generate new `index.md`. Copy content from `README.md` and add ToC.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L241)
+[🔍 find in source code](../handsdown/generator.py#L258)
 
 ```python
 def _get_formatted_docstring(module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord], signature: Union[str, NoneType] = None,
@@ -94,27 +73,9 @@ A module docstring with valid markdown.
 
 - [ModuleRecord](./handsdown_module_record.md#modulerecord)
 
-### Generator()._get_title_from_path
-
-[🔍 find in source code](../handsdown/generator.py#L352)
-
-```python
-def _get_title_from_path(path: pathlib.Path) -> str
-```
-
-Converts `pathlib.Path` to a human readable title.
-
-#### Arguments
-
-- `path` - Relative path to file or folder
-
-#### Returns
-
-Human readable title.
-
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#L82)
+[🔍 find in source code](../handsdown/generator.py#L84)
 
 ```python
 def cleanup_old_docs() -> None
@@ -122,23 +83,48 @@ def cleanup_old_docs() -> None
 
 Remove old docs generated for this module.
 
-#### Arguments
+### Generator().generate_doc
 
-- `preserve_paths` - All doc files generated paths that should not be deleted.
-
-### Generator().generate
-
-[🔍 find in source code](../handsdown/generator.py#L136)
+[🔍 find in source code](../handsdown/generator.py#L104)
 
 ```python
-def generate() -> None
+def generate_doc(source_path: pathlib.Path) -> None
 ```
 
-Generate all module docs at once.
+Generate one module doc at once.
+
+#### Arguments
+
+- `source_path` - Path to source file.
+
+#### Raises
+
+- [GeneratorError](#generatorerror) - If `source_path` not found in current repo.
+
+### Generator().generate_docs
+
+[🔍 find in source code](../handsdown/generator.py#L151)
+
+```python
+def generate_docs() -> None
+```
+
+Generate all doc files at once.
+
+### Generator().generate_index
+
+[🔍 find in source code](../handsdown/generator.py#L165)
+
+```python
+def generate_index() -> None
+```
+
+Generate `index.md` file with content from `README>.md` and `Modules` section that
+contains I Tree of all modules in the project.
 
 ### Generator().replace_links
 
-[🔍 find in source code](../handsdown/generator.py#L175)
+[🔍 find in source code](../handsdown/generator.py#L192)
 
 ```python
 def replace_links(file_path: pathlib.Path) -> None
@@ -159,3 +145,13 @@ my_md.read_text()
 #### Arguments
 
 - `file_path` - Path to MD document file.
+
+## GeneratorError
+
+[🔍 find in source code](../handsdown/generator.py#L13)
+
+```python
+class GeneratorError(*args, **kwargs)
+```
+
+Main error for [Generator](#generator)

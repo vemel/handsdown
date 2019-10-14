@@ -11,7 +11,9 @@ from handsdown.md_document import MDDocument
 
 
 class GeneratorError(Exception):
-    pass
+    """
+    Main error for `Generator`
+    """
 
 
 class Generator:
@@ -82,12 +84,13 @@ class Generator:
     def cleanup_old_docs(self) -> None:
         """
         Remove old docs generated for this module.
-
-        Arguments:
-            preserve_paths -- All doc files generated paths that should not be deleted.
         """
+        self._logger.debug(f"Removing orphaned docs")
         preserve_file_names = self._module_records.get_output_file_names()
         for doc_path in self._output_path.glob("*.md"):
+            if doc_path.name == "index.md":
+                continue
+
             md_name = doc_path.name
             if md_name in preserve_file_names:
                 continue
@@ -98,16 +101,28 @@ class Generator:
                 self._logger.info(f"Deleting orphaned doc file {md_name}")
                 doc_path.unlink()
 
-    def _generate_doc(self, module_record: ModuleRecord) -> None:
+    def generate_doc(self, source_path: Path) -> None:
         """
-        Generate one module doc at once. If `file_path` has nothing to document - return `None`.
+        Generate one module doc at once.
 
         Arguments:
-            file_path -- Path to source file.
+            source_path -- Path to source file.
 
-        Returns:
-            A path to generated MD file or None.
+        Raises:
+            GeneratorError -- If `source_path` not found in current repo.
         """
+        for module_record in self._module_records:
+            if module_record.source_path != source_path:
+                continue
+
+            self._generate_doc(module_record)
+            self.replace_links(module_record.output_file_name)
+            self._replace_local_links(module_record)
+            return
+
+        raise GeneratorError(f"Record not found for {source_path.name}")
+
+    def _generate_doc(self, module_record: ModuleRecord) -> None:
         md_name = module_record.output_file_name
         target_file = self._output_path / md_name
         relative_doc_path = target_file.relative_to(self._root_path)
@@ -133,9 +148,9 @@ class Generator:
         md_doc.ensure_toc_exists()
         md_doc.write(self._output_path / md_name)
 
-    def generate(self) -> None:
+    def generate_docs(self) -> None:
         """
-        Generate all module docs at once.
+        Generate all doc files at once.
         """
         self._logger.debug(
             f"Generating docs for {self._root_path.name} to {self._output_path.relative_to(self._root_path.parent)}"
@@ -147,9 +162,11 @@ class Generator:
             self._replace_local_links(module_record)
             self.replace_links(output_file_path)
 
-        self._logger.debug(f"Removing orphaned docs")
-        self.cleanup_old_docs()
-
+    def generate_index(self) -> None:
+        """
+        Generate `index.md` file with content from `README>.md` and `Modules` section that
+        contains I Tree of all modules in the project.
+        """
         index_md_path = Path(self._output_path, "index.md")
         self._logger.debug(f"Generating {index_md_path.relative_to(self._root_path)}")
         self._generate_index_md()
@@ -324,61 +341,3 @@ class Generator:
         md_doc.ensure_toc_exists()
         md_doc.write(self._output_path / "index.md")
 
-    def _get_md_name(self, path: Path) -> Text:
-        relative_path = path.relative_to(self._root_path)
-        name_parts = []
-        for part in relative_path.parts:
-            if part == "__init__.py":
-                part = "index"
-            stem = part.split(".")[0]
-            name_parts.append(stem)
-
-        if not name_parts:
-            return "stub.md"
-
-        return f"{'_'.join(name_parts)}.md"
-
-    @staticmethod
-    def _get_file_import_string(path: Path) -> Text:
-        name_parts = []
-        for part in path.parts:
-            stem = part.split(".")[0]
-            if stem == "__init__":
-                continue
-            name_parts.append(stem)
-
-        return f"{'.'.join(name_parts)}"
-
-    def _get_title_from_path(self, path: Path) -> Text:
-        """
-        Converts `pathlib.Path` to a human readable title.
-
-        Arguments:
-            path -- Relative path to file or folder
-
-        Returns:
-            Human readable title.
-        """
-        path_parts = path.parts
-        name_parts = []
-        for path_part in path_parts:
-            if path_part == "__init__.py":
-                continue
-            name = path_part.split(".")[0]
-            name = name.replace("__", "").replace("_", " ")
-            name = name.capitalize()
-            name_parts.append(name)
-
-        if name_parts:
-            return ": ".join(name_parts)
-
-        return "Index"
-
-    @staticmethod
-    def _get_title_from_md_content(content: Text) -> Optional[Text]:
-        lines = content.split("\n")[:10]
-        for line in lines:
-            if line.startswith("# "):
-                return line.split(" ", 1)[-1].strip()
-
-        return None

@@ -70,7 +70,9 @@ def main() -> None:
         source_paths=path_finder.list(),
         raise_import_errors=args.panic,
     )
-    generator.generate()
+    generator.generate_docs()
+    generator.generate_index()
+    generator.cleanup_old_docs()
 
 
 if __name__ == "__main__":
