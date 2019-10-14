@@ -37,9 +37,9 @@ class SectionMap(UserDict):
         header = "#" * header_level
         for section_name, section_lines in self.items():
             if section_name:
-                lines.extend([f"{header} {section_name}", ""])
+                lines.append(f"{header} {section_name}")
 
             section_lines = IndentTrimmer.trim_lines(section_lines)
             lines.append("\n".join(section_lines))
 
-        return "\n".join(lines)
+        return "\n\n".join(lines)
