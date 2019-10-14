@@ -1,6 +1,6 @@
-# Handsdown: Indent trimmer
+# Handsdown: IndentTrimmer
 
-- [Handsdown: Indent trimmer](#handsdown-indent-trimmer)
+- [Handsdown: IndentTrimmer](#handsdown-indenttrimmer)
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)

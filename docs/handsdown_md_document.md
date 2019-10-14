@@ -1,6 +1,6 @@
-# Handsdown: Md document
+# Handsdown: MDDocument
 
-- [Handsdown: Md document](#handsdown-md-document)
+- [Handsdown: MDDocument](#handsdown-mddocument)
   - [MDDocument](#mddocument)
     - [MDDocument().append](#mddocumentappend)
     - [MDDocument().ensure_toc_exists](#mddocumentensure_toc_exists)

@@ -17,6 +17,7 @@ class ModuleObjectRecord:
         level -- 0 for classes and functions, 1 for methods.
         title -- Object human-readable title.
         docstring -- Object docstring.
+        is_class -- True if object is a class.
     """
 
     source_path: Path
@@ -27,6 +28,7 @@ class ModuleObjectRecord:
     level: int
     title: Text
     docstring: Optional[Text]
+    is_class: bool
 
 
 @dataclass
@@ -38,6 +40,7 @@ class ModuleRecord:
         source_path -- Absolute import source path.
         output_file_name -- MD file name for this module.
         module -- Imported module.
+        title -- Human readable module title.
         import_string -- Module import string.
         objects -- List of objects in the module.
         docstring -- Module docstring.
@@ -46,6 +49,7 @@ class ModuleRecord:
     source_path: Path
     output_file_name: Text
     module: Any
+    title: Optional[Text]
     import_string: Text
     objects: List[ModuleObjectRecord]
     docstring: Optional[Text]
@@ -53,6 +57,7 @@ class ModuleRecord:
     def get_title_parts(self) -> List[Text]:
         """
         Get parts of module title from module import string.
+        If `title` is set, last part replaced with `title`.
 
         Examples:
 
@@ -61,13 +66,23 @@ class ModuleRecord:
             # ['My module', 'Utils', 'parsers']
             ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
             # ['My module', 'Main']
+            ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
+            # ['My module', 'MyLibrary']
             ```
 
         Returns:
             A list of title parts as strings.
         """
         parts = self.import_string.split(".")
-        return [i.replace("_", " ").strip().capitalize() for i in parts]
+        result = []
+        for part in parts:
+            part = part.replace("_", " ").strip().capitalize()
+            result.append(part)
+
+        if self.title and result:
+            result[-1] = self.title
+
+        return result
 
 
 class ModuleRecordList:

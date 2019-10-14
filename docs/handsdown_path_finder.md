@@ -1,6 +1,6 @@
-# Handsdown: Path finder
+# Handsdown: PathFinder
 
-- [Handsdown: Path finder](#handsdown-path-finder)
+- [Handsdown: PathFinder](#handsdown-pathfinder)
   - [PathFinder](#pathfinder)
     - [PathFinder().__iter__](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)

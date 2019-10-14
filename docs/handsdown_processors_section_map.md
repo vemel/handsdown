@@ -1,6 +1,6 @@
-# Handsdown: Processors: Section map
+# Handsdown: Processors: SectionMap
 
-- [Handsdown: Processors: Section map](#handsdown-processors-section-map)
+- [Handsdown: Processors: SectionMap](#handsdown-processors-sectionmap)
   - [SectionMap](#sectionmap)
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)

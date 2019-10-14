@@ -96,6 +96,7 @@ class Loader:
 
         file_import = self.get_import_string(source_path)
         output_file_name = self.get_md_name(source_path)
+        main_class_lookup_name = source_path.stem.replace("_", "")
 
         try:
             inspect_module = self.import_module(source_path)
@@ -113,6 +114,7 @@ class Loader:
 
         module_record = ModuleRecord(
             module=inspect_module,
+            title=None,
             docstring="\n\n".join(docstring_parts),
             output_file_name=output_file_name,
             source_path=source_path,
@@ -127,8 +129,15 @@ class Loader:
                 f"Cannot import module objects from {source_path.name}: {e}"
             )
 
-        for module_object_record in module_object_records:
-            module_record.objects.append(module_object_record)
+        for object_record in module_object_records:
+            # if class name looks like it is a main class in the module - set it as a title.
+            if (
+                object_record.is_class
+                and object_record.title.lower() == main_class_lookup_name
+            ):
+                module_record.title = object_record.title
+
+            module_record.objects.append(object_record)
 
         # skip modules without objects and docstring
         if not module_record.objects and not module_record.docstring:
@@ -287,6 +296,7 @@ class Loader:
         members.sort(key=lambda x: x[0])
 
         for object_name, inspect_object in members:
+            is_class = inspect.isclass(inspect_object)
             yield ModuleObjectRecord(
                 import_string=object_name,
                 level=0,
@@ -296,9 +306,10 @@ class Loader:
                 source_path=module_record.source_path,
                 output_file_name=module_record.output_file_name,
                 source_line_number=self.get_source_line_number(inspect_object),
+                is_class=is_class,
             )
 
-            if not inspect.isclass(inspect_object):
+            if not is_class:
                 continue
 
             object_members = inspect.getmembers(
@@ -324,6 +335,7 @@ class Loader:
                     source_path=module_record.source_path,
                     output_file_name=module_record.output_file_name,
                     source_line_number=self.get_source_line_number(inspect_method),
+                    is_class=False,
                 )
 
     @staticmethod

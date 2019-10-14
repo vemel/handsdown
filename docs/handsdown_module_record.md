@@ -1,6 +1,6 @@
-# Handsdown: Module record
+# Handsdown: ModuleRecord
 
-- [Handsdown: Module record](#handsdown-module-record)
+- [Handsdown: ModuleRecord](#handsdown-modulerecord)
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
@@ -27,6 +27,7 @@ class ModuleObjectRecord(
     level: int,
     title: str,
     docstring: Union[str, NoneType],
+    is_class: bool,
 )
 ```
 
@@ -42,16 +43,18 @@ Representation of an imported module object.
 - `level` - 0 for classes and functions, 1 for methods.
 - `title` - Object human-readable title.
 - `docstring` - Object docstring.
+- `is_class` - True if object is a class.
 
 ## ModuleRecord
 
-[🔍 find in source code](../handsdown/module_record.py#L33)
+[🔍 find in source code](../handsdown/module_record.py#L35)
 
 ```python
 class ModuleRecord(
     source_path: pathlib.Path,
     output_file_name: str,
     module: Any,
+    title: Union[str, NoneType],
     import_string: str,
     objects: List[handsdown.module_record.ModuleObjectRecord],
     docstring: Union[str, NoneType],
@@ -65,19 +68,21 @@ Representation of an imported module.
 - `source_path` - Absolute import source path.
 - `output_file_name` - MD file name for this module.
 - `module` - Imported module.
+- `title` - Human readable module title.
 - `import_string` - Module import string.
 - `objects` - List of objects in the module.
 - `docstring` - Module docstring.
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](../handsdown/module_record.py#L53)
+[🔍 find in source code](../handsdown/module_record.py#L57)
 
 ```python
 def get_title_parts() -> List[str]
 ```
 
 Get parts of module title from module import string.
+If `title` is set, last part replaced with `title`.
 
 #### Examples
 
@@ -86,6 +91,8 @@ ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
 # ['My module', 'Utils', 'parsers']
 ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
 # ['My module', 'Main']
+ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
+# ['My module', 'MyLibrary']
 ```
 
 #### Returns
@@ -94,7 +101,7 @@ A list of title parts as strings.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#L73)
+[🔍 find in source code](../handsdown/module_record.py#L88)
 
 ```python
 class ModuleRecordList()
@@ -104,7 +111,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().__iter__
 
-[🔍 find in source code](../handsdown/module_record.py#L124)
+[🔍 find in source code](../handsdown/module_record.py#L139)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
@@ -122,7 +129,7 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#L112)
+[🔍 find in source code](../handsdown/module_record.py#L127)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -140,7 +147,7 @@ Add new [ModuleRecord](#modulerecord).
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#L82)
+[🔍 find in source code](../handsdown/module_record.py#L97)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
@@ -162,7 +169,7 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 ### ModuleRecordList().get_output_file_names
 
-[🔍 find in source code](../handsdown/module_record.py#L94)
+[🔍 find in source code](../handsdown/module_record.py#L109)
 
 ```python
 def get_output_file_names() -> Set[str]
@@ -176,7 +183,7 @@ A set of output names as strings.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#L103)
+[🔍 find in source code](../handsdown/module_record.py#L118)
 
 ```python
 def get_package_names() -> Set[str]
