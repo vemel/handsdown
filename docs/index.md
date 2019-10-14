@@ -96,6 +96,7 @@ pip install handsdown
     - [Base](./handsdown_processors_base.md)
     - [Pep257](./handsdown_processors_pep257.md)
     - [Rst](./handsdown_processors_rst.md)
+    - [Section map](./handsdown_processors_section_map.md)
     - [Smart](./handsdown_processors_smart.md)
   - [Signature](./handsdown_signature.md)
   - [Utils](./handsdown_utils.md)

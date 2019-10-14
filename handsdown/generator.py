@@ -116,7 +116,7 @@ class Generator:
                 continue
 
             self._generate_doc(module_record)
-            self.replace_links(module_record.output_file_name)
+            self.replace_links(self._output_path / module_record.output_file_name)
             self._replace_local_links(module_record)
             return
 
@@ -277,7 +277,7 @@ class Generator:
         if not docstring:
             return None
 
-        sections = self._docstring_processor.build_sections(docstring)
+        section_map = self._docstring_processor.build_sections(docstring)
         if signature:
             related_objects = self._get_objects_from_signature(signature)
             for related_object in related_objects:
@@ -290,12 +290,14 @@ class Generator:
 
                 title = related_object.title
                 anchor_link = MDDocument.get_anchor_link(title)
-                sections["See also"].append(f"- [{title}]({md_link}#{anchor_link})")
+                section_map.add_line(
+                    "See also", f"- [{title}]({md_link}#{anchor_link})"
+                )
                 self._logger.debug(
                     f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'
                 )
 
-        formatted_docstring = self._docstring_processor.render_sections(sections)
+        formatted_docstring = section_map.render(header_level=4)
         return formatted_docstring.strip("\n")
 
     def _get_objects_from_signature(self, signature: Text) -> List[ModuleObjectRecord]:
@@ -340,4 +342,3 @@ class Generator:
         md_doc.append("\n".join(lines))
         md_doc.ensure_toc_exists()
         md_doc.write(self._output_path / "index.md")
-

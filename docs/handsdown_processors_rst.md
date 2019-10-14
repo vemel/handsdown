@@ -13,4 +13,4 @@
 class RSTDocstringProcessor()
 ```
 
-This class implements the preprocessor for restructured text.
+Docstring processor for restructured text docstring format.

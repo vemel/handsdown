@@ -1,10 +1,5 @@
-import re
-
 from collections import UserDict
 from typing import Text
-
-
-anchor_re = re.compile(r"[^a-z0-9_-]+")
 
 
 class OSEnvironMock(UserDict):

@@ -6,40 +6,42 @@ from handsdown.processors.base import BaseDocstringProcessor
 
 class RSTDocstringProcessor(BaseDocstringProcessor):
     """
-    This class implements the preprocessor for restructured text.
+    Docstring processor for restructured text docstring format.
     """
 
     line_re_map = {
         re.compile(
-            r'^\s*:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$'
-        ): '- `{param}` *{type}* - {desc}',
+            r"^\s*:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
         re.compile(
-            r'^\s*:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$'
-        ): '- `{param}` - {desc}',
+            r"^\s*:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"
+        ): "- `{param}` - {desc}",
         re.compile(
-            r'^\s*:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:$'
-        ): '- `{param}` *{type}*',
+            r"^\s*:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:$"
+        ): "- `{param}` *{type}*",
         re.compile(
-            r'^\s*:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:$'
-        ): '- `{param}`',
-        re.compile(r'\s*:(?P<section>returns?)\s*:\s*(?P<desc>.*)?$'): '{desc}',
-        re.compile(r'\s*:(?P<section>returns?)\s+(?P<type>[^:]+):$'): 'Type: *{type}*',
+            r"^\s*:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:$"
+        ): "- `{param}`",
+        re.compile(r"\s*:(?P<section>returns?)\s*:\s*(?P<desc>.*)?$"): "{desc}",
+        re.compile(r"\s*:(?P<section>returns?)\s+(?P<type>[^:]+):$"): "Type: *{type}*",
         re.compile(
-            r'\s*:(?P<section>returns?)\s+(?P<type>[^:]+)\s*:\s*(?P<desc>.+)$'
-        ): 'Type: *{type}*\n{desc}',
-        re.compile(r'\s*:(?P<section>rtype)\s+(?P<type>[^:]+):$'): 'Type: *{type}*',
-        re.compile(r':(?P<section>raises?)\s+(?P<type>\w+)\s*:$'): '- `{type}`',
-        re.compile(r':(?P<section>raises?)\s+(?P<type>\w+)\s*:(?P<desc>.+)$'): '- `{type}` - {desc}',
+            r"\s*:(?P<section>returns?)\s+(?P<type>[^:]+)\s*:\s*(?P<desc>.+)$"
+        ): "Type: *{type}*\n{desc}",
+        re.compile(r"\s*:(?P<section>rtype)\s+(?P<type>[^:]+):$"): "Type: *{type}*",
+        re.compile(r":(?P<section>raises?)\s+(?P<type>\w+)\s*:$"): "- `{type}`",
+        re.compile(
+            r":(?P<section>raises?)\s+(?P<type>\w+)\s*:(?P<desc>.+)$"
+        ): "- `{type}` - {desc}",
     }
 
-    re_section_map = {
-        'raise': 'Raises',
-        'raises': 'Raises',
-        'rtype': 'Returns',
-        'return': 'Returns',
-        'returns': 'Returns',
-        'param': 'Arguments',
-        'parameter': 'Arguments',
+    section_name_map = {
+        "raise": "Raises",
+        "raises": "Raises",
+        "rtype": "Returns",
+        "return": "Returns",
+        "returns": "Returns",
+        "param": "Arguments",
+        "parameter": "Arguments",
     }
 
     def _parse_line(self, line: Text) -> Optional[Text]:
@@ -59,8 +61,8 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
 
             match_dict = match.groupdict()
 
-            if 'section' in match_dict:
-                self.current_section_name = self.re_section_map[match_dict['section']]
+            if "section" in match_dict:
+                self.current_section_name = self.section_name_map[match_dict["section"]]
 
             return line_format.format(**match_dict)
 

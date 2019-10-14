@@ -7,7 +7,7 @@
 
 ## OSEnvironMock
 
-[🔍 find in source code](../handsdown/utils.py#L10)
+[🔍 find in source code](../handsdown/utils.py#L5)
 
 ```python
 class OSEnvironMock(*args, **kwargs)

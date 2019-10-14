@@ -46,7 +46,7 @@ Main doc generator.
 
 ### Generator()._generate_index_md
 
-[🔍 find in source code](../handsdown/generator.py#L312)
+[🔍 find in source code](../handsdown/generator.py#L314)
 
 ```python
 def _generate_index_md() -> None

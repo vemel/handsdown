@@ -3,12 +3,15 @@ from typing import Text
 from handsdown.processors.rst import RSTDocstringProcessor
 from handsdown.processors.pep257 import PEP257DocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
-from handsdown.type_defs import SectionMap
+from handsdown.processors.section_map import SectionMap
 
 
 class SmartDocstringProcessor(BaseDocstringProcessor):
     """
-    This class implements the preprocessor for restructured text and google.
+    Docstring processor that checks docstring and uses on of processors
+
+    - `handsdown.processors.pep257.PEP257DocstringProcessor`
+    - `handsdown.processors.rst.RSTDocstringProcessor`
     """
 
     def __init__(self) -> None:
@@ -21,15 +24,20 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
 
     def build_sections(self, content: Text) -> SectionMap:
         """
-        Preprocessors a given section into it's components.
-        """
-        stripped_lines = []
-        for original_line in content.split("\n"):
-            stripped_lines.append(original_line)
+        Parse docstring and split it to sections with arrays of strings.
 
-        google_keywords = self._pep257_processor.section_name_map.keys()
-        for google_keyword in google_keywords:
-            if google_keyword in stripped_lines:
+        Arguments:
+            content - Object docstring.
+
+        Returns:
+            A dictionary where key is a section name and value is a list of string sof this
+            section.
+        """
+        stripped_lines = content.split("\n")
+
+        pep257_keywords = self._pep257_processor.section_name_map.keys()
+        for keyword in pep257_keywords:
+            if keyword in stripped_lines:
                 return self._pep257_processor.build_sections(content)
 
         return self._rst_processor.build_sections(content)
