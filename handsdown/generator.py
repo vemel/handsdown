@@ -158,9 +158,12 @@ class Generator:
             f"> Auto-generated documentation for [{module_record.import_string}]"
             f"({self._root_relative_path}/{relative_file_path}) module."
         )
+
         if docstring:
+            # set MD and module record title if it is found in docstring
             title, docstring = md_doc.extract_title(docstring)
             if title:
+                module_record.title = title
                 md_doc.title = title
 
             md_doc.append(docstring)
@@ -345,22 +348,24 @@ class Generator:
         if readme_path.exists():
             md_doc.append(readme_path.read_text())
 
+        md_doc.append("## Modules")
+
         lines = []
-        lines.append("\n## Modules\n")
-        last_title_parts: List[Text] = []
+        last_import_string_parts: List[Text] = []
         for module_record in self._module_records:
             md_name = module_record.output_file_name
             title_parts = module_record.get_title_parts()
+            import_string_parts = module_record.get_import_string_parts()
             for index, title_part in enumerate(title_parts[:-1]):
                 if (
-                    len(last_title_parts) > index
-                    and last_title_parts[index] == title_part
+                    len(last_import_string_parts) > index
+                    and last_import_string_parts[index] == import_string_parts[index]
                 ):
                     continue
                 indent = "  " * index
                 lines.append(f"{indent}- {title_part}")
 
-            last_title_parts = title_parts
+            last_import_string_parts = import_string_parts
             indent = "  " * (len(title_parts) - 1)
             lines.append(f"{indent}- [{title_parts[-1]}](./{md_name})")
 

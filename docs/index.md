@@ -84,7 +84,7 @@ pip install handsdown
 
 - Handsdown
   - [Main](./handsdown___main__.md)
-  - [Cli parser](./handsdown_cli_parser.md)
+  - [CLI Parser](./handsdown_cli_parser.md)
   - [Generator](./handsdown_generator.md)
   - [IndentTrimmer](./handsdown_indent_trimmer.md)
   - [Loader](./handsdown_loader.md)
