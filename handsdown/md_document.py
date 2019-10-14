@@ -40,22 +40,27 @@ class MDDocument:
 
     def __init__(self, content: Text = ""):
         self._sections = []
-        self._content = content
+        self._content = ""
         self.title = None
         self.toc_section = None
-        if self._content:
-            self._parse_content()
+        if content:
+            self.append(content)
 
     def _parse_content(self) -> None:
         content = self._content
+        self.title = None
+        self.toc_section = None
         if content.startswith("# "):
             title_line, content = content.split("\n", 1)
             self.title = title_line.split(" ", 1)[1]
 
         sections = content.split(self._section_separator)
         self._sections = []
-        for section in sections:
-            if self.is_toc(section):
+        for section_index, section in enumerate(sections):
+            section = IndentTrimmer.trim_empty_lines(section)
+            if not section:
+                continue
+            if self.is_toc(section) and not self.toc_section and section_index < 2:
                 self.toc_section = section
                 continue
 
@@ -91,8 +96,8 @@ class MDDocument:
         lines = section.split("\n")
         if len(lines) < 2:
             return False
-        for line in section.split("\n"):
-            if "- " not in line or "[" not in line:
+        for line in lines:
+            if "- [" not in line:
                 return False
 
         return True
@@ -139,6 +144,7 @@ class MDDocument:
                 self._sections.append(section)
 
         self._content = self._build_content()
+        self._parse_content()
 
     def generate_toc_section(self, max_depth: int = 3) -> Text:
         """

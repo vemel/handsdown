@@ -296,11 +296,10 @@ class Generator:
         """
         Generate new `index.md`. Copy content from `README.md` and add ToC.
         """
-        content = ""
+        md_doc = MDDocument()
         readme_path = Path(self._root_path / "README.md")
         if readme_path.exists():
-            content = readme_path.read_text()
-        md_doc = MDDocument(content)
+            md_doc.append(readme_path.read_text())
 
         lines = []
         lines.append("\n## Modules\n")

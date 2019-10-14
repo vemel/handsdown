@@ -49,7 +49,7 @@ Path('output.md').read_text()
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L127)
+[🔍 find in source code](../handsdown/md_document.py#L132)
 
 ```python
 def append(content: str) -> None
@@ -65,7 +65,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().ensure_toc_exists
 
-[🔍 find in source code](../handsdown/md_document.py#L64)
+[🔍 find in source code](../handsdown/md_document.py#L69)
 
 ```python
 def ensure_toc_exists() -> None
@@ -75,7 +75,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L143)
+[🔍 find in source code](../handsdown/md_document.py#L149)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -93,7 +93,7 @@ A string with ToC.
 
 ### MDDocument.get_anchor_link
 
-[🔍 find in source code](../handsdown/md_document.py#L71)
+[🔍 find in source code](../handsdown/md_document.py#L76)
 
 ```python
 def get_anchor_link(title: str) -> str
@@ -107,7 +107,7 @@ A test of anchor link.
 
 ### MDDocument.is_toc
 
-[🔍 find in source code](../handsdown/md_document.py#L83)
+[🔍 find in source code](../handsdown/md_document.py#L88)
 
 ```python
 def is_toc(section: str) -> bool
@@ -121,7 +121,7 @@ True the section is ToC.
 
 ### MDDocument().write
 
-[🔍 find in source code](../handsdown/md_document.py#L117)
+[🔍 find in source code](../handsdown/md_document.py#L122)
 
 ```python
 def write(path: pathlib.Path) -> None

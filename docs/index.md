@@ -1,15 +1,12 @@
 # 🙌 Handsdown - Python documentation generator
 
-- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
-- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
-  - [🔬 Features](#-features)
-  - [🎉 Usage](#-usage)
-    - [💻 From command line](#-from-command-line)
-    - [🧩 As a module](#-as-a-module)
-  - [🐶 Installation](#-installation)
-  - [🔧 Development](#-development)
-  - [Modules](#modules)
-
+- [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)
+  - [🔬 Features](#%f0%9f%94%ac-features)
+  - [🎉 Usage](#%f0%9f%8e%89-usage)
+    - [💻 From command line](#%f0%9f%92%bb-from-command-line)
+    - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
+  - [🐶 Installation](#%f0%9f%90%b6-installation)
+  - [🔧 Development](#%f0%9f%94%a7-development)
 
 Python docstring-based documentation generator for lazy perfectionists.
 
@@ -76,7 +73,6 @@ pip install handsdown
 - Install [pipenv](https://pypi.org/project/pipenv/)
 - Run `pipenv install -d`
 - Use `black` formatter in your IDE
-
 
 ## Modules
 

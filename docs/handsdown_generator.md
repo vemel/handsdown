@@ -105,7 +105,7 @@ A module docstring with valid markdown.
 
 ### Generator()._get_title_from_path
 
-[🔍 find in source code](../handsdown/generator.py#L353)
+[🔍 find in source code](../handsdown/generator.py#L352)
 
 ```python
 def _get_title_from_path(path: pathlib.Path) -> str
