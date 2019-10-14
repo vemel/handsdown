@@ -4,6 +4,7 @@
   - [MDDocument](#mddocument)
     - [MDDocument().append](#mddocumentappend)
     - [MDDocument().ensure_toc_exists](#mddocumentensure_toc_exists)
+    - [MDDocument.extract_title](#mddocumentextract_title)
     - [MDDocument().generate_toc_section](#mddocumentgenerate_toc_section)
     - [MDDocument.get_anchor_link](#mddocumentget_anchor_link)
     - [MDDocument.is_toc](#mddocumentis_toc)
@@ -72,6 +73,29 @@ def ensure_toc_exists() -> None
 ```
 
 Check if ToC exists in the document or create one.
+
+### MDDocument.extract_title
+
+[🔍 find in source code](../handsdown/md_document.py#L192)
+
+```python
+def extract_title(content) -> Tuple[str, str]
+```
+
+Extract title from the first line of content.
+If title is present -  return a title and a remnaing content.
+if not - return an empty title and untouched content.
+
+#### Examples
+
+```python
+MDDocument.extract_title('# Title\ncontent') # ('Title', 'content')
+MDDocument.extract_title('no title\ncontent') # ('', 'no title\ncontent')
+```
+
+#### Returns
+
+A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
