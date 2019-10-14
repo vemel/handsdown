@@ -189,7 +189,7 @@ class Loader:
         if "\n" in docstring and docstring[0] != "\n":
             short_docstring = docstring[:30].replace("\n", "\\n")
             self._logger.warning(
-                f'Docstring "{short_docstring}" does not start with newline, trying to fix...'
+                f'Docstring "{short_docstring}" does not start with newline, check output'
             )
             lines = docstring.split("\n")
             next_line_index = 1
