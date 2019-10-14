@@ -10,7 +10,7 @@
 [🔍 find in source code](../handsdown/processors/rst.py#L7)
 
 ```python
-class RSTDocstringProcessor() -> None
+class RSTDocstringProcessor()
 ```
 
 This class implements the preprocessor for restructured text.

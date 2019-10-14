@@ -12,7 +12,7 @@
 [🔍 find in source code](../handsdown/processors/base.py#L9)
 
 ```python
-class BaseDocstringProcessor() -> None
+class BaseDocstringProcessor()
 ```
 
 This class implements the preprocessor for PEP257 and Google style.

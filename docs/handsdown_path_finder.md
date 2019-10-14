@@ -14,7 +14,7 @@
 [🔍 find in source code](../handsdown/path_finder.py#L9)
 
 ```python
-class PathFinder(root: pathlib.Path, glob_expr: str) -> None
+class PathFinder(root: pathlib.Path, glob_expr: str)
 ```
 
 Find matching paths inside `root` path.

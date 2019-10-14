@@ -159,15 +159,16 @@ class SignatureBuilder:
         definition = self._get_defintion()
 
         Config.BREAK_LINES = False
-        result = f"{definition} {name}{signature}"
-        if len(result) < Config.MAX_LINE_LENGTH:
-            return result
-
-        Config.BREAK_LINES = True
         signature_repr = f"{signature}"
-        end_index = signature_repr.rfind(")")
-        signature_repr = f"{signature_repr[:end_index]}, \n{signature_repr[end_index:]}"
-        signature_repr = "\n".join([i.rstrip() for i in signature_repr.split("\n")])
+        result = f"{definition} {name}{signature_repr}"
+        if len(result) > Config.MAX_LINE_LENGTH:
+            Config.BREAK_LINES = True
+            end_index = signature_repr.rfind(")")
+            signature_repr = (
+                f"{signature_repr[:end_index]}, \n{signature_repr[end_index:]}"
+            )
+            signature_repr = "\n".join([i.rstrip() for i in signature_repr.split("\n")])
+
         if self._is_class:
             signature_repr = signature_repr.replace(" -> None", "")
         result = f"{definition} {name}{signature_repr}"

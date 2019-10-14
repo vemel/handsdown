@@ -10,7 +10,7 @@
 [🔍 find in source code](../handsdown/processors/pep257.py#L7)
 
 ```python
-class PEP257DocstringProcessor() -> None
+class PEP257DocstringProcessor()
 ```
 
 This class implements the preprocessor for PEP257 and Google style.

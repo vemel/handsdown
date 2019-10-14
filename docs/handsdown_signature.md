@@ -14,7 +14,7 @@
 [🔍 find in source code](../handsdown/signature.py#L15)
 
 ```python
-class ProxyDefaultValue(original: Type) -> None
+class ProxyDefaultValue(original: Type)
 ```
 
 Proxy class to represent function parameter default value in signature
@@ -28,7 +28,7 @@ Proxy class to represent function parameter default value in signature
 [🔍 find in source code](../handsdown/signature.py#L39)
 
 ```python
-class ProxyParameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any) -> None
+class ProxyParameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
 ```
 
 Helper class to represent function parameters in signature
@@ -38,9 +38,7 @@ Helper class to represent function parameters in signature
 [🔍 find in source code](../handsdown/signature.py#L57)
 
 ```python
-def create(
-    parameter: inspect.Parameter,
-    type_hint: Union[Type, NoneType],
+def create(parameter: inspect.Parameter, type_hint: Union[Type, NoneType],
 ) -> handsdown.signature.ProxyParameter
 ```
 

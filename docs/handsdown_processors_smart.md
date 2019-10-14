@@ -11,7 +11,7 @@
 [🔍 find in source code](../handsdown/processors/smart.py#L9)
 
 ```python
-class SmartDocstringProcessor() -> None
+class SmartDocstringProcessor()
 ```
 
 This class implements the preprocessor for restructured text and google.
