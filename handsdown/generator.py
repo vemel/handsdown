@@ -31,12 +31,14 @@ class Generator:
 
     Arguments:
         LOGGER_NAME -- Used by Logger, `handsdown`
+        INDEX_NAME -- Docs index filename
 
     Raises:
         GeneratorError -- If input/output paths are invalid.
     """
 
     LOGGER_NAME = "handsdown"
+    INDEX_NAME = "README.md"
 
     def __init__(
         self,
@@ -107,7 +109,7 @@ class Generator:
         self._logger.debug(f"Removing orphaned docs")
         preserve_file_names = self._module_records.get_output_file_names()
         for doc_path in self._output_path.glob("*.md"):
-            if doc_path.name == "index.md":
+            if doc_path.name == self.INDEX_NAME:
                 continue
 
             md_name = doc_path.name
@@ -194,7 +196,7 @@ class Generator:
         Generate `index.md` file with content from `README>.md` and `Modules` section that
         contains I Tree of all modules in the project.
         """
-        index_md_path = Path(self._output_path, "index.md")
+        index_md_path = Path(self._output_path, self.INDEX_NAME)
         self._logger.debug(f"Generating {index_md_path.relative_to(self._root_path)}")
         self._generate_index_md()
         self.replace_links(index_md_path)
@@ -371,4 +373,4 @@ class Generator:
 
         md_doc.append("\n".join(lines))
         md_doc.ensure_toc_exists()
-        md_doc.write(self._output_path / "index.md")
+        md_doc.write(self._output_path / self.INDEX_NAME)
