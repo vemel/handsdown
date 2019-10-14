@@ -18,17 +18,25 @@ class GeneratorError(Exception):
 
 class Generator:
     """
-    Main doc generator.
+    Main handsdown doc generator.
 
     Arguments:
         input_path -- Path to repo to generate docs.
+        output_path -- Path to folder with auto-generated docs to output.
+        source_paths -- List of paths to source files for generation.
         logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
-        output_path -- Path to folder with auto-generated docs to output.
+        raise_errors -- Raise Loader errors instead of silencing them.
+
+    Arguments:
+        LOGGER_NAME -- Used by Logger, `handsdown`
+
+    Raises:
+        GeneratorError -- If input/output paths are invalid.
     """
 
-    ignore_paths = ["build/**", "docs/**", "dist/**", "test/**", "tests/**"]
+    LOGGER_NAME = "handsdown"
 
     def __init__(
         self,
@@ -38,22 +46,30 @@ class Generator:
         logger: Optional[logging.Logger] = None,
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
-        raise_import_errors: bool = False,
+        raise_errors: bool = False,
     ) -> None:
-        self._logger = logger or logging.Logger("handsdown")
+        self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
         self._output_path = output_path
 
         try:
-            self._output_path.relative_to(self._root_path)
+            output_relative_path = self._output_path.relative_to(self._root_path)
         except ValueError as e:
             raise GeneratorError(f"Output path should be inside input path: {e}")
 
+        # relative path from output to source root folder
+        # used while creating links to source
+        root_relative_path = Path()
+        for part in output_relative_path.parts:
+            root_relative_path = root_relative_path / ".."
+        self._root_relative_path = root_relative_path
+
+        # create output folder if it does not exist
         if not self._output_path.exists():
             self._logger.info(f"Creating folder {self._output_path}")
-            self._output_path.mkdir()
+            self._output_path.mkdir(parents=True)
 
-        self._raise_import_errors = raise_import_errors
+        self._raise_errors = raise_errors
         self._loader = loader or Loader(root_path=self._root_path, logger=self._logger)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
@@ -72,7 +88,7 @@ class Generator:
             try:
                 module_record = self._loader.get_module_record(source_path)
             except LoaderError as e:
-                if self._raise_import_errors:
+                if self._raise_errors:
                     raise
 
                 self._logger.warning(
@@ -139,7 +155,8 @@ class Generator:
 
         md_doc = MDDocument()
         md_doc.append(
-            f"> Auto-generated documentation for [{module_record.import_string}](../{relative_file_path}) module."
+            f"> Auto-generated documentation for [{module_record.import_string}]"
+            f"({self._root_relative_path}/{relative_file_path}) module."
         )
         if docstring:
             md_doc.append(docstring)
@@ -241,7 +258,8 @@ class Generator:
             source_path = module_object_record.source_path
             relative_path = source_path.relative_to(self._root_path)
             lines.append(
-                f"[🔍 find in source code](../{relative_path}#L{module_object_record.source_line_number})\n"
+                f"[🔍 find in source code]({self._root_relative_path}/{relative_path}"
+                f"#L{module_object_record.source_line_number})\n"
             )
 
             signature = self._loader.get_object_signature(module_object_record.object)
