@@ -163,6 +163,7 @@ class SignatureBuilder:
         result = f"{definition} {name}{signature_repr}"
         if len(result) > Config.MAX_LINE_LENGTH:
             Config.BREAK_LINES = True
+            signature_repr = f"{signature}"
             end_index = signature_repr.rfind(")")
             signature_repr = (
                 f"{signature_repr[:end_index]}, \n{signature_repr[end_index:]}"

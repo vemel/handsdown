@@ -18,7 +18,14 @@
 [🔍 find in source code](../handsdown/generator.py#L19)
 
 ```python
-class Generator(input_path: pathlib.Path, source_paths: Iterable[pathlib.Path], logger: Union[logging.Logger, NoneType] = None, docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None, loader: Union[handsdown.loader.Loader, NoneType] = None, output_path: Union[pathlib.Path, NoneType] = None, raise_import_errors: bool = False,
+class Generator(
+    input_path: pathlib.Path,
+    source_paths: Iterable[pathlib.Path],
+    logger: Union[logging.Logger, NoneType] = None,
+    docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None,
+    loader: Union[handsdown.loader.Loader, NoneType] = None,
+    output_path: Union[pathlib.Path, NoneType] = None,
+    raise_import_errors: bool = False,
 )
 ```
 
@@ -52,7 +59,9 @@ Generate new `index.md`. Copy content from `README.md` and add ToC.
 [🔍 find in source code](../handsdown/generator.py#L258)
 
 ```python
-def _get_formatted_docstring(module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord], signature: Union[str, NoneType] = None,
+def _get_formatted_docstring(
+    module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord],
+    signature: Union[str, NoneType] = None,
 ) -> Union[str, NoneType]
 ```
 

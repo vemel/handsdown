@@ -39,7 +39,8 @@ my_module_utils = loader.import_module('my_module.utils')
 [🔍 find in source code](../handsdown/loader.py#L272)
 
 ```python
-def _discover_module_objects(module_record: handsdown.module_record.ModuleRecord,
+def _discover_module_objects(
+    module_record: handsdown.module_record.ModuleRecord,
 ) -> Generator[handsdown.module_record.ModuleObjectRecord, NoneType, NoneType]
 ```
 
@@ -81,7 +82,8 @@ A string with object docsting.
 [🔍 find in source code](../handsdown/loader.py#L78)
 
 ```python
-def get_module_record(source_path: pathlib.Path,
+def get_module_record(
+    source_path: pathlib.Path,
 ) -> Union[handsdown.module_record.ModuleRecord, NoneType]
 ```
 

@@ -18,7 +18,15 @@
 [🔍 find in source code](../handsdown/module_record.py#L7)
 
 ```python
-class ModuleObjectRecord(source_path: pathlib.Path, source_line_number: int, output_file_name: str, object: Any, import_string: str, level: int, title: str, docstring: Union[str, NoneType],
+class ModuleObjectRecord(
+    source_path: pathlib.Path,
+    source_line_number: int,
+    output_file_name: str,
+    object: Any,
+    import_string: str,
+    level: int,
+    title: str,
+    docstring: Union[str, NoneType],
 )
 ```
 
@@ -40,7 +48,13 @@ Representation of an imported module object.
 [🔍 find in source code](../handsdown/module_record.py#L33)
 
 ```python
-class ModuleRecord(source_path: pathlib.Path, output_file_name: str, module: Any, import_string: str, objects: List[handsdown.module_record.ModuleObjectRecord], docstring: Union[str, NoneType],
+class ModuleRecord(
+    source_path: pathlib.Path,
+    output_file_name: str,
+    module: Any,
+    import_string: str,
+    objects: List[handsdown.module_record.ModuleObjectRecord],
+    docstring: Union[str, NoneType],
 )
 ```
 

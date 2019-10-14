@@ -38,7 +38,9 @@ Helper class to represent function parameters in signature
 [🔍 find in source code](../handsdown/signature.py#L57)
 
 ```python
-def create(parameter: inspect.Parameter, type_hint: Union[Type, NoneType],
+def create(
+    parameter: inspect.Parameter,
+    type_hint: Union[Type, NoneType],
 ) -> handsdown.signature.ProxyParameter
 ```
 
