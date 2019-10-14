@@ -4,7 +4,7 @@
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
-> Auto-generated [Handsdown](./README.md) documentation for [handsdown.processors.base](../handsdown/processors/base.py) module.
+> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.processors.base](../handsdown/processors/base.py) module.
 
 ## BaseDocstringProcessor
 

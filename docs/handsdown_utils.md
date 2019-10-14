@@ -4,7 +4,7 @@
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 
-> Auto-generated [Handsdown](./README.md) documentation for [handsdown.utils](../handsdown/utils.py) module.
+> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.utils](../handsdown/utils.py) module.
 
 ## OSEnvironMock
 

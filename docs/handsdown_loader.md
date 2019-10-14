@@ -12,7 +12,7 @@
     - [Loader().setup](#loadersetup)
   - [LoaderError](#loadererror)
 
-> Auto-generated [Handsdown](./README.md) documentation for [handsdown.loader](../handsdown/loader.py) module.
+> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.loader](../handsdown/loader.py) module.
 
 ## Loader
 

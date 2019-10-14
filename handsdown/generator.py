@@ -31,8 +31,9 @@ class Generator:
         raise_errors -- Raise Loader errors instead of silencing them.
 
     Arguments:
-        LOGGER_NAME -- Used by Logger, `handsdown`
-        INDEX_NAME -- Docs index filename
+        LOGGER_NAME -- Name of logger: `handsdown`
+        INDEX_NAME -- Docs index filename: `README.md`
+        INDEX_MODULES_NAME -- Modules ToC name in index: `Modules`
 
     Raises:
         GeneratorError -- If input/output paths are invalid.
@@ -40,6 +41,7 @@ class Generator:
 
     LOGGER_NAME = "handsdown"
     INDEX_NAME = "README.md"
+    INDEX_MODULES_NAME = "Modules"
 
     def __init__(
         self,
@@ -159,7 +161,9 @@ class Generator:
         content_lines = self._generate_module_doc_lines(module_record)
 
         md_doc = MDDocument()
-        index_link = MDDocument.render_link(self._project_name, md_name=self.INDEX_NAME)
+        index_link = MDDocument.render_link(
+            self._project_name, anchor=self.INDEX_MODULES_NAME, md_name=self.INDEX_NAME
+        )
         md_doc.append(
             f"> Auto-generated {index_link} documentation for [{module_record.import_string}]"
             f"({self._root_relative_path}/{relative_file_path}) module."
@@ -353,7 +357,7 @@ class Generator:
                 md_doc.title = title
 
         md_doc.append(f"> Auto-generated `{self._project_name}` documentation index.")
-        md_doc.append("## Modules")
+        md_doc.append(f"## {self.INDEX_MODULES_NAME}")
 
         lines = []
         last_import_string_parts: List[Text] = []

@@ -19,7 +19,7 @@ Python docstring-based documentation generator for lazy perfectionists.
 - 📦 Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md#modules)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Links to source code from every doc section.
-- #️⃣ Create links easily as `handsdown.generator.Generator.replace_links` (check [Docs index](https://github.com/vemel/handsdown/blob/master/docs/README.md#features))
+- #️⃣ Make links by just adding `module.import.String` to docs. 
 - 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🎉 Usage

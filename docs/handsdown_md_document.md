@@ -10,7 +10,7 @@
     - [MDDocument.is_toc](#mddocumentis_toc)
     - [MDDocument().write](#mddocumentwrite)
 
-> Auto-generated [Handsdown](./README.md) documentation for [handsdown.md_document](../handsdown/md_document.py) module.
+> Auto-generated [Handsdown](./README.md#modules) documentation for [handsdown.md_document](../handsdown/md_document.py) module.
 
 ## MDDocument
 
