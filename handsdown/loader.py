@@ -249,8 +249,8 @@ class Loader:
         module: Any, parent: Any = None
     ) -> Callable[[Any], bool]:
         def predicate(obj: Any) -> bool:
-            # skip objects without docstrings
-            if not obj.__doc__:
+            # skip methods without docstrings
+            if parent and not obj.__doc__:
                 return False
 
             # skip objects from different modules
