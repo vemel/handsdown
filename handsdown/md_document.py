@@ -1,5 +1,5 @@
 import re
-from typing import Text, Optional, List
+from typing import Text, Optional, List, Tuple
 from pathlib import Path
 
 from handsdown.indent_trimmer import IndentTrimmer
@@ -47,14 +47,14 @@ class MDDocument:
             self.append(content)
 
     def _parse_content(self) -> None:
-        content = self._content
         self.title = None
         self.toc_section = None
-        if content.startswith("# "):
-            title_line, content = content.split("\n", 1)
-            self.title = title_line.split(" ", 1)[1]
+        title, content = self.extract_title(self._content)
+        if title:
+            self.title = title
+            self._content = content
 
-        sections = content.split(self._section_separator)
+        sections = self._content.split(self._section_separator)
         self._sections = []
         for section_index, section in enumerate(sections):
             section = IndentTrimmer.trim_empty_lines(section)
@@ -188,3 +188,30 @@ class MDDocument:
             toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
 
         return "\n".join(toc_lines)
+
+    @staticmethod
+    def extract_title(content) -> Tuple[Text, Text]:
+        """
+        Extract title from the first line of content.
+        If title is present -  return a title and a remnaing content.
+        if not - return an empty title and untouched content.
+
+        Examples:
+
+            ```python
+            MDDocument.extract_title('# Title\\ncontent') # ('Title', 'content')
+            MDDocument.extract_title('no title\\ncontent') # ('', 'no title\\ncontent')
+            ```
+
+        Returns:
+            A tuple fo title and remaining content.
+        """
+        title = ""
+        if content.startswith("# "):
+            if "\n" not in content:
+                content = f"{content}\n"
+
+            title_line, content = content.split("\n", 1)
+            title = title_line.split(" ", 1)[-1]
+
+        return title, content

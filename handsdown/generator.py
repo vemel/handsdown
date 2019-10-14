@@ -159,6 +159,10 @@ class Generator:
             f"({self._root_relative_path}/{relative_file_path}) module."
         )
         if docstring:
+            title, docstring = md_doc.extract_title(docstring)
+            if title:
+                md_doc.title = title
+
             md_doc.append(docstring)
         md_doc.append("\n".join(content_lines))
 
