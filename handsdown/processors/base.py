@@ -23,6 +23,7 @@ class BaseDocstringProcessor:
 
     line_re_map: Dict[Pattern, Text] = {}
     section_name_map: Dict[Text, Text] = {}
+    replace_map: Dict[Text, Text] = {}
 
     def build_sections(self, content: Text) -> SectionMap:
         """
@@ -90,7 +91,7 @@ class BaseDocstringProcessor:
             lines.pop()
 
     def _parse_line(self, line: Text) -> None:
-        # MD-style codeblock
+        # MD-style codeblock starts with triple backticks
         if line.strip().startswith("```"):
             self.in_codeblock = not self.in_codeblock
             self._codeblock_indent = self._current_indent
@@ -98,10 +99,18 @@ class BaseDocstringProcessor:
             self._add_line(line)
             return
 
+        # If there is a line with a section name - set this section as active
         if line in self.section_name_map:
             self.current_section_name = self.section_name_map[line]
             return
 
+        # replace occurences from `replace_map`
+        for target_str, replace_str in self.replace_map.items():
+            line = line.replace(target_str, replace_str)
+
+        # format line using `line_re_map` regexps
+        # multiline result supported
+        # if `section` found in match - set this section as active
         for line_re, line_format in self.line_re_map.items():
             match = line_re.match(line)
             if not match:
@@ -109,7 +118,10 @@ class BaseDocstringProcessor:
 
             match_dict = match.groupdict()
 
-            if "section" in match_dict:
+            if (
+                "section" in match_dict
+                and match_dict["section"] in self.section_name_map
+            ):
                 self.current_section_name = self.section_name_map[match_dict["section"]]
 
             formatted_line = line_format.format(**match_dict)
@@ -117,7 +129,7 @@ class BaseDocstringProcessor:
                 self._add_line(line_part)
             return
 
-        # RST-style codeblock
+        # RST-style codeblock start with `::` in the end of the line
         if line.endswith("::"):
             self.in_codeblock = True
             self._codeblock_indent = self._current_indent + 4

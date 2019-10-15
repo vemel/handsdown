@@ -24,7 +24,7 @@ class RSTExample(*args, **kwargs)
 def reference()
 ```
 
-This is a reference for ``RST-style`` docstrings. Check :data:`source` code
+This is a reference for ``RST-style`` docstrings. Check `source` code
 to see how it works.
 
 #### Arguments
@@ -59,8 +59,8 @@ print(data)
 def replace_test()
 ```
 
-Check if all :attr:`attributes`, :data:``data`` and :exc:`Exception` in
-:class:[RSTExample](#rstexample) look good.
+Check if all `attributes`, ``data`` and `Exception` in
+[RSTExample](#rstexample) look good.
 
 ### RSTExample.rtype_test
 
