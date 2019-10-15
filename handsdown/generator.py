@@ -84,9 +84,12 @@ class Generator:
         self._module_records = self._build_module_record_list()
 
         package_names = self._module_records.get_package_names()
-        self._docstring_links_re = re.compile(f'`(?:{"|".join(package_names)})\\.\\S+`')
+        package_names_re_expr = "|".join(package_names)
+        self._docstring_links_re = re.compile(
+            f"`+((?:{package_names_re_expr})\\.\\S+)`+"
+        )
         self._signature_links_re = re.compile(
-            f'[ \\[]((?:{"|".join(package_names)})\\.[^() :,]+)'
+            f"[ \\[]((?:{package_names_re_expr})\\.[^() :,]+)"
         )
 
     def _build_module_record_list(self) -> ModuleRecordList:
@@ -286,8 +289,7 @@ class Generator:
         content = file_path.read_text()
         file_changed = False
         for match in re.findall(self._docstring_links_re, content):
-            module_name = match.replace("`", "")
-            module_object_record = self._module_records.find_object(module_name)
+            module_object_record = self._module_records.find_object(match)
             if module_object_record is None:
                 continue
 

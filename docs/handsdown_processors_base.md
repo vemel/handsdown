@@ -16,9 +16,9 @@ class BaseDocstringProcessor()
 
 Base docstring processor. All docstring processors are based on top of it:
 
-- [PEP257DocstringProcessor](./handsdown_processors_pep257.md#pep257docstringprocessor)
-- [RSTDocstringProcessor](./handsdown_processors_rst.md#rstdocstringprocessor)
-- [SmartDocstringProcessor](./handsdown_processors_smart.md#smartdocstringprocessor)
+- `[PEP257DocstringProcessor](./handsdown_processors_pep257.md#pep257docstringprocessor)`
+- `[RSTDocstringProcessor](./handsdown_processors_rst.md#rstdocstringprocessor)`
+- `[SmartDocstringProcessor](./handsdown_processors_smart.md#smartdocstringprocessor)`
 
 ### BaseDocstringProcessor().build\_sections
 

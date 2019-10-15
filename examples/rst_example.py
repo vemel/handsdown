@@ -32,5 +32,5 @@ class RSTExample:
     def replace_test():
         """
         Check if all :attr:`attributes`, :data:``data`` and :exc:`Exception` in
-        :class:`RSTExample` look good.
+        :class:``RSTExample`` and :class:`RSTExample` look good.
         """
