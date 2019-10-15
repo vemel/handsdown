@@ -1,6 +1,6 @@
 # Smart
 
-- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / [Processors](./handsdown_processors_index.md) / Smart
+- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Smart
   - [SmartDocstringProcessor](#smartdocstringprocessor)
     - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 

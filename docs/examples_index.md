@@ -1,8 +1,8 @@
 # Examples
 
-- [Handsdown](./README.md) / Examples
+- [Handsdown](./README.md#handsdown) / Examples
   - Modules
-    - [RSTExample](./examples_rst_example.md)
+    - [RSTExample](./examples_rst_example.md#rstexample)
 
 > Auto-generated documentation for [examples](../examples/__init__.py) module.
 

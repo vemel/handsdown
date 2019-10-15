@@ -1,6 +1,6 @@
 # ModuleRecord
 
-- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / ModuleRecord
+- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)

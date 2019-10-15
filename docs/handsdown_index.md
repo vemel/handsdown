@@ -1,24 +1,24 @@
 # Handsdown
 
-- [Handsdown](./README.md) / Handsdown
+- [Handsdown](./README.md#handsdown) / Handsdown
   - Modules
-    - [Main](./handsdown___main__.md)
-    - [Cli Parser](./handsdown_cli_parser.md)
-    - [Generator](./handsdown_generator.md)
-    - [IndentTrimmer](./handsdown_indent_trimmer.md)
-    - [Loader](./handsdown_loader.md)
-    - [Main](./handsdown_main.md)
-    - [MDDocument](./handsdown_md_document.md)
-    - [ModuleRecord](./handsdown_module_record.md)
-    - [PathFinder](./handsdown_path_finder.md)
-    - [Processors](./handsdown_processors_index.md)
-      - [Base](./handsdown_processors_base.md)
-      - [Pep257](./handsdown_processors_pep257.md)
-      - [Rst](./handsdown_processors_rst.md)
-      - [SectionMap](./handsdown_processors_section_map.md)
-      - [Smart](./handsdown_processors_smart.md)
-    - [Signature](./handsdown_signature.md)
-    - [Utils](./handsdown_utils.md)
+    - [Main](./handsdown___main__.md#main)
+    - [Cli Parser](./handsdown_cli_parser.md#cli-parser)
+    - [Generator](./handsdown_generator.md#generator)
+    - [IndentTrimmer](./handsdown_indent_trimmer.md#indenttrimmer)
+    - [Loader](./handsdown_loader.md#loader)
+    - [Main](./handsdown_main.md#main)
+    - [MDDocument](./handsdown_md_document.md#mddocument)
+    - [ModuleRecord](./handsdown_module_record.md#modulerecord)
+    - [PathFinder](./handsdown_path_finder.md#pathfinder)
+    - [Processors](./handsdown_processors_index.md#processors)
+      - [Base](./handsdown_processors_base.md#base)
+      - [Pep257](./handsdown_processors_pep257.md#pep257)
+      - [Rst](./handsdown_processors_rst.md#rst)
+      - [SectionMap](./handsdown_processors_section_map.md#sectionmap)
+      - [Smart](./handsdown_processors_smart.md#smart)
+    - [Signature](./handsdown_signature.md#signature)
+    - [Utils](./handsdown_utils.md#utils)
 
 > Auto-generated documentation for [handsdown](../handsdown/__init__.py) module.
 

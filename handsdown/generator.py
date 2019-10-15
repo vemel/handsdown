@@ -215,12 +215,16 @@ class Generator:
                 MDDocument.render_doc_link(
                     parend_module_record.title,
                     md_name=parend_module_record.output_file_name,
+                    anchor=parend_module_record.title,
                 )
             )
 
         breadcrumbs.append(module_record.title)
         breadcrumbs.insert(
-            0, MDDocument.render_doc_link(self._project_name, md_name=self.INDEX_NAME)
+            0,
+            MDDocument.render_doc_link(
+                self._project_name, md_name=self.INDEX_NAME, anchor=self._project_name
+            ),
         )
 
         return " / ".join(breadcrumbs)
@@ -445,5 +449,8 @@ class Generator:
 
             last_import_string_parts = import_string_parts
             indent = "  " * (len(title_parts) - len(parts) - 1)
-            lines.append(f"{indent}- [{title_parts[-1]}](./{md_name})")
+            link = MDDocument.render_doc_link(
+                title_parts[-1], md_name=md_name, anchor=title_parts[-1]
+            )
+            lines.append(f"{indent}- {link}")
         return lines

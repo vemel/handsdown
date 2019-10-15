@@ -1,6 +1,6 @@
 # Base
 
-- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / [Processors](./handsdown_processors_index.md) / Base
+- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
