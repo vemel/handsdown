@@ -1,6 +1,6 @@
 # Loader
 
-- [Loader](#loader)
+- [Handsdown](./README.md) / Loader
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)
@@ -12,7 +12,7 @@
     - [Loader().setup](#loadersetup)
   - [LoaderError](#loadererror)
 
-> Auto-generated documentation for [Handsdown](./README.md) / [Loader](#loader) module ([loader.py](../handsdown/loader.py))
+> Auto-generated documentation for [handsdown.loader](../handsdown/loader.py) module
 
 ## Loader
 

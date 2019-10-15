@@ -162,13 +162,10 @@ class Generator:
 
         md_doc = MDDocument()
         source_link = MDDocument.render_link(
-            f"{module_record.source_path.name}",
+            f"{module_record.import_string}",
             f"{self._root_relative_path / relative_file_path}",
         )
-        breadscrumbs = self._build_breadcrumbs_string(module_record)
-        md_doc.append(
-            f"> Auto-generated documentation for {breadscrumbs} module ({source_link})"
-        )
+        md_doc.append(f"> Auto-generated documentation for {source_link} module")
 
         if docstring:
             # set MD and module record title if it is found in docstring
@@ -188,13 +185,16 @@ class Generator:
         modules_toc_lines = self._build_modules_toc_lines(
             module_record.import_string, max_depth=3
         )
+
+        toc_lines = md_doc.toc_section.split("\n")
+        breadscrumbs = self._build_breadcrumbs_string(module_record)
+        toc_lines[0] = f"- {breadscrumbs}"
         if modules_toc_lines:
-            toc_lines = md_doc.toc_section.split("\n")
             toc_lines.append(f"  - {self.MODULES_NAME}")
             for line in modules_toc_lines:
                 toc_lines.append(f"    {line}")
 
-            md_doc.toc_section = "\n".join(toc_lines)
+        md_doc.toc_section = "\n".join(toc_lines)
 
         md_doc.write(self._output_path / md_name)
 
@@ -221,7 +221,7 @@ class Generator:
         breadcrumbs[0] = MDDocument.render_doc_link(
             self._project_name, md_name=self.INDEX_NAME
         )
-        breadcrumbs.append(f"`{module_record.title}`")
+        breadcrumbs.append(module_record.title)
 
         return " / ".join(breadcrumbs)
 
@@ -402,9 +402,8 @@ class Generator:
         modules_toc_lines = self._build_modules_toc_lines("", max_depth=10)
         if modules_toc_lines:
             toc_lines = md_doc.toc_section.split("\n")
-            toc_lines.append(f"  - {self.MODULES_NAME}")
             for line in modules_toc_lines:
-                toc_lines.append(f"    {line}")
+                toc_lines.append(f"  {line}")
 
             md_doc.toc_section = "\n".join(toc_lines)
 

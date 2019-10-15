@@ -1,6 +1,6 @@
 # Generator
 
-- [Generator](#generator)
+- [Handsdown](./README.md) / Generator
   - [Generator](#generator)
     - [Generator()._generate_index](#generator_generate_index)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)
@@ -11,7 +11,7 @@
     - [Generator().replace_links](#generatorreplace_links)
   - [GeneratorError](#generatorerror)
 
-> Auto-generated documentation for [Handsdown](./README.md) / [Generator](#generator) module ([generator.py](../handsdown/generator.py))
+> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module
 
 ## Generator
 

@@ -1,6 +1,6 @@
 # ModuleRecord
 
-- [ModuleRecord](#modulerecord)
+- [Handsdown](./README.md) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)
@@ -12,7 +12,7 @@
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
-> Auto-generated documentation for [Handsdown](./README.md) / [ModuleRecord](#modulerecord) module ([module_record.py](../handsdown/module_record.py))
+> Auto-generated documentation for [handsdown.module_record](../handsdown/module_record.py) module
 
 ## ModuleObjectRecord
 
