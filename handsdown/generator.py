@@ -185,6 +185,17 @@ class Generator:
 
         md_doc.ensure_toc_exists()
 
+        modules_toc_lines = self._build_modules_toc_lines(
+            module_record.import_string, max_depth=3
+        )
+        if modules_toc_lines:
+            toc_lines = md_doc.toc_section.split("\n")
+            toc_lines.append(f"  - {self.MODULES_NAME}")
+            for line in modules_toc_lines:
+                toc_lines.append(f"    {line}")
+
+            md_doc.toc_section = "\n".join(toc_lines)
+
         md_doc.write(self._output_path / md_name)
 
     def _build_breadcrumbs_string(self, module_record: ModuleRecord) -> Text:
@@ -399,7 +410,9 @@ class Generator:
 
         md_doc.write(self._output_path / self.INDEX_NAME)
 
-    def _build_modules_toc_lines(self, import_string: Text, max_depth: int = 3):
+    def _build_modules_toc_lines(
+        self, import_string: Text, max_depth: int
+    ) -> List[Text]:
         lines: List[Text] = []
         parts: List[Text] = []
         if import_string:
@@ -407,6 +420,9 @@ class Generator:
 
         last_import_string_parts: List[Text] = []
         for module_record in self._module_records:
+            if module_record.import_string == import_string:
+                continue
+
             if not module_record.import_string.startswith(import_string):
                 continue
 
@@ -417,15 +433,18 @@ class Generator:
             title_parts = module_record.get_title_parts()
             import_string_parts = module_record.get_import_string_parts()
             for index, title_part in enumerate(title_parts[:-1]):
+                if index < len(parts):
+                    continue
+
                 if (
                     len(last_import_string_parts) > index
                     and last_import_string_parts[index] == import_string_parts[index]
                 ):
                     continue
-                indent = "  " * index
+                indent = "  " * (index - len(parts))
                 lines.append(f"{indent}- {title_part}")
 
             last_import_string_parts = import_string_parts
-            indent = "  " * (len(title_parts) - 1)
+            indent = "  " * (len(title_parts) - len(parts) - 1)
             lines.append(f"{indent}- [{title_parts[-1]}](./{md_name})")
         return lines
