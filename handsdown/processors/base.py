@@ -112,7 +112,9 @@ class BaseDocstringProcessor:
             if "section" in match_dict:
                 self.current_section_name = self.section_name_map[match_dict["section"]]
 
-            self._add_line(line_format.format(**match_dict))
+            formatted_line = line_format.format(**match_dict)
+            for line_part in formatted_line.split("\n"):
+                self._add_line(line_part)
             return
 
         # RST-style codeblock
