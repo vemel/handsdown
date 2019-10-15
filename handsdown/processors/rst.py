@@ -33,7 +33,12 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
         ): "- `{type}` - {desc}",
     }
 
-    replace_map = {":attr:`": "`", ":data:`": "`", ":class:`": "`", ":exc:`": "`"}
+    replace_map = {
+        ":attr:`": "attribute `",
+        ":data:`": "`",
+        ":class:`": "class `",
+        ":exc:`": "exception `",
+    }
 
     section_name_map = {
         "raise": "Raises",

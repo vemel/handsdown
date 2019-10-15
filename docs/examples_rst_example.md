@@ -59,8 +59,8 @@ print(data)
 def replace_test()
 ```
 
-Check if all `attributes`, ``data`` and `Exception` in
-[RSTExample](#rstexample) look good.
+Check if all attribute `attributes`, ``data`` and exception `Exception` in
+class [RSTExample](#rstexample) look good.
 
 ### RSTExample.rtype\_test
 

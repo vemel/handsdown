@@ -205,7 +205,7 @@ Render Markdown link wih escaped title.
 ```python
 MDDocument.render_link('my title', 'doc.md#test') # [my title](doc.md#test)
 MDDocument.render_link('MyClass.__init__', 'my.md')
-# [MyClass.\_\_init\_\_](doc.md#my.md)
+# [MyClass.__init__](doc.md#my.md)
 ```
 
 #### Arguments
