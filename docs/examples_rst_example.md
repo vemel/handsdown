@@ -75,4 +75,4 @@ def rtype_test()
 #### Returns
 
 Return statement
-:rtype: bool
+Type: *bool*
