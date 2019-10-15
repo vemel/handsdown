@@ -157,15 +157,16 @@ class Generator:
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
-        docstring = self._get_formatted_docstring(module_record)
-        content_lines = self._generate_module_doc_lines(module_record)
-
         md_doc = MDDocument()
         source_link = MDDocument.render_link(
             f"{module_record.import_string}",
             f"{self._root_relative_path / relative_file_path}",
         )
+        md_doc.title = module_record.title
         md_doc.subtitle = f"> Auto-generated documentation for {source_link} module."
+
+        docstring = self._get_formatted_docstring(module_record)
+        self._generate_module_doc_lines(module_record, md_doc)
 
         if docstring:
             # set MD and module record title if it is found in docstring
@@ -175,10 +176,6 @@ class Generator:
                 md_doc.title = title
 
             md_doc.append(docstring)
-        md_doc.append("\n".join(content_lines))
-
-        if not md_doc.title:
-            md_doc.title = module_record.title
 
         md_doc.ensure_toc_exists()
 
@@ -307,33 +304,32 @@ class Generator:
         if file_changed:
             file_path.write_text(content)
 
-    def _generate_module_doc_lines(self, module_record: ModuleRecord) -> List[Text]:
-        lines = []
+    def _generate_module_doc_lines(
+        self, module_record: ModuleRecord, md_doc: MDDocument
+    ) -> None:
         for module_object_record in module_record.objects:
-            lines.append(
-                f'{"#" * (module_object_record.level + 2)} {module_object_record.title}\n'
+            md_doc.append_title(
+                module_object_record.title, level=module_object_record.level + 2
             )
 
             source_path = module_object_record.source_path
             relative_path = source_path.relative_to(self._root_path)
-            lines.append(
-                f"[🔍 find in source code]({self._root_relative_path}/{relative_path}"
-                f"#L{module_object_record.source_line_number})\n"
+            source_link = md_doc.render_link(
+                "🔍 find in source code",
+                f"{self._root_relative_path / relative_path}#L{module_object_record.source_line_number}",
             )
+            md_doc.append(source_link)
 
             signature = self._loader.get_object_signature(module_object_record.object)
 
             if signature:
-                lines.append(f"```python\n{signature}\n```\n")
+                md_doc.append(f"```python\n{signature}\n```")
 
             formatted_docstring = self._get_formatted_docstring(
                 module_record=module_object_record, signature=signature
             )
             if formatted_docstring:
-                lines.extend(formatted_docstring.split("\n"))
-                lines.append("")
-
-        return lines
+                md_doc.append(formatted_docstring)
 
     def _get_formatted_docstring(
         self,

@@ -106,15 +106,17 @@ class MDDocument:
 
         return True
 
-    @staticmethod
-    def render_link(title: Text, link: Text) -> Text:
+    @classmethod
+    def render_link(cls, title: Text, link: Text) -> Text:
         """
-        Render Markdown link.
+        Render Markdown link wih escaped title.
 
         Examples:
 
             ```python
             MDDocument.render_link('my title', 'doc.md#test') # [my title](doc.md#test)
+            MDDocument.render_link('MyClass.__init__', 'my.md')
+            # [MyClass.__init__](doc.md#my.md)
             ```
 
         Arguments:
@@ -223,7 +225,18 @@ class MDDocument:
                 self._sections.append(section)
 
         self._content = self._build_content()
-        # self._parse_content()
+
+    def append_title(self, title: Text, level: int) -> None:
+        """
+        Append `title` to the document.
+
+        Arguments:
+            title -- Title to add.
+            level -- Title level, number of `#` characters.
+        """
+        section = f'{"#" * level} {self._escape_title(title)}'
+        self._sections.append(section)
+        self._content = self._build_content()
 
     def generate_toc_section(self, max_depth: int = 3) -> Text:
         """
@@ -292,3 +305,7 @@ class MDDocument:
             title = title_line.split(" ", 1)[-1]
 
         return title, content
+
+    @staticmethod
+    def _escape_title(title: Text) -> Text:
+        return title.replace("_", "\\_")

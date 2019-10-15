@@ -5,14 +5,14 @@
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
-    - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)
-    - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
+    - [ModuleRecord().get\_import\_string\_parts](#modulerecordget_import_string_parts)
+    - [ModuleRecord().get\_title\_parts](#modulerecordget_title_parts)
   - [ModuleRecordList](#modulerecordlist)
-    - [ModuleRecordList().__iter__](#modulerecordlist__iter__)
+    - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
     - [ModuleRecordList().add](#modulerecordlistadd)
-    - [ModuleRecordList().find_object](#modulerecordlistfind_object)
-    - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
-    - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
+    - [ModuleRecordList().find\_object](#modulerecordlistfind_object)
+    - [ModuleRecordList().get\_output\_file\_names](#modulerecordlistget_output_file_names)
+    - [ModuleRecordList().get\_package\_names](#modulerecordlistget_package_names)
 
 ## ModuleObjectRecord
 
@@ -74,7 +74,7 @@ Representation of an imported module.
 - `objects` - List of objects in the module.
 - `docstring` - Module docstring.
 
-### ModuleRecord().get_import_string_parts
+### ModuleRecord().get\_import\_string\_parts
 
 [🔍 find in source code](../handsdown/module_record.py#L59)
 
@@ -99,7 +99,7 @@ ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title
 
 A list of import string parts as strings.
 
-### ModuleRecord().get_title_parts
+### ModuleRecord().get\_title\_parts
 
 [🔍 find in source code](../handsdown/module_record.py#L79)
 
@@ -135,7 +135,7 @@ class ModuleRecordList()
 
 Aggregation of [ModuleRecord](#modulerecord) objects.
 
-### ModuleRecordList().__iter__
+### ModuleRecordList().\_\_iter\_\_
 
 [🔍 find in source code](../handsdown/module_record.py#L162)
 
@@ -171,7 +171,7 @@ Add new [ModuleRecord](#modulerecord).
 
 - [ModuleRecord](#modulerecord)
 
-### ModuleRecordList().find_object
+### ModuleRecordList().find\_object
 
 [🔍 find in source code](../handsdown/module_record.py#L119)
 
@@ -193,7 +193,7 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 - [ModuleObjectRecord](#moduleobjectrecord)
 
-### ModuleRecordList().get_output_file_names
+### ModuleRecordList().get\_output\_file\_names
 
 [🔍 find in source code](../handsdown/module_record.py#L131)
 
@@ -207,7 +207,7 @@ Get all output MD file names.
 
 A set of output names as strings.
 
-### ModuleRecordList().get_package_names
+### ModuleRecordList().get\_package\_names
 
 [🔍 find in source code](../handsdown/module_record.py#L140)
 

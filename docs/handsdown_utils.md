@@ -4,7 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
-  - [get_title_from_path_part](#get_title_from_path_part)
+  - [get\_title\_from\_path\_part](#get_title_from_path_part)
 
 ## OSEnvironMock
 
@@ -16,7 +16,7 @@ class OSEnvironMock(*args, **kwargs)
 
 Mock for `os.environ` that returns `env` string isntead of undefined variables.
 
-## get_title_from_path_part
+## get\_title\_from\_path\_part
 
 [🔍 find in source code](../handsdown/utils.py#L14)
 

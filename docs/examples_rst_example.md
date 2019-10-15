@@ -5,8 +5,8 @@
 - [Handsdown](./README.md#handsdown) / [Examples](./examples_index.md#examples) / RSTExample
   - [RSTExample](#rstexample)
     - [RSTExample.reference](#rstexamplereference)
-    - [RSTExample.replace_test](#rstexamplereplace_test)
-    - [RSTExample.rtype_test](#rstexamplertype_test)
+    - [RSTExample.replace\_test](#rstexamplereplace_test)
+    - [RSTExample.rtype\_test](#rstexamplertype_test)
 
 ## RSTExample
 
@@ -51,7 +51,7 @@ data = {
 print(data)
 ```
 
-### RSTExample.replace_test
+### RSTExample.replace\_test
 
 [🔍 find in source code](../examples/rst_example.py#L31)
 
@@ -62,7 +62,7 @@ def replace_test()
 Check if all `attributes`, ``data`` and `Exception` in
 [RSTExample](#rstexample) look good.
 
-### RSTExample.rtype_test
+### RSTExample.rtype\_test
 
 [🔍 find in source code](../examples/rst_example.py#L22)
 

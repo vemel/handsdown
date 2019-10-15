@@ -4,11 +4,11 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
-    - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
-    - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
-    - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
-    - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
-    - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
+    - [IndentTrimmer.get\_line\_indent](#indenttrimmerget_line_indent)
+    - [IndentTrimmer.trim\_empty\_lines](#indenttrimmertrim_empty_lines)
+    - [IndentTrimmer.trim\_line](#indenttrimmertrim_line)
+    - [IndentTrimmer.trim\_lines](#indenttrimmertrim_lines)
+    - [IndentTrimmer.trim\_text](#indenttrimmertrim_text)
 
 ## IndentTrimmer
 
@@ -20,7 +20,7 @@ class IndentTrimmer(*args, **kwargs)
 
 Utility class for removing indentation for sections and lines.
 
-### IndentTrimmer.get_line_indent
+### IndentTrimmer.get\_line\_indent
 
 [🔍 find in source code](../handsdown/indent_trimmer.py#L105)
 
@@ -45,7 +45,7 @@ IndentTrimmer.get_line_indent('test') # 0
 
 A number of indentation characters in a beginning of the line.
 
-### IndentTrimmer.trim_empty_lines
+### IndentTrimmer.trim\_empty\_lines
 
 [🔍 find in source code](../handsdown/indent_trimmer.py#L9)
 
@@ -67,7 +67,7 @@ IndentTrimmer.trim_empty_lines(text)
 
 A stripped string.
 
-### IndentTrimmer.trim_line
+### IndentTrimmer.trim\_line
 
 [🔍 find in source code](../handsdown/indent_trimmer.py#L81)
 
@@ -93,7 +93,7 @@ IndentTrimmer.trim_line('     test', 1) # '    test'
 
 A line with removed indent.
 
-### IndentTrimmer.trim_lines
+### IndentTrimmer.trim\_lines
 
 [🔍 find in source code](../handsdown/indent_trimmer.py#L48)
 
@@ -126,7 +126,7 @@ IndentTrimmer.trim_lines([
 
 A list of lines with trimmed indent.
 
-### IndentTrimmer.trim_text
+### IndentTrimmer.trim\_text
 
 [🔍 find in source code](../handsdown/indent_trimmer.py#L27)
 

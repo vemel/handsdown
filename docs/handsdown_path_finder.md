@@ -4,7 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
-    - [PathFinder().__iter__](#pathfinder__iter__)
+    - [PathFinder().\_\_iter\_\_](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
@@ -33,7 +33,7 @@ path_finder.exclude('*new*').list() # ['my.txt']
 - `root` - Path to root folder.
 - `glob_expr` - `glob` expression to lookup in `root`
 
-### PathFinder().__iter__
+### PathFinder().\_\_iter\_\_
 
 [🔍 find in source code](../handsdown/path_finder.py#L103)
 

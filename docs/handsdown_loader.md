@@ -4,13 +4,13 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / Loader
   - [Loader](#loader)
-    - [Loader()._discover_module_objects](#loader_discover_module_objects)
-    - [Loader()._get_object_docstring](#loader_get_object_docstring)
-    - [Loader()._setup_django](#loader_setup_django)
-    - [Loader().get_module_record](#loaderget_module_record)
-    - [Loader.get_object_signature](#loaderget_object_signature)
-    - [Loader.get_source_line_number](#loaderget_source_line_number)
-    - [Loader().import_module](#loaderimport_module)
+    - [Loader().\_discover\_module\_objects](#loader_discover_module_objects)
+    - [Loader().\_get\_object\_docstring](#loader_get_object_docstring)
+    - [Loader().\_setup\_django](#loader_setup_django)
+    - [Loader().get\_module\_record](#loaderget_module_record)
+    - [Loader.get\_object\_signature](#loaderget_object_signature)
+    - [Loader.get\_source\_line\_number](#loaderget_source_line_number)
+    - [Loader().import\_module](#loaderimport_module)
     - [Loader().setup](#loadersetup)
   - [LoaderError](#loadererror)
 
@@ -35,7 +35,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 - `import_paths` - List of import paths for `import_module` lookup.
 
-### Loader()._discover_module_objects
+### Loader().\_discover\_module\_objects
 
 [🔍 find in source code](../handsdown/loader.py#L303)
 
@@ -60,7 +60,7 @@ A generator that yields `ModuleObjectRecord` instances.
 - [ModuleRecord](./handsdown_module_record.md#modulerecord)
 - [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord)
 
-### Loader()._get_object_docstring
+### Loader().\_get\_object\_docstring
 
 [🔍 find in source code](../handsdown/loader.py#L195)
 
@@ -78,7 +78,7 @@ Get trimmed object docstring or an empty string.
 
 A string with object docsting.
 
-### Loader()._setup_django
+### Loader().\_setup\_django
 
 [🔍 find in source code](../handsdown/loader.py#L153)
 
@@ -93,7 +93,7 @@ Patches applied during apps initialization:
 - Patch `sys.path` to add current repo to it.
 - Patch `logging.config.dictConfig`.
 
-### Loader().get_module_record
+### Loader().get\_module\_record
 
 [🔍 find in source code](../handsdown/loader.py#L83)
 
@@ -121,7 +121,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 - [ModuleRecord](./handsdown_module_record.md#modulerecord)
 
-### Loader.get_object_signature
+### Loader.get\_object\_signature
 
 [🔍 find in source code](../handsdown/loader.py#L178)
 
@@ -140,7 +140,7 @@ returns None.
 
 A string with object signature or None.
 
-### Loader.get_source_line_number
+### Loader.get\_source\_line\_number
 
 [🔍 find in source code](../handsdown/loader.py#L377)
 
@@ -156,7 +156,7 @@ Get line number in source file where `obj` is declared.
 
 A line number as an integer, starting for 1.
 
-### Loader().import_module
+### Loader().import\_module
 
 [🔍 find in source code](../handsdown/loader.py#L236)
 
