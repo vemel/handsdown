@@ -1,6 +1,6 @@
 # RSTExample
 
-- [Handsdown](./README.md) / RSTExample
+- [Handsdown](./README.md) / [Examples](./examples_index.md) / RSTExample
   - [RSTExample](#rstexample)
     - [RSTExample.reference](#rstexamplereference)
     - [RSTExample.replace_test](#rstexamplereplace_test)

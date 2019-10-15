@@ -1,6 +1,6 @@
 # Signature
 
-- [Handsdown](./README.md) / Signature
+- [Handsdown](./README.md) / `Handsdown` / Signature
   - [Config](#config)
   - [ProxyDefaultValue](#proxydefaultvalue)
   - [ProxyParameter](#proxyparameter)

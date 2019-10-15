@@ -1,6 +1,6 @@
 # Processors
 
-- [Handsdown](./README.md) / Processors
+- [Handsdown](./README.md) / `Handsdown` / Processors
   - Modules
     - [Base](./handsdown_processors_base.md)
     - [Pep257](./handsdown_processors_pep257.md)

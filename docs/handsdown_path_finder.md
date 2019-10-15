@@ -1,6 +1,6 @@
 # PathFinder
 
-- [Handsdown](./README.md) / PathFinder
+- [Handsdown](./README.md) / `Handsdown` / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().__iter__](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)

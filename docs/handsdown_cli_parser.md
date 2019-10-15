@@ -1,6 +1,6 @@
 # CLI Parser
 
-- [Handsdown](./README.md) / CLI Parser
+- [Handsdown](./README.md) / `Handsdown` / CLI Parser
   - [abs_path](#abs_path)
   - [get_cli_parser](#get_cli_parser)
 

@@ -1,6 +1,6 @@
 # Base
 
-- [Handsdown](./README.md) / [Processors](./handsdown_processors_index.md) / Base
+- [Handsdown](./README.md) / `Handsdown` / [Processors](./handsdown_processors_index.md) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
@@ -22,7 +22,7 @@ Base docstring processor. All docstring processors are based on top of it:
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](../handsdown/processors/base.py#L26)
+[🔍 find in source code](../handsdown/processors/base.py#L28)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

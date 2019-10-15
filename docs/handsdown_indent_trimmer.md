@@ -1,6 +1,6 @@
 # IndentTrimmer
 
-- [Handsdown](./README.md) / IndentTrimmer
+- [Handsdown](./README.md) / `Handsdown` / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)

@@ -1,6 +1,6 @@
 # Rst
 
-- [Handsdown](./README.md) / [Processors](./handsdown_processors_index.md) / Rst
+- [Handsdown](./README.md) / `Handsdown` / [Processors](./handsdown_processors_index.md) / Rst
   - [RSTDocstringProcessor](#rstdocstringprocessor)
 
 > Auto-generated documentation for [handsdown.processors.rst](../handsdown/processors/rst.py) module

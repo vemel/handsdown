@@ -1,6 +1,6 @@
 # Main
 
-- [Handsdown](./README.md) / Main
+- [Handsdown](./README.md) / `Handsdown` / Main
   - [get_logger](#get_logger)
   - [main](#main)
 
