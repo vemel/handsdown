@@ -22,7 +22,7 @@ Base docstring processor. All docstring processors are based on top of it:
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](../handsdown/processors/base.py#L23)
+[🔍 find in source code](../handsdown/processors/base.py#L26)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

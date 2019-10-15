@@ -1,4 +1,4 @@
-from typing import Text, Optional, Dict, Pattern
+from typing import Text, Dict, Pattern, Optional
 
 from handsdown.processors.section_map import SectionMap
 from handsdown.indent_trimmer import IndentTrimmer
@@ -16,6 +16,10 @@ class BaseDocstringProcessor:
     def __init__(self) -> None:
         self.current_section_name: Text = ""
         self.in_codeblock = False
+        self._codeblock_indent = 0
+        self._codeblock_lines_count = 0
+        self.section_map = SectionMap()
+        self._current_indent = 0
 
     line_re_map: Dict[Pattern, Text] = {}
     section_name_map: Dict[Text, Text] = {}
@@ -33,33 +37,70 @@ class BaseDocstringProcessor:
         """
         self.current_section_name = ""
         self.in_codeblock = False
-        section_map = SectionMap()
+        self.section_map = SectionMap()
+        self._current_indent = 0
+        self._codeblock_indent = 0
+        self._codeblock_lines_count = 0
 
         for line in content.split("\n"):
-            indent = IndentTrimmer.get_line_indent(line)
-            parsed_line = self._parse_line(
-                IndentTrimmer.trim_line(line, indent).rstrip()
-            )
-            if parsed_line is None:
-                continue
-            for line_part in parsed_line.split("\n"):
-                section_map.add_line(
-                    self.current_section_name, f'{" " * indent}{line_part}'
-                )
-
-        return section_map
-
-    def _parse_line(self, line: Text) -> Optional[Text]:
-        if line.strip().startswith("```"):
-            self.in_codeblock = not self.in_codeblock
-            return line
+            self._current_indent = IndentTrimmer.get_line_indent(line)
+            line = line.strip()
+            if self.in_codeblock:
+                self._parse_code_line(line)
+            else:
+                self._parse_line(line)
 
         if self.in_codeblock:
-            return line
+            self._strip_empty_lines()
+            self._add_line("```", indent=0)
+
+        return self.section_map
+
+    def _parse_code_line(self, line: Text) -> bool:
+        # end RST-style codeblock
+        if line and self._current_indent < self._codeblock_indent:
+            self.in_codeblock = False
+            self._strip_empty_lines()
+            self._add_line("```", indent=0)
+            self._parse_line(line)
+            return
+
+        # end MD-style codeblock
+        if line.strip().startswith("```"):
+            self._add_line("```", indent=0)
+            self.in_codeblock = False
+            return
+
+        if not line and self._codeblock_lines_count == 0:
+            return
+
+        self._add_line(line, indent=self._current_indent - self._codeblock_indent)
+        self._codeblock_lines_count += 1
+
+    def _add_line(self, line: Text, indent: Optional[int] = None) -> None:
+        indent_str = " " * self._current_indent
+        if indent is not None:
+            indent_str = " " * indent
+
+        self.section_map.add_line(self.current_section_name, f"{indent_str}{line}")
+
+    def _strip_empty_lines(self):
+        lines = self.section_map[self.current_section_name]
+        while lines and not lines[-1].strip():
+            lines.pop()
+
+    def _parse_line(self, line: Text) -> None:
+        # MD-style codeblock
+        if line.strip().startswith("```"):
+            self.in_codeblock = not self.in_codeblock
+            self._codeblock_indent = self._current_indent
+            self._codeblock_lines_count = 0
+            self._add_line(line)
+            return
 
         if line in self.section_name_map:
             self.current_section_name = self.section_name_map[line]
-            return None
+            return
 
         for line_re, line_format in self.line_re_map.items():
             match = line_re.match(line)
@@ -71,6 +112,17 @@ class BaseDocstringProcessor:
             if "section" in match_dict:
                 self.current_section_name = self.section_name_map[match_dict["section"]]
 
-            return line_format.format(**match_dict)
+            self._add_line(line_format.format(**match_dict))
+            return
 
-        return line
+        # RST-style codeblock
+        if line.endswith("::"):
+            self.in_codeblock = True
+            self._codeblock_indent = self._current_indent + 4
+            self._codeblock_lines_count = 0
+            self._add_line(line[:-2])
+            self._add_line("")
+            self._add_line("```python")
+            return
+
+        self._add_line(line)
