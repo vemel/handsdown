@@ -1,5 +1,7 @@
 # Handsdown
 
+> Auto-generated documentation index.
+
 - [Handsdown](#handsdown)
   - [Examples](./examples_index.md#examples)
     - [RSTExample](./examples_rst_example.md#rstexample)
@@ -21,5 +23,3 @@
       - [Smart](./handsdown_processors_smart.md#smart)
     - [Signature](./handsdown_signature.md#signature)
     - [Utils](./handsdown_utils.md#utils)
-
-> Auto-generated documentation index.

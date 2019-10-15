@@ -1,13 +1,13 @@
 # PathFinder
 
+> Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module.
+
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().__iter__](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
-
-> Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module.
 
 ## PathFinder
 

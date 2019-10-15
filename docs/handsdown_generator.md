@@ -1,5 +1,7 @@
 # Generator
 
+> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
+
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / Generator
   - [Generator](#generator)
     - [Generator()._generate_index](#generator_generate_index)
@@ -10,8 +12,6 @@
     - [Generator().generate_index](#generatorgenerate_index)
     - [Generator().replace_links](#generatorreplace_links)
   - [GeneratorError](#generatorerror)
-
-> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
 
 ## Generator
 

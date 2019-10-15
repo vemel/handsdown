@@ -1,10 +1,10 @@
 # CLI Parser
 
+> Auto-generated documentation for [handsdown.cli_parser](../handsdown/cli_parser.py) module.
+
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / CLI Parser
   - [abs_path](#abs_path)
   - [get_cli_parser](#get_cli_parser)
-
-> Auto-generated documentation for [handsdown.cli_parser](../handsdown/cli_parser.py) module.
 
 ## abs_path
 

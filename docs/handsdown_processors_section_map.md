@@ -1,11 +1,11 @@
 # SectionMap
 
+> Auto-generated documentation for [handsdown.processors.section_map](../handsdown/processors/section_map.py) module.
+
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / SectionMap
   - [SectionMap](#sectionmap)
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)
-
-> Auto-generated documentation for [handsdown.processors.section_map](../handsdown/processors/section_map.py) module.
 
 ## SectionMap
 

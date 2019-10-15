@@ -41,27 +41,31 @@ class MDDocument:
     def __init__(self, content: Text = "") -> None:
         self._sections: List[Text] = []
         self._content = ""
-        self.title: Optional[Text] = None
-        self.toc_section: Optional[Text] = None
+        self._title: Optional[Text] = None
+        self._subtitle: Optional[Text] = None
+        self._toc_section: Optional[Text] = None
         if content:
             self.append(content)
 
-    def _parse_content(self) -> None:
-        self.title = None
-        self.toc_section = None
+    def set(self, content: Text) -> None:
+        self._content = content
+        self._title = None
+        self._toc_section = None
         title, content = self.extract_title(self._content)
         if title:
-            self.title = title
-            self._content = content
+            self._title = title
 
-        sections = self._content.split(self._section_separator)
+        sections = content.split(self._section_separator)
         self._sections = []
         for section_index, section in enumerate(sections):
             section = IndentTrimmer.trim_empty_lines(section)
             if not section:
                 continue
-            if self.is_toc(section) and not self.toc_section and section_index < 2:
-                self.toc_section = section
+            if self.is_toc(section) and not self._toc_section and section_index < 2:
+                self._toc_section = section
+                if self._sections:
+                    self._subtitle = self._section_separator.join(self._sections)
+                    self._sections = []
                 continue
 
             self._sections.append(section)
@@ -70,8 +74,8 @@ class MDDocument:
         """
         Check if ToC exists in the document or create one.
         """
-        if not self.toc_section:
-            self.toc_section = self.generate_toc_section()
+        if not self._toc_section:
+            self._toc_section = self.generate_toc_section()
 
     @classmethod
     def get_anchor(cls, title: Text) -> Text:
@@ -158,10 +162,12 @@ class MDDocument:
 
     def _build_content(self) -> Text:
         sections = []
-        if self.title:
-            sections.append(f"# {self.title}")
-        if self.toc_section:
-            sections.append(self.toc_section)
+        if self._title:
+            sections.append(f"# {self._title}")
+        if self._subtitle:
+            sections.append(self._subtitle)
+        if self._toc_section:
+            sections.append(self._toc_section)
 
         sections.extend(self._sections)
         return self._section_separator.join(sections) + "\n"
@@ -175,6 +181,32 @@ class MDDocument:
         """
         content = self._build_content()
         path.write_text(content)
+
+    @property
+    def title(self) -> Optional[Text]:
+        return self._title
+
+    @title.setter
+    def title(self, title: Text) -> None:
+        self._title = title
+        self._content = self._build_content()
+
+    @property
+    def subtitle(self) -> Optional[Text]:
+        return self._subtitle
+
+    @subtitle.setter
+    def subtitle(self, subtitle: Text) -> None:
+        self._subtitle = subtitle
+        self._content = self._build_content()
+
+    @property
+    def toc_section(self) -> Optional[Text]:
+        return self._toc_section
+
+    @toc_section.setter
+    def toc_section(self, toc_section: Text) -> None:
+        self._toc_section = toc_section
 
     def append(self, content: Text) -> None:
         """
@@ -191,7 +223,7 @@ class MDDocument:
                 self._sections.append(section)
 
         self._content = self._build_content()
-        self._parse_content()
+        # self._parse_content()
 
     def generate_toc_section(self, max_depth: int = 3) -> Text:
         """
@@ -204,9 +236,6 @@ class MDDocument:
             A string with ToC.
         """
         toc_lines = []
-        if self.title:
-            link = self.render_doc_link(self.title, anchor=self.title)
-            toc_lines.append(f"- {link}")
 
         in_codeblock = False
         for line in self._content.split("\n"):

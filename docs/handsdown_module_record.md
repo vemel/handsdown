@@ -1,5 +1,7 @@
 # ModuleRecord
 
+> Auto-generated documentation for [handsdown.module_record](../handsdown/module_record.py) module.
+
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
@@ -11,8 +13,6 @@
     - [ModuleRecordList().find_object](#modulerecordlistfind_object)
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
-
-> Auto-generated documentation for [handsdown.module_record](../handsdown/module_record.py) module.
 
 ## ModuleObjectRecord
 
