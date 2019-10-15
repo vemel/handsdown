@@ -93,7 +93,7 @@ class Generator:
         )
 
     def _build_module_record_list(self) -> ModuleRecordList:
-        result = ModuleRecordList()
+        module_record_list = ModuleRecordList()
         for source_path in self._source_paths:
             try:
                 module_record = self._loader.get_module_record(source_path)
@@ -106,9 +106,9 @@ class Generator:
                 )
 
             if module_record:
-                result.add(module_record)
+                module_record_list.add(module_record)
 
-        return result
+        return module_record_list
 
     def cleanup_old_docs(self) -> None:
         """

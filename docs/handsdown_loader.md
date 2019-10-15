@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().\_discover\_module\_objects
 
-[🔍 find in source code](../handsdown/loader.py#L303)
+[🔍 find in source code](../handsdown/loader.py#L326)
 
 ```python
 def _discover_module_objects(
@@ -62,7 +62,7 @@ A generator that yields `ModuleObjectRecord` instances.
 
 ### Loader().\_get\_object\_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L195)
+[🔍 find in source code](../handsdown/loader.py#L202)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -80,7 +80,7 @@ A string with object docsting.
 
 ### Loader().\_setup\_django
 
-[🔍 find in source code](../handsdown/loader.py#L153)
+[🔍 find in source code](../handsdown/loader.py#L160)
 
 ```python
 def _setup_django() -> None
@@ -123,7 +123,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader.get\_object\_signature
 
-[🔍 find in source code](../handsdown/loader.py#L178)
+[🔍 find in source code](../handsdown/loader.py#L185)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -142,7 +142,7 @@ A string with object signature or None.
 
 ### Loader.get\_source\_line\_number
 
-[🔍 find in source code](../handsdown/loader.py#L377)
+[🔍 find in source code](../handsdown/loader.py#L397)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -158,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import\_module
 
-[🔍 find in source code](../handsdown/loader.py#L236)
+[🔍 find in source code](../handsdown/loader.py#L239)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any

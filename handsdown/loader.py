@@ -125,6 +125,7 @@ class Loader:
             source_path=source_path,
             import_string=file_import,
             objects=[],
+            related_objects=[],
         )
 
         try:
@@ -141,6 +142,12 @@ class Loader:
                 and object_record.title.lower() == main_class_lookup_name
             ):
                 module_record.title = object_record.title
+
+            # add objects from different modules to related objects
+            if hasattr(object_record.object, "__module__"):
+                if object_record.object.__module__ != inspect_module.__name__:
+                    module_record.related_objects.append(object_record)
+                    continue
 
             module_record.objects.append(object_record)
 
@@ -206,10 +213,6 @@ class Loader:
 
         # Fix multiline docstrings starting with no newline after quotes
         if "\n" in docstring and docstring[0] != "\n":
-            short_docstring = docstring[:30].replace("\n", "\\n")
-            self._logger.warning(
-                f'Docstring "{short_docstring}" does not start with newline, check output'
-            )
             lines = docstring.split("\n")
             next_line_index = 1
             next_line = lines[next_line_index]
@@ -270,31 +273,51 @@ class Loader:
         return module
 
     @staticmethod
-    def _get_inspect_predicate(
-        module: Any, parent: Any = None
-    ) -> Callable[[Any], bool]:
-        def predicate(obj: Any) -> bool:
-            # skip methods without docstrings
-            if parent and not obj.__doc__:
+    def _inspect_predicate(obj: Any) -> bool:
+        # skip built-in fields
+        if getattr(obj, "__name__", "") == "type":
+            return False
+
+        # skip built-in classes
+        if getattr(obj, "__module__", "builtins") == "builtins":
+            return False
+
+        # skip built-in fields
+        if hasattr(obj, "__module__"):
+            if not hasattr(obj, "__name__"):
                 return False
 
-            # skip objects from different modules
-            if hasattr(obj, "__module__"):
-                if obj.__module__ != module.__name__:
-                    return False
+            if obj.__name__.startswith("__"):
+                return False
 
-            if inspect.isclass(obj):
+        if inspect.isclass(obj):
+            return True
+
+        if inspect.isfunction(obj):
+            return True
+
+        return False
+
+    @staticmethod
+    def _get_parent_inspect_predicate(parent: Any) -> Callable[[Any], bool]:
+        def predicate(obj: Any) -> bool:
+            # skip attributes without docstrings
+            if not obj.__doc__:
+                return False
+
+            # skip nameless attributes
+            if not hasattr(obj, "__name__"):
+                return False
+
+            # skip built-in attributes
+            if obj.__name__ not in parent.__dict__:
+                return False
+
+            if inspect.ismethod(obj):
                 return True
 
-            # skip built-in methods
-            if inspect.ismethod(obj) and parent:
-                if obj.__name__ in parent.__dict__:
-                    return True
-
-            # skip inherited functions
             if inspect.isfunction(obj):
-                if not parent or obj.__name__ in parent.__dict__:
-                    return True
+                return True
 
             return False
 
@@ -315,9 +338,7 @@ class Loader:
         import_string = module_record.import_string
         inspect_module = module_record.module
 
-        members = inspect.getmembers(
-            inspect_module, self._get_inspect_predicate(inspect_module)
-        )
+        members = inspect.getmembers(inspect_module, self._inspect_predicate)
         members.sort(key=lambda x: x[0])
 
         for object_name, inspect_object in members:
@@ -338,8 +359,7 @@ class Loader:
                 continue
 
             object_members = inspect.getmembers(
-                inspect_object,
-                self._get_inspect_predicate(inspect_module, inspect_object),
+                inspect_object, self._get_parent_inspect_predicate(inspect_object)
             )
             object_members.sort(key=lambda x: x[0])
 

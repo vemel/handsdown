@@ -54,6 +54,7 @@ class ModuleRecord:
     title: Text
     import_string: Text
     objects: List[ModuleObjectRecord]
+    related_objects: List[ModuleObjectRecord]
     docstring: Optional[Text]
 
     def get_import_string_parts(self) -> List[Text]:
