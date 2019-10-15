@@ -391,14 +391,10 @@ class Generator:
 
     def _generate_index(self) -> None:
         """
-        Generate new `<output>/README.md`. Copy content from `README.md` and add ToC.
+        Generate new `<output>/README.md` with ToC of all project modules.
         """
         md_doc = MDDocument()
-        readme_path = Path(self._root_path / "README.md")
-        if readme_path.exists():
-            title, _ = MDDocument.extract_title(readme_path.read_text())
-            if title:
-                md_doc.title = title
+        md_doc.title = self._project_name
 
         md_doc.append(f"> Auto-generated documentation index.")
         md_doc.ensure_toc_exists()

@@ -1,6 +1,6 @@
-# 🙌 Handsdown - Python documentation generator
+# Handsdown
 
-- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
+- [Handsdown](#handsdown)
   - [Examples](./examples_index.md#examples)
     - [RSTExample](./examples_rst_example.md#rstexample)
   - [Handsdown](./handsdown_index.md#handsdown)

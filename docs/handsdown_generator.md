@@ -62,7 +62,7 @@ Main handsdown doc generator.
 def _generate_index() -> None
 ```
 
-Generate new `<output>/README.md`. Copy content from `README.md` and add ToC.
+Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
