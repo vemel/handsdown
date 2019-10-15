@@ -399,7 +399,7 @@ class Generator:
         md_doc.append(f"> Auto-generated `{self._project_name}` documentation index.")
         md_doc.ensure_toc_exists()
 
-        modules_toc_lines = self._build_modules_toc_lines("", max_depth=10)
+        modules_toc_lines = self._build_modules_toc_lines("", max_depth=3)
         if modules_toc_lines:
             toc_lines = md_doc.toc_section.split("\n")
             for line in modules_toc_lines:
