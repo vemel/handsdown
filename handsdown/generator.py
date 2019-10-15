@@ -218,10 +218,10 @@ class Generator:
                 )
             )
 
-        breadcrumbs[0] = MDDocument.render_doc_link(
-            self._project_name, md_name=self.INDEX_NAME
-        )
         breadcrumbs.append(module_record.title)
+        breadcrumbs.insert(
+            0, MDDocument.render_doc_link(self._project_name, md_name=self.INDEX_NAME)
+        )
 
         return " / ".join(breadcrumbs)
 
