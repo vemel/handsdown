@@ -3,18 +3,17 @@
 from pathlib import Path
 from setuptools import setup
 from setuptools import find_packages
-import __version__ as v
+import __version__ as version_data
 
 ROOT_PATH = Path(__file__).absolute().parent
 README_PATH = ROOT_PATH / "README.md"
 DESCRIPTION = README_PATH.read_text().split("\n")[0]
 URL = f"https://github.com/vemel/{ROOT_PATH.name}"
 
-version = v.__version__
+version = version_data.__version__
 
 #######################################
 # USER INPUTS:
-REQUIRES_PYTHON = ">=3.7"
 AUTHOR = "Vlad Emelianov"
 AUTHOR_EMAIL = "vlad.emelianov.nz@gmail.com"
 
@@ -38,13 +37,36 @@ setup(
     author=AUTHOR,
     author_email=AUTHOR_EMAIL,
     packages=find_packages(
-        exclude=["tests", "*.tests", "*.tests.*", "tests.*", "__pycache__"]
+        exclude=[
+            "tests",
+            "*.tests",
+            "*.tests.*",
+            "tests.*",
+            "__pycache__",
+            "examples",
+            "examples.*",
+        ]
     ),
     install_requires=REQUIRED,
     extras_require=EXTRAS,
-    include_package_data=True,
-    zip_safe=False,
+    include_package_data=False,
+    zip_safe=True,
     dependency_links=DEPENDENCY_LINKS,
-    classifiers=["Programming Language :: Python :: 3.7"],
-    entry_points={"console_scripts": [f"handsdown = {ROOT_PATH.name}.main:main"]},
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Framework :: Django",
+        "Framework :: Flask",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3 :: Only",
+        "Topic :: Software Development :: Documentation",
+        "Topic :: Software Development :: Code Generators",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
+    entry_points={"console_scripts": [f"handsdown = handsdown.main:main"]},
 )
