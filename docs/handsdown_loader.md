@@ -1,6 +1,6 @@
 # Loader
 
-- [Handsdown](./README.md) / `Handsdown` / Loader
+- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / Loader
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)

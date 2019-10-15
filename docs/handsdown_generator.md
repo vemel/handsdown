@@ -1,6 +1,6 @@
 # Generator
 
-- [Handsdown](./README.md) / `Handsdown` / Generator
+- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / Generator
   - [Generator](#generator)
     - [Generator()._generate_index](#generator_generate_index)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)

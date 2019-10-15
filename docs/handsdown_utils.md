@@ -1,6 +1,6 @@
 # Utils
 
-- [Handsdown](./README.md) / `Handsdown` / Utils
+- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / Utils
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 

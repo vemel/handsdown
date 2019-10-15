@@ -1,6 +1,6 @@
 # SectionMap
 
-- [Handsdown](./README.md) / `Handsdown` / [Processors](./handsdown_processors_index.md) / SectionMap
+- [Handsdown](./README.md) / [Handsdown](./handsdown_index.md) / [Processors](./handsdown_processors_index.md) / SectionMap
   - [SectionMap](#sectionmap)
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)

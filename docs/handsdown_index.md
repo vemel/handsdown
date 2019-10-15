@@ -1,11 +1,9 @@
-# 🙌 Handsdown - Python documentation generator
+# Handsdown
 
-- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
-  - [Examples](./examples_index.md)
-    - [RSTExample](./examples_rst_example.md)
-  - [Handsdown](./handsdown_index.md)
+- [Handsdown](./README.md) / Handsdown
+  - Modules
     - [Main](./handsdown___main__.md)
-    - [CLI Parser](./handsdown_cli_parser.md)
+    - [Cli Parser](./handsdown_cli_parser.md)
     - [Generator](./handsdown_generator.md)
     - [IndentTrimmer](./handsdown_indent_trimmer.md)
     - [Loader](./handsdown_loader.md)
@@ -22,4 +20,6 @@
     - [Signature](./handsdown_signature.md)
     - [Utils](./handsdown_utils.md)
 
-> Auto-generated `Handsdown` documentation index.
+> Auto-generated documentation for [handsdown](../handsdown/__init__.py) module
+
+Source code for `handsdown` project.
