@@ -12,7 +12,7 @@
     - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [ModuleRecord](#modulerecord) module ([module_record.py](../handsdown/module_record.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [ModuleRecord](#modulerecord) module ([module_record.py](../handsdown/module_record.py))
 
 ## ModuleObjectRecord
 

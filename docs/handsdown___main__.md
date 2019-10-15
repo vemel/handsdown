@@ -2,6 +2,6 @@
 
 - [Main](#main)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / `Main` module ([__main__.py](../handsdown/__main__.py))
+> Auto-generated documentation for [Handsdown](./README.md) / `Main` module ([__main__.py](../handsdown/__main__.py))
 
 Main module entrypoint.

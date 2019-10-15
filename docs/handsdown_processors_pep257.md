@@ -3,7 +3,7 @@
 - [Pep257](#pep257)
   - [PEP257DocstringProcessor](#pep257docstringprocessor)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / `Pep257` module ([pep257.py](../handsdown/processors/pep257.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [Processors](./handsdown_processors_index.md) / `Pep257` module ([pep257.py](../handsdown/processors/pep257.py))
 
 ## PEP257DocstringProcessor
 

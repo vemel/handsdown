@@ -8,7 +8,7 @@
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
     - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [IndentTrimmer](#indenttrimmer) module ([indent_trimmer.py](../handsdown/indent_trimmer.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [IndentTrimmer](#indenttrimmer) module ([indent_trimmer.py](../handsdown/indent_trimmer.py))
 
 ## IndentTrimmer
 

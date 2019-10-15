@@ -8,7 +8,7 @@
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / `Signature` module ([signature.py](../handsdown/signature.py))
+> Auto-generated documentation for [Handsdown](./README.md) / `Signature` module ([signature.py](../handsdown/signature.py))
 
 ## Config
 

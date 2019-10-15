@@ -11,7 +11,7 @@
     - [Generator().replace_links](#generatorreplace_links)
   - [GeneratorError](#generatorerror)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [Generator](#generator) module ([generator.py](../handsdown/generator.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [Generator](#generator) module ([generator.py](../handsdown/generator.py))
 
 ## Generator
 
@@ -62,7 +62,7 @@ Main handsdown doc generator.
 def _generate_index() -> None
 ```
 
-Generate new `index.md`. Copy content from `README.md` and add ToC.
+Generate new `<output>/README.md`. Copy content from `README.md` and add ToC.
 
 ### Generator()._get_formatted_docstring
 
@@ -138,7 +138,7 @@ Generate all doc files at once.
 def generate_index() -> None
 ```
 
-Generate `index.md` file with title from `<root>/README.md` and `Modules` section that
+Generate `README.md` file with title from `<root>/README.md` and `Modules` section that
 contains a Tree of all modules in the project.
 
 ### Generator().replace_links

@@ -2,7 +2,7 @@
 
 - [Processors](#processors)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / `Processors` module ([__init__.py](../handsdown/processors/__init__.py))
+> Auto-generated documentation for [Handsdown](./README.md) / `Processors` module ([__init__.py](../handsdown/processors/__init__.py))
 
 Docstrings processors.
 

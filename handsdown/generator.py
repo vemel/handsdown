@@ -41,7 +41,7 @@ class Generator:
 
     LOGGER_NAME = "handsdown"
     INDEX_NAME = "README.md"
-    INDEX_MODULES_NAME = "Modules"
+    MODULES_NAME = "Modules"
 
     def __init__(
         self,
@@ -184,6 +184,7 @@ class Generator:
             md_doc.title = module_record.title
 
         md_doc.ensure_toc_exists()
+
         md_doc.write(self._output_path / md_name)
 
     def _build_breadcrumbs_string(self, module_record: ModuleRecord) -> Text:
@@ -207,7 +208,7 @@ class Generator:
             )
 
         breadcrumbs[0] = MDDocument.render_doc_link(
-            self._project_name, anchor=self.INDEX_MODULES_NAME, md_name=self.INDEX_NAME
+            self._project_name, md_name=self.INDEX_NAME
         )
         breadcrumbs.append(f"`{module_record.title}`")
 
@@ -229,7 +230,7 @@ class Generator:
 
     def generate_index(self) -> None:
         """
-        Generate `index.md` file with title from `<root>/README.md` and `Modules` section that
+        Generate `README.md` file with title from `<root>/README.md` and `Modules` section that
         contains a Tree of all modules in the project.
         """
         self._logger.debug(
@@ -375,7 +376,7 @@ class Generator:
 
     def _generate_index(self) -> None:
         """
-        Generate new `index.md`. Copy content from `README.md` and add ToC.
+        Generate new `<output>/README.md`. Copy content from `README.md` and add ToC.
         """
         md_doc = MDDocument()
         readme_path = Path(self._root_path / "README.md")
@@ -385,11 +386,33 @@ class Generator:
                 md_doc.title = title
 
         md_doc.append(f"> Auto-generated `{self._project_name}` documentation index.")
-        md_doc.append(f"## {self.INDEX_MODULES_NAME}")
+        md_doc.ensure_toc_exists()
 
-        lines = []
+        modules_toc_lines = self._build_modules_toc_lines("", max_depth=10)
+        if modules_toc_lines:
+            toc_lines = md_doc.toc_section.split("\n")
+            toc_lines.append(f"  - {self.MODULES_NAME}")
+            for line in modules_toc_lines:
+                toc_lines.append(f"    {line}")
+
+            md_doc.toc_section = "\n".join(toc_lines)
+
+        md_doc.write(self._output_path / self.INDEX_NAME)
+
+    def _build_modules_toc_lines(self, import_string: Text, max_depth: int = 3):
+        lines: List[Text] = []
+        parts: List[Text] = []
+        if import_string:
+            parts = import_string.split(".")
+
         last_import_string_parts: List[Text] = []
         for module_record in self._module_records:
+            if not module_record.import_string.startswith(import_string):
+                continue
+
+            if len(module_record.import_string.split(".")) > len(parts) + max_depth:
+                continue
+
             md_name = module_record.output_file_name
             title_parts = module_record.get_title_parts()
             import_string_parts = module_record.get_import_string_parts()
@@ -405,7 +428,4 @@ class Generator:
             last_import_string_parts = import_string_parts
             indent = "  " * (len(title_parts) - 1)
             lines.append(f"{indent}- [{title_parts[-1]}](./{md_name})")
-
-        md_doc.append("\n".join(lines))
-        md_doc.ensure_toc_exists()
-        md_doc.write(self._output_path / self.INDEX_NAME)
+        return lines

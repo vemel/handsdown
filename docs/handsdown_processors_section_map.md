@@ -5,7 +5,7 @@
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / [SectionMap](#sectionmap) module ([section_map.py](../handsdown/processors/section_map.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [Processors](./handsdown_processors_index.md) / [SectionMap](#sectionmap) module ([section_map.py](../handsdown/processors/section_map.py))
 
 ## SectionMap
 

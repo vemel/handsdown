@@ -4,7 +4,7 @@
   - [SmartDocstringProcessor](#smartdocstringprocessor)
     - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 
-> Auto-generated documentation for [Handsdown](./README.md#modules) / [Processors](./handsdown_processors_index.md) / `Smart` module ([smart.py](../handsdown/processors/smart.py))
+> Auto-generated documentation for [Handsdown](./README.md) / [Processors](./handsdown_processors_index.md) / `Smart` module ([smart.py](../handsdown/processors/smart.py))
 
 ## SmartDocstringProcessor
 
