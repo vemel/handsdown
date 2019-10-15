@@ -165,7 +165,7 @@ class Generator:
             f"{module_record.import_string}",
             f"{self._root_relative_path / relative_file_path}",
         )
-        md_doc.append(f"> Auto-generated documentation for {source_link} module")
+        md_doc.append(f"> Auto-generated documentation for {source_link} module.")
 
         if docstring:
             # set MD and module record title if it is found in docstring
@@ -396,7 +396,7 @@ class Generator:
             if title:
                 md_doc.title = title
 
-        md_doc.append(f"> Auto-generated `{self._project_name}` documentation index.")
+        md_doc.append(f"> Auto-generated documentation index.")
         md_doc.ensure_toc_exists()
 
         modules_toc_lines = self._build_modules_toc_lines("", max_depth=3)

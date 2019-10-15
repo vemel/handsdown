@@ -8,7 +8,7 @@
     - [SectionMap](./handsdown_processors_section_map.md)
     - [Smart](./handsdown_processors_smart.md)
 
-> Auto-generated documentation for [handsdown.processors](../handsdown/processors/__init__.py) module
+> Auto-generated documentation for [handsdown.processors](../handsdown/processors/__init__.py) module.
 
 Docstrings processors.
 

@@ -11,7 +11,7 @@
     - [Generator().replace_links](#generatorreplace_links)
   - [GeneratorError](#generatorerror)
 
-> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module
+> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
 
 ## Generator
 

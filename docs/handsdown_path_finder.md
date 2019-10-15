@@ -7,7 +7,7 @@
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
 
-> Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module
+> Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module.
 
 ## PathFinder
 

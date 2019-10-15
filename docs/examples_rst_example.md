@@ -6,7 +6,7 @@
     - [RSTExample.replace_test](#rstexamplereplace_test)
     - [RSTExample.rtype_test](#rstexamplertype_test)
 
-> Auto-generated documentation for [examples.rst_example](../examples/rst_example.py) module
+> Auto-generated documentation for [examples.rst_example](../examples/rst_example.py) module.
 
 ## RSTExample
 

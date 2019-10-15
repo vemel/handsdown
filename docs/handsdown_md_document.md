@@ -12,7 +12,7 @@
     - [MDDocument.render_link](#mddocumentrender_link)
     - [MDDocument().write](#mddocumentwrite)
 
-> Auto-generated documentation for [handsdown.md_document](../handsdown/md_document.py) module
+> Auto-generated documentation for [handsdown.md_document](../handsdown/md_document.py) module.
 
 ## MDDocument
 

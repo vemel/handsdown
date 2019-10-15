@@ -22,4 +22,4 @@
     - [Signature](./handsdown_signature.md)
     - [Utils](./handsdown_utils.md)
 
-> Auto-generated `Handsdown` documentation index.
+> Auto-generated documentation index.

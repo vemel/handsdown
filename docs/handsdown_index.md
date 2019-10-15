@@ -20,6 +20,6 @@
     - [Signature](./handsdown_signature.md)
     - [Utils](./handsdown_utils.md)
 
-> Auto-generated documentation for [handsdown](../handsdown/__init__.py) module
+> Auto-generated documentation for [handsdown](../handsdown/__init__.py) module.
 
 Source code for `handsdown` project.
