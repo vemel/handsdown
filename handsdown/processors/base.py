@@ -1,4 +1,3 @@
-from abc import abstractmethod
 from typing import Text, Optional, Dict, Pattern
 
 from handsdown.processors.section_map import SectionMap
@@ -19,6 +18,7 @@ class BaseDocstringProcessor:
         self.in_codeblock = False
 
     line_re_map: Dict[Pattern, Text] = {}
+    section_name_map: Dict[Text, Text] = {}
 
     def build_sections(self, content: Text) -> SectionMap:
         """
@@ -49,6 +49,28 @@ class BaseDocstringProcessor:
 
         return section_map
 
-    @abstractmethod
     def _parse_line(self, line: Text) -> Optional[Text]:
-        pass
+        if line.strip().startswith("```"):
+            self.in_codeblock = not self.in_codeblock
+            return line
+
+        if self.in_codeblock:
+            return line
+
+        if line in self.section_name_map:
+            self.current_section_name = self.section_name_map[line]
+            return None
+
+        for line_re, line_format in self.line_re_map.items():
+            match = line_re.match(line)
+            if not match:
+                continue
+
+            match_dict = match.groupdict()
+
+            if "section" in match_dict:
+                self.current_section_name = self.section_name_map[match_dict["section"]]
+
+            return line_format.format(**match_dict)
+
+        return line

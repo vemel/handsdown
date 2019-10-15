@@ -8,7 +8,7 @@
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](../handsdown/processors/base.py#L8)
+[🔍 find in source code](../handsdown/processors/base.py#L7)
 
 ```python
 class BaseDocstringProcessor()
