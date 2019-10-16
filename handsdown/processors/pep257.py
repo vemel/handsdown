@@ -5,7 +5,7 @@ from handsdown.processors.base import BaseDocstringProcessor
 
 class PEP257DocstringProcessor(BaseDocstringProcessor):
     """
-    Docstring processor for PEP257 and Google docstring format.
+    Docstring processor for PEP 257 and Google docstring format.
     """
 
     line_re_map = {
@@ -38,11 +38,14 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
         "Example:": "Examples",
         "Examples:": "Examples",
         "Keyword Args:": "Arguments",
+        "Keyword args:": "Arguments",
         "Keyword Arguments:": "Arguments",
+        "Keyword arguments:": "Arguments",
         "Methods:": "Methods",
         "Note:": "Notes",
         "Notes:": "Notes",
         "Other Parameters:": "Arguments",
+        "Other parameters:": "Arguments",
         "Parameters:": "Arguments",
         "Return:": "Returns",
         "Returns:": "Returns",
