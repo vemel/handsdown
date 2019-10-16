@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().\_discover\_module\_objects
 
-[🔍 find in source code](../handsdown/loader.py#L326)
+[🔍 find in source code](../handsdown/loader.py#L322)
 
 ```python
 def _discover_module_objects(
@@ -45,15 +45,15 @@ def _discover_module_objects(
 ) -> Generator[handsdown.module_record.ModuleObjectRecord, NoneType, NoneType]
 ```
 
-Get `ModuleObjectRecord` for every object in a module.
+Get [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord) for every object in a module.
 
 #### Arguments
 
-- `module_record` - `ModuleRecord` instance.
+- `module_record` - [ModuleRecord](./handsdown_module_record.md#modulerecord) instance.
 
 #### Returns
 
-A generator that yields `ModuleObjectRecord` instances.
+A generator that yields [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord) instances.
 
 #### See also
 
@@ -103,7 +103,7 @@ def get_module_record(
 ) -> Union[handsdown.module_record.ModuleRecord, NoneType]
 ```
 
-Build `ModuleRecord` for given `source_path`.
+Build [ModuleRecord](./handsdown_module_record.md#modulerecord) for given `source_path`.
 
 #### Arguments
 
@@ -111,7 +111,7 @@ Build `ModuleRecord` for given `source_path`.
 
 #### Returns
 
-A new `ModuleRecord` instance or None if there is ntohing to import.
+A new [ModuleRecord](./handsdown_module_record.md#modulerecord) instance or None if there is ntohing to import.
 
 #### Raises
 
@@ -142,10 +142,10 @@ A string with object signature or None.
 
 ### Loader.get\_source\_line\_number
 
-[🔍 find in source code](../handsdown/loader.py#L403)
+[🔍 find in source code](../handsdown/loader.py#L413)
 
 ```python
-def get_source_line_number(obj: Any) -> Union[int, NoneType]
+def get_source_line_number(obj: Any) -> int
 ```
 
 Get line number in source file where `obj` is declared.

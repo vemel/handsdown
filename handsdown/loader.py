@@ -272,8 +272,7 @@ class Loader:
 
         return module
 
-    @staticmethod
-    def _inspect_predicate(obj: Any) -> bool:
+    def _inspect_predicate(self, obj: Any) -> bool:
         # skip built-in fields
         if getattr(obj, "__name__", "") == "type":
             return False
@@ -290,13 +289,10 @@ class Loader:
             if obj.__name__.startswith("__"):
                 return False
 
-        if inspect.isclass(obj):
-            return True
+        if not inspect.isclass(obj) and not inspect.isfunction(obj):
+            return False
 
-        if inspect.isfunction(obj):
-            return True
-
-        return False
+        return True
 
     @staticmethod
     def _get_parent_inspect_predicate(parent: Any) -> Callable[[Any], bool]:
@@ -343,6 +339,20 @@ class Loader:
 
         for object_name, inspect_object in members:
             is_class = inspect.isclass(inspect_object)
+
+            # skip modules with unknown source
+            try:
+                source_path = Path(inspect.getsourcefile(inspect_object))
+            except OSError:
+                continue
+
+            # skip modules from 3rd party libraries
+            try:
+                source_path.relative_to(self._root_path)
+            except ValueError:
+                continue
+
+            output_file_name = self.get_md_name(source_path)
             source_line_number = self.get_source_line_number(inspect_object)
 
             # skip objects from other sources
@@ -355,8 +365,8 @@ class Loader:
                 object=inspect_object,
                 docstring=self._get_object_docstring(inspect_object),
                 title=object_name,
-                source_path=module_record.source_path,
-                output_file_name=module_record.output_file_name,
+                source_path=source_path,
+                output_file_name=output_file_name,
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
             )
@@ -401,7 +411,7 @@ class Loader:
         return obj.__doc__ or ""
 
     @staticmethod
-    def get_source_line_number(obj: Any) -> Optional[int]:
+    def get_source_line_number(obj: Any) -> int:
         """
         Get line number in source file where `obj` is declared.
 
@@ -410,8 +420,5 @@ class Loader:
         Returns:
             A line number as an integer, starting for 1.
         """
-        try:
-            source_code_info = inspect.findsource(obj)
-        except OSError:
-            return None
+        source_code_info = inspect.findsource(obj)
         return source_code_info[1] + 1

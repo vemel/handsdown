@@ -257,12 +257,21 @@ class Generator:
         output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
         file_changed = False
-        for obj in module_record.objects:
-            search_str = f"`{obj.title}`"
-            if search_str in content:
-                title = obj.title
-                link = MDDocument.render_doc_link(title, anchor=title)
-                content = content.replace(search_str, link)
+        module_objects = module_record.objects + module_record.related_objects
+        link_re = re.compile(r"`+\S+`+")
+        for match in link_re.findall(content):
+            import_string = match.replace("`", "")
+            for module_object in module_objects:
+                if module_object.import_string != import_string:
+                    continue
+
+                title = module_object.title
+                md_name = None
+                if module_record.output_file_name != module_object.output_file_name:
+                    md_name = module_object.output_file_name
+
+                link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
+                content = content.replace(match, link)
                 self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
                 file_changed = True
 
