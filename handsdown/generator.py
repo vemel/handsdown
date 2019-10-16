@@ -261,7 +261,6 @@ class Generator:
         content = output_file_name.read_text()
         file_changed = False
         link_re = re.compile(r"`+\S+`+")
-        print([module_object.import_string for module_object in module_record.objects])
         for match in link_re.findall(content):
             import_string = match.replace("`", "")
             for module_object in module_record.objects:
