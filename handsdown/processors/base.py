@@ -162,6 +162,15 @@ class BaseDocstringProcessor:
             self.current_section_name = self.section_name_map[line]
             return
 
+        # If section name ends with `::` - add section and start RST code block
+        if line.endswith("::") and line[:-1] in self.section_name_map:
+            self.current_section_name = self.section_name_map[line[:-1]]
+            self._in_codeblock = True
+            self._codeblock_indent = self._current_indent + 1
+            self._codeblock_lines_count = 0
+            self._add_line("```python", indent=0)
+            return
+
         # replace occurences from `replace_map`
         for target_str, replace_str in self.replace_map.items():
             line = line.replace(target_str, replace_str)
