@@ -13,7 +13,7 @@ Python docstring-based documentation generator for lazy perfectionists.
 
 ## 🔬 Features
 
-- 👓 PEP257, Google and RST docstrings support. All of them are converted to a valid markdown.
+- 👓 PEP257, PEP484, Google and RST docstrings support. All of them are converted to a valid markdown.
 - 🐍 Works with Django and Flask apps
 - 🐈 Github-friendly. Use your local markdown viewer or open docs
   [right on Github](https://github.com/vemel/handsdown/blob/master/docs/README.md)

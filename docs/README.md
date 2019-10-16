@@ -4,6 +4,7 @@
 
 - [Handsdown](#handsdown)
   - [Examples](./examples_index.md#examples)
+    - [Google Example](./examples_google_example.md#google-example)
     - [RSTExample](./examples_rst_example.md#rstexample)
   - [Handsdown](./handsdown_index.md#handsdown)
     - [Main](./handsdown___main__.md#main)

@@ -4,6 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / Examples
   - Modules
+    - [Google Example](./examples_google_example.md#google-example)
     - [RSTExample](./examples_rst_example.md#rstexample)
 
 Examples of different docstring formats supported by `handsdown`.
