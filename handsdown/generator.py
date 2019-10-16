@@ -42,6 +42,7 @@ class Generator:
     LOGGER_NAME = "handsdown"
     INDEX_NAME = "README.md"
     MODULES_NAME = "Modules"
+    short_link_re = re.compile(r"`+\S+`+")
 
     def __init__(
         self,
@@ -147,7 +148,7 @@ class Generator:
 
             self._generate_doc(module_record)
             self.replace_links(self._output_path / module_record.output_file_name)
-            self._replace_local_links(module_record)
+            self._replace_short_links(module_record)
             return
 
         raise GeneratorError(f"Record not found for {source_path.name}")
@@ -241,7 +242,7 @@ class Generator:
         for module_record in self._module_records:
             self._generate_doc(module_record)
             output_file_path = self._output_path / module_record.output_file_name
-            self._replace_local_links(module_record)
+            self._replace_short_links(module_record)
             self.replace_links(output_file_path)
 
     def generate_index(self) -> None:
@@ -254,15 +255,14 @@ class Generator:
         )
         self._generate_index()
 
-    def _replace_local_links(self, module_record: ModuleRecord) -> None:
+    def _replace_short_links(self, module_record: ModuleRecord) -> None:
         if not module_record.objects:
             return
 
         output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
         file_changed = False
-        link_re = re.compile(r"`+\S+`+")
-        for match in link_re.findall(content):
+        for match in self.short_link_re.findall(content):
             import_string = match.replace("`", "")
             for module_object in module_record.objects:
                 if module_object.import_string != import_string:
