@@ -22,7 +22,7 @@ Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L105)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L112)
 
 ```python
 def get_line_indent(line: str) -> int
@@ -69,7 +69,7 @@ A stripped string.
 
 ### IndentTrimmer.trim_line
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L81)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L88)
 
 ```python
 def trim_line(line: str, indent: int) -> str
@@ -95,7 +95,7 @@ A line with removed indent.
 
 ### IndentTrimmer.trim_lines
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L48)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L54)
 
 ```python
 def trim_lines(lines: Iterable[str]) -> List[str]
@@ -110,7 +110,7 @@ IndentTrimmer.trim_lines([
     '  asd',
     ' asd',
     '   asd',
-)
+])
 # [
 #     ' asd',
 #     'asd',
@@ -128,7 +128,7 @@ A list of lines with trimmed indent.
 
 ### IndentTrimmer.trim_text
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L27)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L33)
 
 ```python
 def trim_text(text: str) -> str

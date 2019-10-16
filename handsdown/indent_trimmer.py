@@ -22,7 +22,13 @@ class IndentTrimmer:
         Returns:
             A stripped string.
         """
-        return text.strip("\n ")
+        lines = text.split("\n")
+        while lines and not lines[0].strip():
+            lines.pop(0)
+        while lines and not lines[-1].strip():
+            lines.pop()
+
+        return "\n".join(lines)
 
     @classmethod
     def trim_text(cls, text: Text) -> Text:
@@ -57,7 +63,7 @@ class IndentTrimmer:
                 '  asd',
                 ' asd',
                 '   asd',
-            )
+            ])
             # [
             #     ' asd',
             #     'asd',
@@ -71,10 +77,11 @@ class IndentTrimmer:
         Returns:
             A list of lines with trimmed indent.
         """
-        indent = cls._get_lines_indent(lines)
+        indents = (cls.get_line_indent(line) for line in lines if line.strip())
+        min_indent = min(indents, default=0)
         new_lines = []
         for line in lines:
-            new_lines.append(cls.trim_line(line, indent))
+            new_lines.append(cls.trim_line(line, min_indent))
 
         return new_lines
 
@@ -120,13 +127,4 @@ class IndentTrimmer:
         Returns:
             A number of indentation characters in a beginning of the line.
         """
-        return len(line) - len(line.lstrip())
-
-    @classmethod
-    def _get_lines_indent(cls, lines: Iterable[Text]) -> int:
-        indents = [cls._get_line_indent(i) for i in lines if i.strip()]
-        return min(indents, default=0)
-
-    @staticmethod
-    def _get_line_indent(line: Text) -> int:
         return len(line) - len(line.lstrip())

@@ -143,7 +143,7 @@ class BaseDocstringProcessor:
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line(line)
+            self._add_line(line, indent=0)
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines
