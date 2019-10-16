@@ -347,12 +347,7 @@ class Loader:
                 continue
 
             output_file_name = self.get_md_name(source_path)
-            source_line_number = self.get_source_line_number(inspect_object)
             is_related = source_path != module_record.source_path
-
-            # skip objects from other sources
-            if source_line_number is None:
-                continue
 
             yield ModuleObjectRecord(
                 import_string=object_name,
