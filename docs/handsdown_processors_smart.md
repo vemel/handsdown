@@ -4,7 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Smart
   - [SmartDocstringProcessor](#smartdocstringprocessor)
-    - [SmartDocstringProcessor().build\_sections](#smartdocstringprocessorbuild_sections)
+    - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 
 ## SmartDocstringProcessor
 
@@ -19,7 +19,7 @@ Docstring processor that checks docstring and uses on of processors
 - `[PEP257DocstringProcessor](./handsdown_processors_pep257.md#pep257docstringprocessor)`
 - `[RSTDocstringProcessor](./handsdown_processors_rst.md#rstdocstringprocessor)`
 
-### SmartDocstringProcessor().build\_sections
+### SmartDocstringProcessor().build_sections
 
 [🔍 find in source code](../handsdown/processors/smart.py#L25)
 

@@ -3,10 +3,10 @@
 > Auto-generated documentation for [handsdown.main](../handsdown/main.py) module.
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / Main
-  - [get\_logger](#get_logger)
+  - [get_logger](#get_logger)
   - [main](#main)
 
-## get\_logger
+## get_logger
 
 [🔍 find in source code](../handsdown/main.py#L23)
 

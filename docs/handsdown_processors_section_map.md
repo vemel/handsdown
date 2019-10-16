@@ -4,7 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / SectionMap
   - [SectionMap](#sectionmap)
-    - [SectionMap().add\_line](#sectionmapadd_line)
+    - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().render](#sectionmaprender)
 
 ## SectionMap
@@ -17,7 +17,7 @@ class SectionMap(*args, **kwargs)
 
 Storage for parsed section for `handsdown.processors.base.BaseProcessor`
 
-### SectionMap().add\_line
+### SectionMap().add_line
 
 [🔍 find in source code](../handsdown/processors/section_map.py#L11)
 

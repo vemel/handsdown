@@ -36,6 +36,7 @@ class MDDocument:
     """
 
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
+    _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
     def __init__(self, content: Text = "") -> None:
@@ -306,6 +307,8 @@ class MDDocument:
 
         return title, content
 
-    @staticmethod
-    def _escape_title(title: Text) -> Text:
-        return title.replace("_", "\\_")
+    @classmethod
+    def _escape_title(cls, title: Text) -> Text:
+        for match in cls._escape_title_re.findall(title):
+            title = title.replace(match, match.replace("_", "\\_"))
+        return title

@@ -4,7 +4,7 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
-    - [BaseDocstringProcessor().build\_sections](#basedocstringprocessorbuild_sections)
+    - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
 ## BaseDocstringProcessor
 
@@ -20,7 +20,7 @@ Base docstring processor. All docstring processors are based on top of it:
 - `[RSTDocstringProcessor](./handsdown_processors_rst.md#rstdocstringprocessor)`
 - `[SmartDocstringProcessor](./handsdown_processors_smart.md#smartdocstringprocessor)`
 
-### BaseDocstringProcessor().build\_sections
+### BaseDocstringProcessor().build_sections
 
 [🔍 find in source code](../handsdown/processors/base.py#L28)
 

@@ -5,14 +5,14 @@
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / MDDocument
   - [MDDocument](#mddocument)
     - [MDDocument().append](#mddocumentappend)
-    - [MDDocument().append\_title](#mddocumentappend_title)
-    - [MDDocument().ensure\_toc\_exists](#mddocumentensure_toc_exists)
-    - [MDDocument.extract\_title](#mddocumentextract_title)
-    - [MDDocument().generate\_toc\_section](#mddocumentgenerate_toc_section)
-    - [MDDocument.get\_anchor](#mddocumentget_anchor)
-    - [MDDocument.is\_toc](#mddocumentis_toc)
-    - [MDDocument.render\_doc\_link](#mddocumentrender_doc_link)
-    - [MDDocument.render\_link](#mddocumentrender_link)
+    - [MDDocument().append_title](#mddocumentappend_title)
+    - [MDDocument().ensure_toc_exists](#mddocumentensure_toc_exists)
+    - [MDDocument.extract_title](#mddocumentextract_title)
+    - [MDDocument().generate_toc_section](#mddocumentgenerate_toc_section)
+    - [MDDocument.get_anchor](#mddocumentget_anchor)
+    - [MDDocument.is_toc](#mddocumentis_toc)
+    - [MDDocument.render_doc_link](#mddocumentrender_doc_link)
+    - [MDDocument.render_link](#mddocumentrender_link)
     - [MDDocument().write](#mddocumentwrite)
 
 ## MDDocument
@@ -53,7 +53,7 @@ Path('output.md').read_text()
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L213)
+[🔍 find in source code](../handsdown/md_document.py#L214)
 
 ```python
 def append(content: str) -> None
@@ -67,9 +67,9 @@ Handle trimming and sectioning the content and update
 
 - `content` - Text to add.
 
-### MDDocument().append\_title
+### MDDocument().append_title
 
-[🔍 find in source code](../handsdown/md_document.py#L229)
+[🔍 find in source code](../handsdown/md_document.py#L230)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -82,9 +82,9 @@ Append `title` to the document.
 - `title` - Title to add.
 - `level` - Title level, number of `#` characters.
 
-### MDDocument().ensure\_toc\_exists
+### MDDocument().ensure_toc_exists
 
-[🔍 find in source code](../handsdown/md_document.py#L73)
+[🔍 find in source code](../handsdown/md_document.py#L74)
 
 ```python
 def ensure_toc_exists() -> None
@@ -92,9 +92,9 @@ def ensure_toc_exists() -> None
 
 Check if ToC exists in the document or create one.
 
-### MDDocument.extract\_title
+### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L282)
+[🔍 find in source code](../handsdown/md_document.py#L283)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -115,9 +115,9 @@ MDDocument.extract_title('no title\ncontent') # ('', 'no title\ncontent')
 
 A tuple fo title and remaining content.
 
-### MDDocument().generate\_toc\_section
+### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L241)
+[🔍 find in source code](../handsdown/md_document.py#L242)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -133,9 +133,9 @@ Generate Table of Contents MD content.
 
 A string with ToC.
 
-### MDDocument.get\_anchor
+### MDDocument.get_anchor
 
-[🔍 find in source code](../handsdown/md_document.py#L80)
+[🔍 find in source code](../handsdown/md_document.py#L81)
 
 ```python
 def get_anchor(title: str) -> str
@@ -147,9 +147,9 @@ Convert title to Github-compatible anchor link.
 
 A test of anchor link.
 
-### MDDocument.is\_toc
+### MDDocument.is_toc
 
-[🔍 find in source code](../handsdown/md_document.py#L92)
+[🔍 find in source code](../handsdown/md_document.py#L93)
 
 ```python
 def is_toc(section: str) -> bool
@@ -161,9 +161,9 @@ Check if the section is Tree of Contents.
 
 True the section is ToC.
 
-### MDDocument.render\_doc\_link
+### MDDocument.render_doc_link
 
-[🔍 find in source code](../handsdown/md_document.py#L131)
+[🔍 find in source code](../handsdown/md_document.py#L132)
 
 ```python
 def render_doc_link(title: str, anchor: str = '', md_name: str = '') -> str
@@ -190,9 +190,9 @@ MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
 
 A string with Markdown link.
 
-### MDDocument.render\_link
+### MDDocument.render_link
 
-[🔍 find in source code](../handsdown/md_document.py#L109)
+[🔍 find in source code](../handsdown/md_document.py#L110)
 
 ```python
 def render_link(title: str, link: str) -> str
@@ -219,7 +219,7 @@ A string with Markdown link.
 
 ### MDDocument().write
 
-[🔍 find in source code](../handsdown/md_document.py#L177)
+[🔍 find in source code](../handsdown/md_document.py#L178)
 
 ```python
 def write(path: pathlib.Path) -> None
