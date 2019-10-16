@@ -20,6 +20,7 @@ class ModuleObjectRecord:
         title -- Object human-readable title.
         docstring -- Object docstring.
         is_class -- True if object is a class.
+        is_related -- True if object is from a different module
     """
 
     source_path: Path
@@ -31,6 +32,7 @@ class ModuleObjectRecord:
     title: Text
     docstring: Optional[Text]
     is_class: bool
+    is_related: bool
 
 
 @dataclass
@@ -54,7 +56,6 @@ class ModuleRecord:
     title: Text
     import_string: Text
     objects: List[ModuleObjectRecord]
-    related_objects: List[ModuleObjectRecord]
     docstring: Optional[Text]
 
     def get_import_string_parts(self) -> List[Text]:

@@ -254,14 +254,17 @@ class Generator:
         self._generate_index()
 
     def _replace_local_links(self, module_record: ModuleRecord) -> None:
+        if not module_record.objects:
+            return
+
         output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
         file_changed = False
-        module_objects = module_record.objects + module_record.related_objects
         link_re = re.compile(r"`+\S+`+")
+        print([module_object.import_string for module_object in module_record.objects])
         for match in link_re.findall(content):
             import_string = match.replace("`", "")
-            for module_object in module_objects:
+            for module_object in module_record.objects:
                 if module_object.import_string != import_string:
                     continue
 
@@ -319,6 +322,9 @@ class Generator:
         self, module_record: ModuleRecord, md_doc: MDDocument
     ) -> None:
         for module_object_record in module_record.objects:
+            if module_object_record.is_related:
+                continue
+
             md_doc.append_title(
                 module_object_record.title, level=module_object_record.level + 2
             )

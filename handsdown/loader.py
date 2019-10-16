@@ -125,7 +125,6 @@ class Loader:
             source_path=source_path,
             import_string=file_import,
             objects=[],
-            related_objects=[],
         )
 
         try:
@@ -139,15 +138,10 @@ class Loader:
             # if class name looks like it is a main class in the module - set it as a title.
             if (
                 object_record.is_class
+                and not object_record.is_related
                 and object_record.title.lower() == main_class_lookup_name
             ):
                 module_record.title = object_record.title
-
-            # add objects from different modules to related objects
-            if hasattr(object_record.object, "__module__"):
-                if object_record.object.__module__ != inspect_module.__name__:
-                    module_record.related_objects.append(object_record)
-                    continue
 
             module_record.objects.append(object_record)
 
@@ -354,6 +348,7 @@ class Loader:
 
             output_file_name = self.get_md_name(source_path)
             source_line_number = self.get_source_line_number(inspect_object)
+            is_related = source_path != module_record.source_path
 
             # skip objects from other sources
             if source_line_number is None:
@@ -369,6 +364,7 @@ class Loader:
                 output_file_name=output_file_name,
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
+                is_related=is_related,
             )
 
             if not is_class:
@@ -393,10 +389,11 @@ class Loader:
                     object=inspect_method,
                     docstring=self._get_object_docstring(inspect_method),
                     title=title,
-                    source_path=module_record.source_path,
+                    source_path=source_path,
                     output_file_name=module_record.output_file_name,
                     source_line_number=self.get_source_line_number(inspect_method),
                     is_class=False,
+                    is_related=is_related,
                 )
 
     @staticmethod
