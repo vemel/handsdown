@@ -10,7 +10,6 @@
     - [Generator().generate_doc](#generatorgenerate_doc)
     - [Generator().generate_docs](#generatorgenerate_docs)
     - [Generator().generate_index](#generatorgenerate_index)
-    - [Generator().replace_links](#generatorreplace_links)
   - [GeneratorError](#generatorerror)
 
 ## Generator
@@ -56,7 +55,7 @@ Main handsdown doc generator.
 
 ### Generator()._generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L405)
+[🔍 find in source code](../handsdown/generator.py#L390)
 
 ```python
 def _generate_index() -> None
@@ -66,7 +65,7 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L351)
+[🔍 find in source code](../handsdown/generator.py#L336)
 
 ```python
 def _get_formatted_docstring(
@@ -94,7 +93,7 @@ A module docstring with valid markdown.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#L114)
+[🔍 find in source code](../handsdown/generator.py#L115)
 
 ```python
 def cleanup_old_docs() -> None
@@ -104,7 +103,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../handsdown/generator.py#L134)
+[🔍 find in source code](../handsdown/generator.py#L135)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -122,7 +121,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#L233)
+[🔍 find in source code](../handsdown/generator.py#L234)
 
 ```python
 def generate_docs() -> None
@@ -140,30 +139,6 @@ def generate_index() -> None
 
 Generate `README.md` file with title from `<root>/README.md` and `Modules` section that
 contains a Tree of all modules in the project.
-
-### Generator().replace_links
-
-[🔍 find in source code](../handsdown/generator.py#L284)
-
-```python
-def replace_links(file_path: pathlib.Path) -> None
-```
-
-Replace all import strings with Markdown links. Only import strings that present in this
-package are replaced, so not dead linsk should be generated.
-
-```python
-my_md = Path('doc.md')
-my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
-handsdown.replace_links(my_md)
-
-my_md.read_text()
-# 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
-```
-
-#### Arguments
-
-- `file_path` - Path to MD document file.
 
 ## GeneratorError
 

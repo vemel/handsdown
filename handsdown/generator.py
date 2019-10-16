@@ -147,8 +147,8 @@ class Generator:
                 continue
 
             self._generate_doc(module_record)
-            self.replace_links(self._output_path / module_record.output_file_name)
             self._replace_short_links(module_record)
+            self._replace_full_links(module_record)
             return
 
         raise GeneratorError(f"Record not found for {source_path.name}")
@@ -241,9 +241,8 @@ class Generator:
 
         for module_record in self._module_records:
             self._generate_doc(module_record)
-            output_file_path = self._output_path / module_record.output_file_name
             self._replace_short_links(module_record)
-            self.replace_links(output_file_path)
+            self._replace_full_links(module_record)
 
     def generate_index(self) -> None:
         """
@@ -269,9 +268,9 @@ class Generator:
                     continue
 
                 title = module_object.title
-                md_name = None
-                if module_record.output_file_name != module_object.output_file_name:
-                    md_name = module_object.output_file_name
+                md_name = module_object.output_file_name
+                if module_record.output_file_name == module_object.output_file_name:
+                    md_name = None
 
                 link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
                 content = content.replace(match, link)
@@ -281,42 +280,28 @@ class Generator:
         if file_changed:
             output_file_name.write_text(content)
 
-    def replace_links(self, file_path: Path) -> None:
-        """
-        Replace all import strings with Markdown links. Only import strings that present in this
-        package are replaced, so not dead linsk should be generated.
+    def _replace_full_links(self, module_record: ModuleRecord) -> None:
+        output_file_name = self._output_path / module_record.output_file_name
+        content = output_file_name.read_text()
 
-        ```python
-        my_md = Path('doc.md')
-        my_md.write_text('I love `' + 'handsdown.indent_trimmer.IndentTrimmer.trim_lines` function!')
-        handsdown.replace_links(my_md)
-
-        my_md.read_text()
-        # 'I love [IndentTrimmer.trim_lines](./handsdown_indent_trimmer.md#indenttrimmertrim_lines) function!'
-        ```
-
-        Arguments:
-            file_path -- Path to MD document file.
-        """
-        content = file_path.read_text()
         file_changed = False
         for match in re.findall(self._docstring_links_re, content):
-            module_object_record = self._module_records.find_object(match)
-            if module_object_record is None:
+            module_object = self._module_records.find_object(match)
+            if module_object is None:
                 continue
 
-            md_name = module_object_record.output_file_name
-            if md_name == file_path.name:
-                continue
+            title = module_object.title
+            md_name = module_object.output_file_name
+            if module_record.output_file_name == module_object.output_file_name:
+                md_name = None
 
-            title = module_object_record.title
             link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
             content = content.replace(match, link)
-            self._logger.debug(f'Adding link "{title}" to {file_path.name}')
+            self._logger.debug(f'Adding link "{title}" to {output_file_name}')
             file_changed = True
 
         if file_changed:
-            file_path.write_text(content)
+            output_file_name.write_text(content)
 
     def _generate_module_doc_lines(
         self, module_record: ModuleRecord, md_doc: MDDocument
