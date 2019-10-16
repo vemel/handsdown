@@ -16,7 +16,7 @@ class IndentTrimmer:
             ```python
             text = '\\n  \\n test\\ntest2\\n \\n '
             IndentTrimmer.trim_empty_lines(text)
-            # ' test\\ntest2'
+            ' test\\ntest2'
             ```
 
         Returns:
@@ -39,7 +39,7 @@ class IndentTrimmer:
 
             ```python
             IndentTrimmer.trim_text('  asd\\n asd\\n   asd\\n')
-            # ' asd\\nasd\\n  asd\\n'
+            ' asd\\nasd\\n  asd\\n'
             ```
 
         Arguments:
@@ -64,11 +64,11 @@ class IndentTrimmer:
                 ' asd',
                 '   asd',
             ])
-            # [
-            #     ' asd',
-            #     'asd',
-            #     '  asd',
-            # ]
+            [
+                ' asd',
+                'asd',
+                '  asd',
+            ]
             ```
 
         Arguments:
@@ -93,9 +93,14 @@ class IndentTrimmer:
         Examples:
 
             ```python
-            IndentTrimmer.trim_line('     test', 2) # '   test'
-            IndentTrimmer.trim_line('     test', 6) # 'test'
-            IndentTrimmer.trim_line('     test', 1) # '    test'
+            IndentTrimmer.trim_line('     test', 2)
+            '   test'
+
+            IndentTrimmer.trim_line('     test', 6)
+            'test'
+
+            IndentTrimmer.trim_line('     test', 1)
+            '    test'
             ```
 
         Arguments:
@@ -117,8 +122,11 @@ class IndentTrimmer:
         Examples:
 
             ```python
-            IndentTrimmer.get_line_indent('   test') # 3
-            IndentTrimmer.get_line_indent('test') # 0
+            IndentTrimmer.get_line_indent('   test')
+            3
+
+            IndentTrimmer.get_line_indent('test')
+            0
             ```
 
         Arguments:

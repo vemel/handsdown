@@ -22,7 +22,7 @@ Utility class for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
 
-[🔍 find in source code](../handsdown/indent_trimmer.py#L112)
+[🔍 find in source code](../handsdown/indent_trimmer.py#L117)
 
 ```python
 def get_line_indent(line: str) -> int
@@ -33,8 +33,11 @@ Get indent length of the line.
 #### Examples
 
 ```python
-IndentTrimmer.get_line_indent('   test') # 3
-IndentTrimmer.get_line_indent('test') # 0
+IndentTrimmer.get_line_indent('   test')
+3
+
+IndentTrimmer.get_line_indent('test')
+0
 ```
 
 #### Arguments
@@ -60,7 +63,7 @@ Trim empty lines in the begging and the end of the text.
 ```python
 text = '\n  \n test\ntest2\n \n '
 IndentTrimmer.trim_empty_lines(text)
-# ' test\ntest2'
+' test\ntest2'
 ```
 
 #### Returns
@@ -80,9 +83,14 @@ Trim indent from line if it is empty.
 #### Examples
 
 ```python
-IndentTrimmer.trim_line('     test', 2) # '   test'
-IndentTrimmer.trim_line('     test', 6) # 'test'
-IndentTrimmer.trim_line('     test', 1) # '    test'
+IndentTrimmer.trim_line('     test', 2)
+'   test'
+
+IndentTrimmer.trim_line('     test', 6)
+'test'
+
+IndentTrimmer.trim_line('     test', 1)
+'    test'
 ```
 
 #### Arguments
@@ -111,11 +119,11 @@ IndentTrimmer.trim_lines([
     ' asd',
     '   asd',
 ])
-# [
-#     ' asd',
-#     'asd',
-#     '  asd',
-# ]
+[
+    ' asd',
+    'asd',
+    '  asd',
+]
 ```
 
 #### Arguments
@@ -140,7 +148,7 @@ Trim minimum indent from each line of text.
 
 ```python
 IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
-# ' asd\nasd\n  asd\n'
+' asd\nasd\n  asd\n'
 ```
 
 #### Arguments

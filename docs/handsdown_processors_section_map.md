@@ -48,11 +48,15 @@ Dataclass representing a [Section](#section) block.
 class SectionMap(*args, **kwargs)
 ```
 
-Storage for parsed section for `handsdown.processors.base.BaseProcessor`
+Dict-based storage for parsed [Section](#section) list for
+`handsdown.processors.base.BaseProcessor`
+
+Key is a [Section](#section) title.
+Value is a related [Section](#section) instance.
 
 ### SectionMap().add_block
 
-[🔍 find in source code](../handsdown/processors/section_map.py#L59)
+[🔍 find in source code](../handsdown/processors/section_map.py#L63)
 
 ```python
 def add_block(section_name: str) -> None
@@ -66,7 +70,7 @@ Add new [SectionBlock](#sectionblock) to section `section_name`.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](../handsdown/processors/section_map.py#L38)
+[🔍 find in source code](../handsdown/processors/section_map.py#L42)
 
 ```python
 def add_line(section_name: str, line: str) -> None
@@ -82,7 +86,7 @@ If line and section are empty - section is not created.
 
 ### SectionMap().render
 
-[🔍 find in source code](../handsdown/processors/section_map.py#L85)
+[🔍 find in source code](../handsdown/processors/section_map.py#L89)
 
 ```python
 def render(header_level: int) -> str
@@ -100,7 +104,7 @@ A markdown string.
 
 ### SectionMap().trim_block
 
-[🔍 find in source code](../handsdown/processors/section_map.py#L71)
+[🔍 find in source code](../handsdown/processors/section_map.py#L75)
 
 ```python
 def trim_block(section_name: str) -> None

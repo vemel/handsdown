@@ -35,16 +35,17 @@ md_doc.title = 'My doc'
 md_doc.ensure_toc_exists()
 md_doc.write(Path('output.md'))
 
+# output is indented for readability
 Path('output.md').read_text()
-# # My doc
-#
-# - [My doc](#my-doc)
-#   - [New section](#new-section)
-#
-# ## New section
-#
-# some content
-#
+'''# My doc
+
+- [My doc](#my-doc)
+  - [New section](#new-section)
+
+## New section
+
+some content
+'''
 ```
 
 #### Arguments
@@ -53,7 +54,7 @@ Path('output.md').read_text()
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L214)
+[🔍 find in source code](../handsdown/md_document.py#L221)
 
 ```python
 def append(content: str) -> None
@@ -69,7 +70,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().append_title
 
-[🔍 find in source code](../handsdown/md_document.py#L230)
+[🔍 find in source code](../handsdown/md_document.py#L237)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -84,7 +85,7 @@ Append `title` to the document.
 
 ### MDDocument().ensure_toc_exists
 
-[🔍 find in source code](../handsdown/md_document.py#L74)
+[🔍 find in source code](../handsdown/md_document.py#L75)
 
 ```python
 def ensure_toc_exists() -> None
@@ -94,7 +95,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L283)
+[🔍 find in source code](../handsdown/md_document.py#L290)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -107,8 +108,11 @@ if not - return an empty title and untouched content.
 #### Examples
 
 ```python
-MDDocument.extract_title('# Title\ncontent') # ('Title', 'content')
-MDDocument.extract_title('no title\ncontent') # ('', 'no title\ncontent')
+MDDocument.extract_title('# Title\ncontent')
+('Title', 'content')
+
+MDDocument.extract_title('no title\ncontent')
+('', 'no title\ncontent')
 ```
 
 #### Returns
@@ -117,7 +121,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L242)
+[🔍 find in source code](../handsdown/md_document.py#L249)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -135,7 +139,7 @@ A string with ToC.
 
 ### MDDocument.get_anchor
 
-[🔍 find in source code](../handsdown/md_document.py#L81)
+[🔍 find in source code](../handsdown/md_document.py#L82)
 
 ```python
 def get_anchor(title: str) -> str
@@ -149,7 +153,7 @@ A test of anchor link.
 
 ### MDDocument.is_toc
 
-[🔍 find in source code](../handsdown/md_document.py#L93)
+[🔍 find in source code](../handsdown/md_document.py#L94)
 
 ```python
 def is_toc(section: str) -> bool
@@ -163,7 +167,7 @@ True the section is ToC.
 
 ### MDDocument.render_doc_link
 
-[🔍 find in source code](../handsdown/md_document.py#L132)
+[🔍 find in source code](../handsdown/md_document.py#L135)
 
 ```python
 def render_doc_link(title: str, anchor: str = '', md_name: str = '') -> str
@@ -174,10 +178,14 @@ Render Markdown link to a local MD document.
 #### Examples
 
 ```python
-MDDocument.render_doc_link('my title', anchor='My anchor') # [my title](#my-anchor)
-MDDocument.render_doc_link('my title', md_name='doc.md') # [my title](./doc.md)
+MDDocument.render_doc_link('my title', anchor='My anchor')
+'[my title](#my-anchor)'
+
+MDDocument.render_doc_link('my title', md_name='doc.md')
+'[my title](./doc.md)'
+
 MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
-# [my title](./doc.md#my-anchor)
+'[my title](./doc.md#my-anchor)'
 ```
 
 #### Arguments
@@ -192,7 +200,7 @@ A string with Markdown link.
 
 ### MDDocument.render_link
 
-[🔍 find in source code](../handsdown/md_document.py#L110)
+[🔍 find in source code](../handsdown/md_document.py#L111)
 
 ```python
 def render_link(title: str, link: str) -> str
@@ -203,9 +211,11 @@ Render Markdown link wih escaped title.
 #### Examples
 
 ```python
-MDDocument.render_link('my title', 'doc.md#test') # [my title](doc.md#test)
+MDDocument.render_link('my title', 'doc.md#test')
+'[my title](doc.md#test)'
+
 MDDocument.render_link('MyClass.__init__', 'my.md')
-# [MyClass.__init__](doc.md#my.md)
+'[MyClass.__init__](doc.md#my.md)'
 ```
 
 #### Arguments
@@ -219,7 +229,7 @@ A string with Markdown link.
 
 ### MDDocument().write
 
-[🔍 find in source code](../handsdown/md_document.py#L178)
+[🔍 find in source code](../handsdown/md_document.py#L185)
 
 ```python
 def write(path: pathlib.Path) -> None

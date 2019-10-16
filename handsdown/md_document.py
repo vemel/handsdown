@@ -19,16 +19,17 @@ class MDDocument:
         md_doc.ensure_toc_exists()
         md_doc.write(Path('output.md'))
 
+        # output is indented for readability
         Path('output.md').read_text()
-        # # My doc
-        #
-        # - [My doc](#my-doc)
-        #   - [New section](#new-section)
-        #
-        # ## New section
-        #
-        # some content
-        #
+        '''# My doc
+
+        - [My doc](#my-doc)
+          - [New section](#new-section)
+
+        ## New section
+
+        some content
+        '''
         ```
 
     Arguments:
@@ -115,9 +116,11 @@ class MDDocument:
         Examples:
 
             ```python
-            MDDocument.render_link('my title', 'doc.md#test') # [my title](doc.md#test)
+            MDDocument.render_link('my title', 'doc.md#test')
+            '[my title](doc.md#test)'
+
             MDDocument.render_link('MyClass.__init__', 'my.md')
-            # [MyClass.__init__](doc.md#my.md)
+            '[MyClass.__init__](doc.md#my.md)'
             ```
 
         Arguments:
@@ -139,10 +142,14 @@ class MDDocument:
         Examples:
 
             ```python
-            MDDocument.render_doc_link('my title', anchor='My anchor') # [my title](#my-anchor)
-            MDDocument.render_doc_link('my title', md_name='doc.md') # [my title](./doc.md)
+            MDDocument.render_doc_link('my title', anchor='My anchor')
+            '[my title](#my-anchor)'
+
+            MDDocument.render_doc_link('my title', md_name='doc.md')
+            '[my title](./doc.md)'
+
             MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
-            # [my title](./doc.md#my-anchor)
+            '[my title](./doc.md#my-anchor)'
             ```
 
         Arguments:
@@ -290,8 +297,11 @@ class MDDocument:
         Examples:
 
             ```python
-            MDDocument.extract_title('# Title\\ncontent') # ('Title', 'content')
-            MDDocument.extract_title('no title\\ncontent') # ('', 'no title\\ncontent')
+            MDDocument.extract_title('# Title\\ncontent')
+            ('Title', 'content')
+
+            MDDocument.extract_title('no title\\ncontent')
+            ('', 'no title\\ncontent')
             ```
 
         Returns:

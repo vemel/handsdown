@@ -32,7 +32,11 @@ class Section:
 
 class SectionMap(UserDict):
     """
-    Storage for parsed section for `handsdown.processors.base.BaseProcessor`
+    Dict-based storage for parsed `Section` list for
+    `handsdown.processors.base.BaseProcessor`
+
+    Key is a `Section` title.
+    Value is a related `Section` instance.
     """
 
     def add_line(self, section_name: Text, line: Text) -> None:

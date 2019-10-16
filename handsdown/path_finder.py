@@ -14,9 +14,14 @@ class PathFinder:
 
         ```python
         path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-        path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-        path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-        path_finder.exclude('*new*').list() # ['my.txt']
+        path_finder.list()
+        ['my_new.txt', 'my.txt', 'new.txt']
+
+        path_finder.include('my*').list()
+        ['my_new.txt', 'my.txt']
+
+        path_finder.exclude('*new*').list()
+        ['my.txt']
         ```
 
     Arguments:

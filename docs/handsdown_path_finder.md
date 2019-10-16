@@ -23,9 +23,14 @@ Find matching paths inside `root` path.
 
 ```python
 path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
-path_finder.list() # ['my_new.txt', 'my.txt', 'new.txt']
-path_finder.include('my*').list() # ['my_new.txt', 'my.txt']
-path_finder.exclude('*new*').list() # ['my.txt']
+path_finder.list()
+['my_new.txt', 'my.txt', 'new.txt']
+
+path_finder.include('my*').list()
+['my_new.txt', 'my.txt']
+
+path_finder.exclude('*new*').list()
+['my.txt']
 ```
 
 #### Arguments
@@ -35,7 +40,7 @@ path_finder.exclude('*new*').list() # ['my.txt']
 
 ### PathFinder().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/path_finder.py#L103)
+[🔍 find in source code](../handsdown/path_finder.py#L108)
 
 ```python
 def __iter__() -> Generator[pathlib.Path, NoneType, NoneType]
@@ -49,7 +54,7 @@ A generator of matched paths.
 
 ### PathFinder().exclude
 
-[🔍 find in source code](../handsdown/path_finder.py#L61)
+[🔍 find in source code](../handsdown/path_finder.py#L66)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -73,7 +78,7 @@ A copy of itself.
 
 ### PathFinder().include
 
-[🔍 find in source code](../handsdown/path_finder.py#L41)
+[🔍 find in source code](../handsdown/path_finder.py#L46)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -97,7 +102,7 @@ A copy of itself.
 
 ### PathFinder().list
 
-[🔍 find in source code](../handsdown/path_finder.py#L119)
+[🔍 find in source code](../handsdown/path_finder.py#L124)
 
 ```python
 def list() -> List[pathlib.Path]

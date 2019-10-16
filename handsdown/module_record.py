@@ -66,11 +66,13 @@ class ModuleRecord:
 
             ```python
             ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-            # ['My my_module', 'utils', 'parsers']
+            ['My my_module', 'utils', 'parsers']
+
             ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
-            # ['my_module', '__main__']
+            ['my_module', '__main__']
+
             ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
-            # ['my_module', 'my_lib']
+            ['my_module', 'my_lib']
             ```
 
         Returns:
@@ -87,11 +89,13 @@ class ModuleRecord:
 
             ```python
             ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-            # ['My module', 'Utils', 'parsers']
+            ['My module', 'Utils', 'parsers']
+
             ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
-            # ['My module', 'Main']
+            ['My module', 'Main']
+
             ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
-            # ['My module', 'MyLibrary']
+            ['My module', 'MyLibrary']
             ```
 
         Returns:
