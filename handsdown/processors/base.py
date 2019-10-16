@@ -63,12 +63,14 @@ class BaseDocstringProcessor:
             self.in_codeblock = False
             self._strip_empty_lines()
             self._add_line("```", indent=0)
+            self._add_line("")
             self._parse_line(line)
             return
 
         # end MD-style codeblock
         if line.strip().startswith("```"):
             self._add_line("```", indent=0)
+            self._add_line("")
             self.in_codeblock = False
             return
 
