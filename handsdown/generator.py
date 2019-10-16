@@ -95,6 +95,7 @@ class Generator:
     def _build_module_record_list(self) -> ModuleRecordList:
         module_record_list = ModuleRecordList()
         for source_path in self._source_paths:
+            module_record = None
             try:
                 module_record = self._loader.get_module_record(source_path)
             except LoaderError as e:

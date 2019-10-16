@@ -94,7 +94,7 @@ A module docstring with valid markdown.
 
 ### Generator().cleanup\_old\_docs
 
-[🔍 find in source code](../handsdown/generator.py#L113)
+[🔍 find in source code](../handsdown/generator.py#L114)
 
 ```python
 def cleanup_old_docs() -> None
@@ -104,7 +104,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate\_doc
 
-[🔍 find in source code](../handsdown/generator.py#L133)
+[🔍 find in source code](../handsdown/generator.py#L134)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -122,7 +122,7 @@ Generate one module doc at once.
 
 ### Generator().generate\_docs
 
-[🔍 find in source code](../handsdown/generator.py#L232)
+[🔍 find in source code](../handsdown/generator.py#L233)
 
 ```python
 def generate_docs() -> None
@@ -132,7 +132,7 @@ Generate all doc files at once.
 
 ### Generator().generate\_index
 
-[🔍 find in source code](../handsdown/generator.py#L246)
+[🔍 find in source code](../handsdown/generator.py#L247)
 
 ```python
 def generate_index() -> None
