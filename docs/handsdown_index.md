@@ -7,7 +7,7 @@
     - [From command line](#from-command-line)
     - [As a module](#as-a-module)
   - [Installation](#installation)
-  - [🐏 Examples](#-examples)
+  - [Examples](#examples)
   - Modules
     - [Main](./handsdown___main__.md#main)
     - [Cli Parser](./handsdown_cli_parser.md#cli-parser)
@@ -91,7 +91,7 @@ Install using pip
 pip install handsdown
 ```
 
-## 🐏 Examples
+## Examples
 
 - All Markdown documentation in this project
 - [RST docstrings](../examples/rst_example.py) with [generated output](/docs/examples_rst_example.md#rstexample)

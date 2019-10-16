@@ -64,7 +64,7 @@ Install using pip
 pip install handsdown
 ```
 
-## 🐏 Examples
+## Examples
 
 - All Markdown documentation in this project
 - [RST docstrings](../examples/rst_example.py) with [generated output](/docs/examples_rst_example.md#rstexample)
