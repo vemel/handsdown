@@ -30,12 +30,11 @@ def get_cli_parser() -> argparse.ArgumentParser:
         "handsdown", description="Docstring-based python documentation generator."
     )
     parser.add_argument(
-        "-d", "--debug", action="store_true", help="Show debug messages"
+        "--panic", action="store_true", help="Panic and die on import error"
     )
     parser.add_argument(
-        "-p", "--panic", action="store_true", help="Panic and die on import error"
+        "--safe", action="store_true", help="Ignore any errors during import"
     )
-    parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(
         "-i",
         "--input-path",
@@ -64,4 +63,8 @@ def get_cli_parser() -> argparse.ArgumentParser:
         default=Path.cwd() / "docs",
         type=abs_path,
     )
+    parser.add_argument(
+        "-d", "--debug", action="store_true", help="Show debug messages"
+    )
+    parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     return parser

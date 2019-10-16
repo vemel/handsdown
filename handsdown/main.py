@@ -71,6 +71,7 @@ def main() -> None:
             output_path=args.output_path,
             source_paths=path_finder.list(),
             raise_errors=args.panic,
+            ignore_unknown_errors=args.safe,
         )
         if args.files:
             for path in args.files:
