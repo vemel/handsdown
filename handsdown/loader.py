@@ -327,6 +327,7 @@ class Loader:
         """
         import_string = module_record.import_string
         inspect_module = module_record.module
+        relative_source_path = module_record.source_path.relative_to(self._root_path)
 
         members = inspect.getmembers(inspect_module, self._inspect_predicate)
         members.sort(key=lambda x: x[0])
@@ -339,6 +340,10 @@ class Loader:
                 source_path = Path(inspect.getsourcefile(inspect_object))
             except (OSError, TypeError):
                 continue
+
+            # fix source path if module was imported from installed pacakges
+            if source_path.as_posix().endswith(relative_source_path.as_posix()):
+                source_path = module_record.source_path
 
             # skip modules from 3rd party libraries
             try:
