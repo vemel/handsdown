@@ -43,8 +43,8 @@ Extended description of method.
 #### Examples
 
 Examples should be written in doctest format, and should illustrate how
-    to use the function.
-
+    to use the function
+    
 ```python
 >>> print([i for i in
 ... example_generator(2)])

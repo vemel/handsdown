@@ -24,7 +24,7 @@ class ClassExample:
 
         Examples:
             Examples should be written in doctest format, and should illustrate how
-            to use the function.
+            to use the function::
 
             >>> print([i for i in
             ... example_generator(2)])
@@ -57,14 +57,14 @@ def function_example(arg1, arg2, arg3=None):
     Extended description of function.
     You can use this function like::
 
-        result = function_example(
-            {
-                'key': 'value',
-            },
-            None,
-        )
+      result = function_example(
+          {
+              'key': 'value',
+          },
+          None,
+      )
 
-        print result
+      print result
 
     Args:
         arg1 (int): Description of arg1

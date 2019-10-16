@@ -91,6 +91,19 @@ class BaseDocstringProcessor:
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
 
     def _parse_code_line(self, line: Text) -> bool:
+        if not line and self._codeblock_lines_count == 0:
+            return
+
+        if self._codeblock_lines_count == 0:
+            self._codeblock_indent = max(self._codeblock_indent, self._current_indent)
+
+        # this is actually a doctest block as it starts with `>>>`
+        if self._codeblock_lines_count == 0 and line.startswith(">>>"):
+            self._in_doctest_block = True
+            self._codeblock_indent = self._current_indent
+            self._parse_doctest_line(line)
+            return
+
         # end RST-style codeblock
         if line and self._current_indent < self._codeblock_indent:
             self._in_codeblock = False
@@ -101,13 +114,10 @@ class BaseDocstringProcessor:
             return
 
         # end MD-style codeblock
-        if line.strip().startswith("```"):
+        if line.startswith("```"):
             self._add_line("```", indent=0)
             self._add_line("")
             self._in_codeblock = False
-            return
-
-        if not line and self._codeblock_lines_count == 0:
             return
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
@@ -127,7 +137,7 @@ class BaseDocstringProcessor:
 
     def _parse_line(self, line: Text) -> None:
         # MD-style codeblock starts with triple backticks
-        if line.strip().startswith("```"):
+        if line.startswith("```"):
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
@@ -135,7 +145,7 @@ class BaseDocstringProcessor:
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines
-        if line.strip().startswith(">>>"):
+        if line.startswith(">>>"):
             self._in_doctest_block = True
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
@@ -178,11 +188,11 @@ class BaseDocstringProcessor:
         # RST-style codeblock start with `::` in the end of the line
         if line.endswith("::"):
             self._in_codeblock = True
-            self._codeblock_indent = self._current_indent + 4
+            self._codeblock_indent = self._current_indent + 1
             self._codeblock_lines_count = 0
             self._add_line(line[:-2])
             self._add_line("")
-            self._add_line("```python")
+            self._add_line("```python", indent=0)
             return
 
         self._add_line(line)
