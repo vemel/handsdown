@@ -142,10 +142,10 @@ A string with object signature or None.
 
 ### Loader.get\_source\_line\_number
 
-[🔍 find in source code](../handsdown/loader.py#L397)
+[🔍 find in source code](../handsdown/loader.py#L403)
 
 ```python
-def get_source_line_number(obj: Any) -> int
+def get_source_line_number(obj: Any) -> Union[int, NoneType]
 ```
 
 Get line number in source file where `obj` is declared.

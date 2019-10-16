@@ -343,6 +343,12 @@ class Loader:
 
         for object_name, inspect_object in members:
             is_class = inspect.isclass(inspect_object)
+            source_line_number = self.get_source_line_number(inspect_object)
+
+            # skip objects from other sources
+            if source_line_number is None:
+                continue
+
             yield ModuleObjectRecord(
                 import_string=object_name,
                 level=0,
@@ -395,7 +401,7 @@ class Loader:
         return obj.__doc__ or ""
 
     @staticmethod
-    def get_source_line_number(obj: Any) -> int:
+    def get_source_line_number(obj: Any) -> Optional[int]:
         """
         Get line number in source file where `obj` is declared.
 
@@ -404,5 +410,8 @@ class Loader:
         Returns:
             A line number as an integer, starting for 1.
         """
-        source_code_info = inspect.findsource(obj)
+        try:
+            source_code_info = inspect.findsource(obj)
+        except OSError:
+            return None
         return source_code_info[1] + 1
