@@ -1,3 +1,12 @@
+"""
+# PEP 287 - reStructuredText docstrings examples
+
+## Links
+
+[PEP 287 - reStructuredText Docstring Format](https://www.python.org/dev/peps/pep-0287/)
+"""
+
+
 class RSTExample:
     @staticmethod
     def reference():

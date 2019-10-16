@@ -4,8 +4,9 @@
 
 - [Handsdown](#handsdown)
   - [Examples](./examples_index.md#examples)
-    - [Google Example](./examples_google_example.md#google-example)
-    - [RSTExample](./examples_rst_example.md#rstexample)
+    - [Google docstrings examples](./examples_google_docstrings.md#google-docstrings-examples)
+    - [PEP 257 - reStructuredText docstrings examples](./examples_pep257_docstrings.md#pep-257---restructuredtext-docstrings-examples)
+    - [PEP 287 - reStructuredText docstrings examples](./examples_rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
   - [Handsdown](./handsdown_index.md#handsdown)
     - [Main](./handsdown___main__.md#main)
     - [CLI Parser](./handsdown_cli_parser.md#cli-parser)

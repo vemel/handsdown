@@ -13,4 +13,4 @@
 class PEP257DocstringProcessor()
 ```
 
-Docstring processor for PEP257 and Google docstring format.
+Docstring processor for PEP 257 and Google docstring format.

@@ -6,6 +6,14 @@
   - [get_logger](#get_logger)
   - [main](#main)
 
+Main CLI entrypoint for `handsdown`
+
+#### Attributes
+
+- `EXCLUDE_EXPRS` - Path glob expressions to always exclude.
+  By default: `build/*`, `tests/*`, `test/*` are excluded.
+- `SOURCES_GLOB_EXPR` - Glob expr to lokkup python source files: `**/*.py`
+
 ## get_logger
 
 [🔍 find in source code](../handsdown/main.py#L23)
@@ -33,11 +41,3 @@ def main() -> None
 ```
 
 Main entrypoint for CLI.
-
-Main CLI entrypoint for `handsdown`
-
-#### Attributes
-
-- `EXCLUDE_EXPRS` - Path glob expressions to always exclude.
-  By default: `build/*`, `tests/*`, `test/*` are excluded.
-- `SOURCES_GLOB_EXPR` - Glob expr to lokkup python source files: `**/*.py`

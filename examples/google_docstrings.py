@@ -1,3 +1,10 @@
+"""
+# Google docstrings examples
+
+## Links
+
+[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+"""
 from typing import Text
 
 
@@ -34,6 +41,8 @@ class ClassExample:
 
         Args:
             text (str, optional): Description of arg1
+            *args (str): Description of args
+            **kwargs (str): Description of kwargs
 
         Returns:
             int: Description of return value

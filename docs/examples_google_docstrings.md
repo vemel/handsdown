@@ -1,16 +1,21 @@
-# Google Example
+# Google docstrings examples
 
-> Auto-generated documentation for [examples.google_example](../examples/google_example.py) module.
+> Auto-generated documentation for [examples.google_docstrings](../examples/google_docstrings.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Examples](./examples_index.md#examples) / Google Example
+- [Handsdown](./README.md#handsdown) / [Examples](./examples_index.md#examples) / Google docstrings examples
+  - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)
   - [function_example](#function_example)
   - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
 
+## Links
+
+[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+
 ## ClassExample
 
-[🔍 find in source code](../examples/google_example.py#L4)
+[🔍 find in source code](../examples/google_docstrings.py#L11)
 
 ```python
 class ClassExample(*args, **kwargs)
@@ -25,7 +30,7 @@ Google-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](../examples/google_example.py#L13)
+[🔍 find in source code](../examples/google_docstrings.py#L20)
 
 ```python
 def method_example(text: str = 'hello') -> int
@@ -60,6 +65,8 @@ Examples should be written in doctest format, and should illustrate how
 #### Arguments
 
 - `text` *str, optional* - Description of arg1
+- `*args` *str* - Description of args
+- `**kwargs` *str* - Description of kwargs
 
 #### Returns
 
@@ -67,7 +74,7 @@ Examples should be written in doctest format, and should illustrate how
 
 ## function_example
 
-[🔍 find in source code](../examples/google_example.py#L45)
+[🔍 find in source code](../examples/google_docstrings.py#L54)
 
 ```python
 def function_example(arg1, arg2, arg3=None)
@@ -107,7 +114,7 @@ print result
 
 ## function_with_pep484_type_annotations
 
-[🔍 find in source code](../examples/google_example.py#L76)
+[🔍 find in source code](../examples/google_docstrings.py#L85)
 
 ```python
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool
