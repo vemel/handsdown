@@ -9,9 +9,8 @@ class MDDocument:
     """
     MD file wrapper. Controls document title and Table of Contents.
 
-    Examples:
+    Examples::
 
-        ```python
         md_doc = MDDocument('hello')
         md_doc.append('## New section')
         md_doc.append('some content')
@@ -30,7 +29,6 @@ class MDDocument:
 
         some content
         '''
-        ```
 
     Arguments:
         content -- Initial MD content.
@@ -113,15 +111,13 @@ class MDDocument:
         """
         Render Markdown link wih escaped title.
 
-        Examples:
+        Examples::
 
-            ```python
             MDDocument.render_link('my title', 'doc.md#test')
             '[my title](doc.md#test)'
 
             MDDocument.render_link('MyClass.__init__', 'my.md')
             '[MyClass.__init__](doc.md#my.md)'
-            ```
 
         Arguments:
             title -- Link text.
@@ -139,9 +135,8 @@ class MDDocument:
         """
         Render Markdown link to a local MD document.
 
-        Examples:
+        Examples::
 
-            ```python
             MDDocument.render_doc_link('my title', anchor='My anchor')
             '[my title](#my-anchor)'
 
@@ -150,7 +145,6 @@ class MDDocument:
 
             MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
             '[my title](./doc.md#my-anchor)'
-            ```
 
         Arguments:
             title -- Link text.
@@ -294,15 +288,13 @@ class MDDocument:
         If title is present -  return a title and a remnaing content.
         if not - return an empty title and untouched content.
 
-        Examples:
+        Examples::
 
-            ```python
             MDDocument.extract_title('# Title\\ncontent')
             ('Title', 'content')
 
             MDDocument.extract_title('no title\\ncontent')
             ('', 'no title\\ncontent')
-            ```
 
         Returns:
             A tuple fo title and remaining content.

@@ -25,12 +25,10 @@ class Loader:
     """
     Loader for python source code.
 
-    Examples:
+    Examples::
 
-        ```python
         loader = Loader(Path('path/to/my_module/'))
         my_module_utils = loader.import_module('my_module.utils')
-        ```
 
     Arguments:
         import_paths -- List of import paths for `import_module` lookup.

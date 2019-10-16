@@ -11,13 +11,11 @@ class IndentTrimmer:
         """
         Trim empty lines in the begging and the end of the text.
 
-        Examples:
+        Examples::
 
-            ```python
             text = '\\n  \\n test\\ntest2\\n \\n '
             IndentTrimmer.trim_empty_lines(text)
             ' test\\ntest2'
-            ```
 
         Returns:
             A stripped string.
@@ -35,12 +33,10 @@ class IndentTrimmer:
         """
         Trim minimum indent from each line of text.
 
-        Examples:
+        Examples::
 
-            ```python
             IndentTrimmer.trim_text('  asd\\n asd\\n   asd\\n')
             ' asd\\nasd\\n  asd\\n'
-            ```
 
         Arguments:
             text -- Multiline text.
@@ -56,9 +52,8 @@ class IndentTrimmer:
         """
         Trim minimum indent from each line of text.
 
-        Examples:
+        Examples::
 
-            ```python
             IndentTrimmer.trim_lines([
                 '  asd',
                 ' asd',
@@ -69,7 +64,6 @@ class IndentTrimmer:
                 'asd',
                 '  asd',
             ]
-            ```
 
         Arguments:
             lines -- List of lines.
@@ -90,9 +84,8 @@ class IndentTrimmer:
         """
         Trim indent from line if it is empty.
 
-        Examples:
+        Examples::
 
-            ```python
             IndentTrimmer.trim_line('     test', 2)
             '   test'
 
@@ -101,7 +94,6 @@ class IndentTrimmer:
 
             IndentTrimmer.trim_line('     test', 1)
             '    test'
-            ```
 
         Arguments:
             line -- A line of text.
@@ -119,15 +111,13 @@ class IndentTrimmer:
         """
         Get indent length of the line.
 
-        Examples:
+        Examples::
 
-            ```python
             IndentTrimmer.get_line_indent('   test')
             3
 
             IndentTrimmer.get_line_indent('test')
             0
-            ```
 
         Arguments:
             line -- Line of text.

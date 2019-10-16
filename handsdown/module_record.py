@@ -62,9 +62,8 @@ class ModuleRecord:
         """
         Get parts of module `import_string`.
 
-        Examples:
+        Examples::
 
-            ```python
             ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
             ['My my_module', 'utils', 'parsers']
 
@@ -73,7 +72,6 @@ class ModuleRecord:
 
             ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
             ['my_module', 'my_lib']
-            ```
 
         Returns:
             A list of import string parts as strings.
@@ -85,9 +83,8 @@ class ModuleRecord:
         Get parts of module title from module import string.
         If `title` is set, last part replaced with `title`.
 
-        Examples:
+        Examples::
 
-            ```python
             ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
             ['My module', 'Utils', 'parsers']
 
@@ -96,7 +93,6 @@ class ModuleRecord:
 
             ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
             ['My module', 'MyLibrary']
-            ```
 
         Returns:
             A list of title parts as strings.
