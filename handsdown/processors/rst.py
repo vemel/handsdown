@@ -36,6 +36,8 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
     replace_map = {
         ":attr:`": "attribute `",
         ":data:`": "`",
+        ":class:``~": "class ``",
+        ":class:`~": "class `",
         ":class:`": "class `",
         ":exc:`": "exception `",
     }
