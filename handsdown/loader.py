@@ -267,21 +267,21 @@ class Loader:
         return module
 
     def _inspect_predicate(self, obj: Any) -> bool:
-        # skip built-in fields
-        if getattr(obj, "__name__", "") == "type":
+        # skip built-in objects
+        if getattr(obj, "__name__", "type") == "type":
             return False
 
-        # skip built-in classes
+        # skip built-in objects
         if getattr(obj, "__module__", "builtins") == "builtins":
             return False
 
-        # skip built-in fields
-        if hasattr(obj, "__module__"):
-            if not hasattr(obj, "__name__"):
-                return False
+        # skip nameless objects
+        if not getattr(obj, "__name__", None):
+            return False
 
-            if obj.__name__.startswith("__"):
-                return False
+        # skip built-in objects
+        if obj.__name__.startswith("__"):
+            return False
 
         if not inspect.isclass(obj) and not inspect.isfunction(obj):
             return False
@@ -296,7 +296,7 @@ class Loader:
                 return False
 
             # skip nameless attributes
-            if not hasattr(obj, "__name__"):
+            if not getattr(obj, "__name__", None):
                 return False
 
             # skip built-in attributes
@@ -337,7 +337,7 @@ class Loader:
             # skip modules with unknown source
             try:
                 source_path = Path(inspect.getsourcefile(inspect_object))
-            except OSError:
+            except (OSError, TypeError):
                 continue
 
             # skip modules from 3rd party libraries
