@@ -54,7 +54,6 @@ class Generator:
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
-        ignore_unknown_errors: bool = False,
     ) -> None:
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
@@ -80,7 +79,6 @@ class Generator:
             self._output_path.mkdir(parents=True)
 
         self._raise_errors = raise_errors
-        self._ignore_unknown_errors = ignore_unknown_errors
         self._loader = loader or Loader(root_path=self._root_path, logger=self._logger)
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
@@ -108,13 +106,6 @@ class Generator:
 
                 self._logger.warning(
                     f"Skipping {source_path.relative_to(self._root_path)} due to import error: {e}"
-                )
-            except Exception as e:
-                if not self._ignore_unknown_errors:
-                    raise
-
-                self._logger.warning(
-                    f"Skipping {source_path.relative_to(self._root_path)} due to unknown error: {e}"
                 )
 
             if module_record:

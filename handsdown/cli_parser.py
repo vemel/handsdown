@@ -33,9 +33,6 @@ def get_cli_parser() -> argparse.ArgumentParser:
         "--panic", action="store_true", help="Panic and die on import error"
     )
     parser.add_argument(
-        "--safe", action="store_true", help="Ignore any errors during import"
-    )
-    parser.add_argument(
         "-i",
         "--input-path",
         help="Path to project root folder",
