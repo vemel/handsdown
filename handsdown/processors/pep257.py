@@ -9,19 +9,25 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
     """
 
     line_re_map = {
+        # Google non-typed
         re.compile(r"^\s*(?P<param>\S+):\s+(?P<desc>.+)$"): "- `{param}` - {desc}",
+        # Google typed with parentheses
         re.compile(
-            r"^\s*(?P<param>\S+)\s+(?P<type>\S+):\s+(?P<desc>.+)$"
+            r"^\s*(?P<param>\S+)\s+\((?P<type>\S+(?:,\s+optional)?)\):\s+(?P<desc>.+)$"
         ): "- `{param}` *{type}* - {desc}",
+        # Google typed without parentheses
         re.compile(
-            r"^\s*(?P<param>\S+)\s+\((?P<type>\S+)\):\s+(?P<desc>.+)$"
+            r"^\s*(?P<param>\S+)\s+(?P<type>\S+(?:,\s+optional)?):\s+(?P<desc>.+)$"
         ): "- `{param}` *{type}* - {desc}",
+        # PEP257 non-typed
         re.compile(r"^\s*(?P<param>\S+)\s+--\s+(?P<desc>.+)$"): "- `{param}` - {desc}",
-        re.compile(
-            r"^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$"
-        ): "- `{param}` *{type}* - {desc}",
+        # PEP257 typed with curly brackets
         re.compile(
             r"^\s*(?P<param>\S+)\s+\{(?P<type>\S+)\}\s+--\s+(?P<desc>.+)$"
+        ): "- `{param}` *{type}* - {desc}",
+        # PEP257 typed
+        re.compile(
+            r"^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$"
         ): "- `{param}` *{type}* - {desc}",
     }
 
