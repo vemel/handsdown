@@ -15,7 +15,8 @@ class BaseDocstringProcessor:
 
     def __init__(self) -> None:
         self.current_section_name: Text = ""
-        self.in_codeblock = False
+        self._in_codeblock = False
+        self._in_doctest_block = False
         self._codeblock_indent = 0
         self._codeblock_lines_count = 0
         self.section_map = SectionMap()
@@ -24,6 +25,15 @@ class BaseDocstringProcessor:
     line_re_map: Dict[Pattern, Text] = {}
     section_name_map: Dict[Text, Text] = {}
     replace_map: Dict[Text, Text] = {}
+
+    def _reset(self):
+        self.current_section_name = ""
+        self._in_codeblock = False
+        self._in_doctest_block = False
+        self.section_map = SectionMap()
+        self._current_indent = 0
+        self._codeblock_indent = 0
+        self._codeblock_lines_count = 0
 
     def build_sections(self, content: Text) -> SectionMap:
         """
@@ -36,31 +46,54 @@ class BaseDocstringProcessor:
             A dictionary where key is a section name and value is a list of string sof this
             section.
         """
-        self.current_section_name = ""
-        self.in_codeblock = False
-        self.section_map = SectionMap()
-        self._current_indent = 0
-        self._codeblock_indent = 0
-        self._codeblock_lines_count = 0
+        self._reset()
 
         for line in content.split("\n"):
             self._current_indent = IndentTrimmer.get_line_indent(line)
             line = line.strip()
-            if self.in_codeblock:
-                self._parse_code_line(line)
-            else:
-                self._parse_line(line)
 
-        if self.in_codeblock:
+            if self._in_doctest_block:
+                self._parse_doctest_line(line)
+                continue
+
+            if self._in_codeblock:
+                self._parse_code_line(line)
+                continue
+
+            self._parse_line(line)
+
+        if self._in_codeblock:
             self._strip_empty_lines()
             self._add_line("```", indent=0)
 
         return self.section_map
 
+    def _parse_doctest_line(self, line: Text) -> bool:
+        # end doctest codeblock
+        if not line:
+            self._in_doctest_block = False
+            self._in_codeblock = False
+            self._strip_empty_lines()
+            self._add_line("```", indent=0)
+            self._add_line("")
+            return
+
+        # end doctest section
+        if self._current_indent < self._codeblock_indent:
+            self._in_doctest_block = False
+            self._in_codeblock = False
+            self._strip_empty_lines()
+            self._add_line("```", indent=0)
+            self._add_line("")
+            self._parse_line(line)
+            return
+
+        self._add_line(line, indent=self._current_indent - self._codeblock_indent)
+
     def _parse_code_line(self, line: Text) -> bool:
         # end RST-style codeblock
         if line and self._current_indent < self._codeblock_indent:
-            self.in_codeblock = False
+            self._in_codeblock = False
             self._strip_empty_lines()
             self._add_line("```", indent=0)
             self._add_line("")
@@ -71,7 +104,7 @@ class BaseDocstringProcessor:
         if line.strip().startswith("```"):
             self._add_line("```", indent=0)
             self._add_line("")
-            self.in_codeblock = False
+            self._in_codeblock = False
             return
 
         if not line and self._codeblock_lines_count == 0:
@@ -95,10 +128,21 @@ class BaseDocstringProcessor:
     def _parse_line(self, line: Text) -> None:
         # MD-style codeblock starts with triple backticks
         if line.strip().startswith("```"):
-            self.in_codeblock = not self.in_codeblock
+            self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_line(line)
+            return
+
+        # Doctest line starts with `>>>` and continues with `...` and output lines
+        if line.strip().startswith(">>>"):
+            self._in_doctest_block = True
+            self._in_codeblock = True
+            self._codeblock_indent = self._current_indent
+            self._codeblock_lines_count = 0
+            self._add_line("")
+            self._add_line("```python", indent=0)
+            self._parse_doctest_line(line)
             return
 
         # If there is a line with a section name - set this section as active
@@ -133,7 +177,7 @@ class BaseDocstringProcessor:
 
         # RST-style codeblock start with `::` in the end of the line
         if line.endswith("::"):
-            self.in_codeblock = True
+            self._in_codeblock = True
             self._codeblock_indent = self._current_indent + 4
             self._codeblock_lines_count = 0
             self._add_line(line[:-2])
