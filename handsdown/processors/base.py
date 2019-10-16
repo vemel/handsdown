@@ -63,7 +63,7 @@ class BaseDocstringProcessor:
             self._parse_line(line)
 
         if self._in_codeblock:
-            self._strip_empty_lines()
+            self._trim_empty_lines()
             self._add_line("```", indent=0)
 
         return self.section_map
@@ -73,18 +73,18 @@ class BaseDocstringProcessor:
         if not line:
             self._in_doctest_block = False
             self._in_codeblock = False
-            self._strip_empty_lines()
+            self._trim_empty_lines()
             self._add_line("```", indent=0)
-            self._add_line("")
+            self._add_block()
             return
 
         # end doctest section
         if self._current_indent < self._codeblock_indent:
             self._in_doctest_block = False
             self._in_codeblock = False
-            self._strip_empty_lines()
+            self._trim_empty_lines()
             self._add_line("```", indent=0)
-            self._add_line("")
+            self._add_block()
             self._parse_line(line)
             return
 
@@ -107,16 +107,16 @@ class BaseDocstringProcessor:
         # end RST-style codeblock
         if line and self._current_indent < self._codeblock_indent:
             self._in_codeblock = False
-            self._strip_empty_lines()
+            self._trim_empty_lines()
             self._add_line("```", indent=0)
-            self._add_line("")
+            self._add_block()
             self._parse_line(line)
             return
 
         # end MD-style codeblock
         if line.startswith("```"):
             self._add_line("```", indent=0)
-            self._add_line("")
+            self._add_block()
             self._in_codeblock = False
             return
 
@@ -130,10 +130,11 @@ class BaseDocstringProcessor:
 
         self.section_map.add_line(self.current_section_name, f"{indent_str}{line}")
 
-    def _strip_empty_lines(self):
-        lines = self.section_map[self.current_section_name]
-        while lines and not lines[-1].strip():
-            lines.pop()
+    def _add_block(self) -> None:
+        self.section_map.add_block(self.current_section_name)
+
+    def _trim_empty_lines(self):
+        self.section_map.trim_block(self.current_section_name)
 
     def _parse_line(self, line: Text) -> None:
         # MD-style codeblock starts with triple backticks
@@ -141,6 +142,7 @@ class BaseDocstringProcessor:
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
+            self._add_block()
             self._add_line(line)
             return
 
@@ -150,7 +152,7 @@ class BaseDocstringProcessor:
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
-            self._add_line("")
+            self._add_block()
             self._add_line("```python", indent=0)
             self._parse_doctest_line(line)
             return
@@ -191,7 +193,7 @@ class BaseDocstringProcessor:
             self._codeblock_indent = self._current_indent + 1
             self._codeblock_lines_count = 0
             self._add_line(line[:-2])
-            self._add_line("")
+            self._add_block()
             self._add_line("```python", indent=0)
             return
 
