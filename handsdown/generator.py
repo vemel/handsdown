@@ -181,8 +181,6 @@ class Generator:
         md_doc.subtitle = f"> Auto-generated documentation for {source_link} module."
 
         docstring = self._get_formatted_docstring(module_record)
-        self._generate_module_doc_lines(module_record, md_doc)
-
         if docstring:
             # set MD and module record title if it is found in docstring
             title, docstring = md_doc.extract_title(docstring)
@@ -192,6 +190,7 @@ class Generator:
 
             md_doc.append(docstring)
 
+        self._generate_module_doc_lines(module_record, md_doc)
         md_doc.ensure_toc_exists()
 
         modules_toc_lines = self._build_modules_toc_lines(
