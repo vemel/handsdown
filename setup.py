@@ -26,7 +26,6 @@ DEPENDENCY_LINKS = []
 # Optional Packages
 EXTRAS = {}
 
-
 setup(
     name=ROOT_PATH.name,
     version=version,
@@ -68,5 +67,9 @@ setup(
         "Topic :: Software Development :: Code Generators",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    entry_points={"console_scripts": [f"handsdown = handsdown.main:main"]},
+    entry_points={"console_scripts": ["handsdown = handsdown.main:main"]},
+    project_urls={
+        "Source": "https://github.com/vemel/handsdown",
+        "Documentation": f"https://github.com/vemel/handsdown/tree/{version}/docs/handsdown_index.md#handsdown",
+    },
 )
