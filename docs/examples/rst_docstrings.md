@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.rst_docstrings](../../examples/rst_docstrings.py) module.
 
-- [Index](../README.md#handsdown-index) / [Examples](index.md#examples) / [PEP 287 - reStructuredText docstrings examples](#pep-287---restructuredtext-docstrings-examples) / PEP 287 - reStructuredText docstrings examples
+- [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 287 - reStructuredText docstrings examples
   - [Links](#links)
   - [RSTExample](#rstexample)
     - [RSTExample.reference](#rstexamplereference)

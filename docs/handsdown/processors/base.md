@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.processors.base](../../../handsdown/processors/base.py) module.
 
-- [Index](../../README.md#handsdown-index) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / [Base](#base) / Base
+- [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 

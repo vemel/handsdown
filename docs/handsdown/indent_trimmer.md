@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.indent_trimmer](../../handsdown/indent_trimmer.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [IndentTrimmer](#indenttrimmer) / IndentTrimmer
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)

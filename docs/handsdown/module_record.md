@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.module_record](../../handsdown/module_record.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [ModuleRecord](#modulerecord) / ModuleRecord
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)

@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.docstring_formatter](../../handsdown/docstring_formatter.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [DocstringFormatter](#docstringformatter) / DocstringFormatter
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / DocstringFormatter
   - [DocstringFormatter](#docstringformatter)
     - [DocstringFormatter().render](#docstringformatterrender)
 

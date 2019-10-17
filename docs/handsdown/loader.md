@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.loader](../../handsdown/loader.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Loader](#loader) / Loader
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Loader
   - [Loader](#loader)
     - [Loader().get_module_record](#loaderget_module_record)
     - [Loader.get_source_line_number](#loaderget_source_line_number)

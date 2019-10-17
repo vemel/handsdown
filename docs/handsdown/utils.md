@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.utils](../../handsdown/utils.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Utils](#utils) / Utils
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 

@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.pep257_docstrings](../../examples/pep257_docstrings.py) module.
 
-- [Index](../README.md#handsdown-index) / [Examples](index.md#examples) / [PEP 257 - reStructuredText docstrings examples](#pep-257---restructuredtext-docstrings-examples) / PEP 257 - reStructuredText docstrings examples
+- [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 257 - reStructuredText docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)

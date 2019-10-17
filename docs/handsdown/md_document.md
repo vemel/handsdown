@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.md_document](../../handsdown/md_document.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [MDDocument](#mddocument) / MDDocument
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / MDDocument
   - [MDDocument](#mddocument)
     - [MDDocument().path](#mddocumentpath)
     - [MDDocument().sections](#mddocumentsections)
@@ -93,7 +93,7 @@ All non-special `sections` of the document.
 
 ```python
 #property getter
-def subtitle() -> Union[str, NoneType]
+def subtitle() -> str
 
 #property setter
 def subtitle(subtitle: str) -> None

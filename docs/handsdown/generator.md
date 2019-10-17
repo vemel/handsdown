@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.generator](../../handsdown/generator.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Generator](#generator) / Generator
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Generator
   - [Generator](#generator)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
     - [Generator().generate_doc](#generatorgenerate_doc)
@@ -45,7 +45,7 @@ Main handsdown doc generator.
 - `LOGGER_NAME` - Name of logger: `handsdown`
 - `INDEX_NAME` - Docs index filename: `README.md`
 - `INDEX_TITLE` - Docs index title: `Index`
-- `INDEX_MODULES_NAME` - Modules ToC name in index: `Modules`
+- `MODULES_NAME` - Modules ToC name in index: `Modules`
 
 #### See also
 
@@ -82,7 +82,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../../handsdown/generator.py#L242)
+[🔍 find in source code](../../handsdown/generator.py#L240)
 
 ```python
 def generate_docs() -> None
@@ -92,7 +92,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../../handsdown/generator.py#L257)
+[🔍 find in source code](../../handsdown/generator.py#L255)
 
 ```python
 def generate_index() -> None

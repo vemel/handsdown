@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Signature](#signature) / Signature
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Signature
   - [Config](#config)
   - [DefaultValue](#defaultvalue)
   - [Parameter](#parameter)

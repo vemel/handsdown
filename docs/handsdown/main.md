@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.main](../../handsdown/main.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Main](#main) / Main
+- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Main
   - [get_logger](#get_logger)
   - [main](#main)
 

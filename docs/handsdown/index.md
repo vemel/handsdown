@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown](../../handsdown/__init__.py) module.
 
-- [Index](../README.md#handsdown-index) / [Handsdown](#handsdown) / Handsdown
+- [Index](../README.md#modules) / Handsdown
   - [Usage](#usage)
     - [From command line](#from-command-line)
     - [As a module](#as-a-module)

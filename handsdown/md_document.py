@@ -56,7 +56,7 @@ class MDDocument:
         self._sections: List[Text] = []
         self._content = ""
         self._title: Optional[Text] = None
-        self._subtitle: Optional[Text] = None
+        self._subtitle: Text = ""
         self._toc_section: Text = ""
         self._path = path
         self._path_finder = PathFinder(self._path.parent)
@@ -87,11 +87,11 @@ class MDDocument:
 
         sections = content.split(self._section_separator)
         self._sections = []
-        for section_index, section in enumerate(sections):
+        for section in sections:
             section = IndentTrimmer.trim_empty_lines(section)
             if not section:
                 continue
-            if self.is_toc(section) and not self._toc_section and section_index < 2:
+            if self.is_toc(section) and not self._toc_section:
                 self._toc_section = section
                 if self._sections:
                     self._subtitle = self._section_separator.join(self._sections)
@@ -226,7 +226,7 @@ class MDDocument:
         self._content = self._build_content()
 
     @property
-    def subtitle(self) -> Optional[Text]:
+    def subtitle(self) -> Text:
         return self._subtitle
 
     @subtitle.setter

@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.google_docstrings](../../examples/google_docstrings.py) module.
 
-- [Index](../README.md#handsdown-index) / [Examples](index.md#examples) / [Google docstrings examples](#google-docstrings-examples) / Google docstrings examples
+- [Index](../README.md#modules) / [Examples](index.md#examples) / Google docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)

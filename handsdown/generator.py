@@ -38,7 +38,7 @@ class Generator:
         LOGGER_NAME -- Name of logger: `handsdown`
         INDEX_NAME -- Docs index filename: `README.md`
         INDEX_TITLE -- Docs index title: `Index`
-        INDEX_MODULES_NAME -- Modules ToC name in index: `Modules`
+        MODULES_NAME -- Modules ToC name in index: `Modules`
     """
 
     LOGGER_NAME = "handsdown"
@@ -209,7 +209,7 @@ class Generator:
 
         import_string_parts = module_record.get_import_string_parts()
         parent_import_parts: List[Text] = []
-        for part in import_string_parts:
+        for part in import_string_parts[:-1]:
             parent_import_parts.append(part)
             parent_import = ".".join(parent_import_parts)
             parend_module_record = self._module_records.find_object(parent_import)
@@ -231,9 +231,7 @@ class Generator:
             md_document.render_doc_link(
                 self.INDEX_TITLE,
                 target_path=self._output_path / self.INDEX_NAME,
-                anchor=md_document.get_anchor(
-                    f"{self._project_name} {self.INDEX_TITLE}"
-                ),
+                anchor=md_document.get_anchor(self.MODULES_NAME),
             ),
         )
 
@@ -262,21 +260,36 @@ class Generator:
         self._logger.debug(
             f"Generating {self._root_path_finder.relative(self._index_path)}"
         )
-        md_document = MDDocument(self._output_path / self.INDEX_NAME)
-        md_document.title = f"{self._project_name} {self.INDEX_TITLE}"
+        index_path = self._output_path / self.INDEX_NAME
+        md_document = MDDocument(index_path)
 
-        md_document.subtitle = "> Auto-generated documentation index."
+        readme_path = self._root_path / "README.md"
+        if readme_path.exists():
+            index_path.write_text(readme_path.read_text())
+            md_document.read()
+
+        if not md_document.title:
+            md_document.title = f"{self._project_name} {self.INDEX_TITLE}"
+
+        if md_document.subtitle:
+            md_document.subtitle = (
+                f"> Auto-generated documentation index.\n\n{md_document.subtitle}"
+            )
+        else:
+            md_document.subtitle = "> Auto-generated documentation index."
+
         md_document.ensure_toc_exists()
+        modules_link = md_document.render_doc_link(
+            title=self.MODULES_NAME, anchor=md_document.get_anchor(self.MODULES_NAME)
+        )
+        md_document.toc_section = f"{md_document.toc_section}\n  - {modules_link}"
+        md_document.append_title(self.MODULES_NAME, level=3)
 
         modules_toc_lines = self._build_modules_toc_lines(
-            "", max_depth=3, md_document=md_document
+            "", max_depth=2, md_document=md_document
         )
-        if modules_toc_lines:
-            toc_lines = md_document.toc_section.split("\n")
-            for line in modules_toc_lines:
-                toc_lines.append(f"  {line}")
 
-            md_document.toc_section = "\n".join(toc_lines)
+        md_document.append("\n".join(modules_toc_lines))
 
         md_document.write()
 
