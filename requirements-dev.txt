@@ -1,0 +1,7 @@
+black==19.3b0
+codecov==2.0.15
+mypy==0.730
+pylint==2.4.2
+pytest-cov==2.8.1
+pytest==5.2.1
+rope==0.14.0

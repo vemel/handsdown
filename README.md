@@ -1,5 +1,8 @@
 # 🙌 Handsdown - Python documentation generator
 
+![pypi](https://img.shields.io/pypi/v/handsdown)
+![versions](https://img.shields.io/pypi/pyversions/handsdown)
+
 Python docstring-based documentation generator for lazy perfectionists.
 
 - [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)

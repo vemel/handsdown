@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.7"
+install:
+  - pip install -r requirements.txt
+  - pip install -r requirements-dev.txt
+env:
+  - CODECOV_TOKEN="2ebbb6e9-4150-4f2f-80ba-7abd36be7e41"
+script:
+  - pytest --cov-report term --cov=tests
+after_success:
+  - codecov
