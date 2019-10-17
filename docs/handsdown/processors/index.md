@@ -12,5 +12,5 @@
 
 Docstrings processors.
 
-- `[PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)`
-- `[RSTDocstringProcessor](rst.md#rstdocstringprocessor)`
+- [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
+- [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

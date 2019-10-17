@@ -6,22 +6,24 @@
   - [SmartDocstringProcessor](#smartdocstringprocessor)
     - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 
+    Docstring processor that selects a `DocstringProcessor` based on a docstring content:
+
+- [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
+- [RSTDocstringProcessor](rst.md#rstdocstringprocessor)
+
 ## SmartDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L9)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L16)
 
 ```python
 class SmartDocstringProcessor()
 ```
 
-Docstring processor that checks docstring and uses on of processors
-
-- `[PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)`
-- `[RSTDocstringProcessor](rst.md#rstdocstringprocessor)`
+Docstring processor that selects a `DocstringProcessor` based on a docstring content.
 
 ### SmartDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L25)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L29)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

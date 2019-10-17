@@ -6,9 +6,11 @@
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 
+Handful utils that do not deserve a separate module.
+
 ## OSEnvironMock
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L5)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L8)
 
 ```python
 class OSEnvironMock(*args, **kwargs)
@@ -18,7 +20,7 @@ Mock for `os.environ` that returns `env` string isntead of undefined variables.
 
 ## get_title_from_path_part
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L14)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L17)
 
 ```python
 def get_title_from_path_part(path_part: str) -> str

@@ -1,3 +1,11 @@
+"""
+Base class for all docstring processors:
+
+- `handsdown.processors.pep257.PEP257DocstringProcessor`
+- `handsdown.processors.rst.RSTDocstringProcessor`
+- `handsdown.processors.smart.SmartDocstringProcessor`
+"""
+
 from typing import Text, Dict, Pattern, Optional
 
 from handsdown.processors.section_map import SectionMap
@@ -6,11 +14,7 @@ from handsdown.indent_trimmer import IndentTrimmer
 
 class BaseDocstringProcessor:
     """
-    Base docstring processor. All docstring processors are based on top of it:
-
-    - `handsdown.processors.pep257.PEP257DocstringProcessor`
-    - `handsdown.processors.rst.RSTDocstringProcessor`
-    - `handsdown.processors.smart.SmartDocstringProcessor`
+    Base docstring processor. All docstring processors are based on top of it.
     """
 
     def __init__(self) -> None:

@@ -1,3 +1,10 @@
+"""
+    Docstring processor that selects a `DocstringProcessor` based on a docstring content:
+
+- `handsdown.processors.pep257.PEP257DocstringProcessor`
+- `handsdown.processors.rst.RSTDocstringProcessor`
+"""
+
 from typing import Text
 
 from handsdown.processors.rst import RSTDocstringProcessor
@@ -8,10 +15,7 @@ from handsdown.processors.section_map import SectionMap
 
 class SmartDocstringProcessor(BaseDocstringProcessor):
     """
-    Docstring processor that checks docstring and uses on of processors
-
-    - `handsdown.processors.pep257.PEP257DocstringProcessor`
-    - `handsdown.processors.rst.RSTDocstringProcessor`
+    Docstring processor that selects a `DocstringProcessor` based on a docstring content.
     """
 
     def __init__(self) -> None:

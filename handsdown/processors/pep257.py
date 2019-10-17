@@ -1,3 +1,7 @@
+"""
+Docstring processor for PEP 257 and Google docstring format.
+"""
+
 import re
 
 from handsdown.processors.base import BaseDocstringProcessor

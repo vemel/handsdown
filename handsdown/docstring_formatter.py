@@ -1,3 +1,7 @@
+"""
+Translator of docstrings to Markdown format.
+"""
+
 from typing import Text
 
 from handsdown.indent_trimmer import IndentTrimmer
@@ -8,7 +12,7 @@ __all__ = ["DocstringFormatter"]
 
 class DocstringFormatter:
     """
-    Clean up docstring to be compatible with Markdown format.
+    Translator of docstrings to Markdown format.
 
     Arguments:
         docstring -- Raw docstring.

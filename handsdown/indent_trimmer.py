@@ -1,3 +1,7 @@
+"""
+Utility for removing indentation for sections and lines.
+"""
+
 from typing import Iterable, Text, List
 
 
@@ -6,7 +10,7 @@ __all__ = ["IndentTrimmer"]
 
 class IndentTrimmer:
     """
-    Utility class for removing indentation for sections and lines.
+    Utility for removing indentation for sections and lines.
     """
 
     @staticmethod

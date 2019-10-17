@@ -1,3 +1,6 @@
+"""
+Handful utils that do not deserve a separate module.
+"""
 from collections import UserDict
 from typing import Text
 

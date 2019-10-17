@@ -10,17 +10,25 @@
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
+Module for function signature generation.
+
 ## Config
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L10)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L14)
 
 ```python
 class Config(*args, **kwargs)
 ```
 
+Config class to control signature generation.
+
+Attrubutes:
+    BREAK_LINES -- True if function parameters should start from a new line.
+    MAX_LINE_LENGTH -- Max signature line length: `100`
+
 ## DefaultValue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L15)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L27)
 
 ```python
 class DefaultValue(original: Type)
@@ -34,7 +42,7 @@ Represent function parameter default value in signature
 
 ## Parameter
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L39)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L51)
 
 ```python
 class Parameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
@@ -44,7 +52,7 @@ Represent function parameters in signature
 
 ### Parameter.create
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L80)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L92)
 
 ```python
 def create(
@@ -66,7 +74,7 @@ Create `ProxyParameter` for original `inspect.Parameter`
 
 ## SignatureBuilder
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L101)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L113)
 
 ```python
 class SignatureBuilder(obj: Any)
@@ -81,7 +89,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L155)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L167)
 
 ```python
 def build() -> str

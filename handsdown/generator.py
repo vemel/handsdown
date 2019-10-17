@@ -1,3 +1,7 @@
+"""
+Main handsdown documentation generator.
+"""
+
 import re
 import logging
 from pathlib import Path
@@ -20,7 +24,7 @@ class GeneratorError(Exception):
 
 class Generator:
     """
-    Main handsdown doc generator.
+    Main handsdown documentation generator.
 
     Arguments:
         input_path -- Path to repo to generate docs.
@@ -87,9 +91,7 @@ class Generator:
 
         package_names = self._module_records.get_package_names()
         package_names_re_expr = "|".join(package_names)
-        self._docstring_links_re = re.compile(
-            f"`+((?:{package_names_re_expr})\\.\\S+)`+"
-        )
+        self._docstring_links_re = re.compile(f"`+(?:{package_names_re_expr})\\.\\S+`+")
         self._signature_links_re = re.compile(
             f"[ \\[]((?:{package_names_re_expr})\\.[^() :,]+)"
         )
@@ -331,7 +333,8 @@ class Generator:
 
         for index, section in enumerate(sections):
             for match in re.findall(self._docstring_links_re, section):
-                module_object = self._module_records.find_object(match)
+                object_name = match.replace("`", "")
+                module_object = self._module_records.find_object(object_name)
                 if module_object is None:
                     continue
 

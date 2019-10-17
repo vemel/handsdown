@@ -1,3 +1,7 @@
+"""
+Dataclass for an imported module.
+"""
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Text, Set, List, Generator, Dict, Optional

@@ -1,3 +1,7 @@
+"""
+Module for splitting docstring into `Section` groups.
+"""
+
 from collections import UserDict
 from dataclasses import dataclass
 from typing import Text, List, Generator

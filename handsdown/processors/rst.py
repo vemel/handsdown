@@ -1,3 +1,7 @@
+"""
+Docstring processor for restructured text docstring format.
+"""
+
 import re
 
 from handsdown.processors.base import BaseDocstringProcessor

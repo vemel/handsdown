@@ -5,9 +5,11 @@
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Rst
   - [RSTDocstringProcessor](#rstdocstringprocessor)
 
+Docstring processor for restructured text docstring format.
+
 ## RSTDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L6)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L10)
 
 ```python
 class RSTDocstringProcessor()

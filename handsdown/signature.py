@@ -1,3 +1,7 @@
+"""
+Module for function signature generation.
+"""
+
 from __future__ import annotations
 
 import re
@@ -8,6 +12,14 @@ from types import MappingProxyType
 
 
 class Config:
+    """
+    Config class to control signature generation.
+
+    Attrubutes:
+        BREAK_LINES -- True if function parameters should start from a new line.
+        MAX_LINE_LENGTH -- Max signature line length: `100`
+    """
+
     BREAK_LINES = False
     MAX_LINE_LENGTH = 100
 

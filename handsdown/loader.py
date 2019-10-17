@@ -1,3 +1,7 @@
+"""
+Loader for python source code.
+"""
+
 import importlib
 from importlib.machinery import ModuleSpec
 from pathlib import Path
@@ -215,8 +219,26 @@ class Loader:
         docstring = self._get_docstring(obj)
         return DocstringFormatter(docstring).render()
 
-    def get_import_string(self, path: Path) -> Text:
-        relative_path = path.relative_to(self._root_path)
+    def get_import_string(self, source_path: Path) -> Text:
+        """
+        Get Python import string for a source `source_path` relative to `root_path`.
+
+        Examples::
+
+            loader = Loader(root_path=Path("/root"), ...)
+            loader.get_import_string('/root/my_module/test.py')
+            'my_module.test'
+
+            loader.get_import_string('/root/my_module/__init__.py')
+            'my_module'
+
+        Arguments:
+            source_path -- Path to a source file.
+
+        Returns:
+            A Python import string.
+        """
+        relative_path = source_path.relative_to(self._root_path)
         name_parts = []
         for part in relative_path.parts:
             stem = part.split(".")[0]

@@ -1,3 +1,8 @@
+"""
+Glob helper for matching paths inside `root` path with `.gitignore`-like
+`include` and `exclude` patterns.
+"""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -17,7 +22,8 @@ class PathFinderError(Exception):
 
 class PathFinder:
     """
-    Find matching paths inside `root` path.
+    Glob helper for matching paths inside `root` path with `.gitignore`-like
+    `include` and `exclude` patterns.
 
     Examples::
 

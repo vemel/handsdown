@@ -1,3 +1,6 @@
+"""
+Markdown file builder.
+"""
 from __future__ import annotations
 
 import re
@@ -14,9 +17,9 @@ __all__ = ["MDDocument"]
 
 class MDDocument:
     """
-    MD file wrapper. Controls document title and Table of Contents.
-    Can be used as a context manager, on exit context is written
-    to `path`.
+    Markdown file builder.
+
+    Can be used as a context manager, on exit context is written to `path`.
 
     Examples::
 
@@ -55,9 +58,9 @@ class MDDocument:
     def __init__(self, path: Path) -> None:
         self._sections: List[Text] = []
         self._content = ""
-        self._title: Optional[Text] = None
-        self._subtitle: Text = ""
-        self._toc_section: Text = ""
+        self._title = ""
+        self._subtitle = ""
+        self._toc_section = ""
         self._path = path
         self._path_finder = PathFinder(self._path.parent)
 
@@ -79,7 +82,7 @@ class MDDocument:
         Read and parse content from `path`.
         """
         self._content = self._path.read_text()
-        self._title = None
+        self._title = ""
         self._toc_section = ""
         title, content = self.extract_title(self._content)
         if title:
@@ -217,7 +220,10 @@ class MDDocument:
         self._path.write_text(content)
 
     @property
-    def title(self) -> Optional[Text]:
+    def title(self) -> Text:
+        """
+        `MDDocument` title or an empty string.
+        """
         return self._title
 
     @title.setter
@@ -227,6 +233,9 @@ class MDDocument:
 
     @property
     def subtitle(self) -> Text:
+        """
+        `MDDocument` subtitle or an empty string.
+        """
         return self._subtitle
 
     @subtitle.setter
@@ -236,6 +245,9 @@ class MDDocument:
 
     @property
     def toc_section(self) -> Text:
+        """
+        Document Tree of Contents section or an empty line.
+        """
         return self._toc_section
 
     @toc_section.setter
