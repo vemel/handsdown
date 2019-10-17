@@ -41,7 +41,8 @@ class MDDocument:
 
         with MDDocument(path=Path('output.md')) as md_document:
             md_document.title = 'My doc'
-            md_doc.append('## New section')
+            md_doc.append_title('New section', level=2)
+            md_doc.append('New line')
 
     Arguments:
         path -- Path to store document.
@@ -73,8 +74,11 @@ class MDDocument:
             raise exc_type
         return self.write()
 
-    def set(self, content: Text) -> None:
-        self._content = content
+    def read(self) -> None:
+        """
+        Read and parse content from `path`.
+        """
+        self._content = self._path.read_text()
         self._title = None
         self._toc_section = ""
         title, content = self.extract_title(self._content)
