@@ -295,6 +295,10 @@ class Loader:
             if not getattr(obj, "__name__", None):
                 return False
 
+            # skip private attributes
+            if obj.__name__.startswith("_"):
+                return False
+
             # skip built-in attributes
             if obj.__name__ not in parent.__dict__:
                 return False

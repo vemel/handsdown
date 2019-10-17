@@ -4,7 +4,6 @@
 
 - [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Generator](#generator) / Generator
   - [Generator](#generator)
-    - [Generator()._render_docstring](#generator_render_docstring)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
     - [Generator().generate_doc](#generatorgenerate_doc)
     - [Generator().generate_docs](#generatorgenerate_docs)
@@ -52,36 +51,6 @@ Main handsdown doc generator.
 
 - [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
 - [Loader](loader.md#loader)
-
-### Generator()._render_docstring
-
-[🔍 find in source code](../../handsdown/generator.py#L373)
-
-```python
-def _render_docstring(
-    module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord],
-    md_document: handsdown.md_document.MDDocument,
-    signature: Union[str, NoneType] = None,
-) -> None
-```
-
-Get object docstring and convert it to a valid markdown using
-`[BaseDocstringProcessor](processors/base.md#basedocstringprocessor)`.
-
-#### Arguments
-
-- `source_path` - Path to object source file.
-- `module_object` - Object to inspect.
-- `signature` - Object signature if exists.
-
-#### Returns
-
-A module docstring with valid markdown.
-
-#### See also
-
-- [ModuleRecord](module_record.md#modulerecord)
-- [MDDocument](md_document.md#mddocument)
 
 ### Generator().cleanup_old_docs
 

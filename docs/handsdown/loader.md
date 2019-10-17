@@ -4,10 +4,6 @@
 
 - [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Loader](#loader) / Loader
   - [Loader](#loader)
-    - [Loader()._discover_module_objects](#loader_discover_module_objects)
-    - [Loader()._get_object_docstring](#loader_get_object_docstring)
-    - [Loader._get_object_signature](#loader_get_object_signature)
-    - [Loader()._setup_django](#loader_setup_django)
     - [Loader().get_module_record](#loaderget_module_record)
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
@@ -36,83 +32,6 @@ my_module_utils = loader.import_module('my_module.utils')
 - `root_path` - Root path of the project.
 - `output_path` - Docs output path.
 - `logger` - Logger instance.
-
-### Loader()._discover_module_objects
-
-[🔍 find in source code](../../handsdown/loader.py#L312)
-
-```python
-def _discover_module_objects(
-    module_record: handsdown.module_record.ModuleRecord,
-) -> Generator[handsdown.module_record.ModuleObjectRecord, NoneType, NoneType]
-```
-
-Get [ModuleObjectRecord](module_record.md#moduleobjectrecord) for every object in a module.
-
-#### Arguments
-
-- `module_record` - [ModuleRecord](module_record.md#modulerecord) instance.
-
-#### Yields
-
-New [ModuleObjectRecord](module_record.md#moduleobjectrecord) instances.
-
-#### See also
-
-- [ModuleRecord](module_record.md#modulerecord)
-- [ModuleObjectRecord](module_record.md#moduleobjectrecord)
-
-### Loader()._get_object_docstring
-
-[🔍 find in source code](../../handsdown/loader.py#L205)
-
-```python
-def _get_object_docstring(obj: Any) -> str
-```
-
-Get trimmed object docstring or an empty string.
-
-#### Arguments
-
-- `obj` - Object to inspect.
-
-#### Returns
-
-A string with object docsting.
-
-### Loader._get_object_signature
-
-[🔍 find in source code](../../handsdown/loader.py#L179)
-
-```python
-def _get_object_signature(obj: Any) -> str
-```
-
-Get class, method or function signature. If object is not callable -
-returns None.
-
-#### Arguments
-
-- `obj` - Object to inspect.
-
-#### Returns
-
-A string with object signature or None.
-
-### Loader()._setup_django
-
-[🔍 find in source code](../../handsdown/loader.py#L154)
-
-```python
-def _setup_django() -> None
-```
-
-Initialize Django apps in order to safely import Django models.
-Patches applied during apps initialization:
-
-- Patch `os.environ` to avoid failing on undefined variables.
-- Patch `sys.path` to add current repo to it.
-- Patch `logging.config.dictConfig`.
 
 ### Loader().get_module_record
 
@@ -144,7 +63,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../../handsdown/loader.py#L446)
+[🔍 find in source code](../../handsdown/loader.py#L450)
 
 ```python
 def get_source_line_number(obj: Any) -> int
