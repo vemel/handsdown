@@ -22,7 +22,7 @@ class Generator(
     output_path: pathlib.Path,
     source_paths: Iterable[pathlib.Path],
     logger: Union[logging.Logger, NoneType] = None,
-    docstring_processor: Union[[BaseDocstringProcessor](./handsdown_processors_base.md#basedocstringprocessor), NoneType] = None,
+    docstring_processor: Union[handsdown.processors.base.BaseDocstringProcessor, NoneType] = None,
     loader: Union[handsdown.loader.Loader, NoneType] = None,
     raise_errors: bool = False,
 )
@@ -56,7 +56,7 @@ Main handsdown doc generator.
 
 ### Generator()._generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L421)
+[🔍 find in source code](../handsdown/generator.py#L415)
 
 ```python
 def _generate_index() -> None
@@ -66,7 +66,7 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L364)
+[🔍 find in source code](../handsdown/generator.py#L358)
 
 ```python
 def _get_formatted_docstring(
@@ -124,7 +124,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#L251)
+[🔍 find in source code](../handsdown/generator.py#L252)
 
 ```python
 def generate_docs() -> None
@@ -134,7 +134,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L268)
+[🔍 find in source code](../handsdown/generator.py#L270)
 
 ```python
 def generate_index() -> None

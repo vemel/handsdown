@@ -211,6 +211,14 @@ class MDDocument:
     def toc_section(self, toc_section: Text) -> None:
         self._toc_section = toc_section
 
+    @property
+    def sections(self) -> List[Text]:
+        return self._sections
+
+    @property
+    def path(self) -> Path:
+        return self._path
+
     def append(self, content: Text) -> None:
         """
         Append `content` to the document.

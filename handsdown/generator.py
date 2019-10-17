@@ -154,7 +154,8 @@ class Generator:
 
             self._generate_doc(module_record, md_document)
             self._replace_short_links(module_record, md_document)
-            self._replace_full_links(module_record, md_document)
+            self._replace_full_links(md_document)
+            md_document.write()
             return
 
         raise GeneratorError(f"Record not found for {source_path.name}")
@@ -263,7 +264,8 @@ class Generator:
             )
             self._generate_doc(module_record, md_document)
             self._replace_short_links(module_record, md_document)
-            self._replace_full_links(module_record, md_document)
+            self._replace_full_links(md_document)
+            md_document.write()
 
     def generate_index(self) -> None:
         """
@@ -281,53 +283,45 @@ class Generator:
         if not module_record.objects:
             return
 
-        output_file_name = self._output_path / module_record.output_file_name
-        content = output_file_name.read_text()
-        file_changed = False
-        for match in self.short_link_re.findall(content):
-            import_string = match.replace("`", "")
-            for module_object in module_record.objects:
-                if module_object.import_string != import_string:
+        sections = md_document.sections
+
+        for index, section in enumerate(sections):
+            for match in self.short_link_re.findall(section):
+                import_string = match.replace("`", "")
+                for module_object in module_record.objects:
+                    if module_object.import_string != import_string:
+                        continue
+
+                    title = module_object.title
+                    link = md_document.render_doc_link(
+                        title,
+                        anchor=title,
+                        target_path=self._output_path / module_object.output_file_name,
+                    )
+                    section = section.replace(match, link)
+                    self._logger.debug(
+                        f'Adding local link "{title}" to {md_document.path.name}'
+                    )
+            sections[index] = section
+
+    def _replace_full_links(self, md_document: MDDocument) -> None:
+        sections = md_document.sections
+
+        for index, section in enumerate(sections):
+            for match in re.findall(self._docstring_links_re, section):
+                module_object = self._module_records.find_object(match)
+                if module_object is None:
                     continue
 
                 title = module_object.title
-
                 link = md_document.render_doc_link(
                     title,
                     anchor=title,
                     target_path=self._output_path / module_object.output_file_name,
                 )
-                content = content.replace(match, link)
-                self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
-                file_changed = True
-
-        if file_changed:
-            output_file_name.write_text(content)
-
-    def _replace_full_links(
-        self, module_record: ModuleRecord, md_document: MDDocument
-    ) -> None:
-        output_file_name = self._output_path / module_record.output_file_name
-        content = output_file_name.read_text()
-
-        file_changed = False
-        for match in re.findall(self._docstring_links_re, content):
-            module_object = self._module_records.find_object(match)
-            if module_object is None:
-                continue
-
-            title = module_object.title
-            link = md_document.render_doc_link(
-                title,
-                anchor=title,
-                target_path=self._output_path / module_object.output_file_name,
-            )
-            content = content.replace(match, link)
-            self._logger.debug(f'Adding link "{title}" to {output_file_name}')
-            file_changed = True
-
-        if file_changed:
-            output_file_name.write_text(content)
+                section = section.replace(match, link)
+                self._logger.debug(f'Adding link "{title}" to {md_document.path.name}')
+            sections[index] = section
 
     def _generate_module_doc_lines(
         self, module_record: ModuleRecord, md_document: MDDocument

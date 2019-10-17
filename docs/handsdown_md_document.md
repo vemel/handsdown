@@ -56,7 +56,7 @@ some content
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L214)
+[🔍 find in source code](../handsdown/md_document.py#L222)
 
 ```python
 def append(content: str) -> None
@@ -72,7 +72,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().append_title
 
-[🔍 find in source code](../handsdown/md_document.py#L230)
+[🔍 find in source code](../handsdown/md_document.py#L238)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -97,7 +97,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L283)
+[🔍 find in source code](../handsdown/md_document.py#L291)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -123,7 +123,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L242)
+[🔍 find in source code](../handsdown/md_document.py#L250)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -187,10 +187,10 @@ Render Markdown link to a local MD document.
 MDDocument.render_doc_link('my title', anchor='My anchor')
 '[my title](#my-anchor)'
 
-MDDocument.render_doc_link('my title', md_name='doc.md')
+MDDocument.render_doc_link('my title', target_path=Path('doc.md'))
 '[my title](./doc.md)'
 
-MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
+MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('doc.md'))
 '[my title](./doc.md#my-anchor)'
 ```
 
