@@ -60,7 +60,7 @@ class Generator:
         self._output_path = output_path
         self._project_name = get_title_from_path_part(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
-        self._root_path_finder = PathFinder(self._root_path / "_")
+        self._root_path_finder = PathFinder(self._root_path)
 
         # create output folder if it does not exist
         if not self._output_path.exists():

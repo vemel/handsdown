@@ -6,7 +6,13 @@ import fnmatch
 from typing import Text, List, Iterable, Generator
 
 
-__all__ = ["PathFinder"]
+__all__ = ["PathFinder", "PathFinderError"]
+
+
+class PathFinderError(Exception):
+    """
+    Main error for `PathFinder`.
+    """
 
 
 class PathFinder:
@@ -28,10 +34,18 @@ class PathFinder:
     Arguments:
         root -- Path to root folder.
         glob_expr -- `glob` expression to lookup in `root`
+
+    Raises:
+        PathFinderError -- If `root` is not absolute or not a directory.
     """
 
     def __init__(self, root: Path) -> None:
-        self._root = root.absolute()
+        if not root.is_absolute():
+            raise PathFinderError("Root path should be absolute")
+        if not root.exists() and not root.is_dir():
+            raise PathFinderError("Root path should be a directory")
+
+        self._root = root
         self.include_exprs: List[Text] = []
         self.exclude_exprs: List[Text] = []
 
@@ -132,16 +146,13 @@ class PathFinder:
 
         Returns:
             A relative path to `target`.
-
-        Raises:
-            ValueError -- if `target` is not absolute.
         """
         if not target.is_absolute():
-            raise ValueError("Target path should be absolute")
+            raise PathFinderError("Target path should be absolute")
 
         relative_target = Path()
         up_path = Path()
-        for parent in self._root.parents:
+        for parent in (self._root / "_").parents:
             try:
                 relative_target = target.relative_to(parent)
             except ValueError:
@@ -160,7 +171,7 @@ class PathFinder:
             force -- Delete existing parent if it is not a directory.
 
         Raises:
-            ValueError -- If any existing parent is not a directory and not in `safe` mode.
+            PathFinderError -- If any existing parent is not a directory and not in `safe` mode.
         """
         parents = self._root.parents
         missing_parents = []
@@ -174,7 +185,7 @@ class PathFinder:
                 continue
 
             if not parent.is_dir():
-                raise ValueError(f"{parent} is not a directory")
+                raise PathFinderError(f"{parent} is not a directory")
 
             break
 

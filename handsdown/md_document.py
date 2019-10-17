@@ -58,7 +58,7 @@ class MDDocument:
         self._subtitle: Optional[Text] = None
         self._toc_section: Text = ""
         self._path = path
-        self._path_finder = PathFinder(self._path)
+        self._path_finder = PathFinder(self._path.parent)
 
     def __enter__(self) -> MDDocument:
         return self

@@ -9,10 +9,11 @@
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().mkdir](#pathfindermkdir)
     - [PathFinder().relative](#pathfinderrelative)
+  - [PathFinderError](#pathfindererror)
 
 ## PathFinder
 
-[🔍 find in source code](../../handsdown/path_finder.py#l12)
+[🔍 find in source code](../../handsdown/path_finder.py#l18)
 
 ```python
 class PathFinder(root: pathlib.Path)
@@ -39,9 +40,13 @@ path_finder.exclude('*new*').list('*.txt')
 - `root` - Path to root folder.
 - `glob_expr` - `glob` expression to lookup in `root`
 
+#### Raises
+
+- [PathFinderError](#pathfindererror) - If `root` is not absolute or not a directory.
+
 ### PathFinder().exclude
 
-[🔍 find in source code](../../handsdown/path_finder.py#l66)
+[🔍 find in source code](../../handsdown/path_finder.py#l80)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -65,7 +70,7 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[🔍 find in source code](../../handsdown/path_finder.py#l108)
+[🔍 find in source code](../../handsdown/path_finder.py#l122)
 
 ```python
 def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
@@ -80,7 +85,7 @@ Matching `Path` objects.
 
 ### PathFinder().include
 
-[🔍 find in source code](../../handsdown/path_finder.py#l46)
+[🔍 find in source code](../../handsdown/path_finder.py#l60)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -104,7 +109,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[🔍 find in source code](../../handsdown/path_finder.py#l155)
+[🔍 find in source code](../../handsdown/path_finder.py#l166)
 
 ```python
 def mkdir(force=False)
@@ -118,11 +123,11 @@ Create directories up to `root` if they do not exist.
 
 #### Raises
 
-- `ValueError` - If any existing parent is not a directory and not in `safe` mode.
+- [PathFinderError](#pathfindererror) - If any existing parent is not a directory and not in `safe` mode.
 
 ### PathFinder().relative
 
-[🔍 find in source code](../../handsdown/path_finder.py#l125)
+[🔍 find in source code](../../handsdown/path_finder.py#l139)
 
 ```python
 def relative(target: pathlib.Path) -> pathlib.Path
@@ -139,6 +144,12 @@ Find a relative path from `root` to `target`.
 
 A relative path to `target`.
 
-#### Raises
+## PathFinderError
 
-- `ValueError` - if `target` is not absolute.
+[🔍 find in source code](../../handsdown/path_finder.py#l12)
+
+```python
+class PathFinderError(*args, **kwargs)
+```
+
+Main error for [PathFinder](#pathfinder).

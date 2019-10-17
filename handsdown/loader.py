@@ -44,7 +44,7 @@ class Loader:
     ) -> None:
         self._logger = logger
         self._root_path = root_path
-        self._root_path_finder = PathFinder(self._root_path / "_")
+        self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
         self._sys_path_dirty = False
         self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
