@@ -7,6 +7,7 @@
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().glob](#pathfinderglob)
     - [PathFinder().include](#pathfinderinclude)
+    - [PathFinder().mkdir](#pathfindermkdir)
     - [PathFinder().relative](#pathfinderrelative)
 
 ## PathFinder
@@ -100,6 +101,24 @@ A copy of itself.
 #### See also
 
 - [PathFinder](#pathfinder)
+
+### PathFinder().mkdir
+
+[🔍 find in source code](../../handsdown/path_finder.py#l155)
+
+```python
+def mkdir(force=False)
+```
+
+Create directories up to `root` if they do not exist.
+
+#### Arguments
+
+- `force` - Delete existing parent if it is not a directory.
+
+#### Raises
+
+- `ValueError` - If any existing parent is not a directory and not in `safe` mode.
 
 ### PathFinder().relative
 

@@ -151,3 +151,32 @@ class PathFinder:
                 break
 
         return up_path / relative_target
+
+    def mkdir(self, force=False):
+        """
+        Create directories up to `root` if they do not exist.
+
+        Arguments:
+            force -- Delete existing parent if it is not a directory.
+
+        Raises:
+            ValueError -- If any existing parent is not a directory and not in `safe` mode.
+        """
+        parents = self._root.parents
+        missing_parents = []
+        for parent in parents:
+            if not parent.exists():
+                missing_parents.append(parent)
+                continue
+
+            if not parent.is_dir() and force:
+                parent.unlink()
+                continue
+
+            if not parent.is_dir():
+                raise ValueError(f"{parent} is not a directory")
+
+            break
+
+        for parent in reversed(missing_parents):
+            parent.mkdir()
