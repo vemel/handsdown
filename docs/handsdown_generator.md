@@ -14,7 +14,7 @@
 
 ## Generator
 
-[🔍 find in source code](../handsdown/generator.py#l20)
+[🔍 find in source code](../handsdown/generator.py#l21)
 
 ```python
 class Generator(
@@ -56,7 +56,7 @@ Main handsdown doc generator.
 
 ### Generator()._generate_index
 
-[🔍 find in source code](../handsdown/generator.py#l404)
+[🔍 find in source code](../handsdown/generator.py#l407)
 
 ```python
 def _generate_index() -> None
@@ -66,7 +66,7 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#l347)
+[🔍 find in source code](../handsdown/generator.py#l350)
 
 ```python
 def _get_formatted_docstring(
@@ -96,7 +96,7 @@ A module docstring with valid markdown.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#l109)
+[🔍 find in source code](../handsdown/generator.py#l111)
 
 ```python
 def cleanup_old_docs() -> None
@@ -106,7 +106,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../handsdown/generator.py#l129)
+[🔍 find in source code](../handsdown/generator.py#l131)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -124,7 +124,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#l243)
+[🔍 find in source code](../handsdown/generator.py#l245)
 
 ```python
 def generate_docs() -> None
@@ -134,7 +134,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#l259)
+[🔍 find in source code](../handsdown/generator.py#l262)
 
 ```python
 def generate_index() -> None
@@ -145,7 +145,7 @@ contains a Tree of all modules in the project.
 
 ## GeneratorError
 
-[🔍 find in source code](../handsdown/generator.py#l14)
+[🔍 find in source code](../handsdown/generator.py#l15)
 
 ```python
 class GeneratorError(*args, **kwargs)

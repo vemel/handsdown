@@ -4,18 +4,17 @@
 
 - [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
-    - [PathFinder().\_\_iter\_\_](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)
-    - [PathFinder.get_relative_path](#pathfinderget_relative_path)
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
+    - [PathFinder().relative](#pathfinderrelative)
 
 ## PathFinder
 
 [🔍 find in source code](../handsdown/path_finder.py#l12)
 
 ```python
-class PathFinder(root: pathlib.Path, glob_expr: str)
+class PathFinder(root: pathlib.Path)
 ```
 
 Find matching paths inside `root` path.
@@ -23,14 +22,14 @@ Find matching paths inside `root` path.
 #### Examples
 
 ```python
-path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
+path_finder = PathFinder(root=Path.cwd())
 path_finder.list()
 ['my_new.txt', 'my.txt', 'new.txt']
 
-path_finder.include('my*').list()
+path_finder.include('my*').list('*.txt')
 ['my_new.txt', 'my.txt']
 
-path_finder.exclude('*new*').list()
+path_finder.exclude('*new*').list('*.txt')
 ['my.txt']
 ```
 
@@ -39,23 +38,9 @@ path_finder.exclude('*new*').list()
 - `root` - Path to root folder.
 - `glob_expr` - `glob` expression to lookup in `root`
 
-### PathFinder().\_\_iter\_\_
-
-[🔍 find in source code](../handsdown/path_finder.py#l109)
-
-```python
-def __iter__() -> Generator[pathlib.Path, NoneType, NoneType]
-```
-
-Iterate over matched paths respecting `include` and `exclude` patterns.
-
-#### Returns
-
-A generator of matched paths.
-
 ### PathFinder().exclude
 
-[🔍 find in source code](../handsdown/path_finder.py#l67)
+[🔍 find in source code](../handsdown/path_finder.py#l66)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -77,28 +62,9 @@ A copy of itself.
 
 - [PathFinder](.#pathfinder)
 
-### PathFinder.get_relative_path
-
-[🔍 find in source code](../handsdown/path_finder.py#l134)
-
-```python
-def get_relative_path(source: pathlib.Path, target: pathlib.Path) -> pathlib.Path
-```
-
-Find a relative path from `source` folder to `target`.
-
-#### Arguments
-
-- `source` - Source path.
-- `target` - Target path.
-
-#### Returns
-
-A relative path to `target`.
-
 ### PathFinder().include
 
-[🔍 find in source code](../handsdown/path_finder.py#l47)
+[🔍 find in source code](../handsdown/path_finder.py#l46)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -122,10 +88,10 @@ A copy of itself.
 
 ### PathFinder().list
 
-[🔍 find in source code](../handsdown/path_finder.py#l125)
+[🔍 find in source code](../handsdown/path_finder.py#l108)
 
 ```python
-def list() -> List[pathlib.Path]
+def list(glob_expr: str) -> List[pathlib.Path]
 ```
 
 Return all matching paths as a list.
@@ -133,3 +99,26 @@ Return all matching paths as a list.
 #### Returns
 
 A list of all matched paths.
+
+### PathFinder().relative
+
+[🔍 find in source code](../handsdown/path_finder.py#l126)
+
+```python
+def relative(target: pathlib.Path) -> pathlib.Path
+```
+
+Find a relative path from `root` to `target`.
+`target` should be an absolute path.
+
+#### Arguments
+
+- `target` - Target path.
+
+#### Returns
+
+A relative path to `target`.
+
+#### Raises
+
+- `ValueError` - if `target` is not absolute.

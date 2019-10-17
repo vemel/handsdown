@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import fnmatch
 
-from typing import Text, Generator, List, Iterable
+from typing import Text, List, Iterable
 
 
 __all__ = ["PathFinder"]
@@ -15,14 +15,14 @@ class PathFinder:
 
     Examples::
 
-        path_finder = PathFinder(root=Path.cwd(), glob_expr='*.txt')
+        path_finder = PathFinder(root=Path.cwd())
         path_finder.list()
         ['my_new.txt', 'my.txt', 'new.txt']
 
-        path_finder.include('my*').list()
+        path_finder.include('my*').list('*.txt')
         ['my_new.txt', 'my.txt']
 
-        path_finder.exclude('*new*').list()
+        path_finder.exclude('*new*').list('*.txt')
         ['my.txt']
 
     Arguments:
@@ -30,16 +30,15 @@ class PathFinder:
         glob_expr -- `glob` expression to lookup in `root`
     """
 
-    def __init__(self, root: Path, glob_expr: Text) -> None:
-        self._root = root
-        self._glob_expr = glob_expr
+    def __init__(self, root: Path) -> None:
+        self._root = root.absolute()
         self.include_exprs: List[Text] = []
         self.exclude_exprs: List[Text] = []
 
     def _copy(
         self, include_exprs: Iterable[Text], exclude_exprs: Iterable[Text]
     ) -> PathFinder:
-        new_copy = PathFinder(root=self._root, glob_expr=self._glob_expr)
+        new_copy = PathFinder(root=self._root)
         new_copy.include_exprs = list(include_exprs)
         new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy
@@ -106,46 +105,44 @@ class PathFinder:
 
         return False
 
-    def __iter__(self) -> Generator[Path, None, None]:
-        """
-        Iterate over matched paths respecting `include` and `exclude` patterns.
-
-        Returns:
-            A generator of matched paths.
-        """
-        for path in self._root.glob(self._glob_expr):
-            relative_path = path.relative_to(self._root)
-            if not self._match_include(relative_path):
-                continue
-            if self._match_exclude(relative_path):
-                continue
-
-            yield path
-
-    def list(self) -> List[Path]:
+    def list(self, glob_expr: Text) -> List[Path]:
         """
         Return all matching paths as a list.
 
         Returns:
             A list of all matched paths.
         """
-        return list(self)
+        result = []
+        for path in self._root.glob(glob_expr):
+            relative_path = path.relative_to(self._root)
+            if not self._match_include(relative_path):
+                continue
+            if self._match_exclude(relative_path):
+                continue
 
-    @staticmethod
-    def get_relative_path(source: Path, target: Path) -> Path:
+            result.append(path)
+        return result
+
+    def relative(self, target: Path) -> Path:
         """
-        Find a relative path from `source` folder to `target`.
+        Find a relative path from `root` to `target`.
+        `target` should be an absolute path.
 
         Arguments:
-            source -- Source path.
             target -- Target path.
 
         Returns:
             A relative path to `target`.
+
+        Raises:
+            ValueError -- if `target` is not absolute.
         """
+        if not target.is_absolute():
+            raise ValueError("Target path should be absolute")
+
         relative_target = Path()
         up_path = Path()
-        for parent in source.parents:
+        for parent in self._root.parents:
             try:
                 relative_target = target.relative_to(parent)
             except ValueError:

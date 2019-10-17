@@ -59,7 +59,7 @@ def main() -> None:
     logger = get_logger(level=log_level)
 
     path_finder = (
-        PathFinder(root=args.input_path, glob_expr=SOURCES_GLOB)
+        PathFinder(root=args.input_path)
         .exclude(*EXCLUDE_EXPRS, *args.exclude)
         .include(*args.include)
     )
@@ -69,7 +69,7 @@ def main() -> None:
             input_path=args.input_path,
             logger=logger,
             output_path=args.output_path,
-            source_paths=path_finder.list(),
+            source_paths=path_finder.list(SOURCES_GLOB),
             raise_errors=args.panic,
         )
         if args.files:

@@ -58,6 +58,7 @@ class MDDocument:
         self._subtitle: Optional[Text] = None
         self._toc_section: Text = ""
         self._path = path
+        self._path_finder = PathFinder(self._path)
 
     def __enter__(self) -> MDDocument:
         return self
@@ -188,7 +189,7 @@ class MDDocument:
         if anchor:
             link = f"#{anchor}"
         if target_path and target_path != self._path:
-            link_path = PathFinder.get_relative_path(self._path, target_path)
+            link_path = self._path_finder.relative(target_path)
             link = f"{link_path}{link}"
 
         return self.render_link(title, link)

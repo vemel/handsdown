@@ -9,6 +9,7 @@ from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord, ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import get_title_from_path_part
+from handsdown.path_finder import PathFinder
 
 
 class GeneratorError(Exception):
@@ -60,9 +61,10 @@ class Generator:
         self._output_path = output_path
         self._project_name = get_title_from_path_part(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
+        self._root_path_finder = PathFinder(self._root_path)
 
         try:
-            output_relative_path = self._output_path.relative_to(self._root_path)
+            output_relative_path = self._root_path_finder.relative(self._output_path)
         except ValueError as e:
             raise GeneratorError(f"Output path should be inside input path: {e}")
 
@@ -245,7 +247,8 @@ class Generator:
         Generate all doc files at once.
         """
         self._logger.debug(
-            f"Generating docs for {self._root_path.name} to {self._output_path.relative_to(self._root_path.parent)}"
+            f"Generating docs for {self._project_name} to"
+            f" {self._root_path_finder.relative(self._output_path)}"
         )
 
         for module_record in self._module_records:
