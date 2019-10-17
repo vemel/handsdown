@@ -1,6 +1,8 @@
 # Processors
 
-> Auto-generated documentation for [handsdown.processors](../../../handsdown/processors/__init__.py) module.
+> Auto-generated documentation for [handsdown.processors](../../../handsdown/processors/__init__.py) module..
+
+Docstrings processors.
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / Processors
   - Modules
@@ -9,8 +11,6 @@
     - [Rst](rst.md#rst)
     - [SectionMap](section_map.md#sectionmap)
     - [Smart](smart.md#smart)
-
-Docstrings processors.
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

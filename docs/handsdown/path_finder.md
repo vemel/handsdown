@@ -1,6 +1,9 @@
 # PathFinder
 
-> Auto-generated documentation for [handsdown.path_finder](../../handsdown/path_finder.py) module.
+> Auto-generated documentation for [handsdown.path_finder](../../handsdown/path_finder.py) module..
+
+Glob helper for matching paths inside `root` path with `.gitignore`-like
+`include` and `exclude` patterns.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
@@ -10,9 +13,6 @@
     - [PathFinder().mkdir](#pathfindermkdir)
     - [PathFinder().relative](#pathfinderrelative)
   - [PathFinderError](#pathfindererror)
-
-Glob helper for matching paths inside `root` path with `.gitignore`-like
-`include` and `exclude` patterns.
 
 ## PathFinder
 

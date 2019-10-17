@@ -1,6 +1,8 @@
 # IndentTrimmer
 
-> Auto-generated documentation for [handsdown.indent_trimmer](../../handsdown/indent_trimmer.py) module.
+> Auto-generated documentation for [handsdown.indent_trimmer](../../handsdown/indent_trimmer.py) module..
+
+Utility for removing indentation for sections and lines.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
@@ -9,8 +11,6 @@
     - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
     - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
-
-Utility for removing indentation for sections and lines.
 
 ## IndentTrimmer
 

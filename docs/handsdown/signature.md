@@ -1,6 +1,8 @@
 # Signature
 
-> Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module.
+> Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module..
+
+Module for function signature generation.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Signature
   - [Config](#config)
@@ -9,8 +11,6 @@
     - [Parameter.create](#parametercreate)
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
-
-Module for function signature generation.
 
 ## Config
 

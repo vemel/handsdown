@@ -1,12 +1,12 @@
 # Smart
 
-> Auto-generated documentation for [handsdown.processors.smart](../../../handsdown/processors/smart.py) module.
+> Auto-generated documentation for [handsdown.processors.smart](../../../handsdown/processors/smart.py) module..
+
+    Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
   - [SmartDocstringProcessor](#smartdocstringprocessor)
     - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
-
-    Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

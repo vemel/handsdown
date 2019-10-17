@@ -1,6 +1,8 @@
 # ModuleRecord
 
-> Auto-generated documentation for [handsdown.module_record](../../handsdown/module_record.py) module.
+> Auto-generated documentation for [handsdown.module_record](../../handsdown/module_record.py) module..
+
+Dataclass for an imported module.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
@@ -11,8 +13,6 @@
     - [ModuleRecordList().add](#modulerecordlistadd)
     - [ModuleRecordList().find_object](#modulerecordlistfind_object)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
-
-Dataclass for an imported module.
 
 ## ModuleObjectRecord
 

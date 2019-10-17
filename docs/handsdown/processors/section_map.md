@@ -1,6 +1,8 @@
 # SectionMap
 
-> Auto-generated documentation for [handsdown.processors.section_map](../../../handsdown/processors/section_map.py) module.
+> Auto-generated documentation for [handsdown.processors.section_map](../../../handsdown/processors/section_map.py) module..
+
+Module for splitting docstring into `Section` groups.
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
   - [Section](#section)
@@ -12,8 +14,6 @@
     - [SectionMap().add_block](#sectionmapadd_block)
     - [SectionMap().add_line](#sectionmapadd_line)
     - [SectionMap().trim_block](#sectionmaptrim_block)
-
-Module for splitting docstring into [Section](#section) groups.
 
 ## Section
 

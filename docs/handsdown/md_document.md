@@ -1,6 +1,8 @@
 # MDDocument
 
-> Auto-generated documentation for [handsdown.md_document](../../handsdown/md_document.py) module.
+> Auto-generated documentation for [handsdown.md_document](../../handsdown/md_document.py) module..
+
+Markdown file builder.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / MDDocument
   - [MDDocument](#mddocument)
@@ -20,8 +22,6 @@
     - [MDDocument().render_doc_link](#mddocumentrender_doc_link)
     - [MDDocument.render_link](#mddocumentrender_link)
     - [MDDocument().write](#mddocumentwrite)
-
-Markdown file builder.
 
 ## MDDocument
 
@@ -133,7 +133,7 @@ Document Tree of Contents section or an empty line.
 
 ### MDDocument().append
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L271)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L279)
 
 ```python
 def append(content: str) -> None
@@ -149,7 +149,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().append_title
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L287)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L298)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -166,7 +166,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().ensure_toc_exists
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L106)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L114)
 
 ```python
 def ensure_toc_exists() -> None
@@ -176,7 +176,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L342)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L353)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -202,7 +202,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L301)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L312)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -220,7 +220,7 @@ A string with ToC.
 
 ### MDDocument.get_anchor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L113)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L121)
 
 ```python
 def get_anchor(title: str) -> str
@@ -234,7 +234,7 @@ A test of anchor link.
 
 ### MDDocument.is_toc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L125)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L133)
 
 ```python
 def is_toc(section: str) -> bool
@@ -258,7 +258,7 @@ Read and parse content from `path`.
 
 ### MDDocument().render_doc_link
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L164)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L172)
 
 ```python
 def render_doc_link(
@@ -299,7 +299,7 @@ A string with Markdown link.
 
 ### MDDocument.render_link
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L142)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L150)
 
 ```python
 def render_link(title: str, link: str) -> str
@@ -328,7 +328,7 @@ A string with Markdown link.
 
 ### MDDocument().write
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L214)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L222)
 
 ```python
 def write() -> None

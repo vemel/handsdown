@@ -1,14 +1,14 @@
 # PEP 257 - reStructuredText docstrings examples
 
-> Auto-generated documentation for [examples.pep257_docstrings](../../examples/pep257_docstrings.py) module.
+> Auto-generated documentation for [examples.pep257_docstrings](../../examples/pep257_docstrings.py) module..
+
+## Links
 
 - [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 257 - reStructuredText docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)
   - [function_example](#function_example)
-
-## Links
 
 [PEP 257 - Docstring Conventions](https://www.python.org/dev/peps/pep-0287/)
 

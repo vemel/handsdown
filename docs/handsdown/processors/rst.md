@@ -1,11 +1,11 @@
 # Rst
 
-> Auto-generated documentation for [handsdown.processors.rst](../../../handsdown/processors/rst.py) module.
+> Auto-generated documentation for [handsdown.processors.rst](../../../handsdown/processors/rst.py) module..
+
+Docstring processor for restructured text docstring format.
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Rst
   - [RSTDocstringProcessor](#rstdocstringprocessor)
-
-Docstring processor for restructured text docstring format.
 
 ## RSTDocstringProcessor
 

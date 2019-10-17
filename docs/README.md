@@ -1,6 +1,6 @@
 # 🙌 Handsdown - Python documentation generator
 
-> Auto-generated documentation index.
+> Auto-generated documentation index..
 
 ![PyPI](https://img.shields.io/pypi/v/handsdown)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown)

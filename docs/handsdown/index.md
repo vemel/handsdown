@@ -1,6 +1,8 @@
 # Handsdown
 
-> Auto-generated documentation for [handsdown](../../handsdown/__init__.py) module.
+> Auto-generated documentation for [handsdown](../../handsdown/__init__.py) module..
+
+Root of `handsdown` source code.
 
 - [Index](../README.md#modules) / Handsdown
 - [Handsdown](#handsdown)
@@ -28,8 +30,6 @@
       - [Smart](processors/smart.md#smart)
     - [Signature](signature.md#signature)
     - [Utils](utils.md#utils)
-
-Root of `handsdown` source code.
 
 # Handsdown
 

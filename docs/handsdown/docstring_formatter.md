@@ -1,12 +1,12 @@
 # DocstringFormatter
 
-> Auto-generated documentation for [handsdown.docstring_formatter](../../handsdown/docstring_formatter.py) module.
+> Auto-generated documentation for [handsdown.docstring_formatter](../../handsdown/docstring_formatter.py) module..
+
+Translator of docstrings to Markdown format.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / DocstringFormatter
   - [DocstringFormatter](#docstringformatter)
     - [DocstringFormatter().render](#docstringformatterrender)
-
-Translator of docstrings to Markdown format.
 
 ## DocstringFormatter
 

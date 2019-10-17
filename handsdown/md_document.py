@@ -103,6 +103,14 @@ class MDDocument:
 
             self._sections.append(section)
 
+        # extract subtitle from the first section if it is not a title
+        if (
+            not self._subtitle
+            and self._sections
+            and not self._sections[0].startswith("#")
+        ):
+            self._subtitle = self._sections.pop(0)
+
     def ensure_toc_exists(self) -> None:
         """
         Check if ToC exists in the document or create one.
@@ -279,6 +287,9 @@ class MDDocument:
         """
         for section in content.split(self._section_separator):
             section = IndentTrimmer.trim_empty_lines(section)
+            if not self.subtitle:
+                self.subtitle = section
+                continue
             if section:
                 self._sections.append(section)
 

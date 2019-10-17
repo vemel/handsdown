@@ -1,12 +1,12 @@
 # Base
 
-> Auto-generated documentation for [handsdown.processors.base](../../../handsdown/processors/base.py) module.
+> Auto-generated documentation for [handsdown.processors.base](../../../handsdown/processors/base.py) module..
+
+Base class for all docstring processors:
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
-
-Base class for all docstring processors:
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

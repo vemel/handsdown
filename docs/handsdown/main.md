@@ -1,12 +1,12 @@
 # Main
 
-> Auto-generated documentation for [handsdown.main](../../handsdown/main.py) module.
+> Auto-generated documentation for [handsdown.main](../../handsdown/main.py) module..
+
+Main CLI entrypoint for `handsdown`
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Main
   - [get_logger](#get_logger)
   - [main](#main)
-
-Main CLI entrypoint for `handsdown`
 
 #### Attributes
 

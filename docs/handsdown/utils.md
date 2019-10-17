@@ -1,12 +1,12 @@
 # Utils
 
-> Auto-generated documentation for [handsdown.utils](../../handsdown/utils.py) module.
+> Auto-generated documentation for [handsdown.utils](../../handsdown/utils.py) module..
+
+Handful utils that do not deserve a separate module.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
-
-Handful utils that do not deserve a separate module.
 
 ## OSEnvironMock
 
