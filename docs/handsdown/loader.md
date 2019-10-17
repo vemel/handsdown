@@ -16,7 +16,7 @@
 
 ## Loader
 
-[🔍 find in source code](../../handsdown/loader.py#l25)
+[🔍 find in source code](../../handsdown/loader.py#L25)
 
 ```python
 class Loader(root_path: pathlib.Path, output_path: pathlib.Path, logger: logging.Logger)
@@ -39,7 +39,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../../handsdown/loader.py#l312)
+[🔍 find in source code](../../handsdown/loader.py#L312)
 
 ```python
 def _discover_module_objects(
@@ -64,7 +64,7 @@ New [ModuleObjectRecord](module_record.md#moduleobjectrecord) instances.
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../../handsdown/loader.py#l205)
+[🔍 find in source code](../../handsdown/loader.py#L205)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -82,7 +82,7 @@ A string with object docsting.
 
 ### Loader._get_object_signature
 
-[🔍 find in source code](../../handsdown/loader.py#l179)
+[🔍 find in source code](../../handsdown/loader.py#L179)
 
 ```python
 def _get_object_signature(obj: Any) -> str
@@ -101,7 +101,7 @@ A string with object signature or None.
 
 ### Loader()._setup_django
 
-[🔍 find in source code](../../handsdown/loader.py#l154)
+[🔍 find in source code](../../handsdown/loader.py#L154)
 
 ```python
 def _setup_django() -> None
@@ -116,7 +116,7 @@ Patches applied during apps initialization:
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../../handsdown/loader.py#l83)
+[🔍 find in source code](../../handsdown/loader.py#L83)
 
 ```python
 def get_module_record(
@@ -144,7 +144,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../../handsdown/loader.py#l446)
+[🔍 find in source code](../../handsdown/loader.py#L446)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -160,7 +160,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../../handsdown/loader.py#l229)
+[🔍 find in source code](../../handsdown/loader.py#L229)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
@@ -184,7 +184,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../../handsdown/loader.py#l59)
+[🔍 find in source code](../../handsdown/loader.py#L59)
 
 ```python
 def setup() -> None
@@ -197,7 +197,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](../../handsdown/loader.py#l19)
+[🔍 find in source code](../../handsdown/loader.py#L19)
 
 ```python
 class LoaderError(*args, **kwargs)

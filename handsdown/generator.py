@@ -31,6 +31,8 @@ class Generator:
         loader -- Loader for python modules.
         raise_errors -- Raise `LoaderError` instead of silencing in.
         ignore_unknown_errors -- Continue on any error.
+        source_code_url -- URL to source files to use instead of relative paths,
+            useful for [Github Pages](https://pages.github.com/).
 
     Arguments:
         LOGGER_NAME -- Name of logger: `handsdown`
@@ -54,6 +56,7 @@ class Generator:
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
+        source_code_url: Optional[Text] = None,
     ) -> None:
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
@@ -61,6 +64,7 @@ class Generator:
         self._project_name = get_title_from_path_part(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
         self._root_path_finder = PathFinder(self._root_path)
+        self._source_code_url = source_code_url
 
         # create output folder if it does not exist
         if not self._output_path.exists():
@@ -217,7 +221,7 @@ class Generator:
                 md_document.render_doc_link(
                     parend_module_record.title,
                     target_path=parend_module_record.output_path,
-                    anchor=parend_module_record.title,
+                    anchor=md_document.get_anchor(parend_module_record.title),
                 )
             )
 
@@ -227,7 +231,9 @@ class Generator:
             md_document.render_doc_link(
                 self.INDEX_TITLE,
                 target_path=self._output_path / self.INDEX_NAME,
-                anchor=f"{self._project_name} {self.INDEX_TITLE}",
+                anchor=md_document.get_anchor(
+                    f"{self._project_name} {self.INDEX_TITLE}"
+                ),
             ),
         )
 
@@ -291,7 +297,9 @@ class Generator:
 
                     title = module_object.title
                     link = md_document.render_doc_link(
-                        title, anchor=title, target_path=module_object.output_path
+                        title,
+                        target_path=module_object.output_path,
+                        anchor=md_document.get_anchor(title),
                     )
                     section = section.replace(match, link)
                     self._logger.debug(
@@ -311,7 +319,9 @@ class Generator:
 
                 title = module_object.title
                 link = md_document.render_doc_link(
-                    title, anchor=title, target_path=module_object.output_path
+                    title,
+                    target_path=module_object.output_path,
+                    anchor=md_document.get_anchor(title),
                 )
                 section = section.replace(match, link)
                 self._logger.debug(
@@ -332,11 +342,21 @@ class Generator:
             )
 
             source_path = module_object_record.source_path
+            source_line_number = module_object_record.source_line_number
             source_link = md_document.render_doc_link(
                 title="🔍 find in source code",
                 target_path=source_path,
-                anchor=f"L{module_object_record.source_line_number}",
+                anchor=f"L{source_line_number}",
             )
+            if self._source_code_url:
+                relative_path_str = self._root_path_finder.relative(
+                    source_path
+                ).as_posix()
+                source_link = md_document.render_link(
+                    title="🔍 find in source code",
+                    link=f"{self._source_code_url}{relative_path_str}#L{source_line_number}",
+                )
+
             md_document.append(source_link)
 
             signature = module_object_record.signature
@@ -386,7 +406,9 @@ class Generator:
 
                 title = related_object.title
                 link = md_document.render_doc_link(
-                    title, anchor=title, target_path=related_object.output_path
+                    title,
+                    target_path=related_object.output_path,
+                    anchor=md_document.get_anchor(title),
                 )
                 section_map.add_line("See also", f"- {link}")
                 self._logger.debug(
@@ -447,8 +469,8 @@ class Generator:
             indent = "  " * (len(title_parts) - len(parts) - 1)
             link = md_document.render_doc_link(
                 title=title_parts[-1],
-                anchor=title_parts[-1],
                 target_path=module_record.output_path,
+                anchor=md_document.get_anchor(title_parts[-1]),
             )
             lines.append(f"{indent}- {link}")
         return lines

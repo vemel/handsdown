@@ -7,10 +7,11 @@
   - [dir_abs_path](#dir_abs_path)
   - [existing_dir_abs_path](#existing_dir_abs_path)
   - [get_cli_parser](#get_cli_parser)
+  - [git_repo](#git_repo)
 
 ## abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#l9)
+[🔍 find in source code](../../handsdown/cli_parser.py#L32)
 
 ```python
 def abs_path(path_str: str) -> pathlib.Path
@@ -28,7 +29,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#l22)
+[🔍 find in source code](../../handsdown/cli_parser.py#L45)
 
 ```python
 def dir_abs_path(path_str: str) -> pathlib.Path
@@ -50,7 +51,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#l41)
+[🔍 find in source code](../../handsdown/cli_parser.py#L64)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> pathlib.Path
@@ -72,7 +73,7 @@ An absolute path.
 
 ## get_cli_parser
 
-[🔍 find in source code](../../handsdown/cli_parser.py#l62)
+[🔍 find in source code](../../handsdown/cli_parser.py#L85)
 
 ```python
 def get_cli_parser() -> argparse.ArgumentParser
@@ -83,3 +84,21 @@ Get CLI arguments parser.
 #### Returns
 
 An `argparse.ArgumentParser` instance.
+
+## git_repo
+
+[🔍 find in source code](../../handsdown/cli_parser.py#L13)
+
+```python
+def git_repo(git_repo_url: str) -> str
+```
+
+Validate `git_repo_url` to be a Github repo and converts SSH urls to HTTPS.
+
+#### Arguments
+
+git_repo_url - Github URL or `remote.origin.url`
+
+#### Returns
+
+A Github URL.

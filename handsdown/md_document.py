@@ -167,16 +167,16 @@ class MDDocument:
         Examples::
 
             md_doc = MDDocument(path='/root/parent/doc.md')
-            MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('/root/parent/doc.md')
+            MDDocument.render_doc_link('my title', anchor='my-anchor', target_path=Path('/root/parent/doc.md')
             '[my title](#my-anchor)'
 
             MDDocument.render_doc_link('my title', target_path=Path('/root/parent/other.md'))
             '[my title](other.md)'
 
-            MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('doc.md'))
+            MDDocument.render_doc_link('my title', anchor='my-anchor', target_path=Path('doc.md'))
             '[my title](doc.md#my-anchor)'
 
-            MDDocument.render_doc_link('my title', anchor='My anchor')
+            MDDocument.render_doc_link('my title', anchor='my-anchor')
             '[my title](#my-anchor)'
 
         Arguments:
@@ -188,8 +188,6 @@ class MDDocument:
             A string with Markdown link.
         """
         link = ""
-        if anchor:
-            anchor = self.get_anchor(anchor)
         if anchor:
             link = f"#{anchor}"
         if target_path and target_path != self._path:
@@ -324,7 +322,7 @@ class MDDocument:
                 continue
 
             title = line.split(" ", 1)[-1].strip()
-            link = self.render_doc_link(title, anchor=title)
+            link = self.render_doc_link(title, anchor=self.get_anchor(title))
             toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
 
         return "\n".join(toc_lines)

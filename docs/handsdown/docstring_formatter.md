@@ -9,7 +9,7 @@
 
 ## DocstringFormatter
 
-[🔍 find in source code](../../handsdown/docstring_formatter.py#l9)
+[🔍 find in source code](../../handsdown/docstring_formatter.py#L9)
 
 ```python
 class DocstringFormatter(docstring: str)
@@ -23,7 +23,7 @@ Clean up docstring to be compatible with Markdown format.
 
 ### DocstringFormatter._cleanup
 
-[🔍 find in source code](../../handsdown/docstring_formatter.py#l23)
+[🔍 find in source code](../../handsdown/docstring_formatter.py#L23)
 
 ```python
 def _cleanup(docstring: str) -> str
@@ -41,7 +41,7 @@ Aligned docstring.
 
 ### DocstringFormatter().render
 
-[🔍 find in source code](../../handsdown/docstring_formatter.py#l55)
+[🔍 find in source code](../../handsdown/docstring_formatter.py#L55)
 
 ```python
 def render() -> str

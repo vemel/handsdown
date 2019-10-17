@@ -16,7 +16,7 @@ Main CLI entrypoint for `handsdown`
 
 ## get_logger
 
-[🔍 find in source code](../../handsdown/main.py#l23)
+[🔍 find in source code](../../handsdown/main.py#L23)
 
 ```python
 def get_logger(level: int) -> logging.Logger
@@ -34,7 +34,7 @@ A `logging.Logger` instance.
 
 ## main
 
-[🔍 find in source code](../../handsdown/main.py#l47)
+[🔍 find in source code](../../handsdown/main.py#L47)
 
 ```python
 def main() -> None

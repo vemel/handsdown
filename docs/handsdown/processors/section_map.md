@@ -15,7 +15,7 @@
 
 ## Section
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l31)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L31)
 
 ```python
 class Section(title: str, blocks: List[handsdown.processors.section_map.SectionBlock])
@@ -30,7 +30,7 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 
 ### Section().render
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l43)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L43)
 
 ```python
 def render() -> str
@@ -44,7 +44,7 @@ Section lines as a text.
 
 ## SectionBlock
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l9)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L9)
 
 ```python
 class SectionBlock(lines: List[str])
@@ -58,7 +58,7 @@ Dataclass representing a [Section](#section) block.
 
 ### SectionBlock().render
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l19)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L19)
 
 ```python
 def render() -> str
@@ -72,7 +72,7 @@ Block lines as a text.
 
 ## SectionMap
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l56)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L56)
 
 ```python
 class SectionMap(*args, **kwargs)
@@ -86,7 +86,7 @@ Value is a related [Section](#section) instance.
 
 ### SectionMap().sections
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l56)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L56)
 
 ```python
 #property getter
@@ -105,7 +105,7 @@ List [Section](#section) objects.
 
 ### SectionMap().add_block
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l86)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L86)
 
 ```python
 def add_block(section_name: str) -> None
@@ -119,7 +119,7 @@ Add new [SectionBlock](#sectionblock) to section `section_name`.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l65)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L65)
 
 ```python
 def add_line(section_name: str, line: str) -> None
@@ -135,7 +135,7 @@ If line and section are empty - section is not created.
 
 ### SectionMap().trim_block
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l98)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#L98)
 
 ```python
 def trim_block(section_name: str) -> None

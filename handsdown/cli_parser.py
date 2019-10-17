@@ -1,9 +1,32 @@
 """
 # CLI Parser
 """
+import re
 import argparse
 from pathlib import Path
 from typing import Text
+
+
+_git_repo_re = re.compile(r"git@github\.com:(?P<user>\S+)/(?P<repo>\S+)\.git")
+
+
+def git_repo(git_repo_url: Text) -> Text:
+    """
+    Validate `git_repo_url` to be a Github repo and converts SSH urls to HTTPS.
+
+    Arguments:
+        git_repo_url - Github URL or `remote.origin.url`
+
+    Returns:
+        A Github URL.
+    """
+    match = _git_repo_re.match(git_repo_url)
+    if match:
+        git_repo_url = "https://github.com/{user}/{repo}/blob/master/".format(
+            **match.groupdict()
+        )
+
+    return git_repo_url
 
 
 def abs_path(path_str: Text) -> Path:
@@ -102,6 +125,9 @@ def get_cli_parser() -> argparse.ArgumentParser:
         help="Path to output folder",
         default=Path.cwd() / "docs",
         type=dir_abs_path,
+    )
+    parser.add_argument(
+        "--gh-pages", help="Build docs for GitHub Pages", default=None, type=git_repo
     )
     parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"

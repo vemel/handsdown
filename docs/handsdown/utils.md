@@ -8,7 +8,7 @@
 
 ## OSEnvironMock
 
-[🔍 find in source code](../../handsdown/utils.py#l5)
+[🔍 find in source code](../../handsdown/utils.py#L5)
 
 ```python
 class OSEnvironMock(*args, **kwargs)
@@ -18,7 +18,7 @@ Mock for `os.environ` that returns `env` string isntead of undefined variables.
 
 ## get_title_from_path_part
 
-[🔍 find in source code](../../handsdown/utils.py#l14)
+[🔍 find in source code](../../handsdown/utils.py#L14)
 
 ```python
 def get_title_from_path_part(path_part: str) -> str

@@ -13,7 +13,7 @@
 
 ## PathFinder
 
-[🔍 find in source code](../../handsdown/path_finder.py#l18)
+[🔍 find in source code](../../handsdown/path_finder.py#L18)
 
 ```python
 class PathFinder(root: pathlib.Path)
@@ -46,7 +46,7 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 
 ### PathFinder().exclude
 
-[🔍 find in source code](../../handsdown/path_finder.py#l83)
+[🔍 find in source code](../../handsdown/path_finder.py#L83)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -70,7 +70,7 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[🔍 find in source code](../../handsdown/path_finder.py#l125)
+[🔍 find in source code](../../handsdown/path_finder.py#L125)
 
 ```python
 def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
@@ -85,7 +85,7 @@ Matching `Path` objects.
 
 ### PathFinder().include
 
-[🔍 find in source code](../../handsdown/path_finder.py#l63)
+[🔍 find in source code](../../handsdown/path_finder.py#L63)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -109,7 +109,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[🔍 find in source code](../../handsdown/path_finder.py#l170)
+[🔍 find in source code](../../handsdown/path_finder.py#L170)
 
 ```python
 def mkdir(force: bool = False) -> None
@@ -127,7 +127,7 @@ Create directories up to `root` if they do not exist.
 
 ### PathFinder().relative
 
-[🔍 find in source code](../../handsdown/path_finder.py#l142)
+[🔍 find in source code](../../handsdown/path_finder.py#L142)
 
 ```python
 def relative(target: pathlib.Path) -> pathlib.Path
@@ -146,7 +146,7 @@ A relative path to `target`.
 
 ## PathFinderError
 
-[🔍 find in source code](../../handsdown/path_finder.py#l12)
+[🔍 find in source code](../../handsdown/path_finder.py#L12)
 
 ```python
 class PathFinderError(*args, **kwargs)

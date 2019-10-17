@@ -71,6 +71,7 @@ def main() -> None:
             output_path=args.output_path,
             source_paths=path_finder.glob(SOURCES_GLOB),
             raise_errors=args.panic,
+            source_code_url=args.gh_pages,
         )
         if args.files:
             for path in args.files:
@@ -80,6 +81,12 @@ def main() -> None:
             generator.generate_index()
             if args.cleanup:
                 generator.cleanup_old_docs()
+
+        if args.gh_pages:
+            gh_pages_config_path = args.output_path / "_config.yml"
+            if not gh_pages_config_path.exists():
+                logger.info(f"Creating {gh_pages_config_path} file")
+                gh_pages_config_path.write_text("theme: jekyll-theme-cayman\n")
     except GeneratorError as e:
         logger.error(e)
         sys.exit(1)
