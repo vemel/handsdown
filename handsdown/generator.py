@@ -36,9 +36,6 @@ class Generator:
         LOGGER_NAME -- Name of logger: `handsdown`
         INDEX_NAME -- Docs index filename: `README.md`
         INDEX_MODULES_NAME -- Modules ToC name in index: `Modules`
-
-    Raises:
-        GeneratorError -- If input/output paths are invalid.
     """
 
     LOGGER_NAME = "handsdown"
@@ -62,11 +59,6 @@ class Generator:
         self._project_name = get_title_from_path_part(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
         self._root_path_finder = PathFinder(self._root_path)
-
-        try:
-            output_relative_path = self._root_path_finder.relative(self._output_path)
-        except ValueError as e:
-            raise GeneratorError(f"Output path should be inside input path: {e}")
 
         # create output folder if it does not exist
         if not self._output_path.exists():

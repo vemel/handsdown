@@ -68,7 +68,7 @@ path_finder.exclude("tests/*", "build/*")
 handsdown = Generator(
     input_path=repo_path,
     output_path=repo_path / 'output',
-    source_paths=path_finder.list()
+    source_paths=path_finder.glob("**/*.py")
 )
 
 # generate all docs at once
