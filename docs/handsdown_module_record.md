@@ -105,7 +105,7 @@ A list of import string parts as strings.
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](../handsdown/module_record.py#L83)
+[🔍 find in source code](../handsdown/module_record.py#L81)
 
 ```python
 def get_title_parts() -> List[str]
@@ -133,7 +133,7 @@ A list of title parts as strings.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#L116)
+[🔍 find in source code](../handsdown/module_record.py#L112)
 
 ```python
 class ModuleRecordList()
@@ -143,7 +143,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/module_record.py#L168)
+[🔍 find in source code](../handsdown/module_record.py#L164)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
@@ -157,11 +157,11 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 #### See also
 
-- [ModuleRecord](#modulerecord)
+- [ModuleRecord](./docs#modulerecord)
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#L155)
+[🔍 find in source code](../handsdown/module_record.py#L151)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -175,11 +175,11 @@ Add new [ModuleRecord](#modulerecord).
 
 #### See also
 
-- [ModuleRecord](#modulerecord)
+- [ModuleRecord](./docs#modulerecord)
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#L125)
+[🔍 find in source code](../handsdown/module_record.py#L121)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
@@ -197,11 +197,11 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 #### See also
 
-- [ModuleObjectRecord](#moduleobjectrecord)
+- [ModuleObjectRecord](./docs#moduleobjectrecord)
 
 ### ModuleRecordList().get_output_file_names
 
-[🔍 find in source code](../handsdown/module_record.py#L137)
+[🔍 find in source code](../handsdown/module_record.py#L133)
 
 ```python
 def get_output_file_names() -> Set[str]
@@ -215,7 +215,7 @@ A set of output names as strings.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#L146)
+[🔍 find in source code](../handsdown/module_record.py#L142)
 
 ```python
 def get_package_names() -> Set[str]

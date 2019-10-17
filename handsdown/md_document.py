@@ -11,12 +11,12 @@ class MDDocument:
 
     Examples::
 
-        md_doc = MDDocument('hello')
+        md_doc = MDDocument(path=Path('output.md'))
         md_doc.append('## New section')
         md_doc.append('some content')
         md_doc.title = 'My doc'
         md_doc.ensure_toc_exists()
-        md_doc.write(Path('output.md'))
+        md_doc.write()
 
         # output is indented for readability
         Path('output.md').read_text()
@@ -31,26 +31,28 @@ class MDDocument:
         '''
 
     Arguments:
-        content -- Initial MD content.
+        path -- Path to store document.
+        root_path -- Path to root doc folder. If not provided,
+            `path` parent folder is used.
     """
 
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
-    def __init__(self, content: Text = "") -> None:
+    def __init__(self, path: Path, root_path: Optional[Path] = None) -> None:
         self._sections: List[Text] = []
         self._content = ""
         self._title: Optional[Text] = None
         self._subtitle: Optional[Text] = None
-        self._toc_section: Optional[Text] = None
-        if content:
-            self.append(content)
+        self._toc_section: Text = ""
+        self._path = path
+        self._root_path = root_path or self._path.parent
 
     def set(self, content: Text) -> None:
         self._content = content
         self._title = None
-        self._toc_section = None
+        self._toc_section = ""
         title, content = self.extract_title(self._content)
         if title:
             self._title = title
@@ -128,9 +130,8 @@ class MDDocument:
         """
         return f"[{title}]({link})"
 
-    @classmethod
     def render_doc_link(
-        cls, title: Text, anchor: Text = "", md_name: Text = ""
+        self, title: Text, anchor: Text = "", target_path: Optional[Path] = None
     ) -> Text:
         """
         Render Markdown link to a local MD document.
@@ -140,29 +141,30 @@ class MDDocument:
             MDDocument.render_doc_link('my title', anchor='My anchor')
             '[my title](#my-anchor)'
 
-            MDDocument.render_doc_link('my title', md_name='doc.md')
+            MDDocument.render_doc_link('my title', target_path=Path('doc.md'))
             '[my title](./doc.md)'
 
-            MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
+            MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('doc.md'))
             '[my title](./doc.md#my-anchor)'
 
         Arguments:
             title -- Link text.
-            anchor -- Unescaped or exacped anchor tag.
-            md_name -- Name of local MD document.
+            anchor -- Unescaped or escaped anchor tag.
+            target_path -- Target MDDocument path.
 
         Returns:
             A string with Markdown link.
         """
         link = ""
         if anchor:
-            anchor = cls.get_anchor(anchor)
+            anchor = self.get_anchor(anchor)
         if anchor:
             link = f"#{anchor}"
-        if md_name:
+        if target_path and target_path != self._path:
+            md_name = target_path.name
             link = f"./{md_name}{link}"
 
-        return cls.render_link(title, link)
+        return self.render_link(title, link)
 
     def _build_content(self) -> Text:
         sections = []
@@ -176,15 +178,12 @@ class MDDocument:
         sections.extend(self._sections)
         return self._section_separator.join(sections) + "\n"
 
-    def write(self, path: Path) -> None:
+    def write(self) -> None:
         """
         Write MD content to `path`.
-
-        Arguments:
-            path -- Output path.
         """
         content = self._build_content()
-        path.write_text(content)
+        self._path.write_text(content)
 
     @property
     def title(self) -> Optional[Text]:
@@ -205,7 +204,7 @@ class MDDocument:
         self._content = self._build_content()
 
     @property
-    def toc_section(self) -> Optional[Text]:
+    def toc_section(self) -> Text:
         return self._toc_section
 
     @toc_section.setter

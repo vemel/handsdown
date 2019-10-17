@@ -11,7 +11,7 @@
     - [MDDocument().generate_toc_section](#mddocumentgenerate_toc_section)
     - [MDDocument.get_anchor](#mddocumentget_anchor)
     - [MDDocument.is_toc](#mddocumentis_toc)
-    - [MDDocument.render_doc_link](#mddocumentrender_doc_link)
+    - [MDDocument().render_doc_link](#mddocumentrender_doc_link)
     - [MDDocument.render_link](#mddocumentrender_link)
     - [MDDocument().write](#mddocumentwrite)
 
@@ -20,7 +20,7 @@
 [🔍 find in source code](../handsdown/md_document.py#L8)
 
 ```python
-class MDDocument(content: str = '')
+class MDDocument(path: pathlib.Path, root_path: Union[pathlib.Path, NoneType] = None)
 ```
 
 MD file wrapper. Controls document title and Table of Contents.
@@ -28,12 +28,12 @@ MD file wrapper. Controls document title and Table of Contents.
 #### Examples
 
 ```python
-md_doc = MDDocument('hello')
+md_doc = MDDocument(path=Path('output.md'))
 md_doc.append('## New section')
 md_doc.append('some content')
 md_doc.title = 'My doc'
 md_doc.ensure_toc_exists()
-md_doc.write(Path('output.md'))
+md_doc.write()
 
 # output is indented for readability
 Path('output.md').read_text()
@@ -50,11 +50,13 @@ some content
 
 #### Arguments
 
-- `content` - Initial MD content.
+- `path` - Path to store document.
+- `root_path` - Path to root doc folder. If not provided,
+    `path` parent folder is used.
 
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L221)
+[🔍 find in source code](../handsdown/md_document.py#L214)
 
 ```python
 def append(content: str) -> None
@@ -70,7 +72,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().append_title
 
-[🔍 find in source code](../handsdown/md_document.py#L237)
+[🔍 find in source code](../handsdown/md_document.py#L230)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -95,7 +97,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L290)
+[🔍 find in source code](../handsdown/md_document.py#L283)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -121,7 +123,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L249)
+[🔍 find in source code](../handsdown/md_document.py#L242)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str
@@ -165,12 +167,16 @@ Check if the section is Tree of Contents.
 
 True the section is ToC.
 
-### MDDocument.render_doc_link
+### MDDocument().render_doc_link
 
-[🔍 find in source code](../handsdown/md_document.py#L135)
+[🔍 find in source code](../handsdown/md_document.py#L133)
 
 ```python
-def render_doc_link(title: str, anchor: str = '', md_name: str = '') -> str
+def render_doc_link(
+    title: str,
+    anchor: str = '',
+    target_path: Union[pathlib.Path, NoneType] = None,
+) -> str
 ```
 
 Render Markdown link to a local MD document.
@@ -191,8 +197,8 @@ MDDocument.render_doc_link('my title', anchor='My anchor', md_name='doc.md')
 #### Arguments
 
 - `title` - Link text.
-- `anchor` - Unescaped or exacped anchor tag.
-- `md_name` - Name of local MD document.
+- `anchor` - Unescaped or escaped anchor tag.
+- `target_path` - Target MDDocument path.
 
 #### Returns
 
@@ -229,14 +235,10 @@ A string with Markdown link.
 
 ### MDDocument().write
 
-[🔍 find in source code](../handsdown/md_document.py#L185)
+[🔍 find in source code](../handsdown/md_document.py#L181)
 
 ```python
-def write(path: pathlib.Path) -> None
+def write() -> None
 ```
 
 Write MD content to `path`.
-
-#### Arguments
-
-- `path` - Output path.

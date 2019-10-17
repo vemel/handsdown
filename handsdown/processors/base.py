@@ -26,7 +26,7 @@ class BaseDocstringProcessor:
     section_name_map: Dict[Text, Text] = {}
     replace_map: Dict[Text, Text] = {}
 
-    def _reset(self):
+    def _reset(self) -> None:
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
@@ -68,7 +68,7 @@ class BaseDocstringProcessor:
 
         return self.section_map
 
-    def _parse_doctest_line(self, line: Text) -> bool:
+    def _parse_doctest_line(self, line: Text) -> None:
         # end doctest codeblock
         if not line:
             self._in_doctest_block = False
@@ -90,7 +90,7 @@ class BaseDocstringProcessor:
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
 
-    def _parse_code_line(self, line: Text) -> bool:
+    def _parse_code_line(self, line: Text) -> None:
         if not line and self._codeblock_lines_count == 0:
             return
 
@@ -133,7 +133,7 @@ class BaseDocstringProcessor:
     def _add_block(self) -> None:
         self.section_map.add_block(self.current_section_name)
 
-    def _trim_empty_lines(self):
+    def _trim_empty_lines(self) -> None:
         self.section_map.trim_block(self.current_section_name)
 
     def _parse_line(self, line: Text) -> None:

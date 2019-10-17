@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L316)
+[🔍 find in source code](../handsdown/loader.py#L314)
 
 ```python
 def _discover_module_objects(
@@ -62,7 +62,7 @@ A generator that yields [ModuleObjectRecord](./handsdown_module_record.md#module
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L196)
+[🔍 find in source code](../handsdown/loader.py#L194)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -80,7 +80,7 @@ A string with object docsting.
 
 ### Loader()._setup_django
 
-[🔍 find in source code](../handsdown/loader.py#L154)
+[🔍 find in source code](../handsdown/loader.py#L152)
 
 ```python
 def _setup_django() -> None
@@ -95,7 +95,7 @@ Patches applied during apps initialization:
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L83)
+[🔍 find in source code](../handsdown/loader.py#L81)
 
 ```python
 def get_module_record(
@@ -123,7 +123,7 @@ A new [ModuleRecord](./handsdown_module_record.md#modulerecord) instance or None
 
 ### Loader.get_object_signature
 
-[🔍 find in source code](../handsdown/loader.py#L179)
+[🔍 find in source code](../handsdown/loader.py#L177)
 
 ```python
 def get_object_signature(obj: Any) -> Union[str, NoneType]
@@ -142,7 +142,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L410)
+[🔍 find in source code](../handsdown/loader.py#L413)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -158,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L233)
+[🔍 find in source code](../handsdown/loader.py#L231)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
@@ -182,7 +182,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../handsdown/loader.py#L54)
+[🔍 find in source code](../handsdown/loader.py#L52)
 
 ```python
 def setup() -> None

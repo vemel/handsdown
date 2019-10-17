@@ -62,7 +62,7 @@ Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 
 #### See also
 
-- [ProxyParameter](#proxyparameter)
+- [ProxyParameter](./docs#proxyparameter)
 
 ## SignatureBuilder
 

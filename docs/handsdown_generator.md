@@ -56,7 +56,7 @@ Main handsdown doc generator.
 
 ### Generator()._generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L390)
+[🔍 find in source code](../handsdown/generator.py#L421)
 
 ```python
 def _generate_index() -> None
@@ -66,11 +66,12 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#L336)
+[🔍 find in source code](../handsdown/generator.py#L364)
 
 ```python
 def _get_formatted_docstring(
     module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord],
+    md_document: handsdown.md_document.MDDocument,
     signature: Union[str, NoneType] = None,
 ) -> Union[str, NoneType]
 ```
@@ -91,6 +92,7 @@ A module docstring with valid markdown.
 #### See also
 
 - [ModuleRecord](./handsdown_module_record.md#modulerecord)
+- [MDDocument](./handsdown_md_document.md#mddocument)
 
 ### Generator().cleanup_old_docs
 
@@ -122,7 +124,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#L234)
+[🔍 find in source code](../handsdown/generator.py#L251)
 
 ```python
 def generate_docs() -> None
@@ -132,7 +134,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#L247)
+[🔍 find in source code](../handsdown/generator.py#L268)
 
 ```python
 def generate_index() -> None

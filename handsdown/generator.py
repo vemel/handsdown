@@ -147,14 +147,21 @@ class Generator:
             if module_record.source_path != source_path:
                 continue
 
-            self._generate_doc(module_record)
-            self._replace_short_links(module_record)
-            self._replace_full_links(module_record)
+            md_document = MDDocument(
+                path=self._output_path / module_record.output_file_name,
+                root_path=self._output_path,
+            )
+
+            self._generate_doc(module_record, md_document)
+            self._replace_short_links(module_record, md_document)
+            self._replace_full_links(module_record, md_document)
             return
 
         raise GeneratorError(f"Record not found for {source_path.name}")
 
-    def _generate_doc(self, module_record: ModuleRecord) -> None:
+    def _generate_doc(
+        self, module_record: ModuleRecord, md_document: MDDocument
+    ) -> None:
         md_name = module_record.output_file_name
         target_file = self._output_path / md_name
         relative_doc_path = target_file.relative_to(self._root_path)
@@ -163,44 +170,51 @@ class Generator:
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
-        md_doc = MDDocument()
         source_link = MDDocument.render_link(
             f"{module_record.import_string}",
             f"{self._root_relative_path / relative_file_path}",
         )
-        md_doc.title = module_record.title
-        md_doc.subtitle = f"> Auto-generated documentation for {source_link} module."
-
-        docstring = self._get_formatted_docstring(module_record)
-        if docstring:
-            # set MD and module record title if it is found in docstring
-            title, docstring = md_doc.extract_title(docstring)
-            if title:
-                module_record.title = title
-                md_doc.title = title
-
-            md_doc.append(docstring)
-
-        self._generate_module_doc_lines(module_record, md_doc)
-        md_doc.ensure_toc_exists()
-
-        modules_toc_lines = self._build_modules_toc_lines(
-            module_record.import_string, max_depth=3
+        md_document.title = module_record.title
+        md_document.subtitle = (
+            f"> Auto-generated documentation for {source_link} module."
         )
 
-        toc_lines = md_doc.toc_section.split("\n")
-        breadscrumbs = self._build_breadcrumbs_string(module_record)
+        docstring = self._get_formatted_docstring(
+            module_record=module_record, md_document=md_document
+        )
+        if docstring:
+            # set MD and module record title if it is found in docstring
+            title, docstring = md_document.extract_title(docstring)
+            if title:
+                module_record.title = title
+                md_document.title = title
+
+            md_document.append(docstring)
+
+        self._generate_module_doc_lines(module_record, md_document)
+        md_document.ensure_toc_exists()
+
+        modules_toc_lines = self._build_modules_toc_lines(
+            module_record.import_string, max_depth=3, md_document=md_document
+        )
+
+        toc_lines = md_document.toc_section.split("\n")
+        breadscrumbs = self._build_breadcrumbs_string(
+            module_record=module_record, md_document=md_document
+        )
         toc_lines[0] = f"- {breadscrumbs}"
         if modules_toc_lines:
             toc_lines.append(f"  - {self.MODULES_NAME}")
             for line in modules_toc_lines:
                 toc_lines.append(f"    {line}")
 
-        md_doc.toc_section = "\n".join(toc_lines)
+        md_document.toc_section = "\n".join(toc_lines)
 
-        md_doc.write(self._output_path / md_name)
+        md_document.write()
 
-    def _build_breadcrumbs_string(self, module_record: ModuleRecord) -> Text:
+    def _build_breadcrumbs_string(
+        self, module_record: ModuleRecord, md_document: MDDocument
+    ) -> Text:
         breadcrumbs: List[Text] = []
 
         import_string_parts = module_record.get_import_string_parts()
@@ -214,9 +228,10 @@ class Generator:
                 continue
 
             breadcrumbs.append(
-                MDDocument.render_doc_link(
+                md_document.render_doc_link(
                     parend_module_record.title,
-                    md_name=parend_module_record.output_file_name,
+                    target_path=self._output_path
+                    / parend_module_record.output_file_name,
                     anchor=parend_module_record.title,
                 )
             )
@@ -224,8 +239,10 @@ class Generator:
         breadcrumbs.append(module_record.title)
         breadcrumbs.insert(
             0,
-            MDDocument.render_doc_link(
-                self._project_name, md_name=self.INDEX_NAME, anchor=self._project_name
+            md_document.render_doc_link(
+                self._project_name,
+                target_path=self._output_path / self.INDEX_NAME,
+                anchor=self._project_name,
             ),
         )
 
@@ -240,9 +257,13 @@ class Generator:
         )
 
         for module_record in self._module_records:
-            self._generate_doc(module_record)
-            self._replace_short_links(module_record)
-            self._replace_full_links(module_record)
+            md_document = MDDocument(
+                path=self._output_path / module_record.output_file_name,
+                root_path=self._output_path,
+            )
+            self._generate_doc(module_record, md_document)
+            self._replace_short_links(module_record, md_document)
+            self._replace_full_links(module_record, md_document)
 
     def generate_index(self) -> None:
         """
@@ -254,7 +275,9 @@ class Generator:
         )
         self._generate_index()
 
-    def _replace_short_links(self, module_record: ModuleRecord) -> None:
+    def _replace_short_links(
+        self, module_record: ModuleRecord, md_document: MDDocument
+    ) -> None:
         if not module_record.objects:
             return
 
@@ -268,11 +291,12 @@ class Generator:
                     continue
 
                 title = module_object.title
-                md_name = module_object.output_file_name
-                if module_record.output_file_name == module_object.output_file_name:
-                    md_name = None
 
-                link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
+                link = md_document.render_doc_link(
+                    title,
+                    anchor=title,
+                    target_path=self._output_path / module_object.output_file_name,
+                )
                 content = content.replace(match, link)
                 self._logger.debug(f'Adding local link "{title}" to {output_file_name}')
                 file_changed = True
@@ -280,7 +304,9 @@ class Generator:
         if file_changed:
             output_file_name.write_text(content)
 
-    def _replace_full_links(self, module_record: ModuleRecord) -> None:
+    def _replace_full_links(
+        self, module_record: ModuleRecord, md_document: MDDocument
+    ) -> None:
         output_file_name = self._output_path / module_record.output_file_name
         content = output_file_name.read_text()
 
@@ -291,11 +317,11 @@ class Generator:
                 continue
 
             title = module_object.title
-            md_name = module_object.output_file_name
-            if module_record.output_file_name == module_object.output_file_name:
-                md_name = None
-
-            link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
+            link = md_document.render_doc_link(
+                title,
+                anchor=title,
+                target_path=self._output_path / module_object.output_file_name,
+            )
             content = content.replace(match, link)
             self._logger.debug(f'Adding link "{title}" to {output_file_name}')
             file_changed = True
@@ -304,38 +330,41 @@ class Generator:
             output_file_name.write_text(content)
 
     def _generate_module_doc_lines(
-        self, module_record: ModuleRecord, md_doc: MDDocument
+        self, module_record: ModuleRecord, md_document: MDDocument
     ) -> None:
         for module_object_record in module_record.objects:
             if module_object_record.is_related:
                 continue
 
-            md_doc.append_title(
+            md_document.append_title(
                 module_object_record.title, level=module_object_record.level + 2
             )
 
             source_path = module_object_record.source_path
             relative_path = source_path.relative_to(self._root_path)
-            source_link = md_doc.render_link(
+            source_link = md_document.render_link(
                 "🔍 find in source code",
                 f"{self._root_relative_path / relative_path}#L{module_object_record.source_line_number}",
             )
-            md_doc.append(source_link)
+            md_document.append(source_link)
 
             signature = self._loader.get_object_signature(module_object_record.object)
 
             if signature:
-                md_doc.append(f"```python\n{signature}\n```")
+                md_document.append(f"```python\n{signature}\n```")
 
             formatted_docstring = self._get_formatted_docstring(
-                module_record=module_object_record, signature=signature
+                module_record=module_object_record,
+                signature=signature,
+                md_document=md_document,
             )
             if formatted_docstring:
-                md_doc.append(formatted_docstring)
+                md_document.append(formatted_docstring)
 
     def _get_formatted_docstring(
         self,
         module_record: Union[ModuleRecord, ModuleObjectRecord],
+        md_document: MDDocument,
         signature: Optional[Text] = None,
     ) -> Optional[Text]:
         """
@@ -367,7 +396,9 @@ class Generator:
                     md_name = related_object.output_file_name
 
                 title = related_object.title
-                link = MDDocument.render_doc_link(title, anchor=title, md_name=md_name)
+                link = md_document.render_doc_link(
+                    title, anchor=title, target_path=self._output_path / md_name
+                )
                 section_map.add_line("See also", f"- {link}")
                 self._logger.debug(
                     f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'
@@ -391,24 +422,28 @@ class Generator:
         """
         Generate new `<output>/README.md` with ToC of all project modules.
         """
-        md_doc = MDDocument()
-        md_doc.title = self._project_name
+        md_document = MDDocument(
+            path=self._output_path / self.INDEX_NAME, root_path=self._output_path
+        )
+        md_document.title = self._project_name
 
-        md_doc.subtitle = "> Auto-generated documentation index."
-        md_doc.ensure_toc_exists()
+        md_document.subtitle = "> Auto-generated documentation index."
+        md_document.ensure_toc_exists()
 
-        modules_toc_lines = self._build_modules_toc_lines("", max_depth=3)
+        modules_toc_lines = self._build_modules_toc_lines(
+            "", max_depth=3, md_document=md_document
+        )
         if modules_toc_lines:
-            toc_lines = md_doc.toc_section.split("\n")
+            toc_lines = md_document.toc_section.split("\n")
             for line in modules_toc_lines:
                 toc_lines.append(f"  {line}")
 
-            md_doc.toc_section = "\n".join(toc_lines)
+            md_document.toc_section = "\n".join(toc_lines)
 
-        md_doc.write(self._output_path / self.INDEX_NAME)
+        md_document.write()
 
     def _build_modules_toc_lines(
-        self, import_string: Text, max_depth: int
+        self, import_string: Text, max_depth: int, md_document: MDDocument
     ) -> List[Text]:
         lines: List[Text] = []
         parts: List[Text] = []
@@ -443,8 +478,10 @@ class Generator:
 
             last_import_string_parts = import_string_parts
             indent = "  " * (len(title_parts) - len(parts) - 1)
-            link = MDDocument.render_doc_link(
-                title_parts[-1], md_name=md_name, anchor=title_parts[-1]
+            link = md_document.render_doc_link(
+                title=title_parts[-1],
+                anchor=title_parts[-1],
+                target_path=self._output_path / md_name,
             )
             lines.append(f"{indent}- {link}")
         return lines

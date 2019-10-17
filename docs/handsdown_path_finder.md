@@ -40,7 +40,7 @@ path_finder.exclude('*new*').list()
 
 ### PathFinder().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/path_finder.py#L108)
+[🔍 find in source code](../handsdown/path_finder.py#L106)
 
 ```python
 def __iter__() -> Generator[pathlib.Path, NoneType, NoneType]
@@ -54,7 +54,7 @@ A generator of matched paths.
 
 ### PathFinder().exclude
 
-[🔍 find in source code](../handsdown/path_finder.py#L66)
+[🔍 find in source code](../handsdown/path_finder.py#L64)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -74,11 +74,11 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](#pathfinder)
+- [PathFinder](./docs#pathfinder)
 
 ### PathFinder().include
 
-[🔍 find in source code](../handsdown/path_finder.py#L46)
+[🔍 find in source code](../handsdown/path_finder.py#L44)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -98,11 +98,11 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](#pathfinder)
+- [PathFinder](./docs#pathfinder)
 
 ### PathFinder().list
 
-[🔍 find in source code](../handsdown/path_finder.py#L124)
+[🔍 find in source code](../handsdown/path_finder.py#L122)
 
 ```python
 def list() -> List[pathlib.Path]

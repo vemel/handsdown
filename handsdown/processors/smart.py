@@ -19,8 +19,8 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
         self._rst_processor = RSTDocstringProcessor()
         super(SmartDocstringProcessor, self).__init__()
 
-    def _parse_line(self, line: Text) -> Text:
-        return line
+    def _parse_line(self, line: Text) -> None:
+        pass
 
     def build_sections(self, content: Text) -> SectionMap:
         """

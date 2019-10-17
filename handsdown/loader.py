@@ -335,9 +335,14 @@ class Loader:
 
             # skip modules with unknown source
             try:
-                source_path = Path(inspect.getsourcefile(inspect_object))
+                source_path_str = inspect.getsourcefile(inspect_object)
             except (OSError, TypeError):
                 continue
+
+            if not source_path_str:
+                continue
+
+            source_path = Path(source_path_str)
 
             # fix source path if module was imported from installed pacakges
             if source_path.as_posix().endswith(relative_source_path.as_posix()):
