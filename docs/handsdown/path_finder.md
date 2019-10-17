@@ -109,7 +109,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[🔍 find in source code](../../handsdown/path_finder.py#l166)
+[🔍 find in source code](../../handsdown/path_finder.py#l167)
 
 ```python
 def mkdir(force=False)

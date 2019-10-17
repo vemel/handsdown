@@ -42,8 +42,11 @@ class PathFinder:
     def __init__(self, root: Path) -> None:
         if not root.is_absolute():
             raise PathFinderError("Root path should be absolute")
-        if not root.exists() and not root.is_dir():
-            raise PathFinderError("Root path should be a directory")
+        try:
+            if not root.exists() and not root.is_dir():
+                raise PathFinderError("Root path should be a directory")
+        except OSError:
+            pass
 
         self._root = root
         self.include_exprs: List[Text] = []
@@ -152,7 +155,8 @@ class PathFinder:
 
         relative_target = Path()
         up_path = Path()
-        for parent in (self._root / "_").parents:
+        parents = [self._root] + list(self._root.parents)
+        for parent in parents:
             try:
                 relative_target = target.relative_to(parent)
             except ValueError:

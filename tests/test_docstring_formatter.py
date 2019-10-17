@@ -13,7 +13,7 @@ class TestIndentTrimmer(unittest.TestCase):
         """
         print(DocstringFormatter(docstring).render())
         self.assertEqual(
-            DocstringFormatter(docstring).render(), "\n# flask.app\n\nDocstring.\n"
+            DocstringFormatter(docstring).render(), "# flask.app\n\nDocstring."
         )
 
     def test_wrong_indent(self):
@@ -23,6 +23,5 @@ class TestIndentTrimmer(unittest.TestCase):
         """
         print(DocstringFormatter(docstring).render())
         self.assertEqual(
-            DocstringFormatter(docstring).render(),
-            "\nWrong indent\n\nCorrect indent.\n",
+            DocstringFormatter(docstring).render(), "Wrong indent\n\nCorrect indent."
         )
