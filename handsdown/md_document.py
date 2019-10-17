@@ -1,5 +1,6 @@
 import re
-from typing import Text, Optional, List, Tuple
+from types import TracebackType
+from typing import Text, Optional, List, Tuple, Type
 from pathlib import Path
 
 from handsdown.indent_trimmer import IndentTrimmer
@@ -8,6 +9,8 @@ from handsdown.indent_trimmer import IndentTrimmer
 class MDDocument:
     """
     MD file wrapper. Controls document title and Table of Contents.
+    Can be used as a context manager, on exit context is written
+    to `path`.
 
     Examples::
 
@@ -30,6 +33,10 @@ class MDDocument:
         some content
         '''
 
+        with MDDocument(path=Path('output.md')) as md_document:
+            md_document.title = 'My doc'
+            md_doc.append('## New section')
+
     Arguments:
         path -- Path to store document.
         root_path -- Path to root doc folder. If not provided,
@@ -48,6 +55,19 @@ class MDDocument:
         self._toc_section: Text = ""
         self._path = path
         self._root_path = root_path or self._path.parent
+
+    def __enter__(self):
+        return self
+
+    def __exit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        traceback: Optional[TracebackType],
+    ):
+        if exc_type:
+            raise exc_type
+        return self.write()
 
     def set(self, content: Text) -> None:
         self._content = content
@@ -237,11 +257,13 @@ class MDDocument:
 
     def append_title(self, title: Text, level: int) -> None:
         """
-        Append `title` to the document.
+        Append `title` of a given `level` to the document.
+        Handle trimming and sectioning the content and update
+        `title` and `toc_section` fields.
 
         Arguments:
             title -- Title to add.
-            level -- Title level, number of `#` characters.
+            level -- Title level, number of `#` symbols.
         """
         section = f'{"#" * level} {self._escape_title(title)}'
         self._sections.append(section)

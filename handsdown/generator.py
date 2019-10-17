@@ -147,15 +147,14 @@ class Generator:
             if module_record.source_path != source_path:
                 continue
 
-            md_document = MDDocument(
+            with MDDocument(
                 path=self._output_path / module_record.output_file_name,
                 root_path=self._output_path,
-            )
+            ) as md_document:
+                self._generate_doc(module_record, md_document)
+                self._replace_short_links(module_record, md_document)
+                self._replace_full_links(md_document)
 
-            self._generate_doc(module_record, md_document)
-            self._replace_short_links(module_record, md_document)
-            self._replace_full_links(md_document)
-            md_document.write()
             return
 
         raise GeneratorError(f"Record not found for {source_path.name}")
@@ -258,14 +257,13 @@ class Generator:
         )
 
         for module_record in self._module_records:
-            md_document = MDDocument(
+            with MDDocument(
                 path=self._output_path / module_record.output_file_name,
                 root_path=self._output_path,
-            )
-            self._generate_doc(module_record, md_document)
-            self._replace_short_links(module_record, md_document)
-            self._replace_full_links(md_document)
-            md_document.write()
+            ) as md_document:
+                self._generate_doc(module_record, md_document)
+                self._replace_short_links(module_record, md_document)
+                self._replace_full_links(md_document)
 
     def generate_index(self) -> None:
         """
