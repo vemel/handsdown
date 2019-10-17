@@ -64,6 +64,7 @@ disable=
       broad-except,
       logging-format-interpolation,
       duplicate-code,
+      missing-docstring,
       invalid-name,
       parameter-unpacking,
       unpacking-in-except,
