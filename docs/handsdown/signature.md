@@ -4,9 +4,9 @@
 
 - [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Signature](#signature) / Signature
   - [Config](#config)
-  - [ProxyDefaultValue](#proxydefaultvalue)
-  - [ProxyParameter](#proxyparameter)
-    - [ProxyParameter.create](#proxyparametercreate)
+  - [DefaultValue](#defaultvalue)
+  - [Parameter](#parameter)
+    - [Parameter.create](#parametercreate)
   - [SignatureBuilder](#signaturebuilder)
     - [SignatureBuilder().build](#signaturebuilderbuild)
 
@@ -18,42 +18,42 @@
 class Config(*args, **kwargs)
 ```
 
-## ProxyDefaultValue
+## DefaultValue
 
 [🔍 find in source code](../../handsdown/signature.py#l15)
 
 ```python
-class ProxyDefaultValue(original: Type)
+class DefaultValue(original: Type)
 ```
 
-Proxy class to represent function parameter default value in signature
+Represent function parameter default value in signature
 
 #### Arguments
 
-- `original` - Original value.
+- `original` - Original default value.
 
-## ProxyParameter
+## Parameter
 
 [🔍 find in source code](../../handsdown/signature.py#l39)
 
 ```python
-class ProxyParameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
+class Parameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
 ```
 
-Helper class to represent function parameters in signature
+Represent function parameters in signature
 
-### ProxyParameter.create
+### Parameter.create
 
-[🔍 find in source code](../../handsdown/signature.py#l57)
+[🔍 find in source code](../../handsdown/signature.py#l80)
 
 ```python
 def create(
     parameter: inspect.Parameter,
     type_hint: Union[Type, NoneType],
-) -> handsdown.signature.ProxyParameter
+) -> handsdown.signature.Parameter
 ```
 
-Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
+Create `ProxyParameter` for original `inspect.Parameter`
 
 #### Arguments
 
@@ -62,11 +62,11 @@ Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 
 #### See also
 
-- [ProxyParameter](#proxyparameter)
+- [Parameter](#parameter)
 
 ## SignatureBuilder
 
-[🔍 find in source code](../../handsdown/signature.py#l78)
+[🔍 find in source code](../../handsdown/signature.py#l101)
 
 ```python
 class SignatureBuilder(obj: Any)
@@ -81,7 +81,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](../../handsdown/signature.py#l132)
+[🔍 find in source code](../../handsdown/signature.py#l155)
 
 ```python
 def build() -> str

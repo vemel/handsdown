@@ -12,12 +12,12 @@ class Config:
     MAX_LINE_LENGTH = 100
 
 
-class ProxyDefaultValue:
+class DefaultValue:
     """
-    Proxy class to represent function parameter default value in signature
+    Represent function parameter default value in signature
 
     Arguments:
-        original -- Original value.
+        original -- Original default value.
     """
 
     _hex_code_re = re.compile(r" at 0x[a-f0-9]+")
@@ -25,7 +25,7 @@ class ProxyDefaultValue:
     def __init__(self, original: Type) -> None:
         self._original = original
 
-    def __repr__(self) -> Text:
+    def __str__(self) -> Text:
         if isinstance(self._original, enum.Enum):
             return f"{self._original.value}"
             # return f'{self._original.__class__.__name__}.{self._original.value}'
@@ -36,28 +36,51 @@ class ProxyDefaultValue:
         return result
 
 
-class ProxyParameter(inspect.Parameter):
+class Parameter(inspect.Parameter):
     """
-    Helper class to represent function parameters in signature
+    Represent function parameters in signature
     """
+
+    _empty = getattr(inspect, "_empty")
+    _VAR_POSITIONAL = getattr(inspect, "_VAR_POSITIONAL")
+    _VAR_KEYWORD = getattr(inspect, "_VAR_KEYWORD")
 
     def __init__(self, type_hint: Optional[Type], *args: Any, **kwargs: Any) -> None:
-        super(ProxyParameter, self).__init__(*args, **kwargs)
-        if isinstance(self._annotation, str) and type_hint:
+        super(Parameter, self).__init__(*args, **kwargs)
+        self._default: Type = self._default
+        self._name: Text = self._name
+        if type_hint:
             self._annotation = type_hint
-        if self._default is not inspect._empty:  # pylint: disable=protected-access
-            self._default = ProxyDefaultValue(self._default)
+        self._proxy_default = DefaultValue(self._default)
 
     def __str__(self) -> Text:
-        parent_value = super(ProxyParameter, self).__str__()
-        if not Config.BREAK_LINES:
-            return parent_value
-        return f"\n    {parent_value}"
+        kind = self.kind
+        formatted = self._name
+
+        # Add annotation and default value
+        if self._annotation is not self._empty:
+            annotation = inspect.formatannotation(self._annotation)
+            formatted = f"{formatted}: {annotation}"
+
+        if self._default is not self._empty:
+            if self._annotation is not self._empty:
+                formatted = f"{formatted} = {self._proxy_default}"
+            else:
+                formatted = f"{formatted}={self._proxy_default}"
+
+        if kind == self._VAR_POSITIONAL:
+            formatted = "*" + formatted
+        elif kind == self._VAR_KEYWORD:
+            formatted = "**" + formatted
+
+        if Config.BREAK_LINES:
+            return f"\n    {formatted}"
+        return formatted
 
     @classmethod
     def create(
         cls, parameter: inspect.Parameter, type_hint: Optional[Type]
-    ) -> ProxyParameter:
+    ) -> Parameter:
         """
         Create `ProxyParameter` for original `inspect.Parameter`
 
@@ -106,7 +129,7 @@ class SignatureBuilder:
         for key, value in signature.parameters.items():
             if key == "self":
                 continue
-            clean_parameters[key] = ProxyParameter.create(value, type_hints.get(key))
+            clean_parameters[key] = Parameter.create(value, type_hints.get(key))
 
         signature._parameters = MappingProxyType(  # pylint: disable=protected-access
             clean_parameters
