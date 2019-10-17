@@ -78,7 +78,8 @@ def main() -> None:
         else:
             generator.generate_docs()
             generator.generate_index()
-            generator.cleanup_old_docs()
+            if args.cleanup:
+                generator.cleanup_old_docs()
     except GeneratorError as e:
         logger.error(e)
         sys.exit(1)

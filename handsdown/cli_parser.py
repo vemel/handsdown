@@ -46,6 +46,9 @@ def get_cli_parser() -> argparse.ArgumentParser:
         "include", nargs="*", help="Path expressions to include", default=[]
     )
     parser.add_argument(
+        "--cleanup", action="store_true", help="Remove orphaned auto-generated docs."
+    )
+    parser.add_argument(
         "-f",
         "--files",
         nargs="*",
