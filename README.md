@@ -2,6 +2,8 @@
 
 ![pypi](https://img.shields.io/pypi/v/handsdown)
 ![versions](https://img.shields.io/pypi/pyversions/handsdown)
+![build](https://img.shields.io/travis/vemel/handsdown)
+![coverage](https://img.shields.io/codecov/c/github/vemel/handsdown)
 
 Python docstring-based documentation generator for lazy perfectionists.
 
