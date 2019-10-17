@@ -111,7 +111,7 @@ class Generator:
         Remove old docs generated for this module.
         """
         self._logger.debug(f"Removing orphaned docs")
-        preserve_paths = self._module_records.get_output_paths()
+        preserve_paths = {i.output_path for i in self._module_records}
         for doc_path in self._output_path.glob("**/*.md"):
             if doc_path == self._index_path:
                 continue

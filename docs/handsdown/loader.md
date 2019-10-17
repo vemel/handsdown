@@ -144,7 +144,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../../handsdown/loader.py#l454)
+[🔍 find in source code](../../handsdown/loader.py#l459)
 
 ```python
 def get_source_line_number(obj: Any) -> int

@@ -11,7 +11,6 @@
     - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
     - [ModuleRecordList().add](#modulerecordlistadd)
     - [ModuleRecordList().find_object](#modulerecordlistfind_object)
-    - [ModuleRecordList().get_output_paths](#modulerecordlistget_output_paths)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
 ## ModuleObjectRecord
@@ -22,12 +21,12 @@
 class ModuleObjectRecord(
     source_path: pathlib.Path,
     source_line_number: int,
-    output_path: str,
+    output_path: pathlib.Path,
     object: Any,
     import_string: str,
     level: int,
     title: str,
-    docstring: Union[str, NoneType],
+    docstring: str,
     is_class: bool,
     is_related: bool,
     signature: str,
@@ -57,12 +56,12 @@ Dataclass for an imported module object.
 ```python
 class ModuleRecord(
     source_path: pathlib.Path,
-    output_path: str,
+    output_path: pathlib.Path,
     module: Any,
     title: str,
     import_string: str,
     objects: List[handsdown.module_record.ModuleObjectRecord],
-    docstring: Union[str, NoneType],
+    docstring: str,
 )
 ```
 
@@ -145,7 +144,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[🔍 find in source code](../../handsdown/module_record.py#l166)
+[🔍 find in source code](../../handsdown/module_record.py#l157)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
@@ -163,7 +162,7 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../../handsdown/module_record.py#l153)
+[🔍 find in source code](../../handsdown/module_record.py#l144)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -201,23 +200,9 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 - [ModuleObjectRecord](#moduleobjectrecord)
 
-### ModuleRecordList().get_output_paths
-
-[🔍 find in source code](../../handsdown/module_record.py#l135)
-
-```python
-def get_output_paths() -> Set[str]
-```
-
-Get all output MD file names.
-
-#### Returns
-
-A set of output names as strings.
-
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../../handsdown/module_record.py#l144)
+[🔍 find in source code](../../handsdown/module_record.py#l135)
 
 ```python
 def get_package_names() -> Set[str]

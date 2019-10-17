@@ -26,12 +26,12 @@ class ModuleObjectRecord:
 
     source_path: Path
     source_line_number: int
-    output_path: Text
+    output_path: Path
     object: Any
     import_string: Text
     level: int
     title: Text
-    docstring: Optional[Text]
+    docstring: Text
     is_class: bool
     is_related: bool
     signature: Text
@@ -53,12 +53,12 @@ class ModuleRecord:
     """
 
     source_path: Path
-    output_path: Text
+    output_path: Path
     module: Any
     title: Text
     import_string: Text
     objects: List[ModuleObjectRecord]
-    docstring: Optional[Text]
+    docstring: Text
 
     def get_import_string_parts(self) -> List[Text]:
         """
@@ -131,15 +131,6 @@ class ModuleRecordList:
             Found `ModuleObjectRecord` instance or None.
         """
         return self.import_string_map.get(import_string)
-
-    def get_output_paths(self) -> Set[Text]:
-        """
-        Get all output MD file names.
-
-        Returns:
-            A set of output names as strings.
-        """
-        return {i.output_path for i in self}
 
     def get_package_names(self) -> Set[Text]:
         """

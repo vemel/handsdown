@@ -71,7 +71,7 @@ class Loader:
             )
             self._setup_django()
 
-    def _get_output_path(self, source_path: Path) -> Text:
+    def _get_output_path(self, source_path: Path) -> Path:
         relative_source_path = self._root_path_finder.relative(source_path)
         if relative_source_path.stem == "__init__":
             relative_source_path = relative_source_path.parent / "index"
@@ -366,19 +366,24 @@ class Loader:
                 continue
 
             is_related = source_path != module_record.source_path
+            docstring = ""
+            signature = ""
+            if not is_related:
+                docstring = self._get_object_docstring(inspect_object)
+                signature = self._get_object_signature(inspect_object)
 
             yield ModuleObjectRecord(
                 import_string=object_name,
                 level=0,
                 object=inspect_object,
-                docstring=self._get_object_docstring(inspect_object),
+                docstring=docstring,
                 title=object_name,
                 source_path=source_path,
                 output_path=self._get_output_path(source_path),
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
-                signature=self._get_object_signature(inspect_object),
+                signature=signature,
             )
 
             if not is_class or is_related:
