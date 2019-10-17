@@ -2,12 +2,12 @@
 
 > Auto-generated documentation for [handsdown.processors.pep257](../handsdown/processors/pep257.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Pep257
+- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / [Processors](handsdown_processors_index.md#processors) / Pep257
   - [PEP257DocstringProcessor](#pep257docstringprocessor)
 
 ## PEP257DocstringProcessor
 
-[🔍 find in source code](../handsdown/processors/pep257.py#L6)
+[🔍 find in source code](../handsdown/processors/pep257.py#l6)
 
 ```python
 class PEP257DocstringProcessor()

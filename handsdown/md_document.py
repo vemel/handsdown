@@ -1,9 +1,15 @@
+from __future__ import annotations
+
 import re
 from types import TracebackType
 from typing import Text, Optional, List, Tuple, Type
 from pathlib import Path
 
 from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.path_finder import PathFinder
+
+
+__all__ = ["MDDocument"]
 
 
 class MDDocument:
@@ -39,24 +45,21 @@ class MDDocument:
 
     Arguments:
         path -- Path to store document.
-        root_path -- Path to root doc folder. If not provided,
-            `path` parent folder is used.
     """
 
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
-    def __init__(self, path: Path, root_path: Optional[Path] = None) -> None:
+    def __init__(self, path: Path) -> None:
         self._sections: List[Text] = []
         self._content = ""
         self._title: Optional[Text] = None
         self._subtitle: Optional[Text] = None
         self._toc_section: Text = ""
         self._path = path
-        self._root_path = root_path or self._path.parent
 
-    def __enter__(self):
+    def __enter__(self) -> MDDocument:
         return self
 
     def __exit__(
@@ -64,7 +67,7 @@ class MDDocument:
         exc_type: Optional[Type[BaseException]],
         exc_value: Optional[BaseException],
         traceback: Optional[TracebackType],
-    ):
+    ) -> None:
         if exc_type:
             raise exc_type
         return self.write()
@@ -154,18 +157,22 @@ class MDDocument:
         self, title: Text, anchor: Text = "", target_path: Optional[Path] = None
     ) -> Text:
         """
-        Render Markdown link to a local MD document.
+        Render Markdown link to a local MD document, use relative path as a link.
 
         Examples::
 
-            MDDocument.render_doc_link('my title', anchor='My anchor')
+            md_doc = MDDocument(path='/root/parent/doc.md')
+            MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('/root/parent/doc.md')
             '[my title](#my-anchor)'
 
-            MDDocument.render_doc_link('my title', target_path=Path('doc.md'))
-            '[my title](./doc.md)'
+            MDDocument.render_doc_link('my title', target_path=Path('/root/parent/other.md'))
+            '[my title](other.md)'
 
             MDDocument.render_doc_link('my title', anchor='My anchor', target_path=Path('doc.md'))
-            '[my title](./doc.md#my-anchor)'
+            '[my title](doc.md#my-anchor)'
+
+            MDDocument.render_doc_link('my title', anchor='My anchor')
+            '[my title](#my-anchor)'
 
         Arguments:
             title -- Link text.
@@ -181,8 +188,8 @@ class MDDocument:
         if anchor:
             link = f"#{anchor}"
         if target_path and target_path != self._path:
-            md_name = target_path.name
-            link = f"./{md_name}{link}"
+            link_path = PathFinder.get_relative_path(self._path, target_path)
+            link = f"{link_path}{link}"
 
         return self.render_link(title, link)
 

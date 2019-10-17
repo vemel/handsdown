@@ -175,7 +175,7 @@ class Loader:
         self._logging_config_patch.stop()
 
     @staticmethod
-    def get_object_signature(obj: Any) -> Optional[Text]:
+    def _get_object_signature(obj: Any) -> Text:
         """
         Get class, method or function signature. If object is not callable -
         returns None.
@@ -197,9 +197,6 @@ class Loader:
                 parts.append("#property setter")
                 parts.append(SignatureBuilder(obj.fset).build())
             return "\n".join(parts)
-
-        # if not callable(obj):
-        #     return None
 
         return SignatureBuilder(obj).build()
 
@@ -380,7 +377,7 @@ class Loader:
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
-                signature=self.get_object_signature(inspect_object),
+                signature=self._get_object_signature(inspect_object),
             )
 
             if not is_class or is_related:
@@ -412,7 +409,7 @@ class Loader:
                         source_line_number=self.get_source_line_number(inspect_object),
                         is_class=False,
                         is_related=False,
-                        signature=self.get_object_signature(property_object),
+                        signature=self._get_object_signature(property_object),
                     )
 
             object_members = inspect.getmembers(
@@ -439,7 +436,7 @@ class Loader:
                     source_line_number=self.get_source_line_number(inspect_method),
                     is_class=False,
                     is_related=is_related,
-                    signature=self.get_object_signature(inspect_method),
+                    signature=self._get_object_signature(inspect_method),
                 )
 
     @staticmethod

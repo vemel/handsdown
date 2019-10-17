@@ -6,6 +6,9 @@ import fnmatch
 from typing import Text, Generator, List, Iterable
 
 
+__all__ = ["PathFinder"]
+
+
 class PathFinder:
     """
     Find matching paths inside `root` path.
@@ -127,3 +130,28 @@ class PathFinder:
             A list of all matched paths.
         """
         return list(self)
+
+    @staticmethod
+    def get_relative_path(source: Path, target: Path) -> Path:
+        """
+        Find a relative path from `source` folder to `target`.
+
+        Arguments:
+            source -- Source path.
+            target -- Target path.
+
+        Returns:
+            A relative path to `target`.
+        """
+        relative_target = Path()
+        up_path = Path()
+        for parent in source.parents:
+            try:
+                relative_target = target.relative_to(parent)
+            except ValueError:
+                up_path = up_path / ".."
+                continue
+            else:
+                break
+
+        return up_path / relative_target

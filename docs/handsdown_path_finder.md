@@ -2,16 +2,17 @@
 
 > Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / PathFinder
+- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().\_\_iter\_\_](#pathfinder__iter__)
     - [PathFinder().exclude](#pathfinderexclude)
+    - [PathFinder.get_relative_path](#pathfinderget_relative_path)
     - [PathFinder().include](#pathfinderinclude)
     - [PathFinder().list](#pathfinderlist)
 
 ## PathFinder
 
-[🔍 find in source code](../handsdown/path_finder.py#L9)
+[🔍 find in source code](../handsdown/path_finder.py#l12)
 
 ```python
 class PathFinder(root: pathlib.Path, glob_expr: str)
@@ -40,7 +41,7 @@ path_finder.exclude('*new*').list()
 
 ### PathFinder().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/path_finder.py#L106)
+[🔍 find in source code](../handsdown/path_finder.py#l109)
 
 ```python
 def __iter__() -> Generator[pathlib.Path, NoneType, NoneType]
@@ -54,7 +55,7 @@ A generator of matched paths.
 
 ### PathFinder().exclude
 
-[🔍 find in source code](../handsdown/path_finder.py#L64)
+[🔍 find in source code](../handsdown/path_finder.py#l67)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -74,11 +75,30 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](./docs#pathfinder)
+- [PathFinder](.#pathfinder)
+
+### PathFinder.get_relative_path
+
+[🔍 find in source code](../handsdown/path_finder.py#l134)
+
+```python
+def get_relative_path(source: pathlib.Path, target: pathlib.Path) -> pathlib.Path
+```
+
+Find a relative path from `source` folder to `target`.
+
+#### Arguments
+
+- `source` - Source path.
+- `target` - Target path.
+
+#### Returns
+
+A relative path to `target`.
 
 ### PathFinder().include
 
-[🔍 find in source code](../handsdown/path_finder.py#L44)
+[🔍 find in source code](../handsdown/path_finder.py#l47)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -98,11 +118,11 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](./docs#pathfinder)
+- [PathFinder](.#pathfinder)
 
 ### PathFinder().list
 
-[🔍 find in source code](../handsdown/path_finder.py#L122)
+[🔍 find in source code](../handsdown/path_finder.py#l125)
 
 ```python
 def list() -> List[pathlib.Path]

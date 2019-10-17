@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.pep257_docstrings](../examples/pep257_docstrings.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Examples](./examples_index.md#examples) / PEP 257 - reStructuredText docstrings examples
+- [Handsdown](README.md#handsdown) / [Examples](examples_index.md#examples) / PEP 257 - reStructuredText docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)
@@ -14,7 +14,7 @@
 
 ## ClassExample
 
-[🔍 find in source code](../examples/pep257_docstrings.py#L11)
+[🔍 find in source code](../examples/pep257_docstrings.py#l11)
 
 ```python
 class ClassExample(*args, **kwargs)
@@ -29,7 +29,7 @@ PEP257-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](../examples/pep257_docstrings.py#L20)
+[🔍 find in source code](../examples/pep257_docstrings.py#l20)
 
 ```python
 def method_example(text: str = 'hello') -> int
@@ -73,7 +73,7 @@ Description of return value
 
 ## function_example
 
-[🔍 find in source code](../examples/pep257_docstrings.py#L53)
+[🔍 find in source code](../examples/pep257_docstrings.py#l53)
 
 ```python
 def function_example(real=0.0, imag=0.0)

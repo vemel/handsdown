@@ -66,13 +66,6 @@ class Generator:
         except ValueError as e:
             raise GeneratorError(f"Output path should be inside input path: {e}")
 
-        # relative path from output to source root folder
-        # used while creating links to source
-        root_relative_path = Path()
-        for part in output_relative_path.parts:
-            root_relative_path = root_relative_path / ".."
-        self._root_relative_path = root_relative_path
-
         # create output folder if it does not exist
         if not self._output_path.exists():
             self._logger.info(f"Creating folder {self._output_path}")
@@ -148,8 +141,7 @@ class Generator:
                 continue
 
             with MDDocument(
-                path=self._output_path / module_record.output_file_name,
-                root_path=self._output_path,
+                self._output_path / module_record.output_file_name
             ) as md_document:
                 self._generate_doc(module_record, md_document)
                 self._replace_short_links(module_record, md_document)
@@ -170,9 +162,9 @@ class Generator:
             f"Generating doc {relative_doc_path} for {relative_file_path}"
         )
 
-        source_link = MDDocument.render_link(
-            f"{module_record.import_string}",
-            f"{self._root_relative_path / relative_file_path}",
+        source_link = md_document.render_doc_link(
+            title=f"{module_record.import_string}",
+            target_path=module_record.source_path,
         )
         md_document.title = module_record.title
         md_document.subtitle = (
@@ -258,8 +250,7 @@ class Generator:
 
         for module_record in self._module_records:
             with MDDocument(
-                path=self._output_path / module_record.output_file_name,
-                root_path=self._output_path,
+                self._output_path / module_record.output_file_name
             ) as md_document:
                 self._generate_doc(module_record, md_document)
                 self._replace_short_links(module_record, md_document)
@@ -333,10 +324,10 @@ class Generator:
             )
 
             source_path = module_object_record.source_path
-            relative_path = source_path.relative_to(self._root_path)
-            source_link = md_document.render_link(
-                "🔍 find in source code",
-                f"{self._root_relative_path / relative_path}#L{module_object_record.source_line_number}",
+            source_link = md_document.render_doc_link(
+                title="🔍 find in source code",
+                target_path=source_path,
+                anchor=f"L{module_object_record.source_line_number}",
             )
             md_document.append(source_link)
 
@@ -414,9 +405,7 @@ class Generator:
         """
         Generate new `<output>/README.md` with ToC of all project modules.
         """
-        md_document = MDDocument(
-            path=self._output_path / self.INDEX_NAME, root_path=self._output_path
-        )
+        md_document = MDDocument(self._output_path / self.INDEX_NAME)
         md_document.title = self._project_name
 
         md_document.subtitle = "> Auto-generated documentation index."

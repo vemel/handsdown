@@ -2,13 +2,13 @@
 
 > Auto-generated documentation for [handsdown.processors.base](../handsdown/processors/base.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / [Processors](./handsdown_processors_index.md#processors) / Base
+- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / [Processors](handsdown_processors_index.md#processors) / Base
   - [BaseDocstringProcessor](#basedocstringprocessor)
     - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](../handsdown/processors/base.py#L7)
+[🔍 find in source code](../handsdown/processors/base.py#l7)
 
 ```python
 class BaseDocstringProcessor()
@@ -16,13 +16,13 @@ class BaseDocstringProcessor()
 
 Base docstring processor. All docstring processors are based on top of it:
 
-- `[PEP257DocstringProcessor](./handsdown_processors_pep257.md#pep257docstringprocessor)`
-- `[RSTDocstringProcessor](./handsdown_processors_rst.md#rstdocstringprocessor)`
-- `[SmartDocstringProcessor](./handsdown_processors_smart.md#smartdocstringprocessor)`
+- `[PEP257DocstringProcessor](handsdown_processors_pep257.md#pep257docstringprocessor)`
+- `[RSTDocstringProcessor](handsdown_processors_rst.md#rstdocstringprocessor)`
+- `[SmartDocstringProcessor](handsdown_processors_smart.md#smartdocstringprocessor)`
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](../handsdown/processors/base.py#L38)
+[🔍 find in source code](../handsdown/processors/base.py#l38)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap
@@ -41,4 +41,4 @@ section.
 
 #### See also
 
-- [SectionMap](./handsdown_processors_section_map.md#sectionmap)
+- [SectionMap](handsdown_processors_section_map.md#sectionmap)

@@ -2,13 +2,13 @@
 
 > Auto-generated documentation for [handsdown.loader](../handsdown/loader.py) module.
 
-- [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / Loader
+- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / Loader
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)
+    - [Loader._get_object_signature](#loader_get_object_signature)
     - [Loader()._setup_django](#loader_setup_django)
     - [Loader().get_module_record](#loaderget_module_record)
-    - [Loader.get_object_signature](#loaderget_object_signature)
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
     - [Loader().setup](#loadersetup)
@@ -16,7 +16,7 @@
 
 ## Loader
 
-[🔍 find in source code](../handsdown/loader.py#L24)
+[🔍 find in source code](../handsdown/loader.py#l24)
 
 ```python
 class Loader(root_path: pathlib.Path, logger: logging.Logger)
@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L326)
+[🔍 find in source code](../handsdown/loader.py#l323)
 
 ```python
 def _discover_module_objects(
@@ -45,24 +45,24 @@ def _discover_module_objects(
 ) -> Generator[handsdown.module_record.ModuleObjectRecord, NoneType, NoneType]
 ```
 
-Get [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord) for every object in a module.
+Get [ModuleObjectRecord](handsdown_module_record.md#moduleobjectrecord) for every object in a module.
 
 #### Arguments
 
-- `module_record` - [ModuleRecord](./handsdown_module_record.md#modulerecord) instance.
+- `module_record` - [ModuleRecord](handsdown_module_record.md#modulerecord) instance.
 
 #### Returns
 
-A generator that yields [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord) instances.
+A generator that yields [ModuleObjectRecord](handsdown_module_record.md#moduleobjectrecord) instances.
 
 #### See also
 
-- [ModuleRecord](./handsdown_module_record.md#modulerecord)
-- [ModuleObjectRecord](./handsdown_module_record.md#moduleobjectrecord)
+- [ModuleRecord](handsdown_module_record.md#modulerecord)
+- [ModuleObjectRecord](handsdown_module_record.md#moduleobjectrecord)
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L206)
+[🔍 find in source code](../handsdown/loader.py#l203)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -78,9 +78,28 @@ Get trimmed object docstring or an empty string.
 
 A string with object docsting.
 
+### Loader._get_object_signature
+
+[🔍 find in source code](../handsdown/loader.py#l177)
+
+```python
+def _get_object_signature(obj: Any) -> str
+```
+
+Get class, method or function signature. If object is not callable -
+returns None.
+
+#### Arguments
+
+- `obj` - Object to inspect.
+
+#### Returns
+
+A string with object signature or None.
+
 ### Loader()._setup_django
 
-[🔍 find in source code](../handsdown/loader.py#L152)
+[🔍 find in source code](../handsdown/loader.py#l152)
 
 ```python
 def _setup_django() -> None
@@ -95,7 +114,7 @@ Patches applied during apps initialization:
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../handsdown/loader.py#L81)
+[🔍 find in source code](../handsdown/loader.py#l81)
 
 ```python
 def get_module_record(
@@ -103,7 +122,7 @@ def get_module_record(
 ) -> Union[handsdown.module_record.ModuleRecord, NoneType]
 ```
 
-Build [ModuleRecord](./handsdown_module_record.md#modulerecord) for given `source_path`.
+Build [ModuleRecord](handsdown_module_record.md#modulerecord) for given `source_path`.
 
 #### Arguments
 
@@ -111,7 +130,7 @@ Build [ModuleRecord](./handsdown_module_record.md#modulerecord) for given `sourc
 
 #### Returns
 
-A new [ModuleRecord](./handsdown_module_record.md#modulerecord) instance or None if there is ntohing to import.
+A new [ModuleRecord](handsdown_module_record.md#modulerecord) instance or None if there is ntohing to import.
 
 #### Raises
 
@@ -119,30 +138,11 @@ A new [ModuleRecord](./handsdown_module_record.md#modulerecord) instance or None
 
 #### See also
 
-- [ModuleRecord](./handsdown_module_record.md#modulerecord)
-
-### Loader.get_object_signature
-
-[🔍 find in source code](../handsdown/loader.py#L177)
-
-```python
-def get_object_signature(obj: Any) -> Union[str, NoneType]
-```
-
-Get class, method or function signature. If object is not callable -
-returns None.
-
-#### Arguments
-
-- `obj` - Object to inspect.
-
-#### Returns
-
-A string with object signature or None.
+- [ModuleRecord](handsdown_module_record.md#modulerecord)
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L456)
+[🔍 find in source code](../handsdown/loader.py#l453)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -158,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L243)
+[🔍 find in source code](../handsdown/loader.py#l240)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any
@@ -182,7 +182,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../handsdown/loader.py#L52)
+[🔍 find in source code](../handsdown/loader.py#l52)
 
 ```python
 def setup() -> None
@@ -195,7 +195,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](../handsdown/loader.py#L18)
+[🔍 find in source code](../handsdown/loader.py#l18)
 
 ```python
 class LoaderError(*args, **kwargs)
