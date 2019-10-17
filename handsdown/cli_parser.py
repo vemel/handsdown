@@ -130,6 +130,9 @@ def get_cli_parser() -> argparse.ArgumentParser:
         "--gh-pages", help="Build docs for GitHub Pages", default=None, type=git_repo
     )
     parser.add_argument(
+        "--toc-depth", help="Maximum depth of child modules ToC", default=3, type=int
+    )
+    parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")

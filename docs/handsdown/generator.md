@@ -24,6 +24,7 @@ class Generator(
     loader: Union[handsdown.loader.Loader, NoneType] = None,
     raise_errors: bool = False,
     source_code_url: Union[str, NoneType] = None,
+    toc_depth: int = 3,
 )
 ```
 
@@ -41,6 +42,7 @@ Main handsdown doc generator.
 - `ignore_unknown_errors` - Continue on any error.
 - `source_code_url` - URL to source files to use instead of relative paths,
     useful for [GitHub Pages](https://pages.github.com/).
+- `toc_depth` - Maximum depth of child modules ToC
 
 - `LOGGER_NAME` - Name of logger: `handsdown`
 - `INDEX_NAME` - Docs index filename: `README.md`
@@ -54,7 +56,7 @@ Main handsdown doc generator.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L113)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L116)
 
 ```python
 def cleanup_old_docs() -> None
@@ -64,7 +66,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L144)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L147)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -82,7 +84,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L240)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L245)
 
 ```python
 def generate_docs() -> None
@@ -92,7 +94,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L255)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L260)
 
 ```python
 def generate_index() -> None

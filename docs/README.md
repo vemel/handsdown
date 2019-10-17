@@ -146,7 +146,7 @@ pip install handsdown
 - Run `pipenv install -d`
 - Use `black` formatter in your IDE
 
-### Modules
+## Modules
 
 - [Examples](examples/index.md#examples)
   - [Google docstrings examples](examples/google_docstrings.md#google-docstrings-examples)
@@ -164,5 +164,10 @@ pip install handsdown
   - [ModuleRecord](handsdown/module_record.md#modulerecord)
   - [PathFinder](handsdown/path_finder.md#pathfinder)
   - [Processors](handsdown/processors/index.md#processors)
+    - [Base](handsdown/processors/base.md#base)
+    - [Pep257](handsdown/processors/pep257.md#pep257)
+    - [Rst](handsdown/processors/rst.md#rst)
+    - [SectionMap](handsdown/processors/section_map.md#sectionmap)
+    - [Smart](handsdown/processors/smart.md#smart)
   - [Signature](handsdown/signature.md#signature)
   - [Utils](handsdown/utils.md#utils)

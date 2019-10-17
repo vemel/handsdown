@@ -33,6 +33,7 @@ class Generator:
         ignore_unknown_errors -- Continue on any error.
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
+        toc_depth -- Maximum depth of child modules ToC
 
     Arguments:
         LOGGER_NAME -- Name of logger: `handsdown`
@@ -57,6 +58,7 @@ class Generator:
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
         source_code_url: Optional[Text] = None,
+        toc_depth: int = 3,
     ) -> None:
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
@@ -65,6 +67,7 @@ class Generator:
         self._index_path = Path(self._output_path, self.INDEX_NAME)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
+        self._toc_depth = toc_depth
 
         # create output folder if it does not exist
         if not self._output_path.exists():
@@ -187,7 +190,9 @@ class Generator:
         md_document.ensure_toc_exists()
 
         modules_toc_lines = self._build_modules_toc_lines(
-            module_record.import_string, max_depth=3, md_document=md_document
+            module_record.import_string,
+            max_depth=self._toc_depth,
+            md_document=md_document,
         )
 
         toc_lines = md_document.toc_section.split("\n")
@@ -283,10 +288,10 @@ class Generator:
             title=self.MODULES_NAME, anchor=md_document.get_anchor(self.MODULES_NAME)
         )
         md_document.toc_section = f"{md_document.toc_section}\n  - {modules_link}"
-        md_document.append_title(self.MODULES_NAME, level=3)
+        md_document.append_title(self.MODULES_NAME, level=2)
 
         modules_toc_lines = self._build_modules_toc_lines(
-            "", max_depth=2, md_document=md_document
+            "", max_depth=self._toc_depth, md_document=md_document
         )
 
         md_document.append("\n".join(modules_toc_lines))

@@ -72,6 +72,7 @@ def main() -> None:
             source_paths=path_finder.glob(SOURCES_GLOB),
             raise_errors=args.panic,
             source_code_url=args.gh_pages,
+            toc_depth=args.toc_depth,
         )
         if args.files:
             for path in args.files:
