@@ -60,7 +60,7 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](.#pathfinder)
+- [PathFinder](#pathfinder)
 
 ### PathFinder().glob
 
@@ -99,7 +99,7 @@ A copy of itself.
 
 #### See also
 
-- [PathFinder](.#pathfinder)
+- [PathFinder](#pathfinder)
 
 ### PathFinder().relative
 

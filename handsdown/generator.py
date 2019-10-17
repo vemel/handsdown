@@ -58,7 +58,7 @@ class Generator:
         self._output_path = output_path
         self._project_name = get_title_from_path_part(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
-        self._root_path_finder = PathFinder(self._root_path)
+        self._root_path_finder = PathFinder(self._root_path / "_")
 
         # create output folder if it does not exist
         if not self._output_path.exists():
@@ -92,7 +92,7 @@ class Generator:
                     raise
 
                 self._logger.warning(
-                    f"Skipping {source_path.relative_to(self._root_path)} due to import error: {e}"
+                    f"Skipping {self._root_path_finder.relative(source_path)} due to import error: {e}"
                 )
 
             if module_record:
@@ -150,10 +150,9 @@ class Generator:
     ) -> None:
         md_name = module_record.output_file_name
         target_file = self._output_path / md_name
-        relative_doc_path = target_file.relative_to(self._root_path)
-        relative_file_path = module_record.source_path.relative_to(self._root_path)
         self._logger.debug(
-            f"Generating doc {relative_doc_path} for {relative_file_path}"
+            f"Generating doc {self._root_path_finder.relative(target_file)}"
+            f" for {self._root_path_finder.relative(module_record.source_path)}"
         )
 
         source_link = md_document.render_doc_link(
@@ -257,7 +256,7 @@ class Generator:
         contains a Tree of all modules in the project.
         """
         self._logger.debug(
-            f"Generating {self._index_path.relative_to(self._root_path)}"
+            f"Generating {self._root_path_finder.relative(self._index_path)}"
         )
         self._generate_index()
 
@@ -284,7 +283,8 @@ class Generator:
                     )
                     section = section.replace(match, link)
                     self._logger.debug(
-                        f'Adding local link "{title}" to {md_document.path.name}'
+                        f"Adding local link '{title}' to"
+                        f" {self._root_path_finder.relative(md_document.path)}"
                     )
             sections[index] = section
 
@@ -304,7 +304,10 @@ class Generator:
                     target_path=self._output_path / module_object.output_file_name,
                 )
                 section = section.replace(match, link)
-                self._logger.debug(f'Adding link "{title}" to {md_document.path.name}')
+                self._logger.debug(
+                    f"Adding link '{title}' to"
+                    f" {self._root_path_finder.relative(md_document.path)}"
+                )
             sections[index] = section
 
     def _generate_module_doc_lines(
@@ -357,7 +360,6 @@ class Generator:
         Returns:
             A module docstring with valid markdown.
         """
-        output_file_name = module_record.output_file_name
         docstring = module_record.docstring
         if not docstring:
             return None
@@ -369,17 +371,15 @@ class Generator:
                 if related_object is module_record:
                     continue
 
-                md_name = ""
-                if related_object.output_file_name != output_file_name:
-                    md_name = related_object.output_file_name
+                target_path = self._output_path / related_object.output_file_name
 
                 title = related_object.title
                 link = md_document.render_doc_link(
-                    title, anchor=title, target_path=self._output_path / md_name
+                    title, anchor=title, target_path=target_path
                 )
                 section_map.add_line("See also", f"- {link}")
                 self._logger.debug(
-                    f'Adding link "{title}" to {self._output_path / output_file_name} "See also" section'
+                    f"Adding link '{title}' to {self._root_path_finder.relative(target_path)} 'See also' section"
                 )
 
         formatted_docstring = section_map.render(header_level=4)

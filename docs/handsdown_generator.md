@@ -62,7 +62,7 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#l342)
+[🔍 find in source code](../handsdown/generator.py#l345)
 
 ```python
 def _get_formatted_docstring(
@@ -120,7 +120,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#l237)
+[🔍 find in source code](../handsdown/generator.py#l236)
 
 ```python
 def generate_docs() -> None
@@ -130,7 +130,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#l254)
+[🔍 find in source code](../handsdown/generator.py#l253)
 
 ```python
 def generate_index() -> None

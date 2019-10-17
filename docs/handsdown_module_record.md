@@ -159,7 +159,7 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 #### See also
 
-- [ModuleRecord](.#modulerecord)
+- [ModuleRecord](#modulerecord)
 
 ### ModuleRecordList().add
 
@@ -177,7 +177,7 @@ Add new [ModuleRecord](#modulerecord).
 
 #### See also
 
-- [ModuleRecord](.#modulerecord)
+- [ModuleRecord](#modulerecord)
 
 ### ModuleRecordList().find_object
 
@@ -199,7 +199,7 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 #### See also
 
-- [ModuleObjectRecord](.#moduleobjectrecord)
+- [ModuleObjectRecord](#moduleobjectrecord)
 
 ### ModuleRecordList().get_output_file_names
 
