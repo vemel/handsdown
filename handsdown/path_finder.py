@@ -15,7 +15,7 @@ class PathFinder:
 
     Examples::
 
-        path_finder = PathFinder(root=Path.cwd())
+        path_finder = PathFinder(Path.cwd())
         path_finder.list()
         ['my_new.txt', 'my.txt', 'new.txt']
 
@@ -38,7 +38,7 @@ class PathFinder:
     def _copy(
         self, include_exprs: Iterable[Text], exclude_exprs: Iterable[Text]
     ) -> PathFinder:
-        new_copy = PathFinder(root=self._root)
+        new_copy = PathFinder(self._root)
         new_copy.include_exprs = list(include_exprs)
         new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy

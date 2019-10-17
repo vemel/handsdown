@@ -22,7 +22,7 @@ Find matching paths inside `root` path.
 #### Examples
 
 ```python
-path_finder = PathFinder(root=Path.cwd())
+path_finder = PathFinder(Path.cwd())
 path_finder.list()
 ['my_new.txt', 'my.txt', 'new.txt']
 

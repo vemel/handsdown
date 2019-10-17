@@ -59,7 +59,7 @@ def main() -> None:
     logger = get_logger(level=log_level)
 
     path_finder = (
-        PathFinder(root=args.input_path)
+        PathFinder(args.input_path)
         .exclude(*EXCLUDE_EXPRS, *args.exclude)
         .include(*args.include)
     )
