@@ -25,13 +25,13 @@ Find matching paths inside `root` path.
 
 ```python
 path_finder = PathFinder(Path.cwd())
-path_finder.list()
+list(path_finder.glob('*.txt'))
 ['my_new.txt', 'my.txt', 'new.txt']
 
-path_finder.include('my*').list('*.txt')
+list(path_finder.include('my*').glob('*.txt'))
 ['my_new.txt', 'my.txt']
 
-path_finder.exclude('*new*').list('*.txt')
+list(path_finder.exclude('*new*').glob('*.txt'))
 ['my.txt']
 ```
 
