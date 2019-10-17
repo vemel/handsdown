@@ -39,7 +39,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../../handsdown/loader.py#l325)
+[🔍 find in source code](../../handsdown/loader.py#l312)
 
 ```python
 def _discover_module_objects(
@@ -144,7 +144,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../../handsdown/loader.py#l459)
+[🔍 find in source code](../../handsdown/loader.py#l446)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -160,7 +160,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../../handsdown/loader.py#l242)
+[🔍 find in source code](../../handsdown/loader.py#l229)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any

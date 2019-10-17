@@ -10,6 +10,7 @@
   - [Handsdown](handsdown/index.md#handsdown)
     - [Main](handsdown/__main__.md#main)
     - [CLI Parser](handsdown/cli_parser.md#cli-parser)
+    - [DocstringFormatter](handsdown/docstring_formatter.md#docstringformatter)
     - [Generator](handsdown/generator.md#generator)
     - [IndentTrimmer](handsdown/indent_trimmer.md#indenttrimmer)
     - [Loader](handsdown/loader.md#loader)

@@ -9,7 +9,7 @@ import os
 from typing import Optional, Text, Any, Callable, Generator
 
 from handsdown.signature import SignatureBuilder
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.docstring_formatter import DocstringFormatter
 from handsdown.utils import OSEnvironMock
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.utils import get_title_from_path_part
@@ -213,20 +213,7 @@ class Loader:
             A string with object docsting.
         """
         docstring = self._get_docstring(obj)
-
-        # Fix multiline docstrings starting with no newline after quotes
-        if "\n" in docstring and docstring[0] != "\n":
-            lines = docstring.split("\n")
-            next_line_index = 1
-            next_line = lines[next_line_index]
-            while not next_line.strip() and next_line_index < len(lines) - 1:
-                next_line_index += 1
-                next_line = lines[next_line_index]
-
-            indent = IndentTrimmer.get_line_indent(next_line)
-            docstring = f"\n{' ' * indent}{docstring}"
-
-        return IndentTrimmer.trim_text(docstring)
+        return DocstringFormatter(docstring).render()
 
     def get_import_string(self, path: Path) -> Text:
         relative_path = path.relative_to(self._root_path)

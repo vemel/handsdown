@@ -11,6 +11,7 @@
   - Modules
     - [Main](__main__.md#main)
     - [Cli Parser](cli_parser.md#cli-parser)
+    - [DocstringFormatter](docstring_formatter.md#docstringformatter)
     - [Generator](generator.md#generator)
     - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
     - [Loader](loader.md#loader)
