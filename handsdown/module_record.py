@@ -8,7 +8,7 @@ from handsdown.utils import get_title_from_path_part
 @dataclass
 class ModuleObjectRecord:
     """
-    Representation of an imported module object.
+    Dataclass for an imported module object.
 
     Arguments:
         source_path -- Absolute import source path.
@@ -21,6 +21,7 @@ class ModuleObjectRecord:
         docstring -- Object docstring.
         is_class -- True if object is a class.
         is_related -- True if object is from a different module
+        signature -- Object signature.
     """
 
     source_path: Path
@@ -33,12 +34,13 @@ class ModuleObjectRecord:
     docstring: Optional[Text]
     is_class: bool
     is_related: bool
+    signature: Text
 
 
 @dataclass
 class ModuleRecord:
     """
-    Representation of an imported module.
+    Dataclass for an imported module.
 
     Arguments:
         source_path -- Absolute import source path.

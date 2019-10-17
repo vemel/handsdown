@@ -4,6 +4,11 @@
 
 - [Handsdown](./README.md#handsdown) / [Handsdown](./handsdown_index.md#handsdown) / MDDocument
   - [MDDocument](#mddocument)
+    - [MDDocument().path](#mddocumentpath)
+    - [MDDocument().sections](#mddocumentsections)
+    - [MDDocument().subtitle](#mddocumentsubtitle)
+    - [MDDocument().title](#mddocumenttitle)
+    - [MDDocument().toc_section](#mddocumenttoc_section)
     - [MDDocument().append](#mddocumentappend)
     - [MDDocument().append_title](#mddocumentappend_title)
     - [MDDocument().ensure_toc_exists](#mddocumentensure_toc_exists)
@@ -60,9 +65,67 @@ with MDDocument(path=Path('output.md')) as md_document:
 - `root_path` - Path to root doc folder. If not provided,
     `path` parent folder is used.
 
+### MDDocument().path
+
+[🔍 find in source code](../handsdown/md_document.py#L9)
+
+```python
+#property getter
+def path() -> pathlib.Path
+```
+
+Output path of the document.
+
+### MDDocument().sections
+
+[🔍 find in source code](../handsdown/md_document.py#L9)
+
+```python
+#property getter
+def sections() -> List[str]
+```
+
+All non-special `sections` of the document.
+
+### MDDocument().subtitle
+
+[🔍 find in source code](../handsdown/md_document.py#L9)
+
+```python
+#property getter
+def subtitle() -> Union[str, NoneType]
+
+#property setter
+def subtitle(subtitle: str) -> None
+```
+
+### MDDocument().title
+
+[🔍 find in source code](../handsdown/md_document.py#L9)
+
+```python
+#property getter
+def title() -> Union[str, NoneType]
+
+#property setter
+def title(title: str) -> None
+```
+
+### MDDocument().toc_section
+
+[🔍 find in source code](../handsdown/md_document.py#L9)
+
+```python
+#property getter
+def toc_section() -> str
+
+#property setter
+def toc_section(toc_section: str) -> None
+```
+
 ### MDDocument().append
 
-[🔍 find in source code](../handsdown/md_document.py#L242)
+[🔍 find in source code](../handsdown/md_document.py#L248)
 
 ```python
 def append(content: str) -> None
@@ -78,7 +141,7 @@ Handle trimming and sectioning the content and update
 
 ### MDDocument().append_title
 
-[🔍 find in source code](../handsdown/md_document.py#L258)
+[🔍 find in source code](../handsdown/md_document.py#L264)
 
 ```python
 def append_title(title: str, level: int) -> None
@@ -105,7 +168,7 @@ Check if ToC exists in the document or create one.
 
 ### MDDocument.extract_title
 
-[🔍 find in source code](../handsdown/md_document.py#L313)
+[🔍 find in source code](../handsdown/md_document.py#L319)
 
 ```python
 def extract_title(content: str) -> Tuple[str, str]
@@ -131,7 +194,7 @@ A tuple fo title and remaining content.
 
 ### MDDocument().generate_toc_section
 
-[🔍 find in source code](../handsdown/md_document.py#L272)
+[🔍 find in source code](../handsdown/md_document.py#L278)
 
 ```python
 def generate_toc_section(max_depth: int = 3) -> str

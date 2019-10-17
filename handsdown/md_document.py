@@ -233,10 +233,16 @@ class MDDocument:
 
     @property
     def sections(self) -> List[Text]:
+        """
+        All non-special `sections` of the document.
+        """
         return self._sections
 
     @property
     def path(self) -> Path:
+        """
+        Output path of the document.
+        """
         return self._path
 
     def append(self, content: Text) -> None:

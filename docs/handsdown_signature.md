@@ -81,7 +81,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](../handsdown/signature.py#L137)
+[🔍 find in source code](../handsdown/signature.py#L132)
 
 ```python
 def build() -> str

@@ -340,7 +340,7 @@ class Generator:
             )
             md_document.append(source_link)
 
-            signature = self._loader.get_object_signature(module_object_record.object)
+            signature = module_object_record.signature
 
             if signature:
                 md_document.append(f"```python\n{signature}\n```")

@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader()._discover_module_objects
 
-[🔍 find in source code](../handsdown/loader.py#L314)
+[🔍 find in source code](../handsdown/loader.py#L326)
 
 ```python
 def _discover_module_objects(
@@ -62,7 +62,7 @@ A generator that yields [ModuleObjectRecord](./handsdown_module_record.md#module
 
 ### Loader()._get_object_docstring
 
-[🔍 find in source code](../handsdown/loader.py#L194)
+[🔍 find in source code](../handsdown/loader.py#L206)
 
 ```python
 def _get_object_docstring(obj: Any) -> str
@@ -142,7 +142,7 @@ A string with object signature or None.
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../handsdown/loader.py#L413)
+[🔍 find in source code](../handsdown/loader.py#L456)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -158,7 +158,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../handsdown/loader.py#L231)
+[🔍 find in source code](../handsdown/loader.py#L243)
 
 ```python
 def import_module(file_path: pathlib.Path) -> Any

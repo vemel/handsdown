@@ -186,8 +186,20 @@ class Loader:
         Returns:
             A string with object signature or None.
         """
-        if not callable(obj):
-            return None
+        if isinstance(obj, property):
+            parts = []
+            if getattr(obj, "fget", None):
+                parts.append("#property getter")
+                parts.append(SignatureBuilder(obj.fget).build())
+            if getattr(obj, "fset", None):
+                if parts:
+                    parts.append("")
+                parts.append("#property setter")
+                parts.append(SignatureBuilder(obj.fset).build())
+            return "\n".join(parts)
+
+        # if not callable(obj):
+        #     return None
 
         return SignatureBuilder(obj).build()
 
@@ -368,10 +380,40 @@ class Loader:
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
+                signature=self.get_object_signature(inspect_object),
             )
 
-            if not is_class:
+            if not is_class or is_related:
                 continue
+
+            for property_name in dir(inspect_object):
+                property_object = getattr(inspect_object, property_name, None)
+                if property_object and isinstance(property_object, property):
+
+                    # skip inherited properties
+                    inspect_object_parents = inspect.getmro(inspect_object)
+                    if len(inspect_object_parents) > 2:
+                        if (
+                            getattr(inspect_object_parents[1], property_name, None)
+                            == property_object
+                        ):
+                            continue
+
+                    import_string = f"{object_name}.{property_name}"
+                    title = f"{object_name}().{property_name}"
+                    yield ModuleObjectRecord(
+                        import_string=import_string,
+                        level=1,
+                        object=property_object,
+                        docstring=self._get_object_docstring(property_object),
+                        title=title,
+                        source_path=source_path,
+                        output_file_name=module_record.output_file_name,
+                        source_line_number=self.get_source_line_number(inspect_object),
+                        is_class=False,
+                        is_related=False,
+                        signature=self.get_object_signature(property_object),
+                    )
 
             object_members = inspect.getmembers(
                 inspect_object, self._get_parent_inspect_predicate(inspect_object)
@@ -397,6 +439,7 @@ class Loader:
                     source_line_number=self.get_source_line_number(inspect_method),
                     is_class=False,
                     is_related=is_related,
+                    signature=self.get_object_signature(inspect_method),
                 )
 
     @staticmethod

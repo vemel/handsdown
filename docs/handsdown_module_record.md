@@ -30,10 +30,11 @@ class ModuleObjectRecord(
     docstring: Union[str, NoneType],
     is_class: bool,
     is_related: bool,
+    signature: str,
 )
 ```
 
-Representation of an imported module object.
+Dataclass for an imported module object.
 
 #### Arguments
 
@@ -47,10 +48,11 @@ Representation of an imported module object.
 - `docstring` - Object docstring.
 - `is_class` - True if object is a class.
 - `is_related` - True if object is from a different module
+- `signature` - Object signature.
 
 ## ModuleRecord
 
-[🔍 find in source code](../handsdown/module_record.py#L39)
+[🔍 find in source code](../handsdown/module_record.py#L41)
 
 ```python
 class ModuleRecord(
@@ -64,7 +66,7 @@ class ModuleRecord(
 )
 ```
 
-Representation of an imported module.
+Dataclass for an imported module.
 
 #### Arguments
 
@@ -78,7 +80,7 @@ Representation of an imported module.
 
 ### ModuleRecord().get_import_string_parts
 
-[🔍 find in source code](../handsdown/module_record.py#L61)
+[🔍 find in source code](../handsdown/module_record.py#L63)
 
 ```python
 def get_import_string_parts() -> List[str]
@@ -105,7 +107,7 @@ A list of import string parts as strings.
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](../handsdown/module_record.py#L81)
+[🔍 find in source code](../handsdown/module_record.py#L83)
 
 ```python
 def get_title_parts() -> List[str]
@@ -133,7 +135,7 @@ A list of title parts as strings.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#L112)
+[🔍 find in source code](../handsdown/module_record.py#L114)
 
 ```python
 class ModuleRecordList()
@@ -143,7 +145,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/module_record.py#L164)
+[🔍 find in source code](../handsdown/module_record.py#L166)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
@@ -161,7 +163,7 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#L151)
+[🔍 find in source code](../handsdown/module_record.py#L153)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -179,7 +181,7 @@ Add new [ModuleRecord](#modulerecord).
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#L121)
+[🔍 find in source code](../handsdown/module_record.py#L123)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
@@ -201,7 +203,7 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 ### ModuleRecordList().get_output_file_names
 
-[🔍 find in source code](../handsdown/module_record.py#L133)
+[🔍 find in source code](../handsdown/module_record.py#L135)
 
 ```python
 def get_output_file_names() -> Set[str]
@@ -215,7 +217,7 @@ A set of output names as strings.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#L142)
+[🔍 find in source code](../handsdown/module_record.py#L144)
 
 ```python
 def get_package_names() -> Set[str]

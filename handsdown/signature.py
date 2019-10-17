@@ -118,15 +118,10 @@ class SignatureBuilder:
             ]
 
     def _get_obj_name(self) -> Text:
-        module_object = self._obj
-        name_parts = []
-        if hasattr(module_object, "__name__"):
-            name_parts.append(module_object.__name__)
-        else:
-            name_parts.append(type(module_object).__name__)
-            name_parts.append("__call__")
+        if hasattr(self._obj, "__name__"):
+            return self._obj.__name__
 
-        return ".".join(name_parts)
+        return f"{type(self._obj).__name__}.__call__"
 
     def _get_defintion(self) -> Text:
         if self._is_class:
