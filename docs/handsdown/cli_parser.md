@@ -13,10 +13,10 @@
 [🔍 find in source code](../../handsdown/cli_parser.py#l9)
 
 ```python
-def abs_path(path: str) -> pathlib.Path
+def abs_path(path_str: str) -> pathlib.Path
 ```
 
-Validate path and make it absolute.
+Validate `path_str` and make it absolute.
 
 #### Arguments
 
@@ -31,10 +31,10 @@ An absolute path.
 [🔍 find in source code](../../handsdown/cli_parser.py#l22)
 
 ```python
-def dir_abs_path(path: str) -> pathlib.Path
+def dir_abs_path(path_str: str) -> pathlib.Path
 ```
 
-Validate directory path and make it absolute.
+Validate directory `path_str` and make it absolute.
 
 #### Arguments
 
@@ -53,10 +53,10 @@ An absolute path.
 [🔍 find in source code](../../handsdown/cli_parser.py#l41)
 
 ```python
-def existing_dir_abs_path(path: str) -> pathlib.Path
+def existing_dir_abs_path(path_str: str) -> pathlib.Path
 ```
 
-Validate existing directory path and make it absolute.
+Validate existing directory `path_str` and make it absolute.
 
 #### Arguments
 

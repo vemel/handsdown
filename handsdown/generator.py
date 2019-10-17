@@ -357,7 +357,7 @@ class Generator:
         module_record: Union[ModuleRecord, ModuleObjectRecord],
         md_document: MDDocument,
         signature: Optional[Text] = None,
-    ) -> Optional[Text]:
+    ) -> None:
         """
         Get object docstring and convert it to a valid markdown using
         `handsdown.processors.base.BaseDocstringProcessor`.

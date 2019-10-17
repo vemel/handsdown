@@ -44,7 +44,7 @@ class DocstringFormatter:
 
         return IndentTrimmer.trim_text(docstring)
 
-    def _parse_flask_title(self):
+    def _parse_flask_title(self) -> None:
         lines = list(self._lines)
         for index, line in enumerate(lines):
             if line.startswith("~~~~"):

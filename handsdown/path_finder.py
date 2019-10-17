@@ -167,7 +167,7 @@ class PathFinder:
 
         return up_path / relative_target
 
-    def mkdir(self, force=False):
+    def mkdir(self, force: bool = False) -> None:
         """
         Create directories up to `root` if they do not exist.
 

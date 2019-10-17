@@ -59,7 +59,7 @@ def _render_docstring(
     module_record: Union[handsdown.module_record.ModuleRecord, handsdown.module_record.ModuleObjectRecord],
     md_document: handsdown.md_document.MDDocument,
     signature: Union[str, NoneType] = None,
-) -> Union[str, NoneType]
+) -> None
 ```
 
 Get object docstring and convert it to a valid markdown using

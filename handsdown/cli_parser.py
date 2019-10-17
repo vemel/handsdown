@@ -6,9 +6,9 @@ from pathlib import Path
 from typing import Text
 
 
-def abs_path(path: Text) -> Path:
+def abs_path(path_str: Text) -> Path:
     """
-    Validate path and make it absolute.
+    Validate `path_str` and make it absolute.
 
     Arguments:
         path - A path to check.
@@ -16,12 +16,12 @@ def abs_path(path: Text) -> Path:
     Returns:
         An absolute path.
     """
-    return Path(path).absolute()
+    return Path(path_str).absolute()
 
 
-def dir_abs_path(path: Text) -> Path:
+def dir_abs_path(path_str: Text) -> Path:
     """
-    Validate directory path and make it absolute.
+    Validate directory `path_str` and make it absolute.
 
     Arguments:
         path - A path to check.
@@ -32,15 +32,15 @@ def dir_abs_path(path: Text) -> Path:
     Raises:
         argparse.ArgumentTypeError -- If path is not a directory.
     """
-    path = Path(path).absolute()
+    path = Path(path_str).absolute()
     if path.exists() and not path.is_dir():
         raise argparse.ArgumentTypeError(f"Path {path}  is not a directory")
     return path
 
 
-def existing_dir_abs_path(path: Text) -> Path:
+def existing_dir_abs_path(path_str: Text) -> Path:
     """
-    Validate existing directory path and make it absolute.
+    Validate existing directory `path_str` and make it absolute.
 
     Arguments:
         path - A path to check.
@@ -51,7 +51,7 @@ def existing_dir_abs_path(path: Text) -> Path:
     Raises:
         argparse.ArgumentTypeError -- If path does not exist or is not a directory.
     """
-    path = Path(path).absolute()
+    path = Path(path_str).absolute()
     if not path.exists():
         raise argparse.ArgumentTypeError(f"Path {path} does not exist")
     if not path.is_dir():
