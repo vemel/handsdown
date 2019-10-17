@@ -44,7 +44,7 @@ class Generator:
     LOGGER_NAME = "handsdown"
     INDEX_NAME = "README.md"
     MODULES_NAME = "Modules"
-    short_link_re = re.compile(r"`+\S+`+")
+    _short_link_re = re.compile(r"`+\S+`+")
 
     def __init__(
         self,
@@ -278,7 +278,7 @@ class Generator:
         sections = md_document.sections
 
         for index, section in enumerate(sections):
-            for match in self.short_link_re.findall(section):
+            for match in self._short_link_re.findall(section):
                 import_string = match.replace("`", "")
                 for module_object in module_record.objects:
                     if module_object.import_string != import_string:

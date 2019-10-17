@@ -5,8 +5,8 @@
 - [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().exclude](#pathfinderexclude)
+    - [PathFinder().glob](#pathfinderglob)
     - [PathFinder().include](#pathfinderinclude)
-    - [PathFinder().list](#pathfinderlist)
     - [PathFinder().relative](#pathfinderrelative)
 
 ## PathFinder
@@ -62,6 +62,21 @@ A copy of itself.
 
 - [PathFinder](.#pathfinder)
 
+### PathFinder().glob
+
+[🔍 find in source code](../handsdown/path_finder.py#l108)
+
+```python
+def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
+```
+
+Find all matching `Path` objects respecting `include` and
+`exclude` patterns.
+
+#### Returns
+
+A genertor of matching `Path` objects.
+
 ### PathFinder().include
 
 [🔍 find in source code](../handsdown/path_finder.py#l46)
@@ -86,23 +101,9 @@ A copy of itself.
 
 - [PathFinder](.#pathfinder)
 
-### PathFinder().list
-
-[🔍 find in source code](../handsdown/path_finder.py#l108)
-
-```python
-def list(glob_expr: str) -> List[pathlib.Path]
-```
-
-Return all matching paths as a list.
-
-#### Returns
-
-A list of all matched paths.
-
 ### PathFinder().relative
 
-[🔍 find in source code](../handsdown/path_finder.py#l126)
+[🔍 find in source code](../handsdown/path_finder.py#l125)
 
 ```python
 def relative(target: pathlib.Path) -> pathlib.Path

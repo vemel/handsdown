@@ -69,7 +69,7 @@ def main() -> None:
             input_path=args.input_path,
             logger=logger,
             output_path=args.output_path,
-            source_paths=path_finder.list(SOURCES_GLOB),
+            source_paths=path_finder.glob(SOURCES_GLOB),
             raise_errors=args.panic,
         )
         if args.files:

@@ -3,7 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 import fnmatch
 
-from typing import Text, List, Iterable
+from typing import Text, List, Iterable, Generator
 
 
 __all__ = ["PathFinder"]
@@ -105,14 +105,14 @@ class PathFinder:
 
         return False
 
-    def list(self, glob_expr: Text) -> List[Path]:
+    def glob(self, glob_expr: Text) -> Generator[Path, None, None]:
         """
-        Return all matching paths as a list.
+        Find all matching `Path` objects respecting `include` and
+        `exclude` patterns.
 
         Returns:
-            A list of all matched paths.
+            A genertor of matching `Path` objects.
         """
-        result = []
         for path in self._root.glob(glob_expr):
             relative_path = path.relative_to(self._root)
             if not self._match_include(relative_path):
@@ -120,8 +120,7 @@ class PathFinder:
             if self._match_exclude(relative_path):
                 continue
 
-            result.append(path)
-        return result
+            yield path
 
     def relative(self, target: Path) -> Path:
         """
