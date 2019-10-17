@@ -12,7 +12,7 @@
 
 ## Config
 
-[🔍 find in source code](../../handsdown/signature.py#L10)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L10)
 
 ```python
 class Config(*args, **kwargs)
@@ -20,7 +20,7 @@ class Config(*args, **kwargs)
 
 ## DefaultValue
 
-[🔍 find in source code](../../handsdown/signature.py#L15)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L15)
 
 ```python
 class DefaultValue(original: Type)
@@ -34,7 +34,7 @@ Represent function parameter default value in signature
 
 ## Parameter
 
-[🔍 find in source code](../../handsdown/signature.py#L39)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L39)
 
 ```python
 class Parameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
@@ -44,7 +44,7 @@ Represent function parameters in signature
 
 ### Parameter.create
 
-[🔍 find in source code](../../handsdown/signature.py#L80)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L80)
 
 ```python
 def create(
@@ -66,7 +66,7 @@ Create `ProxyParameter` for original `inspect.Parameter`
 
 ## SignatureBuilder
 
-[🔍 find in source code](../../handsdown/signature.py#L101)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L101)
 
 ```python
 class SignatureBuilder(obj: Any)
@@ -81,7 +81,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](../../handsdown/signature.py#L155)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L155)
 
 ```python
 def build() -> str

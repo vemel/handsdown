@@ -15,7 +15,7 @@
 
 ## RSTExample
 
-[🔍 find in source code](../../examples/rst_docstrings.py#L10)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L10)
 
 ```python
 class RSTExample(*args, **kwargs)
@@ -23,7 +23,7 @@ class RSTExample(*args, **kwargs)
 
 ### RSTExample.reference
 
-[🔍 find in source code](../../examples/rst_docstrings.py#L11)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L11)
 
 ```python
 def reference()
@@ -58,7 +58,7 @@ print(data)
 
 ### RSTExample.replace_test
 
-[🔍 find in source code](../../examples/rst_docstrings.py#L40)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L40)
 
 ```python
 def replace_test()
@@ -69,7 +69,7 @@ class [RSTExample](#rstexample) and class [RSTExample](#rstexample) look good.
 
 ### RSTExample.rtype_test
 
-[🔍 find in source code](../../examples/rst_docstrings.py#L31)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L31)
 
 ```python
 def rtype_test()

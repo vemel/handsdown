@@ -12,13 +12,13 @@ _git_repo_re = re.compile(r"git@github\.com:(?P<user>\S+)/(?P<repo>\S+)\.git")
 
 def git_repo(git_repo_url: Text) -> Text:
     """
-    Validate `git_repo_url` to be a Github repo and converts SSH urls to HTTPS.
+    Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
     Arguments:
-        git_repo_url - Github URL or `remote.origin.url`
+        git_repo_url - GitHub URL or `remote.origin.url`
 
     Returns:
-        A Github URL.
+        A GitHub URL.
     """
     match = _git_repo_re.match(git_repo_url)
     if match:

@@ -14,6 +14,7 @@ Python docstring-based documentation generator for lazy perfectionists.
   - [🐏 Examples](#%f0%9f%90%8f-examples)
   - [🎉 Usage](#%f0%9f%8e%89-usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
+    - [📝 GitHub Pages](#%f0%9f%93%9d-github-pages)
     - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
   - [🐶 Installation](#%f0%9f%90%b6-installation)
   - [🔧 Development](#%f0%9f%94%a7-development)
@@ -61,6 +62,38 @@ handsdown my_module --exclude my_module/migrations
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
+
+### 📝 GitHub Pages
+
+`handsdown` comes with built-in support for [GitHub Pages](https://pages.github.com/),
+although some setup is required. By default documentation uses relative links to source files,
+so for `GitHub Pages` we need absolute URLs to a GitHub repositore for `find in source code`
+links to work.
+
+Now let's generate `GitHub Pages`-friendly documentation
+
+```bash
+# Generate documentation that points to master branch
+# do not use custom output location, as as `GitHub Pages`
+# works only with `docs` directory
+handsdown --gh-pages `git config --get remote.origin.url`
+
+# or specify GitHub url directly
+handsdown --gh-pages https://github.com/<user>/<project>/blob/master/
+```
+
+Commit your changes and enable `GitHub Pages` by setting your project
+`Settings` > `GitHub Pages` > `Source` to `master branch /docs folder`
+
+That's it, you are good to go! Add plugins to `docs/_config.yml` or change
+theme to add your own touch.
+
+If you still want to have relative links to source, e.g. for using docs locally,
+generate docs to another folder
+
+```bash
+handsdown -o docs_local # `docs_local` folder will be created in your project root
+```
 
 ### 🧩 As a module
 

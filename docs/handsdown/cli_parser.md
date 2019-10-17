@@ -11,7 +11,7 @@
 
 ## abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#L32)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L32)
 
 ```python
 def abs_path(path_str: str) -> pathlib.Path
@@ -29,7 +29,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#L45)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L45)
 
 ```python
 def dir_abs_path(path_str: str) -> pathlib.Path
@@ -51,7 +51,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[🔍 find in source code](../../handsdown/cli_parser.py#L64)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L64)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> pathlib.Path
@@ -73,7 +73,7 @@ An absolute path.
 
 ## get_cli_parser
 
-[🔍 find in source code](../../handsdown/cli_parser.py#L85)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L85)
 
 ```python
 def get_cli_parser() -> argparse.ArgumentParser
@@ -87,18 +87,18 @@ An `argparse.ArgumentParser` instance.
 
 ## git_repo
 
-[🔍 find in source code](../../handsdown/cli_parser.py#L13)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L13)
 
 ```python
 def git_repo(git_repo_url: str) -> str
 ```
 
-Validate `git_repo_url` to be a Github repo and converts SSH urls to HTTPS.
+Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
 #### Arguments
 
-git_repo_url - Github URL or `remote.origin.url`
+git_repo_url - GitHub URL or `remote.origin.url`
 
 #### Returns
 
-A Github URL.
+A GitHub URL.

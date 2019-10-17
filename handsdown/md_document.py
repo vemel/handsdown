@@ -110,7 +110,7 @@ class MDDocument:
     @classmethod
     def get_anchor(cls, title: Text) -> Text:
         """
-        Convert title to Github-compatible anchor link.
+        Convert title to a GitHub-friendly anchor link.
 
         Returns:
             A test of anchor link.

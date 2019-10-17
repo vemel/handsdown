@@ -12,7 +12,7 @@
 
 ## Generator
 
-[🔍 find in source code](../../handsdown/generator.py#L21)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L21)
 
 ```python
 class Generator(
@@ -40,7 +40,7 @@ Main handsdown doc generator.
 - `raise_errors` - Raise [LoaderError](loader.md#loadererror) instead of silencing in.
 - `ignore_unknown_errors` - Continue on any error.
 - `source_code_url` - URL to source files to use instead of relative paths,
-    useful for [Github Pages](https://pages.github.com/).
+    useful for [GitHub Pages](https://pages.github.com/).
 
 - `LOGGER_NAME` - Name of logger: `handsdown`
 - `INDEX_NAME` - Docs index filename: `README.md`
@@ -54,7 +54,7 @@ Main handsdown doc generator.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../../handsdown/generator.py#L113)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L113)
 
 ```python
 def cleanup_old_docs() -> None
@@ -64,7 +64,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../../handsdown/generator.py#L144)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L144)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -82,7 +82,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../../handsdown/generator.py#L240)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L240)
 
 ```python
 def generate_docs() -> None
@@ -92,7 +92,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../../handsdown/generator.py#L255)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L255)
 
 ```python
 def generate_index() -> None
@@ -103,7 +103,7 @@ section that contains a Tree of all modules in the project.
 
 ## GeneratorError
 
-[🔍 find in source code](../../handsdown/generator.py#L15)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L15)
 
 ```python
 class GeneratorError(*args, **kwargs)

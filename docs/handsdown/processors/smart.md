@@ -8,7 +8,7 @@
 
 ## SmartDocstringProcessor
 
-[🔍 find in source code](../../../handsdown/processors/smart.py#L9)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L9)
 
 ```python
 class SmartDocstringProcessor()
@@ -21,7 +21,7 @@ Docstring processor that checks docstring and uses on of processors
 
 ### SmartDocstringProcessor().build_sections
 
-[🔍 find in source code](../../../handsdown/processors/smart.py#L25)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L25)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

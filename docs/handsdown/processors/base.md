@@ -8,7 +8,7 @@
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](../../../handsdown/processors/base.py#L7)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L7)
 
 ```python
 class BaseDocstringProcessor()
@@ -22,7 +22,7 @@ Base docstring processor. All docstring processors are based on top of it:
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](../../../handsdown/processors/base.py#L38)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L38)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

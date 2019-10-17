@@ -7,7 +7,7 @@
 
 ## RSTDocstringProcessor
 
-[🔍 find in source code](../../../handsdown/processors/rst.py#L6)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L6)
 
 ```python
 class RSTDocstringProcessor()

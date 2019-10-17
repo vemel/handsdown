@@ -262,7 +262,8 @@ class Loader:
 
         return module
 
-    def _inspect_predicate(self, obj: Any) -> bool:
+    @staticmethod
+    def _inspect_predicate(obj: Any) -> bool:
         # skip built-in objects
         if getattr(obj, "__name__", "type") == "type":
             return False
@@ -303,10 +304,7 @@ class Loader:
             if obj.__name__ not in parent.__dict__:
                 return False
 
-            if inspect.ismethod(obj):
-                return True
-
-            if inspect.isfunction(obj):
+            if inspect.ismethod(obj) or inspect.isfunction(obj):
                 return True
 
             return False
@@ -325,7 +323,6 @@ class Loader:
         Yields:
             New `ModuleObjectRecord` instances.
         """
-        import_string = module_record.import_string
         inspect_module = module_record.module
         relative_source_path = module_record.source_path.relative_to(self._root_path)
 
@@ -363,7 +360,7 @@ class Loader:
                 docstring = self._get_object_docstring(inspect_object)
                 signature = self._get_object_signature(inspect_object)
 
-            yield ModuleObjectRecord(
+            module_object_record = ModuleObjectRecord(
                 import_string=object_name,
                 level=0,
                 object=inspect_object,
@@ -376,65 +373,101 @@ class Loader:
                 is_related=is_related,
                 signature=signature,
             )
+            yield module_object_record
 
             if not is_class or is_related:
                 continue
 
-            for property_name in dir(inspect_object):
-                property_object = getattr(inspect_object, property_name, None)
-                if property_object and isinstance(property_object, property):
+            yield from self._discover_class_properties(module_object_record)
+            yield from self._discover_class_methods(module_object_record)
 
-                    # skip inherited properties
-                    inspect_object_parents = inspect.getmro(inspect_object)
-                    if len(inspect_object_parents) > 2:
-                        if (
-                            getattr(inspect_object_parents[1], property_name, None)
-                            == property_object
-                        ):
-                            continue
+    def _discover_class_properties(
+        self, module_object_record: ModuleObjectRecord
+    ) -> Generator[ModuleObjectRecord, None, None]:
+        """
+        Get `ModuleObjectRecord` for every property in a class.
 
-                    import_string = f"{object_name}.{property_name}"
-                    title = f"{object_name}().{property_name}"
-                    yield ModuleObjectRecord(
-                        import_string=import_string,
-                        level=1,
-                        object=property_object,
-                        docstring=self._get_object_docstring(property_object),
-                        title=title,
-                        source_path=source_path,
-                        output_path=self._get_output_path(source_path),
-                        source_line_number=self.get_source_line_number(inspect_object),
-                        is_class=False,
-                        is_related=False,
-                        signature=self._get_object_signature(property_object),
-                    )
+        Arguments:
+            module_object_record -- `ModuleObjectRecord` instance to inspect.
 
-            object_members = inspect.getmembers(
-                inspect_object, self._get_parent_inspect_predicate(inspect_object)
-            )
-            object_members.sort(key=lambda x: x[0])
+        Yields:
+            New `ModuleObjectRecord` instances.
+        """
+        object_name = module_object_record.import_string
+        inspect_object = module_object_record.object
+        source_path = module_object_record.source_path
 
-            for method_name, inspect_method in object_members:
-                class_method = inspect_object.__dict__[method_name]
+        for property_name in dir(inspect_object):
+            property_object = getattr(inspect_object, property_name, None)
+            if property_object and isinstance(property_object, property):
 
-                import_string = f"{object_name}.{method_name}"
-                title = f"{object_name}().{method_name}"
-                if isinstance(class_method, (staticmethod, classmethod)):
-                    title = f"{object_name}.{method_name}"
+                # skip inherited properties
+                inspect_object_parents = inspect.getmro(inspect_object)
+                if len(inspect_object_parents) > 2:
+                    if (
+                        getattr(inspect_object_parents[1], property_name, None)
+                        == property_object
+                    ):
+                        continue
 
+                import_string = f"{object_name}.{property_name}"
+                title = f"{object_name}().{property_name}"
                 yield ModuleObjectRecord(
                     import_string=import_string,
                     level=1,
-                    object=inspect_method,
-                    docstring=self._get_object_docstring(inspect_method),
+                    object=property_object,
+                    docstring=self._get_object_docstring(property_object),
                     title=title,
                     source_path=source_path,
                     output_path=self._get_output_path(source_path),
-                    source_line_number=self.get_source_line_number(inspect_method),
+                    source_line_number=self.get_source_line_number(inspect_object),
                     is_class=False,
                     is_related=False,
-                    signature=self._get_object_signature(inspect_method),
+                    signature=self._get_object_signature(property_object),
                 )
+
+    def _discover_class_methods(
+        self, module_object_record: ModuleObjectRecord
+    ) -> Generator[ModuleObjectRecord, None, None]:
+        """
+        Get `ModuleObjectRecord` for every method in a class.
+
+        Arguments:
+            module_object_record -- `ModuleObjectRecord` instance to inspect.
+
+        Yields:
+            New `ModuleObjectRecord` instances.
+        """
+        object_name = module_object_record.import_string
+        inspect_object = module_object_record.object
+        source_path = module_object_record.source_path
+
+        object_members = inspect.getmembers(
+            inspect_object, self._get_parent_inspect_predicate(inspect_object)
+        )
+        object_members.sort(key=lambda x: x[0])
+
+        for method_name, inspect_method in object_members:
+            class_method = inspect_object.__dict__[method_name]
+
+            import_string = f"{object_name}.{method_name}"
+            title = f"{object_name}().{method_name}"
+            if isinstance(class_method, (staticmethod, classmethod)):
+                title = f"{object_name}.{method_name}"
+
+            yield ModuleObjectRecord(
+                import_string=import_string,
+                level=1,
+                object=inspect_method,
+                docstring=self._get_object_docstring(inspect_method),
+                title=title,
+                source_path=source_path,
+                output_path=self._get_output_path(source_path),
+                source_line_number=self.get_source_line_number(inspect_method),
+                is_class=False,
+                is_related=False,
+                signature=self._get_object_signature(inspect_method),
+            )
 
     @staticmethod
     def _get_docstring(obj: Any) -> Text:

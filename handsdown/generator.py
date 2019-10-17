@@ -32,7 +32,7 @@ class Generator:
         raise_errors -- Raise `LoaderError` instead of silencing in.
         ignore_unknown_errors -- Continue on any error.
         source_code_url -- URL to source files to use instead of relative paths,
-            useful for [Github Pages](https://pages.github.com/).
+            useful for [GitHub Pages](https://pages.github.com/).
 
     Arguments:
         LOGGER_NAME -- Name of logger: `handsdown`
