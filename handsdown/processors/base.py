@@ -114,7 +114,7 @@ class BaseDocstringProcessor:
             return
 
         # end MD-style codeblock
-        if line.startswith("```"):
+        if line.startswith("```") or line.startswith("~~~"):
             self._add_line("```", indent=0)
             self._add_block()
             self._in_codeblock = False
@@ -138,12 +138,12 @@ class BaseDocstringProcessor:
 
     def _parse_line(self, line: Text) -> None:
         # MD-style codeblock starts with triple backticks
-        if line.startswith("```"):
+        if line.startswith("```") or line.startswith("~~~"):
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line(line, indent=0)
+            self._add_line(f"```{line[3:]}", indent=0)
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines
