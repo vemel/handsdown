@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.processors](../../../handsdown/processors/__init__.py) module.
 
-- [Handsdown](../../README.md#handsdown) / [Handsdown](#handsdown) / Processors
+- [Index](../../README.md#handsdown-index) / [Handsdown](../index.md#handsdown) / [Processors](#processors) / Processors
   - Modules
     - [Base](base.md#base)
     - [Pep257](pep257.md#pep257)

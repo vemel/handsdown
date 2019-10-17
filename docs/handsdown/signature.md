@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module.
 
-- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Signature
+- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Signature](#signature) / Signature
   - [Config](#config)
   - [ProxyDefaultValue](#proxydefaultvalue)
   - [ProxyParameter](#proxyparameter)

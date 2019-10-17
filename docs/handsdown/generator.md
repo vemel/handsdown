@@ -2,9 +2,8 @@
 
 > Auto-generated documentation for [handsdown.generator](../../handsdown/generator.py) module.
 
-- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Generator
+- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Generator](#generator) / Generator
   - [Generator](#generator)
-    - [Generator()._generate_index](#generator_generate_index)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)
     - [Generator().cleanup_old_docs](#generatorcleanup_old_docs)
     - [Generator().generate_doc](#generatorgenerate_doc)
@@ -43,6 +42,7 @@ Main handsdown doc generator.
 
 - `LOGGER_NAME` - Name of logger: `handsdown`
 - `INDEX_NAME` - Docs index filename: `README.md`
+- `INDEX_TITLE` - Docs index title: `Index`
 - `INDEX_MODULES_NAME` - Modules ToC name in index: `Modules`
 
 #### See also
@@ -50,19 +50,9 @@ Main handsdown doc generator.
 - [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
 - [Loader](loader.md#loader)
 
-### Generator()._generate_index
-
-[🔍 find in source code](../../handsdown/generator.py#l402)
-
-```python
-def _generate_index() -> None
-```
-
-Generate new `<output>/README.md` with ToC of all project modules.
-
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../../handsdown/generator.py#l349)
+[🔍 find in source code](../../handsdown/generator.py#l367)
 
 ```python
 def _get_formatted_docstring(
@@ -92,7 +82,7 @@ A module docstring with valid markdown.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../../handsdown/generator.py#l107)
+[🔍 find in source code](../../handsdown/generator.py#l109)
 
 ```python
 def cleanup_old_docs() -> None
@@ -102,7 +92,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../../handsdown/generator.py#l138)
+[🔍 find in source code](../../handsdown/generator.py#l140)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -120,7 +110,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../../handsdown/generator.py#l246)
+[🔍 find in source code](../../handsdown/generator.py#l248)
 
 ```python
 def generate_docs() -> None
@@ -130,14 +120,14 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../../handsdown/generator.py#l261)
+[🔍 find in source code](../../handsdown/generator.py#l263)
 
 ```python
 def generate_index() -> None
 ```
 
-Generate `README.md` file with title from `<root>/README.md` and `Modules` section that
-contains a Tree of all modules in the project.
+Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
+section that contains a Tree of all modules in the project.
 
 ## GeneratorError
 

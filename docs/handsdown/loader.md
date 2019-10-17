@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.loader](../../handsdown/loader.py) module.
 
-- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Loader
+- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [Loader](#loader) / Loader
   - [Loader](#loader)
     - [Loader()._discover_module_objects](#loader_discover_module_objects)
     - [Loader()._get_object_docstring](#loader_get_object_docstring)

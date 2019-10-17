@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.md_document](../../handsdown/md_document.py) module.
 
-- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / MDDocument
+- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [MDDocument](#mddocument) / MDDocument
   - [MDDocument](#mddocument)
     - [MDDocument().path](#mddocumentpath)
     - [MDDocument().sections](#mddocumentsections)

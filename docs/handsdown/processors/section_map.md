@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.processors.section_map](../../../handsdown/processors/section_map.py) module.
 
-- [Handsdown](../../README.md#handsdown) / [Handsdown](#handsdown) / [Processors](#processors) / SectionMap
+- [Index](../../README.md#handsdown-index) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / [SectionMap](#sectionmap) / SectionMap
   - [Section](#section)
   - [SectionBlock](#sectionblock)
   - [SectionMap](#sectionmap)

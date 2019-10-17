@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples](../../examples/__init__.py) module.
 
-- [Handsdown](../README.md#handsdown) / Examples
+- [Index](../README.md#handsdown-index) / [Examples](#examples) / Examples
   - Modules
     - [Google Docstrings](google_docstrings.md#google-docstrings)
     - [Pep257 Docstrings](pep257_docstrings.md#pep257-docstrings)

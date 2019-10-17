@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.path_finder](../../handsdown/path_finder.py) module.
 
-- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / PathFinder
+- [Index](../README.md#handsdown-index) / [Handsdown](index.md#handsdown) / [PathFinder](#pathfinder) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().glob](#pathfinderglob)

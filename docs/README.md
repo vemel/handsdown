@@ -1,8 +1,8 @@
-# Handsdown
+# Handsdown Index
 
 > Auto-generated documentation index.
 
-- [Handsdown](#handsdown)
+- [Handsdown Index](#handsdown-index)
   - [Examples](examples/index.md#examples)
     - [Google docstrings examples](examples/google_docstrings.md#google-docstrings-examples)
     - [PEP 257 - reStructuredText docstrings examples](examples/pep257_docstrings.md#pep-257---restructuredtext-docstrings-examples)
