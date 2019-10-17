@@ -198,8 +198,6 @@ class Generator:
 
         md_document.toc_section = "\n".join(toc_lines)
 
-        md_document.write()
-
     def _build_breadcrumbs_string(
         self, module_record: ModuleRecord, md_document: MDDocument
     ) -> Text:

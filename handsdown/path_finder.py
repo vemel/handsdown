@@ -41,10 +41,10 @@ class PathFinder:
 
     def __init__(self, root: Path) -> None:
         if not root.is_absolute():
-            raise PathFinderError("Root path should be absolute")
+            raise PathFinderError(f"Root path {root} is not absolute")
         try:
-            if not root.exists() and not root.is_dir():
-                raise PathFinderError("Root path should be a directory")
+            if root.exists() and not root.is_dir():
+                raise PathFinderError(f"Root path {root} is not a directory")
         except OSError:
             pass
 
@@ -177,7 +177,7 @@ class PathFinder:
         Raises:
             PathFinderError -- If any existing parent is not a directory and not in `safe` mode.
         """
-        parents = self._root.parents
+        parents = [self._root] + list(self._root.parents)
         missing_parents = []
         for parent in parents:
             if not parent.exists():

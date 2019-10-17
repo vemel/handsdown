@@ -52,7 +52,7 @@ Main handsdown doc generator.
 
 ### Generator()._render_docstring
 
-[🔍 find in source code](../../handsdown/generator.py#l355)
+[🔍 find in source code](../../handsdown/generator.py#l353)
 
 ```python
 def _render_docstring(
@@ -110,7 +110,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../../handsdown/generator.py#l238)
+[🔍 find in source code](../../handsdown/generator.py#l236)
 
 ```python
 def generate_docs() -> None
@@ -120,7 +120,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../../handsdown/generator.py#l253)
+[🔍 find in source code](../../handsdown/generator.py#l251)
 
 ```python
 def generate_index() -> None
