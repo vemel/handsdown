@@ -53,9 +53,9 @@ Get [ModuleObjectRecord](module_record.md#moduleobjectrecord) for every object i
 
 - `module_record` - [ModuleRecord](module_record.md#modulerecord) instance.
 
-#### Returns
+#### Yields
 
-A generator that yields [ModuleObjectRecord](module_record.md#moduleobjectrecord) instances.
+New [ModuleObjectRecord](module_record.md#moduleobjectrecord) instances.
 
 #### See also
 

@@ -177,17 +177,7 @@ class Generator:
             f"> Auto-generated documentation for {source_link} module."
         )
 
-        docstring = self._get_formatted_docstring(
-            module_record=module_record, md_document=md_document
-        )
-        if docstring:
-            # set MD and module record title if it is found in docstring
-            title, docstring = md_document.extract_title(docstring)
-            if title:
-                module_record.title = title
-                md_document.title = title
-
-            md_document.append(docstring)
+        self._render_docstring(module_record=module_record, md_document=md_document)
 
         self._generate_module_doc_lines(module_record, md_document)
         md_document.ensure_toc_exists()
@@ -356,15 +346,13 @@ class Generator:
             if signature:
                 md_document.append(f"```python\n{signature}\n```")
 
-            formatted_docstring = self._get_formatted_docstring(
+            self._render_docstring(
                 module_record=module_object_record,
                 signature=signature,
                 md_document=md_document,
             )
-            if formatted_docstring:
-                md_document.append(formatted_docstring)
 
-    def _get_formatted_docstring(
+    def _render_docstring(
         self,
         module_record: Union[ModuleRecord, ModuleObjectRecord],
         md_document: MDDocument,
@@ -384,7 +372,12 @@ class Generator:
         """
         docstring = module_record.docstring
         if not docstring:
-            return None
+            return
+
+        title, docstring = md_document.extract_title(docstring)
+        if title:
+            module_record.title = title
+            md_document.title = title
 
         section_map = self._docstring_processor.build_sections(docstring)
         if signature:
@@ -403,8 +396,10 @@ class Generator:
                     f" {self._root_path_finder.relative(related_object.output_path)} 'See also' section"
                 )
 
-        formatted_docstring = section_map.render(header_level=4)
-        return formatted_docstring.strip("\n")
+        for section in section_map.sections:
+            if section.title:
+                md_document.append_title(section.title, level=4)
+            md_document.append(section.render())
 
     def _get_objects_from_signature(self, signature: Text) -> List[ModuleObjectRecord]:
         result: List[ModuleObjectRecord] = []

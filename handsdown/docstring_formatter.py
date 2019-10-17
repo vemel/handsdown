@@ -16,6 +16,7 @@ class DocstringFormatter:
 
     def __init__(self, docstring: Text) -> None:
         docstring = self._cleanup(docstring)
+        docstring = IndentTrimmer.trim_empty_lines(docstring)
         lines = docstring.split("\n")
         self._lines = IndentTrimmer.trim_lines(lines)
 

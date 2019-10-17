@@ -110,8 +110,8 @@ class PathFinder:
         Find all matching `Path` objects respecting `include` and
         `exclude` patterns.
 
-        Returns:
-            A genertor of matching `Path` objects.
+        Yields:
+            Matching `Path` objects.
         """
         for path in self._root.glob(glob_expr):
             relative_path = path.relative_to(self._root)

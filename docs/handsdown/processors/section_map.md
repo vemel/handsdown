@@ -4,16 +4,18 @@
 
 - [Index](../../README.md#handsdown-index) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / [SectionMap](#sectionmap) / SectionMap
   - [Section](#section)
+    - [Section().render](#sectionrender)
   - [SectionBlock](#sectionblock)
+    - [SectionBlock().render](#sectionblockrender)
   - [SectionMap](#sectionmap)
+    - [SectionMap().sections](#sectionmapsections)
     - [SectionMap().add_block](#sectionmapadd_block)
     - [SectionMap().add_line](#sectionmapadd_line)
-    - [SectionMap().render](#sectionmaprender)
     - [SectionMap().trim_block](#sectionmaptrim_block)
 
 ## Section
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l20)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l31)
 
 ```python
 class Section(title: str, blocks: List[handsdown.processors.section_map.SectionBlock])
@@ -26,9 +28,23 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 - `title` - Section title.
 - `blocks` - List of line blocks.
 
+### Section().render
+
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l43)
+
+```python
+def render() -> str
+```
+
+Render section content as a text.
+
+#### Returns
+
+Section lines as a text.
+
 ## SectionBlock
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l8)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l9)
 
 ```python
 class SectionBlock(lines: List[str])
@@ -40,9 +56,23 @@ Dataclass representing a [Section](#section) block.
 
 - `lines` - List of lines.
 
+### SectionBlock().render
+
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l19)
+
+```python
+def render() -> str
+```
+
+Render trimmed block lines.
+
+#### Returns
+
+Block lines as a text.
+
 ## SectionMap
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l33)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l56)
 
 ```python
 class SectionMap(*args, **kwargs)
@@ -54,9 +84,28 @@ Dict-based storage for parsed [Section](#section) list for
 Key is a [Section](#section) title.
 Value is a related [Section](#section) instance.
 
+### SectionMap().sections
+
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l56)
+
+```python
+#property getter
+def sections() -> Generator[handsdown.processors.section_map.Section, NoneType, NoneType]
+```
+
+List [Section](#section) objects.
+
+#### Yields
+
+[Section](#section) objects in order of appearance.
+
+#### See also
+
+- [Section](#section)
+
 ### SectionMap().add_block
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l63)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l86)
 
 ```python
 def add_block(section_name: str) -> None
@@ -70,7 +119,7 @@ Add new [SectionBlock](#sectionblock) to section `section_name`.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l42)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l65)
 
 ```python
 def add_line(section_name: str, line: str) -> None
@@ -84,27 +133,9 @@ If line and section are empty - section is not created.
 - `section_name` - Target section title
 - `line` - Line to add
 
-### SectionMap().render
-
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l89)
-
-```python
-def render(header_level: int) -> str
-```
-
-Render sections to a string.
-
-#### Arguments
-
-- `header_level` - Level of section title header.
-
-#### Returns
-
-A markdown string.
-
 ### SectionMap().trim_block
 
-[🔍 find in source code](../../../handsdown/processors/section_map.py#l75)
+[🔍 find in source code](../../../handsdown/processors/section_map.py#l98)
 
 ```python
 def trim_block(section_name: str) -> None

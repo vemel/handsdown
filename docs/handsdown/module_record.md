@@ -152,9 +152,9 @@ def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, None
 
 Iterate over all added [ModuleRecord](#modulerecord) entries.
 
-#### Returns
+#### Yields
 
-A generator iterating over [ModuleRecord](#modulerecord) entries.
+[ModuleRecord](#modulerecord) entries.
 
 #### See also
 

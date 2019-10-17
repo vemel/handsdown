@@ -158,8 +158,8 @@ class ModuleRecordList:
         """
         Iterate over all added `ModuleRecord` entries.
 
-        Returns:
-            A generator iterating over `ModuleRecord` entries.
+        Yields:
+            `ModuleRecord` entries.
         """
         for obj in self.data:
             yield obj

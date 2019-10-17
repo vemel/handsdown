@@ -318,8 +318,8 @@ class Loader:
         Arguments:
             module_record -- `ModuleRecord` instance.
 
-        Returns:
-            A generator that yields `ModuleObjectRecord` instances.
+        Yields:
+            New `ModuleObjectRecord` instances.
         """
         import_string = module_record.import_string
         inspect_module = module_record.module

@@ -74,9 +74,9 @@ def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
 Find all matching `Path` objects respecting `include` and
 `exclude` patterns.
 
-#### Returns
+#### Yields
 
-A genertor of matching `Path` objects.
+Matching `Path` objects.
 
 ### PathFinder().include
 

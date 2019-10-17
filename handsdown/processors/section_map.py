@@ -1,6 +1,7 @@
 from collections import UserDict
 from dataclasses import dataclass
-from typing import Text, List
+from typing import Text, List, Generator
+
 from handsdown.indent_trimmer import IndentTrimmer
 
 
@@ -15,6 +16,16 @@ class SectionBlock:
 
     lines: List[Text]
 
+    def render(self) -> Text:
+        """
+        Render trimmed block lines.
+
+        Returns:
+            Block lines as a text.
+        """
+        lines = IndentTrimmer.trim_lines(self.lines)
+        return "\n".join(lines)
+
 
 @dataclass
 class Section:
@@ -28,6 +39,18 @@ class Section:
 
     title: Text
     blocks: List[SectionBlock]
+
+    def render(self) -> Text:
+        """
+        Render section content as a text.
+
+        Returns:
+            Section lines as a text.
+        """
+        lines = []
+        for block in self.blocks:
+            lines.append(block.render())
+        return "\n\n".join(lines)
 
 
 class SectionMap(UserDict):
@@ -86,24 +109,13 @@ class SectionMap(UserDict):
         while lines and not lines[-1].strip():
             lines.pop()
 
-    def render(self, header_level: int) -> Text:
+    @property
+    def sections(self) -> Generator[Section, None, None]:
         """
-        Render sections to a string.
+        List `Section` objects.
 
-        Arguments:
-            header_level -- Level of section title header.
-
-        Returns:
-            A markdown string.
+        Yields:
+            `Section` objects in order of appearance.
         """
-        lines = []
-        header = "#" * header_level
         for section in self.values():
-            if section.title:
-                lines.append(f"{header} {section.title}")
-
-            for block in section.blocks:
-                block_lines = IndentTrimmer.trim_lines(block.lines)
-                lines.append("\n".join(block_lines))
-
-        return "\n\n".join(lines)
+            yield section
