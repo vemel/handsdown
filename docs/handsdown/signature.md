@@ -1,8 +1,8 @@
 # Signature
 
-> Auto-generated documentation for [handsdown.signature](../handsdown/signature.py) module.
+> Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module.
 
-- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / Signature
+- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Signature
   - [Config](#config)
   - [ProxyDefaultValue](#proxydefaultvalue)
   - [ProxyParameter](#proxyparameter)
@@ -12,7 +12,7 @@
 
 ## Config
 
-[🔍 find in source code](../handsdown/signature.py#l10)
+[🔍 find in source code](../../handsdown/signature.py#l10)
 
 ```python
 class Config(*args, **kwargs)
@@ -20,7 +20,7 @@ class Config(*args, **kwargs)
 
 ## ProxyDefaultValue
 
-[🔍 find in source code](../handsdown/signature.py#l15)
+[🔍 find in source code](../../handsdown/signature.py#l15)
 
 ```python
 class ProxyDefaultValue(original: Type)
@@ -34,7 +34,7 @@ Proxy class to represent function parameter default value in signature
 
 ## ProxyParameter
 
-[🔍 find in source code](../handsdown/signature.py#l39)
+[🔍 find in source code](../../handsdown/signature.py#l39)
 
 ```python
 class ProxyParameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
@@ -44,7 +44,7 @@ Helper class to represent function parameters in signature
 
 ### ProxyParameter.create
 
-[🔍 find in source code](../handsdown/signature.py#l57)
+[🔍 find in source code](../../handsdown/signature.py#l57)
 
 ```python
 def create(
@@ -66,7 +66,7 @@ Create [ProxyParameter](#proxyparameter) for original `inspect.Parameter`
 
 ## SignatureBuilder
 
-[🔍 find in source code](../handsdown/signature.py#l78)
+[🔍 find in source code](../../handsdown/signature.py#l78)
 
 ```python
 class SignatureBuilder(obj: Any)
@@ -81,7 +81,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](../handsdown/signature.py#l132)
+[🔍 find in source code](../../handsdown/signature.py#l132)
 
 ```python
 def build() -> str

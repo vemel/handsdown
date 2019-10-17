@@ -1,14 +1,14 @@
 # Utils
 
-> Auto-generated documentation for [handsdown.utils](../handsdown/utils.py) module.
+> Auto-generated documentation for [handsdown.utils](../../handsdown/utils.py) module.
 
-- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / Utils
+- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 
 ## OSEnvironMock
 
-[🔍 find in source code](../handsdown/utils.py#l5)
+[🔍 find in source code](../../handsdown/utils.py#l5)
 
 ```python
 class OSEnvironMock(*args, **kwargs)
@@ -18,7 +18,7 @@ Mock for `os.environ` that returns `env` string isntead of undefined variables.
 
 ## get_title_from_path_part
 
-[🔍 find in source code](../handsdown/utils.py#l14)
+[🔍 find in source code](../../handsdown/utils.py#l14)
 
 ```python
 def get_title_from_path_part(path_part: str) -> str

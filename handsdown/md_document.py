@@ -211,6 +211,7 @@ class MDDocument:
         Write MD content to `path`.
         """
         content = self._build_content()
+        self._path.parent.mkdir(exist_ok=True)
         self._path.write_text(content)
 
     @property

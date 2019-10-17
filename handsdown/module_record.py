@@ -13,7 +13,7 @@ class ModuleObjectRecord:
     Arguments:
         source_path -- Absolute import source path.
         source_line_number -- Line number of object definition.
-        output_file_name -- MD file name for this module.
+        output_path -- Path to output MD file.
         object -- Imported module object.
         import_string -- Module import string.
         level -- 0 for classes and functions, 1 for methods.
@@ -26,7 +26,7 @@ class ModuleObjectRecord:
 
     source_path: Path
     source_line_number: int
-    output_file_name: Text
+    output_path: Text
     object: Any
     import_string: Text
     level: int
@@ -44,7 +44,7 @@ class ModuleRecord:
 
     Arguments:
         source_path -- Absolute import source path.
-        output_file_name -- MD file name for this module.
+        output_path -- Path to output MD file.
         module -- Imported module.
         title -- Human readable module title.
         import_string -- Module import string.
@@ -53,7 +53,7 @@ class ModuleRecord:
     """
 
     source_path: Path
-    output_file_name: Text
+    output_path: Text
     module: Any
     title: Text
     import_string: Text
@@ -132,14 +132,14 @@ class ModuleRecordList:
         """
         return self.import_string_map.get(import_string)
 
-    def get_output_file_names(self) -> Set[Text]:
+    def get_output_paths(self) -> Set[Text]:
         """
         Get all output MD file names.
 
         Returns:
             A set of output names as strings.
         """
-        return {i.output_file_name for i in self}
+        return {i.output_path for i in self}
 
     def get_package_names(self) -> Set[Text]:
         """

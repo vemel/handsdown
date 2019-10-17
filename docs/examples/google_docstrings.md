@@ -1,8 +1,8 @@
 # Google docstrings examples
 
-> Auto-generated documentation for [examples.google_docstrings](../examples/google_docstrings.py) module.
+> Auto-generated documentation for [examples.google_docstrings](../../examples/google_docstrings.py) module.
 
-- [Handsdown](README.md#handsdown) / [Examples](examples_index.md#examples) / Google docstrings examples
+- [Handsdown](../README.md#handsdown) / [Examples](#examples) / Google docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)
@@ -15,7 +15,7 @@
 
 ## ClassExample
 
-[🔍 find in source code](../examples/google_docstrings.py#l11)
+[🔍 find in source code](../../examples/google_docstrings.py#l11)
 
 ```python
 class ClassExample(*args, **kwargs)
@@ -30,7 +30,7 @@ Google-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](../examples/google_docstrings.py#l20)
+[🔍 find in source code](../../examples/google_docstrings.py#l20)
 
 ```python
 def method_example(text: str = 'hello') -> int
@@ -74,7 +74,7 @@ to use the function
 
 ## function_example
 
-[🔍 find in source code](../examples/google_docstrings.py#l54)
+[🔍 find in source code](../../examples/google_docstrings.py#l54)
 
 ```python
 def function_example(arg1, arg2, arg3=None)
@@ -114,7 +114,7 @@ print result
 
 ## function_with_pep484_type_annotations
 
-[🔍 find in source code](../examples/google_docstrings.py#l85)
+[🔍 find in source code](../../examples/google_docstrings.py#l85)
 
 ```python
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool

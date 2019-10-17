@@ -13,6 +13,7 @@ from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import OSEnvironMock
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.utils import get_title_from_path_part
+from handsdown.path_finder import PathFinder
 
 
 class LoaderError(Exception):
@@ -31,14 +32,20 @@ class Loader:
         my_module_utils = loader.import_module('my_module.utils')
 
     Arguments:
-        import_paths -- List of import paths for `import_module` lookup.
+        root_path -- Root path of the project.
+        output_path -- Docs output path.
+        logger -- Logger instance.
     """
 
     DJANGO_SETTINGS_ENV_VAR = "DJANGO_SETTINGS_MODULE"
 
-    def __init__(self, root_path: Path, logger: logging.Logger) -> None:
+    def __init__(
+        self, root_path: Path, output_path: Path, logger: logging.Logger
+    ) -> None:
         self._logger = logger
         self._root_path = root_path
+        self._root_path_finder = PathFinder(self._root_path / "_")
+        self._output_path = output_path
         self._sys_path_dirty = False
         self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
         self._type_checking_patch = patch("typing.TYPE_CHECKING", True)
@@ -64,19 +71,14 @@ class Loader:
             )
             self._setup_django()
 
-    def get_md_name(self, path: Path) -> Text:
-        relative_path = path.relative_to(self._root_path)
-        name_parts = []
-        for part in relative_path.parts:
-            if part == "__init__.py":
-                part = "index"
-            stem = part.split(".")[0]
-            name_parts.append(stem)
+    def _get_output_path(self, source_path: Path) -> Text:
+        relative_source_path = self._root_path_finder.relative(source_path)
+        if relative_source_path.stem == "__init__":
+            relative_source_path = relative_source_path.parent / "index"
 
-        if not name_parts:
-            return "stub.md"
-
-        return f"{'_'.join(name_parts)}.md"
+        file_name = f"{relative_source_path.stem}.md"
+        relative_output_path = relative_source_path.parent / file_name
+        return self._output_path / relative_output_path
 
     def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
         """
@@ -98,7 +100,6 @@ class Loader:
             return None
 
         file_import = self.get_import_string(source_path)
-        output_file_name = self.get_md_name(source_path)
         main_class_lookup_name = source_path.stem.replace("_", "")
 
         try:
@@ -110,6 +111,7 @@ class Loader:
         docstring = self._get_object_docstring(inspect_module)
         if docstring:
             docstring_parts.append(docstring)
+
         if source_path.name == "__init__.py":
             readme_md_path = source_path.parent / "README.md"
             if readme_md_path.exists():
@@ -119,7 +121,7 @@ class Loader:
             module=inspect_module,
             title=get_title_from_path_part(file_import.split(".")[-1]),
             docstring="\n\n".join(docstring_parts),
-            output_file_name=output_file_name,
+            output_path=self._get_output_path(source_path),
             source_path=source_path,
             import_string=file_import,
             objects=[],
@@ -363,7 +365,6 @@ class Loader:
             except ValueError:
                 continue
 
-            output_file_name = self.get_md_name(source_path)
             is_related = source_path != module_record.source_path
 
             yield ModuleObjectRecord(
@@ -373,7 +374,7 @@ class Loader:
                 docstring=self._get_object_docstring(inspect_object),
                 title=object_name,
                 source_path=source_path,
-                output_file_name=output_file_name,
+                output_path=self._get_output_path(source_path),
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
@@ -405,7 +406,7 @@ class Loader:
                         docstring=self._get_object_docstring(property_object),
                         title=title,
                         source_path=source_path,
-                        output_file_name=module_record.output_file_name,
+                        output_path=self._get_output_path(source_path),
                         source_line_number=self.get_source_line_number(inspect_object),
                         is_class=False,
                         is_related=False,
@@ -432,10 +433,10 @@ class Loader:
                     docstring=self._get_object_docstring(inspect_method),
                     title=title,
                     source_path=source_path,
-                    output_file_name=module_record.output_file_name,
+                    output_path=self._get_output_path(source_path),
                     source_line_number=self.get_source_line_number(inspect_method),
                     is_class=False,
-                    is_related=is_related,
+                    is_related=False,
                     signature=self._get_object_signature(inspect_method),
                 )
 

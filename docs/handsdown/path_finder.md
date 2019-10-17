@@ -1,8 +1,8 @@
 # PathFinder
 
-> Auto-generated documentation for [handsdown.path_finder](../handsdown/path_finder.py) module.
+> Auto-generated documentation for [handsdown.path_finder](../../handsdown/path_finder.py) module.
 
-- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / PathFinder
+- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().glob](#pathfinderglob)
@@ -11,7 +11,7 @@
 
 ## PathFinder
 
-[🔍 find in source code](../handsdown/path_finder.py#l12)
+[🔍 find in source code](../../handsdown/path_finder.py#l12)
 
 ```python
 class PathFinder(root: pathlib.Path)
@@ -40,7 +40,7 @@ path_finder.exclude('*new*').list('*.txt')
 
 ### PathFinder().exclude
 
-[🔍 find in source code](../handsdown/path_finder.py#l66)
+[🔍 find in source code](../../handsdown/path_finder.py#l66)
 
 ```python
 def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -64,7 +64,7 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[🔍 find in source code](../handsdown/path_finder.py#l108)
+[🔍 find in source code](../../handsdown/path_finder.py#l108)
 
 ```python
 def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
@@ -79,7 +79,7 @@ A genertor of matching `Path` objects.
 
 ### PathFinder().include
 
-[🔍 find in source code](../handsdown/path_finder.py#l46)
+[🔍 find in source code](../../handsdown/path_finder.py#l46)
 
 ```python
 def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
@@ -103,7 +103,7 @@ A copy of itself.
 
 ### PathFinder().relative
 
-[🔍 find in source code](../handsdown/path_finder.py#l125)
+[🔍 find in source code](../../handsdown/path_finder.py#l125)
 
 ```python
 def relative(target: pathlib.Path) -> pathlib.Path

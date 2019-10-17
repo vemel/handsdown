@@ -1,8 +1,8 @@
 # Generator
 
-> Auto-generated documentation for [handsdown.generator](../handsdown/generator.py) module.
+> Auto-generated documentation for [handsdown.generator](../../handsdown/generator.py) module.
 
-- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / Generator
+- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / Generator
   - [Generator](#generator)
     - [Generator()._generate_index](#generator_generate_index)
     - [Generator()._get_formatted_docstring](#generator_get_formatted_docstring)
@@ -14,7 +14,7 @@
 
 ## Generator
 
-[🔍 find in source code](../handsdown/generator.py#l21)
+[🔍 find in source code](../../handsdown/generator.py#l21)
 
 ```python
 class Generator(
@@ -38,7 +38,7 @@ Main handsdown doc generator.
 - `logger` - Logger instance.
 - `docstring_processor` - Docstring converter to Markdown.
 - `loader` - Loader for python modules.
-- `raise_errors` - Raise [LoaderError](handsdown_loader.md#loadererror) instead of silencing in.
+- `raise_errors` - Raise [LoaderError](loader.md#loadererror) instead of silencing in.
 - `ignore_unknown_errors` - Continue on any error.
 
 - `LOGGER_NAME` - Name of logger: `handsdown`
@@ -47,12 +47,12 @@ Main handsdown doc generator.
 
 #### See also
 
-- [BaseDocstringProcessor](handsdown_processors_base.md#basedocstringprocessor)
-- [Loader](handsdown_loader.md#loader)
+- [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
+- [Loader](loader.md#loader)
 
 ### Generator()._generate_index
 
-[🔍 find in source code](../handsdown/generator.py#l399)
+[🔍 find in source code](../../handsdown/generator.py#l402)
 
 ```python
 def _generate_index() -> None
@@ -62,7 +62,7 @@ Generate new `<output>/README.md` with ToC of all project modules.
 
 ### Generator()._get_formatted_docstring
 
-[🔍 find in source code](../handsdown/generator.py#l345)
+[🔍 find in source code](../../handsdown/generator.py#l349)
 
 ```python
 def _get_formatted_docstring(
@@ -73,7 +73,7 @@ def _get_formatted_docstring(
 ```
 
 Get object docstring and convert it to a valid markdown using
-`[BaseDocstringProcessor](handsdown_processors_base.md#basedocstringprocessor)`.
+`[BaseDocstringProcessor](processors/base.md#basedocstringprocessor)`.
 
 #### Arguments
 
@@ -87,12 +87,12 @@ A module docstring with valid markdown.
 
 #### See also
 
-- [ModuleRecord](handsdown_module_record.md#modulerecord)
-- [MDDocument](handsdown_md_document.md#mddocument)
+- [ModuleRecord](module_record.md#modulerecord)
+- [MDDocument](md_document.md#mddocument)
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](../handsdown/generator.py#l103)
+[🔍 find in source code](../../handsdown/generator.py#l107)
 
 ```python
 def cleanup_old_docs() -> None
@@ -102,7 +102,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](../handsdown/generator.py#l123)
+[🔍 find in source code](../../handsdown/generator.py#l138)
 
 ```python
 def generate_doc(source_path: pathlib.Path) -> None
@@ -120,7 +120,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](../handsdown/generator.py#l236)
+[🔍 find in source code](../../handsdown/generator.py#l246)
 
 ```python
 def generate_docs() -> None
@@ -130,7 +130,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](../handsdown/generator.py#l253)
+[🔍 find in source code](../../handsdown/generator.py#l261)
 
 ```python
 def generate_index() -> None
@@ -141,7 +141,7 @@ contains a Tree of all modules in the project.
 
 ## GeneratorError
 
-[🔍 find in source code](../handsdown/generator.py#l15)
+[🔍 find in source code](../../handsdown/generator.py#l15)
 
 ```python
 class GeneratorError(*args, **kwargs)

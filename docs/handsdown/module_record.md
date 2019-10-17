@@ -1,8 +1,8 @@
 # ModuleRecord
 
-> Auto-generated documentation for [handsdown.module_record](../handsdown/module_record.py) module.
+> Auto-generated documentation for [handsdown.module_record](../../handsdown/module_record.py) module.
 
-- [Handsdown](README.md#handsdown) / [Handsdown](handsdown_index.md#handsdown) / ModuleRecord
+- [Handsdown](../README.md#handsdown) / [Handsdown](#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)
@@ -11,18 +11,18 @@
     - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
     - [ModuleRecordList().add](#modulerecordlistadd)
     - [ModuleRecordList().find_object](#modulerecordlistfind_object)
-    - [ModuleRecordList().get_output_file_names](#modulerecordlistget_output_file_names)
+    - [ModuleRecordList().get_output_paths](#modulerecordlistget_output_paths)
     - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
 
 ## ModuleObjectRecord
 
-[🔍 find in source code](../handsdown/module_record.py#l9)
+[🔍 find in source code](../../handsdown/module_record.py#l9)
 
 ```python
 class ModuleObjectRecord(
     source_path: pathlib.Path,
     source_line_number: int,
-    output_file_name: str,
+    output_path: str,
     object: Any,
     import_string: str,
     level: int,
@@ -40,7 +40,7 @@ Dataclass for an imported module object.
 
 - `source_path` - Absolute import source path.
 - `source_line_number` - Line number of object definition.
-- `output_file_name` - MD file name for this module.
+- `output_path` - Path to output MD file.
 - `object` - Imported module object.
 - `import_string` - Module import string.
 - `level` - 0 for classes and functions, 1 for methods.
@@ -52,12 +52,12 @@ Dataclass for an imported module object.
 
 ## ModuleRecord
 
-[🔍 find in source code](../handsdown/module_record.py#l41)
+[🔍 find in source code](../../handsdown/module_record.py#l41)
 
 ```python
 class ModuleRecord(
     source_path: pathlib.Path,
-    output_file_name: str,
+    output_path: str,
     module: Any,
     title: str,
     import_string: str,
@@ -71,7 +71,7 @@ Dataclass for an imported module.
 #### Arguments
 
 - `source_path` - Absolute import source path.
-- `output_file_name` - MD file name for this module.
+- `output_path` - Path to output MD file.
 - `module` - Imported module.
 - `title` - Human readable module title.
 - `import_string` - Module import string.
@@ -80,7 +80,7 @@ Dataclass for an imported module.
 
 ### ModuleRecord().get_import_string_parts
 
-[🔍 find in source code](../handsdown/module_record.py#l63)
+[🔍 find in source code](../../handsdown/module_record.py#l63)
 
 ```python
 def get_import_string_parts() -> List[str]
@@ -107,7 +107,7 @@ A list of import string parts as strings.
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](../handsdown/module_record.py#l83)
+[🔍 find in source code](../../handsdown/module_record.py#l83)
 
 ```python
 def get_title_parts() -> List[str]
@@ -135,7 +135,7 @@ A list of title parts as strings.
 
 ## ModuleRecordList
 
-[🔍 find in source code](../handsdown/module_record.py#l114)
+[🔍 find in source code](../../handsdown/module_record.py#l114)
 
 ```python
 class ModuleRecordList()
@@ -145,7 +145,7 @@ Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[🔍 find in source code](../handsdown/module_record.py#l166)
+[🔍 find in source code](../../handsdown/module_record.py#l166)
 
 ```python
 def __iter__() -> Generator[handsdown.module_record.ModuleRecord, NoneType, NoneType]
@@ -163,7 +163,7 @@ A generator iterating over [ModuleRecord](#modulerecord) entries.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](../handsdown/module_record.py#l153)
+[🔍 find in source code](../../handsdown/module_record.py#l153)
 
 ```python
 def add(module_record: handsdown.module_record.ModuleRecord) -> None
@@ -181,7 +181,7 @@ Add new [ModuleRecord](#modulerecord).
 
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](../handsdown/module_record.py#l123)
+[🔍 find in source code](../../handsdown/module_record.py#l123)
 
 ```python
 def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
@@ -201,12 +201,12 @@ Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
 - [ModuleObjectRecord](#moduleobjectrecord)
 
-### ModuleRecordList().get_output_file_names
+### ModuleRecordList().get_output_paths
 
-[🔍 find in source code](../handsdown/module_record.py#l135)
+[🔍 find in source code](../../handsdown/module_record.py#l135)
 
 ```python
-def get_output_file_names() -> Set[str]
+def get_output_paths() -> Set[str]
 ```
 
 Get all output MD file names.
@@ -217,7 +217,7 @@ A set of output names as strings.
 
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](../handsdown/module_record.py#l144)
+[🔍 find in source code](../../handsdown/module_record.py#l144)
 
 ```python
 def get_package_names() -> Set[str]
