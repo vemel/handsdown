@@ -11,6 +11,7 @@ Python docstring-based documentation generator for lazy perfectionists.
 
 - [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)
   - [🔬 Features](#%f0%9f%94%ac-features)
+  - [🤔 Do you need handsdown?](#%f0%9f%a4%94-do-you-need-handsdown)
   - [🐏 Examples](#%f0%9f%90%8f-examples)
   - [🎉 Usage](#%f0%9f%8e%89-usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
@@ -21,17 +22,41 @@ Python docstring-based documentation generator for lazy perfectionists.
 
 ## 🔬 Features
 
-- 👓 [PEP 257](https://www.python.org/dev/peps/pep-0257/), [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) and [reStructuredText](https://www.python.org/dev/peps/pep-0287/) docstrings support. All of them are converted to a valid markdown.
-- 🐍 Works with Django and Flask apps
-- 🐈 Github-friendly. Use your local markdown viewer or open docs
-  [right on Github](https://github.com/vemel/handsdown/blob/master/docs/README.md)
-- 📚 Signatures for every class, function and method.
+- 👓 [PEP 257](https://www.python.org/dev/peps/pep-0257/),
+  [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+  and [reStructuredText](https://www.python.org/dev/peps/pep-0287/)
+  docstrings support. All of them are converted to a valid markdown.
+- 🐍 Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
+- 🐈 GitHub-friendly. Use your local markdown viewer, open docs
+  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or deploy it on
+  [GitHub Pages](https://vemel.github.io/handsdown/)!
+- 📚 Signatures for every class, function, property and method.
 - 🚀 Support for type annotations. Even for the ones from the `__future__`!
 - 📦 Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
 - 🔎 Gather all scattered `README.md` in submodules to one place
-- 🚧 Links to source code from every doc section.
+- 🚧 Find related source code from every doc section.
 - #️⃣ Make links by just adding `module.import.String` to docs. 
-- 💕 Do you love type annotations? Well, you get auto-discovery of related modules for free!
+- 💕 Do you use type annotations? Well, you get auto-discovery of related modules for free!
+
+## 🤔 Do you need handsdown?
+
+You definitely *do* if you:
+
+- prefer to automate documentation builds
+- work with a team and plan to simplify knowledge sharing
+- want to show your project without navigating through a source code
+- build `Django` or `Flask` applications, and even if you do not
+- are proud of your project and are not afraid to show it
+- love Open Source
+
+And probably *do not* if you:
+
+- plan to build html pages locally (Look at
+- [pydocmd](https://pypi.org/project/pydoc-markdown/), they are doing a great job!)
+- not very into docstrings and type annotations
+- like to abstract a documentation away from the way things really are
+- use [Pandas docstrings](https://pandas.pydata.org/pandas-docs/stable/development/contributing_docstring.html)
+  as they are not supported yet
 
 ## 🐏 Examples
 
@@ -46,7 +71,8 @@ with different docstrings format.
 ### 💻 From command line
 
 Just go to your favorite project that has lots of docstrings but missing
-auto-generated docs and let `handsdown` do the thing.
+auto-generated docs, install dependencies to avoid import errors and let
+`handsdown` do the thing.
 
 ```bash
 cd ~/my/project
@@ -59,6 +85,12 @@ handsdown -o output_dir
 
 # generate docs only for my_module, but no migrations, plz
 handsdown my_module --exclude my_module/migrations
+
+# okay, what about Django?
+# you need to set `DJANGO_SETTINGS_MODULE`
+# and exclude migrations folders as they usually are not very interesting
+export DJANGO_SETTINGS_MODULE="settings" # use your path to settings
+handsdown --exclude */migrations
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
