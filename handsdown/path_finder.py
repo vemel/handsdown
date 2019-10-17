@@ -189,7 +189,9 @@ class PathFinder:
                 continue
 
             if not parent.is_dir():
-                raise PathFinderError(f"{parent} is not a directory")
+                raise PathFinderError(
+                    f"{parent} is not a directory, delete it and restart"
+                )
 
             break
 
