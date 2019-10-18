@@ -46,7 +46,7 @@ You definitely *do* if you:
 - work with a team and plan to simplify knowledge sharing
 - want to show your project without navigating through a source code
 - build `Django` or `Flask` applications, and even if you do not
-- are proud of your project and are not afraid to show it
+- are proud of your project and not afraid to show it
 - love Open Source
 
 And probably *do not* if you:
