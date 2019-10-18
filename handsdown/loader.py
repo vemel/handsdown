@@ -310,10 +310,6 @@ class Loader:
     @staticmethod
     def _get_parent_inspect_predicate(parent: Any) -> Callable[[Any], bool]:
         def predicate(obj: Any) -> bool:
-            # skip attributes without docstrings
-            if not obj.__doc__:
-                return False
-
             # skip nameless attributes
             if not getattr(obj, "__name__", None):
                 return False
