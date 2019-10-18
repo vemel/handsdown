@@ -11,7 +11,7 @@
 
 ## abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L32)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L30)
 
 ```python
 def abs_path(path_str: str) -> pathlib.Path
@@ -29,7 +29,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L45)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L43)
 
 ```python
 def dir_abs_path(path_str: str) -> pathlib.Path
@@ -51,7 +51,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L64)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L62)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> pathlib.Path
@@ -73,7 +73,7 @@ An absolute path.
 
 ## get_cli_parser
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L85)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L83)
 
 ```python
 def get_cli_parser() -> argparse.ArgumentParser
@@ -87,7 +87,7 @@ An `argparse.ArgumentParser` instance.
 
 ## git_repo
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L13)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L10)
 
 ```python
 def git_repo(git_repo_url: str) -> str

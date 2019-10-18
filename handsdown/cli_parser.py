@@ -7,9 +7,6 @@ from pathlib import Path
 from typing import Text
 
 
-_git_repo_re = re.compile(r"git@github\.com:(?P<user>\S+)/(?P<repo>\S+)\.git")
-
-
 def git_repo(git_repo_url: Text) -> Text:
     """
     Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
@@ -20,7 +17,8 @@ def git_repo(git_repo_url: Text) -> Text:
     Returns:
         A GitHub URL.
     """
-    match = _git_repo_re.match(git_repo_url)
+    git_repo_re = re.compile(r"git@github\.com:(?P<user>\S+)/(?P<repo>\S+)\.git")
+    match = git_repo_re.match(git_repo_url)
     if match:
         git_repo_url = "https://github.com/{user}/{repo}/blob/master/".format(
             **match.groupdict()
@@ -57,7 +55,7 @@ def dir_abs_path(path_str: Text) -> Path:
     """
     path = Path(path_str).absolute()
     if path.exists() and not path.is_dir():
-        raise argparse.ArgumentTypeError(f"Path {path}  is not a directory")
+        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
 
 

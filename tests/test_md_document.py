@@ -122,6 +122,7 @@ class TestMDDocument(unittest.TestCase):
         md_doc = MDDocument(Path("/test.md"))
         md_doc.append("subtitle")
         md_doc.append("test")
+        md_doc.append("")
         self.assertEqual(md_doc.subtitle, "subtitle")
         self.assertEqual(md_doc.sections[0], "test")
 

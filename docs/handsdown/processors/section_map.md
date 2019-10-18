@@ -6,7 +6,6 @@ Module for splitting docstring into `Section` groups.
 
 - [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
   - [Section](#section)
-    - [Section().render](#sectionrender)
   - [SectionBlock](#sectionblock)
     - [SectionBlock().render](#sectionblockrender)
   - [SectionMap](#sectionmap)
@@ -29,20 +28,6 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 
 - `title` - Section title.
 - `blocks` - List of line blocks.
-
-### Section().render
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L47)
-
-```python
-def render() -> str
-```
-
-Render section content as a text.
-
-#### Returns
-
-Section lines as a text.
 
 ## SectionBlock
 
@@ -74,7 +59,7 @@ Block lines as a text.
 
 ## SectionMap
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L60)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L48)
 
 ```python
 class SectionMap(*args, **kwargs)
@@ -88,14 +73,14 @@ Value is a related [Section](#section) instance.
 
 ### SectionMap().sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L60)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L48)
 
 ```python
 #property getter
 def sections() -> Generator[handsdown.processors.section_map.Section, NoneType, NoneType]
 ```
 
-List [Section](#section) objects.
+Iterate over existing [Section](#section) objects.
 
 #### Yields
 
@@ -107,13 +92,14 @@ List [Section](#section) objects.
 
 ### SectionMap().add_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L90)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L78)
 
 ```python
 def add_block(section_name: str) -> None
 ```
 
 Add new [SectionBlock](#sectionblock) to section `section_name`.
+If [Section](#section) does not exist - it is not created.
 
 #### Arguments
 
@@ -121,7 +107,7 @@ Add new [SectionBlock](#sectionblock) to section `section_name`.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L69)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L57)
 
 ```python
 def add_line(section_name: str, line: str) -> None
@@ -137,13 +123,14 @@ If line and section are empty - section is not created.
 
 ### SectionMap().trim_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L102)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L91)
 
 ```python
 def trim_block(section_name: str) -> None
 ```
 
 Delete last empty lines from the last [SectionBlock](#sectionblock).
+If [Section](#section) does not exist - it is not created.
 
 #### Arguments
 

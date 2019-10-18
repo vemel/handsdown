@@ -44,18 +44,6 @@ class Section:
     title: Text
     blocks: List[SectionBlock]
 
-    def render(self) -> Text:
-        """
-        Render section content as a text.
-
-        Returns:
-            Section lines as a text.
-        """
-        lines = []
-        for block in self.blocks:
-            lines.append(block.render())
-        return "\n\n".join(lines)
-
 
 class SectionMap(UserDict):
     """
@@ -90,18 +78,20 @@ class SectionMap(UserDict):
     def add_block(self, section_name: Text) -> None:
         """
         Add new `SectionBlock` to section `section_name`.
+        If `Section` does not exist - it is not created.
 
         Arguments:
             section_name -- Target section title
         """
         if section_name not in self:
-            self[section_name] = Section(title=section_name, blocks=[])
+            return
 
         self[section_name].blocks.append(SectionBlock(lines=[]))
 
     def trim_block(self, section_name: Text) -> None:
         """
         Delete last empty lines from the last `SectionBlock`.
+        If `Section` does not exist - it is not created.
 
         Arguments:
             section_name - Target section title.
@@ -116,7 +106,7 @@ class SectionMap(UserDict):
     @property
     def sections(self) -> Generator[Section, None, None]:
         """
-        List `Section` objects.
+        Iterate over existing `Section` objects.
 
         Yields:
             `Section` objects in order of appearance.
