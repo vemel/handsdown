@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from pathlib import Path
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
+
 from setuptools import setup
 from setuptools import find_packages
 import __version__ as version_data
@@ -22,6 +26,9 @@ def get_long_description():
 
 long_description = get_long_description()
 version = version_data.__version__
+install_requires = [
+    i for i in Path(root_path / "requirements.txt").read_text().split("\n") if i
+]
 
 
 setup(
@@ -44,7 +51,7 @@ setup(
             "examples.*",
         ]
     ),
-    install_requires=[],
+    install_requires=install_requires,
     extras_require={},
     include_package_data=False,
     zip_safe=True,

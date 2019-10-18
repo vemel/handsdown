@@ -1,6 +1,6 @@
 # Signature
 
-> Auto-generated documentation for [handsdown.signature](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py) module..
+> Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module..
 
 Module for function signature generation.
 
@@ -14,7 +14,7 @@ Module for function signature generation.
 
 ## Config
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L14)
+[🔍 find in source code](../../handsdown/signature.py#L14)
 
 ```python
 class Config(*args, **kwargs)
@@ -28,7 +28,7 @@ Attrubutes:
 
 ## DefaultValue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L27)
+[🔍 find in source code](../../handsdown/signature.py#L27)
 
 ```python
 class DefaultValue(original: Type)
@@ -42,17 +42,17 @@ Represent function parameter default value in signature
 
 ## Parameter
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L51)
+[🔍 find in source code](../../handsdown/signature.py#L53)
 
 ```python
-class Parameter(type_hint: Union[Type, NoneType], *args: Any, **kwargs: Any)
+class Parameter(name: str, kind: Any, default: Type, annotation: Union[Type, NoneType])
 ```
 
 Represent function parameters in signature
 
 ### Parameter.create
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L92)
+[🔍 find in source code](../../handsdown/signature.py#L97)
 
 ```python
 def create(
@@ -74,7 +74,7 @@ Create `ProxyParameter` for original `inspect.Parameter`
 
 ## SignatureBuilder
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L113)
+[🔍 find in source code](../../handsdown/signature.py#L116)
 
 ```python
 class SignatureBuilder(obj: Any)
@@ -89,7 +89,7 @@ to beautify result by splitting lines.
 
 ### SignatureBuilder().build
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py#L167)
+[🔍 find in source code](../../handsdown/signature.py#L173)
 
 ```python
 def build() -> str

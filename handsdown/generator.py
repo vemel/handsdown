@@ -1,19 +1,28 @@
+# -*- coding: future_fstrings -*-
 """
 Main handsdown documentation generator.
 """
 
 import re
 import logging
-from pathlib import Path
-from typing import Iterable, Text, List, Optional, Union
+
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
+
+from typing import Iterable, Text, List, Optional, Union, TYPE_CHECKING
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
-from handsdown.processors.base import BaseDocstringProcessor
-from handsdown.module_record import ModuleRecord, ModuleObjectRecord, ModuleRecordList
+from handsdown.module_record import ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import get_title_from_path_part
 from handsdown.path_finder import PathFinder
+
+if TYPE_CHECKING:
+    from handsdown.processors.base import BaseDocstringProcessor
+    from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 
 
 class GeneratorError(Exception):
@@ -54,16 +63,17 @@ class Generator:
 
     def __init__(
         self,
-        input_path: Path,
-        output_path: Path,
-        source_paths: Iterable[Path],
-        logger: Optional[logging.Logger] = None,
-        docstring_processor: Optional[BaseDocstringProcessor] = None,
-        loader: Optional[Loader] = None,
-        raise_errors: bool = False,
-        source_code_url: Optional[Text] = None,
-        toc_depth: int = 3,
-    ) -> None:
+        input_path,  # type: Path
+        output_path,  # type: Path
+        source_paths,  # type: Iterable[Path]
+        logger=None,  # type: Optional[logging.Logger]
+        docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
+        loader=None,  # type: Optional[Loader]
+        raise_errors=False,  # type: bool
+        source_code_url=None,  # type: Optional[Text]
+        toc_depth=3,  # type: int
+    ):
+        # type: (...) -> None
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
         self._output_path = output_path
@@ -96,7 +106,8 @@ class Generator:
             f"[ \\[]((?:{package_names_re_expr})\\.[^() :,]+)"
         )
 
-    def _build_module_record_list(self) -> ModuleRecordList:
+    def _build_module_record_list(self):
+        # type: () -> ModuleRecordList
         module_record_list = ModuleRecordList()
         for source_path in self._source_paths:
             module_record = None
@@ -115,7 +126,8 @@ class Generator:
 
         return module_record_list
 
-    def cleanup_old_docs(self) -> None:
+    def cleanup_old_docs(self):
+        # type: () -> None
         """
         Remove old docs generated for this module.
         """
@@ -148,7 +160,8 @@ class Generator:
                     f"Deleting orphaned directory {self._root_path_finder.relative(doc_path.parent)}"
                 )
 
-    def generate_doc(self, source_path: Path) -> None:
+    def generate_doc(self, source_path):
+        # type: (Path) -> None
         """
         Generate one module doc at once.
 
@@ -171,9 +184,8 @@ class Generator:
 
         raise GeneratorError(f"Record not found for {source_path.name}")
 
-    def _generate_doc(
-        self, module_record: ModuleRecord, md_document: MDDocument
-    ) -> None:
+    def _generate_doc(self, module_record, md_document):
+        # type: (ModuleRecord, MDDocument) -> None
         self._logger.debug(
             f"Generating doc {self._root_path_finder.relative(md_document.path)}"
             f" for {self._root_path_finder.relative(module_record.source_path)}"
@@ -225,13 +237,12 @@ class Generator:
 
         md_document.toc_section = "\n".join(toc_lines)
 
-    def _build_breadcrumbs_string(
-        self, module_record: ModuleRecord, md_document: MDDocument
-    ) -> Text:
-        breadcrumbs: List[Text] = []
+    def _build_breadcrumbs_string(self, module_record, md_document):
+        # type: (ModuleRecord, MDDocument) -> Text
+        breadcrumbs = []  # type: List[Text]
 
         import_string_parts = module_record.get_import_string_parts()
-        parent_import_parts: List[Text] = []
+        parent_import_parts = []  # type: List[Text]
         for part in import_string_parts[:-1]:
             parent_import_parts.append(part)
             parent_import = ".".join(parent_import_parts)
@@ -260,7 +271,8 @@ class Generator:
 
         return " / ".join(breadcrumbs)
 
-    def generate_docs(self) -> None:
+    def generate_docs(self):
+        # type: () -> None
         """
         Generate all doc files at once.
         """
@@ -275,7 +287,8 @@ class Generator:
                 self._replace_short_links(module_record, md_document)
                 self._replace_full_links(md_document)
 
-    def generate_index(self) -> None:
+    def generate_index(self):
+        # type: () -> None
         """
         Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
         section that contains a Tree of all modules in the project.
@@ -311,9 +324,8 @@ class Generator:
 
         md_document.write()
 
-    def _replace_short_links(
-        self, module_record: ModuleRecord, md_document: MDDocument
-    ) -> None:
+    def _replace_short_links(self, module_record, md_document):
+        # type: (ModuleRecord, MDDocument) -> None
         if not module_record.objects:
             return
 
@@ -339,7 +351,8 @@ class Generator:
                     )
             sections[index] = section
 
-    def _replace_full_links(self, md_document: MDDocument) -> None:
+    def _replace_full_links(self, md_document):
+        # type: (MDDocument) -> None
         sections = md_document.sections
 
         for index, section in enumerate(sections):
@@ -362,9 +375,8 @@ class Generator:
                 )
             sections[index] = section
 
-    def _generate_module_doc_lines(
-        self, module_record: ModuleRecord, md_document: MDDocument
-    ) -> None:
+    def _generate_module_doc_lines(self, module_record, md_document):
+        # type: (ModuleRecord, MDDocument) -> None
         for module_object_record in module_record.objects:
             if module_object_record.is_related:
                 continue
@@ -402,12 +414,8 @@ class Generator:
                 md_document=md_document,
             )
 
-    def _render_docstring(
-        self,
-        module_record: Union[ModuleRecord, ModuleObjectRecord],
-        md_document: MDDocument,
-        signature: Optional[Text] = None,
-    ) -> None:
+    def _render_docstring(self, module_record, md_document, signature=None):
+        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument, Optional[Text]) -> None
         """
         Get object docstring and convert it to a valid markdown using
         `handsdown.processors.base.BaseDocstringProcessor`.
@@ -454,8 +462,9 @@ class Generator:
             for block in section.blocks:
                 md_document.append(block.render())
 
-    def _get_objects_from_signature(self, signature: Text) -> List[ModuleObjectRecord]:
-        result: List[ModuleObjectRecord] = []
+    def _get_objects_from_signature(self, signature):
+        # type: (Text) -> List[ModuleObjectRecord]
+        result = []  # type: List[ModuleObjectRecord]
         for match in re.findall(self._signature_links_re, signature):
             module_object_record = self._module_records.find_object(match)
             if not module_object_record or module_object_record in result:
@@ -465,15 +474,14 @@ class Generator:
 
         return result
 
-    def _build_modules_toc_lines(
-        self, import_string: Text, max_depth: int, md_document: MDDocument
-    ) -> List[Text]:
-        lines: List[Text] = []
-        parts: List[Text] = []
+    def _build_modules_toc_lines(self, import_string, max_depth, md_document):
+        # type: (Text, int, MDDocument) -> List[Text]
+        lines = []  # type: List[Text]
+        parts = []  # type: List[Text]
         if import_string:
             parts = import_string.split(".")
 
-        last_import_string_parts: List[Text] = []
+        last_import_string_parts = []  # type: List[Text]
         for module_record in self._module_records:
             if module_record.import_string == import_string:
                 continue

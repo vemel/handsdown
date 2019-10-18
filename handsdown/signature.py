@@ -1,14 +1,14 @@
+# -*- coding: future_fstrings -*-
 """
 Module for function signature generation.
 """
 
-from __future__ import annotations
-
 import re
 import enum
 import inspect
-from typing import get_type_hints, Text, Type, Optional, Any, Dict
-from types import MappingProxyType
+from typing import Text, Type, Optional, Any, Dict
+
+from pytypes import get_type_hints
 
 
 class Config:
@@ -34,10 +34,12 @@ class DefaultValue:
 
     _hex_code_re = re.compile(r" at 0x[a-f0-9]+")
 
-    def __init__(self, original: Type) -> None:
+    def __init__(self, original):
+        # type: (Type) -> None
         self._original = original
 
-    def __str__(self) -> Text:
+    def __str__(self):
+        # type: () -> Text
         if isinstance(self._original, enum.Enum):
             return f"{self._original.value}"
             # return f'{self._original.__class__.__name__}.{self._original.value}'
@@ -57,15 +59,18 @@ class Parameter(inspect.Parameter):
     _VAR_POSITIONAL = getattr(inspect, "_VAR_POSITIONAL")
     _VAR_KEYWORD = getattr(inspect, "_VAR_KEYWORD")
 
-    def __init__(self, type_hint: Optional[Type], *args: Any, **kwargs: Any) -> None:
-        super(Parameter, self).__init__(*args, **kwargs)
-        self._default: Type = self._default
-        self._name: Text = self._name
-        if type_hint:
-            self._annotation = type_hint
+    def __init__(self, name, kind, default, annotation):
+        # type: (Text, Any, Type, Optional[Type]) -> None
+        super(Parameter, self).__init__(
+            name, kind, default=default, annotation=annotation
+        )
+        self._default = default
+        self._name = name
+        self._annotation = annotation
         self._proxy_default = DefaultValue(self._default)
 
-    def __str__(self) -> Text:
+    def __str__(self):
+        # type: () -> Text
         kind = self.kind
         formatted = self._name
 
@@ -90,9 +95,8 @@ class Parameter(inspect.Parameter):
         return formatted
 
     @classmethod
-    def create(
-        cls, parameter: inspect.Parameter, type_hint: Optional[Type]
-    ) -> Parameter:
+    def create(cls, parameter, type_hint):
+        # type: (inspect.Parameter, Optional[Type]) -> Parameter
         """
         Create `ProxyParameter` for original `inspect.Parameter`
 
@@ -104,8 +108,7 @@ class Parameter(inspect.Parameter):
             name=parameter.name,
             kind=parameter.kind,
             default=parameter.default,
-            annotation=parameter.annotation,
-            type_hint=type_hint,
+            annotation=type_hint or parameter.annotation,
         )
         return obj
 
@@ -119,12 +122,14 @@ class SignatureBuilder:
         obj -- Object to inspect.
     """
 
-    def __init__(self, obj: Any):
+    def __init__(self, obj):
+        # type: (Any) -> None
         self._obj = obj
         self._is_class = inspect.isclass(self._obj)
 
     @staticmethod
-    def _get_type_hints(func: Any) -> Dict[Text, Any]:
+    def _get_type_hints(func):
+        # type: (Any) -> Dict[Text, Any]
         try:
             type_hints = get_type_hints(func)
         except NameError:
@@ -136,35 +141,37 @@ class SignatureBuilder:
         return type_hints
 
     @staticmethod
-    def _enrich_signature(signature: Any, type_hints: Dict[Text, Any]) -> None:
+    def _enrich_signature(signature, type_hints):
+        # type: (Any, Dict[Text, Any]) -> None
         clean_parameters = {}
         for key, value in signature.parameters.items():
             if key == "self":
                 continue
             clean_parameters[key] = Parameter.create(value, type_hints.get(key))
 
-        signature._parameters = MappingProxyType(  # pylint: disable=protected-access
-            clean_parameters
-        )
+        signature._parameters = clean_parameters  # pylint: disable=protected-access
 
-        if isinstance(signature.return_annotation, str) and "return" in type_hints:
+        if "return" in type_hints:
             signature._return_annotation = type_hints[  # pylint: disable=protected-access
                 "return"
             ]
 
-    def _get_obj_name(self) -> Text:
+    def _get_obj_name(self):
+        # type: () -> Text
         if hasattr(self._obj, "__name__"):
             return self._obj.__name__
 
         return f"{type(self._obj).__name__}.__call__"
 
-    def _get_defintion(self) -> Text:
+    def _get_definition(self):
+        # type: () -> Text
         if self._is_class:
             return "class"
 
         return "def"
 
-    def build(self) -> Text:
+    def build(self):
+        # type: () -> Text
         """
         Render signature to string.
 
@@ -184,9 +191,10 @@ class SignatureBuilder:
         self._enrich_signature(signature, type_hints)
         return self._render_signature(signature)
 
-    def _render_signature(self, signature: inspect.Signature) -> Text:
+    def _render_signature(self, signature):
+        # type: (inspect.Signature) -> Text
         name = self._get_obj_name()
-        definition = self._get_defintion()
+        definition = self._get_definition()
 
         Config.BREAK_LINES = False
         signature_repr = f"{signature}"

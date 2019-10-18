@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Text, Set, List, Generator, Dict, Optional
 
 from handsdown.utils import get_title_from_path_part
+from handsdown.signature import SignatureBuilder
 
 
 @dataclass
@@ -38,7 +39,29 @@ class ModuleObjectRecord:
     docstring: Text
     is_class: bool
     is_related: bool
-    signature: Text
+
+    @property
+    def signature(self):
+        # type: () -> Text
+        """
+        Get object signature.
+
+        Returns:
+            A string with object signature.
+        """
+        if isinstance(self.object, property):
+            parts = []
+            if getattr(self.object, "fget", None):
+                parts.append("#property getter")
+                parts.append(SignatureBuilder(self.object.fget).build())
+            if getattr(self.object, "fset", None):
+                if parts:
+                    parts.append("")
+                parts.append("#property setter")
+                parts.append(SignatureBuilder(self.object.fset).build())
+            return "\n".join(parts)
+
+        return SignatureBuilder(self.object).build()
 
 
 @dataclass

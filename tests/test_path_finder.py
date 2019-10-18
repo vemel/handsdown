@@ -1,5 +1,9 @@
 import unittest
-from pathlib import Path
+
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
 
 from handsdown.path_finder import PathFinder, PathFinderError
 

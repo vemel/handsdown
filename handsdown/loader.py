@@ -1,23 +1,30 @@
+# -*- coding: future_fstrings -*-
 """
 Loader for python source code.
 """
 
 import importlib
-from importlib.machinery import ModuleSpec
-from pathlib import Path
+
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
+
 import sys
 import inspect
-import logging
-from unittest.mock import patch, MagicMock
 import os
-from typing import Optional, Text, Any, Callable, Generator
+from typing import Optional, Text, Any, Callable, Generator, TYPE_CHECKING
 
-from handsdown.signature import SignatureBuilder
+from mock import patch, MagicMock
+
 from handsdown.docstring_formatter import DocstringFormatter
 from handsdown.utils import OSEnvironMock
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.utils import get_title_from_path_part
 from handsdown.path_finder import PathFinder
+
+if TYPE_CHECKING:
+    import logging
 
 
 class LoaderError(Exception):
@@ -43,9 +50,8 @@ class Loader:
 
     DJANGO_SETTINGS_ENV_VAR = "DJANGO_SETTINGS_MODULE"
 
-    def __init__(
-        self, root_path: Path, output_path: Path, logger: logging.Logger
-    ) -> None:
+    def __init__(self, root_path, output_path, logger):
+        # type: (Path, Path, logging.Logger) -> None
         self._logger = logger
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
@@ -60,7 +66,8 @@ class Loader:
         )
         self.setup()
 
-    def setup(self) -> None:
+    def setup(self):
+        # type: () -> None
         """
         Setup local frameworks if needed.
 
@@ -75,7 +82,8 @@ class Loader:
             )
             self._setup_django()
 
-    def _get_output_path(self, source_path: Path) -> Path:
+    def _get_output_path(self, source_path):
+        # type: (Path) -> Path
         relative_source_path = self._root_path_finder.relative(source_path)
         if relative_source_path.stem == "__init__":
             relative_source_path = relative_source_path.parent / "index"
@@ -86,7 +94,8 @@ class Loader:
         relative_output_path = relative_source_path.parent / file_name
         return self._output_path / relative_output_path
 
-    def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
+    def get_module_record(self, source_path):
+        # type: (Path) -> Optional[ModuleRecord]
         """
         Build `ModuleRecord` for given `source_path`.
 
@@ -157,7 +166,8 @@ class Loader:
 
         return module_record
 
-    def _setup_django(self) -> None:
+    def _setup_django(self):
+        # type: () -> None
         """
         Initialize Django apps in order to safely import Django models.
         Patches applied during apps initialization:
@@ -182,33 +192,8 @@ class Loader:
         self._sys_path_patch.stop()
         self._logging_config_patch.stop()
 
-    @staticmethod
-    def _get_object_signature(obj: Any) -> Text:
-        """
-        Get class, method or function signature. If object is not callable -
-        returns None.
-
-        Arguments:
-            obj -- Object to inspect.
-
-        Returns:
-            A string with object signature or None.
-        """
-        if isinstance(obj, property):
-            parts = []
-            if getattr(obj, "fget", None):
-                parts.append("#property getter")
-                parts.append(SignatureBuilder(obj.fget).build())
-            if getattr(obj, "fset", None):
-                if parts:
-                    parts.append("")
-                parts.append("#property setter")
-                parts.append(SignatureBuilder(obj.fset).build())
-            return "\n".join(parts)
-
-        return SignatureBuilder(obj).build()
-
-    def _get_object_docstring(self, obj: Any) -> Text:
+    def _get_object_docstring(self, obj):
+        # type: (Any) -> Text
         """
         Get trimmed object docstring or an empty string.
 
@@ -221,7 +206,8 @@ class Loader:
         docstring = self._get_docstring(obj)
         return DocstringFormatter(docstring).render()
 
-    def get_import_string(self, source_path: Path) -> Text:
+    def get_import_string(self, source_path):
+        # type: (Path) -> Text
         """
         Get Python import string for a source `source_path` relative to `root_path`.
 
@@ -250,7 +236,8 @@ class Loader:
 
         return f"{'.'.join(name_parts)}"
 
-    def import_module(self, file_path: Path) -> Any:
+    def import_module(self, file_path):
+        # type: (Path) -> Any
         """
         Import module using `import_paths` list. Clean up all patches afterwards.
 
@@ -281,13 +268,11 @@ class Loader:
         self._logging_logger_patch.stop()
         self._logging_config_patch.stop()
 
-        if module.__spec__ is None:
-            module.__spec__ = ModuleSpec(name="__main__", loader=None, origin=None)
-
         return module
 
     @staticmethod
-    def _inspect_predicate(obj: Any) -> bool:
+    def _inspect_predicate(obj):
+        # type: (Any) -> bool
         # skip built-in objects
         if getattr(obj, "__name__", "type") == "type":
             return False
@@ -310,8 +295,10 @@ class Loader:
         return True
 
     @staticmethod
-    def _get_parent_inspect_predicate(parent: Any) -> Callable[[Any], bool]:
-        def predicate(obj: Any) -> bool:
+    def _get_parent_inspect_predicate(parent):
+        # type: (Any) -> Callable[[Any], bool]
+        def predicate(obj):
+            # type: (Any) -> bool
             # skip nameless attributes
             if not getattr(obj, "__name__", None):
                 return False
@@ -331,9 +318,8 @@ class Loader:
 
         return predicate
 
-    def _discover_module_objects(
-        self, module_record: ModuleRecord
-    ) -> Generator[ModuleObjectRecord, None, None]:
+    def _discover_module_objects(self, module_record):
+        # type: (ModuleRecord) -> Generator[ModuleObjectRecord, None, None]
         """
         Get `ModuleObjectRecord` for every object in a module.
 
@@ -375,10 +361,8 @@ class Loader:
 
             is_related = source_path != module_record.source_path
             docstring = ""
-            signature = ""
             if not is_related:
                 docstring = self._get_object_docstring(inspect_object)
-                signature = self._get_object_signature(inspect_object)
 
             module_object_record = ModuleObjectRecord(
                 import_string=object_name,
@@ -391,19 +375,20 @@ class Loader:
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
-                signature=signature,
             )
             yield module_object_record
 
             if not is_class or is_related:
                 continue
 
-            yield from self._discover_class_properties(module_object_record)
-            yield from self._discover_class_methods(module_object_record)
+            for item in self._discover_class_properties(module_object_record):
+                yield item
 
-    def _discover_class_properties(
-        self, module_object_record: ModuleObjectRecord
-    ) -> Generator[ModuleObjectRecord, None, None]:
+            for item in self._discover_class_methods(module_object_record):
+                yield item
+
+    def _discover_class_properties(self, module_object_record):
+        # type: (ModuleObjectRecord) -> Generator[ModuleObjectRecord, None, None]
         """
         Get `ModuleObjectRecord` for every property in a class.
 
@@ -443,12 +428,10 @@ class Loader:
                     source_line_number=self.get_source_line_number(inspect_object),
                     is_class=False,
                     is_related=False,
-                    signature=self._get_object_signature(property_object),
                 )
 
-    def _discover_class_methods(
-        self, module_object_record: ModuleObjectRecord
-    ) -> Generator[ModuleObjectRecord, None, None]:
+    def _discover_class_methods(self, module_object_record):
+        # type: (ModuleObjectRecord) -> Generator[ModuleObjectRecord, None, None]
         """
         Get `ModuleObjectRecord` for every method in a class.
 
@@ -486,11 +469,11 @@ class Loader:
                 source_line_number=self.get_source_line_number(inspect_method),
                 is_class=False,
                 is_related=False,
-                signature=self._get_object_signature(inspect_method),
             )
 
     @staticmethod
-    def _get_docstring(obj: Any) -> Text:
+    def _get_docstring(obj):
+        # type: (Any) -> Text
         if isinstance(obj, (staticmethod, classmethod)):
             return obj.__func__.__doc__ or ""
         if hasattr(obj, "__name__") or isinstance(obj, property):
@@ -501,7 +484,8 @@ class Loader:
         return obj.__doc__ or ""
 
     @staticmethod
-    def get_source_line_number(obj: Any) -> int:
+    def get_source_line_number(obj):
+        # type: (Any) -> int
         """
         Get line number in source file where `obj` is declared.
 
