@@ -166,10 +166,16 @@ handsdown.generate_index()
 
 ## 🐶 Installation
 
-Install using pip
+Install using `pip` from PyPI
 
 ```bash
 pip install handsdown
+```
+
+oOr directly from GitHub if you cannot wait to test new features
+
+```bash
+pip install git+https://github.com/vemel/handsdown.git
 ```
 
 ## 🔧 Development
