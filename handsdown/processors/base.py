@@ -143,6 +143,7 @@ class BaseDocstringProcessor:
     def _parse_line(self, line: Text) -> None:
         if not line:
             self._add_block()
+            return
 
         # MD-style codeblock starts with triple backticks
         if line.startswith("```") or line.startswith("~~~"):
