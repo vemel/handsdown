@@ -22,9 +22,15 @@ class BaseDocstringProcessor()
 
 Base docstring processor. All docstring processors are based on top of it.
 
+#### Attributes
+
+- `line_re_map` - Mapping of line regexp to format string for it
+- `section_name_map` - Mapping of Section search key to Section title
+- `replace_map` - Mapping of string to replace to replacer
+
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L42)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L47)
 
 ```python
 def build_sections(content: str) -> handsdown.processors.section_map.SectionMap

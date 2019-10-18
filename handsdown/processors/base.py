@@ -15,7 +15,16 @@ from handsdown.indent_trimmer import IndentTrimmer
 class BaseDocstringProcessor:
     """
     Base docstring processor. All docstring processors are based on top of it.
+
+    Attributes:
+        line_re_map -- Mapping of line regexp to format string for it
+        section_name_map -- Mapping of Section search key to Section title
+        replace_map -- Mapping of string to replace to replacer
     """
+
+    line_re_map: Dict[Pattern, Text] = {}
+    section_name_map: Dict[Text, Text] = {}
+    replace_map: Dict[Text, Text] = {}
 
     def __init__(self) -> None:
         self.current_section_name: Text = ""
@@ -25,10 +34,6 @@ class BaseDocstringProcessor:
         self._codeblock_lines_count = 0
         self.section_map = SectionMap()
         self._current_indent = 0
-
-    line_re_map: Dict[Pattern, Text] = {}
-    section_name_map: Dict[Text, Text] = {}
-    replace_map: Dict[Text, Text] = {}
 
     def _reset(self) -> None:
         self.current_section_name = ""
