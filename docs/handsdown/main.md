@@ -1,6 +1,6 @@
 # Main
 
-> Auto-generated documentation for [handsdown.main](../../handsdown/main.py) module..
+> Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/master/handsdown/main.py) module..
 
 Main CLI entrypoint for `handsdown`
 

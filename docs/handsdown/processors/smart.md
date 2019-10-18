@@ -1,6 +1,6 @@
 # Smart
 
-> Auto-generated documentation for [handsdown.processors.smart](../../../handsdown/processors/smart.py) module..
+> Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py) module..
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 

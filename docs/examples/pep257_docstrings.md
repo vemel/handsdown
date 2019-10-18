@@ -1,6 +1,6 @@
 # PEP 257 - reStructuredText docstrings examples
 
-> Auto-generated documentation for [examples.pep257_docstrings](../../examples/pep257_docstrings.py) module.
+> Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) module.
 
 - [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 257 - reStructuredText docstrings examples
   - [Links](#links)

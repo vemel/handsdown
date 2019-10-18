@@ -1,6 +1,6 @@
 # PathFinder
 
-> Auto-generated documentation for [handsdown.path_finder](../../handsdown/path_finder.py) module..
+> Auto-generated documentation for [handsdown.path_finder](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py) module..
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.

@@ -1,6 +1,6 @@
 # Processors
 
-> Auto-generated documentation for [handsdown.processors](../../../handsdown/processors/__init__.py) module..
+> Auto-generated documentation for [handsdown.processors](https://github.com/vemel/handsdown/blob/master/handsdown/processors/__init__.py) module..
 
 Docstrings processors.
 

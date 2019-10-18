@@ -1,6 +1,6 @@
 # MDDocument
 
-> Auto-generated documentation for [handsdown.md_document](../../handsdown/md_document.py) module..
+> Auto-generated documentation for [handsdown.md_document](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py) module..
 
 Markdown file builder.
 

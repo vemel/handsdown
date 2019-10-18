@@ -1,6 +1,6 @@
 # Base
 
-> Auto-generated documentation for [handsdown.processors.base](../../../handsdown/processors/base.py) module..
+> Auto-generated documentation for [handsdown.processors.base](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py) module..
 
 Base class for all docstring processors:
 

@@ -181,6 +181,15 @@ class Generator:
             title=f"{module_record.import_string}",
             target_path=module_record.source_path,
         )
+        if self._source_code_url:
+            relative_path_str = self._root_path_finder.relative(
+                module_record.source_path
+            ).as_posix()
+            source_link = md_document.render_link(
+                title=f"{module_record.import_string}",
+                link=f"{self._source_code_url}{relative_path_str}",
+            )
+
         md_document.title = module_record.title
 
         self._render_docstring(module_record=module_record, md_document=md_document)

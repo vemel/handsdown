@@ -1,6 +1,6 @@
 # Signature
 
-> Auto-generated documentation for [handsdown.signature](../../handsdown/signature.py) module..
+> Auto-generated documentation for [handsdown.signature](https://github.com/vemel/handsdown/blob/master/handsdown/signature.py) module..
 
 Module for function signature generation.
 

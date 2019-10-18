@@ -1,6 +1,6 @@
 # Loader
 
-> Auto-generated documentation for [handsdown.loader](../../handsdown/loader.py) module..
+> Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py) module..
 
 Loader for python source code.
 

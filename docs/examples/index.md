@@ -1,6 +1,6 @@
 # Examples
 
-> Auto-generated documentation for [examples](../../examples/__init__.py) module..
+> Auto-generated documentation for [examples](https://github.com/vemel/handsdown/blob/master/examples/__init__.py) module..
 
 Examples of different docstring formats supported by `handsdown`.
 Can be used as a list of supported features.

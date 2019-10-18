@@ -1,6 +1,6 @@
 # IndentTrimmer
 
-> Auto-generated documentation for [handsdown.indent_trimmer](../../handsdown/indent_trimmer.py) module..
+> Auto-generated documentation for [handsdown.indent_trimmer](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py) module..
 
 Utility for removing indentation for sections and lines.
 

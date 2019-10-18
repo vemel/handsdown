@@ -1,6 +1,6 @@
 # Google docstrings examples
 
-> Auto-generated documentation for [examples.google_docstrings](../../examples/google_docstrings.py) module.
+> Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) module.
 
 - [Index](../README.md#modules) / [Examples](index.md#examples) / Google docstrings examples
   - [Links](#links)

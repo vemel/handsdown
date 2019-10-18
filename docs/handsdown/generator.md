@@ -1,6 +1,6 @@
 # Generator
 
-> Auto-generated documentation for [handsdown.generator](../../handsdown/generator.py) module..
+> Auto-generated documentation for [handsdown.generator](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py) module..
 
 Main handsdown documentation generator.
 
@@ -86,7 +86,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L252)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L261)
 
 ```python
 def generate_docs() -> None
@@ -96,7 +96,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L267)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L276)
 
 ```python
 def generate_index() -> None

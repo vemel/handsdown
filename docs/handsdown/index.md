@@ -1,6 +1,6 @@
 # Handsdown
 
-> Auto-generated documentation for [handsdown](../../handsdown/__init__.py) module..
+> Auto-generated documentation for [handsdown](https://github.com/vemel/handsdown/blob/master/handsdown/__init__.py) module..
 
 Root of `handsdown` source code.
 

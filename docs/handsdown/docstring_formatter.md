@@ -1,6 +1,6 @@
 # DocstringFormatter
 
-> Auto-generated documentation for [handsdown.docstring_formatter](../../handsdown/docstring_formatter.py) module..
+> Auto-generated documentation for [handsdown.docstring_formatter](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py) module..
 
 Translator of docstrings to Markdown format.
 

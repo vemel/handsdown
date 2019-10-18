@@ -1,6 +1,6 @@
 # ModuleRecord
 
-> Auto-generated documentation for [handsdown.module_record](../../handsdown/module_record.py) module..
+> Auto-generated documentation for [handsdown.module_record](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py) module..
 
 Dataclass for an imported module.
 
