@@ -6,9 +6,21 @@ from setuptools import find_packages
 import __version__ as version_data
 
 root_path = Path(__file__).absolute().parent
-readme_path = root_path / "README.md"
+
 description = "Python docstring-based documentation generator for lazy perfectionists."
 
+
+def get_long_description():
+    "Remove ToC from README.md as PyPI does not support links."
+    lines = []
+    readme_path = root_path / "README.md"
+    for readme_line in readme_path.read_text().splitlines():
+        if "](#" not in readme_line:
+            lines.append(readme_line)
+    return "\n".join(lines)
+
+
+long_description = get_long_description()
 version = version_data.__version__
 
 
@@ -16,7 +28,7 @@ setup(
     name=root_path.name,
     version=version,
     description=description,
-    long_description=readme_path.read_text(),
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://vemel.github.io/handsdown/",
     author="Vlad Emelianov",
