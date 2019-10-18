@@ -19,6 +19,17 @@ def get_title_from_path_part(path_part: Text) -> Text:
     Convert `pathlib.Path` part to a human-readable title.
     Replace underscores with spaces and capitalize result.
 
+    Examples::
+
+        get_title_from_path_part("my_path.py")
+        "My Path Py"
+
+        get_title_from_path_part("my_title")
+        "My Title"
+
+        get_title_from_path_part("__init__.py")
+        "Init Py"
+
     Arguments:
         path_part -- Part of filename path.
 
