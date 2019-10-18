@@ -285,13 +285,14 @@ class MDDocument:
         Arguments:
             content -- Text to add.
         """
-        for section in content.split(self._section_separator):
-            section = IndentTrimmer.trim_empty_lines(section)
-            if not self.subtitle:
-                self.subtitle = section
-                continue
-            if section:
-                self._sections.append(section)
+        content = IndentTrimmer.trim_empty_lines(content)
+        if not content:
+            return
+
+        if not self.subtitle and not self.sections and not content.startswith("#"):
+            self.subtitle = content
+        else:
+            self._sections.append(content)
 
         self._content = self._build_content()
 
@@ -320,23 +321,16 @@ class MDDocument:
             A string with ToC.
         """
         toc_lines = []
+        if self.title:
+            link = self.render_doc_link(self.title, anchor=self.get_anchor(self.title))
+            toc_lines.append(f"- {link}")
 
-        in_codeblock = False
-        for line in self._content.split("\n"):
-            line = line.strip()
-            if line.count("```") > 1:
+        sections = [self.title, self.subtitle] + self.sections
+        for section in sections:
+            if not section.startswith("#") or not len(section.splitlines()) == 1:
                 continue
 
-            if line.startswith("```"):
-                in_codeblock = not in_codeblock
-
-            if in_codeblock:
-                continue
-
-            if not line.startswith("#"):
-                continue
-
-            header_symbols = line.split(" ")[0]
+            header_symbols, title = section.rstrip().split(" ", 1)
             if header_symbols.replace("#", ""):
                 continue
 
@@ -344,7 +338,6 @@ class MDDocument:
             if header_level > max_depth:
                 continue
 
-            title = line.split(" ", 1)[-1].strip()
             link = self.render_doc_link(title, anchor=self.get_anchor(title))
             toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
 
