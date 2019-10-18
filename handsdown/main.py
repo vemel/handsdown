@@ -1,11 +1,11 @@
 """
 Main CLI entrypoint for `handsdown`
 
-#### Attributes
+Attributes:
 
-- `EXCLUDE_EXPRS` - Path glob expressions to always exclude.
-  By default: `build/*`, `tests/*`, `test/*` are excluded.
-- `SOURCES_GLOB_EXPR` - Glob expr to lokkup python source files: `**/*.py`
+    EXCLUDE_EXPRS -- Path glob expressions to always exclude.
+        By default `build/*`, `tests/*`, `test/*`, `*/__pycache__/*` are excluded.
+    SOURCES_GLOB -- Glob expr to lokkup python source files: `**/*.py`
 """
 
 import logging
