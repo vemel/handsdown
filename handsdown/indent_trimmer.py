@@ -111,7 +111,7 @@ class IndentTrimmer:
         if not line[:indent].strip():
             return line[indent:]
 
-        return line
+        return line.lstrip()
 
     @staticmethod
     def get_line_indent(line: Text) -> int:
