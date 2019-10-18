@@ -141,6 +141,9 @@ class BaseDocstringProcessor:
         self.section_map.trim_block(self.current_section_name)
 
     def _parse_line(self, line: Text) -> None:
+        if not line:
+            self._add_block()
+
         # MD-style codeblock starts with triple backticks
         if line.startswith("```") or line.startswith("~~~"):
             self._in_codeblock = True
