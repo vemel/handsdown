@@ -15,7 +15,7 @@ Python docstring-based documentation generator for lazy perfectionists.
   - [🐏 Examples](#%f0%9f%90%8f-examples)
   - [🎉 Usage](#%f0%9f%8e%89-usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
-    - [📝 GitHub Pages](#%f0%9f%93%9d-github-pages)
+    - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
     - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
   - [🐶 Installation](#%f0%9f%90%b6-installation)
   - [🔧 Development](#%f0%9f%94%a7-development)
@@ -95,9 +95,9 @@ handsdown --exclude */migrations
 
 Navigate to `docs/README.md` to check your new documentation!
 
-### 📝 GitHub Pages
+### 📝 As a GitHub Pages manager
 
-`handsdown` comes with built-in support for [GitHub Pages](https://pages.github.com/),
+`handsdown` comes with a built-in support for [GitHub Pages](https://pages.github.com/),
 although some setup is required. By default documentation uses relative links to source files,
 so for `GitHub Pages` we need absolute URLs to a GitHub repositore for `find in source code`
 links to work.
