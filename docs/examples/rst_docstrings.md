@@ -18,7 +18,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L10)
 
 ```python
-class RSTExample(*args, **kwargs)
+class RSTExample(args, kwargs)
 ```
 
 ### RSTExample.reference

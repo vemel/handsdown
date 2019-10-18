@@ -14,20 +14,20 @@ Main handsdown documentation generator.
 
 ## Generator
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L34)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L36)
 
 ```python
 class Generator(
-    input_path,
-    output_path,
-    source_paths,
-    logger=None,
-    docstring_processor=None,
-    loader=None,
-    raise_errors=False,
-    source_code_url=None,
-    toc_depth=3,
-)
+    input_path: Path,
+    output_path: Path,
+    source_paths: Iterable[Path],
+    logger: Optional[logging.Logger] = None,
+    docstring_processor: Optional[BaseDocstringProcessor] = None,
+    loader: Optional[Loader] = None,
+    raise_errors: bool = False,
+    source_code_url: Optional[Text] = None,
+    toc_depth: int = 3,
+) -> None
 ```
 
 Main handsdown documentation generator.
@@ -53,20 +53,20 @@ Main handsdown documentation generator.
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L129)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L131)
 
 ```python
-def cleanup_old_docs()
+def cleanup_old_docs() -> None
 ```
 
 Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L163)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L165)
 
 ```python
-def generate_doc(source_path)
+def generate_doc(source_path: Path) -> None
 ```
 
 Generate one module doc at once.
@@ -81,20 +81,20 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L274)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L276)
 
 ```python
-def generate_docs()
+def generate_docs() -> None
 ```
 
 Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L290)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L292)
 
 ```python
-def generate_index()
+def generate_index() -> None
 ```
 
 Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
@@ -102,10 +102,10 @@ section that contains a Tree of all modules in the project.
 
 ## GeneratorError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L28)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L30)
 
 ```python
-class GeneratorError(*args, **kwargs)
+class GeneratorError(args, kwargs)
 ```
 
 Main error for [Generator](#generator)

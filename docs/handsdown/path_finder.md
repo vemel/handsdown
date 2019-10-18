@@ -16,10 +16,10 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 
 ## PathFinder
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L23)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L25)
 
 ```python
-class PathFinder(root: pathlib.Path)
+class PathFinder(root: Path) -> None
 ```
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
@@ -50,10 +50,10 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 
 ### PathFinder().exclude
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L89)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L92)
 
 ```python
-def exclude(*fn_exrps: str) -> handsdown.path_finder.PathFinder
+def exclude(fn_exrps: Text) -> PathFinder
 ```
 
 Add `fnmatch` expression to black list.
@@ -62,22 +62,18 @@ If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-fn_exrps - One or more `fnmatch` expressions.
+- `fn_exrps` - One or more `fnmatch` expressions.
 
 #### Returns
 
 A copy of itself.
 
-#### See also
-
-- [PathFinder](#pathfinder)
-
 ### PathFinder().glob
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L131)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L137)
 
 ```python
-def glob(glob_expr: str) -> Generator[pathlib.Path, NoneType, NoneType]
+def glob(glob_expr: Text) -> Generator[Path, None, None]
 ```
 
 Find all matching `Path` objects respecting `include` and
@@ -89,10 +85,10 @@ Matching `Path` objects.
 
 ### PathFinder().include
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L69)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L71)
 
 ```python
-def include(*fn_exrps: str) -> handsdown.path_finder.PathFinder
+def include(fn_exrps: Text) -> PathFinder
 ```
 
 Add `fnmatch` expression to white list.
@@ -101,19 +97,15 @@ If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
 
-fn_exrps - One or more `fnmatch` expressions.
+- `fn_exrps` - One or more `fnmatch` expressions.
 
 #### Returns
 
 A copy of itself.
 
-#### See also
-
-- [PathFinder](#pathfinder)
-
 ### PathFinder().mkdir
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L176)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L184)
 
 ```python
 def mkdir(force: bool = False) -> None
@@ -131,10 +123,10 @@ Create directories up to `root` if they do not exist.
 
 ### PathFinder().relative
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L148)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L155)
 
 ```python
-def relative(target: pathlib.Path) -> pathlib.Path
+def relative(target: Path) -> Path
 ```
 
 Find a relative path from `root` to `target`.
@@ -150,10 +142,10 @@ A relative path to `target`.
 
 ## PathFinderError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L17)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L19)
 
 ```python
-class PathFinderError(*args, **kwargs)
+class PathFinderError(args, kwargs)
 ```
 
 Main error for [PathFinder](#pathfinder).

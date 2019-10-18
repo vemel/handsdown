@@ -3,6 +3,8 @@
 Main handsdown documentation generator.
 """
 
+from __future__ import unicode_literals
+
 import re
 import logging
 

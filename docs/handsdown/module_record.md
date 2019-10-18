@@ -6,6 +6,7 @@ Dataclass for an imported module.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
+    - [ModuleObjectRecord().signature](#moduleobjectrecordsignature)
   - [ModuleRecord](#modulerecord)
     - [ModuleRecord().get_import_string_parts](#modulerecordget_import_string_parts)
     - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
@@ -16,22 +17,21 @@ Dataclass for an imported module.
 
 ## ModuleObjectRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L13)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L15)
 
 ```python
 class ModuleObjectRecord(
-    source_path: pathlib.Path,
+    source_path: Path,
     source_line_number: int,
-    output_path: pathlib.Path,
-    object: Any,
-    import_string: str,
+    output_path: Path,
+    obj: Any,
+    import_string: Text,
     level: int,
-    title: str,
-    docstring: str,
+    title: Text,
+    docstring: Text,
     is_class: bool,
     is_related: bool,
-    signature: str,
-)
+) -> None
 ```
 
 Dataclass for an imported module object.
@@ -42,6 +42,7 @@ Dataclass for an imported module object.
 - `source_line_number` - Line number of object definition.
 - `output_path` - Path to output MD file.
 - `object` - Imported module object.
+- `parent` - Imported module object parent.
 - `import_string` - Module import string.
 - `level` - 0 for classes and functions, 1 for methods.
 - `title` - Object human-readable title.
@@ -50,20 +51,35 @@ Dataclass for an imported module object.
 - `is_related` - True if object is from a different module
 - `signature` - Object signature.
 
+### ModuleObjectRecord().signature
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L15)
+
+```python
+#property getter
+def signature() -> Text
+```
+
+Get object signature.
+
+#### Returns
+
+A string with object signature.
+
 ## ModuleRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L45)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L85)
 
 ```python
 class ModuleRecord(
-    source_path: pathlib.Path,
-    output_path: pathlib.Path,
+    source_path: Path,
+    output_path: Path,
     module: Any,
-    title: str,
-    import_string: str,
-    objects: List[handsdown.module_record.ModuleObjectRecord],
-    docstring: str,
-)
+    title: Text,
+    import_string: Text,
+    objects: List[ModuleObjectRecord],
+    docstring: Text,
+) -> None
 ```
 
 Dataclass for an imported module.
@@ -80,10 +96,10 @@ Dataclass for an imported module.
 
 ### ModuleRecord().get_import_string_parts
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L67)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L118)
 
 ```python
-def get_import_string_parts() -> List[str]
+def get_import_string_parts() -> List[Text]
 ```
 
 Get parts of module `import_string`.
@@ -107,10 +123,10 @@ A list of import string parts as strings.
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L87)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L139)
 
 ```python
-def get_title_parts() -> List[str]
+def get_title_parts() -> List[Text]
 ```
 
 Get parts of module title from module import string.
@@ -135,20 +151,20 @@ A list of title parts as strings.
 
 ## ModuleRecordList
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L118)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L171)
 
 ```python
-class ModuleRecordList()
+class ModuleRecordList() -> None
 ```
 
 Aggregation of [ModuleRecord](#modulerecord) objects.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L148)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L204)
 
 ```python
-def add(module_record: handsdown.module_record.ModuleRecord) -> None
+def add(module_record: ModuleRecord) -> None
 ```
 
 Add new [ModuleRecord](#modulerecord).
@@ -157,16 +173,12 @@ Add new [ModuleRecord](#modulerecord).
 
 - `module_record` - A new [ModuleRecord](#modulerecord)
 
-#### See also
-
-- [ModuleRecord](#modulerecord)
-
 ### ModuleRecordList().find_object
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L127)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L181)
 
 ```python
-def find_object(import_string: str) -> Union[handsdown.module_record.ModuleObjectRecord, NoneType]
+def find_object(import_string: Text) -> Optional[ModuleObjectRecord]
 ```
 
 Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
@@ -179,16 +191,12 @@ Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
 
 Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
 
-#### See also
-
-- [ModuleObjectRecord](#moduleobjectrecord)
-
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L139)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L194)
 
 ```python
-def get_package_names() -> Set[str]
+def get_package_names() -> Set[Text]
 ```
 
 Get top level import strings.

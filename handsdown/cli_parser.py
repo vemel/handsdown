@@ -1,13 +1,19 @@
+# -*- coding: future_fstrings -*-
 """
 # CLI Parser
 """
 import re
 import argparse
-from pathlib import Path
+
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
 from typing import Text
 
 
-def git_repo(git_repo_url: Text) -> Text:
+def git_repo(git_repo_url):
+    # type: (Text) -> Text
     """
     Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
@@ -27,7 +33,8 @@ def git_repo(git_repo_url: Text) -> Text:
     return git_repo_url
 
 
-def abs_path(path_str: Text) -> Path:
+def abs_path(path_str):
+    # type: (Text) -> Path
     """
     Validate `path_str` and make it absolute.
 
@@ -40,7 +47,8 @@ def abs_path(path_str: Text) -> Path:
     return Path(path_str).absolute()
 
 
-def dir_abs_path(path_str: Text) -> Path:
+def dir_abs_path(path_str):
+    # type: (Text) -> Path
     """
     Validate directory `path_str` and make it absolute.
 
@@ -59,7 +67,8 @@ def dir_abs_path(path_str: Text) -> Path:
     return path
 
 
-def existing_dir_abs_path(path_str: Text) -> Path:
+def existing_dir_abs_path(path_str):
+    # type: (Text) -> Path
     """
     Validate existing directory `path_str` and make it absolute.
 
@@ -80,7 +89,8 @@ def existing_dir_abs_path(path_str: Text) -> Path:
     return path
 
 
-def get_cli_parser() -> argparse.ArgumentParser:
+def get_cli_parser():
+    # type: () -> argparse.ArgumentParser
     """
     Get CLI arguments parser.
 

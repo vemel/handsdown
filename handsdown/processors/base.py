@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Base class for all docstring processors:
 
@@ -12,7 +13,7 @@ from handsdown.processors.section_map import SectionMap
 from handsdown.indent_trimmer import IndentTrimmer
 
 
-class BaseDocstringProcessor:
+class BaseDocstringProcessor(object):
     """
     Base docstring processor. All docstring processors are based on top of it.
 
@@ -22,12 +23,13 @@ class BaseDocstringProcessor:
         replace_map -- Mapping of string to replace to replacer
     """
 
-    line_re_map: Dict[Pattern, Text] = {}
-    section_name_map: Dict[Text, Text] = {}
-    replace_map: Dict[Text, Text] = {}
+    line_re_map = {}  # type: Dict[Pattern, Text]
+    section_name_map = {}  # type: Dict[Text, Text]
+    replace_map = {}  # type: Dict[Text, Text]
 
-    def __init__(self) -> None:
-        self.current_section_name: Text = ""
+    def __init__(self):
+        # type: () -> None
+        self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
         self._codeblock_indent = 0
@@ -35,7 +37,8 @@ class BaseDocstringProcessor:
         self.section_map = SectionMap()
         self._current_indent = 0
 
-    def _reset(self) -> None:
+    def _reset(self):
+        # type: () -> None
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
@@ -44,7 +47,8 @@ class BaseDocstringProcessor:
         self._codeblock_indent = 0
         self._codeblock_lines_count = 0
 
-    def build_sections(self, content: Text) -> SectionMap:
+    def build_sections(self, content):
+        # type: (Text) -> SectionMap
         """
         Parse docstring and split it to sections with arrays of strings.
 
@@ -84,7 +88,8 @@ class BaseDocstringProcessor:
 
         return self.section_map
 
-    def _parse_doctest_line(self, line: Text) -> None:
+    def _parse_doctest_line(self, line):
+        # type: (Text) -> None
         # end doctest codeblock
         if not line:
             self._in_doctest_block = False
@@ -106,7 +111,8 @@ class BaseDocstringProcessor:
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
 
-    def _parse_code_line(self, line: Text) -> None:
+    def _parse_code_line(self, line):
+        # type: (Text) -> None
         if not line and self._codeblock_lines_count == 0:
             return
 
@@ -139,20 +145,24 @@ class BaseDocstringProcessor:
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
         self._codeblock_lines_count += 1
 
-    def _add_line(self, line: Text, indent: Optional[int] = None) -> None:
+    def _add_line(self, line, indent=None):
+        # type: (Text, Optional[int]) -> None
         indent_str = " " * self._current_indent
         if indent is not None:
             indent_str = " " * indent
 
         self.section_map.add_line(self.current_section_name, f"{indent_str}{line}")
 
-    def _add_block(self) -> None:
+    def _add_block(self):
+        # type: () -> None
         self.section_map.add_block(self.current_section_name)
 
-    def _trim_empty_lines(self) -> None:
+    def _trim_empty_lines(self):
+        # type: () -> None
         self.section_map.trim_block(self.current_section_name)
 
-    def _parse_line(self, line: Text) -> None:
+    def _parse_line(self, line):
+        # type: (Text) -> None
         # MD-style codeblock starts with triple backticks
         if line.startswith("```") or line.startswith("~~~"):
             self._in_codeblock = True

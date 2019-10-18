@@ -14,10 +14,10 @@ Base class for all docstring processors:
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L16)
 
 ```python
-class BaseDocstringProcessor()
+class BaseDocstringProcessor() -> None
 ```
 
 Base docstring processor. All docstring processors are based on top of it.
@@ -30,10 +30,10 @@ Base docstring processor. All docstring processors are based on top of it.
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L47)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L50)
 
 ```python
-def build_sections(content: str) -> handsdown.processors.section_map.SectionMap
+def build_sections(content: Text) -> SectionMap
 ```
 
 Parse docstring and split it to sections with arrays of strings.
@@ -46,7 +46,3 @@ content - Object docstring.
 
 A dictionary where key is a section name and value is a list of string sof this
 section.
-
-#### See also
-
-- [SectionMap](section_map.md#sectionmap)

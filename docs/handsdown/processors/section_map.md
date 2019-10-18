@@ -16,39 +16,39 @@ Module for splitting docstring into `Section` groups.
 
 ## Section
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L35)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L36)
 
 ```python
-class Section(title: str, blocks: List[handsdown.processors.section_map.SectionBlock])
+class Section(title: Text, blocks: List[SectionBlock]) -> None
 ```
 
 Dataclass representing a section in a [SectionMap](#sectionmap).
 
-#### Attributes
+#### Arguments
 
 - `title` - Section title.
 - `blocks` - List of line blocks.
 
 ## SectionBlock
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L13)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L12)
 
 ```python
-class SectionBlock(lines: List[str])
+class SectionBlock(lines: List[Text]) -> None
 ```
 
 Dataclass representing a [Section](#section) block.
 
-#### Attributes
+#### Arguments
 
 - `lines` - List of lines.
 
 ### SectionBlock().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L23)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L24)
 
 ```python
-def render() -> str
+def render() -> Text
 ```
 
 Render trimmed block lines.
@@ -59,10 +59,10 @@ Block lines as a text.
 
 ## SectionMap
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L48)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L51)
 
 ```python
-class SectionMap(*args, **kwargs)
+class SectionMap(args, kwargs)
 ```
 
 Dict-based storage for parsed [Section](#section) list for
@@ -73,11 +73,11 @@ Value is a related [Section](#section) instance.
 
 ### SectionMap().sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L48)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L51)
 
 ```python
 #property getter
-def sections() -> Generator[handsdown.processors.section_map.Section, NoneType, NoneType]
+def sections() -> Generator[Section, None, None]
 ```
 
 Iterate over existing [Section](#section) objects.
@@ -86,16 +86,12 @@ Iterate over existing [Section](#section) objects.
 
 [Section](#section) objects in order of appearance.
 
-#### See also
-
-- [Section](#section)
-
 ### SectionMap().add_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L78)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L82)
 
 ```python
-def add_block(section_name: str) -> None
+def add_block(section_name: Text) -> None
 ```
 
 Add new [SectionBlock](#sectionblock) to section `section_name`.
@@ -107,10 +103,10 @@ If [Section](#section) does not exist - it is not created.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L57)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L60)
 
 ```python
-def add_line(section_name: str, line: str) -> None
+def add_line(section_name: Text, line: Text) -> None
 ```
 
 Add new `line` to the last [SectionBlock](#sectionblock) of section `section_name`.
@@ -123,10 +119,10 @@ If line and section are empty - section is not created.
 
 ### SectionMap().trim_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L91)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L96)
 
 ```python
-def trim_block(section_name: str) -> None
+def trim_block(section_name: Text) -> None
 ```
 
 Delete last empty lines from the last [SectionBlock](#sectionblock).

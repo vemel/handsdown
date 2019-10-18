@@ -451,17 +451,18 @@ class Loader:
         object_members.sort(key=lambda x: x[0])
 
         for method_name, inspect_method in object_members:
-            class_method = inspect_object.__dict__[method_name]
+            class_method = getattr(inspect_object, method_name)
+            unbound_method = inspect_object.__dict__[method_name]
 
             import_string = f"{object_name}.{method_name}"
             title = f"{object_name}().{method_name}"
-            if isinstance(class_method, (staticmethod, classmethod)):
+            if isinstance(unbound_method, (staticmethod, classmethod)):
                 title = f"{object_name}.{method_name}"
 
             yield ModuleObjectRecord(
                 import_string=import_string,
                 level=1,
-                obj=inspect_method,
+                obj=class_method,
                 docstring=self._get_object_docstring(inspect_method),
                 title=title,
                 source_path=source_path,

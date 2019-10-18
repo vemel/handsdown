@@ -1,6 +1,6 @@
 # Loader
 
-> Auto-generated documentation for [handsdown.loader](../../handsdown/loader.py) module..
+> Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py) module..
 
 Loader for python source code.
 
@@ -15,10 +15,14 @@ Loader for python source code.
 
 ## Loader
 
-[🔍 find in source code](../../handsdown/loader.py#L36)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L36)
 
 ```python
-class Loader(root_path, output_path, logger)
+class Loader(
+    root_path: Path,
+    output_path: Path,
+    logger: logging.Logger,
+) -> None
 ```
 
 Loader for python source code.
@@ -38,10 +42,10 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](../../handsdown/loader.py#L209)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L209)
 
 ```python
-def get_import_string(source_path: pathlib.Path)
+def get_import_string(source_path: Path) -> Text
 ```
 
 Get Python import string for a source `source_path` relative to `root_path`.
@@ -67,10 +71,10 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](../../handsdown/loader.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L97)
 
 ```python
-def get_module_record(source_path: pathlib.Path)
+def get_module_record(source_path: Path) -> Optional[ModuleRecord]
 ```
 
 Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
@@ -89,10 +93,10 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](../../handsdown/loader.py#L486)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L487)
 
 ```python
-def get_source_line_number(obj: Any)
+def get_source_line_number(obj: Any) -> int
 ```
 
 Get line number in source file where `obj` is declared.
@@ -105,10 +109,10 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](../../handsdown/loader.py#L239)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L239)
 
 ```python
-def import_module(file_path: pathlib.Path)
+def import_module(file_path: Path) -> Any
 ```
 
 Import module using `import_paths` list. Clean up all patches afterwards.
@@ -129,10 +133,10 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](../../handsdown/loader.py#L69)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L69)
 
 ```python
-def setup()
+def setup() -> None
 ```
 
 Setup local frameworks if needed.
@@ -142,10 +146,10 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](../../handsdown/loader.py#L30)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L30)
 
 ```python
-class LoaderError(*args, **kwargs)
+class LoaderError(args, kwargs)
 ```
 
 Main error for [Loader](#loader) class.

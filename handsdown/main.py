@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Main CLI entrypoint for `handsdown`
 
@@ -20,7 +21,8 @@ EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*"]
 SOURCES_GLOB = "**/*.py"
 
 
-def get_logger(level: int) -> logging.Logger:
+def get_logger(level):
+    # type: (int) -> logging.Logger
     """
     Get stdout stream logger.
 
@@ -44,7 +46,8 @@ def get_logger(level: int) -> logging.Logger:
     return logger
 
 
-def main() -> None:
+def main():
+    # type: () -> None
     """
     Main entrypoint for CLI.
     """
@@ -60,7 +63,7 @@ def main() -> None:
 
     path_finder = (
         PathFinder(args.input_path)
-        .exclude(*EXCLUDE_EXPRS, *args.exclude)
+        .exclude(*(EXCLUDE_EXPRS + args.exclude))
         .include(*args.include)
     )
 

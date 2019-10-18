@@ -9,7 +9,7 @@ from typing import Iterable, Text, List
 __all__ = ["IndentTrimmer"]
 
 
-class IndentTrimmer:
+class IndentTrimmer(object):
     """
     Utility for removing indentation for sections and lines.
     """
@@ -83,7 +83,11 @@ class IndentTrimmer:
             A list of lines with trimmed indent.
         """
         indents = (cls.get_line_indent(line) for line in lines if line.strip())
-        min_indent = min(indents, default=0)
+        min_indent = 0
+        indents = list(indents)
+        if indents:
+            min_indent = min(indents)
+
         new_lines = []
         for line in lines:
             new_lines.append(cls.trim_line(line, min_indent))

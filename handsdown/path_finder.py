@@ -1,11 +1,13 @@
+# -*- coding: future_fstrings -*-
 """
 Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.
 """
 
-from __future__ import annotations
-
-from pathlib import Path
+try:
+    from pathlib2 import Path
+except ImportError:
+    from pathlib import Path
 import fnmatch
 
 from typing import Text, List, Iterable, Generator
@@ -45,7 +47,8 @@ class PathFinder:
         PathFinderError -- If `root` is not absolute or not a directory.
     """
 
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root):
+        # type: (Path) -> None
         if not root.is_absolute():
             raise PathFinderError(f"Root path {root} is not absolute")
         try:
@@ -55,25 +58,25 @@ class PathFinder:
             pass
 
         self._root = root
-        self.include_exprs: List[Text] = []
-        self.exclude_exprs: List[Text] = []
+        self.include_exprs = []  # type: List[Text]
+        self.exclude_exprs = []  # type: List[Text]
 
-    def _copy(
-        self, include_exprs: Iterable[Text], exclude_exprs: Iterable[Text]
-    ) -> PathFinder:
+    def _copy(self, include_exprs, exclude_exprs):
+        # type: (Iterable[Text], Iterable[Text]) -> PathFinder
         new_copy = PathFinder(self._root)
         new_copy.include_exprs = list(include_exprs)
         new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy
 
-    def include(self, *fn_exrps: Text) -> PathFinder:
+    def include(self, *fn_exrps):
+        # type: (Text) -> PathFinder
         """
         Add `fnmatch` expression to white list.
         If white list is empty - no white list filtration applied.
         If expression does not have `*` or `.` characters, appends `/*` to it.
 
         Arguments:
-            fn_exrps - One or more `fnmatch` expressions.
+            fn_exrps -- One or more `fnmatch` expressions.
 
         Returns:
             A copy of itself.
@@ -86,14 +89,15 @@ class PathFinder:
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
 
-    def exclude(self, *fn_exrps: Text) -> PathFinder:
+    def exclude(self, *fn_exrps):
+        # type: (Text) -> PathFinder
         """
         Add `fnmatch` expression to black list.
         If black list is empty - no black list filtration applied.
         If expression does not have `*` or `.` characters, appends `/*` to it.
 
         Arguments:
-            fn_exrps - One or more `fnmatch` expressions.
+            fn_exrps -- One or more `fnmatch` expressions.
 
         Returns:
             A copy of itself.
@@ -106,7 +110,8 @@ class PathFinder:
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
 
-    def _match_include(self, path: Path) -> bool:
+    def _match_include(self, path):
+        # type: (Path) -> bool
         if not self.include_exprs:
             return True
 
@@ -117,7 +122,8 @@ class PathFinder:
 
         return False
 
-    def _match_exclude(self, path: Path) -> bool:
+    def _match_exclude(self, path):
+        # type: (Path) -> bool
         if not self.exclude_exprs:
             return False
 
@@ -128,7 +134,8 @@ class PathFinder:
 
         return False
 
-    def glob(self, glob_expr: Text) -> Generator[Path, None, None]:
+    def glob(self, glob_expr):
+        # type: (Text) -> Generator[Path, None, None]
         """
         Find all matching `Path` objects respecting `include` and
         `exclude` patterns.
@@ -145,7 +152,8 @@ class PathFinder:
 
             yield path
 
-    def relative(self, target: Path) -> Path:
+    def relative(self, target):
+        # type: (Path) -> Path
         """
         Find a relative path from `root` to `target`.
         `target` should be an absolute path.
@@ -173,7 +181,8 @@ class PathFinder:
 
         return up_path / relative_target
 
-    def mkdir(self, force: bool = False) -> None:
+    def mkdir(self, force=False):
+        # type: (bool) -> None
         """
         Create directories up to `root` if they do not exist.
 

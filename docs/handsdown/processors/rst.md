@@ -12,7 +12,7 @@ Docstring processor for restructured text docstring format.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L10)
 
 ```python
-class RSTDocstringProcessor()
+class RSTDocstringProcessor() -> None
 ```
 
 Docstring processor for restructured text docstring format.

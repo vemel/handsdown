@@ -15,6 +15,7 @@ Root of `handsdown` source code.
     - [Main](magic_main.md#main)
     - [Cli Parser](cli_parser.md#cli-parser)
     - [DocstringFormatter](docstring_formatter.md#docstringformatter)
+    - [FunctionRepr](function_repr.md#functionrepr)
     - [Generator](generator.md#generator)
     - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
     - [Loader](loader.md#loader)
@@ -28,7 +29,6 @@ Root of `handsdown` source code.
       - [Rst](processors/rst.md#rst)
       - [SectionMap](processors/section_map.md#sectionmap)
       - [Smart](processors/smart.md#smart)
-    - [Signature](signature.md#signature)
     - [Utils](utils.md#utils)
 
 # Handsdown

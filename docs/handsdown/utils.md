@@ -10,20 +10,20 @@ Handful utils that do not deserve a separate module.
 
 ## OSEnvironMock
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L8)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L7)
 
 ```python
-class OSEnvironMock(*args, **kwargs)
+class OSEnvironMock(args, kwargs)
 ```
 
 Mock for `os.environ` that returns `env` string isntead of undefined variables.
 
 ## get_title_from_path_part
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L17)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L23)
 
 ```python
-def get_title_from_path_part(path_part: str) -> str
+def get_title_from_path_part(path_part: Text) -> Text
 ```
 
 Convert `pathlib.Path` part to a human-readable title.

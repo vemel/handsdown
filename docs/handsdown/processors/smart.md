@@ -13,20 +13,20 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 
 ## SmartDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L16)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
 
 ```python
-class SmartDocstringProcessor()
+class SmartDocstringProcessor() -> None
 ```
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content.
 
 ### SmartDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L29)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
 
 ```python
-def build_sections(content: str) -> handsdown.processors.section_map.SectionMap
+def build_sections(content: Text) -> SectionMap
 ```
 
 Parse docstring and split it to sections with arrays of strings.
@@ -39,7 +39,3 @@ content - Object docstring.
 
 A dictionary where key is a section name and value is a list of string sof this
 section.
-
-#### See also
-
-- [SectionMap](section_map.md#sectionmap)

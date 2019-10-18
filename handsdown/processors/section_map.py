@@ -2,25 +2,27 @@
 Module for splitting docstring into `Section` groups.
 """
 
-from collections import UserDict
-from dataclasses import dataclass
+from __future__ import unicode_literals
+
 from typing import Text, List, Generator
 
 from handsdown.indent_trimmer import IndentTrimmer
 
 
-@dataclass
 class SectionBlock:
     """
     Dataclass representing a `Section` block.
 
-    Attributes:
+    Arguments:
         lines -- List of lines.
     """
 
-    lines: List[Text]
+    def __init__(self, lines):
+        # type: (List[Text]) -> None
+        self.lines = lines
 
-    def render(self) -> Text:
+    def render(self):
+        # type: () -> Text
         """
         Render trimmed block lines.
 
@@ -31,21 +33,22 @@ class SectionBlock:
         return "\n".join(lines)
 
 
-@dataclass
 class Section:
     """
     Dataclass representing a section in a `SectionMap`.
 
-    Attributes:
+    Arguments:
         title -- Section title.
         blocks -- List of line blocks.
     """
 
-    title: Text
-    blocks: List[SectionBlock]
+    def __init__(self, title, blocks):
+        # type: (Text, List[SectionBlock]) -> None
+        self.title = title
+        self.blocks = blocks
 
 
-class SectionMap(UserDict):
+class SectionMap(dict):
     """
     Dict-based storage for parsed `Section` list for
     `handsdown.processors.base.BaseProcessor`
@@ -54,7 +57,8 @@ class SectionMap(UserDict):
     Value is a related `Section` instance.
     """
 
-    def add_line(self, section_name: Text, line: Text) -> None:
+    def add_line(self, section_name, line):
+        # type: (Text, Text) -> None
         """
         Add new `line` to the last `SectionBlock` of section `section_name`.
         If line and section are empty - section is not created.
@@ -75,7 +79,8 @@ class SectionMap(UserDict):
 
         self[section_name].blocks[-1].lines.append(line)
 
-    def add_block(self, section_name: Text) -> None:
+    def add_block(self, section_name):
+        # type: (Text) -> None
         """
         Add new `SectionBlock` to section `section_name`.
         If `Section` does not exist - it is not created.
@@ -88,7 +93,8 @@ class SectionMap(UserDict):
 
         self[section_name].blocks.append(SectionBlock(lines=[]))
 
-    def trim_block(self, section_name: Text) -> None:
+    def trim_block(self, section_name):
+        # type: (Text) -> None
         """
         Delete last empty lines from the last `SectionBlock`.
         If `Section` does not exist - it is not created.
@@ -104,7 +110,8 @@ class SectionMap(UserDict):
             lines.pop()
 
     @property
-    def sections(self) -> Generator[Section, None, None]:
+    def sections(self):
+        # type: () -> Generator[Section, None, None]
         """
         Iterate over existing `Section` objects.
 

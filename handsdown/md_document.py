@@ -1,21 +1,25 @@
+# -*- coding: future_fstrings -*-
 """
 Markdown file builder.
 """
-from __future__ import annotations
+from __future__ import unicode_literals
 
+import traceback
 import re
-from types import TracebackType
-from typing import Text, Optional, List, Tuple, Type
-from pathlib import Path
+from typing import Text, Optional, List, Tuple, Type, TYPE_CHECKING
 
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.path_finder import PathFinder
+
+if TYPE_CHECKING:
+    from types import TracebackType
+    from pathlib import Path
 
 
 __all__ = ["MDDocument"]
 
 
-class MDDocument:
+class MDDocument(object):
     """
     Markdown file builder.
 
@@ -55,8 +59,9 @@ class MDDocument:
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
-    def __init__(self, path: Path) -> None:
-        self._sections: List[Text] = []
+    def __init__(self, path):
+        # type: (Path) -> None
+        self._sections = []  # type: List[Text]
         self._content = ""
         self._title = ""
         self._subtitle = ""
@@ -64,20 +69,24 @@ class MDDocument:
         self._path = path
         self._path_finder = PathFinder(self._path.parent)
 
-    def __enter__(self) -> MDDocument:
+    def __enter__(self):
+        # type: (Path) -> MDDocument
         return self
 
     def __exit__(
         self,
-        exc_type: Optional[Type[BaseException]],
-        exc_value: Optional[BaseException],
-        traceback: Optional[TracebackType],
-    ) -> None:
-        if exc_type:
-            raise exc_type
+        exc_type,  # type: Optional[Type[BaseException]]
+        exc_value,  # type: Optional[BaseException]
+        tb,  # type: Optional[TracebackType]
+    ):
+        # type: (...) -> None
+        if exc_value:
+            traceback.print_tb(tb)
+            raise exc_value
         return self.write()
 
-    def read(self) -> None:
+    def read(self):
+        # type: () -> None
         """
         Read and parse content from `path`.
         """
@@ -111,7 +120,8 @@ class MDDocument:
         ):
             self._subtitle = self._sections.pop(0)
 
-    def ensure_toc_exists(self) -> None:
+    def ensure_toc_exists(self):
+        # type: () -> None
         """
         Check if ToC exists in the document or create one.
         """
@@ -119,7 +129,8 @@ class MDDocument:
             self._toc_section = self.generate_toc_section()
 
     @classmethod
-    def get_anchor(cls, title: Text) -> Text:
+    def get_anchor(cls, title):
+        # type: (Text) -> Text
         """
         Convert title to a GitHub-friendly anchor link.
 
@@ -131,7 +142,8 @@ class MDDocument:
         return result
 
     @staticmethod
-    def is_toc(section: Text) -> bool:
+    def is_toc(section):
+        # type: (Text) -> bool
         """
         Check if the section is Tree of Contents.
 
@@ -148,7 +160,8 @@ class MDDocument:
         return True
 
     @classmethod
-    def render_link(cls, title: Text, link: Text) -> Text:
+    def render_link(cls, title, link):
+        # type: (Text, Text) -> Text
         """
         Render Markdown link wih escaped title.
 
@@ -169,9 +182,8 @@ class MDDocument:
         """
         return f"[{title}]({link})"
 
-    def render_doc_link(
-        self, title: Text, anchor: Text = "", target_path: Optional[Path] = None
-    ) -> Text:
+    def render_doc_link(self, title, anchor="", target_path=None):
+        # type: (Text, Text, Optional[Path]) -> Text
         """
         Render Markdown link to a local MD document, use relative path as a link.
 
@@ -207,7 +219,8 @@ class MDDocument:
 
         return self.render_link(title, link)
 
-    def _build_content(self) -> Text:
+    def _build_content(self):
+        # type: () -> Text
         sections = []
         if self._title:
             sections.append(f"# {self._title}")
@@ -219,7 +232,8 @@ class MDDocument:
         sections.extend(self._sections)
         return self._section_separator.join(sections) + "\n"
 
-    def write(self) -> None:
+    def write(self):
+        # type: () -> None
         """
         Write MD content to `path`.
         """
@@ -228,55 +242,64 @@ class MDDocument:
         self._path.write_text(content)
 
     @property
-    def title(self) -> Text:
+    def title(self):
+        # type: () -> Text
         """
         `MDDocument` title or an empty string.
         """
         return self._title
 
     @title.setter
-    def title(self, title: Text) -> None:
+    def title(self, title):
+        # type: (Text) -> None
         self._title = title
         self._content = self._build_content()
 
     @property
-    def subtitle(self) -> Text:
+    def subtitle(self):
+        # type: () -> Text
         """
         `MDDocument` subtitle or an empty string.
         """
         return self._subtitle
 
     @subtitle.setter
-    def subtitle(self, subtitle: Text) -> None:
+    def subtitle(self, subtitle):
+        # type: (Text) -> None
         self._subtitle = subtitle
         self._content = self._build_content()
 
     @property
-    def toc_section(self) -> Text:
+    def toc_section(self):
+        # type: () -> Text
         """
         Document Tree of Contents section or an empty line.
         """
         return self._toc_section
 
     @toc_section.setter
-    def toc_section(self, toc_section: Text) -> None:
+    def toc_section(self, toc_section):
+        # type: (Text) -> None
         self._toc_section = toc_section
 
     @property
-    def sections(self) -> List[Text]:
+    def sections(self):
+        # type: () -> List[Text]
         """
         All non-special `sections` of the document.
         """
         return self._sections
 
     @property
-    def path(self) -> Path:
+    def path(self):
+        # type: () -> Path
         """
         Output path of the document.
         """
         return self._path
 
-    def append(self, content: Text) -> None:
+    def append(self, content):
+        # type: (Text) -> None
         """
         Append `content` to the document.
         Handle trimming and sectioning the content and update
@@ -296,7 +319,8 @@ class MDDocument:
 
         self._content = self._build_content()
 
-    def append_title(self, title: Text, level: int) -> None:
+    def append_title(self, title, level):
+        # type: (Text, int) -> None
         """
         Append `title` of a given `level` to the document.
         Handle trimming and sectioning the content and update
@@ -310,7 +334,8 @@ class MDDocument:
         self._sections.append(section)
         self._content = self._build_content()
 
-    def generate_toc_section(self, max_depth: int = 3) -> Text:
+    def generate_toc_section(self, max_depth=3):
+        # type: (int) -> Text
         """
         Generate Table of Contents MD content.
 
@@ -347,7 +372,8 @@ class MDDocument:
         return "\n".join(toc_lines)
 
     @staticmethod
-    def extract_title(content: Text) -> Tuple[Text, Text]:
+    def extract_title(content):
+        # type: (Text) -> Tuple[Text, Text]
         """
         Extract title from the first line of content.
         If title is present -  return a title and a remnaing content.
@@ -375,7 +401,8 @@ class MDDocument:
         return title, content
 
     @classmethod
-    def _escape_title(cls, title: Text) -> Text:
+    def _escape_title(cls, title):
+        # type: (Text) -> Text
         for match in cls._escape_title_re.findall(title):
             title = title.replace(match, match.replace("_", "\\_"))
         return title

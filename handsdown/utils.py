@@ -1,7 +1,7 @@
 """
 Handful utils that do not deserve a separate module.
 """
-from typing import Text
+from typing import Text, Any
 
 
 class OSEnvironMock(dict):

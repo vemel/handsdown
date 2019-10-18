@@ -18,7 +18,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L11)
 
 ```python
-class ClassExample(*args, **kwargs)
+class ClassExample(args, kwargs)
 ```
 
 Google-style class example
@@ -33,7 +33,7 @@ Google-style class example
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L20)
 
 ```python
-def method_example(text: str = 'hello') -> int
+def method_example(text: str = hello) -> int
 ```
 
 Summary line.

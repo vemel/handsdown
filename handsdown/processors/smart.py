@@ -5,12 +5,14 @@
 - `handsdown.processors.rst.RSTDocstringProcessor`
 """
 
-from typing import Text
+from typing import Text, TYPE_CHECKING
 
 from handsdown.processors.rst import RSTDocstringProcessor
 from handsdown.processors.pep257 import PEP257DocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
-from handsdown.processors.section_map import SectionMap
+
+if TYPE_CHECKING:
+    from handsdown.processors.section_map import SectionMap
 
 
 class SmartDocstringProcessor(BaseDocstringProcessor):
@@ -18,15 +20,18 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
     Docstring processor that selects a `DocstringProcessor` based on a docstring content.
     """
 
-    def __init__(self) -> None:
+    def __init__(self):
+        # type: () -> None
         self._pep257_processor = PEP257DocstringProcessor()
         self._rst_processor = RSTDocstringProcessor()
         super(SmartDocstringProcessor, self).__init__()
 
-    def _parse_line(self, line: Text) -> None:
+    def _parse_line(self, line):
+        # type: (Text) -> None
         pass
 
-    def build_sections(self, content: Text) -> SectionMap:
+    def build_sections(self, content):
+        # type: (Text) -> SectionMap
         """
         Parse docstring and split it to sections with arrays of strings.
 

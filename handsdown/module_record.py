@@ -6,7 +6,7 @@ Dataclass for an imported module.
 from typing import Any, Text, Set, List, Generator, Dict, Optional, TYPE_CHECKING
 
 from handsdown.utils import get_title_from_path_part
-from handsdown.signature import SignatureBuilder
+from handsdown.function_repr import FunctionRepr, ClassRepr
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -21,6 +21,7 @@ class ModuleObjectRecord:
         source_line_number -- Line number of object definition.
         output_path -- Path to output MD file.
         object -- Imported module object.
+        parent -- Imported module object parent.
         import_string -- Module import string.
         level -- 0 for classes and functions, 1 for methods.
         title -- Object human-readable title.
@@ -68,15 +69,17 @@ class ModuleObjectRecord:
             parts = []
             if getattr(self.obj, "fget", None):
                 parts.append("#property getter")
-                parts.append(SignatureBuilder(self.obj.fget).build())
+                parts.append(FunctionRepr(self.obj.fget).render())
             if getattr(self.obj, "fset", None):
                 if parts:
                     parts.append("")
                 parts.append("#property setter")
-                parts.append(SignatureBuilder(self.obj.fset).build())
+                parts.append(FunctionRepr(self.obj.fset).render())
             return "\n".join(parts)
 
-        return SignatureBuilder(self.obj).build()
+        if self.is_class:
+            return ClassRepr(self.obj).render()
+        return FunctionRepr(self.obj).render()
 
 
 class ModuleRecord:

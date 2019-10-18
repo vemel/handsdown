@@ -11,10 +11,10 @@
 
 ## abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L30)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L36)
 
 ```python
-def abs_path(path_str: str) -> pathlib.Path
+def abs_path(path_str: Text) -> Path
 ```
 
 Validate `path_str` and make it absolute.
@@ -29,10 +29,10 @@ An absolute path.
 
 ## dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L43)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L50)
 
 ```python
-def dir_abs_path(path_str: str) -> pathlib.Path
+def dir_abs_path(path_str: Text) -> Path
 ```
 
 Validate directory `path_str` and make it absolute.
@@ -51,10 +51,10 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L62)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L70)
 
 ```python
-def existing_dir_abs_path(path_str: str) -> pathlib.Path
+def existing_dir_abs_path(path_str: Text) -> Path
 ```
 
 Validate existing directory `path_str` and make it absolute.
@@ -73,7 +73,7 @@ An absolute path.
 
 ## get_cli_parser
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L83)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L92)
 
 ```python
 def get_cli_parser() -> argparse.ArgumentParser
@@ -87,10 +87,10 @@ An `argparse.ArgumentParser` instance.
 
 ## git_repo
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L10)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L15)
 
 ```python
-def git_repo(git_repo_url: str) -> str
+def git_repo(git_repo_url: Text) -> Text
 ```
 
 Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
