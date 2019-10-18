@@ -4,8 +4,8 @@ set -e
 ROOT_PATH=$(dirname $(dirname $(realpath $0)))
 cd $ROOT_PATH
 
+pytest --cov-report html --cov=handsdown
 mypy handsdown
 pylint handsdown
-pytest
 
 ./scripts/update_docs.sh

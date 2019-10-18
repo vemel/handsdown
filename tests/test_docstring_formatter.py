@@ -3,7 +3,7 @@ import unittest
 from handsdown.docstring_formatter import DocstringFormatter
 
 
-class TestIndentTrimmer(unittest.TestCase):
+class TestDocstringFormatter(unittest.TestCase):
     def test_flask(self):
         docstring = """
             flask.app
@@ -11,7 +11,6 @@ class TestIndentTrimmer(unittest.TestCase):
 
             Docstring.
         """
-        print(DocstringFormatter(docstring).render())
         self.assertEqual(
             DocstringFormatter(docstring).render(), "# flask.app\n\nDocstring."
         )
@@ -21,7 +20,6 @@ class TestIndentTrimmer(unittest.TestCase):
 
             Correct indent.
         """
-        print(DocstringFormatter(docstring).render())
         self.assertEqual(
             DocstringFormatter(docstring).render(), "Wrong indent\n\nCorrect indent."
         )

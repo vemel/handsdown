@@ -1,8 +1,6 @@
 # PEP 287 - reStructuredText docstrings examples
 
-> Auto-generated documentation for [examples.rst_docstrings](../../examples/rst_docstrings.py) module..
-
-## Links
+> Auto-generated documentation for [examples.rst_docstrings](../../examples/rst_docstrings.py) module.
 
 - [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 287 - reStructuredText docstrings examples
   - [Links](#links)
@@ -10,6 +8,8 @@
     - [RSTExample.reference](#rstexamplereference)
     - [RSTExample.replace_test](#rstexamplereplace_test)
     - [RSTExample.rtype_test](#rstexamplertype_test)
+
+## Links
 
 [PEP 287 - reStructuredText Docstring Format](https://www.python.org/dev/peps/pep-0287/)
 

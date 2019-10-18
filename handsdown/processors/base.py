@@ -56,12 +56,19 @@ class BaseDocstringProcessor:
             self._current_indent = IndentTrimmer.get_line_indent(line)
             line = line.strip()
 
+            # adding new lines to a doctest code block
             if self._in_doctest_block:
                 self._parse_doctest_line(line)
                 continue
 
+            # adding new lines to a code block
             if self._in_codeblock:
                 self._parse_code_line(line)
+                continue
+
+            # adding new block on empty line outside of a code block
+            if not line:
+                self._add_block()
                 continue
 
             self._parse_line(line)
@@ -141,10 +148,6 @@ class BaseDocstringProcessor:
         self.section_map.trim_block(self.current_section_name)
 
     def _parse_line(self, line: Text) -> None:
-        if not line:
-            self._add_block()
-            return
-
         # MD-style codeblock starts with triple backticks
         if line.startswith("```") or line.startswith("~~~"):
             self._in_codeblock = True

@@ -1,8 +1,6 @@
 # Google docstrings examples
 
-> Auto-generated documentation for [examples.google_docstrings](../../examples/google_docstrings.py) module..
-
-## Links
+> Auto-generated documentation for [examples.google_docstrings](../../examples/google_docstrings.py) module.
 
 - [Index](../README.md#modules) / [Examples](index.md#examples) / Google docstrings examples
   - [Links](#links)
@@ -10,6 +8,8 @@
     - [ClassExample().method_example](#classexamplemethod_example)
   - [function_example](#function_example)
   - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
+
+## Links
 
 [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
 

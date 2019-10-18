@@ -42,3 +42,9 @@ class TestIndentTrimmer(unittest.TestCase):
         self.assertEqual(IndentTrimmer.get_line_indent("test"), 0)
         self.assertEqual(IndentTrimmer.get_line_indent("  "), 2)
         self.assertEqual(IndentTrimmer.get_line_indent(""), 0)
+
+    def test_trim_line(self):
+        self.assertEqual(IndentTrimmer.trim_line("   test", 2), " test")
+        self.assertEqual(IndentTrimmer.trim_line(" test", 2), "test")
+        self.assertEqual(IndentTrimmer.trim_line("test", 2), "test")
+        self.assertEqual(IndentTrimmer.trim_line("   ", 2), " ")

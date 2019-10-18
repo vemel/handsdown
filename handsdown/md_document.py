@@ -327,7 +327,10 @@ class MDDocument:
 
         sections = [self.title, self.subtitle] + self.sections
         for section in sections:
-            if not section.startswith("#") or not len(section.splitlines()) == 1:
+            if not section.startswith("#"):
+                continue
+
+            if not len(section.splitlines()) == 1:
                 continue
 
             header_symbols, title = section.rstrip().split(" ", 1)

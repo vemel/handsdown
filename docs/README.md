@@ -1,6 +1,6 @@
 # 🙌 Handsdown - Python documentation generator
 
-> Auto-generated documentation index..
+> Auto-generated documentation index.
 
 ![PyPI](https://img.shields.io/pypi/v/handsdown)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown)
@@ -38,7 +38,7 @@ Python docstring-based documentation generator for lazy perfectionists.
 - 📦 Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
 - 🔎 Gather all scattered `README.md` in submodules to one place
 - 🚧 Find related source code from every doc section.
-- #️⃣ Make links by just adding `module.import.String` to docs. 
+- #️⃣ Make links by just adding `module.import.String` to docs.
 - 💕 Do you use type annotations? Well, you get auto-discovery of related modules for free!
 
 ## 🤔 Do you need handsdown?
