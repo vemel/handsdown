@@ -12,7 +12,7 @@ Root of `handsdown` source code.
   - [Installation](#installation)
   - [Examples](#examples)
   - Modules
-    - [Main](__main__.md#main)
+    - [Main](magic_main.md#main)
     - [Cli Parser](cli_parser.md#cli-parser)
     - [DocstringFormatter](docstring_formatter.md#docstringformatter)
     - [Generator](generator.md#generator)

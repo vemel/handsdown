@@ -185,7 +185,7 @@ pip install handsdown
   - [PEP 257 - reStructuredText docstrings examples](examples/pep257_docstrings.md#pep-257---restructuredtext-docstrings-examples)
   - [PEP 287 - reStructuredText docstrings examples](examples/rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
 - [Handsdown](handsdown/index.md#handsdown)
-  - [Main](handsdown/__main__.md#main)
+  - [Main](handsdown/magic_main.md#main)
   - [CLI Parser](handsdown/cli_parser.md#cli-parser)
   - [DocstringFormatter](handsdown/docstring_formatter.md#docstringformatter)
   - [Generator](handsdown/generator.md#generator)
