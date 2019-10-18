@@ -172,7 +172,7 @@ Install using `pip` from PyPI
 pip install handsdown
 ```
 
-oOr directly from GitHub if you cannot wait to test new features
+or directly from GitHub if you cannot wait to test new features
 
 ```bash
 pip install git+https://github.com/vemel/handsdown.git
