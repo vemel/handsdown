@@ -5,36 +5,22 @@ from setuptools import setup
 from setuptools import find_packages
 import __version__ as version_data
 
-ROOT_PATH = Path(__file__).absolute().parent
-README_PATH = ROOT_PATH / "README.md"
-DESCRIPTION = README_PATH.read_text().split("\n")[0]
-URL = f"https://github.com/vemel/{ROOT_PATH.name}"
+root_path = Path(__file__).absolute().parent
+readme_path = root_path / "README.md"
+description = "Python docstring-based documentation generator for lazy perfectionists."
 
 version = version_data.__version__
 
-#######################################
-# USER INPUTS:
-AUTHOR = "Vlad Emelianov"
-AUTHOR_EMAIL = "vlad.emelianov.nz@gmail.com"
-
-# Required Packages
-REQUIRED = []
-
-# EXTERNAL DEPENDENCY LINKS
-DEPENDENCY_LINKS = []
-
-# Optional Packages
-EXTRAS = {}
 
 setup(
-    name=ROOT_PATH.name,
+    name=root_path.name,
     version=version,
-    description=DESCRIPTION,
-    long_description=README_PATH.read_text(),
+    description=description,
+    long_description=readme_path.read_text(),
     long_description_content_type="text/markdown",
-    url=URL,
-    author=AUTHOR,
-    author_email=AUTHOR_EMAIL,
+    url="https://vemel.github.io/handsdown/",
+    author="Vlad Emelianov",
+    author_email="vlad.emelianov.nz@gmail.com",
     packages=find_packages(
         exclude=[
             "tests",
@@ -46,11 +32,11 @@ setup(
             "examples.*",
         ]
     ),
-    install_requires=REQUIRED,
-    extras_require=EXTRAS,
+    install_requires=[],
+    extras_require={},
     include_package_data=False,
     zip_safe=True,
-    dependency_links=DEPENDENCY_LINKS,
+    dependency_links=[],
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Environment :: Console",
@@ -69,7 +55,7 @@ setup(
     ],
     entry_points={"console_scripts": ["handsdown = handsdown.main:main"]},
     project_urls={
-        "Source": "https://github.com/vemel/handsdown",
-        "Documentation": f"https://github.com/vemel/handsdown/tree/{version}/docs/handsdown_index.md#handsdown",
+        "Source": "https://github.com/vemel/handsdown/",
+        "Documentation": "https://vemel.github.io/handsdown/",
     },
 )
