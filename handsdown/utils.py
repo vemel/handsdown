@@ -1,20 +1,27 @@
 """
 Handful utils that do not deserve a separate module.
 """
-from collections import UserDict
 from typing import Text
 
 
-class OSEnvironMock(UserDict):
+class OSEnvironMock(dict):
     """
     Mock for `os.environ` that returns `env` string isntead of undefined variables.
     """
 
-    def __missing__(self, key: Text) -> Text:
+    def __getitem__(self, key):
+        # type: (Text) -> Any
+        if key not in self:
+            return self.__missing__(key)
+        return self[key]
+
+    def __missing__(self, key):
+        # type: (Text) -> Text
         return "env"
 
 
-def get_title_from_path_part(path_part: Text) -> Text:
+def get_title_from_path_part(path_part):
+    # type: (Text) -> Text
     """
     Convert `pathlib.Path` part to a human-readable title.
     Replace underscores with spaces and capitalize result.

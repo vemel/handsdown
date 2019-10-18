@@ -1,16 +1,17 @@
+# -*- coding: future_fstrings -*-
 """
 Dataclass for an imported module.
 """
 
-from dataclasses import dataclass
-from pathlib import Path
-from typing import Any, Text, Set, List, Generator, Dict, Optional
+from typing import Any, Text, Set, List, Generator, Dict, Optional, TYPE_CHECKING
 
 from handsdown.utils import get_title_from_path_part
 from handsdown.signature import SignatureBuilder
 
+if TYPE_CHECKING:
+    from pathlib import Path
 
-@dataclass
+
 class ModuleObjectRecord:
     """
     Dataclass for an imported module object.
@@ -29,16 +30,30 @@ class ModuleObjectRecord:
         signature -- Object signature.
     """
 
-    source_path: Path
-    source_line_number: int
-    output_path: Path
-    object: Any
-    import_string: Text
-    level: int
-    title: Text
-    docstring: Text
-    is_class: bool
-    is_related: bool
+    def __init__(
+        self,
+        source_path,  # type: Path
+        source_line_number,  # type: int
+        output_path,  # type: Path
+        obj,  # type: Any
+        import_string,  # type: Text
+        level,  # type: int
+        title,  # type: Text
+        docstring,  # type: Text
+        is_class,  # type: bool
+        is_related,  # type: bool
+    ):
+        # type: (...) -> None
+        self.source_path = source_path
+        self.source_line_number = source_line_number
+        self.output_path = output_path
+        self.obj = obj
+        self.import_string = import_string
+        self.level = level
+        self.title = title
+        self.docstring = docstring
+        self.is_class = is_class
+        self.is_related = is_related
 
     @property
     def signature(self):
@@ -49,22 +64,21 @@ class ModuleObjectRecord:
         Returns:
             A string with object signature.
         """
-        if isinstance(self.object, property):
+        if isinstance(self.obj, property):
             parts = []
-            if getattr(self.object, "fget", None):
+            if getattr(self.obj, "fget", None):
                 parts.append("#property getter")
-                parts.append(SignatureBuilder(self.object.fget).build())
-            if getattr(self.object, "fset", None):
+                parts.append(SignatureBuilder(self.obj.fget).build())
+            if getattr(self.obj, "fset", None):
                 if parts:
                     parts.append("")
                 parts.append("#property setter")
-                parts.append(SignatureBuilder(self.object.fset).build())
+                parts.append(SignatureBuilder(self.obj.fset).build())
             return "\n".join(parts)
 
-        return SignatureBuilder(self.object).build()
+        return SignatureBuilder(self.obj).build()
 
 
-@dataclass
 class ModuleRecord:
     """
     Dataclass for an imported module.
@@ -79,15 +93,27 @@ class ModuleRecord:
         docstring -- Module docstring.
     """
 
-    source_path: Path
-    output_path: Path
-    module: Any
-    title: Text
-    import_string: Text
-    objects: List[ModuleObjectRecord]
-    docstring: Text
+    def __init__(
+        self,
+        source_path,  # type: Path
+        output_path,  # type: Path
+        module,  # type: Any
+        title,  # type: Text
+        import_string,  # type: Text
+        objects,  # type: List[ModuleObjectRecord]
+        docstring,  # type: Text
+    ):
+        # type: (...) -> None
+        self.source_path = source_path
+        self.output_path = output_path
+        self.module = module
+        self.title = title
+        self.import_string = import_string
+        self.objects = objects
+        self.docstring = docstring
 
-    def get_import_string_parts(self) -> List[Text]:
+    def get_import_string_parts(self):
+        # type: () -> List[Text]
         """
         Get parts of module `import_string`.
 
@@ -107,7 +133,8 @@ class ModuleRecord:
         """
         return self.import_string.split(".")
 
-    def get_title_parts(self) -> List[Text]:
+    def get_title_parts(self):
+        # type: () -> List[Text]
         """
         Get parts of module title from module import string.
         If `title` is set, last part replaced with `title`.
@@ -143,11 +170,13 @@ class ModuleRecordList:
     Aggregation of `ModuleRecord` objects.
     """
 
-    def __init__(self) -> None:
-        self.data: List[ModuleRecord] = []
-        self.import_string_map: Dict[Text, Any] = {}
+    def __init__(self):
+        # type: () -> None
+        self.data = []  # type: List[ModuleRecord]
+        self.import_string_map = {}  # type: Dict[Text, Any]
 
-    def find_object(self, import_string: Text) -> Optional[ModuleObjectRecord]:
+    def find_object(self, import_string):
+        # type: (Text) -> Optional[ModuleObjectRecord]
         """
         Find `ModuleObjectRecord` by it's import string.
 
@@ -159,7 +188,8 @@ class ModuleRecordList:
         """
         return self.import_string_map.get(import_string)
 
-    def get_package_names(self) -> Set[Text]:
+    def get_package_names(self):
+        # type: () -> Set[Text]
         """
         Get top level import strings.
 
@@ -168,7 +198,8 @@ class ModuleRecordList:
         """
         return {i.import_string.split(".")[0] for i in self}
 
-    def add(self, module_record: ModuleRecord) -> None:
+    def add(self, module_record):
+        # type: (ModuleRecord) -> None
         """
         Add new `ModuleRecord`.
 
@@ -181,7 +212,8 @@ class ModuleRecordList:
             import_string = f"{module_record.import_string}.{obj.import_string}"
             self.import_string_map[import_string] = obj
 
-    def __iter__(self) -> Generator[ModuleRecord, None, None]:
+    def __iter__(self):
+        # type: () -> Generator[ModuleRecord, None, None]
         """
         Iterate over all added `ModuleRecord` entries.
 

@@ -367,7 +367,7 @@ class Loader:
             module_object_record = ModuleObjectRecord(
                 import_string=object_name,
                 level=0,
-                object=inspect_object,
+                obj=inspect_object,
                 docstring=docstring,
                 title=object_name,
                 source_path=source_path,
@@ -399,7 +399,7 @@ class Loader:
             New `ModuleObjectRecord` instances.
         """
         object_name = module_object_record.import_string
-        inspect_object = module_object_record.object
+        inspect_object = module_object_record.obj
         source_path = module_object_record.source_path
 
         for property_name in dir(inspect_object):
@@ -420,7 +420,7 @@ class Loader:
                 yield ModuleObjectRecord(
                     import_string=import_string,
                     level=1,
-                    object=property_object,
+                    obj=property_object,
                     docstring=self._get_object_docstring(property_object),
                     title=title,
                     source_path=source_path,
@@ -442,7 +442,7 @@ class Loader:
             New `ModuleObjectRecord` instances.
         """
         object_name = module_object_record.import_string
-        inspect_object = module_object_record.object
+        inspect_object = module_object_record.obj
         source_path = module_object_record.source_path
 
         object_members = inspect.getmembers(
@@ -461,7 +461,7 @@ class Loader:
             yield ModuleObjectRecord(
                 import_string=import_string,
                 level=1,
-                object=inspect_method,
+                obj=inspect_method,
                 docstring=self._get_object_docstring(inspect_method),
                 title=title,
                 source_path=source_path,

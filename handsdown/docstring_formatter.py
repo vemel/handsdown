@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Translator of docstrings to Markdown format.
 """
@@ -18,14 +19,16 @@ class DocstringFormatter:
         docstring -- Raw docstring.
     """
 
-    def __init__(self, docstring: Text) -> None:
+    def __init__(self, docstring):
+        # type: (Text) -> None
         docstring = self._cleanup(docstring)
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         lines = docstring.split("\n")
         self._lines = IndentTrimmer.trim_lines(lines)
 
     @staticmethod
-    def _cleanup(docstring: Text) -> Text:
+    def _cleanup(docstring):
+        # type: (Text) -> Text
         """
         Fix multiline docstrings starting with no newline after quotes.
 
@@ -48,7 +51,8 @@ class DocstringFormatter:
 
         return IndentTrimmer.trim_text(docstring)
 
-    def _parse_flask_title(self) -> None:
+    def _parse_flask_title(self):
+        # type: () -> None
         lines = list(self._lines)
         for index, line in enumerate(lines):
             if line.startswith("~~~~"):
@@ -56,7 +60,8 @@ class DocstringFormatter:
                     self._lines[index - 1] = f"# {self._lines[index - 1]}"
                 self._lines.pop(index)
 
-    def render(self) -> Text:
+    def render(self):
+        # type: () -> Text
         """
         Get Markdown-friendly docstring.
 

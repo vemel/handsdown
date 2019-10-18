@@ -1,3 +1,4 @@
+# -*- coding: future_fstrings -*-
 """
 Utility for removing indentation for sections and lines.
 """
@@ -14,7 +15,8 @@ class IndentTrimmer:
     """
 
     @staticmethod
-    def trim_empty_lines(text: Text) -> Text:
+    def trim_empty_lines(text):
+        # type: (Text) -> Text
         """
         Trim empty lines in the begging and the end of the text.
 
@@ -36,7 +38,8 @@ class IndentTrimmer:
         return "\n".join(lines)
 
     @classmethod
-    def trim_text(cls, text: Text) -> Text:
+    def trim_text(cls, text):
+        # type: (Text) -> Text
         """
         Trim minimum indent from each line of text.
 
@@ -55,7 +58,8 @@ class IndentTrimmer:
         return "\n".join(new_lines)
 
     @classmethod
-    def trim_lines(cls, lines: Iterable[Text]) -> List[Text]:
+    def trim_lines(cls, lines):
+        # type: (Iterable[Text]) -> List[Text]
         """
         Trim minimum indent from each line of text.
 
@@ -87,7 +91,8 @@ class IndentTrimmer:
         return new_lines
 
     @staticmethod
-    def trim_line(line: Text, indent: int) -> Text:
+    def trim_line(line, indent):
+        # type: (Text, int) -> Text
         """
         Trim indent from line if it is empty.
 
@@ -114,7 +119,8 @@ class IndentTrimmer:
         return line.lstrip()
 
     @staticmethod
-    def get_line_indent(line: Text) -> int:
+    def get_line_indent(line):
+        # type: (Text) -> int
         """
         Get indent length of the line.
 
