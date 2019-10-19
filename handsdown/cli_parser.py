@@ -7,7 +7,7 @@ import argparse
 
 from typing import Text
 
-from pathlib2 import Path
+from handsdown.path_finder import Path
 
 
 def git_repo(git_repo_url):

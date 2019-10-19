@@ -1,11 +1,8 @@
 import unittest
-
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
-
 import argparse
+
+from handsdown.path_finder import Path
+
 
 from handsdown.cli_parser import (
     abs_path,

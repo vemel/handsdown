@@ -16,7 +16,7 @@ Loader for python source code.
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L32)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L34)
 
 ```python
 class Loader(
@@ -41,9 +41,13 @@ my_module_utils = loader.import_module('my_module.utils')
 - `output_path` - Docs output path.
 - `logger` - Logger instance.
 
+#### See also
+
+- [Path](path_finder.md#path)
+
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L205)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L207)
 
 ```python
 def get_import_string(source_path: Path) -> Text
@@ -70,9 +74,13 @@ loader.get_import_string('/root/my_module/__init__.py')
 
 A Python import string.
 
+#### See also
+
+- [Path](path_finder.md#path)
+
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L93)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L95)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]
@@ -92,17 +100,25 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 - [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
 
+#### See also
+
+- [Path](path_finder.md#path)
+
 ### Loader().get_output_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L81)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L83)
 
 ```python
 def get_output_path(source_path: Path) -> Path
 ```
 
+#### See also
+
+- [Path](path_finder.md#path)
+
 ### Loader.get_source_line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L490)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L492)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -118,7 +134,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L235)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L237)
 
 ```python
 def import_module(file_path: Path) -> Any
@@ -140,9 +156,13 @@ Import module using `import_paths` list. Clean up all patches afterwards.
 
 Imported module object.
 
+#### See also
+
+- [Path](path_finder.md#path)
+
 ### Loader().setup
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L65)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L67)
 
 ```python
 def setup() -> None
@@ -155,7 +175,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L26)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L28)
 
 ```python
 class LoaderError()

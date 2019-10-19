@@ -1,13 +1,8 @@
 import unittest
-
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
-
 from tempfile import NamedTemporaryFile
 
 from handsdown.md_document import MDDocument
+from handsdown.path_finder import Path
 
 
 class TestMDDocument(unittest.TestCase):

@@ -1,11 +1,6 @@
 import unittest
 
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
-
-from handsdown.path_finder import PathFinder, PathFinderError
+from handsdown.path_finder import PathFinder, PathFinderError, Path
 
 
 class TestPathFinder(unittest.TestCase):

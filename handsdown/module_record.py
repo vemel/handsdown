@@ -9,8 +9,8 @@ from handsdown.utils import get_title_from_path_part
 from handsdown.function_repr import FunctionRepr, ClassRepr
 
 if TYPE_CHECKING:
-    from pathlib2 import Path
     from handsdown.function_repr import TypeHintData, DefaultValueData
+    from handsdown.path_finder import Path
 
 
 class ModuleObjectRecord:

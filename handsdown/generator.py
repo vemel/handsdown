@@ -10,14 +10,12 @@ import logging
 
 from typing import Iterable, Text, List, Optional, Union, Set, TYPE_CHECKING
 
-from pathlib2 import Path
-
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.module_record import ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import get_title_from_path_part
-from handsdown.path_finder import PathFinder
+from handsdown.path_finder import PathFinder, Path
 
 if TYPE_CHECKING:
     from handsdown.processors.base import BaseDocstringProcessor

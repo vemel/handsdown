@@ -10,14 +10,16 @@ import inspect
 import os
 from typing import Optional, Text, Any, Callable, Generator, TYPE_CHECKING
 
-from pathlib2 import Path
-from mock import patch, MagicMock
+try:
+    from unittest.mock import patch, MagicMock
+except ImportError:
+    from mock import patch, MagicMock
 
 from handsdown.docstring_formatter import DocstringFormatter
 from handsdown.utils import OSEnvironMock
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.utils import get_title_from_path_part
-from handsdown.path_finder import PathFinder
+from handsdown.path_finder import PathFinder, Path
 
 if TYPE_CHECKING:
     import logging

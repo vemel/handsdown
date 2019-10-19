@@ -7,7 +7,11 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 import fnmatch
 from typing import Text, List, Iterable, Generator
 
-from pathlib2 import Path
+try:
+    from pathlib import Path as PathlibPath
+except ImportError:
+    from pathlib2 import Path as PathlibPath
+
 
 __all__ = ["PathFinder", "PathFinderError"]
 
@@ -15,6 +19,12 @@ __all__ = ["PathFinder", "PathFinderError"]
 class PathFinderError(Exception):
     """
     Main error for `PathFinder`.
+    """
+
+
+class Path(type(PathlibPath())):
+    """
+    Regular `pathlib.Path` or `pathlib2.Path`
     """
 
 

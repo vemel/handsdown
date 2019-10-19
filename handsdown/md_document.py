@@ -13,7 +13,7 @@ from handsdown.path_finder import PathFinder
 
 if TYPE_CHECKING:
     from types import TracebackType
-    from pathlib2 import Path
+    from handsdown.path_finder import Path
 
 
 __all__ = ["MDDocument"]
