@@ -270,7 +270,11 @@ class FunctionRepr(object):
 
     def __init__(self, func):
         # type: (Any) -> None
-        self.name = func.__name__
+        if hasattr(func, "__name__"):
+            self.name = func.__name__
+        else:
+            self.name = str(func)
+
         self.func = func
         self._function_data = FunctionData(self.name)
 
