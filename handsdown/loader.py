@@ -54,9 +54,6 @@ class Loader:
         self._output_path = output_path
         self._sys_path_dirty = False
         self._os_environ_patch = mock.patch("os.environ", OSEnvironMock(os.environ))
-        self._type_checking_patch = mock.patch(
-            "typing.TYPE_CHECKING", TypeCheckingMock()
-        )
         self._logging_logger_patch = mock.patch("logging.Logger", mock.MagicMock())
         self._logging_config_patch = mock.patch(
             "logging.config.dictConfig", mock.MagicMock()
@@ -263,18 +260,18 @@ class Loader:
         Returns:
             Imported module object.
         """
+        import_string = self.get_import_string(file_path)
         self._sys_path_patch.start()
         self._os_environ_patch.start()
-        self._type_checking_patch.start()
         self._logging_logger_patch.start()
         self._logging_config_patch.start()
 
-        import_string = self.get_import_string(file_path)
-        module = importlib.import_module(import_string)
+        self._logger.debug("Importing {} as {}".format(file_path, import_string))
+        with mock.patch("typing.TYPE_CHECKING", TypeCheckingMock(file_path)):
+            module = importlib.import_module(import_string)
 
         self._sys_path_patch.stop()
         self._os_environ_patch.stop()
-        self._type_checking_patch.stop()
         self._logging_logger_patch.stop()
         self._logging_config_patch.stop()
 
