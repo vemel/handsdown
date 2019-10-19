@@ -13,7 +13,7 @@ Handful utils that do not deserve a separate module.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L7)
 
 ```python
-class OSEnvironMock(args, kwargs)
+class OSEnvironMock()
 ```
 
 Mock for `os.environ` that returns `env` string isntead of undefined variables.

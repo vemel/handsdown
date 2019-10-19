@@ -8,6 +8,7 @@ Loader for python source code.
   - [Loader](#loader)
     - [Loader().get_import_string](#loaderget_import_string)
     - [Loader().get_module_record](#loaderget_module_record)
+    - [Loader().get_output_path](#loaderget_output_path)
     - [Loader.get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
     - [Loader().setup](#loadersetup)
@@ -91,6 +92,14 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 - [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
 
+### Loader().get_output_path
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L81)
+
+```python
+def get_output_path(source_path: Path) -> Path
+```
+
 ### Loader.get_source_line_number
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L490)
@@ -149,7 +158,7 @@ Frameworks supported:
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L26)
 
 ```python
-class LoaderError(args, kwargs)
+class LoaderError()
 ```
 
 Main error for [Loader](#loader) class.

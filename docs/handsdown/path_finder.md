@@ -145,7 +145,7 @@ A relative path to `target`.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L15)
 
 ```python
-class PathFinderError(args, kwargs)
+class PathFinderError()
 ```
 
 Main error for [PathFinder](#pathfinder).

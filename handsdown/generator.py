@@ -134,7 +134,10 @@ class Generator:
         """
         self._logger.debug(f"Removing orphaned docs")
         preserve_paths = {i.output_path for i in self._module_records}
-        preserve_paths.update(self._error_output_paths)
+
+        # skip error output paths
+        # preserve_paths.update(self._error_output_paths)
+
         for doc_path in self._output_path.glob("**/*.md"):
             if doc_path == self._index_path:
                 continue

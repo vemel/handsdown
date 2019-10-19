@@ -17,7 +17,7 @@ Utility for removing indentation for sections and lines.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L12)
 
 ```python
-class IndentTrimmer(args, kwargs)
+class IndentTrimmer()
 ```
 
 Utility for removing indentation for sections and lines.

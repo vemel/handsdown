@@ -18,7 +18,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L11)
 
 ```python
-class ClassExample(args, kwargs)
+class ClassExample()
 ```
 
 Google-style class example

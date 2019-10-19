@@ -1,8 +1,8 @@
-# PEP 257 - reStructuredText docstrings examples
+# PEP 257 - PEP 257 and Google docstrings examples
 
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) module.
 
-- [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 257 - reStructuredText docstrings examples
+- [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 257 - PEP 257 and Google docstrings examples
   - [Links](#links)
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexamplemethod_example)
@@ -17,7 +17,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
 
 ```python
-class ClassExample(args, kwargs)
+class ClassExample()
 ```
 
 PEP257-style class example

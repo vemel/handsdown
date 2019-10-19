@@ -189,7 +189,7 @@ pip install git+https://github.com/vemel/handsdown.git
 - [Examples](examples/index.md#examples)
   - [Comment Typed](examples/comment_typed.md#comment-typed)
   - [Google docstrings examples](examples/google_docstrings.md#google-docstrings-examples)
-  - [PEP 257 - reStructuredText docstrings examples](examples/pep257_docstrings.md#pep-257---restructuredtext-docstrings-examples)
+  - [PEP 257 - PEP 257 and Google docstrings examples](examples/pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
   - [PEP 287 - reStructuredText docstrings examples](examples/rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
   - [Typed](examples/typed.md#typed)
 - [Handsdown](handsdown/index.md#handsdown)

@@ -13,7 +13,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
 
 ```python
-class MyValue(args, kwargs)
+class MyValue()
 ```
 
 ## Typed

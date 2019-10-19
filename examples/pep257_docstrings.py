@@ -1,5 +1,5 @@
 """
-# PEP 257 - reStructuredText docstrings examples
+# PEP 257 - PEP 257 and Google docstrings examples
 
 ## Links
 
