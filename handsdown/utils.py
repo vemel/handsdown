@@ -6,7 +6,7 @@ from typing import Text, Any
 
 class OSEnvironMock(dict):
     """
-    Mock for `os.environ` that returns `env` string isntead of undefined variables.
+    Mock for `os.environ` that returns `env` string instead of undefined variables.
     """
 
     def __getitem__(self, key):

@@ -400,6 +400,11 @@ class FunctionRepr(object):
         for parameter in self._function_data.parameters:
             if isinstance(parameter.type_hint, TypeHintData):
                 result[parameter.name] = parameter.type_hint
+
+        return_type_hint = self._function_data.return_type_hint
+        if isinstance(return_type_hint, TypeHintData):
+            result["return"] = return_type_hint
+
         return result
 
     def get_defaults(self):

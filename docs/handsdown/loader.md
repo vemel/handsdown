@@ -92,6 +92,10 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 - [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
 
+#### See also
+
+- [ModuleRecord](module_record.md#modulerecord)
+
 ### Loader().get_output_path
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L85)

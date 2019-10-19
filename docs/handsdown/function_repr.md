@@ -21,7 +21,7 @@
 
 ## ClassRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L468)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L473)
 
 ```python
 class ClassRepr(inspect_class: Any) -> None
@@ -132,7 +132,7 @@ Inspired a lot by built-in `inspect.Signature`.
 
 ### FunctionRepr().get_defaults
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L405)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L410)
 
 ```python
 def get_defaults() -> Dict[Text, DefaultValueData]
@@ -145,6 +145,10 @@ Can be used to find related objects in the project.
 #### Returns
 
 A list of all set [DefaultValueData](#defaultvaluedata)
+
+#### See also
+
+- [DefaultValueData](#defaultvaluedata)
 
 ### FunctionRepr().get_type_hints
 
@@ -162,9 +166,13 @@ Can be used to find related objects in the project.
 
 A list of all set [TypeHintData](#typehintdata)
 
+#### See also
+
+- [TypeHintData](#typehintdata)
+
 ### FunctionRepr().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L435)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L440)
 
 ```python
 def render() -> Text

@@ -16,7 +16,7 @@ Handful utils that do not deserve a separate module.
 class OSEnvironMock()
 ```
 
-Mock for `os.environ` that returns `env` string isntead of undefined variables.
+Mock for `os.environ` that returns `env` string instead of undefined variables.
 
 ## get_title_from_path_part
 

@@ -148,6 +148,10 @@ A list of import string parts as strings.
 def get_reference_objects() -> List[ModuleObjectRecord]
 ```
 
+#### See also
+
+- [ModuleObjectRecord](#moduleobjectrecord)
+
 ### ModuleRecord().get_title_parts
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/module_record.py#L178)
@@ -221,6 +225,10 @@ Find [ModuleObjectRecord](#moduleobjectrecord) by it's import string.
 #### Returns
 
 Found [ModuleObjectRecord](#moduleobjectrecord) instance or None.
+
+#### See also
+
+- [ModuleObjectRecord](#moduleobjectrecord)
 
 ### ModuleRecordList().get_package_names
 
