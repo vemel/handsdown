@@ -208,4 +208,5 @@ pip install git+https://github.com/vemel/handsdown.git
     - [Rst](handsdown/processors/rst.md#rst)
     - [SectionMap](handsdown/processors/section_map.md#sectionmap)
     - [Smart](handsdown/processors/smart.md#smart)
+  - [Sentinel](handsdown/sentinel.md#sentinel)
   - [Utils](handsdown/utils.md#utils)

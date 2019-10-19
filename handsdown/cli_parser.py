@@ -5,11 +5,9 @@
 import re
 import argparse
 
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
 from typing import Text
+
+from pathlib2 import Path
 
 
 def git_repo(git_repo_url):

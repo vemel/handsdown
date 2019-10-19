@@ -4,14 +4,10 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.
 """
 
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
 import fnmatch
-
 from typing import Text, List, Iterable, Generator
 
+from pathlib2 import Path
 
 __all__ = ["PathFinder", "PathFinderError"]
 

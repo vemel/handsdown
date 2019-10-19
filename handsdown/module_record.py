@@ -9,7 +9,8 @@ from handsdown.utils import get_title_from_path_part
 from handsdown.function_repr import FunctionRepr, ClassRepr
 
 if TYPE_CHECKING:
-    from pathlib import Path
+    from pathlib2 import Path
+    from handsdown.function_repr import TypeHintData
 
 
 class ModuleObjectRecord:
@@ -57,12 +58,11 @@ class ModuleObjectRecord:
         self.is_class = is_class
         self.is_related = is_related
         self.module_record = module_record
-        self.related_object_names = []
-        self._type_hints = {}
+        self._type_hints = {}  # type: Dict[Text, TypeHintData]
 
     def __repr__(self):
         # type: () -> Text
-        return f"<ModuleRecordObject title={self.title}>"
+        return f"<ModuleObjectRecord title={self.title}>"
 
     @property
     def signature(self):
@@ -86,20 +86,21 @@ class ModuleObjectRecord:
             return "\n".join(parts)
 
         if self.is_class:
-            function_repr = ClassRepr(self.obj)
+            function_repr = ClassRepr(self.obj)  # type: FunctionRepr
         else:
             function_repr = FunctionRepr(self.obj)
 
         result = function_repr.render()
-        self._type_hints = list(function_repr.get_type_hints().values())
+        self._type_hints = function_repr.get_type_hints()
         return result
 
     def get_reference_objects(self):
+        # type: () -> List[ModuleObjectRecord]
         result = []
         objects = self.module_record.objects
         parent_import_string = self.import_string.rsplit(".", 1)[0]
-        references = set()
-        for type_hint in self._type_hints:
+        references = set()  # type: Set[Text]
+        for type_hint in self._type_hints.values():
             references.update(type_hint.get_class_names())
         for obj in objects:
             if obj is self:
@@ -144,7 +145,6 @@ class ModuleRecord:
         self.import_string = import_string
         self.objects = objects
         self.docstring = docstring
-        self.related_object_names = []
 
     def __repr__(self):
         # type: () -> Text
@@ -202,7 +202,9 @@ class ModuleRecord:
 
         return result
 
-    def get_reference_objects(self):
+    @staticmethod
+    def get_reference_objects():
+        # type: () -> List[ModuleObjectRecord]
         return []
 
 

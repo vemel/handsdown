@@ -82,9 +82,8 @@ class IndentTrimmer(object):
         Returns:
             A list of lines with trimmed indent.
         """
-        indents = (cls.get_line_indent(line) for line in lines if line.strip())
+        indents = [cls.get_line_indent(line) for line in lines if line.strip()]
         min_indent = 0
-        indents = list(indents)
         if indents:
             min_indent = min(indents)
 

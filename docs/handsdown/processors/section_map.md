@@ -66,7 +66,7 @@ Block lines as a text.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L51)
 
 ```python
-class SectionMap(args, kwargs)
+class SectionMap() -> None
 ```
 
 Dict-based storage for parsed [Section](#section) list for
@@ -92,7 +92,7 @@ Iterate over existing [Section](#section) objects.
 
 ### SectionMap().add_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L82)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L88)
 
 ```python
 def add_block(section_name: Text) -> None
@@ -107,7 +107,7 @@ If [Section](#section) does not exist - it is not created.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L60)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L65)
 
 ```python
 def add_line(section_name: Text, line: Text) -> None
@@ -123,7 +123,7 @@ If line and section are empty - section is not created.
 
 ### SectionMap().trim_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L96)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L102)
 
 ```python
 def trim_block(section_name: Text) -> None

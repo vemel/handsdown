@@ -8,12 +8,9 @@ from __future__ import unicode_literals
 import re
 import logging
 
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
-
 from typing import Iterable, Text, List, Optional, Union, TYPE_CHECKING
+
+from pathlib2 import Path
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -413,7 +410,7 @@ class Generator:
             )
 
     def _render_docstring(self, module_record, md_document):
-        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument, List[ModuleObjectRecord]) -> None
+        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument) -> None
         """
         Get object docstring and convert it to a valid markdown using
         `handsdown.processors.base.BaseDocstringProcessor`.

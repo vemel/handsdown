@@ -13,7 +13,7 @@ class OSEnvironMock(dict):
         # type: (Text) -> Any
         if key not in self:
             return self.__missing__(key)
-        return self[key]
+        return super(OSEnvironMock, self).__getitem__(key)
 
     def __missing__(self, key):
         # type: (Text) -> Text

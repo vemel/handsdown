@@ -15,7 +15,7 @@ Loader for python source code.
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L36)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L32)
 
 ```python
 class Loader(
@@ -42,7 +42,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L209)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L205)
 
 ```python
 def get_import_string(source_path: Path) -> Text
@@ -71,7 +71,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L93)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]
@@ -93,7 +93,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader.get_source_line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L494)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L490)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -109,7 +109,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L239)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L235)
 
 ```python
 def import_module(file_path: Path) -> Any
@@ -133,7 +133,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L69)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L65)
 
 ```python
 def setup() -> None
@@ -146,7 +146,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L30)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L26)
 
 ```python
 class LoaderError(args, kwargs)

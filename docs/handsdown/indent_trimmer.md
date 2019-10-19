@@ -24,7 +24,7 @@ Utility for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L125)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L124)
 
 ```python
 def get_line_indent(line: Text) -> int
@@ -74,7 +74,7 @@ A stripped string.
 
 ### IndentTrimmer.trim_line
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L96)
 
 ```python
 def trim_line(line: Text, indent: int) -> Text

@@ -5,16 +5,12 @@ Loader for python source code.
 
 import importlib
 
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
-
 import sys
 import inspect
 import os
 from typing import Optional, Text, Any, Callable, Generator, TYPE_CHECKING
 
+from pathlib2 import Path
 from mock import patch, MagicMock
 
 from handsdown.docstring_formatter import DocstringFormatter

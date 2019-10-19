@@ -57,6 +57,11 @@ class SectionMap(dict):
     Value is a related `Section` instance.
     """
 
+    def __init__(self):
+        # type: () -> None
+        super(SectionMap, self).__init__()
+        self._order = []  # type: List[Text]
+
     def add_line(self, section_name, line):
         # type: (Text, Text) -> None
         """
@@ -71,6 +76,7 @@ class SectionMap(dict):
             if not line:
                 return
 
+            self._order.append(section_name)
             self[section_name] = Section(title=section_name, blocks=[])
 
         section = self[section_name]
@@ -118,5 +124,5 @@ class SectionMap(dict):
         Yields:
             `Section` objects in order of appearance.
         """
-        for section in self.values():
-            yield section
+        for section_name in self._order:
+            yield self[section_name]
