@@ -89,7 +89,7 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
         "Topic :: Documentation",
-        "Topic :: Documentation :: Sphinx"
+        "Topic :: Documentation :: Sphinx",
         "Topic :: Software Development :: Documentation",
         "Topic :: Software Development :: Code Generators",
         "Topic :: Software Development :: Libraries :: Python Modules",
