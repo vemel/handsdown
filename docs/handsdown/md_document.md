@@ -263,7 +263,7 @@ Read and parse content from `path`.
 ```python
 def render_doc_link(
     title: Text,
-    anchor: Text = ,
+    anchor: Text = '',
     target_path: Optional[Path] = None,
 ) -> Text
 ```

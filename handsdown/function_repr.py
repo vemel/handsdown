@@ -30,7 +30,31 @@ class TypeHintData:
         # type: () -> Text
         return self.render()
 
-    def __repr__(self):
+    def get_class_names(self):
+        # type: () -> List[Text]
+        s = self.render()
+        class_names = self._split_re.split(s)
+        class_names = [i for i in class_names if i]
+        return class_names
+
+
+class DefaultValueData:
+    _split_re = re.compile(r"[\(\) ,]")
+
+    def __init__(self, value):
+        # type: (Any) -> None
+        self.value = value
+
+    def render(self):
+        # type: () -> Text
+        s = repr(self.value)
+
+        if s.startswith("<") and " at 0x" in s:
+            s = s.split(" at ", 1)[0] + ">"
+
+        return s
+
+    def __str__(self):
         # type: () -> Text
         return self.render()
 
@@ -48,7 +72,7 @@ class ParameterData:
     def __init__(self, name):
         # type: (Text) -> None
         self.name = name
-        self.default = self.NOT_SET  # type: Any
+        self.default = self.NOT_SET  # type: Union[Sentinel, DefaultValueData]
         self.type_hint = self.NOT_SET  # type: Union[Sentinel, TypeHintData]
 
     def render(self):
@@ -158,7 +182,7 @@ class FunctionRepr(object):
         for index, value in enumerate(defaults):
             parameter_index = args_count - len(defaults) + index
             if parameter_index < len(parameters_data):
-                parameters_data[parameter_index].default = value
+                parameters_data[parameter_index].default = DefaultValueData(value)
 
         if parameters_data:
             if parameters_data[0].name in ("self", "cls"):
