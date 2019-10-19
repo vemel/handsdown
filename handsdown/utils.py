@@ -20,6 +20,30 @@ class OSEnvironMock(dict):
         return "env"
 
 
+class TypeCheckingMock:
+    """
+    Helper to turn on anf off `TYPE_CHECKING`.
+
+    Returns `True` for the first call, `False` for subsequent.
+    """
+
+    def __init__(self):
+        # type: () -> None
+        self._value = True
+
+    def __bool__(self):
+        # type: () -> bool
+        """
+        Check if TYPE_CHECKING should be enabled.
+
+        Returns:
+            `True` for the first call, `False` for subsequent.
+        """
+        result = self._value
+        self._value = False
+        return result
+
+
 def get_title_from_path_part(path_part):
     # type: (Text) -> Text
     """

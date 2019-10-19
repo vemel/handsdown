@@ -6,6 +6,7 @@ Handful utils that do not deserve a separate module.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
+  - [TypeCheckingMock](#typecheckingmock)
   - [get_title_from_path_part](#get_title_from_path_part)
 
 ## OSEnvironMock
@@ -18,9 +19,21 @@ class OSEnvironMock()
 
 Mock for `os.environ` that returns `env` string instead of undefined variables.
 
-## get_title_from_path_part
+## TypeCheckingMock
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L23)
+
+```python
+class TypeCheckingMock() -> None
+```
+
+Helper to turn on anf off `TYPE_CHECKING`.
+
+Returns `True` for the first call, `False` for subsequent.
+
+## get_title_from_path_part
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L47)
 
 ```python
 def get_title_from_path_part(path_part: Text) -> Text

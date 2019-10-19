@@ -15,9 +15,8 @@ except ImportError:
     import mock  # type: ignore
 
 from handsdown.docstring_formatter import DocstringFormatter
-from handsdown.utils import OSEnvironMock
+from handsdown.utils import OSEnvironMock, TypeCheckingMock, get_title_from_path_part
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
-from handsdown.utils import get_title_from_path_part
 from handsdown.path_finder import PathFinder, Path
 
 if TYPE_CHECKING:
@@ -55,7 +54,9 @@ class Loader:
         self._output_path = output_path
         self._sys_path_dirty = False
         self._os_environ_patch = mock.patch("os.environ", OSEnvironMock(os.environ))
-        self._type_checking_patch = mock.patch("typing.TYPE_CHECKING", True)
+        self._type_checking_patch = mock.patch(
+            "typing.TYPE_CHECKING", TypeCheckingMock()
+        )
         self._logging_logger_patch = mock.patch("logging.Logger", mock.MagicMock())
         self._logging_config_patch = mock.patch(
             "logging.config.dictConfig", mock.MagicMock()
