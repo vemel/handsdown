@@ -9,6 +9,13 @@ __all__ = ["FunctionRepr", "ClassRepr"]
 
 
 class TypeHintData:
+    """
+    Represent parameter type hint object.
+
+    Arguments:
+        type_hint -- Real type hint value
+    """
+
     _split_re = re.compile(r"[\]\[ ,]")
 
     def __init__(self, type_hint):
@@ -17,6 +24,17 @@ class TypeHintData:
 
     def render(self):
         # type: () -> Text
+        """
+        Render type hint to a string.
+
+        If `type_hint`:
+        - is a string - it returned as it is.
+        - has name - name is used as an output.
+        - otherwise raw `str` is used, `typing.` prefix removed
+
+        Returns:
+            A type hint representation.
+        """
         if isinstance(self.type_hint, str):
             return self.type_hint
 
@@ -29,10 +47,24 @@ class TypeHintData:
 
     def __str__(self):
         # type: () -> Text
+        """
+        Render type hint to a string.
+
+        See `render` function.
+
+        Returns:
+            A type hint representation.
+        """
         return self.render()
 
     def get_class_names(self):
         # type: () -> List[Text]
+        """
+        Get class names for a rendered type hint.
+
+        Returns:
+            A list of parsed class names.
+        """
         s = self.render()
         result = []
         for class_name in self._split_re.split(s):
@@ -51,6 +83,13 @@ class TypeHintData:
 
 
 class DefaultValueData:
+    """
+    Represent parameter default value.
+
+    Arguments:
+        value -- Real default value.
+    """
+
     _split_re = re.compile(r"[\(\) ,'\"<>]")
 
     def __init__(self, value):
@@ -59,6 +98,15 @@ class DefaultValueData:
 
     def render(self):
         # type: () -> Text
+        """
+        Render default value to a string.
+
+        `repr` of `value` is used, dynamic hash part is removed for dynamic objects
+        and `u`  flag is removed for unicode strings.
+
+        Returns:
+            A default value representation.
+        """
         s = repr(self.value)
 
         if s.startswith("<") and " at 0x" in s:
@@ -72,10 +120,28 @@ class DefaultValueData:
 
     def __str__(self):
         # type: () -> Text
+        """
+        Render default value to a string.
+
+        `See `render` function.
+
+        Returns:
+            A default value representation.
+        """
         return self.render()
 
     def get_class_names(self):
         # type: () -> List[Text]
+        """
+        Get import strings from a rendered default value.
+
+        If import string has several parts, it retuned all possible import
+        cases, e.g. for `my_module.test.Test` it produces `Test`, `test.Test`
+        and `my_module.test.Test`.
+
+        Returns:
+            A list of import strings.
+        """
         s = self.render()
         class_names = self._split_re.split(s)
         result = []
@@ -94,6 +160,16 @@ class DefaultValueData:
 
 
 class ParameterData:
+    """
+    Represent function parameter.
+
+    Arguments:
+        name -- Argument name.
+
+    Attributes:
+        NOT_SET -- Sentinel value to use if default value or type hint are not set.
+    """
+
     NOT_SET = Sentinel()
 
     def __init__(self, name):
@@ -104,6 +180,12 @@ class ParameterData:
 
     def render(self):
         # type: () -> Text
+        """
+        Render parameter data to a string.
+
+        Returns:
+            A parameter representation.
+        """
         if self.type_hint is not self.NOT_SET:
             if self.default is not self.NOT_SET:
                 return "{}: {} = {}".format(self.name, self.type_hint, self.default)
@@ -117,10 +199,25 @@ class ParameterData:
 
     def __str__(self):
         # type: () -> Text
+        """
+        Render parameter data to a string.
+
+        See `render` function.
+
+        Returns:
+            A parameter representation.
+        """
         return self.render()
 
 
 class FunctionData:
+    """
+    Represent function data.
+
+    Arguments:
+        name -- Function name.
+    """
+
     def __init__(self, name):
         # type: (Text) -> None
         self.name = name
@@ -130,6 +227,14 @@ class FunctionData:
 
     def render(self, multi_line=False):
         # type: (bool) -> Text
+        """
+        Render function data to a string.
+
+        Result is a valid Python function definition.
+
+        Returns:
+            A function representation.
+        """
         rendered_parameters = []
         for parameter in self.parameters:
             rendered_parameters.append(parameter.render())
@@ -149,6 +254,15 @@ class FunctionData:
 
 
 class FunctionRepr(object):
+    """
+    Renderer of a function signature.
+
+    Inspired a lot by built-in `inspect.Signature`.
+
+    Arguments:
+        func -- Function to represent.
+    """
+
     _single_type_re = re.compile(r".+#\s*type:\s*(.+)")
     _return_type_re = re.compile(r".*#\s*type:\s+\((.*)\)\s*->\s*(.+)")
     _line_lenght = 79
@@ -274,6 +388,14 @@ class FunctionRepr(object):
 
     def get_type_hints(self):
         # type: () -> Dict[Text, TypeHintData]
+        """
+        Return a list of `TypeHintData` for all parameters.
+
+        Can be used to find related objects in the project.
+
+        Returns:
+            A list of all set `TypeHintData`
+        """
         result = {}
         for parameter in self._function_data.parameters:
             if isinstance(parameter.type_hint, TypeHintData):
@@ -282,6 +404,14 @@ class FunctionRepr(object):
 
     def get_defaults(self):
         # type: () -> Dict[Text, DefaultValueData]
+        """
+        Return a list of `DefaultValueData` for all parameters.
+
+        Can be used to find related objects in the project.
+
+        Returns:
+            A list of all set `DefaultValueData`
+        """
         result = {}
         for parameter in self._function_data.parameters:
             if isinstance(parameter.default, DefaultValueData):
@@ -304,6 +434,15 @@ class FunctionRepr(object):
 
     def render(self):
         # type: () -> Text
+        """
+        Render function data to a string.
+
+        Result is a valid Python function definition. If result is too long -
+        splits it to multiple lines.
+
+        Returns:
+            A representaion of a function.
+        """
         self._function_data.parameters = self._get_parameters_data()
         self._function_data.definition = self._definition
         self._add_type_hints()
@@ -315,10 +454,27 @@ class FunctionRepr(object):
 
     def __str__(self):
         # type: () -> Text
+        """
+        Render function data to a string.
+
+        See `render` method.
+
+        Returns:
+            A representaion of a function.
+        """
         return self.render()
 
 
 class ClassRepr(FunctionRepr):
+    """
+    Renderer of a class `__init__` function signature.
+
+    Built on top of `FunctionRepr`, and changes definition to `class`.
+
+    Arguments:
+        inspect_class -- Class to represent.
+    """
+
     _definition = "class"
 
     def __init__(self, inspect_class):
