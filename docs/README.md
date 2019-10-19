@@ -64,9 +64,9 @@ And probably *do not* if you:
 ## 🐏 Examples
 
 `handsdown` built a nice
-[documentation](https://github.com/vemel/handsdown/blob/master/docs/README.md) for
+[documentation](https://vemel.github.io/handsdown/#-handsdown---python-documentation-generator) for
 itself to show it's abilities. Check how it works under the hood or discover
-[examples](https://github.com/vemel/handsdown/blob/master/docs/examples_index.md)
+[examples](https://vemel.github.io/handsdown/examples/#examples)
 with different docstrings format.
 
 ## 🎉 Usage
