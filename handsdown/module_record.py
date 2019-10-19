@@ -10,7 +10,7 @@ from handsdown.function_repr import FunctionRepr, ClassRepr
 
 if TYPE_CHECKING:
     from pathlib2 import Path
-    from handsdown.function_repr import TypeHintData
+    from handsdown.function_repr import TypeHintData, DefaultValueData
 
 
 class ModuleObjectRecord:
@@ -59,6 +59,7 @@ class ModuleObjectRecord:
         self.is_related = is_related
         self.module_record = module_record
         self._type_hints = {}  # type: Dict[Text, TypeHintData]
+        self._default_values = {}  # type: Dict[Text, DefaultValueData]
 
     def __repr__(self):
         # type: () -> Text
@@ -92,6 +93,7 @@ class ModuleObjectRecord:
 
         result = function_repr.render()
         self._type_hints = function_repr.get_type_hints()
+        self._default_values = function_repr.get_defaults()
         return result
 
     def get_reference_objects(self):
@@ -102,6 +104,9 @@ class ModuleObjectRecord:
         references = set()  # type: Set[Text]
         for type_hint in self._type_hints.values():
             references.update(type_hint.get_class_names())
+        for default_value in self._default_values.values():
+            references.update(default_value.get_class_names())
+
         for obj in objects:
             if obj is self:
                 continue

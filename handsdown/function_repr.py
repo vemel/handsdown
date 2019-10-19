@@ -52,7 +52,7 @@ class TypeHintData:
 
 
 class DefaultValueData:
-    _split_re = re.compile(r"[\(\) ,]")
+    _split_re = re.compile(r"[\(\) ,'\"<>]")
 
     def __init__(self, value):
         # type: (Any) -> None
@@ -75,8 +75,19 @@ class DefaultValueData:
         # type: () -> List[Text]
         s = self.render()
         class_names = self._split_re.split(s)
-        class_names = [i for i in class_names if i]
-        return class_names
+        result = []
+        for class_name in class_names:
+            if not class_name:
+                continue
+
+            parts = class_name.split(".")
+            parts.reverse()
+            import_parts = []  # type: List[Text]
+            for part in parts:
+                import_parts = [part] + import_parts
+                import_string = ".".join(import_parts)
+                result.append(import_string)
+        return result
 
 
 class ParameterData:
@@ -264,6 +275,14 @@ class FunctionRepr(object):
         for parameter in self._function_data.parameters:
             if isinstance(parameter.type_hint, TypeHintData):
                 result[parameter.name] = parameter.type_hint
+        return result
+
+    def get_defaults(self):
+        # type: () -> Dict[Text, DefaultValueData]
+        result = {}
+        for parameter in self._function_data.parameters:
+            if isinstance(parameter.default, DefaultValueData):
+                result[parameter.name] = parameter.default
         return result
 
     def _add_type_hints(self):

@@ -16,7 +16,7 @@ class Typed:
 
     @classmethod
     def classmethod(cls, _my_value, *_args, **_kwargs) -> None:
-        # type: (MyValue, Text, Any) -> Dict[Text, MyValue]
+        # type: (MyValue, Text, Any) -> Typed
         pass
 
 

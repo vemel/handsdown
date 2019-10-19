@@ -37,11 +37,7 @@ class Typed(
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L17)
 
 ```python
-def classmethod(
-    _my_value: MyValue,
-    _args: Text,
-    _kwargs: Any,
-) -> Dict[Text, MyValue]
+def classmethod(_my_value: MyValue, _args: Text, _kwargs: Any) -> Typed
 ```
 
 #### See also
@@ -75,3 +71,7 @@ def func_any(
     _kwargs: None = <class 'examples.comment_typed.MyValue'>,
 ) -> Any
 ```
+
+#### See also
+
+- [MyValue](#myvalue)
