@@ -7,7 +7,7 @@ Base class for all docstring processors:
 - `handsdown.processors.smart.SmartDocstringProcessor`
 """
 
-from typing import Text, Dict, Pattern, Optional
+from typing import Text, Dict, Pattern, Optional, Tuple
 
 from handsdown.processors.section_map import SectionMap
 from handsdown.indent_trimmer import IndentTrimmer
@@ -23,7 +23,7 @@ class BaseDocstringProcessor(object):
         replace_map -- Mapping of string to replace to replacer
     """
 
-    line_re_map = {}  # type: Dict[Pattern, Text]
+    line_re_map = tuple()  # type: Tuple[Tuple[Pattern, Text], ...]
     section_name_map = {}  # type: Dict[Text, Text]
     replace_map = {}  # type: Dict[Text, Text]
 
@@ -204,7 +204,7 @@ class BaseDocstringProcessor(object):
         # format line using `line_re_map` regexps
         # multiline result supported
         # if `section` found in match - set this section as active
-        for line_re, line_format in self.line_re_map.items():
+        for line_re, line_format in self.line_re_map:
             match = line_re.match(line)
             if not match:
                 continue
