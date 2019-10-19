@@ -65,6 +65,10 @@ class DefaultValueData:
         if s.startswith("<") and " at 0x" in s:
             s = s.split(" at ", 1)[0] + ">"
 
+        # fix unicode strings
+        if s.startswith("u'"):
+            s = s[1:]
+
         return s
 
     def __str__(self):
@@ -197,7 +201,7 @@ class FunctionRepr(object):
         args_count = 0
 
         # skip inherited from object
-        if names == ["args", "kwargs"]:
+        if names == ["self", "args", "kwargs"]:
             names = []
 
         for name in names:
