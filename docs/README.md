@@ -3,9 +3,10 @@
 > Auto-generated documentation index.
 
 ![PyPI](https://img.shields.io/pypi/v/handsdown)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown)
-![PyPI - Format](https://img.shields.io/pypi/format/handsdown)
 ![PyPI - Status](https://img.shields.io/pypi/status/handsdown)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/handsdown)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/handsdown)
 ![Travis (.org)](https://img.shields.io/travis/vemel/handsdown)
 ![Codecov](https://img.shields.io/codecov/c/github/vemel/handsdown)
 
