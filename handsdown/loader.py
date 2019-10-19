@@ -84,6 +84,15 @@ class Loader:
 
     def get_output_path(self, source_path):
         # type: (Path) -> Path
+        """
+        Get output MD document path based on `source_path`.
+
+        Arguments:
+            source_path -- Path to source code file.
+
+        Returns:
+            A path to the output `.md` file even if it does not exist yet.
+        """
         relative_source_path = self._root_path_finder.relative(source_path)
         if relative_source_path.stem == "__init__":
             relative_source_path = relative_source_path.parent / "index"

@@ -43,7 +43,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L209)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L218)
 
 ```python
 def get_import_string(source_path: Path) -> Text
@@ -72,7 +72,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L106)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]
@@ -104,9 +104,19 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 def get_output_path(source_path: Path) -> Path
 ```
 
+Get output MD document path based on `source_path`.
+
+#### Arguments
+
+- `source_path` - Path to source code file.
+
+#### Returns
+
+A path to the output `.md` file even if it does not exist yet.
+
 ### Loader.get_source_line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L494)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L503)
 
 ```python
 def get_source_line_number(obj: Any) -> int
@@ -122,7 +132,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L239)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L248)
 
 ```python
 def import_module(file_path: Path) -> Any

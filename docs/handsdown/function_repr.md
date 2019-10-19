@@ -2,6 +2,8 @@
 
 > Auto-generated documentation for [handsdown.function_repr](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py) module.
 
+Function sgnature builder.
+
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / FunctionRepr
   - [ClassRepr](#classrepr)
   - [DefaultValueData](#defaultvaluedata)
@@ -21,7 +23,7 @@
 
 ## ClassRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L477)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L480)
 
 ```python
 class ClassRepr(inspect_class: Any) -> None
@@ -37,7 +39,7 @@ Built on top of [FunctionRepr](#functionrepr), and changes definition to `class`
 
 ## DefaultValueData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L85)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L88)
 
 ```python
 class DefaultValueData(value: Any) -> None
@@ -51,7 +53,7 @@ Represent parameter default value.
 
 ### DefaultValueData().get_class_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L133)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L136)
 
 ```python
 def get_class_names() -> List[Text]
@@ -69,7 +71,7 @@ A list of import strings.
 
 ### DefaultValueData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L99)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L102)
 
 ```python
 def render() -> Text
@@ -86,7 +88,7 @@ A default value representation.
 
 ## FunctionData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L213)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L216)
 
 ```python
 class FunctionData(name: Text) -> None
@@ -100,7 +102,7 @@ Represent function data.
 
 ### FunctionData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L228)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L231)
 
 ```python
 def render(multi_line: bool = False) -> Text
@@ -116,7 +118,7 @@ A function representation.
 
 ## FunctionRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L256)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L259)
 
 ```python
 class FunctionRepr(func: Any) -> None
@@ -132,7 +134,7 @@ Inspired a lot by built-in `inspect.Signature`.
 
 ### FunctionRepr().get_defaults
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L414)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L417)
 
 ```python
 def get_defaults() -> Dict[Text, DefaultValueData]
@@ -152,7 +154,7 @@ A list of all set [DefaultValueData](#defaultvaluedata)
 
 ### FunctionRepr().get_type_hints
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L393)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L396)
 
 ```python
 def get_type_hints() -> Dict[Text, TypeHintData]
@@ -172,7 +174,7 @@ A list of all set [TypeHintData](#typehintdata)
 
 ### FunctionRepr().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L444)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L447)
 
 ```python
 def render() -> Text
@@ -189,7 +191,7 @@ A representaion of a function.
 
 ## ParameterData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L162)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L165)
 
 ```python
 class ParameterData(name: Text) -> None
@@ -207,7 +209,7 @@ Represent function parameter.
 
 ### ParameterData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L181)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L184)
 
 ```python
 def render() -> Text
@@ -221,7 +223,7 @@ A parameter representation.
 
 ## TypeHintData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L11)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L14)
 
 ```python
 class TypeHintData(type_hint: Any) -> None
@@ -235,7 +237,7 @@ Represent parameter type hint object.
 
 ### TypeHintData().get_class_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L60)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L63)
 
 ```python
 def get_class_names() -> List[Text]
@@ -249,7 +251,7 @@ A list of parsed class names.
 
 ### TypeHintData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L25)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L28)
 
 ```python
 def render() -> Text

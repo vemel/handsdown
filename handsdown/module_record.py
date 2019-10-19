@@ -97,6 +97,13 @@ class ModuleObjectRecord:
 
     def get_reference_objects(self):
         # type: () -> List[ModuleObjectRecord]
+        """
+        Get a list of all objects referenced in default values or type hints
+        of the object.
+
+        Returns:
+            A list of related `ModuleObjectRecord`.
+        """
         result = []
         objects = self.module_record.objects
         parent_import_string = self.import_string.rsplit(".", 1)[0]
@@ -209,6 +216,16 @@ class ModuleRecord:
     @staticmethod
     def get_reference_objects():
         # type: () -> List[ModuleObjectRecord]
+        """
+        Get a list of all objects referenced in default values or type hints
+        of the object.
+
+        For module no related objects are listed, added for compatibility
+        with `ModuleObjectRecord`.
+
+        Returns:
+            An empty list.
+        """
         return []
 
 

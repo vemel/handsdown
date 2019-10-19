@@ -1,3 +1,6 @@
+"""
+Function sgnature builder.
+"""
 import inspect
 import re
 from typing import Text, List, Any, Dict, Optional, Union

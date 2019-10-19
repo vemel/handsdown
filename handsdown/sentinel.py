@@ -1,3 +1,6 @@
+"""
+Sentinel value than can be used as a placeholder.
+"""
 from typing import Text
 
 

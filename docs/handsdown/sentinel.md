@@ -2,12 +2,14 @@
 
 > Auto-generated documentation for [handsdown.sentinel](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py) module.
 
+Sentinel value than can be used as a placeholder.
+
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Sentinel
   - [Sentinel](#sentinel)
 
 ## Sentinel
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L4)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
 
 ```python
 class Sentinel(name: Text = 'DEFAULT') -> None
