@@ -15,7 +15,7 @@ class Typed:
         pass
 
     @classmethod
-    def classmethod(cls, _my_value, *_args, **_kwargs) -> None:
+    def classmethod(cls, _my_value, *_args, **_kwargs):
         # type: (MyValue, Text, Any) -> Typed
         pass
 
