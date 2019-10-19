@@ -24,7 +24,9 @@ class TypeHintData:
         if hasattr(self.type_hint, "__name__"):
             return self.type_hint.__name__
 
-        return str(self.type_hint)
+        result = str(self.type_hint)
+        result = result.replace("typing.", "")
+        return result
 
     def __str__(self):
         # type: () -> Text
@@ -33,9 +35,20 @@ class TypeHintData:
     def get_class_names(self):
         # type: () -> List[Text]
         s = self.render()
-        class_names = self._split_re.split(s)
-        class_names = [i for i in class_names if i]
-        return class_names
+        result = []
+        for class_name in self._split_re.split(s):
+            class_name = class_name.strip()
+            if class_name == "..." or not class_name:
+                continue
+            parts = class_name.split(".")
+            parts.reverse()
+            import_parts = []  # type: List[Text]
+            for part in parts:
+                import_parts = [part] + import_parts
+                import_string = ".".join(import_parts)
+                result.append(import_string)
+
+        return result
 
 
 class DefaultValueData:
@@ -208,7 +221,7 @@ class FunctionRepr(object):
             if match:
                 arg_type, return_type = match.groups()
                 type_hints["return"] = return_type
-                arg_types = [i.strip() for i in arg_type.split(",") if i != "..."]
+                arg_types = self._strip_arg_type(arg_type)
                 for arg_type in arg_types:
                     if len(self._function_data.parameters) <= parameter_index:
                         continue
@@ -226,6 +239,24 @@ class FunctionRepr(object):
                 parameter_index += 1
 
         return type_hints
+
+    @staticmethod
+    def _strip_arg_type(arg_type):
+        # type: (Text) -> List[Text]
+        bracket_count = 0
+        result = [""]
+        for c in arg_type:
+            if c == "," and bracket_count == 0:
+                result.append("")
+                continue
+            if c == "[":
+                bracket_count += 1
+            if c == "]":
+                bracket_count -= 1
+
+            result[-1] = f"{result[-1]}{c}"
+
+        return [i.strip() for i in result]
 
     def get_type_hints(self):
         # type: () -> Dict[Text, TypeHintData]
