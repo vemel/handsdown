@@ -43,6 +43,8 @@ class TypeCheckingMock:
         self._value = False
         return result
 
+    __nonzero__ = __bool__
+
 
 def get_title_from_path_part(path_part):
     # type: (Text) -> Text

@@ -33,7 +33,7 @@ Returns `True` for the first call, `False` for subsequent.
 
 ## get_title_from_path_part
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L47)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L49)
 
 ```python
 def get_title_from_path_part(path_part: Text) -> Text
