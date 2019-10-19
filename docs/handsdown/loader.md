@@ -9,7 +9,7 @@ Loader for python source code.
     - [Loader().get_import_string](#loaderget_import_string)
     - [Loader().get_module_record](#loaderget_module_record)
     - [Loader().get_output_path](#loaderget_output_path)
-    - [Loader.get_source_line_number](#loaderget_source_line_number)
+    - [Loader().get_source_line_number](#loaderget_source_line_number)
     - [Loader().import_module](#loaderimport_module)
     - [Loader().setup](#loadersetup)
   - [LoaderError](#loadererror)
@@ -114,7 +114,7 @@ Get output MD document path based on `source_path`.
 
 A path to the output `.md` file even if it does not exist yet.
 
-### Loader.get_source_line_number
+### Loader().get_source_line_number
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L504)
 
