@@ -67,7 +67,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L165)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L168)
 
 ```python
 def generate_doc(source_path: Path) -> None
@@ -85,7 +85,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L276)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L279)
 
 ```python
 def generate_docs() -> None
@@ -95,7 +95,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L292)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L295)
 
 ```python
 def generate_index() -> None
