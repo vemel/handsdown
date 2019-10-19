@@ -7,6 +7,8 @@ Can be used as a list of supported features.
 
 - [Index](../README.md#modules) / Examples
   - Modules
+    - [Comment Typed](comment_typed.md#comment-typed)
     - [Google Docstrings](google_docstrings.md#google-docstrings)
     - [Pep257 Docstrings](pep257_docstrings.md#pep257-docstrings)
     - [Rst Docstrings](rst_docstrings.md#rst-docstrings)
+    - [Typed](typed.md#typed)
