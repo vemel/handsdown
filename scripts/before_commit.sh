@@ -4,7 +4,7 @@ set -e
 ROOT_PATH=$(dirname $(dirname $(realpath $0)))
 cd $ROOT_PATH
 
-pytest --cov-report html --cov=handsdown
+pytest --cov-report term --cov=handsdown
 mypy handsdown
 pylint handsdown
 
