@@ -7,9 +7,9 @@ import fnmatch
 from typing import Text, List, Iterable, Generator
 
 try:
-    from pathlib import Path as PathlibPath
+    from pathlib import Path
 except ImportError:
-    from pathlib2 import Path as PathlibPath
+    from pathlib2 import Path  # type: ignore
 
 
 __all__ = ["PathFinder", "PathFinderError"]
@@ -18,12 +18,6 @@ __all__ = ["PathFinder", "PathFinderError"]
 class PathFinderError(Exception):
     """
     Main error for `PathFinder`.
-    """
-
-
-class Path(type(PathlibPath())):
-    """
-    Regular `pathlib.Path` or `pathlib2.Path`
     """
 
 
@@ -111,7 +105,7 @@ class PathFinder:
         exclude_exprs.extend(self.exclude_exprs)
         for fn_exrp in fn_exrps:
             if "*" not in fn_exrp and "." not in fn_exrp:
-                fn_exrp = "{fn_exrp}/*".format(fn_exrp)
+                fn_exrp = "{}/*".format(fn_exrp)
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
 

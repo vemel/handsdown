@@ -54,7 +54,6 @@ Main handsdown documentation generator.
 #### See also
 
 - [Loader](loader.md#loader)
-- [Path](path_finder.md#path)
 
 ### Generator().cleanup_old_docs
 
@@ -83,10 +82,6 @@ Generate one module doc at once.
 #### Raises
 
 - [GeneratorError](#generatorerror) - If `source_path` not found in current repo.
-
-#### See also
-
-- [Path](path_finder.md#path)
 
 ### Generator().generate_docs
 

@@ -62,7 +62,7 @@ class ModuleObjectRecord:
 
     def __repr__(self):
         # type: () -> Text
-        return "<ModuleObjectRecord title={}>".frmat(self.title)
+        return "<ModuleObjectRecord title={}>".format(self.title)
 
     @property
     def signature(self):

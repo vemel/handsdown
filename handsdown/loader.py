@@ -10,9 +10,9 @@ import os
 from typing import Optional, Text, Any, Callable, Generator, TYPE_CHECKING
 
 try:
-    from unittest.mock import patch, MagicMock
+    from unittest import mock
 except ImportError:
-    from mock import patch, MagicMock
+    import mock  # type: ignore
 
 from handsdown.docstring_formatter import DocstringFormatter
 from handsdown.utils import OSEnvironMock
@@ -54,11 +54,13 @@ class Loader:
         self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
         self._sys_path_dirty = False
-        self._os_environ_patch = patch("os.environ", OSEnvironMock(os.environ))
-        self._type_checking_patch = patch("typing.TYPE_CHECKING", True)
-        self._logging_logger_patch = patch("logging.Logger", MagicMock())
-        self._logging_config_patch = patch("logging.config.dictConfig", MagicMock())
-        self._sys_path_patch = patch(
+        self._os_environ_patch = mock.patch("os.environ", OSEnvironMock(os.environ))
+        self._type_checking_patch = mock.patch("typing.TYPE_CHECKING", True)
+        self._logging_logger_patch = mock.patch("logging.Logger", mock.MagicMock())
+        self._logging_config_patch = mock.patch(
+            "logging.config.dictConfig", mock.MagicMock()
+        )
+        self._sys_path_patch = mock.patch(
             "sys.path", sys.path + [self._root_path.as_posix()]
         )
         self.setup()

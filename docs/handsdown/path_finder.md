@@ -6,7 +6,6 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / PathFinder
-  - [Path](#path)
   - [PathFinder](#pathfinder)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().glob](#pathfinderglob)
@@ -15,19 +14,9 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
     - [PathFinder().relative](#pathfinderrelative)
   - [PathFinderError](#pathfindererror)
 
-## Path
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L24)
-
-```python
-class Path()
-```
-
-Regular `pathlib.Path` or `pathlib2.Path`
-
 ## PathFinder
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L30)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L24)
 
 ```python
 class PathFinder(root: Path) -> None
@@ -59,13 +48,9 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 
 - [PathFinderError](#pathfindererror) - If `root` is not absolute or not a directory.
 
-#### See also
-
-- [Path](#path)
-
 ### PathFinder().exclude
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L91)
 
 ```python
 def exclude(fn_exrps: Text) -> PathFinder
@@ -85,22 +70,22 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L142)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L136)
 
 ```python
 def glob(glob_expr: Text) -> Generator[Path, None, None]
 ```
 
-Find all matching [Path](#path) objects respecting `include` and
+Find all matching `Path` objects respecting `include` and
 `exclude` patterns.
 
 #### Yields
 
-Matching [Path](#path) objects.
+Matching `Path` objects.
 
 ### PathFinder().include
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L76)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L70)
 
 ```python
 def include(fn_exrps: Text) -> PathFinder
@@ -120,7 +105,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L189)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L183)
 
 ```python
 def mkdir(force: bool = False) -> None
@@ -138,7 +123,7 @@ Create directories up to `root` if they do not exist.
 
 ### PathFinder().relative
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L160)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L154)
 
 ```python
 def relative(target: Path) -> Path
@@ -154,10 +139,6 @@ Find a relative path from `root` to `target`.
 #### Returns
 
 A relative path to `target`.
-
-#### See also
-
-- [Path](#path)
 
 ## PathFinderError
 

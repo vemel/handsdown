@@ -69,7 +69,7 @@ class MDDocument(object):
         self._path_finder = PathFinder(self._path.parent)
 
     def __enter__(self):
-        # type: (Path) -> MDDocument
+        # type: () -> MDDocument
         return self
 
     def __exit__(
