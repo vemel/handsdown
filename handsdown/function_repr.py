@@ -230,6 +230,9 @@ class FunctionRepr(object):
 class ClassRepr(FunctionRepr):
     _definition = "class"
 
-    def __init__(self, cls):
-        super(ClassRepr, self).__init__(cls.__init__)
-        self.name = cls.__name__
+    def __init__(self, inspect_class):
+        if hasattr(inspect_class, "__init__"):
+            super(ClassRepr, self).__init__(inspect_class.__init__)
+        else:
+            super(ClassRepr, self).__init__(inspect_class)
+        self.name = inspect_class.__name__

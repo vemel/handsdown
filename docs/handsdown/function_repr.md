@@ -21,7 +21,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L230)
 
 ```python
-class ClassRepr(cls)
+class ClassRepr(inspect_class)
 ```
 
 ## FunctionData
