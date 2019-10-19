@@ -40,7 +40,7 @@ Parse docstring and split it to sections with arrays of strings.
 
 #### Arguments
 
-content - Object docstring.
+- `content` - Object docstring.
 
 #### Returns
 

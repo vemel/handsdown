@@ -52,7 +52,7 @@ class BaseDocstringProcessor(object):
         Parse docstring and split it to sections with arrays of strings.
 
         Arguments:
-            content - Object docstring.
+            content -- Object docstring.
 
         Returns:
             A dictionary where key is a section name and value is a list of string sof this

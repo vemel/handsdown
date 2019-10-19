@@ -21,7 +21,7 @@ Validate `path_str` and make it absolute.
 
 #### Arguments
 
-path - A path to check.
+- `path` - A path to check.
 
 #### Returns
 
@@ -39,7 +39,7 @@ Validate directory `path_str` and make it absolute.
 
 #### Arguments
 
-path - A path to check.
+- `path` - A path to check.
 
 #### Returns
 
@@ -61,7 +61,7 @@ Validate existing directory `path_str` and make it absolute.
 
 #### Arguments
 
-path - A path to check.
+- `path` - A path to check.
 
 #### Returns
 
@@ -97,7 +97,7 @@ Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
 #### Arguments
 
-git_repo_url - GitHub URL or `remote.origin.url`
+- `git_repo_url` - GitHub URL or `remote.origin.url`
 
 #### Returns
 

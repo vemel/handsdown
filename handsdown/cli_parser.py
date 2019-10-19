@@ -15,7 +15,7 @@ def git_repo(git_repo_url):
     Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
     Arguments:
-        git_repo_url - GitHub URL or `remote.origin.url`
+        git_repo_url -- GitHub URL or `remote.origin.url`
 
     Returns:
         A GitHub URL.
@@ -42,7 +42,7 @@ def abs_path(path_str):
     Validate `path_str` and make it absolute.
 
     Arguments:
-        path - A path to check.
+        path -- A path to check.
 
     Returns:
         An absolute path.
@@ -56,7 +56,7 @@ def dir_abs_path(path_str):
     Validate directory `path_str` and make it absolute.
 
     Arguments:
-        path - A path to check.
+        path -- A path to check.
 
     Returns:
         An absolute path.
@@ -76,7 +76,7 @@ def existing_dir_abs_path(path_str):
     Validate existing directory `path_str` and make it absolute.
 
     Arguments:
-        path - A path to check.
+        path -- A path to check.
 
     Returns:
         An absolute path.

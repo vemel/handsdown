@@ -106,7 +106,7 @@ class SectionMap(dict):
         If `Section` does not exist - it is not created.
 
         Arguments:
-            section_name - Target section title.
+            section_name -- Target section title.
         """
         if section_name not in self:
             return
