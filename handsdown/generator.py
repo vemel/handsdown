@@ -45,7 +45,7 @@ class Generator:
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
 
-    Arguments:
+    Attributes:
         LOGGER_NAME -- Name of logger: `handsdown`
         INDEX_NAME -- Docs index filename: `README.md`
         INDEX_TITLE -- Docs index title: `Index`
