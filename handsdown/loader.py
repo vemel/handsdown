@@ -501,8 +501,7 @@ class Loader:
 
         return obj.__doc__ or ""
 
-    @staticmethod
-    def get_source_line_number(obj):
+    def get_source_line_number(self, obj):
         # type: (Any) -> int
         """
         Get line number in source file where `obj` is declared.
@@ -512,5 +511,9 @@ class Loader:
         Returns:
             A line number as an integer, starting for 1.
         """
-        source_code_info = inspect.findsource(obj)
+        try:
+            source_code_info = inspect.findsource(obj)
+        except OSError:
+            self._logger.debug("Cannot get source line for {}".format(obj))
+            return 1
         return source_code_info[1] + 1
