@@ -78,7 +78,7 @@ class Loader:
             )
             self._setup_django()
 
-    def _get_output_path(self, source_path):
+    def get_output_path(self, source_path):
         # type: (Path) -> Path
         relative_source_path = self._root_path_finder.relative(source_path)
         if relative_source_path.stem == "__init__":
@@ -132,7 +132,7 @@ class Loader:
             module=inspect_module,
             title=get_title_from_path_part(file_import.split(".")[-1]),
             docstring="\n\n".join(docstring_parts),
-            output_path=self._get_output_path(source_path),
+            output_path=self.get_output_path(source_path),
             source_path=source_path,
             import_string=file_import,
             objects=[],
@@ -368,7 +368,7 @@ class Loader:
                 title=object_name,
                 module_record=module_record,
                 source_path=source_path,
-                output_path=self._get_output_path(source_path),
+                output_path=self.get_output_path(source_path),
                 source_line_number=self.get_source_line_number(inspect_object),
                 is_class=is_class,
                 is_related=is_related,
@@ -426,7 +426,7 @@ class Loader:
                     title=title,
                     module_record=module_record,
                     source_path=source_path,
-                    output_path=self._get_output_path(source_path),
+                    output_path=self.get_output_path(source_path),
                     source_line_number=self.get_source_line_number(inspect_object),
                     is_class=False,
                     is_related=False,
@@ -469,7 +469,7 @@ class Loader:
                 docstring=self._get_object_docstring(inspect_method),
                 title=title,
                 source_path=source_path,
-                output_path=self._get_output_path(source_path),
+                output_path=self.get_output_path(source_path),
                 source_line_number=self.get_source_line_number(inspect_method),
                 is_class=False,
                 is_related=False,

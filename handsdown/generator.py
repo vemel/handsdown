@@ -8,7 +8,7 @@ from __future__ import unicode_literals
 import re
 import logging
 
-from typing import Iterable, Text, List, Optional, Union, TYPE_CHECKING
+from typing import Iterable, Text, List, Optional, Union, Set, TYPE_CHECKING
 
 from pathlib2 import Path
 
@@ -96,6 +96,7 @@ class Generator:
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
+        self._error_output_paths = set()  # type: Set[Path]
         self._module_records = self._build_module_record_list()
 
         package_names = self._module_records.get_package_names()
@@ -116,6 +117,7 @@ class Generator:
                 if self._raise_errors:
                     raise
 
+                self._error_output_paths.add(self._loader.get_output_path(source_path))
                 self._logger.warning(
                     f"Skipping {self._root_path_finder.relative(source_path)} due to import error: {e}"
                 )
@@ -132,6 +134,7 @@ class Generator:
         """
         self._logger.debug(f"Removing orphaned docs")
         preserve_paths = {i.output_path for i in self._module_records}
+        preserve_paths.update(self._error_output_paths)
         for doc_path in self._output_path.glob("**/*.md"):
             if doc_path == self._index_path:
                 continue
