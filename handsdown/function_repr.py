@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 import inspect
 import re
 from typing import Text, List, Any, Dict, Optional, Union
@@ -107,14 +106,14 @@ class ParameterData:
         # type: () -> Text
         if self.type_hint is not self.NOT_SET:
             if self.default is not self.NOT_SET:
-                return f"{self.name}: {self.type_hint} = {self.default}"
+                return "{}: {} = {}".format(self.name, self.type_hint, self.default)
 
-            return f"{self.name}: {self.type_hint}"
+            return "{}: {}".format(self.name, self.type_hint)
 
         if self.default is not self.NOT_SET:
-            return f"{self.name}={self.default}"
+            return "{}={}".format(self.name, self.default)
 
-        return f"{self.name}"
+        return self.name
 
     def __str__(self):
         # type: () -> Text
@@ -135,16 +134,16 @@ class FunctionData:
         for parameter in self.parameters:
             rendered_parameters.append(parameter.render())
 
-        result = f"{self.definition} {self.name}("
+        result = "{} {}(".format(self.definition, self.name)
         if multi_line:
             parameters = ",\n    ".join(rendered_parameters)
-            result = f"{result}\n    {parameters},\n)"
+            result = "{}\n    {},\n)".format(result, parameters)
         else:
             parameters = ", ".join(rendered_parameters)
-            result = f"{result}{parameters})"
+            result = "{}{})".format(result, parameters)
 
         if self.return_type_hint:
-            result = f"{result} -> {self.return_type_hint}"
+            result = "{} -> {}".format(result, self.return_type_hint)
 
         return result
 
@@ -269,7 +268,7 @@ class FunctionRepr(object):
             if c == "]":
                 bracket_count -= 1
 
-            result[-1] = f"{result[-1]}{c}"
+            result[-1] = "{}{}".format(result[-1], c)
 
         return [i.strip() for i in result]
 

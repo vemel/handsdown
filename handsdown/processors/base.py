@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Base class for all docstring processors:
 
@@ -151,7 +150,9 @@ class BaseDocstringProcessor(object):
         if indent is not None:
             indent_str = " " * indent
 
-        self.section_map.add_line(self.current_section_name, f"{indent_str}{line}")
+        self.section_map.add_line(
+            self.current_section_name, "{}{}".format(indent_str, line)
+        )
 
     def _add_block(self):
         # type: () -> None
@@ -169,7 +170,7 @@ class BaseDocstringProcessor(object):
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line(f"```{line[3:]}", indent=0)
+            self._add_line("```{}".format(line[3:]), indent=0)
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines

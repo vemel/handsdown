@@ -1,5 +1,4 @@
 enum==0.4.7; python_version < '3.4'
-future-fstrings==1.2.0
 mock==3.0.5; python_version < '3.3'
 pathlib2==2.3.5; python_version < '3.4'
-typing==3.7.4.1; python_version <= '3.5'
+typing==3.7.4.1; python_version < '3.5'

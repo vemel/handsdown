@@ -1,6 +1,6 @@
 # Loader
 
-> Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py) module..
+> Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py) module.
 
 Loader for python source code.
 
@@ -16,7 +16,7 @@ Loader for python source code.
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L34)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L33)
 
 ```python
 class Loader(
@@ -162,7 +162,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L67)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L66)
 
 ```python
 def setup() -> None
@@ -175,7 +175,7 @@ Frameworks supported:
 
 ## LoaderError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L28)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L27)
 
 ```python
 class LoaderError()

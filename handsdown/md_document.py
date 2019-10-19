@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Markdown file builder.
 """
@@ -180,7 +179,7 @@ class MDDocument(object):
         Returns:
             A string with Markdown link.
         """
-        return f"[{title}]({link})"
+        return "[{}]({})".format(title, link)
 
     def render_doc_link(self, title, anchor="", target_path=None):
         # type: (Text, Text, Optional[Path]) -> Text
@@ -212,10 +211,10 @@ class MDDocument(object):
         """
         link = ""
         if anchor:
-            link = f"#{anchor}"
+            link = "#{}".format(anchor)
         if target_path and target_path != self._path:
             link_path = self._path_finder.relative(target_path)
-            link = f"{link_path}{link}"
+            link = "{}{}".format(link_path, link)
 
         return self.render_link(title, link)
 
@@ -223,7 +222,7 @@ class MDDocument(object):
         # type: () -> Text
         sections = []
         if self._title:
-            sections.append(f"# {self._title}")
+            sections.append("# {}".format(self._title))
         if self._subtitle:
             sections.append(self._subtitle)
         if self._toc_section:
@@ -330,7 +329,7 @@ class MDDocument(object):
             title -- Title to add.
             level -- Title level, number of `#` symbols.
         """
-        section = f'{"#" * level} {self._escape_title(title)}'
+        section = "{} {}".format("#" * level, self._escape_title(title))
         self._sections.append(section)
         self._content = self._build_content()
 
@@ -348,7 +347,7 @@ class MDDocument(object):
         toc_lines = []
         if self.title:
             link = self.render_doc_link(self.title, anchor=self.get_anchor(self.title))
-            toc_lines.append(f"- {link}")
+            toc_lines.append("- {}".format(link))
 
         sections = [self.title, self.subtitle] + self.sections
         for section in sections:
@@ -367,7 +366,7 @@ class MDDocument(object):
                 continue
 
             link = self.render_doc_link(title, anchor=self.get_anchor(title))
-            toc_lines.append(f'{"  " * (header_level- 1)}- {link}')
+            toc_lines.append("{}- {}".format("  " * (header_level - 1), link))
 
         return "\n".join(toc_lines)
 
@@ -393,7 +392,7 @@ class MDDocument(object):
         title = ""
         if content.startswith("# "):
             if "\n" not in content:
-                content = f"{content}\n"
+                content = "{}\n".format(content)
 
             title_line, content = content.split("\n", 1)
             title = title_line.split(" ", 1)[-1]

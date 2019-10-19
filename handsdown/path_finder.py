@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.
@@ -56,10 +55,10 @@ class PathFinder:
     def __init__(self, root):
         # type: (Path) -> None
         if not root.is_absolute():
-            raise PathFinderError(f"Root path {root} is not absolute")
+            raise PathFinderError("Root path {} is not absolute".format(root))
         try:
             if root.exists() and not root.is_dir():
-                raise PathFinderError(f"Root path {root} is not a directory")
+                raise PathFinderError("Root path {} is not a directory".format(root))
         except OSError:
             pass
 
@@ -91,7 +90,7 @@ class PathFinder:
         include_exprs.extend(self.include_exprs)
         for fn_exrp in fn_exrps:
             if "*" not in fn_exrp and "." not in fn_exrp:
-                fn_exrp = f"{fn_exrp}/*"
+                fn_exrp = "{}/*".format(fn_exrp)
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
 
@@ -112,7 +111,7 @@ class PathFinder:
         exclude_exprs.extend(self.exclude_exprs)
         for fn_exrp in fn_exrps:
             if "*" not in fn_exrp and "." not in fn_exrp:
-                fn_exrp = f"{fn_exrp}/*"
+                fn_exrp = "{fn_exrp}/*".format(fn_exrp)
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
 
@@ -211,7 +210,7 @@ class PathFinder:
 
             if not parent.is_dir():
                 raise PathFinderError(
-                    f"{parent} is not a directory, delete it and restart"
+                    "{} is not a directory, delete it manually".format(parent)
                 )
 
             break

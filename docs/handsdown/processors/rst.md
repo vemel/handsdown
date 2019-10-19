@@ -1,6 +1,6 @@
 # Rst
 
-> Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py) module..
+> Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py) module.
 
 Docstring processor for restructured text docstring format.
 

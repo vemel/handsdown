@@ -21,7 +21,7 @@
 
 ## ClassRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L322)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L321)
 
 ```python
 class ClassRepr(inspect_class: Any) -> None
@@ -29,7 +29,7 @@ class ClassRepr(inspect_class: Any) -> None
 
 ## DefaultValueData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L54)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L53)
 
 ```python
 class DefaultValueData(value: Any) -> None
@@ -37,7 +37,7 @@ class DefaultValueData(value: Any) -> None
 
 ### DefaultValueData().get_class_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L78)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L77)
 
 ```python
 def get_class_names() -> List[Text]
@@ -45,7 +45,7 @@ def get_class_names() -> List[Text]
 
 ### DefaultValueData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L61)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L60)
 
 ```python
 def render() -> Text
@@ -53,7 +53,7 @@ def render() -> Text
 
 ## FunctionData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L124)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L123)
 
 ```python
 class FunctionData(name: Text) -> None
@@ -61,7 +61,7 @@ class FunctionData(name: Text) -> None
 
 ### FunctionData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L132)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L131)
 
 ```python
 def render(multi_line: bool = False) -> Text
@@ -69,7 +69,7 @@ def render(multi_line: bool = False) -> Text
 
 ## FunctionRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L152)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L151)
 
 ```python
 class FunctionRepr(func: Any) -> None
@@ -77,7 +77,7 @@ class FunctionRepr(func: Any) -> None
 
 ### FunctionRepr().get_defaults
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L284)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L283)
 
 ```python
 def get_defaults() -> Dict[Text, DefaultValueData]
@@ -85,7 +85,7 @@ def get_defaults() -> Dict[Text, DefaultValueData]
 
 ### FunctionRepr().get_type_hints
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L276)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L275)
 
 ```python
 def get_type_hints() -> Dict[Text, TypeHintData]
@@ -93,7 +93,7 @@ def get_type_hints() -> Dict[Text, TypeHintData]
 
 ### FunctionRepr().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L306)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L305)
 
 ```python
 def render() -> Text
@@ -101,7 +101,7 @@ def render() -> Text
 
 ## ParameterData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L97)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L96)
 
 ```python
 class ParameterData(name: Text) -> None
@@ -109,7 +109,7 @@ class ParameterData(name: Text) -> None
 
 ### ParameterData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L106)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L105)
 
 ```python
 def render() -> Text
@@ -117,7 +117,7 @@ def render() -> Text
 
 ## TypeHintData
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L12)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L11)
 
 ```python
 class TypeHintData(type_hint: Any) -> None
@@ -125,7 +125,7 @@ class TypeHintData(type_hint: Any) -> None
 
 ### TypeHintData().get_class_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L35)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L34)
 
 ```python
 def get_class_names() -> List[Text]
@@ -133,7 +133,7 @@ def get_class_names() -> List[Text]
 
 ### TypeHintData().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L19)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L18)
 
 ```python
 def render() -> Text

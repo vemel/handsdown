@@ -1,6 +1,6 @@
 # Utils
 
-> Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py) module..
+> Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py) module.
 
 Handful utils that do not deserve a separate module.
 

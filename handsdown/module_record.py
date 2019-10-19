@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Dataclass for an imported module.
 """
@@ -63,7 +62,7 @@ class ModuleObjectRecord:
 
     def __repr__(self):
         # type: () -> Text
-        return f"<ModuleObjectRecord title={self.title}>"
+        return "<ModuleObjectRecord title={}>".frmat(self.title)
 
     @property
     def signature(self):
@@ -153,7 +152,7 @@ class ModuleRecord:
 
     def __repr__(self):
         # type: () -> Text
-        return f"<ModuleRecord title={self.title}>"
+        return "<ModuleRecord title={}>".format(self.title)
 
     def get_import_string_parts(self):
         # type: () -> List[Text]
@@ -257,7 +256,9 @@ class ModuleRecordList:
         self.data.append(module_record)
         self.import_string_map[module_record.import_string] = module_record
         for obj in module_record.objects:
-            import_string = f"{module_record.import_string}.{obj.import_string}"
+            import_string = "{}.{}".format(
+                module_record.import_string, obj.import_string
+            )
             self.import_string_map[import_string] = obj
 
     def __iter__(self):

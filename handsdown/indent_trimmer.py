@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Utility for removing indentation for sections and lines.
 """

@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Translator of docstrings to Markdown format.
 """
@@ -47,7 +46,7 @@ class DocstringFormatter:
                 next_line = lines[next_line_index]
 
             indent = IndentTrimmer.get_line_indent(next_line)
-            docstring = f"\n{' ' * indent}{docstring}"
+            docstring = "\n{}{}".format(" " * indent, docstring)
 
         return IndentTrimmer.trim_text(docstring)
 
@@ -57,7 +56,7 @@ class DocstringFormatter:
         for index, line in enumerate(lines):
             if line.startswith("~~~~"):
                 if index:
-                    self._lines[index - 1] = f"# {self._lines[index - 1]}"
+                    self._lines[index - 1] = "# {}".format(self._lines[index - 1])
                 self._lines.pop(index)
 
     def render(self):

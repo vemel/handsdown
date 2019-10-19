@@ -1,6 +1,6 @@
 # SectionMap
 
-> Auto-generated documentation for [handsdown.processors.section_map](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py) module..
+> Auto-generated documentation for [handsdown.processors.section_map](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py) module.
 
 Module for splitting docstring into `Section` groups.
 

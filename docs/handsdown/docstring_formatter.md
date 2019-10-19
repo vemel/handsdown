@@ -1,6 +1,6 @@
 # DocstringFormatter
 
-> Auto-generated documentation for [handsdown.docstring_formatter](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py) module..
+> Auto-generated documentation for [handsdown.docstring_formatter](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py) module.
 
 Translator of docstrings to Markdown format.
 
@@ -10,7 +10,7 @@ Translator of docstrings to Markdown format.
 
 ## DocstringFormatter
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L14)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L13)
 
 ```python
 class DocstringFormatter(docstring: Text) -> None
@@ -24,7 +24,7 @@ Translator of docstrings to Markdown format.
 
 ### DocstringFormatter().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L63)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L62)
 
 ```python
 def render() -> Text

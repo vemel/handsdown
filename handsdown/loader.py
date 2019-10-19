@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Loader for python source code.
 """
@@ -75,8 +74,9 @@ class Loader:
         django_settings_env_var = os.environ.get(self.DJANGO_SETTINGS_ENV_VAR)
         if django_settings_env_var:
             self._logger.info(
-                f"Found {self.DJANGO_SETTINGS_ENV_VAR} env variable,"
-                f" trying to setup django apps with {django_settings_env_var} settings"
+                "Found {} env variable, trying to setup django apps with {} settings".format(
+                    self.DJANGO_SETTINGS_ENV_VAR, django_settings_env_var
+                )
             )
             self._setup_django()
 
@@ -88,7 +88,7 @@ class Loader:
         if relative_source_path.stem == "__main__":
             relative_source_path = relative_source_path.parent / "magic_main"
 
-        file_name = f"{relative_source_path.stem}.md"
+        file_name = "{}.md".format(relative_source_path.stem)
         relative_output_path = relative_source_path.parent / file_name
         return self._output_path / relative_output_path
 
@@ -118,7 +118,7 @@ class Loader:
         try:
             inspect_module = self.import_module(source_path)
         except Exception as e:
-            raise LoaderError(f"Cannot import {source_path.name}: {e}")
+            raise LoaderError("Cannot import {}: {}".format(source_path.name, e))
 
         docstring_parts = []
         docstring = self._get_object_docstring(inspect_module)
@@ -144,7 +144,7 @@ class Loader:
             module_object_records = list(self._discover_module_objects(module_record))
         except Exception as e:
             raise LoaderError(
-                f"Cannot import module objects from {source_path.name}: {e}"
+                "Cannot import module objects from {}: {}".format(source_path.name, e)
             )
 
         for object_record in module_object_records:
@@ -182,9 +182,9 @@ class Loader:
             django = importlib.import_module("django")
             getattr(django, "setup")()
         except Exception as e:
-            self._logger.warning(f"Cannot setup django apps: {e}")
+            self._logger.warning("Cannot setup django apps: {}".format(e))
         else:
-            self._logger.info(f"Django apps are initialized")
+            self._logger.info("Django apps are initialized")
 
         self._os_environ_patch.stop()
         self._sys_path_patch.stop()
@@ -232,7 +232,7 @@ class Loader:
                 continue
             name_parts.append(stem)
 
-        return f"{'.'.join(name_parts)}"
+        return ".".join(name_parts)
 
     def import_module(self, file_path):
         # type: (Path) -> Any
@@ -418,8 +418,8 @@ class Loader:
                     ):
                         continue
 
-                import_string = f"{object_name}.{property_name}"
-                title = f"{object_name}().{property_name}"
+                import_string = "{}.{}".format(object_name, property_name)
+                title = "{}().{}".format(object_name, property_name)
                 yield ModuleObjectRecord(
                     import_string=import_string,
                     level=1,
@@ -458,10 +458,10 @@ class Loader:
             class_method = getattr(inspect_object, method_name)
             unbound_method = inspect_object.__dict__[method_name]
 
-            import_string = f"{object_name}.{method_name}"
-            title = f"{object_name}().{method_name}"
+            import_string = "{}.{}".format(object_name, method_name)
+            title = "{}().{}".format(object_name, method_name)
             if isinstance(unbound_method, (staticmethod, classmethod)):
-                title = f"{object_name}.{method_name}"
+                title = "{}.{}".format(object_name, method_name)
 
             yield ModuleObjectRecord(
                 import_string=import_string,

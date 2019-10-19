@@ -1,4 +1,3 @@
-# -*- coding: future_fstrings -*-
 """
 Main CLI entrypoint for `handsdown`
 
@@ -89,7 +88,7 @@ def main():
         if args.gh_pages:
             gh_pages_config_path = args.output_path / "_config.yml"
             if not gh_pages_config_path.exists():
-                logger.info(f"Creating {gh_pages_config_path} file")
+                logger.info("Creating {} file".format(gh_pages_config_path))
                 gh_pages_config_path.write_text("theme: jekyll-theme-cayman\n")
     except GeneratorError as e:
         logger.error(e)

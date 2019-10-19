@@ -1,6 +1,6 @@
 # Main
 
-> Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/master/handsdown/main.py) module..
+> Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/master/handsdown/main.py) module.
 
 Main CLI entrypoint for `handsdown`
 
@@ -16,7 +16,7 @@ Main CLI entrypoint for `handsdown`
 
 ## get_logger
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L24)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L23)
 
 ```python
 def get_logger(level: int) -> logging.Logger
@@ -34,7 +34,7 @@ A `logging.Logger` instance.
 
 ## main
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L49)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L48)
 
 ```python
 def main() -> None
