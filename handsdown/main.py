@@ -16,7 +16,7 @@ from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import get_cli_parser
 
 
-EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*"]
+EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*"]
 SOURCES_GLOB = "**/*.py"
 
 
