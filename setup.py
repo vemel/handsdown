@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-try:
-    from pathlib2 import Path
-except ImportError:
-    from pathlib import Path
+from os import path
 
 from setuptools import setup
 from setuptools import find_packages
 import __version__ as version_data
 
-root_path = Path(__file__).absolute().parent
+root_path = path.dirname(path.abspath(__file__))
 
 description = "Python docstring-based documentation generator for lazy perfectionists."
 
@@ -17,22 +14,32 @@ description = "Python docstring-based documentation generator for lazy perfectio
 def get_long_description():
     "Remove ToC from README.md as PyPI does not support links."
     lines = []
-    readme_path = root_path / "README.md"
-    for readme_line in readme_path.read_text().splitlines():
-        if "](#" not in readme_line:
-            lines.append(readme_line)
+    readme_path = path.join(root_path, "README.md")
+    with open(readme_path) as readme_file:
+        for readme_line in readme_file.readlines():
+            if "](#" not in readme_line:
+                lines.append(readme_line.rstrip("\n"))
     return "\n".join(lines)
+
+
+def get_install_requires():
+    install_requires = []
+    requirements_path = path.join(root_path, "requirements.txt")
+    with open(requirements_path) as f:
+        for line in f.readlines():
+            line = line.rstrip(" \n")
+            if line:
+                install_requires.append(line)
+
+    return install_requires
 
 
 long_description = get_long_description()
 version = version_data.__version__
-install_requires = [
-    i for i in Path(root_path / "requirements.txt").read_text().split("\n") if i
-]
 
 
 setup(
-    name=root_path.name,
+    name="handsdown",
     version=version,
     description=description,
     long_description=long_description,
@@ -51,7 +58,7 @@ setup(
             "examples.*",
         ]
     ),
-    install_requires=install_requires,
+    install_requires=get_install_requires(),
     extras_require={},
     include_package_data=False,
     zip_safe=True,
