@@ -29,4 +29,4 @@ script:
   - if [ "$TOXENV" = "py37" ]; then mypy handsdown; fi
   - if [ "$TOXENV" = "py37" ]; then pylint handsdown; fi
 after_success:
-  - codecov
+  - if [ "$TOXENV" = "py37" ]; then codecov; fi
