@@ -2,7 +2,10 @@
 Handful utils that do not deserve a separate module.
 """
 import traceback
-from typing import Text, Any
+from typing import Text, Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from path_finder import Path
 
 
 class OSEnvironMock(dict):
