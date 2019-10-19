@@ -1,7 +1,7 @@
 language: python
 os:
   - linux
-  - osx
+  # - osx
 jobs:
   include:
     - os: linux
@@ -10,15 +10,16 @@ jobs:
     - os: linux
       python: 3.6
       env: TOXENV=py36
-    - os: linux
-      python: 3.5
-      env: TOXENV=py35
-    - os: osx
-      python: 3.7
-      env: TOXENV=py37
+    # - os: linux
+    #   python: 3.5
+    #   env: TOXENV=py35
+    # - os: osx
+    #   python: 3.7
+    #   env: TOXENV=py37
 install:
   - pip install -r requirements.txt
   - pip install -r requirements-dev.txt
+  - python setup.py install
 env:
   - CODECOV_TOKEN="2ebbb6e9-4150-4f2f-80ba-7abd36be7e41"
 script:
