@@ -29,6 +29,10 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 - `title` - Section title.
 - `blocks` - List of line blocks.
 
+#### See also
+
+- [SectionBlock](#sectionblock)
+
 ## SectionBlock
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L12)

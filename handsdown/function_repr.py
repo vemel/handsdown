@@ -7,39 +7,51 @@ __all__ = ["FunctionRepr", "ClassRepr"]
 
 
 class TypeHintData:
+    _split_re = re.compile(r"[\]\[ ,]")
+
     def __init__(self, type_hint):
-        self._type_hint = type_hint
+        self.type_hint = type_hint
 
     def render(self):
-        if isinstance(self._type_hint, str):
-            return self._type_hint
+        if isinstance(self.type_hint, str):
+            return self.type_hint
 
-        if hasattr(self._type_hint, "__name__"):
-            return self._type_hint.__name__
+        if hasattr(self.type_hint, "__name__"):
+            return self.type_hint.__name__
 
-        # print(dir(self._type_hint), self._type_hint)
-        return str(self._type_hint)
+        return str(self.type_hint)
 
     def __str__(self):
         return self.render()
 
+    def __repr__(self):
+        return self.render()
+
+    def get_class_names(self):
+        s = self.render()
+        class_names = self._split_re.split(s)
+        class_names = [i for i in class_names if i]
+        return class_names
+
+
+class NotSetValue:
+    pass
+
 
 class ParameterData:
-    NOT_SET = object()
-
     def __init__(self, name):
         self.name = name
-        self.default = self.NOT_SET
-        self.type_hint = self.NOT_SET
+        self.default = NotSetValue
+        self.type_hint = NotSetValue
 
     def render(self):
-        if self.type_hint is not self.NOT_SET:
-            if self.default is not self.NOT_SET:
+        if self.type_hint is not NotSetValue:
+            if self.default is not NotSetValue:
                 return f"{self.name}: {self.type_hint} = {self.default}"
 
             return f"{self.name}: {self.type_hint}"
 
-        if self.default is not self.NOT_SET:
+        if self.default is not NotSetValue:
             return f"{self.name}={self.default}"
 
         return f"{self.name}"
@@ -173,6 +185,13 @@ class FunctionRepr(object):
                 parameter_index += 1
 
         return type_hints
+
+    def get_type_hints(self):
+        result = {}
+        for parameter in self._function_data.parameters:
+            if parameter.type_hint is not NotSetValue:
+                result[parameter.name] = parameter.type_hint
+        return result
 
     def _add_type_hints(self):
         type_hints = self._get_type_hints()

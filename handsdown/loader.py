@@ -370,6 +370,7 @@ class Loader:
                 obj=inspect_object,
                 docstring=docstring,
                 title=object_name,
+                module_record=module_record,
                 source_path=source_path,
                 output_path=self._get_output_path(source_path),
                 source_line_number=self.get_source_line_number(inspect_object),
@@ -381,14 +382,18 @@ class Loader:
             if not is_class or is_related:
                 continue
 
-            for item in self._discover_class_properties(module_object_record):
+            for item in self._discover_class_properties(
+                module_object_record, module_record
+            ):
                 yield item
 
-            for item in self._discover_class_methods(module_object_record):
+            for item in self._discover_class_methods(
+                module_object_record, module_record
+            ):
                 yield item
 
-    def _discover_class_properties(self, module_object_record):
-        # type: (ModuleObjectRecord) -> Generator[ModuleObjectRecord, None, None]
+    def _discover_class_properties(self, module_object_record, module_record):
+        # type: (ModuleObjectRecord, ModuleRecord) -> Generator[ModuleObjectRecord, None, None]
         """
         Get `ModuleObjectRecord` for every property in a class.
 
@@ -423,6 +428,7 @@ class Loader:
                     obj=property_object,
                     docstring=self._get_object_docstring(property_object),
                     title=title,
+                    module_record=module_record,
                     source_path=source_path,
                     output_path=self._get_output_path(source_path),
                     source_line_number=self.get_source_line_number(inspect_object),
@@ -430,8 +436,8 @@ class Loader:
                     is_related=False,
                 )
 
-    def _discover_class_methods(self, module_object_record):
-        # type: (ModuleObjectRecord) -> Generator[ModuleObjectRecord, None, None]
+    def _discover_class_methods(self, module_object_record, module_record):
+        # type: (ModuleObjectRecord, ModuleRecord) -> Generator[ModuleObjectRecord, None, None]
         """
         Get `ModuleObjectRecord` for every method in a class.
 
@@ -463,6 +469,7 @@ class Loader:
                 import_string=import_string,
                 level=1,
                 obj=class_method,
+                module_record=module_record,
                 docstring=self._get_object_docstring(inspect_method),
                 title=title,
                 source_path=source_path,

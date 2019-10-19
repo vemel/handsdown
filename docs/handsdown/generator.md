@@ -51,6 +51,10 @@ Main handsdown documentation generator.
 - `INDEX_TITLE` - Docs index title: `Index`
 - `MODULES_NAME` - Modules ToC name in index: `Modules`
 
+#### See also
+
+- [Loader](loader.md#loader)
+
 ### Generator().cleanup_old_docs
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L131)

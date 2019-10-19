@@ -406,18 +406,14 @@ class Generator:
             md_document.append(source_link)
 
             signature = module_object_record.signature
-
-            if signature:
-                md_document.append(f"```python\n{signature}\n```")
+            md_document.append(f"```python\n{signature}\n```")
 
             self._render_docstring(
-                module_record=module_object_record,
-                signature=signature,
-                md_document=md_document,
+                module_record=module_object_record, md_document=md_document
             )
 
-    def _render_docstring(self, module_record, md_document, signature=None):
-        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument, Optional[Text]) -> None
+    def _render_docstring(self, module_record, md_document):
+        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument, List[ModuleObjectRecord]) -> None
         """
         Get object docstring and convert it to a valid markdown using
         `handsdown.processors.base.BaseDocstringProcessor`.
@@ -440,23 +436,19 @@ class Generator:
             md_document.title = title
 
         section_map = self._docstring_processor.build_sections(docstring)
-        if signature:
-            related_objects = self._get_objects_from_signature(signature)
-            for related_object in related_objects:
-                if related_object is module_record:
-                    continue
-
-                title = related_object.title
-                link = md_document.render_doc_link(
-                    title,
-                    target_path=related_object.output_path,
-                    anchor=md_document.get_anchor(title),
-                )
-                section_map.add_line("See also", f"- {link}")
-                self._logger.debug(
-                    f"Adding link '{title}' to"
-                    f" {self._root_path_finder.relative(related_object.output_path)} 'See also' section"
-                )
+        reference_objects = module_record.get_reference_objects()
+        for reference_object in reference_objects:
+            title = reference_object.title
+            link = md_document.render_doc_link(
+                title,
+                target_path=reference_object.output_path,
+                anchor=md_document.get_anchor(title),
+            )
+            section_map.add_line("See also", f"- {link}")
+            self._logger.debug(
+                f"Adding link '{title}' to"
+                f" {self._root_path_finder.relative(reference_object.output_path)} 'See also' section"
+            )
 
         for section in section_map.sections:
             if section.title:

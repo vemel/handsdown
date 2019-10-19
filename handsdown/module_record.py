@@ -43,6 +43,7 @@ class ModuleObjectRecord:
         docstring,  # type: Text
         is_class,  # type: bool
         is_related,  # type: bool
+        module_record,  # type: ModuleRecord
     ):
         # type: (...) -> None
         self.source_path = source_path
@@ -55,6 +56,13 @@ class ModuleObjectRecord:
         self.docstring = docstring
         self.is_class = is_class
         self.is_related = is_related
+        self.module_record = module_record
+        self.related_object_names = []
+        self._type_hints = {}
+
+    def __repr__(self):
+        # type: () -> Text
+        return f"<ModuleRecordObject title={self.title}>"
 
     @property
     def signature(self):
@@ -78,8 +86,30 @@ class ModuleObjectRecord:
             return "\n".join(parts)
 
         if self.is_class:
-            return ClassRepr(self.obj).render()
-        return FunctionRepr(self.obj).render()
+            function_repr = ClassRepr(self.obj)
+        else:
+            function_repr = FunctionRepr(self.obj)
+
+        result = function_repr.render()
+        self._type_hints = list(function_repr.get_type_hints().values())
+        return result
+
+    def get_reference_objects(self):
+        result = []
+        objects = self.module_record.objects
+        parent_import_string = self.import_string.rsplit(".", 1)[0]
+        references = set()
+        for type_hint in self._type_hints:
+            references.update(type_hint.get_class_names())
+        for obj in objects:
+            if obj is self:
+                continue
+            if obj.import_string == parent_import_string:
+                continue
+            if obj.import_string in references:
+                result.append(obj)
+
+        return result
 
 
 class ModuleRecord:
@@ -114,6 +144,11 @@ class ModuleRecord:
         self.import_string = import_string
         self.objects = objects
         self.docstring = docstring
+        self.related_object_names = []
+
+    def __repr__(self):
+        # type: () -> Text
+        return f"<ModuleRecord title={self.title}>"
 
     def get_import_string_parts(self):
         # type: () -> List[Text]
@@ -166,6 +201,9 @@ class ModuleRecord:
             result[-1] = self.title
 
         return result
+
+    def get_reference_objects(self):
+        return []
 
 
 class ModuleRecordList:
