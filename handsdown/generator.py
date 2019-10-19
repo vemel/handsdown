@@ -424,9 +424,6 @@ class Generator:
             A module docstring with valid markdown.
         """
         docstring = module_record.docstring
-        if not docstring:
-            return
-
         title, docstring = md_document.extract_title(docstring)
         if title:
             module_record.title = title
