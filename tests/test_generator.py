@@ -1,5 +1,9 @@
 import unittest
-from unittest.mock import patch
+
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 
 from handsdown.generator import Generator
 from handsdown.path_finder import Path
