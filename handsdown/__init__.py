@@ -7,5 +7,5 @@ from handsdown.loader import LoaderError
 from handsdown.version import version
 
 name = "handsdown"
-_version = version
+__version__ = version
 __all__ = ["Generator", "PathFinder", "LoaderError", "name"]
