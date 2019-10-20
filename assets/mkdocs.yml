@@ -1,0 +1,8 @@
+site_name: "{project_name}"
+site_url: "{source_code_url}"
+repo_url: "{source_code_url}"
+docs_dir: "{docs_path}"
+
+theme:
+  name: mkdocs
+  include_sidebar: false

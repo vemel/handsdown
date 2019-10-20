@@ -8,10 +8,11 @@ Handful utils that do not deserve a separate module.
   - [OSEnvironMock](#osenvironmock)
   - [TypeCheckingMock](#typecheckingmock)
   - [get_title_from_path_part](#get_title_from_path_part)
+  - [render_asset](#render_asset)
 
 ## OSEnvironMock
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L11)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L14)
 
 ```python
 class OSEnvironMock()
@@ -21,7 +22,7 @@ Mock for `os.environ` that returns `env` string instead of undefined variables.
 
 ## TypeCheckingMock
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L27)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L30)
 
 ```python
 class TypeCheckingMock(target_file_path: Path) -> None
@@ -45,7 +46,7 @@ with patch("typing.TYPE_CHECKING", TypeCheckingMock(file_path)):
 
 ## get_title_from_path_part
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L65)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L68)
 
 ```python
 def get_title_from_path_part(path_part: Text) -> Text
@@ -74,3 +75,23 @@ get_title_from_path_part("__init__.py")
 #### Returns
 
 A human-readable title as a string.
+
+## render_asset
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L96)
+
+```python
+def render_asset(
+    name: Text,
+    target_path: Path,
+    format_dict: Dict[Text, Text],
+) -> None
+```
+
+Render `assets/<name>` file to `target_path`.
+
+#### Arguments
+
+- `name` - Asset file name.
+- `target_path` - Path of output file.
+- `format_dict` - Format asset with values from the dict before writing.

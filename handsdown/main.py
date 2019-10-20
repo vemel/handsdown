@@ -10,14 +10,17 @@ Attributes:
 
 import logging
 import sys
+from typing import TYPE_CHECKING
 
 from handsdown.generator import Generator, GeneratorError
 from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import get_cli_parser
+from handsdown.utils import render_asset, get_title_from_path_part
+from handsdown.settings import LOGGER_NAME, SOURCES_GLOB, EXCLUDE_EXPRS
 
 
-EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*"]
-SOURCES_GLOB = "**/*.py"
+if TYPE_CHECKING:
+    import argparse
 
 
 def get_logger(level):
@@ -31,7 +34,7 @@ def get_logger(level):
     Returns:
         A `logging.Logger` instance.
     """
-    logger = logging.Logger("handsdown")
+    logger = logging.Logger(LOGGER_NAME)
     logger.setLevel(level)
 
     formatter = logging.Formatter(
@@ -43,6 +46,34 @@ def get_logger(level):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     return logger
+
+
+def create_external_configs(namespace):
+    # type: (argparse.Namespace) -> None
+    """
+    Create `GitHub Pages` and `Read the Docs` configuration files.
+    """
+    logger = logging.Logger(LOGGER_NAME)
+    configs = (
+        ("gh_pages_config.yml", namespace.output_path / "_config.yml"),
+        ("mkdocs.yml", namespace.output_path / "mkdocs.yml"),
+        ("readthedocs.yml", namespace.input_path / ".readthedocs.yml"),
+    )
+    for asset_name, target_path in configs:
+        if target_path.exists():
+            continue
+        logger.info("Creating {} file".format(target_path))
+        render_asset(
+            asset_name,
+            target_path,
+            dict(
+                source_code_url=namespace.source_code_url.replace("blob/master/", ""),
+                project_name=get_title_from_path_part(namespace.input_path.name),
+                docs_path=PathFinder(namespace.input_path)
+                .relative(namespace.output_path)
+                .as_posix(),
+            ),
+        )
 
 
 def main():
@@ -73,7 +104,7 @@ def main():
             output_path=args.output_path,
             source_paths=path_finder.glob(SOURCES_GLOB),
             raise_errors=args.panic,
-            source_code_url=args.gh_pages,
+            source_code_url=args.source_code_url,
             toc_depth=args.toc_depth,
         )
         if args.files:
@@ -85,11 +116,8 @@ def main():
             if args.cleanup:
                 generator.cleanup_old_docs()
 
-        if args.gh_pages:
-            gh_pages_config_path = args.output_path / "_config.yml"
-            if not gh_pages_config_path.exists():
-                logger.info("Creating {} file".format(gh_pages_config_path))
-                gh_pages_config_path.write_text("theme: jekyll-theme-cayman\n")
+        if args.source_code_url:
+            create_external_configs(args)
     except GeneratorError as e:
         logger.error(e)
         sys.exit(1)

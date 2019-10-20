@@ -10,35 +10,36 @@
 Python docstring-based documentation generator for lazy perfectionists.
 
 - [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)
-  - [🔬 Features](#%f0%9f%94%ac-features)
-  - [🤔 Do you need handsdown?](#%f0%9f%a4%94-do-you-need-handsdown)
-  - [🐏 Examples](#%f0%9f%90%8f-examples)
-  - [🎉 Usage](#%f0%9f%8e%89-usage)
+  - [Features](#features)
+  - [Do you need handsdown?](#do-you-need-handsdown)
+  - [Examples](#examples)
+  - [Usage](#usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
     - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
     - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
-  - [🐶 Installation](#%f0%9f%90%b6-installation)
-  - [🔧 Development](#%f0%9f%94%a7-development)
+    - [🐏 Deploy to Read the Docs](#%f0%9f%90%8f-deploy-to-read-the-docs)
+  - [Installation](#installation)
+  - [Development](#development)
 
-## 🔬 Features
+## Features
 
-- 👓 [PEP 257](https://www.python.org/dev/peps/pep-0257/),
+- [PEP 257](https://www.python.org/dev/peps/pep-0257/),
   [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
   and [reStructuredText](https://www.python.org/dev/peps/pep-0287/)
   docstrings support. All of them are converted to a valid markdown.
-- 🐍 Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
-- 🐈 GitHub-friendly. Use your local markdown viewer, open docs
+- Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
+- GitHub-friendly. Use your local markdown viewer, open docs
   [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or deploy it on
   [GitHub Pages](https://vemel.github.io/handsdown/)!
-- 📚 Signatures for every class, function, property and method.
-- 🚀 Support for type annotations. Even for the ones from the `__future__`!
-- 📦 Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
-- 🔎 Gather all scattered `README.md` in submodules to one place
-- 🚧 Find related source code from every doc section.
-- #️⃣ Make links by just adding `module.import.String` to docs.
-- 💕 Do you use type annotations? Well, you get auto-discovery of related modules for free!
+- Signatures for every class, function, property and method.
+- Support for type annotations. Even for the ones from the `__future__`!
+- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
+- Gather all scattered `README.md` in submodules to one place
+- Find related source code from every doc section.
+- Make links by just adding `module.import.String` to docs.
+- Do you use type annotations? Well, you get auto-discovery of related modules for free!
 
-## 🤔 Do you need handsdown?
+## Do you need handsdown?
 
 You definitely *do* if you:
 
@@ -58,7 +59,7 @@ And probably *do not* if you:
 - use [Pandas docstrings](https://pandas.pydata.org/pandas-docs/stable/development/contributing_docstring.html)
   as they are not supported yet
 
-## 🐏 Examples
+## Examples
 
 `handsdown` built a nice
 [documentation](https://vemel.github.io/handsdown/#-handsdown---python-documentation-generator) for
@@ -66,7 +67,7 @@ itself to show it's abilities. Check how it works under the hood or discover
 [examples](https://vemel.github.io/handsdown/examples/#examples)
 with different docstrings format.
 
-## 🎉 Usage
+## Usage
 
 ### 💻 From command line
 
@@ -106,12 +107,12 @@ Now let's generate `GitHub Pages`-friendly documentation
 
 ```bash
 # Generate documentation that points to master branch
-# do not use custom output location, as as `GitHub Pages`
+# do not use custom output location, as `GitHub Pages`
 # works only with `docs` directory
-handsdown --gh-pages `git config --get remote.origin.url`
+handsdown --external `git config --get remote.origin.url`
 
 # or specify GitHub url directly
-handsdown --gh-pages https://github.com/<user>/<project>/blob/master/
+handsdown --external https://github.com/<user>/<project>/blob/master/
 ```
 
 Commit your changes and enable `GitHub Pages` by setting your project
@@ -161,7 +162,15 @@ handsdown.generate_index()
 # navigate to `output` dir and check results
 ```
 
-## 🐶 Installation
+### 🐏 Deploy to Read the Docs
+
+If you use `--external` CLI flag, `handsdown` generates all required configuration for you,
+so you just need to add yu repository.
+
+- Follow [GitHub Pages](#-as-a-github-pages-manager) guide
+- Add your repository on [Read the Docs](https://readthedocs.org/)
+
+## Installation
 
 Install using `pip` from PyPI
 
@@ -175,7 +184,7 @@ or directly from GitHub if you cannot wait to test new features
 pip install git+https://github.com/vemel/handsdown.git
 ```
 
-## 🔧 Development
+## Development
 
 - Install [pipenv](https://pypi.org/project/pipenv/)
 - Run `pipenv install -d`

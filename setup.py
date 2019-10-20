@@ -47,20 +47,10 @@ setup(
     url="https://vemel.github.io/handsdown/",
     author="Vlad Emelianov",
     author_email="vlad.emelianov.nz@gmail.com",
-    packages=find_packages(
-        exclude=[
-            "tests",
-            "*.tests",
-            "*.tests.*",
-            "tests.*",
-            "__pycache__",
-            "examples",
-            "examples.*",
-        ]
-    ),
+    packages=find_packages(exclude=["tests", "__pycache__", "examples"]),
     install_requires=get_install_requires(),
     extras_require={},
-    include_package_data=False,
+    include_package_data=True,
     zip_safe=True,
     dependency_links=[],
     classifiers=[

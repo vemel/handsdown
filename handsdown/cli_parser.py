@@ -138,7 +138,15 @@ def get_cli_parser():
         type=dir_abs_path,
     )
     parser.add_argument(
-        "--gh-pages", help="Build docs for GitHub Pages", default=None, type=git_repo
+        "--external",
+        help=(
+            "Build docs and config for external hosting, GitHub Pages or Read the Docs."
+            " Provide the project GitHub .../blob/master/ URL here."
+        ),
+        dest="source_code_url",
+        metavar="REPO_URL",
+        default=None,
+        type=git_repo,
     )
     parser.add_argument(
         "--toc-depth", help="Maximum depth of child modules ToC", default=3, type=int

@@ -5,6 +5,7 @@
 Main CLI entrypoint for `handsdown`
 
 - [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Main
+  - [create_external_configs](#create_external_configs)
   - [get_logger](#get_logger)
   - [main](#main)
 
@@ -14,9 +15,19 @@ Main CLI entrypoint for `handsdown`
     By default `build/*`, `tests/*`, `test/*`, `*/__pycache__/*`, `.*/*` are excluded.
 - `SOURCES_GLOB` - Glob expr to lokkup python source files: `**/*.py`
 
+## create_external_configs
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L51)
+
+```python
+def create_external_configs(namespace: argparse.Namespace) -> None
+```
+
+Create `GitHub Pages` and `Read the Docs` configuration files.
+
 ## get_logger
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L23)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L26)
 
 ```python
 def get_logger(level: int) -> logging.Logger
@@ -34,7 +45,7 @@ A `logging.Logger` instance.
 
 ## main
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L48)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L79)
 
 ```python
 def main() -> None

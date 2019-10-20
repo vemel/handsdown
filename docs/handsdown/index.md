@@ -30,6 +30,7 @@ Root of `handsdown` source code.
       - [SectionMap](processors/section_map.md#sectionmap)
       - [Smart](processors/smart.md#smart)
     - [Sentinel](sentinel.md#sentinel)
+    - [Settings](settings.md#settings)
     - [Utils](utils.md#utils)
 
 # Handsdown

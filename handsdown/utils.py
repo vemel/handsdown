@@ -2,7 +2,10 @@
 Handful utils that do not deserve a separate module.
 """
 import traceback
-from typing import Text, Any, TYPE_CHECKING
+from typing import Text, Any, Dict, TYPE_CHECKING
+
+from handsdown.settings import ASSETS_PATH
+
 
 if TYPE_CHECKING:
     from path_finder import Path
@@ -88,3 +91,18 @@ def get_title_from_path_part(path_part):
     parts = path_part.replace(".", "_").split("_")
     parts = [i.strip().capitalize() for i in parts if i.strip()]
     return " ".join(parts)
+
+
+def render_asset(name, target_path, format_dict):
+    # type: (Text, Path, Dict[Text, Text]) -> None
+    """
+    Render `assets/<name>` file to `target_path`.
+
+    Arguments:
+        name -- Asset file name.
+        target_path -- Path of output file.
+        format_dict -- Format asset with values from the dict before writing.
+    """
+    content = (ASSETS_PATH / name).read_text()
+    content = content.format(**format_dict)
+    target_path.write_text(content)
