@@ -113,6 +113,7 @@ def main():
         else:
             generator.generate_docs()
             generator.generate_index()
+            generator.generate_modules()
             if args.cleanup:
                 generator.cleanup_old_docs()
 

@@ -4,7 +4,7 @@
 
 Handful utils that do not deserve a separate module.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Utils
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Utils
   - [OSEnvironMock](#osenvironmock)
   - [TypeCheckingMock](#typecheckingmock)
   - [get_title_from_path_part](#get_title_from_path_part)

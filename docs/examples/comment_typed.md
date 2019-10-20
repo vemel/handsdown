@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.comment_typed](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py) module.
 
-- [Index](../README.md#modules) / [Examples](index.md#examples) / Comment Typed
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Comment Typed
   - [MyValue](#myvalue)
   - [Typed](#typed)
     - [Typed.classmethod](#typedclassmethod)

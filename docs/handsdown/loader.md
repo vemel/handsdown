@@ -4,7 +4,7 @@
 
 Loader for python source code.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Loader
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Loader
   - [Loader](#loader)
     - [Loader().get_import_string](#loaderget_import_string)
     - [Loader().get_module_record](#loaderget_module_record)

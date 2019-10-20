@@ -4,7 +4,7 @@
 
 Translator of docstrings to Markdown format.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / DocstringFormatter
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / DocstringFormatter
   - [DocstringFormatter](#docstringformatter)
     - [DocstringFormatter().render](#docstringformatterrender)
 

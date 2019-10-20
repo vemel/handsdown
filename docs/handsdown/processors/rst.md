@@ -4,7 +4,7 @@
 
 Docstring processor for restructured text docstring format.
 
-- [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Rst
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Rst
   - [RSTDocstringProcessor](#rstdocstringprocessor)
 
 ## RSTDocstringProcessor

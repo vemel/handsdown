@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples.rst_docstrings](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py) module.
 
-- [Index](../README.md#modules) / [Examples](index.md#examples) / PEP 287 - reStructuredText docstrings examples
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 287 - reStructuredText docstrings examples
   - [Links](#links)
   - [RSTExample](#rstexample)
     - [RSTExample.reference](#rstexamplereference)

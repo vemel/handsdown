@@ -4,7 +4,7 @@
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
-- [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
   - [SmartDocstringProcessor](#smartdocstringprocessor)
     - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 

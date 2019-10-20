@@ -4,7 +4,7 @@
 
 Module for splitting docstring into `Section` groups.
 
-- [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
   - [Section](#section)
   - [SectionBlock](#sectionblock)
     - [SectionBlock().render](#sectionblockrender)

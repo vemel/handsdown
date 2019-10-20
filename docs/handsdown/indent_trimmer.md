@@ -4,7 +4,7 @@
 
 Utility for removing indentation for sections and lines.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / IndentTrimmer
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)

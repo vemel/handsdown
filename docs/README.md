@@ -11,18 +11,20 @@
 
 Python docstring-based documentation generator for lazy perfectionists.
 
-- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
+Full Handsdown project documentation can be found in [Modules](MODULES.md#modules)
+
+- [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)
   - [Features](#features)
   - [Do you need handsdown?](#do-you-need-handsdown)
   - [Examples](#examples)
   - [Usage](#usage)
-    - [💻 From command line](#-from-command-line)
-    - [📝 As a GitHub Pages manager](#-as-a-github-pages-manager)
-    - [🧩 As a module](#-as-a-module)
-    - [🐏 Deploy to Read the Docs](#-deploy-to-read-the-docs)
+    - [💻 From command line](#%f0%9f%92%bb-from-command-line)
+    - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
+    - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
+    - [🐏 Deploy on Read the Docs](#%f0%9f%90%8f-deploy-on-read-the-docs)
   - [Installation](#installation)
   - [Development](#development)
-  - [Modules](#modules)
+  - [Modules](MODULES.md#modules)
 
 ## Features
 
@@ -31,12 +33,12 @@ Python docstring-based documentation generator for lazy perfectionists.
   and [reStructuredText](https://www.python.org/dev/peps/pep-0287/)
   docstrings support. All of them are converted to a valid markdown.
 - Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
-- GitHub-friendly. Use your local markdown viewer, open docs
-  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or deploy it on
-  [GitHub Pages](https://vemel.github.io/handsdown/)!
+- Can be used locally, or
+  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or even deployed on
+  [GitHub Pages](https://vemel.github.io/handsdown/) and [Read the Docs](https://handsdown.readthedocs.io/)!
 - Signatures for every class, function, property and method.
 - Support for type annotations. Even for the ones from the `__future__`!
-- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
+- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/MODULES.md)
 - Gather all scattered `README.md` in submodules to one place
 - Find related source code from every doc section.
 - Make links by just adding `module.import.String` to docs.
@@ -165,7 +167,7 @@ handsdown.generate_index()
 # navigate to `output` dir and check results
 ```
 
-### 🐏 Deploy to Read the Docs
+### 🐏 Deploy on Read the Docs
 
 If you use `--external` CLI flag, `handsdown` generates all required configuration for you,
 so you just need to add yu repository.
@@ -192,33 +194,3 @@ pip install git+https://github.com/vemel/handsdown.git
 - Install [pipenv](https://pypi.org/project/pipenv/)
 - Run `pipenv install -d`
 - Use `black` formatter in your IDE
-
-## Modules
-
-- [Examples](examples/index.md#examples)
-  - [Comment Typed](examples/comment_typed.md#comment-typed)
-  - [Google docstrings examples](examples/google_docstrings.md#google-docstrings-examples)
-  - [PEP 257 - PEP 257 and Google docstrings examples](examples/pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
-  - [PEP 287 - reStructuredText docstrings examples](examples/rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
-  - [Typed](examples/typed.md#typed)
-- [Handsdown](handsdown/index.md#handsdown)
-  - [Main](handsdown/magic_main.md#main)
-  - [CLI Parser](handsdown/cli_parser.md#cli-parser)
-  - [DocstringFormatter](handsdown/docstring_formatter.md#docstringformatter)
-  - [FunctionRepr](handsdown/function_repr.md#functionrepr)
-  - [Generator](handsdown/generator.md#generator)
-  - [IndentTrimmer](handsdown/indent_trimmer.md#indenttrimmer)
-  - [Loader](handsdown/loader.md#loader)
-  - [Main](handsdown/main.md#main)
-  - [MDDocument](handsdown/md_document.md#mddocument)
-  - [ModuleRecord](handsdown/module_record.md#modulerecord)
-  - [PathFinder](handsdown/path_finder.md#pathfinder)
-  - [Processors](handsdown/processors/index.md#processors)
-    - [Base](handsdown/processors/base.md#base)
-    - [Pep257](handsdown/processors/pep257.md#pep257)
-    - [Rst](handsdown/processors/rst.md#rst)
-    - [SectionMap](handsdown/processors/section_map.md#sectionmap)
-    - [Smart](handsdown/processors/smart.md#smart)
-  - [Sentinel](handsdown/sentinel.md#sentinel)
-  - [Settings](handsdown/settings.md#settings)
-  - [Utils](handsdown/utils.md#utils)

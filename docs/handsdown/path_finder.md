@@ -5,7 +5,7 @@
 Glob helper for matching paths inside `root` path with `.gitignore`-like
 `include` and `exclude` patterns.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / PathFinder
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / PathFinder
   - [PathFinder](#pathfinder)
     - [PathFinder().exclude](#pathfinderexclude)
     - [PathFinder().glob](#pathfinderglob)

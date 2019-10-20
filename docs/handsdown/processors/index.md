@@ -4,7 +4,7 @@
 
 Docstrings processors.
 
-- [Index](../../README.md#modules) / [Handsdown](../index.md#handsdown) / Processors
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / Processors
   - Modules
     - [Base](base.md#base)
     - [Pep257](pep257.md#pep257)

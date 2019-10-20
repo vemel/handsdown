@@ -74,7 +74,7 @@ class TestMDDocument(unittest.TestCase):
             with MDDocument(Path(temp_f.name)):
                 raise ValueError("test")
 
-    def test_ensure_toc_exists(self):
+    def test_add_toc_if_not_exists(self):
         with NamedTemporaryFile(mode="w+") as temp_f:
             temp_f.write(
                 "\n".join(
@@ -97,10 +97,10 @@ class TestMDDocument(unittest.TestCase):
         # md_doc.append_title('header', level=1)
         # md_doc.append_title('header2', level=2)
         self.assertEqual(md_doc.toc_section, "- [TOC](#toc)\n- [TOC2](#toc2)")
-        md_doc.ensure_toc_exists()
+        md_doc.add_toc_if_not_exists()
         self.assertEqual(md_doc.toc_section, "- [TOC](#toc)\n- [TOC2](#toc2)")
         md_doc.toc_section = ""
-        md_doc.ensure_toc_exists()
+        md_doc.add_toc_if_not_exists()
         self.assertEqual(
             md_doc.toc_section,
             "- [header](#header)\n  - [header2](#header2)\n    - [header3](#header3)",

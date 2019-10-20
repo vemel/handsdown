@@ -4,7 +4,7 @@
 
 Root of `handsdown` source code.
 
-- [Index](../README.md#modules) / Handsdown
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Handsdown
 - [Handsdown](#handsdown)
   - [Usage](#usage)
     - [From command line](#from-command-line)

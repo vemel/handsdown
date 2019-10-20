@@ -4,7 +4,7 @@
 
 Various project constants.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Settings
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Settings
 
 #### Attributes
 

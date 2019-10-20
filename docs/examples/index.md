@@ -5,7 +5,7 @@
 Examples of different docstring formats supported by `handsdown`.
 Can be used as a list of supported features.
 
-- [Index](../README.md#modules) / Examples
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Examples
   - Modules
     - [Comment Typed](comment_typed.md#comment-typed)
     - [Google Docstrings](google_docstrings.md#google-docstrings)

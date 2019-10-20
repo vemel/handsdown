@@ -4,7 +4,7 @@
 
 Dataclass for an imported module.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / ModuleRecord
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / ModuleRecord
   - [ModuleObjectRecord](#moduleobjectrecord)
     - [ModuleObjectRecord().signature](#moduleobjectrecordsignature)
     - [ModuleObjectRecord().get_reference_objects](#moduleobjectrecordget_reference_objects)

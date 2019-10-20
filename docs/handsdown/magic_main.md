@@ -4,4 +4,4 @@
 
 Main module entrypoint.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Main
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Main

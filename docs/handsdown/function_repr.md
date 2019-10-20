@@ -4,7 +4,7 @@
 
 Function sgnature builder.
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / FunctionRepr
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / FunctionRepr
   - [ClassRepr](#classrepr)
   - [DefaultValueData](#defaultvaluedata)
     - [DefaultValueData().get_class_names](#defaultvaluedataget_class_names)

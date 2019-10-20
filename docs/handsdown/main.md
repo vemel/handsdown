@@ -4,7 +4,7 @@
 
 Main CLI entrypoint for `handsdown`
 
-- [Index](../README.md#modules) / [Handsdown](index.md#handsdown) / Main
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Main
   - [create_external_configs](#create_external_configs)
   - [get_logger](#get_logger)
   - [main](#main)

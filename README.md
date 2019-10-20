@@ -17,7 +17,7 @@ Python docstring-based documentation generator for lazy perfectionists.
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
     - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
     - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
-    - [🐏 Deploy to Read the Docs](#%f0%9f%90%8f-deploy-to-read-the-docs)
+    - [🐏 Deploy on Read the Docs](#%f0%9f%90%8f-deploy-on-read-the-docs)
   - [Installation](#installation)
   - [Development](#development)
 
@@ -28,12 +28,12 @@ Python docstring-based documentation generator for lazy perfectionists.
   and [reStructuredText](https://www.python.org/dev/peps/pep-0287/)
   docstrings support. All of them are converted to a valid markdown.
 - Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
-- GitHub-friendly. Use your local markdown viewer, open docs
-  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or deploy it on
-  [GitHub Pages](https://vemel.github.io/handsdown/)!
+- Can be used locally, or
+  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or even deployed on
+  [GitHub Pages](https://vemel.github.io/handsdown/) and [Read the Docs](https://handsdown.readthedocs.io/)!
 - Signatures for every class, function, property and method.
 - Support for type annotations. Even for the ones from the `__future__`!
-- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/README.md)
+- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/MODULES.md)
 - Gather all scattered `README.md` in submodules to one place
 - Find related source code from every doc section.
 - Make links by just adding `module.import.String` to docs.
@@ -162,7 +162,7 @@ handsdown.generate_index()
 # navigate to `output` dir and check results
 ```
 
-### 🐏 Deploy to Read the Docs
+### 🐏 Deploy on Read the Docs
 
 If you use `--external` CLI flag, `handsdown` generates all required configuration for you,
 so you just need to add yu repository.

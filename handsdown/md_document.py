@@ -30,7 +30,7 @@ class MDDocument(object):
         md_doc.append('## New section')
         md_doc.append('some content')
         md_doc.title = 'My doc'
-        md_doc.ensure_toc_exists()
+        md_doc.add_toc_if_not_exists()
         md_doc.write()
 
         # output is indented for readability
@@ -84,12 +84,16 @@ class MDDocument(object):
             raise exc_value
         return self.write()
 
-    def read(self):
-        # type: () -> None
+    def read(self, source_path=None):
+        # type: (Optional[Path]) -> None
         """
-        Read and parse content from `path`.
+        Read and parse content from `source_path`.
+
+        Arguments:
+            source_path -- Input file path. If not provided - `path` is used.
         """
-        self._content = self._path.read_text()
+        path = source_path or self._path
+        self._content = path.read_text()
         self._title = ""
         self._toc_section = ""
         title, content = self.extract_title(self._content)
@@ -119,7 +123,7 @@ class MDDocument(object):
         ):
             self._subtitle = self._sections.pop(0)
 
-    def ensure_toc_exists(self):
+    def add_toc_if_not_exists(self):
         # type: () -> None
         """
         Check if ToC exists in the document or create one.
@@ -180,6 +184,14 @@ class MDDocument(object):
             A string with Markdown link.
         """
         return "[{}]({})".format(title, link)
+
+    def render_md_doc_link(self, target_md_document, title=None):
+        # type: (MDDocument, Optional[Text]) -> Text
+        return self.render_doc_link(
+            title=title or target_md_document.title,
+            anchor=self.get_anchor(target_md_document.title),
+            target_path=target_md_document.path,
+        )
 
     def render_doc_link(self, title, anchor="", target_path=None):
         # type: (Text, Text, Optional[Path]) -> Text
@@ -280,6 +292,7 @@ class MDDocument(object):
     def toc_section(self, toc_section):
         # type: (Text) -> None
         self._toc_section = toc_section
+        self._content = self._build_content()
 
     @property
     def sections(self):
