@@ -8,6 +8,8 @@ from handsdown.function_repr import (
     ClassRepr,
     TypeHintData,
     DefaultValueData,
+    ParameterData,
+    FunctionData,
 )
 
 
@@ -56,6 +58,47 @@ class TestDefaultValueData(unittest.TestCase):
             DefaultValueData("my_class.MyClass(Test)").get_class_names(),
             ["MyClass", "my_class.MyClass", "Test"],
         )
+
+
+class TestParameterData(unittest.TestCase):
+    def test_render(self):
+        data = ParameterData("name")
+        self.assertEqual(data.render(), "name")
+        self.assertEqual(str(data), "name")
+        data.type_hint = "type_hint"
+        self.assertEqual(data.render(), "name: type_hint")
+        data.default = "default"
+        self.assertEqual(data.render(), "name: type_hint = default")
+        data.default = "default"
+        data.type_hint = ParameterData.NOT_SET
+        self.assertEqual(data.render(), "name=default")
+
+
+class TestFunctionData(unittest.TestCase):
+    def test_render(self):
+        parameter_mock = MagicMock()
+        parameter_mock.render.return_value = "param"
+
+        data = FunctionData("name")
+        self.assertEqual(data.render(), "def name():")
+        self.assertEqual(data.render(multi_line=True), "def name():")
+
+        data.return_type_hint = "ReturnType"
+        self.assertEqual(data.render(), "def name() -> ReturnType:")
+
+        data.parameters = [parameter_mock, parameter_mock]
+        self.assertEqual(data.render(), "def name(param, param) -> ReturnType:")
+        self.assertEqual(
+            data.render(multi_line=True),
+            "def name(\n    param,\n    param,\n) -> ReturnType:",
+        )
+
+        data.name = ""
+        data.parameters = []
+        self.assertEqual(data.render(), "lambda:")
+
+        data.parameters = [parameter_mock, parameter_mock]
+        self.assertEqual(data.render(), "lambda param, param:")
 
 
 class TestFunctionRepr(unittest.TestCase):

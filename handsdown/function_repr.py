@@ -240,22 +240,27 @@ class FunctionData:
         Returns:
             A function representation.
         """
-        rendered_parameters = []
-        for parameter in self.parameters:
-            rendered_parameters.append(parameter.render())
+        parameters = ""
+        rendered_parameters = [i.render() for i in self.parameters]
+        if self.parameters:
+            if multi_line:
+                parameters = "\n    {},\n".format(",\n    ".join(rendered_parameters))
+            else:
+                parameters = ", ".join(rendered_parameters)
 
-        result = "{} {}(".format(self.definition, self.name)
-        if multi_line:
-            parameters = ",\n    ".join(rendered_parameters)
-            result = "{}\n    {},\n)".format(result, parameters)
-        else:
-            parameters = ", ".join(rendered_parameters)
-            result = "{}{})".format(result, parameters)
-
+        return_type_hint = ""
         if self.return_type_hint:
-            result = "{} -> {}".format(result, self.return_type_hint)
+            return_type_hint = " -> {}".format(self.return_type_hint)
 
-        result = "{}:".format(result)
+        if not self.name:
+            if parameters:
+                result = "lambda {}:".format(parameters)
+            else:
+                result = "lambda:"
+        else:
+            result = "{} {}({}){}:".format(
+                self.definition, self.name, parameters, return_type_hint
+            )
 
         return result
 
