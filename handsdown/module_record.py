@@ -83,10 +83,10 @@ class ModuleObjectRecord:
                 parts.append(FunctionRepr(self.obj.fset).render())
             return "\n".join(parts)
 
-        if self.is_class:
-            function_repr = ClassRepr(self.obj)  # type: FunctionRepr
-        else:
+        if not self.is_class:
             function_repr = FunctionRepr(self.obj)
+        else:
+            function_repr = ClassRepr(self.obj)
 
         result = function_repr.render()
         self._type_hints = function_repr.get_type_hints()
