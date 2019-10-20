@@ -21,7 +21,7 @@ from handsdown.utils import make_title
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.path_finder import PathFinder, Path
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     import logging
 
 

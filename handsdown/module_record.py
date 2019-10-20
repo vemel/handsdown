@@ -7,7 +7,7 @@ from typing import Any, Text, Set, List, Generator, Dict, Optional, TYPE_CHECKIN
 from handsdown.utils import make_title
 from handsdown.function_repr import FunctionRepr, ClassRepr
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.function_repr import TypeHintData, DefaultValueData
     from handsdown.path_finder import Path
 
@@ -166,13 +166,13 @@ class ModuleRecord:
 
         Examples::
 
-            ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-            ['My my_module', 'utils', 'parsers']
+            ModuleRecord(..., import_string='my_module.utils.parsers').get_import_string_parts()
+            ['my_module', 'utils', 'parsers']
 
-            ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
+            ModuleRecord(..., import_string='my_module.__main__').get_import_string_parts()
             ['my_module', '__main__']
 
-            ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
+            ModuleRecord(..., import_string='my_module.my_lib').get_import_string_parts()
             ['my_module', 'my_lib']
 
         Returns:
@@ -189,13 +189,13 @@ class ModuleRecord:
         Examples::
 
             ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-            ['My module', 'Utils', 'parsers']
+            ['My Module', 'Utils', 'Parsers']
 
             ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
-            ['My module', 'Main']
+            ['My Module', 'Main']
 
             ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
-            ['My module', 'MyLibrary']
+            ['My Module', 'MyLibrary']
 
         Returns:
             A list of title parts as strings.

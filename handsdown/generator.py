@@ -17,7 +17,7 @@ from handsdown.md_document import MDDocument
 from handsdown.utils import make_title
 from handsdown.path_finder import PathFinder, Path
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.processors.base import BaseDocstringProcessor
     from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 

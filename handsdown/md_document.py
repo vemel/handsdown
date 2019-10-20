@@ -10,7 +10,7 @@ from typing import Text, Optional, List, Tuple, Type, TYPE_CHECKING
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.path_finder import PathFinder
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from types import TracebackType
     from handsdown.path_finder import Path
 

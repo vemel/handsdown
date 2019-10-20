@@ -4,7 +4,7 @@ Helper to turn on or off `TYPE_CHECKING` to avoid sircular imports.
 import traceback
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.path_finder import Path
 
 

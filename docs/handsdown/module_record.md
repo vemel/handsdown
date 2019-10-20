@@ -133,13 +133,13 @@ Get parts of module `import_string`.
 #### Examples
 
 ```python
-ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-['My my_module', 'utils', 'parsers']
+ModuleRecord(..., import_string='my_module.utils.parsers').get_import_string_parts()
+['my_module', 'utils', 'parsers']
 
-ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
+ModuleRecord(..., import_string='my_module.__main__').get_import_string_parts()
 ['my_module', '__main__']
 
-ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
+ModuleRecord(..., import_string='my_module.my_lib').get_import_string_parts()
 ['my_module', 'my_lib']
 ```
 
@@ -185,13 +185,13 @@ If `title` is set, last part replaced with `title`.
 
 ```python
 ModuleRecord(..., import_string='my_module.utils.parsers').get_title_parts()
-['My module', 'Utils', 'parsers']
+['My Module', 'Utils', 'Parsers']
 
 ModuleRecord(..., import_string='my_module.__main__').get_title_parts()
-['My module', 'Main']
+['My Module', 'Main']
 
 ModuleRecord(..., import_string='my_module.my_lib', title='MyLibrary').get_title_parts()
-['My module', 'MyLibrary']
+['My Module', 'MyLibrary']
 ```
 
 #### Returns

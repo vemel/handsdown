@@ -11,7 +11,7 @@ from handsdown.processors.rst import RSTDocstringProcessor
 from handsdown.processors.pep257 import PEP257DocstringProcessor
 from handsdown.processors.base import BaseDocstringProcessor
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.processors.section_map import SectionMap
 
 
