@@ -34,7 +34,7 @@ def get_logger(level):
     Returns:
         A `logging.Logger` instance.
     """
-    logger = logging.Logger(LOGGER_NAME)
+    logger = logging.getLogger(LOGGER_NAME)
     logger.setLevel(level)
 
     formatter = logging.Formatter(
@@ -53,7 +53,7 @@ def create_external_configs(namespace):
     """
     Create `GitHub Pages` and `Read the Docs` configuration files.
     """
-    logger = logging.Logger(LOGGER_NAME)
+    logger = logging.getLogger(LOGGER_NAME)
     configs = (
         ("gh_pages_config.yml", namespace.output_path / "_config.yml"),
         ("mkdocs.yml", namespace.input_path / "mkdocs.yml"),
