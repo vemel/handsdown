@@ -54,7 +54,6 @@ class Loader:
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
-        self._sys_path_dirty = False
         self._os_environ_patch = mock.patch("os.environ", OSEnvironMock(os.environ))
         self._logging_logger_patch = mock.patch("logging.Logger", mock.MagicMock())
         self._logging_config_patch = mock.patch(

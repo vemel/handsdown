@@ -15,9 +15,10 @@ from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.module_record import ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import make_title
-from handsdown.path_finder import PathFinder, Path
+from handsdown.path_finder import PathFinder
 
 if TYPE_CHECKING:  # pragma: no cover
+    from handsdown.path_finder import Path
     from handsdown.processors.base import BaseDocstringProcessor
     from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 
@@ -77,7 +78,6 @@ class Generator:
         self._root_path = input_path
         self._output_path = output_path
         self._project_name = make_title(input_path.name)
-        self._index_path = Path(self._output_path, self.INDEX_NAME)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth
@@ -103,9 +103,6 @@ class Generator:
         package_names_re_expr = "|".join(package_names)
         self._docstring_links_re = re.compile(
             r"`+(?:{})\.\S+`+".format(package_names_re_expr)
-        )
-        self._signature_links_re = re.compile(
-            r"[ \[]((?:{})\.[^() :,]+)".format(package_names_re_expr)
         )
         self._prepare_index()
 
@@ -528,18 +525,6 @@ class Generator:
                 md_document.append_title(section.title, level=4)
             for block in section.blocks:
                 md_document.append(block.render())
-
-    def _get_objects_from_signature(self, signature):
-        # type: (Text) -> List[ModuleObjectRecord]
-        result = []  # type: List[ModuleObjectRecord]
-        for match in re.findall(self._signature_links_re, signature):
-            module_object_record = self._module_records.find_object(match)
-            if not module_object_record or module_object_record in result:
-                continue
-
-            result.append(module_object_record)
-
-        return result
 
     def _build_modules_toc_lines(self, import_string, max_depth, md_document):
         # type: (Text, int, MDDocument) -> List[Text]
