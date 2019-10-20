@@ -98,12 +98,9 @@ Navigate to `docs/README.md` to check your new documentation!
 
 ### 📝 As a GitHub Pages manager
 
-`handsdown` comes with a built-in support for [GitHub Pages](https://pages.github.com/),
-although some setup is required. By default documentation uses relative links to source files,
-so for `GitHub Pages` we need absolute URLs to a GitHub repositore for `find in source code`
-links to work.
-
-Now let's generate `GitHub Pages`-friendly documentation
+With `--external` CLI flag, `handsdown` generates all required configuration
+for [GitHub Pages](https://pages.github.com/), so you just need to setup your
+GitHub repository.
 
 ```bash
 # Generate documentation that points to master branch
@@ -115,17 +112,21 @@ handsdown --external `git config --get remote.origin.url`
 handsdown --external https://github.com/<user>/<project>/blob/master/
 ```
 
-Commit your changes and enable `GitHub Pages` by setting your project
-`Settings` > `GitHub Pages` > `Source` to `master branch /docs folder`
+- Generate documentation with `--external` flag as shown above, do not use `--output`
+  flag, only `docs` folder is supported by `GitHub Pages`
+- Commit and push all changes a to `master` branch.
+- Set your GitHub project `Settings` > `GitHub Pages` > `Source` to `master branch /docs folder`
 
-That's it, you are good to go! Add plugins to `docs/_config.yml` or change
-theme to add your own touch.
+All set! You can change `docs/_config.yml` to add your own touch.
 
-If you still want to have relative links to source, e.g. for using docs locally,
+With `--external` flag links to your source are absolute and point to your GitHub repo. If you
+still want to have relative links to source, e.g. for using docs locally,
 generate docs to another folder
 
 ```bash
-handsdown -o docs_local # `docs_local` folder will be created in your project root
+# `docs_local` folder will be created in your project root
+# you probably want to add it to .gitignore
+handsdown -o docs_local
 ```
 
 ### 🧩 As a module
@@ -164,11 +165,36 @@ handsdown.generate_index()
 
 ### 🐏 Deploy on Read the Docs
 
-If you use `--external` CLI flag, `handsdown` generates all required configuration for you,
-so you just need to add yu repository.
+With `--external` CLI flag, `handsdown` generates all required configuration
+for [Read the Docs](https://readthedocs.org/), so you just need to setup your
+GitHub repository.
 
-- Follow [GitHub Pages](#-as-a-github-pages-manager) guide
+```bash
+# Generate documentation that points to master branch
+# do not use custom output location, as `GitHub Pages`
+# works only with `docs` directory
+handsdown --external `git config --get remote.origin.url`
+
+# or specify GitHub url directly
+handsdown --external https://github.com/<user>/<project>/blob/master/
+```
+
+- Generate documentation with `--external` flag as shown above, do not use `--output`
+  flag, only `docs` folder is supported by `Read the Docs`
+- Commit and push all changes a to `master` branch.
 - Add your repository on [Read the Docs](https://readthedocs.org/)
+
+All set! You can change `.readthedocs.yml` and `docs/mkdocs.yml` to add your own touch.
+
+With `--external` flag links to your source are absolute and point to your GitHub repo. If you
+still want to have relative links to source, e.g. for using docs locally,
+generate docs to another folder
+
+```bash
+# `docs_local` folder will be created in your project root
+# you probably want to add it to .gitignore
+handsdown -o docs_local
+```
 
 ## Installation
 
