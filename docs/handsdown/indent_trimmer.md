@@ -27,6 +27,7 @@ Utility for removing indentation for sections and lines.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L123)
 
 ```python
+@staticmethod
 def get_line_indent(line: Text) -> int
 ```
 
@@ -55,6 +56,7 @@ A number of indentation characters in a beginning of the line.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L16)
 
 ```python
+@staticmethod
 def trim_empty_lines(text: Text) -> Text
 ```
 
@@ -77,6 +79,7 @@ A stripped string.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L95)
 
 ```python
+@staticmethod
 def trim_line(line: Text, indent: int) -> Text
 ```
 
@@ -108,6 +111,7 @@ A line with removed indent.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L59)
 
 ```python
+@classmethod
 def trim_lines(lines: Iterable[Text]) -> List[Text]
 ```
 
@@ -141,6 +145,7 @@ A list of lines with trimmed indent.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L39)
 
 ```python
+@classmethod
 def trim_text(text: Text) -> Text
 ```
 

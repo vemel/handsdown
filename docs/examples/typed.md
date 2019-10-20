@@ -36,6 +36,7 @@ class Typed(
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L16)
 
 ```python
+@classmethod
 def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None
 ```
 

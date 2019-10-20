@@ -6,6 +6,7 @@ import re
 from typing import Text, List, Any, Dict, Optional, Union
 
 from handsdown.sentinel import Sentinel
+from handsdown.indent_trimmer import IndentTrimmer
 
 
 __all__ = ["FunctionRepr", "ClassRepr"]
@@ -288,6 +289,8 @@ class FunctionRepr(object):
         except TypeError:
             pass
 
+        self._definition_lines = self._get_definition_lines()
+
     def _get_argument_names(self):
         # type: () -> List[Text]
         if not self._arg_spec:
@@ -338,20 +341,62 @@ class FunctionRepr(object):
 
         return parameters_data
 
+    def _get_definition_lines(self):
+        # type: () -> List[Text]
+        result = []  # type: List[Text]
+        try:
+            source_lines = inspect.getsourcelines(self.func)[0]
+        except (TypeError, OSError, ValueError):
+            return result
+
+        end_index = 1
+        lines_count = len(source_lines)
+
+        parentheses_count = 0
+        while end_index <= lines_count:
+            current_line = source_lines[end_index - 1].split("#", 1)[0].strip()
+            if not current_line and parentheses_count <= 0:
+                break
+
+            no_spaces_line = current_line.replace(" ", "")
+            if "):" in no_spaces_line or ")->" in no_spaces_line:
+                break
+
+            parentheses_count += current_line.count("(")
+            parentheses_count -= current_line.count(")")
+            end_index += 1
+
+        while end_index < lines_count:
+            current_line = source_lines[end_index].strip()
+            if not current_line.startswith("#"):
+                break
+            end_index += 1
+
+        result = source_lines[:end_index]
+        result = [i.rstrip("\r\n") for i in result]
+        return IndentTrimmer.trim_lines(result)
+
+    def _get_decorator_lines(self):
+        # type: () -> List[Text]
+        result = []
+        parentheses_count = 0
+        for line in self._definition_lines:
+            if not line.startswith("@") and parentheses_count <= 0:
+                break
+
+            result.append(line)
+            parentheses_count += line.count("(")
+            parentheses_count -= line.count(")")
+        return result
+
     def _get_type_hints(self):
         # type: () -> Dict[Text, Any]
         type_hints = {}  # type: Dict[Text, Any]
         if getattr(self.func, "__annotations__", None):
             type_hints.update(self.func.__annotations__)
 
-        srclines = []  # type: List[Text]
-        try:
-            srclines = inspect.getsourcelines(self.func)[0]
-        except (TypeError, OSError):
-            pass
-
         parameter_index = 0
-        for line in srclines:
+        for line in self._definition_lines:
             match = self._return_type_re.match(line)
             if match:
                 arg_type, return_type = match.groups()
@@ -457,11 +502,15 @@ class FunctionRepr(object):
         """
         self._function_data.parameters = self._get_parameters_data()
         self._function_data.definition = self._definition
+        decorator_lines = self._get_decorator_lines()
         self._add_type_hints()
 
         result = self._function_data.render(multi_line=False)
         if len(result) > self._line_lenght:
             result = self._function_data.render(multi_line=True)
+
+        if decorator_lines:
+            result = "{}\n{}".format("\n".join(decorator_lines), result)
         return result
 
     def __str__(self):

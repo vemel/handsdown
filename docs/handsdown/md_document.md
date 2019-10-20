@@ -72,7 +72,7 @@ with MDDocument(path=Path('output.md')) as md_document:
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L21)
 
 ```python
-#property getter
+@property
 def path() -> Path
 ```
 
@@ -83,7 +83,7 @@ Output path of the document.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L21)
 
 ```python
-#property getter
+@property
 def sections() -> List[Text]
 ```
 
@@ -94,10 +94,10 @@ All non-special `sections` of the document.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L21)
 
 ```python
-#property getter
+@property
 def subtitle() -> Text
 
-#property setter
+@subtitle.setter
 def subtitle(subtitle: Text) -> None
 ```
 
@@ -108,10 +108,10 @@ def subtitle(subtitle: Text) -> None
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L21)
 
 ```python
-#property getter
+@property
 def title() -> Text
 
-#property setter
+@title.setter
 def title(title: Text) -> None
 ```
 
@@ -122,10 +122,10 @@ def title(title: Text) -> None
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L21)
 
 ```python
-#property getter
+@property
 def toc_section() -> Text
 
-#property setter
+@toc_section.setter
 def toc_section(toc_section: Text) -> None
 ```
 
@@ -179,6 +179,7 @@ Check if ToC exists in the document or create one.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L373)
 
 ```python
+@staticmethod
 def extract_title(content: Text) -> Tuple[Text, Text]
 ```
 
@@ -223,6 +224,7 @@ A string with ToC.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L130)
 
 ```python
+@classmethod
 def get_anchor(title: Text) -> Text
 ```
 
@@ -237,6 +239,7 @@ A test of anchor link.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L143)
 
 ```python
+@staticmethod
 def is_toc(section: Text) -> bool
 ```
 
@@ -302,6 +305,7 @@ A string with Markdown link.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L161)
 
 ```python
+@classmethod
 def render_link(title: Text, link: Text) -> Text
 ```
 

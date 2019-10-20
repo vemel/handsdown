@@ -26,6 +26,7 @@ class RSTExample()
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L11)
 
 ```python
+@staticmethod
 def reference()
 ```
 
@@ -61,6 +62,7 @@ print(data)
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L40)
 
 ```python
+@staticmethod
 def replace_test()
 ```
 
@@ -72,6 +74,7 @@ class [RSTExample](#rstexample) and class [RSTExample](#rstexample) look good.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L31)
 
 ```python
+@staticmethod
 def rtype_test()
 ```
 

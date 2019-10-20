@@ -80,7 +80,7 @@ Value is a related [Section](#section) instance.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L51)
 
 ```python
-#property getter
+@property
 def sections() -> Generator[Section, None, None]
 ```
 

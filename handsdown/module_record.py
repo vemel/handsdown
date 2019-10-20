@@ -76,12 +76,10 @@ class ModuleObjectRecord:
         if isinstance(self.obj, property):
             parts = []
             if getattr(self.obj, "fget", None):
-                parts.append("#property getter")
                 parts.append(FunctionRepr(self.obj.fget).render())
             if getattr(self.obj, "fset", None):
                 if parts:
                     parts.append("")
-                parts.append("#property setter")
                 parts.append(FunctionRepr(self.obj.fset).render())
             return "\n".join(parts)
 
