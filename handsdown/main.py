@@ -86,7 +86,7 @@ def main():
     args = parser.parse_args()
     if args.version:
         print(version)
-        sys.exit()
+        return
 
     log_level = logging.INFO
     if args.debug:

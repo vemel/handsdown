@@ -17,7 +17,7 @@ Main CLI entrypoint for `handsdown`
 
 ## create_external_configs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L51)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L52)
 
 ```python
 def create_external_configs(namespace: argparse.Namespace) -> None:
@@ -27,7 +27,7 @@ Create `GitHub Pages` and `Read the Docs` configuration files.
 
 ## get_logger
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L26)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L27)
 
 ```python
 def get_logger(level: int) -> logging.Logger:
@@ -45,7 +45,7 @@ A `logging.Logger` instance.
 
 ## main
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L79)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L80)
 
 ```python
 def main() -> None:
