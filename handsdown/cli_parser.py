@@ -155,4 +155,7 @@ def get_cli_parser():
         "-d", "--debug", action="store_true", help="Show debug messages"
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
+    parser.add_argument(
+        "-v", "--version", action="store_true", help="Show pacakge version"
+    )
     return parser

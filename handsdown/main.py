@@ -17,6 +17,7 @@ from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import get_cli_parser
 from handsdown.utils import render_asset, get_title_from_path_part
 from handsdown.settings import LOGGER_NAME, SOURCES_GLOB, EXCLUDE_EXPRS
+from handsdown.version import version
 
 
 if TYPE_CHECKING:
@@ -83,6 +84,10 @@ def main():
     """
     parser = get_cli_parser()
     args = parser.parse_args()
+    if args.version:
+        print(version)
+        sys.exit()
+
     log_level = logging.INFO
     if args.debug:
         log_level = logging.DEBUG

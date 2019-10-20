@@ -4,7 +4,7 @@ import os
 
 from setuptools import setup
 from setuptools import find_packages
-import __version__ as version_data
+from handsdown.version import version
 
 root_path = os.path.dirname(os.path.abspath(__file__))
 
@@ -35,7 +35,6 @@ def get_install_requires():
 
 
 long_description = get_long_description()
-version = version_data.__version__
 
 
 setup(
