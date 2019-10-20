@@ -78,10 +78,8 @@ class ModuleObjectRecord:
             if getattr(self.obj, "fget", None):
                 parts.append(FunctionRepr(self.obj.fget).render())
             if getattr(self.obj, "fset", None):
-                if parts:
-                    parts.append("")
                 parts.append(FunctionRepr(self.obj.fset).render())
-            return "\n".join(parts)
+            return "\n\n".join(parts)
 
         if not self.is_class:
             function_repr = FunctionRepr(self.obj)

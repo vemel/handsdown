@@ -43,7 +43,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L218)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L217)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -72,7 +72,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L106)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L105)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
@@ -98,7 +98,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 
 ### Loader().get_output_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L85)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L84)
 
 ```python
 def get_output_path(source_path: Path) -> Path:
@@ -116,7 +116,7 @@ A path to the output `.md` file even if it does not exist yet.
 
 ### Loader().get_source_line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L503)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L502)
 
 ```python
 def get_source_line_number(obj: Any) -> int:
@@ -132,7 +132,7 @@ A line number as an integer, starting for 1.
 
 ### Loader().import_module
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L248)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L247)
 
 ```python
 def import_module(file_path: Path) -> Any:
@@ -156,7 +156,7 @@ Imported module object.
 
 ### Loader().setup
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L68)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L67)
 
 ```python
 def setup() -> None:

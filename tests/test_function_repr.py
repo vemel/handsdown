@@ -1,7 +1,61 @@
 import unittest
 from typing import Text, Union
 
-from handsdown.function_repr import FunctionRepr, ClassRepr
+from mock import MagicMock
+
+from handsdown.function_repr import (
+    FunctionRepr,
+    ClassRepr,
+    TypeHintData,
+    DefaultValueData,
+)
+
+
+class TestTypeHintData(unittest.TestCase):
+    def test_render(self):
+        self.assertEqual(TypeHintData("type_hint").render(), "type_hint")
+
+        type_hint = MagicMock()
+        type_hint.__name__ = "type_hint_name"
+        self.assertEqual(TypeHintData(type_hint).render(), "type_hint_name")
+
+        type_hint = MagicMock()
+        type_hint.__name__ = ""
+        type_hint.__str__ = lambda self: "type_hint_str"
+        self.assertEqual(TypeHintData(type_hint).render(), "type_hint_str")
+
+    def test_get_class_names(self):
+        self.assertEqual(
+            TypeHintData(
+                "typing.Union[typing.List, my_class.MyClass]"
+            ).get_class_names(),
+            [
+                "Union",
+                "typing.Union",
+                "List",
+                "typing.List",
+                "MyClass",
+                "my_class.MyClass",
+            ],
+        )
+
+
+class TestDefaultValueData(unittest.TestCase):
+    def test_render(self):
+        self.assertEqual(DefaultValueData("default").render(), "'default'")
+
+        default = MagicMock()
+        default.__repr__ = lambda self: "<function name at 0x1234>"
+        self.assertEqual(DefaultValueData(default).render(), "<function name>")
+
+        default.__repr__ = lambda self: "u'Test'"
+        self.assertEqual(DefaultValueData(default).render(), "'Test'")
+
+    def test_get_class_names(self):
+        self.assertEqual(
+            DefaultValueData("my_class.MyClass(Test)").get_class_names(),
+            ["MyClass", "my_class.MyClass", "Test"],
+        )
 
 
 class TestFunctionRepr(unittest.TestCase):

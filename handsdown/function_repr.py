@@ -43,7 +43,7 @@ class TypeHintData:
         if isinstance(self.type_hint, str):
             return self.type_hint
 
-        if hasattr(self.type_hint, "__name__"):
+        if getattr(self.type_hint, "__name__", None):
             return self.type_hint.__name__
 
         result = str(self.type_hint)
