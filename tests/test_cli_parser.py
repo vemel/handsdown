@@ -9,7 +9,7 @@ from handsdown.cli_parser import (
     git_repo,
     dir_abs_path,
     existing_dir_abs_path,
-    get_cli_parser,
+    parse_args,
 )
 
 
@@ -19,6 +19,14 @@ class TestCLIParser(unittest.TestCase):
         self.assertEqual(
             git_repo("git@github.com:user/project.git"),
             "https://github.com/user/project/blob/master/",
+        )
+        self.assertEqual(
+            git_repo("https://github.com/myuser/project.git"),
+            "https://github.com/myuser/project/blob/master/",
+        )
+        self.assertEqual(
+            git_repo("https://github.com/myuser/project/blob/develop/"),
+            "https://github.com/myuser/project/blob/develop/",
         )
 
     def test_abs_path(self):
@@ -40,5 +48,5 @@ class TestCLIParser(unittest.TestCase):
         with self.assertRaises(argparse.ArgumentTypeError):
             existing_dir_abs_path(Path(__file__))
 
-    def test_get_cli_parser(self):
-        self.assertIsInstance(get_cli_parser(), argparse.ArgumentParser)
+    def test_parse_args(self):
+        self.assertIsInstance(parse_args([]), argparse.Namespace)

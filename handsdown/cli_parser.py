@@ -4,7 +4,7 @@
 import re
 import argparse
 
-from typing import Text
+from typing import Text, List
 
 from handsdown.path_finder import Path
 
@@ -92,8 +92,8 @@ def existing_dir_abs_path(path_str):
     return path
 
 
-def get_cli_parser():
-    # type: () -> argparse.ArgumentParser
+def parse_args(args):
+    # type: (List[Text]) -> argparse.Namespace
     """
     Get CLI arguments parser.
 
@@ -158,4 +158,4 @@ def get_cli_parser():
     parser.add_argument(
         "-v", "--version", action="store_true", help="Show pacakge version"
     )
-    return parser
+    return parser.parse_args(args)

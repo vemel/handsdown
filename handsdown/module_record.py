@@ -4,7 +4,7 @@ Dataclass for an imported module.
 
 from typing import Any, Text, Set, List, Generator, Dict, Optional, TYPE_CHECKING
 
-from handsdown.utils import get_title_from_path_part
+from handsdown.utils import make_title
 from handsdown.function_repr import FunctionRepr, ClassRepr
 
 if TYPE_CHECKING:
@@ -203,7 +203,7 @@ class ModuleRecord:
         parts = self.get_import_string_parts()
         result = []
         for part in parts:
-            part = get_title_from_path_part(part)
+            part = make_title(part)
             result.append(part)
 
         if self.title and result:

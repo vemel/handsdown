@@ -1,13 +1,10 @@
 import unittest
 
-try:
-    from unittest.mock import patch
-except ImportError:
-    from mock import patch
+from mock import patch
 
 from handsdown.generator import Generator
 from handsdown.path_finder import Path
-from handsdown.utils import OSEnvironMock
+from handsdown.utils.os_environ_mock import OSEnvironMock
 
 
 class TestGenerator(unittest.TestCase):

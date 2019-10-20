@@ -15,7 +15,9 @@ except ImportError:
     import mock  # type: ignore
 
 from handsdown.docstring_formatter import DocstringFormatter
-from handsdown.utils import OSEnvironMock, TypeCheckingMock, get_title_from_path_part
+from handsdown.utils.os_environ_mock import OSEnvironMock
+from handsdown.utils.type_checking_mock import TypeCheckingMock
+from handsdown.utils import make_title
 from handsdown.module_record import ModuleRecord, ModuleObjectRecord
 from handsdown.path_finder import PathFinder, Path
 
@@ -141,7 +143,7 @@ class Loader:
 
         module_record = ModuleRecord(
             module=inspect_module,
-            title=get_title_from_path_part(file_import.split(".")[-1]),
+            title=make_title(file_import.split(".")[-1]),
             docstring="\n\n".join(docstring_parts),
             output_path=self.get_output_path(source_path),
             source_path=source_path,

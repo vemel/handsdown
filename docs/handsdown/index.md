@@ -31,7 +31,10 @@ Root of `handsdown` source code.
       - [Smart](processors/smart.md#smart)
     - [Sentinel](sentinel.md#sentinel)
     - [Settings](settings.md#settings)
-    - [Utils](utils.md#utils)
+    - [Utils](utils/index.md#utils)
+      - [Logging](utils/logging.md#logging)
+      - [OSEnvironMock](utils/os_environ_mock.md#osenvironmock)
+      - [TypeCheckingMock](utils/type_checking_mock.md#typecheckingmock)
 
 # Handsdown
 

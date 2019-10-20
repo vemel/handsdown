@@ -6,8 +6,8 @@
   - [abs_path](#abs_path)
   - [dir_abs_path](#dir_abs_path)
   - [existing_dir_abs_path](#existing_dir_abs_path)
-  - [get_cli_parser](#get_cli_parser)
   - [git_repo](#git_repo)
+  - [parse_args](#parse_args)
 
 ## abs_path
 
@@ -71,20 +71,6 @@ An absolute path.
 
 - `argparse.ArgumentTypeError` - If path does not exist or is not a directory.
 
-## get_cli_parser
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L95)
-
-```python
-def get_cli_parser() -> argparse.ArgumentParser:
-```
-
-Get CLI arguments parser.
-
-#### Returns
-
-An `argparse.ArgumentParser` instance.
-
 ## git_repo
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L12)
@@ -102,3 +88,17 @@ Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 #### Returns
 
 A GitHub URL.
+
+## parse_args
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L95)
+
+```python
+def parse_args(args: List[Text]) -> argparse.Namespace:
+```
+
+Get CLI arguments parser.
+
+#### Returns
+
+An `argparse.ArgumentParser` instance.

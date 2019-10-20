@@ -14,39 +14,15 @@ from typing import TYPE_CHECKING
 
 from handsdown.generator import Generator, GeneratorError
 from handsdown.path_finder import PathFinder
-from handsdown.cli_parser import get_cli_parser
-from handsdown.utils import render_asset, get_title_from_path_part
+from handsdown.cli_parser import parse_args
+from handsdown.utils import render_asset, make_title
+from handsdown.utils.logging import get_logger
 from handsdown.settings import LOGGER_NAME, SOURCES_GLOB, EXCLUDE_EXPRS
 from handsdown.version import version
 
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     import argparse
-
-
-def get_logger(level):
-    # type: (int) -> logging.Logger
-    """
-    Get stdout stream logger.
-
-    Arguments:
-        level -- Desired logging level.
-
-    Returns:
-        A `logging.Logger` instance.
-    """
-    logger = logging.getLogger(LOGGER_NAME)
-    logger.setLevel(level)
-
-    formatter = logging.Formatter(
-        fmt="%(asctime)s %(name)s: %(levelname)-8s %(message)s", datefmt="%H:%M:%S"
-    )
-
-    handler = logging.StreamHandler()
-    handler.setLevel(level)
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-    return logger
 
 
 def create_external_configs(namespace):
@@ -69,7 +45,7 @@ def create_external_configs(namespace):
             target_path,
             dict(
                 source_code_url=namespace.source_code_url.replace("blob/master/", ""),
-                project_name=get_title_from_path_part(namespace.input_path.name),
+                project_name=make_title(namespace.input_path.name),
                 docs_path=PathFinder(namespace.input_path)
                 .relative(namespace.output_path)
                 .as_posix(),
@@ -82,8 +58,7 @@ def main():
     """
     Main entrypoint for CLI.
     """
-    parser = get_cli_parser()
-    args = parser.parse_args()
+    args = parse_args(sys.argv[1:])
     if args.version:
         print(version)
         return
@@ -129,5 +104,5 @@ def main():
         sys.exit(1)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

@@ -14,7 +14,7 @@ from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.module_record import ModuleRecordList
 from handsdown.md_document import MDDocument
-from handsdown.utils import get_title_from_path_part
+from handsdown.utils import make_title
 from handsdown.path_finder import PathFinder, Path
 
 if TYPE_CHECKING:
@@ -76,7 +76,7 @@ class Generator:
         self._logger = logger or logging.Logger(self.LOGGER_NAME)
         self._root_path = input_path
         self._output_path = output_path
-        self._project_name = get_title_from_path_part(input_path.name)
+        self._project_name = make_title(input_path.name)
         self._index_path = Path(self._output_path, self.INDEX_NAME)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
@@ -287,9 +287,7 @@ class Generator:
             parent_import = ".".join(parent_import_parts)
             parend_module_record = self._module_records.find_object(parent_import)
             if not parend_module_record:
-                import_string_breadcrumbs.append(
-                    "`{}`".format(get_title_from_path_part(part))
-                )
+                import_string_breadcrumbs.append("`{}`".format(make_title(part)))
                 continue
 
             import_string_breadcrumbs.append(
