@@ -1,7 +1,6 @@
 site_name: "Handsdown"
 site_url: "https://github.com/vemel/handsdown/"
 repo_url: "https://github.com/vemel/handsdown/"
-docs_dir: "docs"
 
 theme:
   name: mkdocs
