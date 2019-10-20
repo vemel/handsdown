@@ -4,8 +4,8 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/handsdown)
 ![Travis (.org)](https://img.shields.io/travis/vemel/handsdown)
-![Codecov](https://img.shields.io/codecov/c/github/vemel/handsdown)
 ![Read the Docs](https://img.shields.io/readthedocs/handsdown)
+![Codecov](https://img.shields.io/codecov/c/github/vemel/handsdown)
 
 Python docstring-based documentation generator for lazy perfectionists.
 
