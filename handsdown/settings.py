@@ -13,7 +13,7 @@ except ImportError:
     from pathlib2 import Path  # type: ignore
 
 
-ASSETS_PATH = Path(__file__).parent.parent / "assets"
+ASSETS_PATH = Path(__file__).parent / "assets"
 LOGGER_NAME = "handsdown"
 EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*"]
 SOURCES_GLOB = "**/*.py"

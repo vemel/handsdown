@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from os import path
+import os
 
 from setuptools import setup
 from setuptools import find_packages
 import __version__ as version_data
 
-root_path = path.dirname(path.abspath(__file__))
+root_path = os.path.dirname(os.path.abspath(__file__))
 
 description = "Python docstring-based documentation generator for lazy perfectionists."
 
@@ -14,7 +14,7 @@ description = "Python docstring-based documentation generator for lazy perfectio
 def get_long_description():
     "Remove ToC from README.md as PyPI does not support links."
     lines = []
-    readme_path = path.join(root_path, "README.md")
+    readme_path = os.path.join(root_path, "README.md")
     with open(readme_path) as readme_file:
         for readme_line in readme_file.readlines():
             if "](#" not in readme_line:
@@ -24,7 +24,7 @@ def get_long_description():
 
 def get_install_requires():
     install_requires = []
-    requirements_path = path.join(root_path, "requirements.txt")
+    requirements_path = os.path.join(root_path, "requirements.txt")
     with open(requirements_path) as f:
         for line in f.readlines():
             line = line.rstrip(" \n")
@@ -47,9 +47,12 @@ setup(
     url="https://vemel.github.io/handsdown/",
     author="Vlad Emelianov",
     author_email="vlad.emelianov.nz@gmail.com",
-    packages=find_packages(exclude=["tests", "__pycache__", "examples"]),
+    packages=find_packages(
+        exclude=["tests", "tests.*", "__pycache__", "examples", "examples.*"]
+    ),
     install_requires=get_install_requires(),
     extras_require={},
+    package_data={"handsdown": ["handsdown/assets/*.yml"]},
     include_package_data=True,
     zip_safe=True,
     dependency_links=[],

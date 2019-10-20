@@ -1,1 +1,1 @@
-include assets/*.yml
+include handsdown/assets/*.yml
