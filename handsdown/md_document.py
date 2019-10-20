@@ -187,6 +187,16 @@ class MDDocument(object):
 
     def render_md_doc_link(self, target_md_document, title=None):
         # type: (MDDocument, Optional[Text]) -> Text
+        """
+        Render Markdown link to `target_md_document` header path with a correct title.
+
+        Arguments:
+            target_md_document -- Target `MDDocument`.
+            title -- Link text. If not provided `target_md_document.title` is used.
+
+        Returns:
+            A string with Markdown link.
+        """
         return self.render_doc_link(
             title=title or target_md_document.title,
             anchor=self.get_anchor(target_md_document.title),
