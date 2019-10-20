@@ -56,7 +56,7 @@ def create_external_configs(namespace):
     logger = logging.Logger(LOGGER_NAME)
     configs = (
         ("gh_pages_config.yml", namespace.output_path / "_config.yml"),
-        ("mkdocs.yml", namespace.output_path / "mkdocs.yml"),
+        ("mkdocs.yml", namespace.input_path / "mkdocs.yml"),
         ("readthedocs.yml", namespace.input_path / ".readthedocs.yml"),
     )
     for asset_name, target_path in configs:
