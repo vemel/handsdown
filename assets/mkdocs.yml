@@ -1,5 +1,4 @@
 site_name: "{project_name}"
-site_url: "{source_code_url}"
 repo_url: "{source_code_url}"
 
 theme:
