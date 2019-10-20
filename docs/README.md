@@ -20,10 +20,11 @@ Full Handsdown project documentation can be found in [Modules](MODULES.md#module
   - [Usage](#usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
     - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
-    - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
     - [🐏 Deploy on Read the Docs](#%f0%9f%90%8f-deploy-on-read-the-docs)
+    - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
   - [Installation](#installation)
   - [Development](#development)
+  - [Modules](MODULES.md#modules)
 
 ## Features
 
@@ -133,6 +134,39 @@ generate docs to another folder
 handsdown -o docs_local
 ```
 
+### 🐏 Deploy on Read the Docs
+
+With `--external` CLI flag, `handsdown` generates all required configuration
+for [Read the Docs](https://readthedocs.org/), so you just need to to add your
+GitHub repository to `Read the Docs`.
+
+```bash
+# Generate documentation that points to master branch
+# do not use custom output location, as `GitHub Pages`
+# works only with `docs` directory
+handsdown --external `git config --get remote.origin.url`
+
+# or specify GitHub url directly
+handsdown --external https://github.com/<user>/<project>/blob/master/
+```
+
+- Generate documentation with `--external` flag as shown above, do not use `--output`
+  flag, only `docs` folder is supported by `Read the Docs`
+- Commit and push all changes a to `master` branch.
+- Add your repository on [Read the Docs](https://readthedocs.org/)
+
+All set! You can change `.readthedocs.yml` and `docs/mkdocs.yml` to add your own touch.
+
+With `--external` flag links to your source are absolute and point to your GitHub repo. If you
+still want to have relative links to source, e.g. for using docs locally,
+generate docs to another folder
+
+```bash
+# `docs_local` folder will be created in your project root
+# you probably want to add it to .gitignore
+handsdown -o docs_local
+```
+
 ### 🧩 As a module
 
 ```python
@@ -165,39 +199,6 @@ handsdown.generate_doc(repo_path / 'my_module' / 'source.py')
 handsdown.generate_index()
 
 # navigate to `output` dir and check results
-```
-
-### 🐏 Deploy on Read the Docs
-
-With `--external` CLI flag, `handsdown` generates all required configuration
-for [Read the Docs](https://readthedocs.org/), so you just need to setup your
-GitHub repository.
-
-```bash
-# Generate documentation that points to master branch
-# do not use custom output location, as `GitHub Pages`
-# works only with `docs` directory
-handsdown --external `git config --get remote.origin.url`
-
-# or specify GitHub url directly
-handsdown --external https://github.com/<user>/<project>/blob/master/
-```
-
-- Generate documentation with `--external` flag as shown above, do not use `--output`
-  flag, only `docs` folder is supported by `Read the Docs`
-- Commit and push all changes a to `master` branch.
-- Add your repository on [Read the Docs](https://readthedocs.org/)
-
-All set! You can change `.readthedocs.yml` and `mkdocs.yml` to add your own touch.
-
-With `--external` flag links to your source are absolute and point to your GitHub repo. If you
-still want to have relative links to source, e.g. for using docs locally,
-generate docs to another folder
-
-```bash
-# `docs_local` folder will be created in your project root
-# you probably want to add it to .gitignore
-handsdown -o docs_local
 ```
 
 ## Installation
