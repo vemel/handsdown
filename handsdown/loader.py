@@ -350,7 +350,7 @@ class Loader:
             # skip modules with unknown source
             try:
                 source_path_str = inspect.getsourcefile(inspect_object)
-            except (OSError, TypeError):
+            except (TypeError, OSError, ValueError):
                 continue
 
             if not source_path_str:

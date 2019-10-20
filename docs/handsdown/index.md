@@ -32,7 +32,7 @@ Root of `handsdown` source code.
     - [Sentinel](sentinel.md#sentinel)
     - [Settings](settings.md#settings)
     - [Utils](utils/index.md#utils)
-      - [Logging](utils/logging.md#logging)
+      - [Logger](utils/logger.md#logger)
       - [OSEnvironMock](utils/os_environ_mock.md#osenvironmock)
       - [TypeCheckingMock](utils/type_checking_mock.md#typecheckingmock)
 

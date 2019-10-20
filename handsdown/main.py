@@ -16,8 +16,8 @@ from handsdown.generator import Generator, GeneratorError
 from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import parse_args
 from handsdown.utils import render_asset, make_title
-from handsdown.utils.logging import get_logger
-from handsdown.settings import LOGGER_NAME, SOURCES_GLOB, EXCLUDE_EXPRS
+from handsdown.utils.logger import get_logger
+from handsdown.settings import SOURCES_GLOB, EXCLUDE_EXPRS
 from handsdown.version import version
 
 
@@ -30,7 +30,7 @@ def create_external_configs(namespace):
     """
     Create `GitHub Pages` and `Read the Docs` configuration files.
     """
-    logger = logging.getLogger(LOGGER_NAME)
+    logger = get_logger()
     configs = (
         ("gh_pages_config.yml", namespace.output_path / "_config.yml"),
         ("mkdocs.yml", namespace.input_path / "mkdocs.yml"),

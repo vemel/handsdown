@@ -7,6 +7,7 @@ from typing import Text, List, Any, Dict, Optional, Union
 
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils.logger import get_logger
 
 
 __all__ = ["FunctionRepr", "ClassRepr"]
@@ -281,6 +282,7 @@ class FunctionRepr(object):
         else:
             self.name = str(func)
 
+        self.logger = get_logger()
         self.func = func
         self._function_data = FunctionData(self.name)
 
@@ -288,8 +290,10 @@ class FunctionRepr(object):
         try:
             getargspec = getattr(inspect, "getfullargspec", inspect.getargspec)
             self._arg_spec = getargspec(self.func)
-        except TypeError:
-            pass
+        except TypeError as e:
+            self.logger.warning(
+                "Cannot get arguments of {} function: {}".format(self.name, e)
+            )
 
         self._definition_lines = self._get_definition_lines()
 

@@ -8,7 +8,7 @@ Handful utils that do not deserve a separate module.
   - [make_title](#make_title)
   - [render_asset](#render_asset)
   - Modules
-    - [Logging](logging.md#logging)
+    - [Logger](logger.md#logger)
     - [OSEnvironMock](os_environ_mock.md#osenvironmock)
     - [TypeCheckingMock](type_checking_mock.md#typecheckingmock)
 
