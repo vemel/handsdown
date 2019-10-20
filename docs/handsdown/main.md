@@ -20,7 +20,7 @@ Main CLI entrypoint for `handsdown`
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L51)
 
 ```python
-def create_external_configs(namespace: argparse.Namespace) -> None
+def create_external_configs(namespace: argparse.Namespace) -> None:
 ```
 
 Create `GitHub Pages` and `Read the Docs` configuration files.
@@ -30,7 +30,7 @@ Create `GitHub Pages` and `Read the Docs` configuration files.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L26)
 
 ```python
-def get_logger(level: int) -> logging.Logger
+def get_logger(level: int) -> logging.Logger:
 ```
 
 Get stdout stream logger.
@@ -48,7 +48,7 @@ A `logging.Logger` instance.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L79)
 
 ```python
-def main() -> None
+def main() -> None:
 ```
 
 Main entrypoint for CLI.

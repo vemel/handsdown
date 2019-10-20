@@ -17,7 +17,7 @@ Utility for removing indentation for sections and lines.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L11)
 
 ```python
-class IndentTrimmer()
+class IndentTrimmer():
 ```
 
 Utility for removing indentation for sections and lines.
@@ -28,7 +28,7 @@ Utility for removing indentation for sections and lines.
 
 ```python
 @staticmethod
-def get_line_indent(line: Text) -> int
+def get_line_indent(line: Text) -> int:
 ```
 
 Get indent length of the line.
@@ -57,7 +57,7 @@ A number of indentation characters in a beginning of the line.
 
 ```python
 @staticmethod
-def trim_empty_lines(text: Text) -> Text
+def trim_empty_lines(text: Text) -> Text:
 ```
 
 Trim empty lines in the begging and the end of the text.
@@ -80,7 +80,7 @@ A stripped string.
 
 ```python
 @staticmethod
-def trim_line(line: Text, indent: int) -> Text
+def trim_line(line: Text, indent: int) -> Text:
 ```
 
 Trim indent from line if it is empty.
@@ -112,7 +112,7 @@ A line with removed indent.
 
 ```python
 @classmethod
-def trim_lines(lines: Iterable[Text]) -> List[Text]
+def trim_lines(lines: Iterable[Text]) -> List[Text]:
 ```
 
 Trim minimum indent from each line of text.
@@ -146,7 +146,7 @@ A list of lines with trimmed indent.
 
 ```python
 @classmethod
-def trim_text(text: Text) -> Text
+def trim_text(text: Text) -> Text:
 ```
 
 Trim minimum indent from each line of text.

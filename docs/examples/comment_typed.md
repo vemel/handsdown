@@ -14,7 +14,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L4)
 
 ```python
-class MyValue()
+class MyValue():
 ```
 
 ## Typed
@@ -25,7 +25,7 @@ class MyValue()
 class Typed(
     _value: Union[List[Text], Text, MyValue] = <examples.comment_typed.MyValue object>,
     _name: Text = 'default',
-) -> Dict[Text, MyValue]
+) -> Dict[Text, MyValue]:
 ```
 
 #### See also
@@ -38,7 +38,7 @@ class Typed(
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, _args: Text, _kwargs: Any) -> Typed
+def classmethod(_my_value: MyValue, _args: Text, _kwargs: Any) -> Typed:
 ```
 
 #### See also
@@ -54,7 +54,7 @@ def func(
     _list: Tuple[List[Text], ...],
     _my_value_cls: Type[MyValue],
     _kwargs: None = <class 'examples.comment_typed.MyValue'>,
-) -> Any
+) -> Any:
 ```
 
 #### See also
@@ -70,7 +70,7 @@ def func_any(
     _list: Tuple[List[Text], ...],
     _my_value_cls: Any,
     _kwargs: None = <class 'examples.comment_typed.MyValue'>,
-) -> Any
+) -> Any:
 ```
 
 #### See also

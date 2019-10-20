@@ -12,7 +12,7 @@ Sentinel value than can be used as a placeholder.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
 
 ```python
-class Sentinel(name: Text = 'DEFAULT') -> None
+class Sentinel(name: Text = 'DEFAULT') -> None:
 ```
 
 Sentinel value than can be used as a placeholder.

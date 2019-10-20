@@ -13,7 +13,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
 
 ```python
-class MyValue()
+class MyValue():
 ```
 
 ## Typed
@@ -24,7 +24,7 @@ class MyValue()
 class Typed(
     _value: Union[List[str], str, examples.typed.MyValue] = <examples.typed.MyValue object>,
     _name: str = 'default',
-) -> Dict[str, examples.typed.MyValue]
+) -> Dict[str, examples.typed.MyValue]:
 ```
 
 #### See also
@@ -37,7 +37,7 @@ class Typed(
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None
+def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None:
 ```
 
 #### See also
@@ -53,7 +53,7 @@ def func(
     _list: Tuple[List[str], ...],
     _my_value_cls: Type[examples.typed.MyValue],
     _kwargs: None = <class 'examples.typed.MyValue'>,
-) -> Any
+) -> Any:
 ```
 
 #### See also

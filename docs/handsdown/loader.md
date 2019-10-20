@@ -23,7 +23,7 @@ class Loader(
     root_path: Path,
     output_path: Path,
     logger: logging.Logger,
-) -> None
+) -> None:
 ```
 
 Loader for python source code.
@@ -46,7 +46,7 @@ my_module_utils = loader.import_module('my_module.utils')
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L216)
 
 ```python
-def get_import_string(source_path: Path) -> Text
+def get_import_string(source_path: Path) -> Text:
 ```
 
 Get Python import string for a source `source_path` relative to `root_path`.
@@ -75,7 +75,7 @@ A Python import string.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L104)
 
 ```python
-def get_module_record(source_path: Path) -> Optional[ModuleRecord]
+def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
 ```
 
 Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
@@ -101,7 +101,7 @@ A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L83)
 
 ```python
-def get_output_path(source_path: Path) -> Path
+def get_output_path(source_path: Path) -> Path:
 ```
 
 Get output MD document path based on `source_path`.
@@ -119,7 +119,7 @@ A path to the output `.md` file even if it does not exist yet.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L501)
 
 ```python
-def get_source_line_number(obj: Any) -> int
+def get_source_line_number(obj: Any) -> int:
 ```
 
 Get line number in source file where `obj` is declared.
@@ -135,7 +135,7 @@ A line number as an integer, starting for 1.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L246)
 
 ```python
-def import_module(file_path: Path) -> Any
+def import_module(file_path: Path) -> Any:
 ```
 
 Import module using `import_paths` list. Clean up all patches afterwards.
@@ -159,7 +159,7 @@ Imported module object.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L66)
 
 ```python
-def setup() -> None
+def setup() -> None:
 ```
 
 Setup local frameworks if needed.
@@ -172,7 +172,7 @@ Frameworks supported:
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L26)
 
 ```python
-class LoaderError()
+class LoaderError():
 ```
 
 Main error for [Loader](#loader) class.

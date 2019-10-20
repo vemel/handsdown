@@ -254,6 +254,8 @@ class FunctionData:
         if self.return_type_hint:
             result = "{} -> {}".format(result, self.return_type_hint)
 
+        result = "{}:".format(result)
+
         return result
 
 

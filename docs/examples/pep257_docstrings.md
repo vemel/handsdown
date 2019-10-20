@@ -17,7 +17,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
 
 ```python
-class ClassExample()
+class ClassExample():
 ```
 
 PEP257-style class example
@@ -32,7 +32,7 @@ PEP257-style class example
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L20)
 
 ```python
-def method_example(text: str = 'hello') -> int
+def method_example(text: str = 'hello') -> int:
 ```
 
 Summary line.
@@ -76,7 +76,7 @@ Description of return value
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L53)
 
 ```python
-def function_example(real=0.0, imag=0.0)
+def function_example(real=0.0, imag=0.0):
 ```
 
 Form a complex number.

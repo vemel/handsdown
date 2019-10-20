@@ -13,7 +13,7 @@ Translator of docstrings to Markdown format.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L13)
 
 ```python
-class DocstringFormatter(docstring: Text) -> None
+class DocstringFormatter(docstring: Text) -> None:
 ```
 
 Translator of docstrings to Markdown format.
@@ -27,7 +27,7 @@ Translator of docstrings to Markdown format.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L62)
 
 ```python
-def render() -> Text
+def render() -> Text:
 ```
 
 Get Markdown-friendly docstring.

@@ -18,7 +18,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py#L10)
 
 ```python
-class RSTExample()
+class RSTExample():
 ```
 
 ### RSTExample.reference
@@ -27,7 +27,7 @@ class RSTExample()
 
 ```python
 @staticmethod
-def reference()
+def reference():
 ```
 
 This is a reference for ``RST-style`` docstrings. Check `source` code
@@ -63,7 +63,7 @@ print(data)
 
 ```python
 @staticmethod
-def replace_test()
+def replace_test():
 ```
 
 Check if all attribute `attributes`, ``data`` and exception `Exception` in
@@ -75,7 +75,7 @@ class [RSTExample](#rstexample) and class [RSTExample](#rstexample) look good.
 
 ```python
 @staticmethod
-def rtype_test()
+def rtype_test():
 ```
 
 `:rtype:` test.

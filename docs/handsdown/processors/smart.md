@@ -16,7 +16,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
 
 ```python
-class SmartDocstringProcessor() -> None
+class SmartDocstringProcessor() -> None:
 ```
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content.
@@ -26,7 +26,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
 
 ```python
-def build_sections(content: Text) -> SectionMap
+def build_sections(content: Text) -> SectionMap:
 ```
 
 Parse docstring and split it to sections with arrays of strings.

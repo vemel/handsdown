@@ -19,7 +19,7 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L24)
 
 ```python
-class PathFinder(root: Path) -> None
+class PathFinder(root: Path) -> None:
 ```
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
@@ -53,7 +53,7 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L91)
 
 ```python
-def exclude(fn_exrps: Text) -> PathFinder
+def exclude(fn_exrps: Text) -> PathFinder:
 ```
 
 Add `fnmatch` expression to black list.
@@ -73,7 +73,7 @@ A copy of itself.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L136)
 
 ```python
-def glob(glob_expr: Text) -> Generator[Path, None, None]
+def glob(glob_expr: Text) -> Generator[Path, None, None]:
 ```
 
 Find all matching `Path` objects respecting `include` and
@@ -88,7 +88,7 @@ Matching `Path` objects.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L70)
 
 ```python
-def include(fn_exrps: Text) -> PathFinder
+def include(fn_exrps: Text) -> PathFinder:
 ```
 
 Add `fnmatch` expression to white list.
@@ -108,7 +108,7 @@ A copy of itself.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L183)
 
 ```python
-def mkdir(force: bool = False) -> None
+def mkdir(force: bool = False) -> None:
 ```
 
 Create directories up to `root` if they do not exist.
@@ -126,7 +126,7 @@ Create directories up to `root` if they do not exist.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L154)
 
 ```python
-def relative(target: Path) -> Path
+def relative(target: Path) -> Path:
 ```
 
 Find a relative path from `root` to `target`.
@@ -145,7 +145,7 @@ A relative path to `target`.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L18)
 
 ```python
-class PathFinderError()
+class PathFinderError():
 ```
 
 Main error for [PathFinder](#pathfinder).

@@ -28,7 +28,7 @@ class Generator(
     raise_errors: bool = False,
     source_code_url: Optional[Text] = None,
     toc_depth: int = 3,
-) -> None
+) -> None:
 ```
 
 Main handsdown documentation generator.
@@ -64,7 +64,7 @@ Main handsdown documentation generator.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L158)
 
 ```python
-def cleanup_old_docs() -> None
+def cleanup_old_docs() -> None:
 ```
 
 Remove old docs generated for this module.
@@ -74,7 +74,7 @@ Remove old docs generated for this module.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L199)
 
 ```python
-def generate_doc(source_path: Path) -> None
+def generate_doc(source_path: Path) -> None:
 ```
 
 Generate one module doc at once.
@@ -92,7 +92,7 @@ Generate one module doc at once.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L316)
 
 ```python
-def generate_docs() -> None
+def generate_docs() -> None:
 ```
 
 Generate all doc files at once.
@@ -102,7 +102,7 @@ Generate all doc files at once.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L333)
 
 ```python
-def generate_index() -> None
+def generate_index() -> None:
 ```
 
 Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
@@ -113,7 +113,7 @@ section that contains a Tree of all modules in the project.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L362)
 
 ```python
-def generate_modules() -> None
+def generate_modules() -> None:
 ```
 
 Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
@@ -124,7 +124,7 @@ section that contains a Tree of all modules in the project.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L25)
 
 ```python
-class GeneratorError()
+class GeneratorError():
 ```
 
 Main error for [Generator](#generator)

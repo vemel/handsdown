@@ -30,7 +30,7 @@ class TestFunctionRepr(unittest.TestCase):
             "    _arg1: Union[Text, int],\n"
             "    _default_arg: int = 123,\n"
             "    _typed: Text = 'text',\n"
-            ") -> None",
+            ") -> None:",
         )
 
         type_hints = function_repr.get_type_hints()
@@ -52,7 +52,7 @@ class TestFunctionRepr(unittest.TestCase):
             "    _arg1: Union[Text, int],\n"
             "    _default_arg: int = 123,\n"
             "    _typed: Text = 'text',\n"
-            ") -> None",
+            ") -> None:",
         )
 
 
@@ -72,5 +72,5 @@ class TestClassRepr(unittest.TestCase):
             "    _loooooooooooooooooooooong_arg: Union[Text, int],\n"
             "    _default_arg: int = 123,\n"
             "    _typed: Text = 'text',\n"
-            ") -> None",
+            ") -> None:",
         )

@@ -15,7 +15,7 @@ Handful utils that do not deserve a separate module.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L14)
 
 ```python
-class OSEnvironMock()
+class OSEnvironMock():
 ```
 
 Mock for `os.environ` that returns `env` string instead of undefined variables.
@@ -25,7 +25,7 @@ Mock for `os.environ` that returns `env` string instead of undefined variables.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L30)
 
 ```python
-class TypeCheckingMock(target_file_path: Path) -> None
+class TypeCheckingMock(target_file_path: Path) -> None:
 ```
 
 Helper to turn on or off `TYPE_CHECKING` to avoid sircular imports.
@@ -49,7 +49,7 @@ with patch("typing.TYPE_CHECKING", TypeCheckingMock(file_path)):
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils.py#L68)
 
 ```python
-def get_title_from_path_part(path_part: Text) -> Text
+def get_title_from_path_part(path_part: Text) -> Text:
 ```
 
 Convert `pathlib.Path` part to a human-readable title.
@@ -85,7 +85,7 @@ def render_asset(
     name: Text,
     target_path: Path,
     format_dict: Dict[Text, Text],
-) -> None
+) -> None:
 ```
 
 Render `assets/<name>` file to `target_path`.
