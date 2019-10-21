@@ -1,5 +1,6 @@
 import unittest
 from tempfile import NamedTemporaryFile
+from mock import MagicMock, patch
 
 from handsdown.md_document import MDDocument
 from handsdown.path_finder import Path
@@ -135,6 +136,24 @@ class TestMDDocument(unittest.TestCase):
     def test_get_anchor(self):
         self.assertEqual(MDDocument.get_anchor("s T_e-s%t"), "s-t_e-st")
         self.assertEqual(MDDocument.get_anchor("test"), "test")
+
+    @patch("handsdown.md_document.MDDocument.render_doc_link")
+    def test_render_md_doc_link(self, render_doc_link_mock):
+        md_doc_mock = MagicMock()
+        md_doc_mock.title = "Other title"
+        md_doc_mock.path = "other/test.md"
+        render_doc_link_mock.return_value = "result"
+        md_doc = MDDocument(Path("/root/test.md"))
+
+        self.assertEqual(md_doc.render_md_doc_link(md_doc_mock), "result")
+        render_doc_link_mock.assert_called_with(
+            anchor="other-title", target_path="other/test.md", title="Other title"
+        )
+
+        self.assertEqual(md_doc.render_md_doc_link(md_doc_mock, title="Test"), "result")
+        render_doc_link_mock.assert_called_with(
+            anchor="other-title", target_path="other/test.md", title="Test"
+        )
 
     def test_render_doc_link(self):
         md_doc = MDDocument(Path("/root/test.md"))

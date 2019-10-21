@@ -1,0 +1,29 @@
+Summary line.
+
+Extended description of method.
+
+Examples:
+    Examples should be written in doctest format, and should illustrate how
+    to use the function.
+
+    >>> print([i for i in
+    ... example_generator(2)])
+    [
+        'one',
+        'two',
+    ]
+End docstest
+
+    >>> setup_env()
+    >>> func_call(
+    ...     first_name='test',
+    ...     last_name='test',
+    ... )
+
+Args:
+    text -- Description of arg1
+    *args -- Description of args
+    **kwargs -- Description of kwargs
+
+Returns:
+    Description of return value

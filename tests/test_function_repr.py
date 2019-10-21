@@ -103,15 +103,6 @@ class TestFunctionData(unittest.TestCase):
 
 class TestFunctionRepr(unittest.TestCase):
     def test_init(self):
-        # def my_func(_arg1, _default_arg=123, _typed: Text = "text") -> None:
-        #     pass
-
-        # function_repr = FunctionRepr(my_func)
-        # self.assertEqual(
-        #     function_repr.render(),
-        #     "def my_func(_arg1, _default_arg=123, _typed: str = 'text') -> None",
-        # )
-
         def my_func_typed(
             _arg1,  # type: Union[Text, int]
             _default_arg=123,  # type: int
@@ -119,6 +110,10 @@ class TestFunctionRepr(unittest.TestCase):
         ):
             # type: () -> None
             pass
+
+        my_lambda = lambda x: x
+        function_repr = FunctionRepr(my_lambda)
+        self.assertEqual(function_repr.render(), "lambda x:")
 
         function_repr = FunctionRepr(my_func_typed)
         self.assertEqual(

@@ -47,6 +47,20 @@ class Section:
         self.title = title
         self.blocks = blocks
 
+    def render(self):
+        # type: () -> Text
+        """
+        Render all Section block lines.
+
+        Returns:
+            Section lines as a text.
+        """
+        result = []
+        for block in self.blocks:
+            result.append(block.render())
+
+        return "\n\n".join(result)
+
 
 class SectionMap(dict):
     """

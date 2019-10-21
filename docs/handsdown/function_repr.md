@@ -23,7 +23,7 @@ Function sgnature builder.
 
 ## ClassRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L535)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L539)
 
 ```python
 class ClassRepr(inspect_class: Any) -> None:
@@ -118,7 +118,7 @@ A function representation.
 
 ## FunctionRepr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L263)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L268)
 
 ```python
 class FunctionRepr(func: Any) -> None:
@@ -134,7 +134,7 @@ Inspired a lot by built-in `inspect.Signature`.
 
 ### FunctionRepr().get_defaults
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L468)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L472)
 
 ```python
 def get_defaults() -> Dict[Text, DefaultValueData]:
@@ -154,7 +154,7 @@ A list of all set [DefaultValueData](#defaultvaluedata)
 
 ### FunctionRepr().get_type_hints
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L447)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L451)
 
 ```python
 def get_type_hints() -> Dict[Text, TypeHintData]:
@@ -174,7 +174,7 @@ A list of all set [TypeHintData](#typehintdata)
 
 ### FunctionRepr().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L498)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L502)
 
 ```python
 def render() -> Text:

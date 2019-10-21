@@ -282,10 +282,9 @@ class FunctionRepr(object):
 
     def __init__(self, func):
         # type: (Any) -> None
-        if hasattr(func, "__name__"):
-            self.name = func.__name__
-        else:
-            self.name = str(func)
+        self.name = getattr(func, "__name__", None)
+        if self.name == "<lambda>":
+            self.name = ""
 
         self.logger = get_logger()
         self.func = func
