@@ -33,7 +33,7 @@ Google-style class example
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L20)
 
 ```python
-def method_example(text: str = 'hello') -> int:
+def method_example(text: Text = 'hello'):
 ```
 
 Summary line.
@@ -117,7 +117,7 @@ print result
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L85)
 
 ```python
-def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
+def function_with_pep484_type_annotations(param1: int, param2: str):
 ```
 
 Example function with PEP 484 type annotations.

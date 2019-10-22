@@ -1,20 +1,29 @@
+import ast
+from typing import Any, List, Set, Text, Generator, TYPE_CHECKING
+
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
 from handsdown.ast_parser.class_analyzer import ClassAnalyzer
 
+if TYPE_CHECKING:
+    from handsdown.ast_parser.function_record import FunctionRecord
+    from handsdown.ast_parser.argument_record import ArgumentRecord
+
 
 class ClassRecord(NodeRecord):
     def __init__(self, node):
+        # type: (ast.ClassDef) -> None
         super(ClassRecord, self).__init__(node)
-        self.method_records = []
-        self.decorators = []
-        self.argument_records = []
-        self.bases = []
+        self.method_records = []  # type: List[FunctionRecord]
+        self.decorators = []  # type: List[ExpressionRecord]
+        self.argument_records = []  # type: List[ArgumentRecord]
+        self.bases = []  # type: List[ExpressionRecord]
         self.support_split = True
 
     @property
     def related_names(self):
-        result = set()
+        # type: () -> Set[Text]
+        result = set()  # type: Set[Text]
         for decorator in self.decorators:
             result.update(decorator.related_names)
         for base in self.bases:
@@ -25,10 +34,12 @@ class ClassRecord(NodeRecord):
         return result
 
     def iter_records(self):
+        # type: () -> Generator[NodeRecord, None, None]
         for method in self.get_public_methods():
-            yield (self, method)
+            yield method
 
     def get_public_methods(self):
+        # type: () -> List[FunctionRecord]
         result = []
         for method_record in self.method_records:
             if method_record.name == "__init__":
@@ -42,6 +53,8 @@ class ClassRecord(NodeRecord):
         return result
 
     def _parse(self):
+        # type: () -> None
+        assert isinstance(self.node, ast.ClassDef)
         self.decorators = []
         for decorator in self.node.decorator_list:
             record = ExpressionRecord(decorator)
@@ -57,7 +70,8 @@ class ClassRecord(NodeRecord):
         self.method_records = sorted(analyzer.method_records, key=lambda x: x.name)
 
     def _render_parts(self, indent=0):
-        parts = []
+        # type: (int) -> List[Any]
+        parts = []  # type: List[Any]
         for decorator in self.decorators:
             parts.append(decorator.render(indent))
             parts.append(self.FORCE_LINE_BREAK)

@@ -1,20 +1,28 @@
+from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
+
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
+
+if TYPE_CHECKING:
+    import ast
+    from handsdown.sentinel import Sentinel
 
 
 class ArgumentRecord(NodeRecord):
     def __init__(self, node):
+        # type: (ast.arg) -> None
         super(ArgumentRecord, self).__init__(node)
         self.name = node.arg
-        self.default = None
-        self.type_hint = None
+        self.default = None  # type: Optional[ExpressionRecord]
+        self.type_hint = None  # type: Optional[ExpressionRecord]
         self.prefix = ""
         if node.annotation:
             self.type_hint = ExpressionRecord(node.annotation)
 
     @property
     def related_names(self):
-        result = set()
+        # type: () -> Set[Text]
+        result = set()  # type: Set[Text]
         if self.default:
             result.update(self.default.related_names)
         if self.type_hint:
@@ -22,8 +30,9 @@ class ArgumentRecord(NodeRecord):
 
         return result
 
-    def _render_parts(self, indent):
-        parts = []
+    def _render_parts(self, indent=0):
+        # type: (int) -> List[Union[Text, Sentinel, ExpressionRecord]]
+        parts = []  # type: List[Union[Text, Sentinel, ExpressionRecord]]
         if self.prefix:
             parts.append(self.prefix)
         parts.append(self.name)
@@ -38,3 +47,8 @@ class ArgumentRecord(NodeRecord):
             parts.append(self.default)
 
         return parts
+
+    def _parse(self):
+        # type: () -> None
+        if self.type_hint:
+            self.type_hint.parse()

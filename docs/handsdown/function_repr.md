@@ -26,7 +26,8 @@ Function sgnature builder.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L539)
 
 ```python
-class ClassRepr(inspect_class: Any) -> None:
+class ClassRepr(FunctionRepr):
+    def __init__(inspect_class: Any) -> None:
 ```
 
 Renderer of a class `__init__` function signature.
@@ -37,12 +38,17 @@ Built on top of [FunctionRepr](#functionrepr), and changes definition to `class`
 
 - `inspect_class` - Class to represent.
 
+#### See also
+
+- [ClassRepr](#classrepr)
+
 ## DefaultValueData
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L90)
 
 ```python
-class DefaultValueData(value: Any) -> None:
+class DefaultValueData():
+    def __init__(value: Any) -> None:
 ```
 
 Represent parameter default value.
@@ -91,7 +97,8 @@ A default value representation.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L218)
 
 ```python
-class FunctionData(name: Text) -> None:
+class FunctionData():
+    def __init__(name: Text) -> None:
 ```
 
 Represent function data.
@@ -121,7 +128,8 @@ A function representation.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L268)
 
 ```python
-class FunctionRepr(func: Any) -> None:
+class FunctionRepr(object):
+    def __init__(func: Any) -> None:
 ```
 
 Renderer of a function signature.
@@ -150,7 +158,7 @@ A list of all set [DefaultValueData](#defaultvaluedata)
 
 #### See also
 
-- [DefaultValueData](#defaultvaluedata)
+- [FunctionRepr().get_defaults](#functionreprget_defaults)
 
 ### FunctionRepr().get_type_hints
 
@@ -170,7 +178,7 @@ A list of all set [TypeHintData](#typehintdata)
 
 #### See also
 
-- [TypeHintData](#typehintdata)
+- [FunctionRepr().get_type_hints](#functionreprget_type_hints)
 
 ### FunctionRepr().render
 
@@ -194,7 +202,8 @@ A representaion of a function.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L167)
 
 ```python
-class ParameterData(name: Text) -> None:
+class ParameterData():
+    def __init__(name: Text) -> None:
 ```
 
 Represent function parameter.
@@ -226,7 +235,8 @@ A parameter representation.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/function_repr.py#L16)
 
 ```python
-class TypeHintData(type_hint: Any) -> None:
+class TypeHintData():
+    def __init__(type_hint: Any) -> None:
 ```
 
 Represent parameter type hint object.

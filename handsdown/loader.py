@@ -10,6 +10,7 @@ from handsdown.utils import extract_md_title
 
 if TYPE_CHECKING:  # pragma: no cover
     import logging
+    from handsdown.path_finder import Path
 
 
 class Loader:

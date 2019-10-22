@@ -8,7 +8,7 @@ Can be used as a list of supported features.
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Examples
   - Modules
     - [Comment Typed](comment_typed.md#comment-typed)
-    - [Google Docstrings](google_docstrings.md#google-docstrings)
-    - [Pep257 Docstrings](pep257_docstrings.md#pep257-docstrings)
-    - [Rst Docstrings](rst_docstrings.md#rst-docstrings)
+    - [Google docstrings examples](google_docstrings.md#google-docstrings-examples)
+    - [PEP 257 - PEP 257 and Google docstrings examples](pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
+    - [PEP 287 - reStructuredText docstrings examples](rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
     - [Typed](typed.md#typed)

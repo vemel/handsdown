@@ -19,7 +19,8 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L24)
 
 ```python
-class PathFinder(root: Path) -> None:
+class PathFinder():
+    def __init__(root: Path) -> None:
 ```
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
@@ -53,7 +54,7 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L91)
 
 ```python
-def exclude(fn_exrps: Text) -> PathFinder:
+def exclude(*fn_exrps: Text) -> PathFinder:
 ```
 
 Add `fnmatch` expression to black list.
@@ -88,7 +89,7 @@ Matching `Path` objects.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L70)
 
 ```python
-def include(fn_exrps: Text) -> PathFinder:
+def include(*fn_exrps: Text) -> PathFinder:
 ```
 
 Add `fnmatch` expression to white list.
@@ -145,7 +146,7 @@ A relative path to `target`.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L18)
 
 ```python
-class PathFinderError():
+class PathFinderError(Exception):
 ```
 
 Main error for [PathFinder](#pathfinder).

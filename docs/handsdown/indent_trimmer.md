@@ -17,7 +17,7 @@ Utility for removing indentation for sections and lines.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L11)
 
 ```python
-class IndentTrimmer():
+class IndentTrimmer(object):
 ```
 
 Utility for removing indentation for sections and lines.
@@ -80,7 +80,7 @@ A stripped string.
 
 ```python
 @staticmethod
-def trim_line(line: Text, indent: int) -> Text:
+def trim_line(line: int, indent: Text) -> Text:
 ```
 
 Trim indent from line if it is empty.

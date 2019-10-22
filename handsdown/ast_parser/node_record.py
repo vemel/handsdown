@@ -1,8 +1,15 @@
 import ast
+from typing import Text, Set, Generator, Union, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
+
+if TYPE_CHECKING:
+    from handsdown.ast_parser.module_record import ModuleRecord
+    from handsdown.ast_parser.expression_record import ExpressionRecord
+    from handsdown.ast_parser.expression_record import ExpressionRecord
+    from handsdown.ast_parser.type_defs import RenderParts
 
 
 class NodeRecord:
@@ -19,23 +26,25 @@ class NodeRecord:
     MULTI_LINE_COMMA = Sentinel("MULTI_LINE_COMMA")
 
     def __repr__(self):
+        # type: () -> Text
         return "<{} name={} import={}>".format(
             self.__class__.__name__, self.name, self.import_string
         )
 
     def __init__(self, node):
-        self.name = ""
-        if getattr(node, "name", None):
-            self.name = node.name
-        if getattr(node, "id", None):
+        # type: (Union[ast.AST, Text]) -> None
+        self.name = "{}".format(dir(node))
+        if isinstance(node, ast.Name):
             self.name = node.id
+        if isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+            self.name = node.name
 
         self.title = self.name
         docstring = ""
-        try:
+        if isinstance(
+            node, (ast.AsyncFunctionDef, ast.FunctionDef, ast.ClassDef, ast.Module)
+        ):
             docstring = ast.get_docstring(node) or ""
-        except TypeError:
-            pass
 
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         self.docstring = IndentTrimmer.trim_text(docstring)
@@ -46,17 +55,21 @@ class NodeRecord:
         self.parsed = False
 
     def iter_children(self):
+        # type: () -> Generator[NodeRecord, None, None]
         pass
 
     @property
     def related_names(self):
+        # type: () -> Set[Text]
         return set()
 
     @abstractmethod
     def _parse(self):
+        # type: () -> None
         pass
 
     def parse(self):
+        # type: () -> None
         if self.parsed:
             return
 
@@ -65,9 +78,12 @@ class NodeRecord:
 
     @property
     def line_number(self):
+        # type: () -> int
+        assert isinstance(self.node, ast.AST)
         return self.node.lineno
 
     def render(self, indent=0):
+        # type: (int) -> Text
         if not self.parsed:
             self.parse()
         lines = []
@@ -86,8 +102,6 @@ class NodeRecord:
                     and not multiline
                     and not self.is_line_fit(current_line, indent)
                 ):
-                    # raise ValueError(part_index, last_line_break_index, parts)
-                    # print(current_line, last_line_break_index, parts, multiline)
                     part_index = last_line_break_index
                     current_indent = last_indent
                     current_line = ""
@@ -199,23 +213,31 @@ class NodeRecord:
                 part_index += 1
                 continue
 
-            current_line = "{}{}".format(current_line, part.render(current_indent))
-            part_index += 1
+            if isinstance(part, NodeRecord):
+                current_line = "{}{}".format(current_line, part.render(current_indent))
+                part_index += 1
+                continue
+
+            raise ValueError("Unknown render part: {}".format(part))
 
         return "\n".join(lines)
 
     @abstractmethod
     def _render_parts(self, indent):
+        # type: (int) -> RenderParts
         pass
 
     def is_line_fit(self, line, indent):
+        # type: (Text, int) -> bool
         return len(line) < self.LINE_LENGTH - indent * self.INDENT_SPACES
 
     def render_indent(self, indent):
+        # type: (int) -> Text
         return " " * indent * self.INDENT_SPACES
 
     def get_related_import_strings(self, module_record):
-        result = set()
+        # type: (ModuleRecord) -> Set[Text]
+        result = set()  # type: Set[Text]
         related_names = self.related_names
         if not related_names:
             return result

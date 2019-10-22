@@ -1,30 +1,36 @@
 import ast
+from typing import List, Text, Generator, Tuple, Any, Optional, Dict, TYPE_CHECKING
 
 from handsdown.ast_parser.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import make_title, split_import_string
 
+if TYPE_CHECKING:
+    from handsdown.ast_parser.function_record import FunctionRecord
+    from handsdown.ast_parser.class_record import ClassRecord
+    from handsdown.ast_parser.import_record import ImportRecord
+    from handsdown.path_finder import Path
+
 
 class ModuleRecord(NodeRecord):
     def __init__(self, source_path, import_string):
+        # type: (Path, Text) -> None
         self.tree = ast.parse(source_path.read_text())
         super(ModuleRecord, self).__init__(self.tree)
         self.source_path = source_path
-        self.class_records = []
-        self.function_records = []
-        self.import_records = []
+        self.class_records = []  # type: List[ClassRecord]
+        self.function_records = []  # type: List[FunctionRecord]
+        self.import_records = []  # type: List[ImportRecord]
         self.source_lines = self.source_path.read_text().split("\n")
         self.main_class_lookup_name = source_path.stem.replace("_", "")
         self.name = split_import_string(import_string)[-1]
         self.title = make_title(self.name)
         self.import_string = import_string
-        self.import_string_map = {}
-
-    def get_imports(self):
-        return []
+        self.import_string_map = {}  # type: Dict[Text, NodeRecord]
 
     def get_title_parts(self):
+        # type: () -> List[Text]
         parts = split_import_string(self.import_string)
         result = []
         for part in parts:
@@ -37,6 +43,7 @@ class ModuleRecord(NodeRecord):
         return result
 
     def find_record(self, import_string):
+        # type: (Text) -> Optional[NodeRecord]
         result = self.import_string_map.get(import_string)
         if result:
             return result
@@ -50,16 +57,18 @@ class ModuleRecord(NodeRecord):
         return None
 
     def iter_records(self):
+        # type: () -> Generator[Tuple[NodeRecord, ...], None, None]
         for class_record in self.class_records:
             yield (self, class_record)
 
-            for records in class_record.iter_records():
-                yield (self,) + records
+            for record in class_record.iter_records():
+                yield (self, class_record, record)
 
         for function_record in self.function_records:
             yield (self, function_record)
 
     def _set_import_strings(self):
+        # type: () -> None
         for children in self.iter_records():
             import_string_parts = [self.import_string]
             for child in children[1:]:
@@ -70,7 +79,8 @@ class ModuleRecord(NodeRecord):
                     self.import_string_map[import_string] = child
 
     def _render_parts(self, indent=0):
-        parts = []
+        # type: (int) -> List[Any]
+        parts = []  # type: List[Any]
         if self.import_records:
             for import_record in self.import_records:
                 parts.append(import_record)
@@ -88,6 +98,7 @@ class ModuleRecord(NodeRecord):
         return parts
 
     def build_children(self):
+        # type: () -> None
         analyzer = ModuleAnalyzer()
         analyzer.visit(self.tree)
         self.class_records = sorted(analyzer.class_records, key=lambda x: x.name)
@@ -102,6 +113,7 @@ class ModuleRecord(NodeRecord):
         self._set_import_strings()
 
     def _parse(self):
+        # type: () -> None
         for class_record in self.class_records:
             class_record.parse()
             for method_record in class_record.method_records:
@@ -123,7 +135,7 @@ class ModuleRecord(NodeRecord):
             function_record.parse_type_comments(function_lines)
 
     def _get_function_lines(self, function_record):
-        # type: () -> List[Text]
+        # type: (FunctionRecord) -> List[Text]
         result = []  # type: List[Text]
         start_index = function_record.line_number - 1
         end_index = start_index + 1

@@ -21,15 +21,16 @@ class MyValue():
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
 
 ```python
-class Typed(
-    _value: Union[List[str], str, examples.typed.MyValue] = <examples.typed.MyValue object>,
-    _name: str = 'default',
-) -> Dict[str, examples.typed.MyValue]:
+class Typed():
+    def __init__(
+        _value: Union[(List[Text], Text, MyValue)] = MyValue(),
+        _name: Text = 'default',
+    ):
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [Typed](#typed)
 
 ### Typed.classmethod
 
@@ -37,12 +38,12 @@ class Typed(
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None:
+def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any):
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [Typed.classmethod](#typedclassmethod)
 
 ## func
 
@@ -50,12 +51,12 @@ def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None:
 
 ```python
 def func(
-    _list: Tuple[List[str], ...],
-    _my_value_cls: Type[examples.typed.MyValue],
-    _kwargs: None = <class 'examples.typed.MyValue'>,
-) -> Any:
+    _list: Tuple[(List[Text], ...)],
+    _my_value_cls: Type[MyValue] = MyValue,
+    **_kwargs: None,
+):
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [func](#func)

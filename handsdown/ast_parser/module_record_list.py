@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import Generator, Text, Set, Optional, Dict, List, Any, TYPE_CHECKING
 
 from handsdown.utils import split_import_string
 from handsdown.utils.logger import get_logger
@@ -20,10 +20,10 @@ class ModuleRecordList:
         self.data = []  # type: List[ModuleRecord]
         self.import_string_map = {}  # type: Dict[Text, Any]
 
-    def find_records(self, import_string):
-        # type: (Text) -> Optional[Tuple[NodeRecord, ...]]
+    def find_module_record(self, import_string):
+        # type: (Text) -> Optional[ModuleRecord]
         """
-        Find `NodeRecord` by it's import string.
+        Find `ModuleRecord` by it's import string.
 
         Arguments:
             import_string -- Object import string.
@@ -40,18 +40,13 @@ class ModuleRecordList:
                 continue
 
             if module_record.import_string == import_string:
-                return (module_record,)
+                return module_record
 
             for records in module_record.iter_records():
                 record = records[-1]
                 if record.import_string == import_string:
-                    return records
+                    return module_record
 
-            # self._logger.warning(
-            #     "Not found link: {} in {}".format(
-            #         import_string, module_record.import_string
-            #     )
-            # )
         return None
 
     def get_package_names(self):

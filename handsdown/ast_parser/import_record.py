@@ -1,10 +1,15 @@
 import ast
+from typing import Text, Optional, Union, TYPE_CHECKING
 
 from handsdown.ast_parser.node_record import NodeRecord
+
+if TYPE_CHECKING:
+    from handsdown.ast_parser.type_defs import RenderParts
 
 
 class ImportRecord(NodeRecord):
     def __init__(self, node, alias):
+        # type: (Union[ast.Import, ast.ImportFrom], ast.alias) -> None
         super(ImportRecord, self).__init__(node)
         self.source = None
         if isinstance(node, ast.ImportFrom):
@@ -16,12 +21,14 @@ class ImportRecord(NodeRecord):
             self.local_name = alias.asname or alias.name
 
     def get_import_string(self):
+        # type: () -> Text
         if self.source:
             return "{}.{}".format(self.source, self.name)
 
         return self.name
 
     def _render_parts(self, indent=0):
+        # type: (int) -> RenderParts
         if self.source:
             if self.local_name != self.name:
                 return [
@@ -37,6 +44,7 @@ class ImportRecord(NodeRecord):
         return ["import {}".format(self.name)]
 
     def match(self, string):
+        # type: (Text) -> Optional[Text]
         if string == self.local_name:
             return self.get_import_string()
 
@@ -47,3 +55,7 @@ class ImportRecord(NodeRecord):
                 return "{}.{}".format(self.get_import_string(), trailing_import)
 
         return None
+
+    def _parse(self):
+        # type: () -> None
+        return

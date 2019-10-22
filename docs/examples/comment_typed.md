@@ -22,15 +22,16 @@ class MyValue():
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L8)
 
 ```python
-class Typed(
-    _value: Union[List[Text], Text, MyValue] = <examples.comment_typed.MyValue object>,
-    _name: Text = 'default',
-) -> Dict[Text, MyValue]:
+class Typed():
+    def __init__(
+        _value: Union[List[Text], Text, MyValue] = MyValue(),
+        _name: Text = 'default',
+    ) -> Dict[Text, MyValue]:
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [Typed](#typed)
 
 ### Typed.classmethod
 
@@ -38,12 +39,12 @@ class Typed(
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, _args: Text, _kwargs: Any) -> Typed:
+def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [Typed.classmethod](#typedclassmethod)
 
 ## func
 
@@ -51,15 +52,15 @@ def classmethod(_my_value: MyValue, _args: Text, _kwargs: Any) -> Typed:
 
 ```python
 def func(
-    _list: Tuple[List[Text], ...],
-    _my_value_cls: Type[MyValue],
-    _kwargs: None = <class 'examples.comment_typed.MyValue'>,
+    _list: None,
+    _my_value_cls: Type[MyValue] = MyValue,
+    **_kwargs: Tuple[List[Text], ...],
 ) -> Any:
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [func](#func)
 
 ## func_any
 
@@ -67,12 +68,12 @@ def func(
 
 ```python
 def func_any(
-    _list: Tuple[List[Text], ...],
-    _my_value_cls: Any,
-    _kwargs: None = <class 'examples.comment_typed.MyValue'>,
+    _list: None,
+    _my_value_cls: Any = MyValue,
+    **_kwargs: Tuple[List[Text], ...],
 ) -> Any:
 ```
 
 #### See also
 
-- [MyValue](#myvalue)
+- [func_any](#func_any)

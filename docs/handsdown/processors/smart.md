@@ -16,7 +16,8 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
 
 ```python
-class SmartDocstringProcessor() -> None:
+class SmartDocstringProcessor(BaseDocstringProcessor):
+    def __init__() -> None:
 ```
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content.

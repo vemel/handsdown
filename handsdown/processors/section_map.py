@@ -22,11 +22,13 @@ class SectionBlock:
         self.lines = lines
 
     def is_code(self):
+        # type: () -> bool
         if not self.lines:
             return False
         return self.lines[0].startswith("```")
 
     def is_header(self):
+        # type: () -> bool
         if not self.lines:
             return False
         return self.lines[0].startswith("#")

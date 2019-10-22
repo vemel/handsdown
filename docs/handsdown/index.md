@@ -13,7 +13,20 @@ Root of `handsdown` source code.
   - [Examples](#examples)
   - Modules
     - [Main](magic_main.md#main)
-    - [Cli Parser](cli_parser.md#cli-parser)
+    - [Ast Parser](ast_parser/index.md#ast-parser)
+      - [ArgumentRecord](ast_parser/argument_record.md#argumentrecord)
+      - [ClassAnalyzer](ast_parser/class_analyzer.md#classanalyzer)
+      - [ClassRecord](ast_parser/class_record.md#classrecord)
+      - [ExpressionRecord](ast_parser/expression_record.md#expressionrecord)
+      - [FunctionRecord](ast_parser/function_record.md#functionrecord)
+      - [ImportRecord](ast_parser/import_record.md#importrecord)
+      - [ModuleAnalyzer](ast_parser/module_analyzer.md#moduleanalyzer)
+      - [ModuleRecord](ast_parser/module_record.md#modulerecord)
+      - [ModuleRecordList](ast_parser/module_record_list.md#modulerecordlist)
+      - [NodeRecord](ast_parser/node_record.md#noderecord)
+      - [SourceGenerator](ast_parser/source_generator.md#sourcegenerator)
+      - [Type Defs](ast_parser/type_defs.md#type-defs)
+    - [CLI Parser](cli_parser.md#cli-parser)
     - [DocstringFormatter](docstring_formatter.md#docstringformatter)
     - [FunctionRepr](function_repr.md#functionrepr)
     - [Generator](generator.md#generator)
@@ -21,7 +34,6 @@ Root of `handsdown` source code.
     - [Loader](loader.md#loader)
     - [Main](main.md#main)
     - [MDDocument](md_document.md#mddocument)
-    - [ModuleRecord](module_record.md#modulerecord)
     - [PathFinder](path_finder.md#pathfinder)
     - [Processors](processors/index.md#processors)
       - [Base](processors/base.md#base)
@@ -35,6 +47,7 @@ Root of `handsdown` source code.
       - [Logger](utils/logger.md#logger)
       - [OSEnvironMock](utils/os_environ_mock.md#osenvironmock)
       - [TypeCheckingMock](utils/type_checking_mock.md#typecheckingmock)
+    - [Version](version.md#version)
 
 # Handsdown
 

@@ -17,7 +17,8 @@ Base class for all docstring processors:
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
 
 ```python
-class BaseDocstringProcessor() -> None:
+class BaseDocstringProcessor(object):
+    def __init__() -> None:
 ```
 
 Base docstring processor. All docstring processors are based on top of it.
@@ -46,7 +47,3 @@ Parse docstring and split it to sections with arrays of strings.
 
 A dictionary where key is a section name and value is a list of string sof this
 section.
-
-#### See also
-
-- [SectionMap](section_map.md#sectionmap)

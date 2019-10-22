@@ -2,7 +2,7 @@
 Handful utils that do not deserve a separate module.
 """
 import traceback
-from typing import Text, Any, Dict, TYPE_CHECKING
+from typing import Text, Any, Dict, Tuple, List, TYPE_CHECKING
 
 from handsdown.path_finder import Path
 from handsdown.settings import ASSETS_PATH
@@ -81,4 +81,5 @@ def extract_md_title(content):
 
 
 def split_import_string(import_string):
+    # type: (Text) -> List[Text]
     return import_string.split(".")

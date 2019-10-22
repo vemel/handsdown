@@ -12,7 +12,8 @@ Helper to turn on or off `TYPE_CHECKING` to avoid sircular imports.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/type_checking_mock.py#L11)
 
 ```python
-class TypeCheckingMock(target_file_path: Path) -> None:
+class TypeCheckingMock():
+    def __init__(target_file_path: Path) -> None:
 ```
 
 Helper to turn on or off `TYPE_CHECKING` to avoid sircular imports.

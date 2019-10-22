@@ -1,4 +1,6 @@
 import re
+import ast
+from typing import List, Any, Set, Text, Optional
 
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.argument_record import ArgumentRecord
@@ -10,19 +12,21 @@ class FunctionRecord(NodeRecord):
     _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
     def __init__(self, node, is_method):
+        # type: (ast.FunctionDef, bool) -> None
         super(FunctionRecord, self).__init__(node)
-        self.arguments = []
+        self.arguments = []  # type: List[ArgumentRecord]
         self.is_method = is_method
-        self.return_type_hint = None
-        self.decorators = []
-        self.definition_lines = []
+        self.return_type_hint = None  # type: Optional[ExpressionRecord]
+        self.decorators = []  # type: List[ExpressionRecord]
+        self.definition_lines = []  # type: List[Text]
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
 
     @property
     def related_names(self):
-        result = set()
+        # type: () -> Set[Text]
+        result = set()  # type: Set[Text]
         for decorator in self.decorators:
             result.update(decorator.related_names)
         for argument in self.arguments:
@@ -33,9 +37,11 @@ class FunctionRecord(NodeRecord):
         return result
 
     def _parse(self):
+        # type: () -> None
+        assert isinstance(self.node, ast.FunctionDef)
         self.decorators = []
-        for decorator in self.node.decorator_list:
-            decorator = ExpressionRecord(decorator)
+        for expr in self.node.decorator_list:
+            decorator = ExpressionRecord(expr)
             if decorator.name == "staticmethod":
                 self.is_staticmethod = True
             if decorator.name == "classmethod":
@@ -90,6 +96,7 @@ class FunctionRecord(NodeRecord):
         return result
 
     def parse_type_comments(self, lines):
+        # type: (List[Text]) -> None
         start_line_number = self.line_number
         for relative_line_number, line in enumerate(lines):
             match = self._return_type_re.match(line)
@@ -115,7 +122,8 @@ class FunctionRecord(NodeRecord):
                         argument.type_hint = ExpressionRecord(arg_type.strip())
 
     def _render_parts(self, indent):
-        parts = []
+        # type: (int) -> List[Any]
+        parts = []  # type: List[Any]
         for decorator in self.decorators:
             parts.append("@")
             parts.append(decorator)

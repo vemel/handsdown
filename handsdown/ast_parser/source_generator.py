@@ -1,4 +1,5 @@
 import ast
+from typing import List, Text, Union
 
 BINOP_SYMBOLS = {
     ast.Add: "+",
@@ -31,13 +32,6 @@ CMPOP_SYMBOLS = {
 }
 
 UNARYOP_SYMBOLS = {ast.Invert: "~", ast.Not: "not", ast.UAdd: "+", ast.USub: "-"}
-
-
-def to_source(node, indent_with=" " * 4, add_line_information=False):
-    generator = SourceGenerator(indent_with, add_line_information)
-    generator.visit(node)
-
-    return "".join(generator.result)
 
 
 class SourceGenerator(ast.NodeVisitor):
@@ -80,29 +74,6 @@ class SourceGenerator(ast.NodeVisitor):
             self.newline()
             self.write("else:")
             self.body(node.orelse)
-
-    def signature(self, node):
-        want_comma = []
-
-        def write_comma():
-            if want_comma:
-                self.write(", ")
-            else:
-                want_comma.append(True)
-
-        padding = [None] * (len(node.args) - len(node.defaults))
-        for arg, default in zip(node.args, padding + node.defaults):
-            write_comma()
-            self.visit(arg)
-            if default is not None:
-                self.write("=")
-                self.visit(default)
-        if node.vararg is not None:
-            write_comma()
-            self.write("*" + node.vararg)
-        if node.kwarg is not None:
-            write_comma()
-            self.write("**" + node.kwarg)
 
     def decorators(self, node):
         for decorator in node.decorator_list:
@@ -205,7 +176,7 @@ class SourceGenerator(ast.NodeVisitor):
             else_ = node.orelse
             if len(else_) == 0:
                 break
-            elif len(else_) == 1 and isinstance(else_[0], ast.If):
+            if len(else_) == 1 and isinstance(else_[0], ast.If):
                 node = else_[0]
                 self.newline()
                 self.write("elif ")
@@ -410,18 +381,21 @@ class SourceGenerator(ast.NodeVisitor):
         self.visit(node.right)
 
     def visit_BoolOp(self, node):
+        # type: (ast.BoolOp) -> None
         for idx, value in enumerate(node.values):
             if idx:
                 self.write(" %s " % BOOLOP_SYMBOLS[type(node.op)])
             self.visit(value)
 
     def visit_Compare(self, node):
+        # type: (ast.Compare) -> None
         self.visit(node.left)
         for op, right in zip(node.ops, node.comparators):
             self.write(" %s " % CMPOP_SYMBOLS[type(op)])
             self.visit(right)
 
     def visit_UnaryOp(self, node):
+        # type: (ast.UnaryOp) -> None
         self.write("(")
         op = UNARYOP_SYMBOLS[type(node.op)]
         self.write(op)
@@ -431,12 +405,14 @@ class SourceGenerator(ast.NodeVisitor):
         self.write(")")
 
     def visit_Subscript(self, node):
+        # type: (ast.Subscript) -> None
         self.visit(node.value)
         self.write("[")
         self.visit(node.slice)
         self.write("]")
 
     def visit_Slice(self, node):
+        # type: (ast.Slice) -> None
         if node.lower is not None:
             self.visit(node.lower)
         self.write(":")
@@ -448,41 +424,52 @@ class SourceGenerator(ast.NodeVisitor):
                 self.visit(node.step)
 
     def visit_ExtSlice(self, node):
-        for idx, item in node.dims:
+        # type: (ast.ExtSlice) -> None
+        for idx, item in enumerate(node.dims):
             if idx:
                 self.write(", ")
             self.visit(item)
 
     def visit_Yield(self, node):
-        self.write("yield ")
-        self.visit(node.value)
+        # type: (ast.Yield) -> None
+        self.write("yield")
+        if node.value is not None:
+            self.write(" ")
+            self.visit(node.value)
 
     def visit_Lambda(self, node):
+        # type: (ast.Lambda) -> None
         self.write("lambda ")
         self.visit(node.args)
         self.write(": ")
         self.visit(node.body)
 
     def visit_Ellipsis(self, _node):
+        # type: (ast.Ellipsis) -> None
         self.write("...")
 
-    def _visit_generator(self, node, left, right):
+    def _visit_generator(self, elt, generators, left, right):
+        # type: (ast.expr, List[ast.comprehension], Text, Text) -> None
         self.write(left)
-        self.visit(node.elt)
-        for comprehension in node.generators:
+        self.visit(elt)
+        for comprehension in generators:
             self.visit(comprehension)
         self.write(right)
 
     def visit_ListComp(self, node):
-        return self._visit_generator(node, "[", "]")
+        # type: (ast.ListComp) -> None
+        return self._visit_generator(node.elt, node.generators, "[", "]")
 
     def visit_GeneratorExp(self, node):
-        return self._visit_generator(node, "(", ")")
+        # type: (ast.GeneratorExp) -> None
+        return self._visit_generator(node.elt, node.generators, "(", ")")
 
     def visit_SetComp(self, node):
-        return self._visit_generator(node, "{", "}")
+        # type: (ast.SetComp) -> None
+        return self._visit_generator(node.elt, node.generators, "{", "}")
 
     def visit_DictComp(self, node):
+        # type: (ast.DictComp) -> None
         self.write("{")
         self.visit(node.key)
         self.write(": ")
@@ -492,6 +479,7 @@ class SourceGenerator(ast.NodeVisitor):
         self.write("}")
 
     def visit_IfExp(self, node):
+        # type: (ast.IfExp) -> None
         self.visit(node.body)
         self.write(" if ")
         self.visit(node.test)
@@ -499,22 +487,20 @@ class SourceGenerator(ast.NodeVisitor):
         self.visit(node.orelse)
 
     def visit_Starred(self, node):
+        # type: (ast.Starred) -> None
         self.write("*")
         self.visit(node.value)
-
-    def visit_Repr(self, node):
-        self.write("'")
-        self.visit(node.value)
-        self.write("'")
 
     # Helper Nodes
 
     def visit_alias(self, node):
+        # type: (ast.alias) -> None
         self.write(node.name)
         if node.asname is not None:
             self.write(" as " + node.asname)
 
     def visit_comprehension(self, node):
+        # type: (ast.comprehension) -> None
         self.write(" for ")
         self.visit(node.target)
         self.write(" in ")
@@ -525,6 +511,7 @@ class SourceGenerator(ast.NodeVisitor):
                 self.visit(if_)
 
     def visit_excepthandler(self, node):
+        # type: (ast.ExceptHandler) -> None
         self.newline(node)
         self.write("except")
         if node.type is not None:
@@ -532,9 +519,30 @@ class SourceGenerator(ast.NodeVisitor):
             self.visit(node.type)
             if node.name is not None:
                 self.write(" as ")
-                self.visit(node.name)
+                self.write(node.name)
         self.write(":")
         self.body(node.body)
 
     def visit_arguments(self, node):
-        self.signature(node)
+        # type: (ast.arguments) -> None
+        delimiter = ""
+
+        defaults = [None] * (
+            len(node.args) - len(node.defaults)
+        )  # type: List[Union[None, ast.expr]]
+        defaults.extend(node.defaults)
+        for arg, default in zip(node.args, defaults):
+            self.write(delimiter)
+            delimiter = ", "
+            self.visit(arg)
+            if default is not None:
+                self.write("=")
+                self.visit(default)
+        if node.vararg is not None:
+            self.write(delimiter)
+            delimiter = ", "
+            self.write("**{}".format(node.vararg.arg))
+        if node.kwarg is not None:
+            self.write(delimiter)
+            delimiter = ", "
+            self.write("**{}".format(node.kwarg.arg))

@@ -12,7 +12,7 @@ Mock for `os.environ` that returns `env` string instead of undefined variables.
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/os_environ_mock.py#L7)
 
 ```python
-class OSEnvironMock():
+class OSEnvironMock(dict):
 ```
 
 Mock for `os.environ` that returns `env` string instead of undefined variables.

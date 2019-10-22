@@ -9,21 +9,18 @@ Loader for python source code.
     - [Loader().get_import_string](#loaderget_import_string)
     - [Loader().get_module_record](#loaderget_module_record)
     - [Loader().get_output_path](#loaderget_output_path)
-    - [Loader().get_source_line_number](#loaderget_source_line_number)
-    - [Loader().import_module](#loaderimport_module)
-    - [Loader().setup](#loadersetup)
-  - [LoaderError](#loadererror)
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L34)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L16)
 
 ```python
-class Loader(
-    root_path: Path,
-    output_path: Path,
-    logger: logging.Logger,
-) -> None:
+class Loader():
+    def __init__(
+        root_path: logging.Logger,
+        output_path: Path,
+        logger: Path,
+    ) -> None:
 ```
 
 Loader for python source code.
@@ -43,7 +40,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L217)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L99)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -72,13 +69,13 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L105)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L61)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
 ```
 
-Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
+Build `ModuleRecord` for given `source_path`.
 
 #### Arguments
 
@@ -86,19 +83,11 @@ Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
 
 #### Returns
 
-A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is ntohing to import.
-
-#### Raises
-
-- [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
-
-#### See also
-
-- [ModuleRecord](module_record.md#modulerecord)
+A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader().get_output_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L84)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L40)
 
 ```python
 def get_output_path(source_path: Path) -> Path:
@@ -113,66 +102,3 @@ Get output MD document path based on `source_path`.
 #### Returns
 
 A path to the output `.md` file even if it does not exist yet.
-
-### Loader().get_source_line_number
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L502)
-
-```python
-def get_source_line_number(obj: Any) -> int:
-```
-
-Get line number in source file where `obj` is declared.
-
-- `obj` - Object to inspect.
-
-#### Returns
-
-A line number as an integer, starting for 1.
-
-### Loader().import_module
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L247)
-
-```python
-def import_module(file_path: Path) -> Any:
-```
-
-Import module using `import_paths` list. Clean up all patches afterwards.
-
-- Patch `sys.path` to add current repo to it.
-- Patch `os.environ` to avoid failing on undefined variables.
-- Patch `typing.TYPE_CHECKING` to `True`.
-- Patch `logging.Logger`.
-- Patch `logging.config.dictConfig`.
-
-#### Arguments
-
-- `file_path` - Abslute path to source file.
-
-#### Returns
-
-Imported module object.
-
-### Loader().setup
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L67)
-
-```python
-def setup() -> None:
-```
-
-Setup local frameworks if needed.
-
-Frameworks supported:
-- `Django` (if `DJANGO_SETTINGS_MODULE` env variable is defined)
-
-## LoaderError
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L28)
-
-```python
-class LoaderError():
-```
-
-Main error for [Loader](#loader) class.

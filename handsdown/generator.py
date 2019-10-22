@@ -20,6 +20,7 @@ from handsdown.path_finder import PathFinder
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.path_finder import Path
     from handsdown.processors.base import BaseDocstringProcessor
+    from handsdown.ast_parser.node_record import NodeRecord
     from handsdown.ast_parser.module_record import ModuleRecord
 
 
@@ -275,18 +276,19 @@ class Generator:
         for part in import_string_parts[:-1]:
             parent_import_parts.append(part)
             parent_import = ".".join(parent_import_parts)
-            records = self._module_records.find_records(parent_import)
-            if not records:
+            parent_module_record = self._module_records.find_module_record(
+                parent_import
+            )
+            if not parent_module_record:
                 import_string_breadcrumbs.append("`{}`".format(make_title(part)))
                 continue
 
-            parend_module_record = records[0]
-            output_path = self._loader.get_output_path(parend_module_record.source_path)
+            output_path = self._loader.get_output_path(parent_module_record.source_path)
             import_string_breadcrumbs.append(
                 md_document.render_doc_link(
-                    parend_module_record.title,
+                    parent_module_record.title,
                     target_path=output_path,
-                    anchor=md_document.get_anchor(parend_module_record.title),
+                    anchor=md_document.get_anchor(parent_module_record.title),
                 )
             )
 
@@ -423,13 +425,14 @@ class Generator:
 
         for index, section in enumerate(sections):
             for match in re.findall(self._docstring_links_re, section):
-                object_name = match.replace("`", "")
-                records = self._module_records.find_records(object_name)
-                if records is None:
+                import_string = match.replace("`", "")
+                module_record = self._module_records.find_module_record(import_string)
+                if module_record is None:
                     continue
 
-                module_record = records[0]
-                node_record = records[-1]
+                node_record = module_record.find_record(import_string)
+                if not node_record:
+                    continue
 
                 title = node_record.title
                 output_path = self._loader.get_output_path(module_record.source_path)
@@ -447,7 +450,6 @@ class Generator:
     def _generate_module_doc_lines(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
         for records in module_record.iter_records():
-            module_record = records[0]
             record = records[-1]
             md_document.append_title(record.title, level=len(records))
 
@@ -496,11 +498,18 @@ class Generator:
         section_map = self._docstring_processor.build_sections(docstring)
 
         for import_string in record.get_related_import_strings(module_record):
-            reference_records = self._module_records.find_records(import_string)
-            if not reference_records:
+            related_module_record = self._module_records.find_module_record(
+                import_string
+            )
+            if not related_module_record:
                 continue
-            title = reference_records[-1].title
-            output_path = self._loader.get_output_path(reference_records[0].source_path)
+
+            related_record = module_record.find_record(import_string)
+            if not related_record:
+                continue
+
+            title = record.title
+            output_path = self._loader.get_output_path(module_record.source_path)
             link = md_document.render_doc_link(
                 title, target_path=output_path, anchor=md_document.get_anchor(title)
             )
@@ -530,7 +539,7 @@ class Generator:
             if module_record.import_string == import_string:
                 continue
 
-            if not module_record.import_string.startswith(import_string):
+            if not module_record.import_string.startswith("{}.".format(import_string)):
                 continue
 
             import_string_parts = split_import_string(module_record.import_string)
