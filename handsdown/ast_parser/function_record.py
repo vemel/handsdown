@@ -1,4 +1,3 @@
-import ast
 import re
 
 from handsdown.ast_parser.node_record import NodeRecord
@@ -8,7 +7,7 @@ from handsdown.ast_parser.expression_record import ExpressionRecord
 
 class FunctionRecord(NodeRecord):
     _single_type_re = re.compile(r".+#\s*type:\s*(.+)")
-    _return_type_re = re.compile(r".*#\s*type:\s+\((.*)\)\s*->\s*(.+)")
+    _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
     def __init__(self, node):
         super(FunctionRecord, self).__init__(node)
@@ -17,28 +16,49 @@ class FunctionRecord(NodeRecord):
         self.decorators = []
         self.definition_lines = []
         self.support_split = True
+        self.is_staticmethod = False
+        self.is_classmethod = False
         self._parse_node()
 
+    @property
+    def related_names(self):
+        result = set()
+        for decorator in self.decorators:
+            result.update(decorator.related_names)
+        for argument in self.arguments:
+            result.update(argument.related_names)
+        if self.return_type_hint:
+            result.update(self.return_type_hint.related_names)
+
+        return result
+
     def _parse_node(self):
-        self.name = self.node.name
-        self.docstring = ast.get_docstring(self.node)
         self.decorators = []
         for decorator in self.node.decorator_list:
             decorator = ExpressionRecord(decorator)
+            if decorator.name == "staticmethod":
+                self.is_staticmethod = True
+            if decorator.name == "classmethod":
+                self.is_classmethod = True
             self.decorators.append(decorator)
 
         for arg in self.node.args.args:
             record = ArgumentRecord(arg)
             self.arguments.append(record)
+
         for index, default in enumerate(self.node.args.defaults):
-            argument = self.arguments[len(self.arguments) - 1 - index]
+            argument = self.arguments[
+                len(self.arguments) - len(self.node.args.defaults) + index
+            ]
             argument.default = ExpressionRecord(default)
 
         for arg in self.node.args.kwonlyargs:
             record = ArgumentRecord(arg)
             self.arguments.append(record)
         for index, default in enumerate(self.node.args.kw_defaults):
-            argument = self.arguments[len(self.arguments) - 1 - index]
+            argument = self.arguments[
+                len(self.arguments) - len(self.node.args.kw_defaults) + index
+            ]
             argument.default = ExpressionRecord(default)
 
         if self.node.args.vararg:
@@ -66,19 +86,22 @@ class FunctionRecord(NodeRecord):
 
             result[-1] = "{}{}".format(result[-1], c)
 
-        return [i.strip() for i in result]
+        result = [i.strip() for i in result if i.strip() and i.strip() != "..."]
+        return result
 
     def parse_type_comments(self, lines):
-        argument_index = 0
-        for line in lines:
+        start_line_number = self.line_number
+        for relative_line_number, line in enumerate(lines):
             match = self._return_type_re.match(line)
             if match:
                 arg_type, return_type = match.groups()
                 self.return_type_hint = ExpressionRecord(return_type)
                 arg_types = self._strip_arg_type(arg_type)
-                for arg_type in arg_types:
-                    if len(self.arguments) <= argument_index:
+                for index, arg_type in enumerate(arg_types):
+                    argument_index = len(self.arguments) - 1 - index
+                    if argument_index < 0:
                         continue
+
                     argument = self.arguments[argument_index]
                     argument.type_hint = ExpressionRecord(arg_type.strip())
                     argument_index += 1
@@ -86,11 +109,10 @@ class FunctionRecord(NodeRecord):
             match = self._single_type_re.match(line)
             if match:
                 arg_type = match.group(1)
-                if len(self.arguments) <= argument_index:
-                    continue
-                argument = self.arguments[argument_index]
-                argument.type_hint = ExpressionRecord(arg_type.strip())
-                argument_index += 1
+                line_number = start_line_number + relative_line_number
+                for argument in self.arguments:
+                    if argument.line_number == line_number:
+                        argument.type_hint = ExpressionRecord(arg_type.strip())
 
     def _render_parts(self, indent):
         parts = []
@@ -103,13 +125,20 @@ class FunctionRecord(NodeRecord):
         parts.append(self.name)
         parts.append("(")
         if self.arguments:
-            parts.append(self.LINE_INDENT)
-            for argument in self.arguments[:-1]:
-                parts.append(argument)
-                parts.append(", ")
-                parts.append(self.LINE_BREAK)
-            parts.append(self.arguments[-1])
-            parts.append(self.LINE_UNINDENT)
+            start_index = 0
+            if not self.is_staticmethod:
+                start_index = 1
+            arguments = self.arguments[start_index:]
+            if arguments:
+                parts.append(self.LINE_INDENT)
+                for argument in arguments[:-1]:
+                    parts.append(argument)
+                    parts.append(",")
+                    parts.append(self.SINGLE_LINE_SPACE)
+                    parts.append(self.LINE_BREAK)
+                parts.append(arguments[-1])
+                parts.append(self.MULTI_LINE_COMMA)
+                parts.append(self.LINE_UNINDENT)
         parts.append(")")
         if self.return_type_hint:
             parts.append(" -> ")

@@ -14,16 +14,11 @@ class ModuleAnalyzer(ast.NodeVisitor):
     def visit_Import(self, node):
         for alias in node.names:
             record = ImportRecord(node, alias)
-            record.source = alias.name
-            record.local_name = alias.asname
             self.import_records.append(record)
 
     def visit_ImportFrom(self, node):
         for alias in node.names:
             record = ImportRecord(node, alias)
-            record.source = node.module
-            record.name = alias.name
-            record.local_name = alias.asname
             self.import_records.append(record)
 
     def visit_ClassDef(self, node):

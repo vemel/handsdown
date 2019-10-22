@@ -1,5 +1,9 @@
+import ast
+
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
+from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils import extract_md_title
 
 
 class NodeRecord:
@@ -12,14 +16,42 @@ class NodeRecord:
     FORCE_LINE_BREAK = Sentinel("FORCE_LINE_BREAK")
     FORCE_LINE_INDENT = Sentinel("FORCE_LINE_INDENT")
     FORCE_LINE_UNINDENT = Sentinel("FORCE_LINE_UNINDENT")
+    SINGLE_LINE_SPACE = Sentinel("SINGLE_LINE_SPACE")
+    MULTI_LINE_COMMA = Sentinel("MULTI_LINE_COMMA")
 
     def __init__(self, node):
         self.name = ""
-        self.docstring = ""
+        if getattr(node, "name", None):
+            self.name = node.name
+        if getattr(node, "id", None):
+            self.name = node.id
+
+        self.title = self.name
+        docstring = ""
+        try:
+            docstring = ast.get_docstring(node) or ""
+        except TypeError:
+            pass
+
+        docstring = IndentTrimmer.trim_empty_lines(docstring)
+        docstring = IndentTrimmer.trim_text(docstring)
+        title, docstring = extract_md_title(docstring)
+        if title:
+            self.title = title
+        self.docstring = docstring
+
+        self.import_string = ""
         self.node = node
-        self.related_names = set()
+        self.related_import_strings = set()
         self.support_split = False
         self.source_path = None
+
+    def iter_children(self):
+        pass
+
+    @property
+    def related_names(self):
+        return set()
 
     def _parse_node(self):
         pass
@@ -27,66 +59,6 @@ class NodeRecord:
     @property
     def line_number(self):
         return self.node.lineno
-
-    def _render_one_line(self, indent):
-        lines = [""]
-        current_indent = indent
-        for part in self._render_parts(indent):
-            if part in (self.LINE_INDENT, self.LINE_UNINDENT, self.LINE_BREAK):
-                continue
-
-            if part in (self.LINE_BREAK, self.FORCE_LINE_BREAK):
-                # print(self.name, current_indent)
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if part in (self.LINE_INDENT, self.FORCE_LINE_INDENT):
-                current_indent += 1
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if part in (self.LINE_UNINDENT, self.FORCE_LINE_UNINDENT):
-                current_indent -= 1
-                if not lines[-1].strip():
-                    lines = lines[:-1]
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if isinstance(part, str):
-                lines[-1] = "{}{}".format(lines[-1], part)
-                continue
-
-            lines[-1] = "{}{}".format(lines[-1], part.render(current_indent))
-
-        return lines
-
-    def _render_multi_line(self, indent):
-        lines = [""]
-        current_indent = indent
-        for part in self._render_parts(indent):
-            if part in (self.LINE_BREAK, self.FORCE_LINE_BREAK):
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if part in (self.LINE_INDENT, self.FORCE_LINE_INDENT):
-                current_indent += 1
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if part in (self.LINE_UNINDENT, self.FORCE_LINE_UNINDENT):
-                current_indent -= 1
-                if not lines[-1].strip():
-                    lines = lines[:-1]
-                lines.append(self.render_indent(current_indent))
-                continue
-
-            if isinstance(part, str):
-                lines[-1] = "{}{}".format(lines[-1], part)
-                continue
-
-            lines[-1] = "{}{}".format(lines[-1], part.render(current_indent))
-
-        return lines
 
     def render(self, indent=0):
         lines = []
@@ -117,6 +89,19 @@ class NodeRecord:
                 break
 
             part = parts[part_index]
+
+            if part is self.MULTI_LINE_COMMA:
+                if multiline:
+                    current_line = "{},".format(current_line)
+                part_index += 1
+                continue
+
+            if part is self.SINGLE_LINE_SPACE:
+                if not multiline:
+                    current_line = "{} ".format(current_line)
+                part_index += 1
+                continue
+
             if not multiline and part in (
                 self.LINE_INDENT,
                 self.LINE_UNINDENT,

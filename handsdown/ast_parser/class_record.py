@@ -1,5 +1,3 @@
-import ast
-
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
 from handsdown.ast_parser.class_analyzer import ClassAnalyzer
@@ -10,11 +8,28 @@ class ClassRecord(NodeRecord):
         super(ClassRecord, self).__init__(node)
         self.method_records = []
         self.decorators = []
+        self.argument_records = []
         self.bases = []
         self.support_split = True
         self._parse_node()
 
-    def get_doc_methods(self):
+    @property
+    def related_names(self):
+        result = set()
+        for decorator in self.decorators:
+            result.update(decorator.related_names)
+        for base in self.bases:
+            result.update(base.related_names)
+        for method_record in self.method_records:
+            if method_record.name == "__init__":
+                result.update(method_record.related_names)
+        return result
+
+    def iter_children(self):
+        for method in self.get_public_methods():
+            yield (self, method)
+
+    def get_public_methods(self):
         result = []
         for method_record in self.method_records:
             if method_record.name == "__init__":
@@ -28,19 +43,15 @@ class ClassRecord(NodeRecord):
         return result
 
     def _parse_node(self):
-        self.name = self.node.name
-        self.docstring = ast.get_docstring(self.node)
         self.decorators = []
         for decorator in self.node.decorator_list:
             record = ExpressionRecord(decorator)
             self.decorators.append(record)
-            self.related_names.update(record.related_names)
 
         self.bases = []
         for base in self.node.bases:
             record = ExpressionRecord(base)
             self.bases.append(record)
-            self.related_names.update(record.related_names)
 
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)

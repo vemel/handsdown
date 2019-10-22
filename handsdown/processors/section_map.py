@@ -21,6 +21,16 @@ class SectionBlock:
         # type: (List[Text]) -> None
         self.lines = lines
 
+    def is_code(self):
+        if not self.lines:
+            return False
+        return self.lines[0].startswith("```")
+
+    def is_header(self):
+        if not self.lines:
+            return False
+        return self.lines[0].startswith("#")
+
     def render(self):
         # type: () -> Text
         """

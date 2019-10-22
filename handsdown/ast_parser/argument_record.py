@@ -12,6 +12,16 @@ class ArgumentRecord(NodeRecord):
         if node.annotation:
             self.type_hint = ExpressionRecord(node.annotation)
 
+    @property
+    def related_names(self):
+        result = set()
+        if self.default:
+            result.update(self.default.related_names)
+        if self.type_hint:
+            result.update(self.type_hint.related_names)
+
+        return result
+
     def _render_parts(self, indent):
         parts = []
         if self.prefix:

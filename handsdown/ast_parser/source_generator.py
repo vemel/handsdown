@@ -359,6 +359,9 @@ class SourceGenerator(ast.NodeVisitor):
         self.related_names.add(node.id)
         self.write(node.id)
 
+    def visit_NameConstant(self, node):
+        self.write(str(node.value))
+
     def visit_Str(self, node):
         self.write(repr(node.s))
 
