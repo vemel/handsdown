@@ -8,5 +8,7 @@ class ClassAnalyzer(ast.NodeVisitor):
         self.method_records = []
 
     def visit_FunctionDef(self, node):
-        record = FunctionRecord(node)
+        if node.name.startswith("_") and not node.name.startswith("__"):
+            return
+        record = FunctionRecord(node, is_method=True)
         self.method_records.append(record)

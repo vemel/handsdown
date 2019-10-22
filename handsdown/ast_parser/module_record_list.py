@@ -1,5 +1,8 @@
 from typing import TYPE_CHECKING
 
+from handsdown.utils import split_import_string
+from handsdown.utils.logger import get_logger
+
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.module_record import ModuleRecord
@@ -13,6 +16,7 @@ class ModuleRecordList:
 
     def __init__(self):
         # type: () -> None
+        self._logger = get_logger()
         self.data = []  # type: List[ModuleRecord]
         self.import_string_map = {}  # type: Dict[Text, Any]
 
@@ -27,7 +31,28 @@ class ModuleRecordList:
         Returns:
             Found `NodeRecord` instance or None.
         """
-        return self.import_string_map.get(import_string)
+        import_string_parts = split_import_string(import_string)
+        while import_string_parts:
+            module_import_string = ".".join(import_string_parts)
+            import_string_parts.pop()
+            module_record = self.import_string_map.get(module_import_string)
+            if not module_record:
+                continue
+
+            if module_record.import_string == import_string:
+                return (module_record,)
+
+            for records in module_record.iter_records():
+                record = records[-1]
+                if record.import_string == import_string:
+                    return records
+
+            # self._logger.warning(
+            #     "Not found link: {} in {}".format(
+            #         import_string, module_record.import_string
+            #     )
+            # )
+        return None
 
     def get_package_names(self):
         # type: () -> Set[Text]
@@ -48,23 +73,7 @@ class ModuleRecordList:
             module_record -- A new `ModuleRecord`
         """
         self.data.append(module_record)
-        self.import_string_map[module_record.import_string] = (module_record,)
-        for class_record in module_record.class_records:
-            self.import_string_map[class_record.import_string] = (
-                module_record,
-                class_record,
-            )
-            for method_record in class_record.get_public_methods():
-                self.import_string_map[method_record.import_string] = (
-                    module_record,
-                    class_record,
-                    method_record,
-                )
-        for function_record in module_record.function_records:
-            self.import_string_map[function_record.import_string] = (
-                module_record,
-                function_record,
-            )
+        self.import_string_map[module_record.import_string] = module_record
 
     def __iter__(self):
         # type: () -> Generator[ModuleRecord, None, None]

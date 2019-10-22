@@ -11,7 +11,6 @@ class ExpressionRecord(NodeRecord):
         super(ExpressionRecord, self).__init__(node)
         self.result = ""
         self.analyzer = SourceGenerator("", False)
-        self._parse_node()
 
     @property
     def related_names(self):
@@ -23,7 +22,7 @@ class ExpressionRecord(NodeRecord):
         result.update(self.analyzer.related_names)
         return result
 
-    def _parse_node(self):
+    def _parse(self):
         if isinstance(self.node, str):
             self.name = self.node
             self.result = self.node

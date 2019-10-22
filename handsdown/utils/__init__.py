@@ -78,3 +78,7 @@ def extract_md_title(content):
         title = title_line.split(" ", 1)[-1]
 
     return title, content
+
+
+def split_import_string(import_string):
+    return import_string.split(".")

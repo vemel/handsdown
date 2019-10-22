@@ -75,7 +75,7 @@ class Section:
 class SectionMap(dict):
     """
     Dict-based storage for parsed `Section` list for
-    `handsdown.processors.base.BaseProcessor`
+    `handsdown.processors.base.BaseDocstringProcessor`
 
     Key is a `Section` title.
     Value is a related `Section` instance.

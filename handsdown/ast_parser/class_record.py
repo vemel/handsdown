@@ -11,7 +11,6 @@ class ClassRecord(NodeRecord):
         self.argument_records = []
         self.bases = []
         self.support_split = True
-        self._parse_node()
 
     @property
     def related_names(self):
@@ -25,7 +24,7 @@ class ClassRecord(NodeRecord):
                 result.update(method_record.related_names)
         return result
 
-    def iter_children(self):
+    def iter_records(self):
         for method in self.get_public_methods():
             yield (self, method)
 
@@ -42,7 +41,7 @@ class ClassRecord(NodeRecord):
             result.append(method_record)
         return result
 
-    def _parse_node(self):
+    def _parse(self):
         self.decorators = []
         for decorator in self.node.decorator_list:
             record = ExpressionRecord(decorator)
@@ -55,8 +54,7 @@ class ClassRecord(NodeRecord):
 
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)
-        for record in analyzer.method_records:
-            self.method_records.append(record)
+        self.method_records = sorted(analyzer.method_records, key=lambda x: x.name)
 
     def _render_parts(self, indent=0):
         parts = []

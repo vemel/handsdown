@@ -9,16 +9,16 @@ class FunctionRecord(NodeRecord):
     _single_type_re = re.compile(r".+#\s*type:\s*(.+)")
     _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
-    def __init__(self, node):
+    def __init__(self, node, is_method):
         super(FunctionRecord, self).__init__(node)
         self.arguments = []
+        self.is_method = is_method
         self.return_type_hint = None
         self.decorators = []
         self.definition_lines = []
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
-        self._parse_node()
 
     @property
     def related_names(self):
@@ -32,7 +32,7 @@ class FunctionRecord(NodeRecord):
 
         return result
 
-    def _parse_node(self):
+    def _parse(self):
         self.decorators = []
         for decorator in self.node.decorator_list:
             decorator = ExpressionRecord(decorator)
@@ -126,7 +126,7 @@ class FunctionRecord(NodeRecord):
         parts.append("(")
         if self.arguments:
             start_index = 0
-            if not self.is_staticmethod:
+            if self.is_method and not self.is_staticmethod:
                 start_index = 1
             arguments = self.arguments[start_index:]
             if arguments:

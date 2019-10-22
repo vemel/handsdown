@@ -26,5 +26,5 @@ class ModuleAnalyzer(ast.NodeVisitor):
         self.class_records.append(record)
 
     def visit_FunctionDef(self, node):
-        record = FunctionRecord(node)
+        record = FunctionRecord(node, is_method=False)
         self.function_records.append(record)

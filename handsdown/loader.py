@@ -6,6 +6,7 @@ from typing import Optional, Text, TYPE_CHECKING
 
 from handsdown.ast_parser.module_record import ModuleRecord
 from handsdown.path_finder import PathFinder
+from handsdown.utils import extract_md_title
 
 if TYPE_CHECKING:  # pragma: no cover
     import logging
@@ -77,6 +78,7 @@ class Loader:
         docstring_parts = []
 
         module_record = ModuleRecord(source_path, import_string)
+        module_record.build_children()
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
 
@@ -84,7 +86,12 @@ class Loader:
             readme_md_path = source_path.parent / "README.md"
             if readme_md_path.exists():
                 docstring_parts.append(readme_md_path.read_text())
-                module_record.docstring = "\n\n".join(docstring_parts)
+
+        docstring = "\n\n".join(docstring_parts)
+        title, docstring = extract_md_title(docstring)
+        if title:
+            module_record.title = title
+        module_record.docstring = docstring
 
         return module_record
 

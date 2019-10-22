@@ -3,11 +3,10 @@ import ast
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.utils import extract_md_title
 
 
 class NodeRecord:
-    LINE_LENGTH = 100
+    LINE_LENGTH = 79
     INDENT_SPACES = 4
 
     LINE_BREAK = Sentinel("LINE_BREAK")
@@ -18,6 +17,11 @@ class NodeRecord:
     FORCE_LINE_UNINDENT = Sentinel("FORCE_LINE_UNINDENT")
     SINGLE_LINE_SPACE = Sentinel("SINGLE_LINE_SPACE")
     MULTI_LINE_COMMA = Sentinel("MULTI_LINE_COMMA")
+
+    def __repr__(self):
+        return "<{} name={} import={}>".format(
+            self.__class__.__name__, self.name, self.import_string
+        )
 
     def __init__(self, node):
         self.name = ""
@@ -34,17 +38,12 @@ class NodeRecord:
             pass
 
         docstring = IndentTrimmer.trim_empty_lines(docstring)
-        docstring = IndentTrimmer.trim_text(docstring)
-        title, docstring = extract_md_title(docstring)
-        if title:
-            self.title = title
-        self.docstring = docstring
+        self.docstring = IndentTrimmer.trim_text(docstring)
 
         self.import_string = ""
         self.node = node
-        self.related_import_strings = set()
         self.support_split = False
-        self.source_path = None
+        self.parsed = False
 
     def iter_children(self):
         pass
@@ -53,14 +52,24 @@ class NodeRecord:
     def related_names(self):
         return set()
 
-    def _parse_node(self):
+    @abstractmethod
+    def _parse(self):
         pass
+
+    def parse(self):
+        if self.parsed:
+            return
+
+        self.parsed = True
+        self._parse()
 
     @property
     def line_number(self):
         return self.node.lineno
 
     def render(self, indent=0):
+        if not self.parsed:
+            self.parse()
         lines = []
         start_multiline = False
         multiline = False
@@ -204,3 +213,26 @@ class NodeRecord:
 
     def render_indent(self, indent):
         return " " * indent * self.INDENT_SPACES
+
+    def get_related_import_strings(self, module_record):
+        result = set()
+        related_names = self.related_names
+        if not related_names:
+            return result
+        for related_name in related_names:
+            for class_record in module_record.class_records:
+                if class_record is self or self in class_record.get_public_methods():
+                    continue
+                if class_record.name == related_name:
+                    result.add(class_record.import_string)
+            for function_record in module_record.function_records:
+                if function_record is self:
+                    continue
+                if function_record.name == related_name:
+                    result.add(function_record.import_string)
+            for import_record in module_record.import_records:
+                match = import_record.match(related_name)
+                if match:
+                    result.add(match)
+
+        return result
