@@ -74,22 +74,23 @@ class ClassRecord(NodeRecord):
         parts = []  # type: List[Any]
         for decorator in self.decorators:
             parts.append(decorator.render(indent))
-            parts.append(self.FORCE_LINE_BREAK)
+            parts.append(self.LINE_BREAK)
 
         parts.append("class ")
         parts.append(self.name)
         parts.append("(")
         if self.bases:
-            parts.append(self.LINE_INDENT)
+            parts.append(self.MULTI_LINE_INDENT)
             for base in self.bases:
                 parts.append(base)
-                parts.append(self.LINE_BREAK)
-            parts.append(self.LINE_UNINDENT)
+                parts.append(self.MULTI_LINE_BREAK)
+            parts.append(self.MULTI_LINE_UNINDENT)
         parts.append("):")
 
         for method in self.method_records:
             if method.name == "__init__":
-                parts.append(self.FORCE_LINE_INDENT)
+                parts.append(self.LINE_INDENT)
                 parts.append(method)
+                parts.append(self.LINE_UNINDENT)
 
         return parts

@@ -127,7 +127,7 @@ class FunctionRecord(NodeRecord):
         for decorator in self.decorators:
             parts.append("@")
             parts.append(decorator)
-            parts.append(self.FORCE_LINE_BREAK)
+            parts.append(self.LINE_BREAK)
 
         parts.append("def ")
         parts.append(self.name)
@@ -138,15 +138,15 @@ class FunctionRecord(NodeRecord):
                 start_index = 1
             arguments = self.arguments[start_index:]
             if arguments:
-                parts.append(self.LINE_INDENT)
+                parts.append(self.MULTI_LINE_INDENT)
                 for argument in arguments[:-1]:
                     parts.append(argument)
                     parts.append(",")
                     parts.append(self.SINGLE_LINE_SPACE)
-                    parts.append(self.LINE_BREAK)
+                    parts.append(self.MULTI_LINE_BREAK)
                 parts.append(arguments[-1])
                 parts.append(self.MULTI_LINE_COMMA)
-                parts.append(self.LINE_UNINDENT)
+                parts.append(self.MULTI_LINE_UNINDENT)
         parts.append(")")
         if self.return_type_hint:
             parts.append(" -> ")

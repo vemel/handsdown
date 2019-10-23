@@ -84,16 +84,16 @@ class ModuleRecord(NodeRecord):
         if self.import_records:
             for import_record in self.import_records:
                 parts.append(import_record)
-                parts.append(self.FORCE_LINE_BREAK)
-            parts.append(self.FORCE_LINE_BREAK)
+                parts.append(self.LINE_BREAK)
+            parts.append(self.LINE_BREAK)
         if self.class_records:
             for class_record in self.class_records:
                 parts.append(class_record)
-                parts.append(self.FORCE_LINE_BREAK)
-            parts.append(self.FORCE_LINE_BREAK)
+                parts.append(self.LINE_BREAK)
+            parts.append(self.LINE_BREAK)
         for function_record in self.function_records:
             parts.append(function_record)
-            parts.append(self.FORCE_LINE_BREAK)
+            parts.append(self.LINE_BREAK)
 
         return parts
 

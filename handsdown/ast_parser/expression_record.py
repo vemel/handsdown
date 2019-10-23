@@ -16,7 +16,7 @@ class ExpressionRecord(NodeRecord):
         # type: (Union[ast.expr, Text]) -> None
         super(ExpressionRecord, self).__init__(node)
         self.result = ""
-        self.analyzer = SourceGenerator("", False)
+        self.analyzer = SourceGenerator()
 
     @property
     def related_names(self):
@@ -25,8 +25,8 @@ class ExpressionRecord(NodeRecord):
         if isinstance(self.node, str):
             for related_name in self._str_split_re.split(self.node):
                 result.add(related_name)
-
-        result.update(self.analyzer.related_names)
+        else:
+            result.update(self.analyzer.related_names)
         return result
 
     def _parse(self):

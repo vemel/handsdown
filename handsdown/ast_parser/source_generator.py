@@ -1,5 +1,8 @@
 import ast
-from typing import List, Text, Union
+from typing import List, Text, Union, Set, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from typing import Optional
 
 BINOP_SYMBOLS = {
     ast.Add: "+",
@@ -40,15 +43,21 @@ class SourceGenerator(ast.NodeVisitor):
     `node_to_source` function.
     """
 
-    def __init__(self, indent_with, add_line_information=False):
-        self.result = []
-        self.indent_with = indent_with
-        self.add_line_information = add_line_information
+    def __init__(self):
+        # type: () -> None
+        self.result = []  # type: List[Text]
+        self.indent_with = "    "
         self.indentation = 0
         self.new_lines = 0
-        self.related_names = set()
+        self._names = set()  # type: Set[Text]
+
+    @property
+    def related_names(self):
+        # type: () -> Set[Text]
+        return self._names
 
     def write(self, x):
+        # type: (Text) -> None
         if self.new_lines:
             if self.result:
                 self.result.append("\n" * self.new_lines)
@@ -56,19 +65,19 @@ class SourceGenerator(ast.NodeVisitor):
             self.new_lines = 0
         self.result.append(x)
 
-    def newline(self, node=None, extra=0):
+    def newline(self, extra=0):
+        # type: (int) -> None
         self.new_lines = max(self.new_lines, 1 + extra)
-        if node is not None and self.add_line_information:
-            self.write("# line: %s" % node.lineno)
-            self.new_lines = 1
 
     def body(self, statements):
+        # type: (List[ast.stmt]) -> None
         self.indentation += 1
         for stmt in statements:
             self.visit(stmt)
         self.indentation -= 1
 
     def body_or_else(self, node):
+        # type: (Union[ast.For, ast.AsyncFor, ast.While, ast.If, ast.Try]) -> None
         self.body(node.body)
         if node.orelse:
             self.newline()
@@ -76,15 +85,17 @@ class SourceGenerator(ast.NodeVisitor):
             self.body(node.orelse)
 
     def decorators(self, node):
+        # type: (Union[ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef]) -> None
         for decorator in node.decorator_list:
-            self.newline(decorator)
+            self.newline()
             self.write("@")
             self.visit(decorator)
 
     # Statements
 
     def visit_Assert(self, node):
-        self.newline(node)
+        # type: (ast.Assert) -> None
+        self.newline()
         self.write("assert ")
         self.visit(node.test)
         if node.msg is not None:
@@ -92,7 +103,8 @@ class SourceGenerator(ast.NodeVisitor):
             self.visit(node.msg)
 
     def visit_Assign(self, node):
-        self.newline(node)
+        # type: (ast.Assign) -> None
+        self.newline()
         for idx, target in enumerate(node.targets):
             if idx:
                 self.write(", ")
@@ -101,73 +113,69 @@ class SourceGenerator(ast.NodeVisitor):
         self.visit(node.value)
 
     def visit_AugAssign(self, node):
-        self.newline(node)
+        # type: (ast.AugAssign) -> None
+        self.newline()
         self.visit(node.target)
         self.write(" " + BINOP_SYMBOLS[type(node.op)] + "= ")
         self.visit(node.value)
 
     def visit_ImportFrom(self, node):
-        self.newline(node)
+        # type: (ast.ImportFrom) -> None
+        self.newline()
         self.write("from %s%s import " % ("." * node.level, node.module))
-        for idx, item in enumerate(node.names):
+        for idx, alias in enumerate(node.names):
             if idx:
                 self.write(", ")
-            self.write(item)
+            self.write(alias.name)
+            if alias.asname:
+                self.write(alias.asname)
 
     def visit_Import(self, node):
-        self.newline(node)
+        # type: (ast.Import) -> None
+        self.newline()
         for item in node.names:
             self.write("import ")
             self.visit(item)
 
     def visit_Expr(self, node):
-        self.newline(node)
+        # type: (ast.Expr) -> None
+        self.newline()
         self.generic_visit(node)
 
     def visit_FunctionDef(self, node):
+        # type: (ast.FunctionDef) -> None
         self.newline(extra=1)
         self.decorators(node)
-        self.newline(node)
+        self.newline()
         self.write("def %s(" % node.name)
         self.visit(node.args)
         self.write("):")
         self.body(node.body)
 
     def visit_ClassDef(self, node):
-        have_args = []
-
-        def paren_or_comma():
-            if have_args:
-                self.write(", ")
-            else:
-                have_args.append(True)
-                self.write("(")
-
+        # type: (ast.ClassDef) -> None
         self.newline(extra=2)
         self.decorators(node)
-        self.newline(node)
+        self.newline()
         self.write("class %s" % node.name)
-        for base in node.bases:
-            paren_or_comma()
-            self.visit(base)
-        if hasattr(node, "keywords"):
-            for keyword in node.keywords:
-                paren_or_comma()
+        if node.bases:
+            for base in node.bases:
+                self.visit(base)
+                if base != node.bases[-1]:
+                    self.write(", ")
+            self.write(")")
+        self.write(":")
+        for keyword in node.keywords:
+            if keyword.arg:
                 self.write(keyword.arg + "=")
-                self.visit(keyword.value)
-            if node.starargs is not None:
-                paren_or_comma()
-                self.write("*")
-                self.visit(node.starargs)
-            if node.kwargs is not None:
-                paren_or_comma()
-                self.write("**")
-                self.visit(node.kwargs)
-        self.write(have_args and "):" or ":")
+            self.visit(keyword.value)
+            if keyword != node.keywords[-1]:
+                self.write(", ")
         self.body(node.body)
 
     def visit_If(self, node):
-        self.newline(node)
+        # type: (ast.If) -> None
+        self.newline()
         self.write("if ")
         self.visit(node.test)
         self.write(":")
@@ -190,7 +198,8 @@ class SourceGenerator(ast.NodeVisitor):
                 break
 
     def visit_For(self, node):
-        self.newline(node)
+        # type: (ast.For) -> None
+        self.newline()
         self.write("for ")
         self.visit(node.target)
         self.write(" in ")
@@ -199,173 +208,168 @@ class SourceGenerator(ast.NodeVisitor):
         self.body_or_else(node)
 
     def visit_While(self, node):
-        self.newline(node)
+        # type: (ast.While) -> None
+        self.newline()
         self.write("while ")
         self.visit(node.test)
         self.write(":")
         self.body_or_else(node)
 
     def visit_With(self, node):
-        self.newline(node)
+        # type: (ast.With) -> None
+        self.newline()
         self.write("with ")
-        self.visit(node.context_expr)
-        if node.optional_vars is not None:
-            self.write(" as ")
-            self.visit(node.optional_vars)
+        for item in node.items:
+            self.visit(item.context_expr)
+            if item.optional_vars is not None:
+                self.write(" as ")
+                self.visit(item.optional_vars)
         self.write(":")
         self.body(node.body)
 
-    def visit_Pass(self, node):
-        self.newline(node)
+    def visit_Pass(self, _node):
+        # type: (ast.Pass) -> None
+        self.newline()
         self.write("pass")
 
-    def visit_Print(self, node):
-        self.newline(node)
-        self.write("print ")
-        want_comma = False
-        if node.dest is not None:
-            self.write(" >> ")
-            self.visit(node.dest)
-            want_comma = True
-        for value in node.values:
-            if want_comma:
-                self.write(", ")
-            self.visit(value)
-            want_comma = True
-        if not node.nl:
-            self.write(",")
-
     def visit_Delete(self, node):
-        self.newline(node)
+        # type: (ast.Delete) -> None
+        self.newline()
         self.write("del ")
-        for idx, target in enumerate(node):
+        for idx, target in enumerate(node.targets):
             if idx:
                 self.write(", ")
             self.visit(target)
 
-    def visit_TryExcept(self, node):
-        self.newline(node)
+    def visit_Try(self, node):
+        # type: (ast.Try) -> None
+        self.newline()
         self.write("try:")
         self.body(node.body)
         for handler in node.handlers:
             self.visit(handler)
-
-    def visit_TryFinally(self, node):
-        self.newline(node)
-        self.write("try:")
-        self.body(node.body)
-        self.newline(node)
-        self.write("finally:")
-        self.body(node.finalbody)
+        if node.finalbody:
+            self.write("finally:")
+            for finalbody in node.finalbody:
+                self.visit(finalbody)
 
     def visit_Global(self, node):
-        self.newline(node)
+        # type: (ast.Global) -> None
+        self.newline()
         self.write("global " + ", ".join(node.names))
 
     def visit_Nonlocal(self, node):
-        self.newline(node)
+        # type: (ast.Nonlocal) -> None
+        self.newline()
         self.write("nonlocal " + ", ".join(node.names))
 
     def visit_Return(self, node):
-        self.newline(node)
+        # type: (ast.Return) -> None
+        self.newline()
         if node.value is None:
             self.write("return")
         else:
             self.write("return ")
             self.visit(node.value)
 
-    def visit_Break(self, node):
-        self.newline(node)
+    def visit_Break(self, _node):
+        # type: (ast.Break) -> None
+        self.newline()
         self.write("break")
 
-    def visit_Continue(self, node):
-        self.newline(node)
+    def visit_Continue(self, _node):
+        # type: (ast.Continue) -> None
+        self.newline()
         self.write("continue")
 
     def visit_Raise(self, node):
-        self.newline(node)
+        # type: (ast.Raise) -> None
+        self.newline()
         self.write("raise")
-        if hasattr(node, "exc") and node.exc is not None:
+        if node.exc is not None:
             self.write(" ")
             self.visit(node.exc)
             if node.cause is not None:
                 self.write(" from ")
                 self.visit(node.cause)
-        elif hasattr(node, "type") and node.type is not None:
-            self.visit(node.type)
-            if node.inst is not None:
-                self.write(", ")
-                self.visit(node.inst)
-            if node.tback is not None:
-                self.write(", ")
-                self.visit(node.tback)
 
     # Expressions
 
     def visit_Attribute(self, node):
+        # type: (ast.Attribute) -> None
         self.visit(node.value)
         self.write("." + node.attr)
 
     def visit_Call(self, node):
-        want_comma = []
-
-        def write_comma():
-            if want_comma:
-                self.write(", ")
-            else:
-                want_comma.append(True)
+        # type: (ast.Call) -> None
+        delimiter = ""
 
         self.visit(node.func)
         self.write("(")
         for arg in node.args:
-            write_comma()
+            self.write(delimiter)
+            delimiter = ", "
             self.visit(arg)
         for keyword in node.keywords:
-            write_comma()
-            self.write(keyword.arg + "=")
+            self.write(delimiter)
+            delimiter = ", "
+            if keyword.arg is not None:
+                self.write(keyword.arg + "=")
             self.visit(keyword.value)
         self.write(")")
 
     def visit_Name(self, node):
-        self.related_names.add(node.id)
+        # type: (ast.Name) -> None
+        self._names.add(node.id)
         self.write(node.id)
 
     def visit_NameConstant(self, node):
+        # type: (ast.NameConstant) -> None
         self.write(str(node.value))
 
     def visit_Str(self, node):
+        # type: (ast.Str) -> None
         self.write(repr(node.s))
 
     def visit_Bytes(self, node):
+        # type: (ast.Bytes) -> None
         self.write(repr(node.s))
 
     def visit_Num(self, node):
+        # type: (ast.Num) -> None
         self.write(repr(node.n))
 
     def visit_Tuple(self, node):
+        # type: (ast.Tuple) -> None
         self.write("(")
-        idx = -1
-        for idx, item in enumerate(node.elts):
-            if idx:
-                self.write(", ")
-            self.visit(item)
-        self.write(idx and ")" or ",)")
+        if node.elts:
+            for idx, item in enumerate(node.elts):
+                if idx:
+                    self.write(", ")
+                self.visit(item)
+        else:
+            self.write(",")
+        self.write(")")
 
-    def _visit_sequence(self, node, left, right):
+    def _visit_sequence(self, elts, left, right):
+        # type: (List[ast.expr], Text, Text) -> None
         self.write(left)
-        for idx, item in enumerate(node.elts):
+        for idx, item in enumerate(elts):
             if idx:
                 self.write(", ")
             self.visit(item)
         self.write(right)
 
     def visit_List(self, node):
-        self._visit_sequence(node, "[", "]")
+        # type: (ast.List) -> None
+        self._visit_sequence(node.elts, "[", "]")
 
     def visit_Set(self, node):
-        self._visit_sequence(node, "{", "}")
+        # type: (ast.Set) -> None
+        self._visit_sequence(node.elts, "{", "}")
 
     def visit_Dict(self, node):
+        # type: (ast.Dict) -> None
         self.write("{")
         for idx, (key, value) in enumerate(zip(node.keys, node.values)):
             if idx:
@@ -376,6 +380,7 @@ class SourceGenerator(ast.NodeVisitor):
         self.write("}")
 
     def visit_BinOp(self, node):
+        # type: (ast.BinOp) -> None
         self.visit(node.left)
         self.write(" %s " % BINOP_SYMBOLS[type(node.op)])
         self.visit(node.right)
@@ -510,9 +515,9 @@ class SourceGenerator(ast.NodeVisitor):
                 self.write(" if ")
                 self.visit(if_)
 
-    def visit_excepthandler(self, node):
+    def visit_ExceptHandler(self, node):
         # type: (ast.ExceptHandler) -> None
-        self.newline(node)
+        self.newline()
         self.write("except")
         if node.type is not None:
             self.write(" ")
