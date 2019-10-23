@@ -89,7 +89,9 @@ class Loader:
             module_record = ModuleRecord(source_path, import_string)
             module_record.build_children()
         except Exception as e:
-            raise LoaderError("Cannot load {}, skipping: {}".format(source_path, e))
+            raise LoaderError(
+                "{} while loading {}: {}".format(e.__class__.__name__, source_path, e)
+            )
 
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
@@ -120,7 +122,9 @@ class Loader:
             module_record.parse()
         except Exception as e:
             raise LoaderError(
-                "Cannot parse {}: {}".format(module_record.source_path, e)
+                "{} while parsing {}: {}".format(
+                    e.__class__.__name__, module_record.source_path, e
+                )
             )
 
     def get_import_string(self, source_path):
