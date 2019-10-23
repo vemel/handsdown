@@ -20,6 +20,11 @@ class ArgumentRecord(NodeRecord):
             self.name = node.arg
             if node.annotation:
                 self.type_hint = ExpressionRecord(node.annotation)
+        else:
+            if hasattr(node, "id"):
+                self.name = getattr(node, "id")
+            else:
+                self.name = node
 
     @property
     def related_names(self):

@@ -24,7 +24,7 @@ class NodeRecord(object):
 
 ### NodeRecord().get_related_import_strings
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L325)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L329)
 
 ```python
 def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
@@ -32,7 +32,7 @@ def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
 
 ### NodeRecord().is_line_fit
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L317)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L321)
 
 ```python
 def is_line_fit(line: int, indent: Text) -> bool:
@@ -74,7 +74,7 @@ def related_names() -> Set[Text]:
 
 ### NodeRecord().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L130)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L134)
 
 ```python
 def render(indent: int = 0) -> Text:
@@ -82,7 +82,7 @@ def render(indent: int = 0) -> Text:
 
 ### NodeRecord().render_indent
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L321)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L325)
 
 ```python
 def render_indent(indent: int) -> Text:
