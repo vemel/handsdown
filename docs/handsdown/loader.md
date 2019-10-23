@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L130)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L137)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -106,7 +106,7 @@ A path to the output `.md` file even if it does not exist yet.
 
 ### Loader.parse_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L112)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L119)
 
 ```python
 @staticmethod
