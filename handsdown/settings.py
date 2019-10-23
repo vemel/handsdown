@@ -17,4 +17,4 @@ ASSETS_PATH = os.path.join(HANDSDOWN_PATH, "assets")
 LOGGER_NAME = "handsdown"
 EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*"]
 SOURCES_GLOB = "**/*.py"
-FIND_IN_SOURCE_LABEL = "🔍 find in source code"
+FIND_IN_SOURCE_LABEL = u"🔍 find in source code"

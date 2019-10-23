@@ -16,7 +16,12 @@ if TYPE_CHECKING:
 class ModuleRecord(NodeRecord):
     def __init__(self, source_path, import_string):
         # type: (Path, Text) -> None
-        self.tree = ast.parse(source_path.read_text())
+        content = source_path.read_text()
+        first_line = content.split("\n", 1)[0]
+        if "-*- coding:" in first_line:
+            content = content.split("\n", 1)[-1]
+
+        self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)
         self.source_path = source_path
         self.class_records = []  # type: List[ClassRecord]
