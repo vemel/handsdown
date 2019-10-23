@@ -9,7 +9,7 @@ import re
 
 from typing import Iterable, Text, List, Optional, Set, TYPE_CHECKING
 
-from handsdown.loader import Loader
+from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.md_document import MDDocument
@@ -132,13 +132,12 @@ class Generator:
             module_record = None
             try:
                 module_record = self._loader.get_module_record(source_path)
-            except Exception as e:
+            except LoaderError as e:
                 if self._raise_errors:
                     raise
 
-                self._logger.warning(
-                    "Cannot parse {}, skipping: {}".format(source_path, e)
-                )
+                self._logger.warning("Skipping: {}".format(e))
+                continue
             if module_record:
                 module_record_list.add(module_record)
 
@@ -220,7 +219,14 @@ class Generator:
                 self._root_path_finder.relative(module_record.source_path),
             )
         )
-        module_record.parse()
+        try:
+            self._loader.parse_module_record(module_record)
+        except LoaderError as e:
+            if self._raise_errors:
+                raise
+
+            self._logger.warning("Skipping: {}".format(e))
+            return None
 
         source_link = md_document.render_doc_link(
             title=module_record.import_string, target_path=module_record.source_path

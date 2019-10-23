@@ -14,6 +14,12 @@ if TYPE_CHECKING:  # pragma: no cover
     from handsdown.path_finder import Path
 
 
+class LoaderError(Exception):
+    """
+    Main error for `Loader` class.
+    """
+
+
 class Loader:
     """
     Loader for python source code.
@@ -29,7 +35,7 @@ class Loader:
     """
 
     def __init__(self, root_path, output_path):
-        # type: (Path, Path, logging.Logger) -> None
+        # type: (Path, Path) -> None
         self._logger = get_logger()
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
@@ -66,6 +72,9 @@ class Loader:
 
         Returns:
             A new `ModuleRecord` instance or None if there is ntohing to import.
+
+        Raises:
+            LoaderError -- If python source cannot be loaded.
         """
         if not (source_path.parent / "__init__.py").exists():
             return None
@@ -76,8 +85,12 @@ class Loader:
         import_string = self.get_import_string(source_path)
         docstring_parts = []
 
-        module_record = ModuleRecord(source_path, import_string)
-        module_record.build_children()
+        try:
+            module_record = ModuleRecord(source_path, import_string)
+            module_record.build_children()
+        except Exception as e:
+            raise LoaderError("Cannot load {}, skipping: {}".format(source_path, e))
+
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
 
@@ -93,6 +106,22 @@ class Loader:
         module_record.docstring = docstring
 
         return module_record
+
+    @staticmethod
+    def parse_module_record(module_record):
+        # type: (ModuleRecord) -> None
+        """
+        Parse `ModuleRecord` children and fully load a tree for it.
+
+        Raises:
+            LoaderError -- If python source cannot be parsed.
+        """
+        try:
+            module_record.parse()
+        except Exception as e:
+            raise LoaderError(
+                "Cannot parse {}: {}".format(module_record.source_path, e)
+            )
 
     def get_import_string(self, source_path):
         # type: (Path) -> Text

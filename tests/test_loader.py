@@ -6,7 +6,5 @@ from handsdown.path_finder import Path
 
 class TestLoader(unittest.TestCase):
     def test_init(self):
-        loader = Loader(
-            root_path=Path.cwd(), output_path=Path.cwd() / "docs", logger=None
-        )
+        loader = Loader(root_path=Path.cwd(), output_path=Path.cwd() / "docs")
         self.assertIsInstance(loader, Loader)
