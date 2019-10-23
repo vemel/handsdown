@@ -41,8 +41,6 @@ class Generator:
         logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
-        raise_errors -- Raise `LoaderError` instead of silencing in.
-        ignore_unknown_errors -- Continue on any error.
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
@@ -70,7 +68,6 @@ class Generator:
         logger=None,  # type: Optional[logging.Logger]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
-        raise_errors=False,  # type: bool
         source_code_url=None,  # type: Optional[Text]
         toc_depth=3,  # type: int
     ):
@@ -88,7 +85,6 @@ class Generator:
             self._logger.info("Creating folder {}".format(self._output_path))
             PathFinder(self._output_path).mkdir()
 
-        self._raise_errors = raise_errors
         self._loader = loader or Loader(
             root_path=self._root_path,
             output_path=self._output_path,

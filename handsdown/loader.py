@@ -28,8 +28,6 @@ class Loader:
         logger -- Logger instance.
     """
 
-    DJANGO_SETTINGS_ENV_VAR = "DJANGO_SETTINGS_MODULE"
-
     def __init__(self, root_path, output_path, logger):
         # type: (Path, Path, logging.Logger) -> None
         self._logger = logger

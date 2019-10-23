@@ -83,7 +83,6 @@ def main():
             logger=logger,
             output_path=args.output_path,
             source_paths=path_finder.glob(SOURCES_GLOB),
-            raise_errors=args.panic,
             source_code_url=args.source_code_url,
             toc_depth=args.toc_depth,
         )

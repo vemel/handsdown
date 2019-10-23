@@ -73,8 +73,7 @@ with different docstrings format.
 ### 💻 From command line
 
 Just go to your favorite project that has lots of docstrings but missing
-auto-generated docs, install dependencies to avoid import errors and let
-`handsdown` do the thing.
+auto-generated docs and let `handsdown` do the thing.
 
 ```bash
 cd ~/my/project

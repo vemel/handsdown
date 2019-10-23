@@ -40,7 +40,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L99)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L97)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -69,7 +69,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L61)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L59)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
@@ -87,7 +87,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader().get_output_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L40)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L38)
 
 ```python
 def get_output_path(source_path: Path) -> Path:

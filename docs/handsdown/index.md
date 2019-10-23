@@ -45,8 +45,6 @@ Root of `handsdown` source code.
     - [Settings](settings.md#settings)
     - [Utils](utils/index.md#utils)
       - [Logger](utils/logger.md#logger)
-      - [OSEnvironMock](utils/os_environ_mock.md#osenvironmock)
-      - [TypeCheckingMock](utils/type_checking_mock.md#typecheckingmock)
     - [Version](version.md#version)
 
 # Handsdown

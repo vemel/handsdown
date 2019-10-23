@@ -11,8 +11,6 @@ Handful utils that do not deserve a separate module.
   - [split_import_string](#split_import_string)
   - Modules
     - [Logger](logger.md#logger)
-    - [OSEnvironMock](os_environ_mock.md#osenvironmock)
-    - [TypeCheckingMock](type_checking_mock.md#typecheckingmock)
 
 ## extract_md_title
 
