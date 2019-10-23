@@ -40,8 +40,13 @@ class FunctionRecord(NodeRecord):
         # type: () -> None
         assert isinstance(self.node, ast.FunctionDef)
         self.decorators = []
-        for expr in self.node.decorator_list:
+        for index, expr in enumerate(self.node.decorator_list):
             decorator = ExpressionRecord(expr)
+
+            # FIXME: py38 sets start line to def/class,
+            # move it to the first decorator
+            if index == 0:
+                self.line_number = decorator.line_number
             if decorator.name == "staticmethod":
                 self.is_staticmethod = True
             if decorator.name == "classmethod":

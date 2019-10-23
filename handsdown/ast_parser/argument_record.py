@@ -22,6 +22,7 @@ class ArgumentRecord(NodeRecord):
         if isinstance(self.node, ast.Name):
             return None
 
+        # FIXME: hacks for py27
         if isinstance(self.node, str):
             return None
 
@@ -36,6 +37,7 @@ class ArgumentRecord(NodeRecord):
         if isinstance(self.node, ast.Name):
             return self.node.id
 
+        # FIXME: hacks for py27
         if isinstance(self.node, str):
             return str(self.node)
 

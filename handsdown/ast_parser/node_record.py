@@ -46,11 +46,15 @@ class NodeRecord(object):
         self.title = self.name
         self.support_split = False
         self.parsed = False
+        self.line_number = 1
+        if isinstance(self.node, ast.AST) and not isinstance(self.node, ast.Module):
+            self.line_number = self.node.lineno
 
     def _get_name(self):
         # type: () -> Text
         if isinstance(self.node, ast.Name):
             return self.node.id
+        # FIXME: hacks for py27
         if hasattr(self.node, "value"):
             return getattr(self.node, "value")
         if hasattr(self.node, "name"):
@@ -79,12 +83,6 @@ class NodeRecord(object):
 
         self._parse()
         self.parsed = True
-
-    @property
-    def line_number(self):
-        # type: () -> int
-        assert isinstance(self.node, ast.AST)
-        return self.node.lineno
 
     def _render_line(self, parts, indent):
         # type: (RenderParts, int) -> Text

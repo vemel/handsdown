@@ -136,32 +136,12 @@ class ModuleRecord(NodeRecord):
 
     def _get_function_lines(self, function_record):
         # type: (FunctionRecord) -> List[Text]
+        assert isinstance(function_record.node, ast.FunctionDef)
+
         result = []  # type: List[Text]
         start_index = function_record.line_number - 1
-        end_index = start_index + 1
-        lines_count = len(self.source_lines)
-        source_lines = self.source_lines
-
-        parentheses_count = 0
-        while end_index <= lines_count:
-            current_line = source_lines[end_index - 1].split("#", 1)[0].strip()
-            if not current_line and parentheses_count <= 0:
-                break
-
-            no_spaces_line = current_line.replace(" ", "")
-            if "):" in no_spaces_line or ")->" in no_spaces_line:
-                break
-
-            parentheses_count += current_line.count("(")
-            parentheses_count -= current_line.count(")")
-            end_index += 1
-
-        while end_index < lines_count:
-            current_line = source_lines[end_index].strip()
-            if not current_line.startswith("#"):
-                break
-            end_index += 1
-
-        result = source_lines[start_index:end_index]
+        end_index = function_record.node.body[0].lineno - 1
+        result = self.source_lines[start_index:end_index]
         result = [i.rstrip("\n") for i in result]
-        return IndentTrimmer.trim_lines(result)
+        result = IndentTrimmer.trim_lines(result)
+        return result
