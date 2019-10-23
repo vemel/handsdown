@@ -17,9 +17,9 @@ class ModuleRecord(NodeRecord):
     def __init__(self, source_path, import_string):
         # type: (Path, Text) -> None
         content = source_path.read_text()
-        first_line = content.split("\n", 1)[0]
+        first_line, lines_past_first = content.split("\n", 1)
         if "-*- coding:" in first_line:
-            content = content.split("\n", 1)[-1]
+            content = lines_past_first
 
         self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)
