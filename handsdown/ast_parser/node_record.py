@@ -1,9 +1,9 @@
+import ast
 from typing import Text, Set, Generator, Union, Tuple, List, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.ast_parser import ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.module_record import ModuleRecord
@@ -31,15 +31,6 @@ class NodeRecord(object):
 
     def __init__(self, node):
         # type: (Union[ast.AST, Text]) -> None
-        self.name = "{}".format(node.__class__.__name__)
-        if isinstance(node, ast.Name):
-            self.name = node.id
-        if hasattr(node, "value"):
-            self.name = getattr(node, "value")
-        if hasattr(node, "name"):
-            self.name = getattr(node, "name")
-
-        self.title = self.name
         docstring = ""
         try:
             docstring = ast.get_docstring(node) or ""  # type: ignore
@@ -51,8 +42,21 @@ class NodeRecord(object):
 
         self.import_string = ""
         self.node = node
+        self.name = self._get_name()
+        self.title = self.name
         self.support_split = False
         self.parsed = False
+
+    def _get_name(self):
+        # type: () -> Text
+        if isinstance(self.node, ast.Name):
+            return self.node.id
+        if hasattr(self.node, "value"):
+            return getattr(self.node, "value")
+        if hasattr(self.node, "name"):
+            return getattr(self.node, "name")
+
+        return "{}".format(self.node.__class__.__name__)
 
     def iter_children(self):
         # type: () -> Generator[NodeRecord, None, None]

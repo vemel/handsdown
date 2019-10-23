@@ -1,6 +1,5 @@
+import ast
 from typing import List, Text, Union, Set, TYPE_CHECKING
-
-from handsdown.ast_parser import ast
 
 if TYPE_CHECKING:
     from typing import Optional

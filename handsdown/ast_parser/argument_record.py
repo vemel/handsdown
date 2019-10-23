@@ -1,11 +1,10 @@
+import ast
 from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
-from handsdown.ast_parser import ast_version
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser import ast
     from handsdown.sentinel import Sentinel
 
 
@@ -14,17 +13,36 @@ class ArgumentRecord(NodeRecord):
         # type: (ast.arg) -> None
         super(ArgumentRecord, self).__init__(node)
         self.default = None  # type: Optional[ExpressionRecord]
-        self.type_hint = None  # type: Optional[ExpressionRecord]
+        self.type_hint = self._get_type_hint()
         self.prefix = ""
-        if ast_version == 3:
-            self.name = node.arg
-            if node.annotation:
-                self.type_hint = ExpressionRecord(node.annotation)
-        else:
-            if hasattr(node, "id"):
-                self.name = getattr(node, "id")
-            else:
-                self.name = str(node)
+        self.name = self._get_name()
+
+    def _get_type_hint(self):
+        # type: () -> Optional[ExpressionRecord]
+        if isinstance(self.node, ast.Name):
+            return None
+
+        if isinstance(self.node, str):
+            return None
+
+        if isinstance(self.node, ast.arg):
+            if self.node.annotation:
+                return ExpressionRecord(self.node.annotation)
+
+        return None
+
+    def _get_name(self):
+        # type: () -> Text
+        if isinstance(self.node, ast.Name):
+            return self.node.id
+
+        if isinstance(self.node, str):
+            return str(self.node)
+
+        if isinstance(self.node, ast.arg):
+            return self.node.arg
+
+        return ""
 
     @property
     def related_names(self):

@@ -1,10 +1,10 @@
+import ast
 from typing import List, Text, Generator, Tuple, Any, Optional, Dict, TYPE_CHECKING
 
 from handsdown.ast_parser.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import make_title, split_import_string
-from handsdown.ast_parser import ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.function_record import FunctionRecord
