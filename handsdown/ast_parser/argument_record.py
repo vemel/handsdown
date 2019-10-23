@@ -24,7 +24,7 @@ class ArgumentRecord(NodeRecord):
             if hasattr(node, "id"):
                 self.name = getattr(node, "id")
             else:
-                self.name = node
+                self.name = str(node)
 
     @property
     def related_names(self):

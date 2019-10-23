@@ -42,7 +42,7 @@ class NodeRecord(object):
         self.title = self.name
         docstring = ""
         try:
-            docstring = ast.get_docstring(node) or ""
+            docstring = ast.get_docstring(node) or ""  # type: ignore
         except TypeError:
             pass
 
