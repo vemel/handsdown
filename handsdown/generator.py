@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Main handsdown documentation generator.
 """
@@ -16,6 +15,7 @@ from handsdown.md_document import MDDocument
 from handsdown.utils import make_title, split_import_string
 from handsdown.utils.logger import get_logger
 from handsdown.path_finder import PathFinder
+from handsdown.settings import FIND_IN_SOURCE_LABEL
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.path_finder import Path
@@ -158,7 +158,7 @@ class Generator:
         # skip error output paths
         # preserve_paths.update(self._error_output_paths)
 
-        for doc_path in self._output_path.glob("**/*.md"):
+        for doc_path in PathFinder(self._output_path).glob("**/*.md"):
             if doc_path in preserve_paths:
                 continue
 
@@ -466,7 +466,7 @@ class Generator:
             source_path = module_record.source_path
             source_line_number = record.line_number
             source_link = md_document.render_doc_link(
-                title="🔍 find in source code",
+                title=FIND_IN_SOURCE_LABEL,
                 target_path=source_path,
                 anchor="L{}".format(source_line_number),
             )
@@ -475,7 +475,7 @@ class Generator:
                     source_path
                 ).as_posix()
                 source_link = md_document.render_link(
-                    title="🔍 find in source code",
+                    title=FIND_IN_SOURCE_LABEL,
                     link="{}{}#L{}".format(
                         self._source_code_url, relative_path_str, source_line_number
                     ),
