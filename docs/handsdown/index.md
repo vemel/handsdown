@@ -28,7 +28,6 @@ Root of `handsdown` source code.
       - [Type Defs](ast_parser/type_defs.md#type-defs)
     - [CLI Parser](cli_parser.md#cli-parser)
     - [DocstringFormatter](docstring_formatter.md#docstringformatter)
-    - [FunctionRepr](function_repr.md#functionrepr)
     - [Generator](generator.md#generator)
     - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
     - [Loader](loader.md#loader)
