@@ -12,15 +12,11 @@ Loader for python source code.
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L16)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L17)
 
 ```python
 class Loader():
-    def __init__(
-        root_path: logging.Logger,
-        output_path: Path,
-        logger: Path,
-    ) -> None:
+    def __init__(root_path: Path, output_path: Path) -> None:
 ```
 
 Loader for python source code.
@@ -36,7 +32,6 @@ my_module_utils = loader.import_module('my_module.utils')
 
 - `root_path` - Root path of the project.
 - `output_path` - Docs output path.
-- `logger` - Logger instance.
 
 ### Loader().get_import_string
 

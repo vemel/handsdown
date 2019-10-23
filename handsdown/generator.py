@@ -6,7 +6,6 @@ Main handsdown documentation generator.
 from __future__ import unicode_literals
 
 import re
-import logging
 
 from typing import Iterable, Text, List, Optional, Set, TYPE_CHECKING
 
@@ -15,6 +14,7 @@ from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import make_title, split_import_string
+from handsdown.utils.logger import get_logger
 from handsdown.path_finder import PathFinder
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -38,7 +38,6 @@ class Generator:
         input_path -- Path to repo to generate docs.
         output_path -- Path to folder with auto-generated docs to output.
         source_paths -- List of paths to source files for generation.
-        logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
         raise_errors -- Raise `LoaderError` instead of silencing in.
@@ -66,7 +65,6 @@ class Generator:
         input_path,  # type: Path
         output_path,  # type: Path
         source_paths,  # type: Iterable[Path]
-        logger=None,  # type: Optional[logging.Logger]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
         raise_errors=False,  # type: bool
@@ -74,7 +72,7 @@ class Generator:
         toc_depth=3,  # type: int
     ):
         # type: (...) -> None
-        self._logger = logger or logging.Logger(self.LOGGER_NAME)
+        self._logger = get_logger()
         self._root_path = input_path
         self._output_path = output_path
         self._project_name = make_title(input_path.name)
@@ -89,9 +87,7 @@ class Generator:
             PathFinder(self._output_path).mkdir()
 
         self._loader = loader or Loader(
-            root_path=self._root_path,
-            output_path=self._output_path,
-            logger=self._logger,
+            root_path=self._root_path, output_path=self._output_path
         )
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
@@ -136,12 +132,12 @@ class Generator:
             module_record = None
             try:
                 module_record = self._loader.get_module_record(source_path)
-            except SyntaxError as e:
+            except Exception as e:
                 if self._raise_errors:
                     raise
 
                 self._logger.warning(
-                    "Cannot load {}, skipping: {}".format(source_path, e)
+                    "Cannot parse {}, skipping: {}".format(source_path, e)
                 )
             if module_record:
                 module_record_list.add(module_record)

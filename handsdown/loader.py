@@ -7,6 +7,7 @@ from typing import Optional, Text, TYPE_CHECKING
 from handsdown.ast_parser.module_record import ModuleRecord
 from handsdown.path_finder import PathFinder
 from handsdown.utils import extract_md_title
+from handsdown.utils.logger import get_logger
 
 if TYPE_CHECKING:  # pragma: no cover
     import logging
@@ -25,12 +26,11 @@ class Loader:
     Arguments:
         root_path -- Root path of the project.
         output_path -- Docs output path.
-        logger -- Logger instance.
     """
 
-    def __init__(self, root_path, output_path, logger):
+    def __init__(self, root_path, output_path):
         # type: (Path, Path, logging.Logger) -> None
-        self._logger = logger
+        self._logger = get_logger()
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
