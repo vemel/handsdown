@@ -226,7 +226,7 @@ class Generator:
                 raise
 
             self._logger.warning("Skipping: {}".format(e))
-            return None
+            return
 
         source_link = md_document.render_doc_link(
             title=module_record.import_string, target_path=module_record.source_path
