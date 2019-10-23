@@ -104,6 +104,9 @@ def parse_args(args):
         "handsdown", description="Docstring-based python documentation generator."
     )
     parser.add_argument(
+        "--panic", action="store_true", help="Panic and die on import error"
+    )
+    parser.add_argument(
         "-i",
         "--input-path",
         help="Path to project root folder",

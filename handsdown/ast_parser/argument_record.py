@@ -2,9 +2,10 @@ from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
+from handsdown.ast_parser import ast_version
 
 if TYPE_CHECKING:
-    import ast
+    from handsdown.ast_parser import ast
     from handsdown.sentinel import Sentinel
 
 
@@ -12,12 +13,13 @@ class ArgumentRecord(NodeRecord):
     def __init__(self, node):
         # type: (ast.arg) -> None
         super(ArgumentRecord, self).__init__(node)
-        self.name = node.arg
         self.default = None  # type: Optional[ExpressionRecord]
         self.type_hint = None  # type: Optional[ExpressionRecord]
         self.prefix = ""
-        if node.annotation:
-            self.type_hint = ExpressionRecord(node.annotation)
+        if ast_version == 3:
+            self.name = node.arg
+            if node.annotation:
+                self.type_hint = ExpressionRecord(node.annotation)
 
     @property
     def related_names(self):

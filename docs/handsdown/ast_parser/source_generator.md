@@ -65,7 +65,7 @@
 
 ## SourceGenerator
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L40)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L42)
 
 ```python
 class SourceGenerator(ast.NodeVisitor):
@@ -78,7 +78,7 @@ sourcecode.  For more details have a look at the docstring of the
 
 ### SourceGenerator().body
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L72)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L74)
 
 ```python
 def body(statements: List[ast.stmt]) -> None:
@@ -86,7 +86,7 @@ def body(statements: List[ast.stmt]) -> None:
 
 ### SourceGenerator().body_or_else
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L79)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L81)
 
 ```python
 def body_or_else(
@@ -96,7 +96,7 @@ def body_or_else(
 
 ### SourceGenerator().decorators
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L87)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L89)
 
 ```python
 def decorators(
@@ -106,7 +106,7 @@ def decorators(
 
 ### SourceGenerator().newline
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L68)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L70)
 
 ```python
 def newline(extra: int = 0) -> None:
@@ -114,7 +114,7 @@ def newline(extra: int = 0) -> None:
 
 ### SourceGenerator().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L54)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L56)
 
 ```python
 @property
@@ -123,7 +123,7 @@ def related_names() -> Set[Text]:
 
 ### SourceGenerator().visit_Assert
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L96)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L98)
 
 ```python
 def visit_Assert(node: ast.Assert) -> None:
@@ -131,7 +131,7 @@ def visit_Assert(node: ast.Assert) -> None:
 
 ### SourceGenerator().visit_Assign
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L105)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L107)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -139,7 +139,7 @@ def visit_Assign(node: ast.Assign) -> None:
 
 ### SourceGenerator().visit_Attribute
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L298)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L300)
 
 ```python
 def visit_Attribute(node: ast.Attribute) -> None:
@@ -147,7 +147,7 @@ def visit_Attribute(node: ast.Attribute) -> None:
 
 ### SourceGenerator().visit_AugAssign
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L115)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L117)
 
 ```python
 def visit_AugAssign(node: ast.AugAssign) -> None:
@@ -155,7 +155,7 @@ def visit_AugAssign(node: ast.AugAssign) -> None:
 
 ### SourceGenerator().visit_BinOp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L382)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L384)
 
 ```python
 def visit_BinOp(node: ast.BinOp) -> None:
@@ -163,7 +163,7 @@ def visit_BinOp(node: ast.BinOp) -> None:
 
 ### SourceGenerator().visit_BoolOp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L388)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L390)
 
 ```python
 def visit_BoolOp(node: ast.BoolOp) -> None:
@@ -171,7 +171,7 @@ def visit_BoolOp(node: ast.BoolOp) -> None:
 
 ### SourceGenerator().visit_Break
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L275)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L277)
 
 ```python
 def visit_Break(_node: ast.Break) -> None:
@@ -179,7 +179,7 @@ def visit_Break(_node: ast.Break) -> None:
 
 ### SourceGenerator().visit_Bytes
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L334)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L336)
 
 ```python
 def visit_Bytes(node: ast.Bytes) -> None:
@@ -187,7 +187,7 @@ def visit_Bytes(node: ast.Bytes) -> None:
 
 ### SourceGenerator().visit_Call
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L303)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L305)
 
 ```python
 def visit_Call(node: ast.Call) -> None:
@@ -195,7 +195,7 @@ def visit_Call(node: ast.Call) -> None:
 
 ### SourceGenerator().visit_ClassDef
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L155)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L157)
 
 ```python
 def visit_ClassDef(node: ast.ClassDef) -> None:
@@ -203,7 +203,7 @@ def visit_ClassDef(node: ast.ClassDef) -> None:
 
 ### SourceGenerator().visit_Compare
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L395)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L397)
 
 ```python
 def visit_Compare(node: ast.Compare) -> None:
@@ -211,7 +211,7 @@ def visit_Compare(node: ast.Compare) -> None:
 
 ### SourceGenerator().visit_Continue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L280)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L282)
 
 ```python
 def visit_Continue(_node: ast.Continue) -> None:
@@ -219,7 +219,7 @@ def visit_Continue(_node: ast.Continue) -> None:
 
 ### SourceGenerator().visit_Delete
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L235)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L237)
 
 ```python
 def visit_Delete(node: ast.Delete) -> None:
@@ -227,7 +227,7 @@ def visit_Delete(node: ast.Delete) -> None:
 
 ### SourceGenerator().visit_Dict
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L371)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L373)
 
 ```python
 def visit_Dict(node: ast.Dict) -> None:
@@ -235,7 +235,7 @@ def visit_Dict(node: ast.Dict) -> None:
 
 ### SourceGenerator().visit_DictComp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L476)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L478)
 
 ```python
 def visit_DictComp(node: ast.DictComp) -> None:
@@ -243,7 +243,7 @@ def visit_DictComp(node: ast.DictComp) -> None:
 
 ### SourceGenerator().visit_Ellipsis
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L452)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L454)
 
 ```python
 def visit_Ellipsis(_node: ast.Ellipsis) -> None:
@@ -251,7 +251,7 @@ def visit_Ellipsis(_node: ast.Ellipsis) -> None:
 
 ### SourceGenerator().visit_ExceptHandler
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L518)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L520)
 
 ```python
 def visit_ExceptHandler(node: ast.ExceptHandler) -> None:
@@ -259,7 +259,7 @@ def visit_ExceptHandler(node: ast.ExceptHandler) -> None:
 
 ### SourceGenerator().visit_Expr
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L140)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L142)
 
 ```python
 def visit_Expr(node: ast.Expr) -> None:
@@ -267,7 +267,7 @@ def visit_Expr(node: ast.Expr) -> None:
 
 ### SourceGenerator().visit_ExtSlice
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L431)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L433)
 
 ```python
 def visit_ExtSlice(node: ast.ExtSlice) -> None:
@@ -275,7 +275,7 @@ def visit_ExtSlice(node: ast.ExtSlice) -> None:
 
 ### SourceGenerator().visit_For
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L200)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L202)
 
 ```python
 def visit_For(node: ast.For) -> None:
@@ -283,7 +283,7 @@ def visit_For(node: ast.For) -> None:
 
 ### SourceGenerator().visit_FunctionDef
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L145)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L147)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -291,7 +291,7 @@ def visit_FunctionDef(node: ast.FunctionDef) -> None:
 
 ### SourceGenerator().visit_GeneratorExp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L468)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L470)
 
 ```python
 def visit_GeneratorExp(node: ast.GeneratorExp) -> None:
@@ -299,7 +299,7 @@ def visit_GeneratorExp(node: ast.GeneratorExp) -> None:
 
 ### SourceGenerator().visit_Global
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L256)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L258)
 
 ```python
 def visit_Global(node: ast.Global) -> None:
@@ -307,7 +307,7 @@ def visit_Global(node: ast.Global) -> None:
 
 ### SourceGenerator().visit_If
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L176)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L178)
 
 ```python
 def visit_If(node: ast.If) -> None:
@@ -315,7 +315,7 @@ def visit_If(node: ast.If) -> None:
 
 ### SourceGenerator().visit_IfExp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L486)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L488)
 
 ```python
 def visit_IfExp(node: ast.IfExp) -> None:
@@ -323,7 +323,7 @@ def visit_IfExp(node: ast.IfExp) -> None:
 
 ### SourceGenerator().visit_Import
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L133)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L135)
 
 ```python
 def visit_Import(node: ast.Import) -> None:
@@ -331,7 +331,7 @@ def visit_Import(node: ast.Import) -> None:
 
 ### SourceGenerator().visit_ImportFrom
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L122)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L124)
 
 ```python
 def visit_ImportFrom(node: ast.ImportFrom) -> None:
@@ -339,7 +339,7 @@ def visit_ImportFrom(node: ast.ImportFrom) -> None:
 
 ### SourceGenerator().visit_Lambda
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L445)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L447)
 
 ```python
 def visit_Lambda(node: ast.Lambda) -> None:
@@ -347,7 +347,7 @@ def visit_Lambda(node: ast.Lambda) -> None:
 
 ### SourceGenerator().visit_List
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L363)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L365)
 
 ```python
 def visit_List(node: ast.List) -> None:
@@ -355,7 +355,7 @@ def visit_List(node: ast.List) -> None:
 
 ### SourceGenerator().visit_ListComp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L464)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L466)
 
 ```python
 def visit_ListComp(node: ast.ListComp) -> None:
@@ -363,7 +363,7 @@ def visit_ListComp(node: ast.ListComp) -> None:
 
 ### SourceGenerator().visit_Name
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L321)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L323)
 
 ```python
 def visit_Name(node: ast.Name) -> None:
@@ -371,7 +371,7 @@ def visit_Name(node: ast.Name) -> None:
 
 ### SourceGenerator().visit_NameConstant
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L326)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L328)
 
 ```python
 def visit_NameConstant(node: ast.NameConstant) -> None:
@@ -379,7 +379,7 @@ def visit_NameConstant(node: ast.NameConstant) -> None:
 
 ### SourceGenerator().visit_Nonlocal
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L261)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L263)
 
 ```python
 def visit_Nonlocal(node: ast.Nonlocal) -> None:
@@ -387,7 +387,7 @@ def visit_Nonlocal(node: ast.Nonlocal) -> None:
 
 ### SourceGenerator().visit_Num
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L338)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L340)
 
 ```python
 def visit_Num(node: ast.Num) -> None:
@@ -395,7 +395,7 @@ def visit_Num(node: ast.Num) -> None:
 
 ### SourceGenerator().visit_Pass
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L230)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L232)
 
 ```python
 def visit_Pass(_node: ast.Pass) -> None:
@@ -403,7 +403,7 @@ def visit_Pass(_node: ast.Pass) -> None:
 
 ### SourceGenerator().visit_Raise
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L285)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L287)
 
 ```python
 def visit_Raise(node: ast.Raise) -> None:
@@ -411,7 +411,7 @@ def visit_Raise(node: ast.Raise) -> None:
 
 ### SourceGenerator().visit_Return
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L266)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L268)
 
 ```python
 def visit_Return(node: ast.Return) -> None:
@@ -419,7 +419,7 @@ def visit_Return(node: ast.Return) -> None:
 
 ### SourceGenerator().visit_Set
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L367)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L369)
 
 ```python
 def visit_Set(node: ast.Set) -> None:
@@ -427,7 +427,7 @@ def visit_Set(node: ast.Set) -> None:
 
 ### SourceGenerator().visit_SetComp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L472)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L474)
 
 ```python
 def visit_SetComp(node: ast.SetComp) -> None:
@@ -435,7 +435,7 @@ def visit_SetComp(node: ast.SetComp) -> None:
 
 ### SourceGenerator().visit_Slice
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L419)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L421)
 
 ```python
 def visit_Slice(node: ast.Slice) -> None:
@@ -443,7 +443,7 @@ def visit_Slice(node: ast.Slice) -> None:
 
 ### SourceGenerator().visit_Starred
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L494)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L496)
 
 ```python
 def visit_Starred(node: ast.Starred) -> None:
@@ -451,7 +451,7 @@ def visit_Starred(node: ast.Starred) -> None:
 
 ### SourceGenerator().visit_Str
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L330)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L332)
 
 ```python
 def visit_Str(node: ast.Str) -> None:
@@ -459,7 +459,7 @@ def visit_Str(node: ast.Str) -> None:
 
 ### SourceGenerator().visit_Subscript
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L412)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L414)
 
 ```python
 def visit_Subscript(node: ast.Subscript) -> None:
@@ -467,7 +467,7 @@ def visit_Subscript(node: ast.Subscript) -> None:
 
 ### SourceGenerator().visit_Try
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L244)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L246)
 
 ```python
 def visit_Try(node: ast.Try) -> None:
@@ -475,7 +475,7 @@ def visit_Try(node: ast.Try) -> None:
 
 ### SourceGenerator().visit_Tuple
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L342)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L344)
 
 ```python
 def visit_Tuple(node: ast.Tuple) -> None:
@@ -483,7 +483,7 @@ def visit_Tuple(node: ast.Tuple) -> None:
 
 ### SourceGenerator().visit_UnaryOp
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L402)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L404)
 
 ```python
 def visit_UnaryOp(node: ast.UnaryOp) -> None:
@@ -491,7 +491,7 @@ def visit_UnaryOp(node: ast.UnaryOp) -> None:
 
 ### SourceGenerator().visit_While
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L210)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L212)
 
 ```python
 def visit_While(node: ast.While) -> None:
@@ -499,7 +499,7 @@ def visit_While(node: ast.While) -> None:
 
 ### SourceGenerator().visit_With
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L218)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L220)
 
 ```python
 def visit_With(node: ast.With) -> None:
@@ -507,7 +507,7 @@ def visit_With(node: ast.With) -> None:
 
 ### SourceGenerator().visit_Yield
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L438)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L440)
 
 ```python
 def visit_Yield(node: ast.Yield) -> None:
@@ -515,7 +515,7 @@ def visit_Yield(node: ast.Yield) -> None:
 
 ### SourceGenerator().visit_alias
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L501)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L503)
 
 ```python
 def visit_alias(node: ast.alias) -> None:
@@ -523,7 +523,7 @@ def visit_alias(node: ast.alias) -> None:
 
 ### SourceGenerator().visit_arguments
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L531)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L533)
 
 ```python
 def visit_arguments(node: ast.arguments) -> None:
@@ -531,7 +531,7 @@ def visit_arguments(node: ast.arguments) -> None:
 
 ### SourceGenerator().visit_comprehension
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L507)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L509)
 
 ```python
 def visit_comprehension(node: ast.comprehension) -> None:
@@ -539,7 +539,7 @@ def visit_comprehension(node: ast.comprehension) -> None:
 
 ### SourceGenerator().write
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L59)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/source_generator.py#L61)
 
 ```python
 def write(x: Text) -> None:

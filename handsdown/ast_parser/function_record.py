@@ -1,10 +1,10 @@
 import re
-import ast
 from typing import List, Any, Set, Text, Optional
 
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.argument_record import ArgumentRecord
 from handsdown.ast_parser.expression_record import ExpressionRecord
+from handsdown.ast_parser import ast
 
 
 class FunctionRecord(NodeRecord):
@@ -58,13 +58,14 @@ class FunctionRecord(NodeRecord):
             ]
             argument.default = ExpressionRecord(default)
 
-        for arg in self.node.args.kwonlyargs:
-            record = ArgumentRecord(arg)
-            self.arguments.append(record)
-        for index, default in enumerate(self.node.args.kw_defaults):
-            argument = self.arguments[
-                len(self.arguments) - len(self.node.args.kw_defaults) + index
-            ]
+        if getattr(self.node.args, "kwonlyargs", None):
+            for arg in self.node.args.kwonlyargs:
+                record = ArgumentRecord(arg)
+                self.arguments.append(record)
+            for index, default in enumerate(self.node.args.kw_defaults):
+                argument = self.arguments[
+                    len(self.arguments) - len(self.node.args.kw_defaults) + index
+                ]
             argument.default = ExpressionRecord(default)
 
         if self.node.args.vararg:

@@ -41,6 +41,7 @@ class Generator:
         logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
+        raise_errors -- Raise `LoaderError` instead of silencing in.
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
@@ -68,6 +69,7 @@ class Generator:
         logger=None,  # type: Optional[logging.Logger]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
+        raise_errors=False,  # type: bool
         source_code_url=None,  # type: Optional[Text]
         toc_depth=3,  # type: int
     ):
@@ -79,6 +81,7 @@ class Generator:
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth
+        self._raise_errors = raise_errors
 
         # create output folder if it does not exist
         if not self._output_path.exists():
@@ -130,7 +133,16 @@ class Generator:
         # type: () -> ModuleRecordList
         module_record_list = ModuleRecordList()
         for source_path in self._source_paths:
-            module_record = self._loader.get_module_record(source_path)
+            module_record = None
+            try:
+                module_record = self._loader.get_module_record(source_path)
+            except SyntaxError as e:
+                if self._raise_errors:
+                    raise
+
+                self._logger.warning(
+                    "Cannot load {}, skipping: {}".format(source_path, e)
+                )
             if module_record:
                 module_record_list.add(module_record)
 

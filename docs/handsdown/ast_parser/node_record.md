@@ -18,7 +18,7 @@
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_record.py#L15)
 
 ```python
-class NodeRecord():
+class NodeRecord(object):
     def __init__(node: Union[ast.AST, Text]) -> None:
 ```
 

@@ -18,7 +18,7 @@ class FunctionRecord(NodeRecord):
 
 ### FunctionRecord().parse_type_comments
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/function_record.py#L98)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/function_record.py#L99)
 
 ```python
 def parse_type_comments(lines: List[Text]) -> None:

@@ -1,9 +1,9 @@
-import ast
 from typing import Text, Set, Generator, Union, Tuple, List, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.ast_parser import ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.module_record import ModuleRecord
@@ -12,7 +12,7 @@ if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import RenderParts
 
 
-class NodeRecord:
+class NodeRecord(object):
     LINE_LENGTH = 79
     INDENT_SPACES = 4
 
@@ -34,17 +34,17 @@ class NodeRecord:
         self.name = "{}".format(node.__class__.__name__)
         if isinstance(node, ast.Name):
             self.name = node.id
-        if isinstance(node, ast.NameConstant):
-            self.name = node.value
-        if isinstance(node, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
-            self.name = node.name
+        if hasattr(node, "value"):
+            self.name = getattr(node, "value")
+        if hasattr(node, "name"):
+            self.name = getattr(node, "name")
 
         self.title = self.name
         docstring = ""
-        if isinstance(
-            node, (ast.AsyncFunctionDef, ast.FunctionDef, ast.ClassDef, ast.Module)
-        ):
+        try:
             docstring = ast.get_docstring(node) or ""
+        except TypeError:
+            pass
 
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         self.docstring = IndentTrimmer.trim_text(docstring)

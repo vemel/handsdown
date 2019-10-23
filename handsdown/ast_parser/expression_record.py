@@ -1,9 +1,9 @@
 import re
-import ast
 from typing import Text, Union, Set, TYPE_CHECKING
 
 from handsdown.ast_parser.node_record import NodeRecord
 from handsdown.ast_parser.source_generator import SourceGenerator
+from handsdown.ast_parser import ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import RenderParts
@@ -31,16 +31,16 @@ class ExpressionRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
-        if isinstance(self.node, str):
-            self.name = self.node
-            self.result = self.node
-            return
-
         if isinstance(self.node, ast.Name):
             self.name = self.node.id
 
-        self.analyzer.visit(self.node)
-        self.result = "".join(self.analyzer.result)
+        if isinstance(self.node, ast.AST):
+            self.analyzer.visit(self.node)
+            self.result = "".join(self.analyzer.result)
+            return
+
+        self.name = self.node
+        self.result = self.node
 
     def _render_parts(self, indent=0):
         # type: (int) -> RenderParts
