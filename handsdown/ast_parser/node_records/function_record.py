@@ -84,7 +84,8 @@ class FunctionRecord(NodeRecord):
             record.prefix = "**"
             self.arguments.append(record)
 
-        if self.node.returns:
+        # FIXME: py27 FunctionDef does not have return
+        if hasattr(self.node, "returns") and self.node.returns:
             self.return_type_hint = ExpressionRecord(self.node.returns)
 
     @staticmethod
