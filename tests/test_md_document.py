@@ -104,20 +104,8 @@ class TestMDDocument(unittest.TestCase):
         md_doc.add_toc_if_not_exists()
         self.assertEqual(
             md_doc.toc_section,
-            "- [header](#header)\n  - [header2](#header2)\n    - [header3](#header3)",
+            "- [header](#header)\n    - [header2](#header2)\n        - [header3](#header3)",
         )
-
-    def test_extract_title(self):
-        self.assertEqual(
-            MDDocument.extract_title("# test\ncontent"), ("test", "content")
-        )
-        self.assertEqual(
-            MDDocument.extract_title("# test\n\ncontent"), ("test", "\ncontent")
-        )
-        self.assertEqual(
-            MDDocument.extract_title("## test\n\ncontent"), ("", "## test\n\ncontent")
-        )
-        self.assertEqual(MDDocument.extract_title("# test"), ("test", ""))
 
     def test_append(self):
         md_doc = MDDocument(Path("/test.md"))
@@ -201,6 +189,6 @@ class TestMDDocument(unittest.TestCase):
         md_doc.append("# no header\nasdd")
         self.assertEqual(
             md_doc.generate_toc_section(),
-            "- [header](#header)\n  - [header2](#header2)\n    - [header3](#header3)",
+            "- [header](#header)\n    - [header2](#header2)\n        - [header3](#header3)",
         )
         # raise ValueError()

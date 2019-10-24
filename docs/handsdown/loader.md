@@ -5,25 +5,20 @@
 Loader for python source code.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Loader
-  - [Loader](#loader)
-    - [Loader().get_import_string](#loaderget_import_string)
-    - [Loader().get_module_record](#loaderget_module_record)
-    - [Loader().get_output_path](#loaderget_output_path)
-    - [Loader().get_source_line_number](#loaderget_source_line_number)
-    - [Loader().import_module](#loaderimport_module)
-    - [Loader().setup](#loadersetup)
-  - [LoaderError](#loadererror)
+    - [Loader](#loader)
+        - [Loader().get_import_string](#loaderget_import_string)
+        - [Loader().get_module_record](#loaderget_module_record)
+        - [Loader().get_output_path](#loaderget_output_path)
+        - [Loader.parse_module_record](#loaderparse_module_record)
+    - [LoaderError](#loadererror)
 
 ## Loader
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L34)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L23)
 
 ```python
-class Loader(
-    root_path: Path,
-    output_path: Path,
-    logger: logging.Logger,
-) -> None:
+class Loader():
+    def __init__(root_path: Path, output_path: Path) -> None:
 ```
 
 Loader for python source code.
@@ -39,11 +34,10 @@ my_module_utils = loader.import_module('my_module.utils')
 
 - `root_path` - Root path of the project.
 - `output_path` - Docs output path.
-- `logger` - Logger instance.
 
 ### Loader().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L217)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L137)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -72,13 +66,13 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L105)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L65)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
 ```
 
-Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
+Build `ModuleRecord` for given `source_path`.
 
 #### Arguments
 
@@ -86,19 +80,19 @@ Build [ModuleRecord](module_record.md#modulerecord) for given `source_path`.
 
 #### Returns
 
-A new [ModuleRecord](module_record.md#modulerecord) instance or None if there is ntohing to import.
+A new `ModuleRecord` instance or None if there is ntohing to import.
 
 #### Raises
 
-- [LoaderError](#loadererror) - If module or any of it's objects cannot be imported.
+- [LoaderError](#loadererror) - If python source cannot be loaded.
 
 #### See also
 
-- [ModuleRecord](module_record.md#modulerecord)
+- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
 
 ### Loader().get_output_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L84)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L44)
 
 ```python
 def get_output_path(source_path: Path) -> Path:
@@ -114,65 +108,31 @@ Get output MD document path based on `source_path`.
 
 A path to the output `.md` file even if it does not exist yet.
 
-### Loader().get_source_line_number
+### Loader.parse_module_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L502)
-
-```python
-def get_source_line_number(obj: Any) -> int:
-```
-
-Get line number in source file where `obj` is declared.
-
-- `obj` - Object to inspect.
-
-#### Returns
-
-A line number as an integer, starting for 1.
-
-### Loader().import_module
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L247)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L119)
 
 ```python
-def import_module(file_path: Path) -> Any:
+@staticmethod
+def parse_module_record(module_record: ModuleRecord) -> None:
 ```
 
-Import module using `import_paths` list. Clean up all patches afterwards.
+Parse `ModuleRecord` children and fully load a tree for it.
 
-- Patch `sys.path` to add current repo to it.
-- Patch `os.environ` to avoid failing on undefined variables.
-- Patch `typing.TYPE_CHECKING` to `True`.
-- Patch `logging.Logger`.
-- Patch `logging.config.dictConfig`.
+#### Raises
 
-#### Arguments
+- [LoaderError](#loadererror) - If python source cannot be parsed.
 
-- `file_path` - Abslute path to source file.
+#### See also
 
-#### Returns
-
-Imported module object.
-
-### Loader().setup
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L67)
-
-```python
-def setup() -> None:
-```
-
-Setup local frameworks if needed.
-
-Frameworks supported:
-- `Django` (if `DJANGO_SETTINGS_MODULE` env variable is defined)
+- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
 
 ## LoaderError
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L28)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L17)
 
 ```python
-class LoaderError():
+class LoaderError(Exception):
 ```
 
 Main error for [Loader](#loader) class.

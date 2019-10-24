@@ -5,15 +5,16 @@
 Translator of docstrings to Markdown format.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / DocstringFormatter
-  - [DocstringFormatter](#docstringformatter)
-    - [DocstringFormatter().render](#docstringformatterrender)
+    - [DocstringFormatter](#docstringformatter)
+        - [DocstringFormatter().render](#docstringformatterrender)
 
 ## DocstringFormatter
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L13)
 
 ```python
-class DocstringFormatter(docstring: Text) -> None:
+class DocstringFormatter():
+    def __init__(docstring: Text) -> None:
 ```
 
 Translator of docstrings to Markdown format.
@@ -24,7 +25,7 @@ Translator of docstrings to Markdown format.
 
 ### DocstringFormatter().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L62)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L62)
 
 ```python
 def render() -> Text:

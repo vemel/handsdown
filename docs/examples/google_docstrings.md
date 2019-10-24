@@ -3,11 +3,11 @@
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Google docstrings examples
-  - [Links](#links)
-  - [ClassExample](#classexample)
-    - [ClassExample().method_example](#classexamplemethod_example)
-  - [function_example](#function_example)
-  - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
+    - [Links](#links)
+    - [ClassExample](#classexample)
+        - [ClassExample().method_example](#classexamplemethod_example)
+    - [function_example](#function_example)
+    - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
 
 ## Links
 
@@ -15,7 +15,7 @@
 
 ## ClassExample
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L11)
 
 ```python
 class ClassExample():
@@ -30,10 +30,10 @@ Google-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L20)
 
 ```python
-def method_example(text: str = 'hello') -> int:
+def method_example(text: Text = 'hello') -> int:
 ```
 
 Summary line.
@@ -74,7 +74,7 @@ to use the function
 
 ## function_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L54)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L54)
 
 ```python
 def function_example(arg1, arg2, arg3=None):
@@ -114,7 +114,7 @@ print result
 
 ## function_with_pep484_type_annotations
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L85)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L85)
 
 ```python
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:

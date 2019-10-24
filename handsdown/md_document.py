@@ -5,10 +5,11 @@ from __future__ import unicode_literals
 
 import traceback
 import re
-from typing import Text, Optional, List, Tuple, Type, TYPE_CHECKING
+from typing import Text, Optional, List, Type, TYPE_CHECKING
 
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.path_finder import PathFinder
+from handsdown.utils import extract_md_title
 
 if TYPE_CHECKING:  # pragma: no cover
     from types import TracebackType
@@ -54,6 +55,9 @@ class MDDocument(object):
         path -- Path to store document.
     """
 
+    # Indent in spaces for nested ToC lines
+    TOC_INDENT = 4
+
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
@@ -96,7 +100,7 @@ class MDDocument(object):
         self._content = path.read_text()
         self._title = ""
         self._toc_section = ""
-        title, content = self.extract_title(self._content)
+        title, content = extract_md_title(self._content)
         if title:
             self._title = title
 
@@ -370,14 +374,18 @@ class MDDocument(object):
         toc_lines = []
         if self.title:
             link = self.render_doc_link(self.title, anchor=self.get_anchor(self.title))
-            toc_lines.append("- {}".format(link))
+            toc_line = self.get_toc_line(link, level=0)
+            toc_lines.append(toc_line)
 
         sections = [self.title, self.subtitle] + self.sections
         for section in sections:
             if not section.startswith("#"):
                 continue
 
-            if not len(section.splitlines()) == 1:
+            if "\n" in section:
+                continue
+
+            if " " not in section.rstrip():
                 continue
 
             header_symbols, title = section.rstrip().split(" ", 1)
@@ -389,38 +397,26 @@ class MDDocument(object):
                 continue
 
             link = self.render_doc_link(title, anchor=self.get_anchor(title))
-            toc_lines.append("{}- {}".format("  " * (header_level - 1), link))
+            toc_line = self.get_toc_line(link, level=header_level - 1)
+            toc_lines.append(toc_line)
 
         return "\n".join(toc_lines)
 
-    @staticmethod
-    def extract_title(content):
-        # type: (Text) -> Tuple[Text, Text]
+    @classmethod
+    def get_toc_line(cls, line, level=0):
+        # type: (Text, int) -> Text
         """
-        Extract title from the first line of content.
-        If title is present -  return a title and a remnaing content.
-        if not - return an empty title and untouched content.
+        Get ToC `line` of given `level`.
 
-        Examples::
-
-            MDDocument.extract_title('# Title\\ncontent')
-            ('Title', 'content')
-
-            MDDocument.extract_title('no title\\ncontent')
-            ('', 'no title\\ncontent')
+        Argumemnts:
+            line -- Line to prepare.
+            level -- Line level, starts with `0`.
 
         Returns:
-            A tuple fo title and remaining content.
+            Ready to insert ToC line.
         """
-        title = ""
-        if content.startswith("# "):
-            if "\n" not in content:
-                content = "{}\n".format(content)
-
-            title_line, content = content.split("\n", 1)
-            title = title_line.split(" ", 1)[-1]
-
-        return title, content
+        indent = cls.TOC_INDENT * level
+        return IndentTrimmer.indent_line("- {}".format(line), indent)
 
     @classmethod
     def _escape_title(cls, title):

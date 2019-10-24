@@ -141,3 +141,23 @@ class IndentTrimmer(object):
             A number of indentation characters in a beginning of the line.
         """
         return len(line) - len(line.lstrip())
+
+    @staticmethod
+    def indent_line(line, indent):
+        # type: (Text, int) -> Text
+        """
+        Indent line with givent length `indent`
+
+        Examples::
+
+            IndentTrimmer.indent_line('test', 2)
+            '  test'
+
+        Arguments:
+            line -- Line to indent.
+            indent -- Length of indent in spaces.
+
+        Returns:
+            An indented line.
+        """
+        return u"{}{}".format(" " * indent, line)

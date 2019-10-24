@@ -5,8 +5,8 @@
 Base class for all docstring processors:
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Base
-  - [BaseDocstringProcessor](#basedocstringprocessor)
-    - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
+    - [BaseDocstringProcessor](#basedocstringprocessor)
+        - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)
@@ -14,10 +14,11 @@ Base class for all docstring processors:
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
 
 ```python
-class BaseDocstringProcessor() -> None:
+class BaseDocstringProcessor(object):
+    def __init__() -> None:
 ```
 
 Base docstring processor. All docstring processors are based on top of it.
@@ -30,7 +31,7 @@ Base docstring processor. All docstring processors are based on top of it.
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L49)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L49)
 
 ```python
 def build_sections(content: Text) -> SectionMap:

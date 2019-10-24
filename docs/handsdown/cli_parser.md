@@ -3,15 +3,15 @@
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / CLI Parser
-  - [abs_path](#abs_path)
-  - [dir_abs_path](#dir_abs_path)
-  - [existing_dir_abs_path](#existing_dir_abs_path)
-  - [git_repo](#git_repo)
-  - [parse_args](#parse_args)
+    - [abs_path](#abs_path)
+    - [dir_abs_path](#dir_abs_path)
+    - [existing_dir_abs_path](#existing_dir_abs_path)
+    - [git_repo](#git_repo)
+    - [parse_args](#parse_args)
 
 ## abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L39)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L39)
 
 ```python
 def abs_path(path_str: Text) -> Path:
@@ -29,7 +29,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L53)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L53)
 
 ```python
 def dir_abs_path(path_str: Text) -> Path:
@@ -51,7 +51,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L73)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L73)
 
 ```python
 def existing_dir_abs_path(path_str: Text) -> Path:
@@ -73,7 +73,7 @@ An absolute path.
 
 ## git_repo
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L12)
 
 ```python
 def git_repo(git_repo_url: Text) -> Text:
@@ -91,7 +91,7 @@ A GitHub URL.
 
 ## parse_args
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L95)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L95)
 
 ```python
 def parse_args(args: List[Text]) -> argparse.Namespace:

@@ -3,14 +3,14 @@
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/master/examples/typed.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Typed
-  - [MyValue](#myvalue)
-  - [Typed](#typed)
-    - [Typed.classmethod](#typedclassmethod)
-  - [func](#func)
+    - [MyValue](#myvalue)
+    - [Typed](#typed)
+        - [Typed.classmethod](#typedclassmethod)
+    - [func](#func)
 
 ## MyValue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
 
 ```python
 class MyValue():
@@ -18,26 +18,32 @@ class MyValue():
 
 ## Typed
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
 
 ```python
-class Typed(
-    _value: Union[List[str], str, examples.typed.MyValue] = <examples.typed.MyValue object>,
-    _name: str = 'default',
-) -> Dict[str, examples.typed.MyValue]:
+class Typed():
+    def __init__(
+        _value: Union[List[Text], Text, MyValue] = MyValue(
+            {
+                'key1': 'value1',
+                'key2': 'value2',
+                'key3': 'value3',
+                'key4': 'value4',
+                'key5': 'value5',
+                'key6': 'value6',
+            },
+        ),
+        _name: Text = 'default',
+    ) -> Dict[Text, MyValue]:
 ```
-
-#### See also
-
-- [MyValue](#myvalue)
 
 ### Typed.classmethod
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L16)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L26)
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None:
+def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 ```
 
 #### See also
@@ -46,13 +52,13 @@ def classmethod(_my_value: MyValue, _args: str, _kwargs: Any) -> None:
 
 ## func
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L21)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L31)
 
 ```python
 def func(
-    _list: Tuple[List[str], ...],
-    _my_value_cls: Type[examples.typed.MyValue],
-    _kwargs: None = <class 'examples.typed.MyValue'>,
+    _list: Tuple[List[Text], ...],
+    _my_value_cls: Type[MyValue] = MyValue,
+    **_kwargs: None,
 ) -> Any:
 ```
 

@@ -2,7 +2,7 @@
 Handful utils that do not deserve a separate module.
 """
 import traceback
-from typing import Text, Any, Dict, TYPE_CHECKING
+from typing import Text, Any, Dict, Tuple, List, TYPE_CHECKING
 
 from handsdown.path_finder import Path
 from handsdown.settings import ASSETS_PATH
@@ -16,13 +16,13 @@ def make_title(path_part):
 
     Examples::
 
-        get_title_from_path_part("my_path.py")
+        make_title("my_path.py")
         "My Path Py"
 
-        get_title_from_path_part("my_title")
+        make_title("my_title")
         "My Title"
 
-        get_title_from_path_part("__init__.py")
+        make_title("__init__.py")
         "Init Py"
 
     Arguments:
@@ -49,3 +49,42 @@ def render_asset(name, target_path, format_dict):
     content = (Path(ASSETS_PATH) / name).read_text()
     content = content.format(**format_dict)
     target_path.write_text(content)
+
+
+def extract_md_title(content):
+    # type: (Text) -> Tuple[Text, Text]
+    """
+    Extract title from the first line of content.
+    If title is present -  return a title and a remnaing content.
+    if not - return an empty title and untouched content.
+
+    Examples::
+
+        extract_md_title('# Title\\ncontent')
+        ('Title', 'content')
+
+        extract_md_title('no title\\ncontent')
+        ('', 'no title\\ncontent')
+
+    Returns:
+        A tuple fo title and remaining content.
+    """
+    title = ""
+    if content.startswith("# "):
+        if "\n" not in content:
+            content = "{}\n".format(content)
+
+        title_line, content = content.split("\n", 1)
+        title = title_line.split(" ", 1)[-1]
+
+    return title, content
+
+
+def split_import_string(import_string):
+    # type: (Text) -> List[Text]
+    return import_string.split(".")
+
+
+def isinstance_str(value):
+    # type: (Any) -> bool
+    return isinstance(value, ("".__class__, u"".__class__))

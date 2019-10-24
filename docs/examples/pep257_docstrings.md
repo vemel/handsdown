@@ -3,10 +3,10 @@
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 257 - PEP 257 and Google docstrings examples
-  - [Links](#links)
-  - [ClassExample](#classexample)
-    - [ClassExample().method_example](#classexamplemethod_example)
-  - [function_example](#function_example)
+    - [Links](#links)
+    - [ClassExample](#classexample)
+        - [ClassExample().method_example](#classexamplemethod_example)
+    - [function_example](#function_example)
 
 ## Links
 
@@ -14,7 +14,7 @@
 
 ## ClassExample
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
 
 ```python
 class ClassExample():
@@ -29,10 +29,10 @@ PEP257-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L20)
 
 ```python
-def method_example(text: str = 'hello') -> int:
+def method_example(text: Text = 'hello') -> int:
 ```
 
 Summary line.
@@ -73,7 +73,7 @@ Description of return value
 
 ## function_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L53)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L53)
 
 ```python
 def function_example(real=0.0, imag=0.0):

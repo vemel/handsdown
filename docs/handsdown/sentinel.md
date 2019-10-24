@@ -5,14 +5,15 @@
 Sentinel value than can be used as a placeholder.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Sentinel
-  - [Sentinel](#sentinel)
+    - [Sentinel](#sentinel)
 
 ## Sentinel
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
 
 ```python
-class Sentinel(name: Text = 'DEFAULT') -> None:
+class Sentinel():
+    def __init__(name: Text = 'DEFAULT') -> None:
 ```
 
 Sentinel value than can be used as a placeholder.

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Main handsdown documentation generator.
 """
@@ -6,21 +5,23 @@ Main handsdown documentation generator.
 from __future__ import unicode_literals
 
 import re
-import logging
 
-from typing import Iterable, Text, List, Optional, Union, Set, TYPE_CHECKING
+from typing import Iterable, Text, List, Optional, Set, TYPE_CHECKING
 
 from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
-from handsdown.module_record import ModuleRecordList
+from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.md_document import MDDocument
-from handsdown.utils import make_title
+from handsdown.utils import make_title, split_import_string
+from handsdown.utils.logger import get_logger
 from handsdown.path_finder import PathFinder
+from handsdown.settings import FIND_IN_SOURCE_LABEL
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.path_finder import Path
     from handsdown.processors.base import BaseDocstringProcessor
-    from handsdown.module_record import ModuleRecord, ModuleObjectRecord
+    from handsdown.ast_parser.node_records.node_record import NodeRecord
+    from handsdown.ast_parser.node_records.module_record import ModuleRecord
 
 
 class GeneratorError(Exception):
@@ -37,36 +38,36 @@ class Generator:
         input_path -- Path to repo to generate docs.
         output_path -- Path to folder with auto-generated docs to output.
         source_paths -- List of paths to source files for generation.
-        logger -- Logger instance.
         docstring_processor -- Docstring converter to Markdown.
         loader -- Loader for python modules.
         raise_errors -- Raise `LoaderError` instead of silencing in.
-        ignore_unknown_errors -- Continue on any error.
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
-
-    Attributes:
-        LOGGER_NAME -- Name of logger: `handsdown`
-        INDEX_NAME -- Docs index filename: `README.md`
-        INDEX_TITLE -- Docs index title: `Index`
-        MODULES_NAME -- Docs modules filename: `MODULES.md`
-        MODULES_TITLE -- Docs modules title: `Modules`
     """
 
+    # Name of logger
     LOGGER_NAME = "handsdown"
+
+    # Docs index filename
     INDEX_NAME = "README.md"
+
+    # Docs index title
     INDEX_TITLE = "Index"
+
+    # Docs modules filename
     MODULES_NAME = "MODULES.md"
+
+    # Docs modules title
     MODULES_TITLE = "Modules"
-    _short_link_re = re.compile(r"`+\S+`+")
+
+    _short_link_re = re.compile(r"`+[A-Za-z]\S+`+")
 
     def __init__(
         self,
         input_path,  # type: Path
         output_path,  # type: Path
         source_paths,  # type: Iterable[Path]
-        logger=None,  # type: Optional[logging.Logger]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
         raise_errors=False,  # type: bool
@@ -74,30 +75,32 @@ class Generator:
         toc_depth=3,  # type: int
     ):
         # type: (...) -> None
-        self._logger = logger or logging.Logger(self.LOGGER_NAME)
+        self._logger = get_logger()
         self._root_path = input_path
         self._output_path = output_path
         self._project_name = make_title(input_path.name)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth
+        self._raise_errors = raise_errors
 
         # create output folder if it does not exist
         if not self._output_path.exists():
             self._logger.info("Creating folder {}".format(self._output_path))
             PathFinder(self._output_path).mkdir()
 
-        self._raise_errors = raise_errors
         self._loader = loader or Loader(
-            root_path=self._root_path,
-            output_path=self._output_path,
-            logger=self._logger,
+            root_path=self._root_path, output_path=self._output_path
         )
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
         self._error_output_paths = set()  # type: Set[Path]
+        self._logger.debug(
+            "Generating source map for {} source files".format(len(self._source_paths))
+        )
         self._module_records = self._build_module_record_list()
+        self._logger.debug("Source map generated")
 
         package_names = self._module_records.get_package_names()
         package_names_re_expr = "|".join(package_names)
@@ -140,13 +143,8 @@ class Generator:
                 if self._raise_errors:
                     raise
 
-                self._error_output_paths.add(self._loader.get_output_path(source_path))
-                self._logger.warning(
-                    "Skipping {} due to import error: {}".format(
-                        self._root_path_finder.relative(source_path), e
-                    )
-                )
-
+                self._logger.warning("Skipping: {}".format(e))
+                continue
             if module_record:
                 module_record_list.add(module_record)
 
@@ -158,14 +156,16 @@ class Generator:
         Remove old docs generated for this module.
         """
         self._logger.debug("Removing orphaned docs")
-        preserve_paths = {i.output_path for i in self._module_records}
+        preserve_paths = {
+            self._loader.get_output_path(i.source_path) for i in self._module_records
+        }
         preserve_paths.add(self.md_index.path)
         preserve_paths.add(self.md_modules.path)
 
         # skip error output paths
         # preserve_paths.update(self._error_output_paths)
 
-        for doc_path in self._output_path.glob("**/*.md"):
+        for doc_path in PathFinder(self._output_path).glob("**/*.md"):
             if doc_path in preserve_paths:
                 continue
 
@@ -182,16 +182,14 @@ class Generator:
             doc_path.unlink()
 
             # remove parent directory if it is empty
-            try:
-                doc_path.parent.rmdir()
-            except OSError:
-                continue
-            else:
+            children = list(doc_path.parent.iterdir())
+            if not children:
                 self._logger.info(
                     "Deleting orphaned directory {}".format(
                         self._root_path_finder.relative(doc_path.parent)
                     )
                 )
+                doc_path.parent.rmdir()
 
     def generate_doc(self, source_path):
         # type: (Path) -> None
@@ -208,7 +206,8 @@ class Generator:
             if module_record.source_path != source_path:
                 continue
 
-            with MDDocument(module_record.output_path) as md_document:
+            output_path = self._loader.get_output_path(module_record.source_path)
+            with MDDocument(output_path) as md_document:
                 self._generate_doc(module_record, md_document)
                 self._replace_short_links(module_record, md_document)
                 self._replace_full_links(md_document)
@@ -225,6 +224,14 @@ class Generator:
                 self._root_path_finder.relative(module_record.source_path),
             )
         )
+        try:
+            self._loader.parse_module_record(module_record)
+        except LoaderError as e:
+            if self._raise_errors:
+                raise
+
+            self._logger.warning("Skipping: {}".format(e))
+            return
 
         source_link = md_document.render_doc_link(
             title=module_record.import_string, target_path=module_record.source_path
@@ -240,7 +247,9 @@ class Generator:
 
         md_document.title = module_record.title
 
-        self._render_docstring(module_record=module_record, md_document=md_document)
+        self._render_docstring(
+            module_record=module_record, record=module_record, md_document=md_document
+        )
 
         autogenerated_marker = "> Auto-generated documentation for {} module.".format(
             source_link
@@ -259,17 +268,19 @@ class Generator:
             module_record.import_string,
             max_depth=self._toc_depth,
             md_document=md_document,
+            start_level=2,
         )
 
         toc_lines = md_document.toc_section.split("\n")
         breadscrumbs = self._build_breadcrumbs_string(
             module_record=module_record, md_document=md_document
         )
-        toc_lines[0] = "- {}".format(breadscrumbs)
+        toc_lines[0] = md_document.get_toc_line(breadscrumbs, level=0)
         if modules_toc_lines:
-            toc_lines.append("  - {}".format(self.MODULES_TITLE))
+            toc_line = md_document.get_toc_line(self.MODULES_TITLE, level=1)
+            toc_lines.append(toc_line)
             for line in modules_toc_lines:
-                toc_lines.append("    {}".format(line))
+                toc_lines.append(line)
 
         md_document.toc_section = "\n".join(toc_lines)
 
@@ -277,21 +288,24 @@ class Generator:
         # type: (ModuleRecord, MDDocument) -> Text
         import_string_breadcrumbs = []  # type: List[Text]
 
-        import_string_parts = module_record.get_import_string_parts()
+        import_string_parts = split_import_string(module_record.import_string)
         parent_import_parts = []  # type: List[Text]
         for part in import_string_parts[:-1]:
             parent_import_parts.append(part)
             parent_import = ".".join(parent_import_parts)
-            parend_module_record = self._module_records.find_object(parent_import)
-            if not parend_module_record:
+            parent_module_record = self._module_records.find_module_record(
+                parent_import
+            )
+            if not parent_module_record:
                 import_string_breadcrumbs.append("`{}`".format(make_title(part)))
                 continue
 
+            output_path = self._loader.get_output_path(parent_module_record.source_path)
             import_string_breadcrumbs.append(
                 md_document.render_doc_link(
-                    parend_module_record.title,
-                    target_path=parend_module_record.output_path,
-                    anchor=md_document.get_anchor(parend_module_record.title),
+                    parent_module_record.title,
+                    target_path=output_path,
+                    anchor=md_document.get_anchor(parent_module_record.title),
                 )
             )
 
@@ -320,7 +334,8 @@ class Generator:
         )
 
         for module_record in self._module_records:
-            with MDDocument(module_record.output_path) as md_document:
+            output_path = self._loader.get_output_path(module_record.source_path)
+            with MDDocument(output_path) as md_document:
                 self._generate_doc(module_record, md_document)
                 self._replace_short_links(module_record, md_document)
                 self._replace_full_links(md_document)
@@ -386,17 +401,18 @@ class Generator:
             md_modules.subtitle = "\n\n".join(subtitle_parts)
 
             modules_toc_lines = self._build_modules_toc_lines(
-                import_string="", max_depth=10, md_document=md_modules
+                import_string="", max_depth=10, md_document=md_modules, start_level=1
             )
-            modules_toc_lines.insert(
-                0, "- {}".format(md_modules.render_md_doc_link(self.md_index))
-            )
+
+            md_doc_link = md_modules.render_md_doc_link(self.md_index)
+            modules_toc_lines.insert(0, md_modules.get_toc_line(md_doc_link, level=0))
 
             md_modules.toc_section = "\n".join(modules_toc_lines)
 
     def _replace_short_links(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
-        if not module_record.objects:
+        records = [i[-1] for i in module_record.iter_records()]
+        if not records:
             return
 
         sections = md_document.sections
@@ -404,22 +420,20 @@ class Generator:
         for index, section in enumerate(sections):
             for match in self._short_link_re.findall(section):
                 import_string = match.replace("`", "")
-                for module_object in module_record.objects:
-                    if module_object.import_string != import_string:
-                        continue
+                record = module_record.find_record(import_string)
+                if not record:
+                    continue
 
-                    title = module_object.title
-                    link = md_document.render_doc_link(
-                        title,
-                        target_path=module_object.output_path,
-                        anchor=md_document.get_anchor(title),
+                title = record.title
+                link = md_document.render_doc_link(
+                    title, anchor=md_document.get_anchor(title)
+                )
+                section = section.replace(match, link)
+                self._logger.debug(
+                    "Adding local link '{}' to {}".format(
+                        title, self._root_path_finder.relative(md_document.path)
                     )
-                    section = section.replace(match, link)
-                    self._logger.debug(
-                        "Adding local link '{}' to {}".format(
-                            title, self._root_path_finder.relative(md_document.path)
-                        )
-                    )
+                )
             sections[index] = section
 
     def _replace_full_links(self, md_document):
@@ -428,16 +442,19 @@ class Generator:
 
         for index, section in enumerate(sections):
             for match in re.findall(self._docstring_links_re, section):
-                object_name = match.replace("`", "")
-                module_object = self._module_records.find_object(object_name)
-                if module_object is None:
+                import_string = match.replace("`", "")
+                module_record = self._module_records.find_module_record(import_string)
+                if module_record is None:
                     continue
 
-                title = module_object.title
+                node_record = module_record.find_record(import_string)
+                if not node_record:
+                    continue
+
+                title = node_record.title
+                output_path = self._loader.get_output_path(module_record.source_path)
                 link = md_document.render_doc_link(
-                    title,
-                    target_path=module_object.output_path,
-                    anchor=md_document.get_anchor(title),
+                    title, target_path=output_path, anchor=md_document.get_anchor(title)
                 )
                 section = section.replace(match, link)
                 self._logger.debug(
@@ -449,18 +466,14 @@ class Generator:
 
     def _generate_module_doc_lines(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
-        for module_object_record in module_record.objects:
-            if module_object_record.is_related:
-                continue
+        for records in module_record.iter_records():
+            record = records[-1]
+            md_document.append_title(record.title, level=len(records))
 
-            md_document.append_title(
-                module_object_record.title, level=module_object_record.level + 2
-            )
-
-            source_path = module_object_record.source_path
-            source_line_number = module_object_record.source_line_number
+            source_path = module_record.source_path
+            source_line_number = record.line_number
             source_link = md_document.render_doc_link(
-                title="🔍 find in source code",
+                title=FIND_IN_SOURCE_LABEL,
                 target_path=source_path,
                 anchor="L{}".format(source_line_number),
             )
@@ -469,7 +482,7 @@ class Generator:
                     source_path
                 ).as_posix()
                 source_link = md_document.render_link(
-                    title="🔍 find in source code",
+                    title=FIND_IN_SOURCE_LABEL,
                     link="{}{}#L{}".format(
                         self._source_code_url, relative_path_str, source_line_number
                     ),
@@ -477,15 +490,15 @@ class Generator:
 
             md_document.append(source_link)
 
-            signature = module_object_record.signature
+            signature = record.render(allow_multiline=True)
             md_document.append("```python\n{}\n```".format(signature))
 
             self._render_docstring(
-                module_record=module_object_record, md_document=md_document
+                module_record=module_record, record=record, md_document=md_document
             )
 
-    def _render_docstring(self, module_record, md_document):
-        # type: (Union[ModuleRecord, ModuleObjectRecord], MDDocument) -> None
+    def _render_docstring(self, module_record, record, md_document):
+        # type: (ModuleRecord, NodeRecord, MDDocument) -> None
         """
         Get object docstring and convert it to a valid markdown using
         `handsdown.processors.base.BaseDocstringProcessor`.
@@ -498,25 +511,44 @@ class Generator:
         Returns:
             A module docstring with valid markdown.
         """
-        docstring = module_record.docstring
-        title, docstring = md_document.extract_title(docstring)
-        if title:
-            module_record.title = title
-            md_document.title = title
-
+        docstring = record.docstring
         section_map = self._docstring_processor.build_sections(docstring)
-        reference_objects = module_record.get_reference_objects()
-        for reference_object in reference_objects:
-            title = reference_object.title
-            link = md_document.render_doc_link(
-                title,
-                target_path=reference_object.output_path,
-                anchor=md_document.get_anchor(title),
+
+        for attrubute in record.get_documented_attribute_strings():
+            section_map.add_line_indent("Attributes", "- {}".format(attrubute))
+
+        related_import_strings = record.get_related_import_strings(module_record)
+        links = []
+        for import_string in related_import_strings:
+            related_module_record = self._module_records.find_module_record(
+                import_string
             )
+            if not related_module_record:
+                continue
+
+            related_record = related_module_record.find_record(import_string)
+            if not related_record:
+                continue
+
+            if related_record is record:
+                continue
+
+            title = related_record.title
+            output_path = self._loader.get_output_path(module_record.source_path)
+            target_path = self._loader.get_output_path(
+                related_module_record.source_path
+            )
+            link = md_document.render_doc_link(
+                title, target_path=target_path, anchor=md_document.get_anchor(title)
+            )
+            links.append(link)
+
+        links.sort()
+        for link in links:
             section_map.add_line("See also", "- {}".format(link))
             self._logger.debug(
                 "Adding link '{}' to {} 'See also' section".format(
-                    title, self._root_path_finder.relative(reference_object.output_path)
+                    title, self._root_path_finder.relative(output_path)
                 )
             )
 
@@ -526,8 +558,10 @@ class Generator:
             for block in section.blocks:
                 md_document.append(block.render())
 
-    def _build_modules_toc_lines(self, import_string, max_depth, md_document):
-        # type: (Text, int, MDDocument) -> List[Text]
+    def _build_modules_toc_lines(
+        self, import_string, max_depth, md_document, start_level
+    ):
+        # type: (Text, int, MDDocument, int) -> List[Text]
         lines = []  # type: List[Text]
         parts = []  # type: List[Text]
         if import_string:
@@ -535,17 +569,20 @@ class Generator:
 
         last_import_string_parts = []  # type: List[Text]
         for module_record in self._module_records:
+            output_path = self._loader.get_output_path(module_record.source_path)
             if module_record.import_string == import_string:
                 continue
 
-            if not module_record.import_string.startswith(import_string):
+            if import_string and not module_record.import_string.startswith(
+                "{}.".format(import_string)
+            ):
                 continue
 
-            if len(module_record.import_string.split(".")) > len(parts) + max_depth:
+            import_string_parts = split_import_string(module_record.import_string)
+            if len(import_string_parts) > len(parts) + max_depth:
                 continue
 
             title_parts = module_record.get_title_parts()
-            import_string_parts = module_record.get_import_string_parts()
             for index, title_part in enumerate(title_parts[:-1]):
                 if index < len(parts):
                     continue
@@ -555,15 +592,19 @@ class Generator:
                     and last_import_string_parts[index] == import_string_parts[index]
                 ):
                     continue
-                indent = "  " * (index - len(parts))
-                lines.append("{}- {}".format(indent, title_part))
+                toc_line = md_document.get_toc_line(
+                    title_part, level=index - len(parts) + start_level
+                )
+                lines.append(toc_line)
 
             last_import_string_parts = import_string_parts
-            indent = "  " * (len(title_parts) - len(parts) - 1)
             link = md_document.render_doc_link(
                 title=title_parts[-1],
-                target_path=module_record.output_path,
+                target_path=output_path,
                 anchor=md_document.get_anchor(title_parts[-1]),
             )
-            lines.append("{}- {}".format(indent, link))
+            toc_line = md_document.get_toc_line(
+                link, level=len(title_parts) - len(parts) - 1 + start_level
+            )
+            lines.append(toc_line)
         return lines

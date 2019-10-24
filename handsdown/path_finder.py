@@ -4,6 +4,8 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 """
 
 import fnmatch
+import glob
+import os
 from typing import Text, List, Iterable, Generator
 
 try:
@@ -133,6 +135,17 @@ class PathFinder:
 
         return False
 
+    def _get_glob(self, glob_expr):
+        # type: (Text) -> List[Path]
+        # FIXME: fallback due to error in pathlib2
+        try:
+            return list(self._root.glob(glob_expr))
+        except OSError:
+            pass
+
+        glob_path = os.path.join(self._root.as_posix(), glob_expr)
+        return [Path(i) for i in glob.glob(glob_path)]
+
     def glob(self, glob_expr):
         # type: (Text) -> Generator[Path, None, None]
         """
@@ -142,7 +155,7 @@ class PathFinder:
         Yields:
             Matching `Path` objects.
         """
-        for path in self._root.glob(glob_expr):
+        for path in self._get_glob(glob_expr):
             relative_path = path.relative_to(self._root)
             if not self._match_include(relative_path):
                 continue
