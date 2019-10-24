@@ -1,5 +1,5 @@
 import ast
-from typing import Any, List, Set, Text, Generator, TYPE_CHECKING
+from typing import List, Set, Text, Generator, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -8,6 +8,7 @@ from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
+    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class ClassRecord(NodeRecord):
@@ -80,8 +81,8 @@ class ClassRecord(NodeRecord):
         )
 
     def _render_parts(self, indent=0):
-        # type: (int) -> List[Any]
-        parts = []  # type: List[Any]
+        # type: (int) -> List[RenderExpr]
+        parts = []  # type: List[RenderExpr]
         for decorator in self.decorators:
             parts.append(decorator)
             parts.append(self.LINE_BREAK)

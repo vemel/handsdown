@@ -1,11 +1,12 @@
 import ast
-from typing import Union, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:
     from typing import Optional
+    from handsdown.ast_parser.type_defs import ASTIterable
 
 
 class ExpressionAnalyzer(BaseAnalyzer):
@@ -90,7 +91,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(node.attr)
 
     def _visit_iterable(self, node):
-        # type: (Union[ast.List, ast.Set, ast.Tuple]) -> None
+        # type: (ASTIterable) -> None
         args_count = 0
         if node.elts:
             self.parts.append(self.MULTI_LINE_INDENT)

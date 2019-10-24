@@ -1,11 +1,12 @@
 import ast
-from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
+from typing import List, Text, Set, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
 if TYPE_CHECKING:
     from handsdown.sentinel import Sentinel
+    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class AttributeRecord(NodeRecord):
@@ -30,8 +31,8 @@ class AttributeRecord(NodeRecord):
         return result
 
     def _render_parts(self, indent=0):
-        # type: (int) -> List[Union[Text, Sentinel, ExpressionRecord]]
-        parts = []  # type: List[Union[Text, Sentinel, ExpressionRecord]]
+        # type: (int) -> List[RenderExpr]
+        parts = []  # type: List[RenderExpr]
         parts.append(self.name)
         parts.append(" = ")
         parts.append(self.value)

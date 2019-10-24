@@ -1,15 +1,15 @@
 import ast
-from typing import Text, Optional, Union, List, TYPE_CHECKING
+from typing import Text, Optional, List, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import RenderExpr
+    from handsdown.ast_parser.type_defs import RenderExpr, ASTImport
 
 
 class ImportRecord(NodeRecord):
     def __init__(self, node, alias):
-        # type: (Union[ast.Import, ast.ImportFrom], ast.alias) -> None
+        # type: (ASTImport, ast.alias) -> None
         super(ImportRecord, self).__init__(node)
         self.source = None
         if isinstance(node, ast.ImportFrom):

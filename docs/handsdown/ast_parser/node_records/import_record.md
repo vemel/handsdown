@@ -13,10 +13,7 @@
 
 ```python
 class ImportRecord(NodeRecord):
-    def __init__(
-        node: ast.alias,
-        alias: Union[ast.Import, ast.ImportFrom],
-    ) -> None:
+    def __init__(node: ast.alias, alias: ASTImport) -> None:
 ```
 
 ### ImportRecord().get_import_string

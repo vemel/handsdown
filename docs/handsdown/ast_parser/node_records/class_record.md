@@ -10,7 +10,7 @@
 
 ## ClassRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L13)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L14)
 
 ```python
 class ClassRecord(NodeRecord):
@@ -19,7 +19,7 @@ class ClassRecord(NodeRecord):
 
 ### ClassRecord().get_public_methods
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L48)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L49)
 
 ```python
 def get_public_methods() -> List[FunctionRecord]:
@@ -27,7 +27,7 @@ def get_public_methods() -> List[FunctionRecord]:
 
 ### ClassRecord().iter_records
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L43)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L44)
 
 ```python
 def iter_records() -> Generator[NodeRecord, None, None]:
@@ -35,7 +35,7 @@ def iter_records() -> Generator[NodeRecord, None, None]:
 
 ### ClassRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L28)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L29)
 
 ```python
 @property
