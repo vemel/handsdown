@@ -137,9 +137,10 @@ class PathFinder:
 
     def _get_glob(self, glob_expr):
         # type: (Text) -> List[Path]
+        # FIXME: fallback due to error in pathlib2
         try:
             return list(self._root.glob(glob_expr))
-        except Exception:
+        except OSError:
             pass
 
         glob_path = os.path.join(self._root.as_posix(), glob_expr)
@@ -154,7 +155,7 @@ class PathFinder:
         Yields:
             Matching `Path` objects.
         """
-        for path in self._root.glob(glob_expr):
+        for path in self._get_glob(glob_expr):
             relative_path = path.relative_to(self._root)
             if not self._match_include(relative_path):
                 continue

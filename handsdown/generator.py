@@ -178,10 +178,10 @@ class Generator:
             doc_path.unlink()
 
             # remove parent directory if it is empty
-            try:
+            children = list(doc_path.parent.iterdir())
+            if not children:
                 doc_path.parent.rmdir()
-            except OSError:
-                continue
+
             else:
                 self._logger.info(
                     "Deleting orphaned directory {}".format(

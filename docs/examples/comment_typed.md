@@ -11,7 +11,7 @@
 
 ## MyValue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L4)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L5)
 
 ```python
 class MyValue():
@@ -19,7 +19,7 @@ class MyValue():
 
 ## Typed
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L8)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L9)
 
 ```python
 class Typed():
@@ -42,7 +42,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L29)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L30)
 
 ```python
 @classmethod
@@ -55,7 +55,7 @@ def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
 
 ## func
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L35)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L36)
 
 ```python
 def func(
@@ -71,7 +71,7 @@ def func(
 
 ## func_any
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L40)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L41)
 
 ```python
 def func_any(
