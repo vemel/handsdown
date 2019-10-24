@@ -12,6 +12,7 @@ Module for splitting docstring into `Section` groups.
   - [SectionMap](#sectionmap)
     - [SectionMap().add_block](#sectionmapadd_block)
     - [SectionMap().add_line](#sectionmapadd_line)
+    - [SectionMap().add_line_indent](#sectionmapadd_line_indent)
     - [SectionMap().sections](#sectionmapsections)
     - [SectionMap().trim_block](#sectionmaptrim_block)
 
@@ -95,7 +96,7 @@ Value is a related [Section](#section) instance.
 
 ### SectionMap().add_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L102)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L119)
 
 ```python
 def add_block(section_name: Text) -> None:
@@ -110,7 +111,7 @@ If [Section](#section) does not exist - it is not created.
 
 ### SectionMap().add_line
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L79)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L96)
 
 ```python
 def add_line(section_name: Text, line: Text) -> None:
@@ -124,9 +125,24 @@ If line and section are empty - section is not created.
 - `section_name` - Target section title
 - `line` - Line to add
 
+### SectionMap().add_line_indent
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L79)
+
+```python
+def add_line_indent(section_name: Text, line: Text) -> None:
+```
+
+Add line respecting indent of the current section block.
+
+#### Arguments
+
+- `section_name` - Target section title
+- `line` - Line to add
+
 ### SectionMap().sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L132)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L149)
 
 ```python
 @property
@@ -139,13 +155,9 @@ Iterate over existing [Section](#section) objects.
 
 [Section](#section) objects in order of appearance.
 
-#### See also
-
-- [SectionMap().sections](#sectionmapsections)
-
 ### SectionMap().trim_block
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L116)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L133)
 
 ```python
 def trim_block(section_name: Text) -> None:
