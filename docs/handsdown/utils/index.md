@@ -41,11 +41,36 @@ A tuple fo title and remaining content.
 
 ## isinstance_str
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L88)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L102)
 
 ```python
 def isinstance_str(value: Any) -> bool:
 ```
+
+Check if object is a string.
+
+`py27` compatible.
+
+#### Examples
+
+```python
+isinstance_str('my string')
+True
+
+isinstance_str(u'my string')
+True
+
+isinstance_str(123)
+False
+```
+
+#### Arguments
+
+- `value` - Object to check.
+
+#### Returns
+
+True if `value` is a string.
 
 ## make_title
 
@@ -106,3 +131,20 @@ Render `assets/<name>` file to `target_path`.
 ```python
 def split_import_string(import_string: Text) -> List[Text]:
 ```
+
+Split import string by dots.
+
+#### Examples
+
+```python
+split_import_string('my_module.new_class.NewClass')
+['my_module', 'new_class', 'NewClass']
+```
+
+#### Arguments
+
+- `import_string` - Python import string.
+
+#### Returns
+
+A list of import string parts.
