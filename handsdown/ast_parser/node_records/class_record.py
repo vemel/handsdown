@@ -1,9 +1,9 @@
-import ast
 from typing import List, Set, Text, Generator, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.function_record import FunctionRecord

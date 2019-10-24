@@ -1,8 +1,7 @@
-import ast
-
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
+import handsdown.ast_parser.smart_ast as ast
 
 
 class ClassAnalyzer(BaseAnalyzer):

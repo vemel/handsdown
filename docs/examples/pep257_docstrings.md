@@ -39,10 +39,9 @@ Summary line.
 
 Extended description of method.
 
-#### Examples
-
-Examples should be written in doctest format, and should illustrate how
-to use the function.
+Examples:
+    Examples should be written in doctest format, and should illustrate how
+    to use the function.
 
 ```python
 >>> print([i for i in
@@ -61,15 +60,13 @@ to use the function.
 ... )
 ```
 
-#### Arguments
+Args:
+    text -- Description of arg1
+    *args -- Description of args
+    **kwargs -- Description of kwargs
 
-- `text` - Description of arg1
-- `*args` - Description of args
-- `**kwargs` - Description of kwargs
-
-#### Returns
-
-Description of return value
+Returns:
+    Description of return value
 
 ## function_example
 
@@ -81,7 +78,6 @@ def function_example(real=0.0, imag=0.0):
 
 Form a complex number.
 
-#### Arguments
-
-- `real` - the real part (default 0.0)
-- `imag` - the imaginary part (default 0.0)
+Keyword arguments:
+real -- the real part (default 0.0)
+imag -- the imaginary part (default 0.0)

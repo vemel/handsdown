@@ -1,10 +1,10 @@
 from typing import Optional, List, Text
-import ast
 
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.utils import isinstance_str
+import handsdown.ast_parser.smart_ast as ast
 
 
 class FunctionAnalyzer(BaseAnalyzer):

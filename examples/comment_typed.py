@@ -1,5 +1,5 @@
 # pylint: disable=W
-from typing import Text, List, Union, Any, Dict, Tuple, Type
+from typing import Text, List, Union, Any, Dict, Tuple, Type, Set
 
 
 class MyValue:
@@ -11,14 +11,14 @@ class Typed:
 
     # comment here
     two = 2
-    args = []
-    extras = {}
+    args = []  # type: List[Text]
+    extras = {}  # type: Dict[Text, Text]
 
     def __init__(
         self,
-        my_bool=(one & ~two == "three") and not -4,
+        my_bool=(one & ~two == "three") and not -4,  # type: bool
         my_lambda=lambda x, y=15, *args, **kwargs: x + y,
-        my_set={1, 2, [3, 4], {5: 6}, (7, 8)},
+        my_set={1, 2, [3, 4], {5: 6}, (7, 8)},  # type: Set
         _value=MyValue(
             "asd", kwarg=123, *args, **extras
         ),  # type: Union[List[Text], Text, MyValue]

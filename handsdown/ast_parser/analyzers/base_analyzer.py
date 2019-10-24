@@ -1,5 +1,6 @@
-import ast
 from typing import List, Text, TYPE_CHECKING
+
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.function_record import FunctionRecord

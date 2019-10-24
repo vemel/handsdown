@@ -1,10 +1,10 @@
 import re
-import ast
 from typing import List, Any, Set, Text, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.expression_record import ExpressionRecord

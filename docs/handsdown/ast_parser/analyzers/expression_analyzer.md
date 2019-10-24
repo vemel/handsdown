@@ -110,7 +110,7 @@ def visit_Dict(node: ast.Dict) -> None:
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L280)
 
 ```python
-def visit_Ellipsis(_node: ast.Ellipsis) -> None:
+def visit_Ellipsis(_node: ast.ASTEllipsis) -> None:
 ```
 
 ### ExpressionAnalyzer().visit_Index

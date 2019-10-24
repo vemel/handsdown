@@ -89,8 +89,8 @@ class Loader:
         source_lines = content.split("\n")
 
         # FIXME: remove encoding string for py27
-        if "-*- coding:" in source_lines[0]:
-            source_lines[0] = ""
+        # if "-*- coding:" in source_lines[0]:
+        #     source_lines[0] = ""
 
         try:
             module_record = ModuleRecord(source_path, source_lines, import_string)

@@ -40,10 +40,9 @@ Summary line.
 
 Extended description of method.
 
-#### Examples
-
-Examples should be written in doctest format, and should illustrate how
-to use the function
+Examples:
+    Examples should be written in doctest format, and should illustrate how
+    to use the function
 
 ```python
 >>> print([i for i in
@@ -62,15 +61,13 @@ to use the function
 ... )
 ```
 
-#### Arguments
+Args:
+    text (str, optional): Description of arg1
+    *args (str): Description of args
+    **kwargs (str): Description of kwargs
 
-- `text` *str, optional* - Description of arg1
-- `*args` *str* - Description of args
-- `**kwargs` *str* - Description of kwargs
-
-#### Returns
-
-- `int` - Description of return value
+Returns:
+    int: Description of return value
 
 ## function_example
 
@@ -96,21 +93,18 @@ result = function_example(
 print result
 ```
 
-#### Arguments
+Args:
+    arg1 (int): Description of arg1
+    arg2 (str): Description of arg2
+    arg3 (str, optional): Description of arg3
 
-- `arg1` *int* - Description of arg1
-- `arg2` *str* - Description of arg2
-- `arg3` *str, optional* - Description of arg3
+Returns:
+    bool: Description of return value
 
-#### Returns
-
-- `bool` - Description of return value
-
-#### Raises
-
-- `AttributeError` - The ``Raises`` section is a list of all exceptions
-    that are relevant to the interface.
-- `ValueError` - If `param2` is equal to `param1`.
+Raises:
+    AttributeError: The ``Raises`` section is a list of all exceptions
+        that are relevant to the interface.
+    ValueError: If `param2` is equal to `param1`.
 
 ## function_with_pep484_type_annotations
 
@@ -122,11 +116,9 @@ def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
 
 Example function with PEP 484 type annotations.
 
-#### Arguments
+Args:
+    param1: The first parameter.
+    param2: The second parameter.
 
-- `param1` - The first parameter.
-- `param2` - The second parameter.
-
-#### Returns
-
-The return value. True for success, False otherwise.
+Returns:
+    The return value. True for success, False otherwise.
