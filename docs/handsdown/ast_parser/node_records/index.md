@@ -12,3 +12,4 @@
     - [ImportRecord](import_record.md#importrecord)
     - [ModuleRecord](module_record.md#modulerecord)
     - [NodeRecord](node_record.md#noderecord)
+    - [TextRecord](text_record.md#textrecord)

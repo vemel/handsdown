@@ -1,10 +1,10 @@
 import ast
-from typing import Text, Optional, Union, TYPE_CHECKING
+from typing import Text, Optional, Union, List, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import RenderParts
+    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class ImportRecord(NodeRecord):
@@ -28,7 +28,7 @@ class ImportRecord(NodeRecord):
         return self.name
 
     def _render_parts(self, indent=0):
-        # type: (int) -> RenderParts
+        # type: (int) -> List[RenderExpr]
         if self.source:
             if self.local_name != self.name:
                 return [

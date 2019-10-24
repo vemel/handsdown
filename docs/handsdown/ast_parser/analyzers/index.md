@@ -8,4 +8,3 @@
     - [ClassAnalyzer](class_analyzer.md#classanalyzer)
     - [ExpressionAnalyzer](expression_analyzer.md#expressionanalyzer)
     - [ModuleAnalyzer](module_analyzer.md#moduleanalyzer)
-    - [SourceGenerator](source_generator.md#sourcegenerator)

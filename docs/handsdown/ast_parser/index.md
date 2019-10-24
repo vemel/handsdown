@@ -9,7 +9,6 @@
       - [ClassAnalyzer](analyzers/class_analyzer.md#classanalyzer)
       - [ExpressionAnalyzer](analyzers/expression_analyzer.md#expressionanalyzer)
       - [ModuleAnalyzer](analyzers/module_analyzer.md#moduleanalyzer)
-      - [SourceGenerator](analyzers/source_generator.md#sourcegenerator)
     - [ModuleRecordList](module_record_list.md#modulerecordlist)
     - [Node Records](node_records/index.md#node-records)
       - [ArgumentRecord](node_records/argument_record.md#argumentrecord)
@@ -20,4 +19,5 @@
       - [ImportRecord](node_records/import_record.md#importrecord)
       - [ModuleRecord](node_records/module_record.md#modulerecord)
       - [NodeRecord](node_records/node_record.md#noderecord)
+      - [TextRecord](node_records/text_record.md#textrecord)
     - [Type Defs](type_defs.md#type-defs)

@@ -1,22 +1,23 @@
 import re
 import ast
-from typing import Text, Union, Set, TYPE_CHECKING
+from typing import Text, Set, List, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.analyzers.source_generator import SourceGenerator
+from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
+from handsdown.utils import isinstance_str
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import RenderParts
+    from handsdown.ast_parser.type_defs import RenderExpr, Node
 
 
 class ExpressionRecord(NodeRecord):
     _str_split_re = re.compile(r"[\]\[ ,]")
 
     def __init__(self, node):
-        # type: (Union[ast.expr, Text]) -> None
+        # type: (ast.AST) -> None
         super(ExpressionRecord, self).__init__(node)
-        self.result = ""
-        self.analyzer = SourceGenerator()
+        self.parts = []  # type: List[Node]
+        self.analyzer = ExpressionAnalyzer()
 
     @property
     def related_names(self):
@@ -31,17 +32,30 @@ class ExpressionRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
+        if isinstance_str(self.node):
+            self.parts.append(self.node)
+            return
+
         if isinstance(self.node, ast.Name):
             self.name = self.node.id
 
         if isinstance(self.node, ast.AST):
             self.analyzer.visit(self.node)
-            self.result = "".join(self.analyzer.result)
+            self.parts = self.analyzer.parts
             return
 
-        self.name = self.node
-        self.result = self.node
-
     def _render_parts(self, indent=0):
-        # type: (int) -> RenderParts
-        return [self.result]
+        # type: (int) -> List[RenderExpr]
+        result = []  # type: List[RenderExpr]
+        for part in self.parts:
+            if isinstance(part, ast.AST):
+                part_render = ExpressionRecord(part).render(indent=indent)
+                result.append(part_render)
+                continue
+
+            if isinstance_str(part):
+                result.append(part)
+                continue
+
+            result.append(part)
+        return result

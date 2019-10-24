@@ -1,15 +1,16 @@
 import ast
-from typing import Text, Set, Generator, Union, Tuple, List, TYPE_CHECKING
+from typing import Text, Set, Generator, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils import isinstance_str
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
-    from handsdown.ast_parser.type_defs import RenderParts
+    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class NodeRecord(object):
@@ -30,7 +31,7 @@ class NodeRecord(object):
         return "<{} name={}>".format(self.__class__.__name__, self.name)
 
     def __init__(self, node):
-        # type: (Union[ast.AST, Text]) -> None
+        # type: (ast.AST) -> None
         self.docstring = ""
         self.import_string = ""
         self.node = node
@@ -39,9 +40,21 @@ class NodeRecord(object):
         self.support_split = False
         self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
-        self.line_number = 1
-        if isinstance(self.node, ast.AST) and not isinstance(self.node, ast.Module):
-            self.line_number = self.node.lineno
+        self._line_number = None  # type: Optional[int]
+
+    @property
+    def line_number(self):
+        # type: () -> int
+        if self._line_number is None:
+            if isinstance_str(self.node):
+                return 1
+            self._line_number = self.node.lineno
+        return self._line_number or 1
+
+    @line_number.setter
+    def line_number(self, value):
+        # type: (int) -> None
+        self._line_number = value
 
     def _get_docstring(self):
         # type: () -> Text
@@ -84,7 +97,7 @@ class NodeRecord(object):
         self.parsed = True
 
     def _render_line(self, parts, indent):
-        # type: (RenderParts, int) -> Text
+        # type: (List[RenderExpr], int) -> Text
         result = []
         for part in parts:
             if part is self.SINGLE_LINE_SPACE:
@@ -101,7 +114,7 @@ class NodeRecord(object):
         return "".join(result)
 
     def _render_multi_line(self, parts, indent):
-        # type: (RenderParts, int) -> Tuple[List[Text], int]
+        # type: (List[RenderExpr], int) -> Tuple[List[Text], int]
         result = []
         for part in parts:
             if part is self.MULTI_LINE_BREAK:
@@ -170,7 +183,7 @@ class NodeRecord(object):
 
     @abstractmethod
     def _render_parts(self, indent):
-        # type: (int) -> RenderParts
+        # type: (int) -> List[RenderExpr]
         pass
 
     def is_line_fit(self, line, indent):

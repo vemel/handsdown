@@ -3,6 +3,7 @@ from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.utils import isinstance_str
 
 if TYPE_CHECKING:
     from handsdown.sentinel import Sentinel
@@ -23,7 +24,7 @@ class ArgumentRecord(NodeRecord):
             return None
 
         # FIXME: hacks for py27
-        if isinstance(self.node, str):
+        if isinstance_str(self.node):
             return None
 
         if isinstance(self.node, ast.arg):
@@ -38,7 +39,7 @@ class ArgumentRecord(NodeRecord):
             return self.node.id
 
         # FIXME: hacks for py27
-        if isinstance(self.node, str):
+        if isinstance_str(self.node):
             return str(self.node)
 
         if isinstance(self.node, ast.arg):

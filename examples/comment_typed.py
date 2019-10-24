@@ -6,9 +6,21 @@ class MyValue:
 
 
 class Typed:
+    one = 1
+
+    # comment here
+    two = 2
+    args = []
+    extras = {}
+
     def __init__(
         self,
-        _value=MyValue(),  # type: Union[List[Text], Text, MyValue]
+        my_bool=(one & ~two == "three") and not -4,
+        my_lambda=lambda x, y=15, *args, **kwargs: x + y,
+        my_set={1, 2, [3, 4], {5: 6}, (7, 8)},
+        _value=MyValue(
+            "asd", kwarg=123, *args, **extras
+        ),  # type: Union[List[Text], Text, MyValue]
         _name="default",  # type: Text
     ):
         # type: (...) -> Dict[Text, MyValue]

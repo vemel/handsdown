@@ -155,6 +155,10 @@ Iterate over existing [Section](#section) objects.
 
 [Section](#section) objects in order of appearance.
 
+#### See also
+
+- [SectionMap().sections](#sectionmapsections)
+
 ### SectionMap().trim_block
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/section_map.py#L133)

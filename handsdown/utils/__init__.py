@@ -83,3 +83,8 @@ def extract_md_title(content):
 def split_import_string(import_string):
     # type: (Text) -> List[Text]
     return import_string.split(".")
+
+
+def isinstance_str(value):
+    # type: (Any) -> bool
+    return isinstance(value, ("".__class__, u"".__class__))

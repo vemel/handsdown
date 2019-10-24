@@ -24,10 +24,17 @@ class MyValue():
 ```python
 class Typed():
     def __init__(
-        _value: Union[List[Text], Text, MyValue] = MyValue(),
+        my_bool=one & ~two == 'three' and not -4,
+        my_lambda=lambda x, y, *args, **kwargs: x + y,
+        my_set={1, 2, [3, 4], {5: 6}, (7, 8)},
+        _value=MyValue('asd', *args, kwarg=123, **extras),
         _name: Text = 'default',
     ) -> Dict[Text, MyValue]:
 ```
+
+#### Attributes
+
+- `two` - comment here: `2`
 
 #### See also
 
@@ -35,7 +42,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L17)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L29)
 
 ```python
 @classmethod
@@ -48,7 +55,7 @@ def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
 
 ## func
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L23)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L35)
 
 ```python
 def func(
@@ -64,7 +71,7 @@ def func(
 
 ## func_any
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L28)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py#L40)
 
 ```python
 def func_any(

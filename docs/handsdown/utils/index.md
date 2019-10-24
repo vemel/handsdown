@@ -6,6 +6,7 @@ Handful utils that do not deserve a separate module.
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / Utils
   - [extract_md_title](#extract_md_title)
+  - [isinstance_str](#isinstance_str)
   - [make_title](#make_title)
   - [render_asset](#render_asset)
   - [split_import_string](#split_import_string)
@@ -37,6 +38,14 @@ extract_md_title('no title\ncontent')
 #### Returns
 
 A tuple fo title and remaining content.
+
+## isinstance_str
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L88)
+
+```python
+def isinstance_str(value: Any) -> bool:
+```
 
 ## make_title
 
