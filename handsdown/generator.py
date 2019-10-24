@@ -96,7 +96,11 @@ class Generator:
 
         self._source_paths = sorted(source_paths)
         self._error_output_paths = set()  # type: Set[Path]
+        self._logger.debug(
+            "Generating source map for {} source files".format(len(self._source_paths))
+        )
         self._module_records = self._build_module_record_list()
+        self._logger.debug("Source map generated")
 
         package_names = self._module_records.get_package_names()
         package_names_re_expr = "|".join(package_names)
