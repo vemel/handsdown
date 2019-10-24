@@ -98,6 +98,7 @@ class NodeRecord(object):
                 result.append(part.render(indent, allow_multiline))
 
             if isinstance_str(part):
+                part = str(part)
                 if part.startswith("u'"):
                     part = part[1:]
                 result.append(part)
@@ -129,6 +130,7 @@ class NodeRecord(object):
                 result.append(part.render(indent, allow_multiline))
 
             if isinstance_str(part):
+                part = str(part)
                 if part.startswith("u'"):
                     part = part[1:]
                 result.append(part)
