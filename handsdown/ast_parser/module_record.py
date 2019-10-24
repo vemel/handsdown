@@ -105,6 +105,9 @@ class ModuleRecord(NodeRecord):
         analyzer.visit(self.tree)
         self.class_records = sorted(analyzer.class_records, key=lambda x: x.name)
         self.function_records = sorted(analyzer.function_records, key=lambda x: x.name)
+        self.attribute_records = sorted(
+            analyzer.attribute_records, key=lambda x: x.name
+        )
         self.import_records = analyzer.import_records
         for class_record in self.class_records:
             class_record.parse()
@@ -116,6 +119,10 @@ class ModuleRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
+
+        for attribute_record in self.attribute_records:
+            attribute_record.docstring = self._get_comment_docstring(attribute_record)
+
         for class_record in self.class_records:
             class_record.parse()
             for attribute_record in class_record.attribute_records:
