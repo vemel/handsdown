@@ -22,7 +22,7 @@ class FunctionAnalyzer(BaseAnalyzer):
 
 ### FunctionAnalyzer().generic_visit
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L93)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L94)
 
 ```python
 def generic_visit(_node: ast.AST) -> None:
@@ -30,7 +30,7 @@ def generic_visit(_node: ast.AST) -> None:
 
 ### FunctionAnalyzer().visit_Attribute
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L75)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L76)
 
 ```python
 def visit_Attribute(node: ast.Attribute) -> None:
@@ -38,7 +38,7 @@ def visit_Attribute(node: ast.Attribute) -> None:
 
 ### FunctionAnalyzer().visit_FunctionDef
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L79)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L80)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -46,7 +46,7 @@ def visit_FunctionDef(node: ast.FunctionDef) -> None:
 
 ### FunctionAnalyzer().visit_Name
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L71)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L72)
 
 ```python
 def visit_Name(node: ast.Name) -> None:
@@ -54,7 +54,7 @@ def visit_Name(node: ast.Name) -> None:
 
 ### FunctionAnalyzer().visit_Subscript
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L89)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L90)
 
 ```python
 def visit_Subscript(node: ast.Subscript) -> None:
