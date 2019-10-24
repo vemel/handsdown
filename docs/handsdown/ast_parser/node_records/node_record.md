@@ -96,7 +96,7 @@ def related_names() -> Set[Text]:
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L147)
 
 ```python
-def render(indent=0, allow_multiline: int = False) -> Text:
+def render(indent: bool = 0, allow_multiline: int = False) -> Text:
 ```
 
 ### NodeRecord().render_indent

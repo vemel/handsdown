@@ -88,7 +88,7 @@ class NodeRecord(object):
         self.parsed = True
 
     def _render_line(self, parts, indent, allow_multiline):
-        # type: (List[RenderExpr], int) -> Text
+        # type: (List[RenderExpr], int, bool) -> Text
         result = []
         for part in parts:
             if part is self.SINGLE_LINE_SPACE:
@@ -105,7 +105,7 @@ class NodeRecord(object):
         return "".join(result).replace("\n", " ")
 
     def _render_multi_line(self, parts, indent, allow_multiline):
-        # type: (List[RenderExpr], int) -> Tuple[List[Text], int]
+        # type: (List[RenderExpr], int, bool) -> Tuple[List[Text], int]
         result = []
         for part in parts:
             if part is self.MULTI_LINE_BREAK:
@@ -145,7 +145,7 @@ class NodeRecord(object):
         )
 
     def render(self, indent=0, allow_multiline=False):
-        # type: (int) -> Text
+        # type: (int, bool) -> Text
         if not self.parsed:
             self.parse()
 
@@ -188,7 +188,7 @@ class NodeRecord(object):
             if part is self.LINE_BREAK:
                 lines.append("\n{}".format(self.render_indent(current_indent)))
 
-        return "".join(lines).rstrip(" \n")
+        return "".join(lines).rstrip("\n")
 
     @abstractmethod
     def _render_parts(self, indent):

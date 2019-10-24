@@ -2,12 +2,22 @@ import ast
 from typing import Union, TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:
     from typing import Optional
 
 
 class ExpressionAnalyzer(BaseAnalyzer):
+    MULTI_LINE_BREAK = NodeRecord.MULTI_LINE_BREAK
+    MULTI_LINE_INDENT = NodeRecord.MULTI_LINE_INDENT
+    MULTI_LINE_UNINDENT = NodeRecord.MULTI_LINE_UNINDENT
+    LINE_BREAK = NodeRecord.LINE_BREAK
+    LINE_INDENT = NodeRecord.LINE_INDENT
+    LINE_UNINDENT = NodeRecord.LINE_UNINDENT
+    SINGLE_LINE_SPACE = NodeRecord.SINGLE_LINE_SPACE
+    MULTI_LINE_COMMA = NodeRecord.MULTI_LINE_COMMA
+
     BINOP_SYMBOLS = {
         ast.Add: "+",
         ast.Sub: "-",
@@ -65,7 +75,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.Subscript) -> None
         self.parts.append(node.value)
         self.parts.append("[")
-        self.parts.append(node.slice)
+        if isinstance(node.slice, ast.Index) and isinstance(
+            node.slice.value, ast.Tuple
+        ):
+            self._visit_iterable(node.slice.value)
+        else:
+            self.parts.append(node.slice)
         self.parts.append("]")
 
     def visit_Attribute(self, node):
@@ -74,48 +89,62 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(".")
         self.parts.append(node.attr)
 
-    def visit_iterable(self, node):
+    def _visit_iterable(self, node):
         # type: (Union[ast.List, ast.Set, ast.Tuple]) -> None
         args_count = 0
-        for element in node.elts:
-            if args_count:
-                self.parts.append(", ")
-            args_count += 1
-            self.parts.append(element)
+        if node.elts:
+            self.parts.append(self.MULTI_LINE_INDENT)
+            for element in node.elts:
+                if args_count:
+                    self.parts.append(",")
+                    self.parts.append(self.SINGLE_LINE_SPACE)
+                    self.parts.append(self.MULTI_LINE_BREAK)
+                args_count += 1
+                self.parts.append(element)
+            self.parts.append(self.MULTI_LINE_COMMA)
+            self.parts.append(self.MULTI_LINE_UNINDENT)
 
     def visit_List(self, node):
         # type: (ast.List) -> None
         self.parts.append("[")
-        self.visit_iterable(node)
+        self._visit_iterable(node)
         self.parts.append("]")
 
     def visit_Set(self, node):
         # type: (ast.Set) -> None
         self.parts.append("{")
-        self.visit_iterable(node)
+        self._visit_iterable(node)
         self.parts.append("}")
 
     def visit_Tuple(self, node):
         # type: (ast.Tuple) -> None
         self.parts.append("(")
-        self.visit_iterable(node)
+        self._visit_iterable(node)
         self.parts.append(")")
 
     def visit_Call(self, node):
         # type: (ast.Call) -> None
         self.parts.append(node.func)
         self.parts.append("(")
+        self.parts.append(self.MULTI_LINE_INDENT)
         args_count = 0
         for element in node.args:
             if args_count:
-                self.parts.append(", ")
+                self.parts.append(",")
+                self.parts.append(self.SINGLE_LINE_SPACE)
+                self.parts.append(self.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(element)
         for kwelement in node.keywords:
             if args_count:
-                self.parts.append(", ")
+                self.parts.append(",")
+                self.parts.append(self.SINGLE_LINE_SPACE)
+                self.parts.append(self.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(kwelement)
+        if args_count:
+            self.parts.append(self.MULTI_LINE_COMMA)
+        self.parts.append(self.MULTI_LINE_UNINDENT)
         self.parts.append(")")
 
     def visit_Starred(self, node):
@@ -136,10 +165,20 @@ class ExpressionAnalyzer(BaseAnalyzer):
     def visit_Dict(self, node):
         # type: (ast.Dict) -> None
         self.parts.append("{")
-        for index, key in enumerate(node.keys):
-            self.parts.append(key)
-            self.parts.append(": ")
-            self.parts.append(node.values[index])
+        if node.keys:
+            self.parts.append(self.MULTI_LINE_INDENT)
+            key_count = 0
+            for index, key in enumerate(node.keys):
+                if key_count:
+                    self.parts.append(",")
+                    self.parts.append(self.SINGLE_LINE_SPACE)
+                    self.parts.append(self.MULTI_LINE_BREAK)
+                key_count += 1
+                self.parts.append(key)
+                self.parts.append(": ")
+                self.parts.append(node.values[index])
+            self.parts.append(self.MULTI_LINE_COMMA)
+            self.parts.append(self.MULTI_LINE_UNINDENT)
         self.parts.append("}")
 
     def visit_Compare(self, node):
@@ -185,12 +224,13 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     def visit_arguments(self, node):
         # type: (ast.arguments) -> None
-        args_count = 0
+        arg_count = 0
         for index, arg in enumerate(node.args):
-            if args_count:
-                self.parts.append(", ")
-
-            args_count += 1
+            if arg_count:
+                self.parts.append(",")
+                self.parts.append(self.SINGLE_LINE_SPACE)
+                self.parts.append(self.MULTI_LINE_BREAK)
+            arg_count += 1
             default = None
             default_index = len(node.args) - len(node.defaults) + index
             if default_index < len(node.defaults):
@@ -201,19 +241,26 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append("=")
                 self.parts.append(default)
         if node.vararg is not None:
-            if args_count:
-                self.parts.append(", ")
+            if arg_count:
+                self.parts.append(",")
+                self.parts.append(self.SINGLE_LINE_SPACE)
+                self.parts.append(self.MULTI_LINE_BREAK)
 
-            args_count += 1
+            arg_count += 1
             self.parts.append("*")
             self.parts.append(node.vararg)
         if node.kwarg is not None:
-            if args_count:
-                self.parts.append(", ")
+            if arg_count:
+                self.parts.append(",")
+                self.parts.append(self.SINGLE_LINE_SPACE)
+                self.parts.append(self.MULTI_LINE_BREAK)
 
-            args_count += 1
+            arg_count += 1
             self.parts.append("**")
             self.parts.append(node.kwarg)
+
+        if arg_count:
+            self.parts.append(self.MULTI_LINE_COMMA)
 
     def visit_arg(self, node):
         # type: (ast.arg) -> None
@@ -225,7 +272,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
     def visit_Index(self, node):
         # type: (ast.Index) -> None
         if isinstance(node.value, ast.Tuple):
-            self.visit_iterable(node.value)
+            self._visit_iterable(node.value)
             return
         self.parts.append(node.value)
 

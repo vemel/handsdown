@@ -8,7 +8,16 @@ class MyValue:
 class Typed:
     def __init__(
         self,
-        _value: Union[List[Text], Text, MyValue] = MyValue(),
+        _value: Union[List[Text], Text, MyValue] = MyValue(
+            {
+                "key1": "value1",
+                "key2": "value2",
+                "key3": "value3",
+                "key4": "value4",
+                "key5": "value5",
+                "key6": "value6",
+            }
+        ),
         *,
         _name: Text = "default",
     ) -> Dict[Text, MyValue]:

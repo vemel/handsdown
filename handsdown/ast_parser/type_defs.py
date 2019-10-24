@@ -5,3 +5,4 @@ from handsdown.sentinel import Sentinel
 
 RenderExpr = Union[ExpressionRecord, Text, Sentinel]
 Node = Union[Text, ast.AST]
+DirtyRenderExpr = Union[ast.AST, Text, Sentinel]
