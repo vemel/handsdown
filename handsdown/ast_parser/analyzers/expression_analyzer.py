@@ -1,6 +1,8 @@
 import ast
 from typing import List, Text, Union, Set, TYPE_CHECKING
 
+from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
+
 if TYPE_CHECKING:
     from typing import Optional
 
@@ -38,12 +40,7 @@ CMPOP_SYMBOLS = {
 UNARYOP_SYMBOLS = {ast.Invert: "~", ast.Not: "not", ast.UAdd: "+", ast.USub: "-"}
 
 
-class ExpressionAnalyzer(ast.NodeVisitor):
-    """This visitor is able to transform a well formed syntax tree into python
-    sourcecode.  For more details have a look at the docstring of the
-    `node_to_source` function.
-    """
-
+class ExpressionAnalyzer(BaseAnalyzer):
     def __init__(self):
         # type: () -> None
         self.result = []  # type: List[Text]

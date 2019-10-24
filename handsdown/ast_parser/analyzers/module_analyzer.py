@@ -1,20 +1,13 @@
 import ast
-from typing import List
 
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.class_record import ClassRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
+from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 
 
-class ModuleAnalyzer(ast.NodeVisitor):
-    def __init__(self):
-        # type: () -> None
-        self.import_records = []  # type: List[ImportRecord]
-        self.class_records = []  # type: List[ClassRecord]
-        self.function_records = []  # type: List[FunctionRecord]
-        self.attribute_records = []  # type: List[AttributeRecord]
-
+class ModuleAnalyzer(BaseAnalyzer):
     def visit_Import(self, node):
         # type: (ast.Import) -> None
         for alias in node.names:
