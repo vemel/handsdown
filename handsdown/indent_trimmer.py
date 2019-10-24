@@ -160,4 +160,4 @@ class IndentTrimmer(object):
         Returns:
             An indented line.
         """
-        return "{}{}".format(" " * indent, line)
+        return u"{}{}".format(" " * indent, line)
