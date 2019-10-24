@@ -9,7 +9,7 @@
 
 ## ImportRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L10)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L10)
 
 ```python
 class ImportRecord(NodeRecord):
@@ -23,7 +23,7 @@ class ImportRecord(NodeRecord):
 
 ### ImportRecord().get_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L23)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L23)
 
 ```python
 def get_import_string() -> Text:
@@ -31,7 +31,7 @@ def get_import_string() -> Text:
 
 ### ImportRecord().match
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L46)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L46)
 
 ```python
 def match(string: Text) -> Optional[Text]:

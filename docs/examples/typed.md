@@ -10,7 +10,7 @@
 
 ## MyValue
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
 
 ```python
 class MyValue():
@@ -18,7 +18,7 @@ class MyValue():
 
 ## Typed
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
 
 ```python
 class Typed():
@@ -39,7 +39,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L26)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L26)
 
 ```python
 @classmethod
@@ -52,7 +52,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 ## func
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L31)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L31)
 
 ```python
 def func(

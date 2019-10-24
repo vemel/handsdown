@@ -9,7 +9,7 @@ Sentinel value than can be used as a placeholder.
 
 ## Sentinel
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/sentinel.py#L7)
 
 ```python
 class Sentinel():

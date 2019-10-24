@@ -11,7 +11,7 @@
 
 ## ModuleRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L16)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L16)
 
 ```python
 class ModuleRecord(NodeRecord):
@@ -28,7 +28,7 @@ class ModuleRecord(NodeRecord):
 
 ### ModuleRecord().build_children
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L107)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L107)
 
 ```python
 def build_children() -> None:
@@ -36,7 +36,7 @@ def build_children() -> None:
 
 ### ModuleRecord().find_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L47)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L47)
 
 ```python
 def find_record(import_string: Text) -> Optional[NodeRecord]:
@@ -48,7 +48,7 @@ def find_record(import_string: Text) -> Optional[NodeRecord]:
 
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L34)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L34)
 
 ```python
 def get_title_parts() -> List[Text]:
@@ -56,7 +56,7 @@ def get_title_parts() -> List[Text]:
 
 ### ModuleRecord().iter_records
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L61)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L61)
 
 ```python
 def iter_records() -> Generator[Tuple[NodeRecord, ...], None, None]:

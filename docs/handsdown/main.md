@@ -16,7 +16,7 @@ Main CLI entrypoint for `handsdown`
 
 ## create_external_configs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L28)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L28)
 
 ```python
 def create_external_configs(namespace: argparse.Namespace) -> None:
@@ -26,7 +26,7 @@ Create `GitHub Pages` and `Read the Docs` configuration files.
 
 ## main
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L56)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L56)
 
 ```python
 def main() -> None:

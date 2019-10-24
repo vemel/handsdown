@@ -8,7 +8,7 @@
 
 ## AttributeRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L12)
 
 ```python
 class AttributeRecord(NodeRecord):
@@ -21,7 +21,7 @@ class AttributeRecord(NodeRecord):
 
 ### AttributeRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L25)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L25)
 
 ```python
 @property

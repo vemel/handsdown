@@ -7,7 +7,7 @@
 
 ## get_logger
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/logger.py#L7)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/logger.py#L7)
 
 ```python
 def get_logger(level: Optional[int] = None) -> logging.Logger:

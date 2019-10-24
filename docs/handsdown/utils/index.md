@@ -15,7 +15,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L54)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L54)
 
 ```python
 def extract_md_title(content: Text) -> Tuple[Text, Text]:
@@ -41,7 +41,7 @@ A tuple fo title and remaining content.
 
 ## isinstance_str
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L88)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L88)
 
 ```python
 def isinstance_str(value: Any) -> bool:
@@ -49,7 +49,7 @@ def isinstance_str(value: Any) -> bool:
 
 ## make_title
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L11)
 
 ```python
 def make_title(path_part: Text) -> Text:
@@ -81,7 +81,7 @@ A human-readable title as a string.
 
 ## render_asset
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L39)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L39)
 
 ```python
 def render_asset(
@@ -101,7 +101,7 @@ Render `assets/<name>` file to `target_path`.
 
 ## split_import_string
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L83)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L83)
 
 ```python
 def split_import_string(import_string: Text) -> List[Text]:

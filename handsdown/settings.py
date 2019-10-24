@@ -21,4 +21,4 @@ EXCLUDE_EXPRS = ["build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*"]
 SOURCES_GLOB = "**/*.py"
 
 # Find in code link label.
-FIND_IN_SOURCE_LABEL = u"🔍 find in source code"
+FIND_IN_SOURCE_LABEL = "[find in source code]"

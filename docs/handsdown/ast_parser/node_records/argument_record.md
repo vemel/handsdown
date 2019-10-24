@@ -8,7 +8,7 @@
 
 ## ArgumentRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L12)
 
 ```python
 class ArgumentRecord(NodeRecord):
@@ -28,7 +28,7 @@ class ArgumentRecord(NodeRecord):
 
 ### ArgumentRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L28)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L28)
 
 ```python
 @property

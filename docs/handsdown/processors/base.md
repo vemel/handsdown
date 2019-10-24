@@ -14,7 +14,7 @@ Base class for all docstring processors:
 
 ## BaseDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L15)
 
 ```python
 class BaseDocstringProcessor(object):
@@ -31,7 +31,7 @@ Base docstring processor. All docstring processors are based on top of it.
 
 ### BaseDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L49)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L49)
 
 ```python
 def build_sections(content: Text) -> SectionMap:

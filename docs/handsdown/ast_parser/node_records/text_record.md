@@ -8,7 +8,7 @@
 
 ## TextRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L11)
 
 ```python
 class TextRecord(ExpressionRecord):
@@ -21,7 +21,7 @@ class TextRecord(ExpressionRecord):
 
 ### TextRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L20)
 
 ```python
 @property

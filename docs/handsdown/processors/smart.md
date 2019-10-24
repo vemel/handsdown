@@ -13,7 +13,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 
 ## SmartDocstringProcessor
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
 
 ```python
 class SmartDocstringProcessor(BaseDocstringProcessor):
@@ -28,7 +28,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 
 ### SmartDocstringProcessor().build_sections
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
 
 ```python
 def build_sections(content: Text) -> SectionMap:

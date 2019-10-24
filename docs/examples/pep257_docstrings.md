@@ -14,7 +14,7 @@
 
 ## ClassExample
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
 
 ```python
 class ClassExample():
@@ -29,7 +29,7 @@ PEP257-style class example
 
 ### ClassExample().method_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L20)
 
 ```python
 def method_example(text: Text = 'hello') -> int:
@@ -73,7 +73,7 @@ Description of return value
 
 ## function_example
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L53)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L53)
 
 ```python
 def function_example(real=0.0, imag=0.0):
