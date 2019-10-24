@@ -55,8 +55,8 @@ Main handsdown documentation generator.
 
 #### See also
 
-- [Loader](loader.md#loader)
 - [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
+- [Loader](loader.md#loader)
 
 ### Generator().cleanup_old_docs
 
@@ -70,7 +70,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L192)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L190)
 
 ```python
 def generate_doc(source_path: Path) -> None:
@@ -88,7 +88,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L321)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L319)
 
 ```python
 def generate_docs() -> None:
@@ -98,7 +98,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L339)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L337)
 
 ```python
 def generate_index() -> None:
@@ -109,7 +109,7 @@ section that contains a Tree of all modules in the project.
 
 ### Generator().generate_modules
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L368)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L366)
 
 ```python
 def generate_modules() -> None:

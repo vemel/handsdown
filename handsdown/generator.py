@@ -180,14 +180,12 @@ class Generator:
             # remove parent directory if it is empty
             children = list(doc_path.parent.iterdir())
             if not children:
-                doc_path.parent.rmdir()
-
-            else:
                 self._logger.info(
                     "Deleting orphaned directory {}".format(
                         self._root_path_finder.relative(doc_path.parent)
                     )
                 )
+                doc_path.parent.rmdir()
 
     def generate_doc(self, source_path):
         # type: (Path) -> None
@@ -513,7 +511,9 @@ class Generator:
         for attrubute in record.get_documented_attribute_strings():
             section_map.add_line_indent("Attributes", "- {}".format(attrubute))
 
-        for import_string in record.get_related_import_strings(module_record):
+        related_import_strings = record.get_related_import_strings(module_record)
+        links = []
+        for import_string in related_import_strings:
             related_module_record = self._module_records.find_module_record(
                 import_string
             )
@@ -535,6 +535,10 @@ class Generator:
             link = md_document.render_doc_link(
                 title, target_path=target_path, anchor=md_document.get_anchor(title)
             )
+            links.append(link)
+
+        links.sort()
+        for link in links:
             section_map.add_line("See also", "- {}".format(link))
             self._logger.debug(
                 "Adding link '{}' to {} 'See also' section".format(

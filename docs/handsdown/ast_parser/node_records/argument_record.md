@@ -23,8 +23,8 @@ class ArgumentRecord(NodeRecord):
 
 #### See also
 
-- [NodeRecord](node_record.md#noderecord)
 - [ExpressionRecord](expression_record.md#expressionrecord)
+- [NodeRecord](node_record.md#noderecord)
 
 ### ArgumentRecord().related_names
 
