@@ -1,8 +1,8 @@
 import ast
 from typing import List
 
-from handsdown.ast_parser.function_record import FunctionRecord
-from handsdown.ast_parser.attribute_record import AttributeRecord
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 
 
 class ClassAnalyzer(ast.NodeVisitor):

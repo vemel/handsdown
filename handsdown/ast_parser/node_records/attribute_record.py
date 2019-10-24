@@ -1,8 +1,8 @@
 import ast
 from typing import List, Text, Set, Union, Optional, TYPE_CHECKING, cast
 
-from handsdown.ast_parser.node_record import NodeRecord
-from handsdown.ast_parser.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
 if TYPE_CHECKING:
     from handsdown.sentinel import Sentinel

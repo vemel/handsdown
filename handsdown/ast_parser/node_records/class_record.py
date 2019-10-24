@@ -1,13 +1,13 @@
 import ast
 from typing import Any, List, Set, Text, Generator, TYPE_CHECKING
 
-from handsdown.ast_parser.node_record import NodeRecord
-from handsdown.ast_parser.expression_record import ExpressionRecord
-from handsdown.ast_parser.class_analyzer import ClassAnalyzer
+from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser.function_record import FunctionRecord
-    from handsdown.ast_parser.argument_record import ArgumentRecord
+    from handsdown.ast_parser.node_records.function_record import FunctionRecord
+    from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 
 
 class ClassRecord(NodeRecord):

@@ -1,7 +1,7 @@
 import ast
 from typing import Text, Optional, Union, TYPE_CHECKING
 
-from handsdown.ast_parser.node_record import NodeRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import RenderParts

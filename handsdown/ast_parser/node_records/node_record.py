@@ -6,9 +6,9 @@ from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
 
 if TYPE_CHECKING:
-    from handsdown.ast_parser.module_record import ModuleRecord
-    from handsdown.ast_parser.expression_record import ExpressionRecord
-    from handsdown.ast_parser.attribute_record import AttributeRecord
+    from handsdown.ast_parser.node_records.module_record import ModuleRecord
+    from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+    from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
     from handsdown.ast_parser.type_defs import RenderParts
 
 

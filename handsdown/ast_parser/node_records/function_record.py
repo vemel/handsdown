@@ -2,9 +2,9 @@ import re
 import ast
 from typing import List, Any, Set, Text, Optional
 
-from handsdown.ast_parser.node_record import NodeRecord
-from handsdown.ast_parser.argument_record import ArgumentRecord
-from handsdown.ast_parser.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
 
 class FunctionRecord(NodeRecord):

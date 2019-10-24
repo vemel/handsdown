@@ -1,10 +1,10 @@
 import ast
 from typing import List
 
-from handsdown.ast_parser.import_record import ImportRecord
-from handsdown.ast_parser.class_record import ClassRecord
-from handsdown.ast_parser.function_record import FunctionRecord
-from handsdown.ast_parser.attribute_record import AttributeRecord
+from handsdown.ast_parser.node_records.import_record import ImportRecord
+from handsdown.ast_parser.node_records.class_record import ClassRecord
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 
 
 class ModuleAnalyzer(ast.NodeVisitor):
