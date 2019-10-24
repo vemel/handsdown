@@ -19,6 +19,7 @@ class AttributeRecord(NodeRecord):
         first_target = node.targets[0]
         assert isinstance(first_target, ast.Name)
         self.name = first_target.id
+        self.title = self.name
         self.value = ExpressionRecord(node.value)
 
     @property

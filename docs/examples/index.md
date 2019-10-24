@@ -12,3 +12,11 @@ Can be used as a list of supported features.
     - [PEP 257 - PEP 257 and Google docstrings examples](pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
     - [PEP 287 - reStructuredText docstrings examples](rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
     - [Typed](typed.md#typed)
+
+## 
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/__init__.py#L6)
+
+```python
+name = 'handsdown-examples'
+```

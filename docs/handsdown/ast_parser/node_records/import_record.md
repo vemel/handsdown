@@ -16,6 +16,11 @@ class ImportRecord(NodeRecord):
     def __init__(node: ast.alias, alias: ASTImport) -> None:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+- [ASTImport](../type_defs.md#astimport)
+
 ### ImportRecord().get_import_string
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L23)

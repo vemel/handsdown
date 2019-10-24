@@ -224,6 +224,11 @@ class NodeRecord(object):
                 match = import_record.match(related_name)
                 if match:
                     result.add(match)
+            for attribute_record in module_record.attribute_records:
+                if attribute_record is self:
+                    continue
+                if attribute_record.name == related_name:
+                    result.add(attribute_record.import_string)
 
         return result
 

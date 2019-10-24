@@ -47,6 +47,10 @@ class ModuleRecordList:
                 if record.import_string == import_string:
                     return module_record
 
+            for attribute_record in module_record.attribute_records:
+                if attribute_record.import_string == import_string:
+                    return module_record
+
         return None
 
     def get_package_names(self):

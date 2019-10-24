@@ -80,6 +80,11 @@ class ModuleRecord(NodeRecord):
                     child.import_string = import_string
                     self.import_string_map[import_string] = child
 
+        for attribute_record in self.attribute_records:
+            import_string = "{}.{}".format(self.import_string, attribute_record.name)
+            attribute_record.import_string = import_string
+            self.import_string_map[import_string] = attribute_record
+
     def _render_parts(self, indent=0):
         # type: (int) -> List[Any]
         parts = []  # type: List[Any]

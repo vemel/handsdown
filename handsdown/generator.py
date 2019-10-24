@@ -520,17 +520,17 @@ class Generator:
             if not related_module_record:
                 continue
 
-            related_record = module_record.find_record(import_string)
+            related_record = related_module_record.find_record(import_string)
             if not related_record:
-                continue
-
-            if related_record is record:
                 continue
 
             title = related_record.title
             output_path = self._loader.get_output_path(module_record.source_path)
+            target_path = self._loader.get_output_path(
+                related_module_record.source_path
+            )
             link = md_document.render_doc_link(
-                title, target_path=output_path, anchor=md_document.get_anchor(title)
+                title, target_path=target_path, anchor=md_document.get_anchor(title)
             )
             section_map.add_line("See also", "- {}".format(link))
             self._logger.debug(
