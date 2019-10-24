@@ -19,6 +19,13 @@ class ClassAnalyzer(ast.NodeVisitor):
         self.method_records.append(record)
 
     def visit_Assign(self, node):
-        # raise ValueError(node.targets[0].id, node.value.s)
+        # type: (ast.Assign) -> None
+        # skip multiple assignments
+        if len(node.targets) != 1:
+            return
+        # skip complex assignments
+        if not isinstance(node.targets[0], ast.Name):
+            return
+
         record = AttributeRecord(node)
         self.attribute_records.append(record)

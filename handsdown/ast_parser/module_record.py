@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 class ModuleRecord(NodeRecord):
     def __init__(self, source_path, source_lines, import_string):
-        # type: (Path, Text) -> None
+        # type: (Path, List[Text], Text) -> None
         content = "\n".join(source_lines)
         self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)

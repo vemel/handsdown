@@ -37,7 +37,7 @@ class NodeRecord(object):
         self.name = self._get_name()
         self.title = self.name
         self.support_split = False
-        self.attribute_records = []  # List[AttributeRecord]
+        self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
         self.line_number = 1
         if isinstance(self.node, ast.AST) and not isinstance(self.node, ast.Module):
@@ -206,12 +206,15 @@ class NodeRecord(object):
         return result
 
     def get_documented_attribute_strings(self):
-        # type: (ModuleRecord) -> List[Text]
+        # type: () -> List[Text]
         result = []
         for record in self.attribute_records:
             if not record.docstring:
                 continue
 
-            result.append(record.render_docstring())
+            line = "`{}` - {}: `{}`".format(
+                record.name, record.docstring, record.value.render()
+            )
+            result.append(line)
 
         return result
