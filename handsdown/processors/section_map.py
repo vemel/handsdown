@@ -76,6 +76,23 @@ class SectionMap(dict):
         super(SectionMap, self).__init__()
         self._order = []  # type: List[Text]
 
+    def add_line_indent(self, section_name, line):
+        # type: (Text, Text) -> None
+        """
+        Add line respecting indent of the current section block.
+
+        Arguments:
+            section_name -- Target section title
+            line -- Line to add
+        """
+        if section_name in self:
+            section = self[section_name]
+            if section.blocks and section.blocks[-1].lines:
+                indent = IndentTrimmer.get_line_indent(section.blocks[-1].lines[-1])
+                line = IndentTrimmer.indent_line(line, indent)
+
+        self.add_line(section_name, line)
+
     def add_line(self, section_name, line):
         # type: (Text, Text) -> None
         """

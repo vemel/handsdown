@@ -8,7 +8,7 @@ from handsdown.indent_trimmer import IndentTrimmer
 if TYPE_CHECKING:
     from handsdown.ast_parser.module_record import ModuleRecord
     from handsdown.ast_parser.expression_record import ExpressionRecord
-    from handsdown.ast_parser.expression_record import ExpressionRecord
+    from handsdown.ast_parser.attribute_record import AttributeRecord
     from handsdown.ast_parser.type_defs import RenderParts
 
 
@@ -31,24 +31,23 @@ class NodeRecord(object):
 
     def __init__(self, node):
         # type: (Union[ast.AST, Text]) -> None
-        docstring = ""
-        try:
-            docstring = ast.get_docstring(node) or ""  # type: ignore
-        except TypeError:
-            pass
-
-        docstring = IndentTrimmer.trim_empty_lines(docstring)
-        self.docstring = IndentTrimmer.trim_text(docstring)
-
+        self.docstring = ""
         self.import_string = ""
         self.node = node
         self.name = self._get_name()
         self.title = self.name
         self.support_split = False
+        self.attribute_records = []  # List[AttributeRecord]
         self.parsed = False
         self.line_number = 1
         if isinstance(self.node, ast.AST) and not isinstance(self.node, ast.Module):
             self.line_number = self.node.lineno
+
+    def _get_docstring(self):
+        # type: () -> Text
+        docstring = ast.get_docstring(self.node) or ""  # type: ignore
+        docstring = IndentTrimmer.trim_empty_lines(docstring)
+        return IndentTrimmer.trim_text(docstring)
 
     def _get_name(self):
         # type: () -> Text
@@ -169,152 +168,6 @@ class NodeRecord(object):
 
         return "".join(lines).rstrip(" \n")
 
-        # while parts:
-        #     line, part_index = self._render_line(parts, current_indent)
-        #     if not self.is_line_fit(line, indent):
-        #         line, part_index = self._render_multi_line(parts, current_indent)
-
-        #     lines.append(line)
-
-        #     break_part = parts[part_index]
-        #     if break_part in (self.MULTI_LINE_INDENT, self.LINE_INDENT):
-        #         current_indent += 1
-        #     if break_part in (self.MULTI_LINE_UNINDENT, self.LINE_UNINDENT):
-        #         current_indent -= 1
-
-        # for part in parts:
-        #     if part in (self.LINE_BREAK, self.LINE_INDENT, self.LINE_UNINDENT):
-        #         line, part_index = self._render_line(line_parts, current_indent)
-        #         break
-
-        #     line_parts.append(part)
-
-        # lines = []
-        # start_multiline = False
-        # multiline = False
-        # last_line_break_index = 0
-        # last_indent = indent
-        # part_index = 0
-        # current_indent = indent
-        # current_line = ""
-        # while True:
-        #     if part_index == len(parts):
-        #         if (
-        #             self.support_split
-        #             and not multiline
-        #             and not self.is_line_fit(current_line, indent)
-        #         ):
-        #             part_index = last_line_break_index
-        #             current_indent = last_indent
-        #             current_line = ""
-        #             multiline = True
-        #             continue
-
-        #         lines.append(current_line)
-        #         break
-
-        #     part = parts[part_index]
-
-        #     if part is self.MULTI_LINE_COMMA:
-        #         if multiline:
-        #             current_line = "{},".format(current_line)
-        #         part_index += 1
-        #         continue
-
-        #     if part is self.SINGLE_LINE_SPACE:
-        #         if not multiline:
-        #             current_line = "{} ".format(current_line)
-        #         part_index += 1
-        #         continue
-
-        #     if not multiline and part in (
-        #         self.MULTI_LINE_INDENT,
-        #         self.MULTI_LINE_UNINDENT,
-        #         self.MULTI_LINE_BREAK,
-        #     ):
-        #         part_index += 1
-        #         continue
-
-        #     if part in (self.MULTI_LINE_BREAK, self.LINE_BREAK):
-        #         if (
-        #             self.support_split
-        #             and not multiline
-        #             and not self.is_line_fit(current_line, indent)
-        #         ):
-        #             part_index = last_line_break_index
-        #             current_indent = last_indent
-        #             current_line = ""
-        #             multiline = True
-        #             continue
-
-        #         last_indent = current_indent
-        #         if last_line_break_index != part_index and part is self.LINE_BREAK:
-        #             multiline = start_multiline
-        #         last_line_break_index = part_index
-        #         if current_line:
-        #             lines.append(current_line)
-        #         current_line = self.render_indent(current_indent)
-        #         part_index += 1
-        #         continue
-
-        #     if part in (self.MULTI_LINE_INDENT, self.LINE_INDENT):
-        #         if (
-        #             self.support_split
-        #             and not multiline
-        #             and not self.is_line_fit(current_line, indent)
-        #         ):
-        #             part_index = last_line_break_index
-        #             current_indent = last_indent
-        #             current_line = ""
-        #             multiline = True
-        #             continue
-
-        #         last_indent = current_indent
-        #         if last_line_break_index != part_index and part is self.LINE_BREAK:
-        #             multiline = start_multiline
-        #         last_line_break_index = part_index
-
-        #         if current_line:
-        #             lines.append(current_line)
-        #         current_indent += 1
-        #         current_line = self.render_indent(current_indent)
-        #         part_index += 1
-        #         continue
-
-        #     if part in (self.MULTI_LINE_UNINDENT, self.LINE_UNINDENT):
-        #         if not multiline and not self.is_line_fit(current_line, indent):
-        #             part_index = last_line_break_index
-        #             current_indent = last_indent
-        #             current_line = ""
-        #             multiline = True
-        #             continue
-
-        #         last_indent = current_indent
-        #         if last_line_break_index != part_index and part is self.LINE_BREAK:
-        #             multiline = start_multiline
-        #         last_line_break_index = part_index
-
-        #         if current_line:
-        #             lines.append(current_line)
-        #         current_indent -= 1
-        #         current_line = self.render_indent(current_indent)
-        #         part_index += 1
-        #         continue
-
-        #     if isinstance(part, str):
-        #         current_line = "{}{}".format(current_line, part)
-        #         part_index += 1
-        #         continue
-
-        #     if isinstance(part, NodeRecord):
-        #         current_line = "{}{}".format(current_line, part.render(current_indent))
-        #         part_index += 1
-        #         continue
-
-        #     raise ValueError("Unknown render part: {}".format(part))
-
-        # return "\n".join(lines)
-
     @abstractmethod
     def _render_parts(self, indent):
         # type: (int) -> RenderParts
@@ -349,5 +202,16 @@ class NodeRecord(object):
                 match = import_record.match(related_name)
                 if match:
                     result.add(match)
+
+        return result
+
+    def get_documented_attribute_strings(self):
+        # type: (ModuleRecord) -> List[Text]
+        result = []
+        for record in self.attribute_records:
+            if not record.docstring:
+                continue
+
+            result.append(record.render_docstring())
 
         return result

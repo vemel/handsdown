@@ -22,6 +22,7 @@ class FunctionRecord(NodeRecord):
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
+        self.docstring = self._get_docstring()
 
     @property
     def related_names(self):

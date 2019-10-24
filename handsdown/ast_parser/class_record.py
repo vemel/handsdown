@@ -19,6 +19,7 @@ class ClassRecord(NodeRecord):
         self.argument_records = []  # type: List[ArgumentRecord]
         self.bases = []  # type: List[ExpressionRecord]
         self.support_split = True
+        self.docstring = self._get_docstring()
 
     @property
     def related_names(self):
@@ -68,6 +69,9 @@ class ClassRecord(NodeRecord):
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)
         self.method_records = sorted(analyzer.method_records, key=lambda x: x.name)
+        self.attribute_records = sorted(
+            analyzer.attribute_records, key=lambda x: x.name
+        )
 
     def _render_parts(self, indent=0):
         # type: (int) -> List[Any]

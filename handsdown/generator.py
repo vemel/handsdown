@@ -44,20 +44,23 @@ class Generator:
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
-
-    Attributes:
-        LOGGER_NAME -- Name of logger: `handsdown`
-        INDEX_NAME -- Docs index filename: `README.md`
-        INDEX_TITLE -- Docs index title: `Index`
-        MODULES_NAME -- Docs modules filename: `MODULES.md`
-        MODULES_TITLE -- Docs modules title: `Modules`
     """
 
+    # Name of logger
     LOGGER_NAME = "handsdown"
+
+    # Docs index filename
     INDEX_NAME = "README.md"
+
+    # Docs index title
     INDEX_TITLE = "Index"
+
+    # Docs modules filename
     MODULES_NAME = "MODULES.md"
+
+    # Docs modules title
     MODULES_TITLE = "Modules"
+
     _short_link_re = re.compile(r"`+[A-Za-z]\S+`+")
 
     def __init__(
@@ -506,6 +509,9 @@ class Generator:
         """
         docstring = record.docstring
         section_map = self._docstring_processor.build_sections(docstring)
+
+        for attrubute in record.get_documented_attribute_strings():
+            section_map.add_line_indent("Attributes", "- {}".format(attrubute))
 
         for import_string in record.get_related_import_strings(module_record):
             related_module_record = self._module_records.find_module_record(

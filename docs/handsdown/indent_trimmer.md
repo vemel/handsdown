@@ -7,6 +7,7 @@ Utility for removing indentation for sections and lines.
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / IndentTrimmer
   - [IndentTrimmer](#indenttrimmer)
     - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
+    - [IndentTrimmer.indent_line](#indenttrimmerindent_line)
     - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
     - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
     - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
@@ -50,6 +51,33 @@ IndentTrimmer.get_line_indent('test')
 #### Returns
 
 A number of indentation characters in a beginning of the line.
+
+### IndentTrimmer.indent_line
+
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L145)
+
+```python
+@staticmethod
+def indent_line(line: int, indent: Text) -> Text:
+```
+
+Indent line with givent length `indent`
+
+#### Examples
+
+```python
+IndentTrimmer.indent_line('test', 2)
+'  test'
+```
+
+#### Arguments
+
+- `line` - Line to indent.
+- `indent` - Length of indent in spaces.
+
+#### Returns
+
+An indented line.
 
 ### IndentTrimmer.trim_empty_lines
 

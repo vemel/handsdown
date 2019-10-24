@@ -29,6 +29,7 @@ class ModuleRecord(NodeRecord):
         self.title = make_title(self.name)
         self.import_string = import_string
         self.import_string_map = {}  # type: Dict[Text, NodeRecord]
+        self.docstring = self._get_docstring()
 
     def get_title_parts(self):
         # type: () -> List[Text]
@@ -117,6 +118,15 @@ class ModuleRecord(NodeRecord):
         # type: () -> None
         for class_record in self.class_records:
             class_record.parse()
+            for attribute_record in class_record.attribute_records:
+                # skip private attributes
+                if attribute_record.name.startswith("_"):
+                    continue
+
+                attribute_record.docstring = self._get_comment_docstring(
+                    attribute_record
+                )
+
             for method_record in class_record.method_records:
                 method_record.parse()
                 if method_record.is_classmethod or method_record.is_staticmethod:
@@ -127,16 +137,28 @@ class ModuleRecord(NodeRecord):
                     method_record.title = "{}().{}".format(
                         class_record.title, method_record.title
                     )
-                function_lines = self._get_function_lines(method_record)
+                function_lines = self._get_function_def_lines(method_record)
                 method_record.parse_type_comments(function_lines)
 
         for function_record in self.function_records:
             function_record.parse()
-            function_lines = self._get_function_lines(function_record)
+            function_lines = self._get_function_def_lines(function_record)
             function_record.parse_type_comments(function_lines)
 
-    def _get_function_lines(self, function_record):
+    def _get_function_def_lines(self, function_record):
         # type: (FunctionRecord) -> List[Text]
+        """
+        Get all function definition lines for comment type
+        hints lookup.
+
+        Removes indentation.
+
+        Arguments:
+            function_record -- Function record for source lookup.
+
+        Returns:
+            Function definition lines as an array.
+        """
         assert isinstance(function_record.node, ast.FunctionDef)
 
         result = []  # type: List[Text]
@@ -146,3 +168,29 @@ class ModuleRecord(NodeRecord):
         result = [i.rstrip("\n") for i in result]
         result = IndentTrimmer.trim_lines(result)
         return result
+
+    def _get_comment_docstring(self, node_record):
+        # type: (NodeRecord) -> Text
+        """
+        Get comment docstring preceding the object from the source code.
+
+        Returns only lines starting with `#`, lines joined with a single space.
+
+        Arguments:
+            node_record -- Node record for source lookup.
+
+        Returns:
+            A docstring as a string.
+        """
+        assert isinstance(node_record.node, ast.Assign)
+
+        result = []  # type: List[Text]
+        start_index = node_record.node.lineno - 2
+        start_line = self.source_lines[start_index].strip()
+        while start_index >= 0 and start_line.startswith("#"):
+            result.append(start_line[1:].strip())
+            start_index -= 1
+            start_line = self.source_lines[start_index].strip()
+
+        result.reverse()
+        return " ".join(result)
