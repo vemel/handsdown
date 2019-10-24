@@ -4,7 +4,6 @@ from typing import Text, Set, List, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
-from handsdown.utils import isinstance_str
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import RenderExpr, Node
@@ -22,20 +21,10 @@ class ExpressionRecord(NodeRecord):
     @property
     def related_names(self):
         # type: () -> Set[Text]
-        result = set()
-        if isinstance(self.node, str):
-            for related_name in self._str_split_re.split(self.node):
-                result.add(related_name)
-        else:
-            result.update(self.analyzer.related_names)
-        return result
+        return set(self.analyzer.related_names)
 
     def _parse(self):
         # type: () -> None
-        if isinstance_str(self.node):
-            self.parts.append(self.node)
-            return
-
         if isinstance(self.node, ast.Name):
             self.name = self.node.id
 
@@ -51,10 +40,6 @@ class ExpressionRecord(NodeRecord):
             if isinstance(part, ast.AST):
                 part_render = ExpressionRecord(part).render(indent=indent)
                 result.append(part_render)
-                continue
-
-            if isinstance_str(part):
-                result.append(part)
                 continue
 
             result.append(part)

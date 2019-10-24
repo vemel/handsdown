@@ -138,11 +138,11 @@ class ModuleRecord(NodeRecord):
                 method_record.parse()
                 if method_record.is_classmethod or method_record.is_staticmethod:
                     method_record.title = "{}.{}".format(
-                        class_record.title, method_record.title
+                        class_record.name, method_record.name
                     )
                 else:
                     method_record.title = "{}().{}".format(
-                        class_record.title, method_record.title
+                        class_record.name, method_record.name
                     )
                 function_lines = self._get_function_def_lines(method_record)
                 method_record.parse_type_comments(function_lines)

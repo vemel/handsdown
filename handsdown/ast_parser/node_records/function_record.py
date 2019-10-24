@@ -23,6 +23,8 @@ class FunctionRecord(NodeRecord):
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
+        self.name = self.node.name
+        self.title = self.name
         self.docstring = self._get_docstring()
 
     @property
@@ -49,10 +51,15 @@ class FunctionRecord(NodeRecord):
             # move it to the first decorator
             if index == 0:
                 self.line_number = decorator.line_number
-            if decorator.name == "staticmethod":
-                self.is_staticmethod = True
-            if decorator.name == "classmethod":
-                self.is_classmethod = True
+
+            decorator_name = ""
+            if isinstance(decorator.node, ast.Name):
+                decorator_name = decorator.node.id
+                if decorator_name == "staticmethod":
+                    self.is_staticmethod = True
+                if decorator_name == "classmethod":
+                    self.is_classmethod = True
+
             self.decorators.append(decorator)
 
         for arg in self.node.args.args:

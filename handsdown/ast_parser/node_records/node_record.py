@@ -35,8 +35,8 @@ class NodeRecord(object):
         self.docstring = ""
         self.import_string = ""
         self.node = node
-        self.name = self._get_name()
-        self.title = self.name
+        self.name = self.node.__class__.__name__
+        self.title = ""
         self.support_split = False
         self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
@@ -61,18 +61,6 @@ class NodeRecord(object):
         docstring = ast.get_docstring(self.node) or ""  # type: ignore
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         return IndentTrimmer.trim_text(docstring)
-
-    def _get_name(self):
-        # type: () -> Text
-        if isinstance(self.node, ast.Name):
-            return self.node.id
-        # FIXME: hacks for py27
-        if hasattr(self.node, "value"):
-            return getattr(self.node, "value")
-        if hasattr(self.node, "name"):
-            return getattr(self.node, "name")
-
-        return "{}".format(self.node.__class__.__name__)
 
     def iter_children(self):
         # type: () -> Generator[NodeRecord, None, None]

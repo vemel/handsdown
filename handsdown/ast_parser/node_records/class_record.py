@@ -19,6 +19,8 @@ class ClassRecord(NodeRecord):
         self.argument_records = []  # type: List[ArgumentRecord]
         self.bases = []  # type: List[ExpressionRecord]
         self.support_split = True
+        self.name = self.node.name
+        self.title = self.name
         self.docstring = self._get_docstring()
 
     @property
