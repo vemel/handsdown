@@ -30,8 +30,10 @@ class ClassRecord(NodeRecord):
         # type: () -> Set[Text]
         result = set()  # type: Set[Text]
         for decorator in self.decorators:
+            result.add(decorator.name)
             result.update(decorator.related_names)
         for base in self.bases:
+            result.add(base.name)
             result.update(base.related_names)
         for method_record in self.method_records:
             if method_record.name == "__init__":
@@ -89,9 +91,15 @@ class ClassRecord(NodeRecord):
         parts.append("(")
         if self.bases:
             parts.append(self.MULTI_LINE_INDENT)
+            base_count = 0
             for base in self.bases:
+                if base_count > 0:
+                    parts.append(",")
+                    parts.append(self.SINGLE_LINE_SPACE)
+                    parts.append(self.MULTI_LINE_BREAK)
+                base_count += 1
                 parts.append(base)
-                parts.append(self.MULTI_LINE_BREAK)
+            parts.append(self.MULTI_LINE_COMMA)
             parts.append(self.MULTI_LINE_UNINDENT)
         parts.append("):")
 
