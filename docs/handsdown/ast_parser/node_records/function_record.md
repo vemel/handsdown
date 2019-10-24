@@ -16,6 +16,10 @@ class FunctionRecord(NodeRecord):
     def __init__(node: bool, is_method: ast.FunctionDef) -> None:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### FunctionRecord().parse_type_comments
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L113)

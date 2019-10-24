@@ -8,7 +8,6 @@
     - [ModuleRecord().find_record](#modulerecordfind_record)
     - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
     - [ModuleRecord().iter_records](#modulerecorditer_records)
-    - [ModuleRecord().related_names](#modulerecordrelated_names)
 
 ## ModuleRecord
 
@@ -23,9 +22,13 @@ class ModuleRecord(NodeRecord):
     ) -> None:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### ModuleRecord().build_children
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L110)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L107)
 
 ```python
 def build_children() -> None:
@@ -33,15 +36,19 @@ def build_children() -> None:
 
 ### ModuleRecord().find_record
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L52)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L47)
 
 ```python
 def find_record(import_string: Text) -> Optional[NodeRecord]:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### ModuleRecord().get_title_parts
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L39)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L34)
 
 ```python
 def get_title_parts() -> List[Text]:
@@ -49,17 +56,12 @@ def get_title_parts() -> List[Text]:
 
 ### ModuleRecord().iter_records
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L66)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L61)
 
 ```python
 def iter_records() -> Generator[Tuple[NodeRecord, ...], None, None]:
 ```
 
-### ModuleRecord().related_names
+#### See also
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L34)
-
-```python
-@property
-def related_names() -> Set[Text]:
-```
+- [NodeRecord](node_record.md#noderecord)

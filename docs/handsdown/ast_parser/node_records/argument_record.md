@@ -21,6 +21,11 @@ class ArgumentRecord(NodeRecord):
     ) -> None:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+- [ExpressionRecord](expression_record.md#expressionrecord)
+
 ### ArgumentRecord().related_names
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L28)

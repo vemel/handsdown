@@ -150,11 +150,3 @@ class PathFinderError(Exception):
 ```
 
 Main error for [PathFinder](#pathfinder).
-
-## 
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L17)
-
-```python
-__all__ = ['PathFinder', 'PathFinderError']
-```

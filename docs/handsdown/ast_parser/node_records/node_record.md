@@ -26,7 +26,7 @@ class NodeRecord(object):
 
 ### NodeRecord().get_documented_attribute_strings
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L230)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L231)
 
 ```python
 def get_documented_attribute_strings() -> List[Text]:
@@ -39,6 +39,10 @@ def get_documented_attribute_strings() -> List[Text]:
 ```python
 def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
 ```
+
+#### See also
+
+- [ModuleRecord](module_record.md#modulerecord)
 
 ### NodeRecord().is_line_fit
 

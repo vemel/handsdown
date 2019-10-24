@@ -36,11 +36,3 @@ Get Markdown-friendly docstring.
 #### Returns
 
 A cleaned up docstring.
-
-## 
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L10)
-
-```python
-__all__ = ['DocstringFormatter']
-```

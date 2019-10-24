@@ -22,6 +22,10 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content.
 
+#### See also
+
+- [BaseDocstringProcessor](base.md#basedocstringprocessor)
+
 ### SmartDocstringProcessor().build_sections
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
@@ -40,3 +44,7 @@ Parse docstring and split it to sections with arrays of strings.
 
 A dictionary where key is a section name and value is a list of string sof this
 section.
+
+#### See also
+
+- [SectionMap](section_map.md#sectionmap)

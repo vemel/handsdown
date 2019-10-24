@@ -21,7 +21,7 @@ Aggregation of `ModuleRecord` objects.
 
 ### ModuleRecordList().add
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L62)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L66)
 
 ```python
 def add(module_record: ModuleRecord) -> None:
@@ -32,6 +32,10 @@ Add new `ModuleRecord`.
 #### Arguments
 
 - `module_record` - A new `ModuleRecord`
+
+#### See also
+
+- [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().find_module_record
 
@@ -51,9 +55,13 @@ Find `ModuleRecord` by it's import string.
 
 Found `NodeRecord` instance or None.
 
+#### See also
+
+- [ModuleRecord](node_records/module_record.md#modulerecord)
+
 ### ModuleRecordList().get_package_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L52)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L56)
 
 ```python
 def get_package_names() -> Set[Text]:

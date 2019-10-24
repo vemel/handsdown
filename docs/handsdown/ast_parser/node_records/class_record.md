@@ -17,6 +17,10 @@ class ClassRecord(NodeRecord):
     def __init__(node: ast.ClassDef) -> None:
 ```
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### ClassRecord().get_public_methods
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L49)
@@ -25,6 +29,10 @@ class ClassRecord(NodeRecord):
 def get_public_methods() -> List[FunctionRecord]:
 ```
 
+#### See also
+
+- [FunctionRecord](function_record.md#functionrecord)
+
 ### ClassRecord().iter_records
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L44)
@@ -32,6 +40,10 @@ def get_public_methods() -> List[FunctionRecord]:
 ```python
 def iter_records() -> Generator[NodeRecord, None, None]:
 ```
+
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
 
 ### ClassRecord().related_names
 

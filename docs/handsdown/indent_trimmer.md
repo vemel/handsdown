@@ -193,11 +193,3 @@ IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
 #### Returns
 
 A text with trimmed indent.
-
-## 
-
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/indent_trimmer.py#L8)
-
-```python
-__all__ = ['IndentTrimmer']
-```

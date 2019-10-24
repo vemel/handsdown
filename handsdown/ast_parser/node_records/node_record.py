@@ -211,13 +211,11 @@ class NodeRecord(object):
             return result
         for related_name in related_names:
             for class_record in module_record.class_records:
-                if class_record is self or self in class_record.get_public_methods():
+                if self in class_record.get_public_methods():
                     continue
                 if class_record.name == related_name:
                     result.add(class_record.import_string)
             for function_record in module_record.function_records:
-                if function_record is self:
-                    continue
                 if function_record.name == related_name:
                     result.add(function_record.import_string)
             for import_record in module_record.import_records:
@@ -225,8 +223,6 @@ class NodeRecord(object):
                 if match:
                     result.add(match)
             for attribute_record in module_record.attribute_records:
-                if attribute_record is self:
-                    continue
                 if attribute_record.name == related_name:
                     result.add(attribute_record.import_string)
 

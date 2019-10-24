@@ -37,6 +37,10 @@
 class ExpressionAnalyzer(BaseAnalyzer):
 ```
 
+#### See also
+
+- [BaseAnalyzer](base_analyzer.md#baseanalyzer)
+
 ### ExpressionAnalyzer().generic_visit
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L284)

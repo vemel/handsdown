@@ -18,8 +18,8 @@ class ImportRecord(NodeRecord):
 
 #### See also
 
-- [NodeRecord](node_record.md#noderecord)
 - [ASTImport](../type_defs.md#astimport)
+- [NodeRecord](node_record.md#noderecord)
 
 ### ImportRecord().get_import_string
 

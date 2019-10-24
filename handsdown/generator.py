@@ -524,6 +524,9 @@ class Generator:
             if not related_record:
                 continue
 
+            if related_record is record:
+                continue
+
             title = related_record.title
             output_path = self._loader.get_output_path(module_record.source_path)
             target_path = self._loader.get_output_path(

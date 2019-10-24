@@ -15,6 +15,10 @@
 class ClassAnalyzer(BaseAnalyzer):
 ```
 
+#### See also
+
+- [BaseAnalyzer](base_analyzer.md#baseanalyzer)
+
 ### ClassAnalyzer().visit_Assign
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L16)

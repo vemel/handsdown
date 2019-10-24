@@ -53,6 +53,11 @@ Main handsdown documentation generator.
 - `MODULES_NAME` - Docs modules filename: `'MODULES.md'`
 - `MODULES_TITLE` - Docs modules title: `'Modules'`
 
+#### See also
+
+- [Loader](loader.md#loader)
+- [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
+
 ### Generator().cleanup_old_docs
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L149)

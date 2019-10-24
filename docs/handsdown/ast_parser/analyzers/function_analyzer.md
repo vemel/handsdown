@@ -20,6 +20,10 @@ class FunctionAnalyzer(BaseAnalyzer):
     def __init__() -> None:
 ```
 
+#### See also
+
+- [BaseAnalyzer](base_analyzer.md#baseanalyzer)
+
 ### FunctionAnalyzer().generic_visit
 
 [🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L94)
