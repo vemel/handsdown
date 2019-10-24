@@ -15,7 +15,10 @@ if TYPE_CHECKING:
 
 class NodeRecord(object):
     LINE_LENGTH = 79
+    SINGLE_LINE_LENGTH = 50
     INDENT_SPACES = 4
+    MAX_INDENT = 4
+    ELLIPSIS = "..."
 
     MULTI_LINE_BREAK = Sentinel("MULTI_LINE_BREAK")
     MULTI_LINE_INDENT = Sentinel("MULTI_LINE_INDENT")
@@ -84,7 +87,7 @@ class NodeRecord(object):
         self._parse()
         self.parsed = True
 
-    def _render_line(self, parts, indent):
+    def _render_line(self, parts, indent, allow_multiline):
         # type: (List[RenderExpr], int) -> Text
         result = []
         for part in parts:
@@ -92,16 +95,16 @@ class NodeRecord(object):
                 result.append(" ")
 
             if isinstance(part, NodeRecord):
-                result.append(part.render(indent))
+                result.append(part.render(indent, allow_multiline))
 
             if isinstance(part, ("".__class__, u"".__class__)):
                 if part.startswith("u'"):
                     part = part[1:]
                 result.append(part)
 
-        return "".join(result)
+        return "".join(result).replace("\n", " ")
 
-    def _render_multi_line(self, parts, indent):
+    def _render_multi_line(self, parts, indent, allow_multiline):
         # type: (List[RenderExpr], int) -> Tuple[List[Text], int]
         result = []
         for part in parts:
@@ -123,7 +126,7 @@ class NodeRecord(object):
                 result.append(",")
 
             if isinstance(part, NodeRecord):
-                result.append(part.render(indent))
+                result.append(part.render(indent, allow_multiline))
 
             if isinstance(part, ("".__class__, u"".__class__)):
                 if part.startswith("u'"):
@@ -133,10 +136,21 @@ class NodeRecord(object):
         lines = "".join(result).split("\n")
         return lines, indent
 
-    def render(self, indent=0):
+    def _fit_single_line(self, line):
+        # type: (Text) -> Text
+        if len(line) < self.SINGLE_LINE_LENGTH:
+            return line
+        return "{}{}".format(
+            line[: self.SINGLE_LINE_LENGTH - len(self.ELLIPSIS)], self.ELLIPSIS
+        )
+
+    def render(self, indent=0, allow_multiline=False):
         # type: (int) -> Text
         if not self.parsed:
             self.parse()
+
+        if indent > self.MAX_INDENT:
+            return self.ELLIPSIS
 
         parts = self._render_parts(indent)
         line_parts = []
@@ -148,15 +162,22 @@ class NodeRecord(object):
                 if part_index < len(parts) - 1:
                     continue
 
-            result_lines = [self._render_line(line_parts, current_indent)]
+            result_lines = [
+                self._render_line(line_parts, current_indent, allow_multiline)
+            ]
             if not self.is_line_fit(result_lines[-1], current_indent):
+                if not allow_multiline:
+                    return self._fit_single_line("".join(result_lines))
                 result_lines, current_indent = self._render_multi_line(
-                    line_parts, current_indent
+                    line_parts, current_indent, allow_multiline
                 )
 
             lines.append("\n".join(result_lines))
 
             line_parts = []
+
+            if not allow_multiline:
+                break
 
             if part is self.LINE_INDENT:
                 current_indent += 1

@@ -486,7 +486,7 @@ class Generator:
 
             md_document.append(source_link)
 
-            signature = record.render()
+            signature = record.render(allow_multiline=True)
             md_document.append("```python\n{}\n```".format(signature))
 
             self._render_docstring(

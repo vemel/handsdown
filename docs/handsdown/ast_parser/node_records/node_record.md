@@ -26,7 +26,7 @@ class NodeRecord(object):
 
 ### NodeRecord().get_documented_attribute_strings
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L209)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L230)
 
 ```python
 def get_documented_attribute_strings() -> List[Text]:
@@ -34,7 +34,7 @@ def get_documented_attribute_strings() -> List[Text]:
 
 ### NodeRecord().get_related_import_strings
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L185)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L206)
 
 ```python
 def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
@@ -42,7 +42,7 @@ def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
 
 ### NodeRecord().is_line_fit
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L177)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L198)
 
 ```python
 def is_line_fit(line: int, indent: Text) -> bool:
@@ -50,7 +50,7 @@ def is_line_fit(line: int, indent: Text) -> bool:
 
 ### NodeRecord().iter_children
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L65)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L68)
 
 ```python
 def iter_children() -> Generator[NodeRecord, None, None]:
@@ -58,7 +58,7 @@ def iter_children() -> Generator[NodeRecord, None, None]:
 
 ### NodeRecord().line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L45)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L48)
 
 ```python
 @property
@@ -67,7 +67,7 @@ def line_number() -> int:
 
 ### NodeRecord().line_number
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L54)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L57)
 
 ```python
 @line_number.setter
@@ -76,7 +76,7 @@ def line_number(value: int) -> None:
 
 ### NodeRecord().parse
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L79)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L82)
 
 ```python
 def parse() -> None:
@@ -84,7 +84,7 @@ def parse() -> None:
 
 ### NodeRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L69)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L72)
 
 ```python
 @property
@@ -93,15 +93,15 @@ def related_names() -> Set[Text]:
 
 ### NodeRecord().render
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L136)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L147)
 
 ```python
-def render(indent: int = 0) -> Text:
+def render(indent=0, allow_multiline: int = False) -> Text:
 ```
 
 ### NodeRecord().render_indent
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L181)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L202)
 
 ```python
 def render_indent(indent: int) -> Text:

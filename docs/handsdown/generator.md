@@ -52,10 +52,11 @@ Main handsdown documentation generator.
 - `LOGGER_NAME` - Name of logger: `'handsdown'`
 - `MODULES_NAME` - Docs modules filename: `'MODULES.md'`
 - `MODULES_TITLE` - Docs modules title: `'Modules'`
+- `MODULES_TITLES` - Docs modules title: `'Modulesddddddddddddddd asddddddddddddddddddddd...`
 
 ### Generator().cleanup_old_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L149)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L152)
 
 ```python
 def cleanup_old_docs() -> None:
@@ -65,7 +66,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L192)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L195)
 
 ```python
 def generate_doc(source_path: Path) -> None:
@@ -83,7 +84,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L321)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L324)
 
 ```python
 def generate_docs() -> None:
@@ -93,7 +94,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L339)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L342)
 
 ```python
 def generate_index() -> None:
@@ -104,7 +105,7 @@ section that contains a Tree of all modules in the project.
 
 ### Generator().generate_modules
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L368)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L371)
 
 ```python
 def generate_modules() -> None:

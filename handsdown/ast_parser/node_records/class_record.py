@@ -83,7 +83,7 @@ class ClassRecord(NodeRecord):
         # type: (int) -> List[Any]
         parts = []  # type: List[Any]
         for decorator in self.decorators:
-            parts.append(decorator.render(indent))
+            parts.append(decorator)
             parts.append(self.LINE_BREAK)
 
         parts.append("class ")
