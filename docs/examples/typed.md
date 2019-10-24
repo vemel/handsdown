@@ -30,7 +30,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L16)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L17)
 
 ```python
 @classmethod
@@ -43,7 +43,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 ## func
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L21)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L22)
 
 ```python
 def func(

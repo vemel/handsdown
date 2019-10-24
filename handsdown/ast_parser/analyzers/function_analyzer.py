@@ -44,9 +44,24 @@ class FunctionAnalyzer(BaseAnalyzer):
             record = self._get_argument_record(arg, default)
             self.argument_records.append(record)
 
+        # FIXME: add support for py38
+        # for arg in node.posonlyargs:
+        #     record = self._get_argument_record(arg, None)
+        #     self.argument_records.append(record)
+
+        for index, arg in enumerate(node.kwonlyargs):
+            default = None
+            default_index = len(node.kw_defaults) - len(node.kwonlyargs) + index
+            if default_index >= 0:
+                default = ExpressionRecord(node.kw_defaults[default_index])
+
+            record = self._get_argument_record(arg, default)
+            self.argument_records.append(record)
+
         if node.vararg is not None:
             record = self._get_argument_record(node.vararg, None, prefix="*")
             self.argument_records.append(record)
+
         if node.kwarg is not None:
             record = self._get_argument_record(node.kwarg, None, prefix="**")
             self.argument_records.append(record)
