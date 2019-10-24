@@ -5,8 +5,8 @@
 Main CLI entrypoint for `handsdown`
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Main
-  - [create_external_configs](#create_external_configs)
-  - [main](#main)
+    - [create_external_configs](#create_external_configs)
+    - [main](#main)
 
 #### Attributes
 

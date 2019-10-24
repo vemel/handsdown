@@ -3,10 +3,10 @@
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/master/examples/typed.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Typed
-  - [MyValue](#myvalue)
-  - [Typed](#typed)
-    - [Typed.classmethod](#typedclassmethod)
-  - [func](#func)
+    - [MyValue](#myvalue)
+    - [Typed](#typed)
+        - [Typed.classmethod](#typedclassmethod)
+    - [func](#func)
 
 ## MyValue
 

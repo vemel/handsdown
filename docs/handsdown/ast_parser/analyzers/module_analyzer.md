@@ -3,12 +3,12 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.module_analyzer](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ModuleAnalyzer
-  - [ModuleAnalyzer](#moduleanalyzer)
-    - [ModuleAnalyzer().visit_Assign](#moduleanalyzervisit_assign)
-    - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzervisit_classdef)
-    - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzervisit_functiondef)
-    - [ModuleAnalyzer().visit_Import](#moduleanalyzervisit_import)
-    - [ModuleAnalyzer().visit_ImportFrom](#moduleanalyzervisit_importfrom)
+    - [ModuleAnalyzer](#moduleanalyzer)
+        - [ModuleAnalyzer().visit_Assign](#moduleanalyzervisit_assign)
+        - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzervisit_classdef)
+        - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzervisit_functiondef)
+        - [ModuleAnalyzer().visit_Import](#moduleanalyzervisit_import)
+        - [ModuleAnalyzer().visit_ImportFrom](#moduleanalyzervisit_importfrom)
 
 ## ModuleAnalyzer
 

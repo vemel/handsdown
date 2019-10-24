@@ -5,8 +5,8 @@
 Base class for all docstring processors:
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Base
-  - [BaseDocstringProcessor](#basedocstringprocessor)
-    - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
+    - [BaseDocstringProcessor](#basedocstringprocessor)
+        - [BaseDocstringProcessor().build_sections](#basedocstringprocessorbuild_sections)
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

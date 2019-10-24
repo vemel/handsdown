@@ -5,16 +5,16 @@
 Module for splitting docstring into `Section` groups.
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
-  - [Section](#section)
-    - [Section().render](#sectionrender)
-  - [SectionBlock](#sectionblock)
-    - [SectionBlock().render](#sectionblockrender)
-  - [SectionMap](#sectionmap)
-    - [SectionMap().add_block](#sectionmapadd_block)
-    - [SectionMap().add_line](#sectionmapadd_line)
-    - [SectionMap().add_line_indent](#sectionmapadd_line_indent)
-    - [SectionMap().sections](#sectionmapsections)
-    - [SectionMap().trim_block](#sectionmaptrim_block)
+    - [Section](#section)
+        - [Section().render](#sectionrender)
+    - [SectionBlock](#sectionblock)
+        - [SectionBlock().render](#sectionblockrender)
+    - [SectionMap](#sectionmap)
+        - [SectionMap().add_block](#sectionmapadd_block)
+        - [SectionMap().add_line](#sectionmapadd_line)
+        - [SectionMap().add_line_indent](#sectionmapadd_line_indent)
+        - [SectionMap().sections](#sectionmapsections)
+        - [SectionMap().trim_block](#sectionmaptrim_block)
 
 ## Section
 

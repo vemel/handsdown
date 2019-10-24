@@ -3,8 +3,8 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.text_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / TextRecord
-  - [TextRecord](#textrecord)
-    - [TextRecord().related_names](#textrecordrelated_names)
+    - [TextRecord](#textrecord)
+        - [TextRecord().related_names](#textrecordrelated_names)
 
 ## TextRecord
 

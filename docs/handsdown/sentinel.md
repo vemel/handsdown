@@ -5,7 +5,7 @@
 Sentinel value than can be used as a placeholder.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Sentinel
-  - [Sentinel](#sentinel)
+    - [Sentinel](#sentinel)
 
 ## Sentinel
 

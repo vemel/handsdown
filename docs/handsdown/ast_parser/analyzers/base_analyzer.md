@@ -3,7 +3,7 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.base_analyzer](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / BaseAnalyzer
-  - [BaseAnalyzer](#baseanalyzer)
+    - [BaseAnalyzer](#baseanalyzer)
 
 ## BaseAnalyzer
 

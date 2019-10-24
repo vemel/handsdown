@@ -3,11 +3,11 @@
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Google docstrings examples
-  - [Links](#links)
-  - [ClassExample](#classexample)
-    - [ClassExample().method_example](#classexamplemethod_example)
-  - [function_example](#function_example)
-  - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
+    - [Links](#links)
+    - [ClassExample](#classexample)
+        - [ClassExample().method_example](#classexamplemethod_example)
+    - [function_example](#function_example)
+    - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
 
 ## Links
 

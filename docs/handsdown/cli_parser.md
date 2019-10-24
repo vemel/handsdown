@@ -3,11 +3,11 @@
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / CLI Parser
-  - [abs_path](#abs_path)
-  - [dir_abs_path](#dir_abs_path)
-  - [existing_dir_abs_path](#existing_dir_abs_path)
-  - [git_repo](#git_repo)
-  - [parse_args](#parse_args)
+    - [abs_path](#abs_path)
+    - [dir_abs_path](#dir_abs_path)
+    - [existing_dir_abs_path](#existing_dir_abs_path)
+    - [git_repo](#git_repo)
+    - [parse_args](#parse_args)
 
 ## abs_path
 

@@ -3,8 +3,8 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.argument_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
-  - [ArgumentRecord](#argumentrecord)
-    - [ArgumentRecord().related_names](#argumentrecordrelated_names)
+    - [ArgumentRecord](#argumentrecord)
+        - [ArgumentRecord().related_names](#argumentrecordrelated_names)
 
 ## ArgumentRecord
 

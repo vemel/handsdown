@@ -3,17 +3,17 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.node_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / NodeRecord
-  - [NodeRecord](#noderecord)
-    - [NodeRecord().get_documented_attribute_strings](#noderecordget_documented_attribute_strings)
-    - [NodeRecord().get_related_import_strings](#noderecordget_related_import_strings)
-    - [NodeRecord().is_line_fit](#noderecordis_line_fit)
-    - [NodeRecord().iter_children](#noderecorditer_children)
-    - [NodeRecord().line_number](#noderecordline_number)
-    - [NodeRecord().line_number](#noderecordline_number)
-    - [NodeRecord().parse](#noderecordparse)
-    - [NodeRecord().related_names](#noderecordrelated_names)
-    - [NodeRecord().render](#noderecordrender)
-    - [NodeRecord().render_indent](#noderecordrender_indent)
+    - [NodeRecord](#noderecord)
+        - [NodeRecord().get_documented_attribute_strings](#noderecordget_documented_attribute_strings)
+        - [NodeRecord().get_related_import_strings](#noderecordget_related_import_strings)
+        - [NodeRecord().is_line_fit](#noderecordis_line_fit)
+        - [NodeRecord().iter_children](#noderecorditer_children)
+        - [NodeRecord().line_number](#noderecordline_number)
+        - [NodeRecord().line_number](#noderecordline_number)
+        - [NodeRecord().parse](#noderecordparse)
+        - [NodeRecord().related_names](#noderecordrelated_names)
+        - [NodeRecord().render](#noderecordrender)
+        - [NodeRecord().render_indent](#noderecordrender_indent)
 
 ## NodeRecord
 

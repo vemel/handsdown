@@ -268,17 +268,19 @@ class Generator:
             module_record.import_string,
             max_depth=self._toc_depth,
             md_document=md_document,
+            start_level=2,
         )
 
         toc_lines = md_document.toc_section.split("\n")
         breadscrumbs = self._build_breadcrumbs_string(
             module_record=module_record, md_document=md_document
         )
-        toc_lines[0] = "- {}".format(breadscrumbs)
+        toc_lines[0] = md_document.get_toc_line(breadscrumbs, level=0)
         if modules_toc_lines:
-            toc_lines.append("  - {}".format(self.MODULES_TITLE))
+            toc_line = md_document.get_toc_line(self.MODULES_TITLE, level=1)
+            toc_lines.append(toc_line)
             for line in modules_toc_lines:
-                toc_lines.append("    {}".format(line))
+                toc_lines.append(line)
 
         md_document.toc_section = "\n".join(toc_lines)
 
@@ -399,11 +401,11 @@ class Generator:
             md_modules.subtitle = "\n\n".join(subtitle_parts)
 
             modules_toc_lines = self._build_modules_toc_lines(
-                import_string="", max_depth=10, md_document=md_modules
+                import_string="", max_depth=10, md_document=md_modules, start_level=1
             )
-            modules_toc_lines.insert(
-                0, "- {}".format(md_modules.render_md_doc_link(self.md_index))
-            )
+
+            md_doc_link = md_modules.render_md_doc_link(self.md_index)
+            modules_toc_lines.insert(0, md_modules.get_toc_line(md_doc_link, level=0))
 
             md_modules.toc_section = "\n".join(modules_toc_lines)
 
@@ -556,8 +558,10 @@ class Generator:
             for block in section.blocks:
                 md_document.append(block.render())
 
-    def _build_modules_toc_lines(self, import_string, max_depth, md_document):
-        # type: (Text, int, MDDocument) -> List[Text]
+    def _build_modules_toc_lines(
+        self, import_string, max_depth, md_document, start_level
+    ):
+        # type: (Text, int, MDDocument, int) -> List[Text]
         lines = []  # type: List[Text]
         parts = []  # type: List[Text]
         if import_string:
@@ -569,7 +573,9 @@ class Generator:
             if module_record.import_string == import_string:
                 continue
 
-            if not module_record.import_string.startswith("{}.".format(import_string)):
+            if import_string and not module_record.import_string.startswith(
+                "{}.".format(import_string)
+            ):
                 continue
 
             import_string_parts = split_import_string(module_record.import_string)
@@ -586,15 +592,19 @@ class Generator:
                     and last_import_string_parts[index] == import_string_parts[index]
                 ):
                     continue
-                indent = "  " * (index - len(parts))
-                lines.append("{}- {}".format(indent, title_part))
+                toc_line = md_document.get_toc_line(
+                    title_part, level=index - len(parts) + start_level
+                )
+                lines.append(toc_line)
 
             last_import_string_parts = import_string_parts
-            indent = "  " * (len(title_parts) - len(parts) - 1)
             link = md_document.render_doc_link(
                 title=title_parts[-1],
                 target_path=output_path,
                 anchor=md_document.get_anchor(title_parts[-1]),
             )
-            lines.append("{}- {}".format(indent, link))
+            toc_line = md_document.get_toc_line(
+                link, level=len(title_parts) - len(parts) - 1 + start_level
+            )
+            lines.append(toc_line)
         return lines

@@ -5,8 +5,8 @@
 Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
-  - [SmartDocstringProcessor](#smartdocstringprocessor)
-    - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
+    - [SmartDocstringProcessor](#smartdocstringprocessor)
+        - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 
 - [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
 - [RSTDocstringProcessor](rst.md#rstdocstringprocessor)

@@ -5,12 +5,12 @@
 Loader for python source code.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Loader
-  - [Loader](#loader)
-    - [Loader().get_import_string](#loaderget_import_string)
-    - [Loader().get_module_record](#loaderget_module_record)
-    - [Loader().get_output_path](#loaderget_output_path)
-    - [Loader.parse_module_record](#loaderparse_module_record)
-  - [LoaderError](#loadererror)
+    - [Loader](#loader)
+        - [Loader().get_import_string](#loaderget_import_string)
+        - [Loader().get_module_record](#loaderget_module_record)
+        - [Loader().get_output_path](#loaderget_output_path)
+        - [Loader.parse_module_record](#loaderparse_module_record)
+    - [LoaderError](#loadererror)
 
 ## Loader
 

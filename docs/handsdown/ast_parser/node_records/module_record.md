@@ -3,11 +3,11 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ModuleRecord
-  - [ModuleRecord](#modulerecord)
-    - [ModuleRecord().build_children](#modulerecordbuild_children)
-    - [ModuleRecord().find_record](#modulerecordfind_record)
-    - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
-    - [ModuleRecord().iter_records](#modulerecorditer_records)
+    - [ModuleRecord](#modulerecord)
+        - [ModuleRecord().build_children](#modulerecordbuild_children)
+        - [ModuleRecord().find_record](#modulerecordfind_record)
+        - [ModuleRecord().get_title_parts](#modulerecordget_title_parts)
+        - [ModuleRecord().iter_records](#modulerecorditer_records)
 
 ## ModuleRecord
 

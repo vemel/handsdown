@@ -3,9 +3,9 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.import_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ImportRecord
-  - [ImportRecord](#importrecord)
-    - [ImportRecord().get_import_string](#importrecordget_import_string)
-    - [ImportRecord().match](#importrecordmatch)
+    - [ImportRecord](#importrecord)
+        - [ImportRecord().get_import_string](#importrecordget_import_string)
+        - [ImportRecord().match](#importrecordmatch)
 
 ## ImportRecord
 

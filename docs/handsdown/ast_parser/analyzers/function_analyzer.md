@@ -3,13 +3,13 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.function_analyzer](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py) module.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
-  - [FunctionAnalyzer](#functionanalyzer)
-    - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
-    - [FunctionAnalyzer().visit_Attribute](#functionanalyzervisit_attribute)
-    - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzervisit_functiondef)
-    - [FunctionAnalyzer().visit_Name](#functionanalyzervisit_name)
-    - [FunctionAnalyzer().visit_Subscript](#functionanalyzervisit_subscript)
-    - [FunctionAnalyzer().visit_arguments](#functionanalyzervisit_arguments)
+    - [FunctionAnalyzer](#functionanalyzer)
+        - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
+        - [FunctionAnalyzer().visit_Attribute](#functionanalyzervisit_attribute)
+        - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzervisit_functiondef)
+        - [FunctionAnalyzer().visit_Name](#functionanalyzervisit_name)
+        - [FunctionAnalyzer().visit_Subscript](#functionanalyzervisit_subscript)
+        - [FunctionAnalyzer().visit_arguments](#functionanalyzervisit_arguments)
 
 ## FunctionAnalyzer
 

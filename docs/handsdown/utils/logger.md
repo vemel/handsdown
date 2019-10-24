@@ -3,7 +3,7 @@
 > Auto-generated documentation for [handsdown.utils.logger](https://github.com/vemel/handsdown/blob/master/handsdown/utils/logger.py) module.
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Utils](index.md#utils) / Logger
-  - [get_logger](#get_logger)
+    - [get_logger](#get_logger)
 
 ## get_logger
 
