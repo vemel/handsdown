@@ -1,5 +1,5 @@
 import ast
-from typing import List, Text, Set, Union, Optional, TYPE_CHECKING, cast
+from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -11,12 +11,14 @@ if TYPE_CHECKING:
 class AttributeRecord(NodeRecord):
     def __init__(self, node):
         # type: (ast.Assign) -> None
+        assert isinstance(node, ast.Assign)
+
         super(AttributeRecord, self).__init__(node)
-        self.node = cast(ast.Assign, self.node)
         self.default = None  # type: Optional[ExpressionRecord]
-        self.target = cast(ast.Name, self.node.targets[0])
-        self.name = self.target.id
-        self.value = ExpressionRecord(self.node.value)
+        first_target = node.targets[0]
+        assert isinstance(first_target, ast.Name)
+        self.name = first_target.id
+        self.value = ExpressionRecord(node.value)
 
     @property
     def related_names(self):

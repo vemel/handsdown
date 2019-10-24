@@ -13,13 +13,15 @@ if TYPE_CHECKING:
 class ClassRecord(NodeRecord):
     def __init__(self, node):
         # type: (ast.ClassDef) -> None
+        assert isinstance(node, ast.ClassDef)
+
         super(ClassRecord, self).__init__(node)
         self.method_records = []  # type: List[FunctionRecord]
         self.decorators = []  # type: List[ExpressionRecord]
         self.argument_records = []  # type: List[ArgumentRecord]
         self.bases = []  # type: List[ExpressionRecord]
         self.support_split = True
-        self.name = self.node.name
+        self.name = node.name
         self.title = self.name
         self.docstring = self._get_docstring()
 

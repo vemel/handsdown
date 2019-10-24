@@ -14,6 +14,8 @@ class FunctionRecord(NodeRecord):
 
     def __init__(self, node, is_method):
         # type: (ast.FunctionDef, bool) -> None
+        assert isinstance(node, ast.FunctionDef)
+
         super(FunctionRecord, self).__init__(node)
         self.arguments = []  # type: List[ArgumentRecord]
         self.is_method = is_method
@@ -23,7 +25,7 @@ class FunctionRecord(NodeRecord):
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
-        self.name = self.node.name
+        self.name = node.name
         self.title = self.name
         self.docstring = self._get_docstring()
 
@@ -40,9 +42,10 @@ class FunctionRecord(NodeRecord):
 
         return result
 
-    def _parse(self):
+    def _parse_decorators(self):
         # type: () -> None
         assert isinstance(self.node, ast.FunctionDef)
+
         self.decorators = []
         for index, expr in enumerate(self.node.decorator_list):
             decorator = ExpressionRecord(expr)
@@ -61,6 +64,12 @@ class FunctionRecord(NodeRecord):
                     self.is_classmethod = True
 
             self.decorators.append(decorator)
+
+    def _parse(self):
+        # type: () -> None
+        assert isinstance(self.node, ast.FunctionDef)
+
+        self._parse_decorators()
 
         for arg in self.node.args.args:
             record = ArgumentRecord(arg)
