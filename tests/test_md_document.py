@@ -104,7 +104,7 @@ class TestMDDocument(unittest.TestCase):
         md_doc.add_toc_if_not_exists()
         self.assertEqual(
             md_doc.toc_section,
-            "- [header](#header)\n  - [header2](#header2)\n    - [header3](#header3)",
+            "- [header](#header)\n    - [header2](#header2)\n        - [header3](#header3)",
         )
 
     def test_append(self):
@@ -189,6 +189,6 @@ class TestMDDocument(unittest.TestCase):
         md_doc.append("# no header\nasdd")
         self.assertEqual(
             md_doc.generate_toc_section(),
-            "- [header](#header)\n  - [header2](#header2)\n    - [header3](#header3)",
+            "- [header](#header)\n    - [header2](#header2)\n        - [header3](#header3)",
         )
         # raise ValueError()

@@ -404,6 +404,7 @@ class MDDocument(object):
 
     @classmethod
     def get_toc_line(cls, line, level=0):
+        # type: (Text, int) -> Text
         """
         Get ToC `line` of given `level`.
 

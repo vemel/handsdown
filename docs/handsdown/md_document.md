@@ -158,7 +158,7 @@ A test of anchor link.
 
 ```python
 @classmethod
-def get_toc_line(line, level=0):
+def get_toc_line(line: int, level: Text = 0) -> Text:
 ```
 
 Get ToC `line` of given `level`.
