@@ -1,7 +1,7 @@
 black==19.3b0; python_version >= '3.7'
 codecov==2.0.15
-mypy==0.730; python_version >= '3.5'
-pylint==2.4.2; python_version >= '3.5'
+mypy==0.740; python_version >= '3.5'
+pylint==2.4.3; python_version >= '3.5'
 pytest-cov==2.8.1
 pytest==4.6.6; python_version < '3.5'
 pytest==5.2.1; python_version >= '3.5'
