@@ -34,7 +34,7 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 
 #### See also
 
-- [Section](#section)
+- [SectionBlock](#sectionblock)
 
 ### Section().render
 
@@ -157,7 +157,7 @@ Iterate over existing [Section](#section) objects.
 
 #### See also
 
-- [SectionMap().sections](#sectionmapsections)
+- [Section](#section)
 
 ### SectionMap().trim_block
 

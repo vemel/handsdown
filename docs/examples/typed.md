@@ -39,7 +39,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 #### See also
 
-- [Typed.classmethod](#typedclassmethod)
+- [MyValue](#myvalue)
 
 ## func
 
@@ -55,4 +55,4 @@ def func(
 
 #### See also
 
-- [func](#func)
+- [MyValue](#myvalue)

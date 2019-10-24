@@ -38,7 +38,7 @@ class Typed():
 
 #### See also
 
-- [Typed](#typed)
+- [MyValue](#myvalue)
 
 ### Typed.classmethod
 
@@ -51,7 +51,7 @@ def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
 
 #### See also
 
-- [Typed.classmethod](#typedclassmethod)
+- [MyValue](#myvalue)
 
 ## func
 
@@ -67,7 +67,7 @@ def func(
 
 #### See also
 
-- [func](#func)
+- [MyValue](#myvalue)
 
 ## func_any
 
@@ -83,4 +83,4 @@ def func_any(
 
 #### See also
 
-- [func_any](#func_any)
+- [MyValue](#myvalue)

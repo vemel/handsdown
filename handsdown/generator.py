@@ -524,7 +524,10 @@ class Generator:
             if not related_record:
                 continue
 
-            title = record.title
+            if related_record is record:
+                continue
+
+            title = related_record.title
             output_path = self._loader.get_output_path(module_record.source_path)
             link = md_document.render_doc_link(
                 title, target_path=output_path, anchor=md_document.get_anchor(title)
