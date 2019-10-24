@@ -235,5 +235,4 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     def generic_visit(self, node):
         # type: (ast.AST) -> None
-        print(node)
         self.parts.append("...")

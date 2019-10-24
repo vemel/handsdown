@@ -24,3 +24,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
         record = AttributeRecord(node)
         self.attribute_records.append(record)
+
+    # def generic_visit(self, _node):
+    #     # type: (ast.AST) -> None
+    #     pass

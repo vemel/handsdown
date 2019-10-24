@@ -6,6 +6,8 @@ if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
     from handsdown.ast_parser.node_records.class_record import ClassRecord
     from handsdown.ast_parser.node_records.import_record import ImportRecord
+    from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
+    from handsdown.ast_parser.node_records.argument_record import ExpressionRecord
     from handsdown.ast_parser.type_defs import Node
 
 

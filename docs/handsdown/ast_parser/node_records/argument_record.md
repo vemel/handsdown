@@ -8,16 +8,22 @@
 
 ## ArgumentRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L12)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L11)
 
 ```python
 class ArgumentRecord(NodeRecord):
-    def __init__(node: ast.arg) -> None:
+    def __init__(
+        node: ast.arg,
+        name: Text,
+        default: Optional[ExpressionRecord] = None,
+        type_hint: Optional[ExpressionRecord] = None,
+        prefix: Text = '',
+    ) -> None:
 ```
 
 ### ArgumentRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L50)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L27)
 
 ```python
 @property

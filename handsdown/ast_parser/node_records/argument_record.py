@@ -1,51 +1,28 @@
-import ast
 from typing import List, Text, Set, Union, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
-from handsdown.utils import isinstance_str
 
 if TYPE_CHECKING:
+    import ast
+    from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.sentinel import Sentinel
 
 
 class ArgumentRecord(NodeRecord):
-    def __init__(self, node):
-        # type: (ast.arg) -> None
+    def __init__(
+        self,
+        node,  # type: ast.arg
+        name,  # type: Text
+        default=None,  # type: Optional[ExpressionRecord]
+        type_hint=None,  # type: Optional[ExpressionRecord]
+        prefix="",  # type: Text
+    ):
+        # type: (...) -> None
         super(ArgumentRecord, self).__init__(node)
-        self.default = None  # type: Optional[ExpressionRecord]
-        self.type_hint = self._get_type_hint()
-        self.prefix = ""
-        self.name = self._get_name()
-
-    def _get_type_hint(self):
-        # type: () -> Optional[ExpressionRecord]
-        if isinstance(self.node, ast.Name):
-            return None
-
-        # FIXME: hacks for py27
-        if isinstance_str(self.node):
-            return None
-
-        if isinstance(self.node, ast.arg):
-            if self.node.annotation:
-                return ExpressionRecord(self.node.annotation)
-
-        return None
-
-    def _get_name(self):
-        # type: () -> Text
-        if isinstance(self.node, ast.Name):
-            return self.node.id
-
-        # FIXME: hacks for py27
-        if isinstance_str(self.node):
-            return str(self.node)
-
-        if isinstance(self.node, ast.arg):
-            return self.node.arg
-
-        return ""
+        self.default = default  # type: Optional[ExpressionRecord]
+        self.type_hint = type_hint
+        self.prefix = prefix
+        self.name = name
 
     @property
     def related_names(self):
@@ -63,6 +40,7 @@ class ArgumentRecord(NodeRecord):
         parts = []  # type: List[Union[Text, Sentinel, ExpressionRecord]]
         if self.prefix:
             parts.append(self.prefix)
+
         parts.append(self.name)
         if self.type_hint:
             parts.append(": ")
@@ -78,5 +56,7 @@ class ArgumentRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
+        if self.default:
+            self.default.parse()
         if self.type_hint:
             self.type_hint.parse()

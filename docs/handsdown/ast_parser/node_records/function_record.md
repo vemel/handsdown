@@ -9,7 +9,7 @@
 
 ## FunctionRecord
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L11)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L14)
 
 ```python
 class FunctionRecord(NodeRecord):
@@ -18,7 +18,7 @@ class FunctionRecord(NodeRecord):
 
 ### FunctionRecord().parse_type_comments
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L126)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L113)
 
 ```python
 def parse_type_comments(lines: List[Text]) -> None:
@@ -26,7 +26,7 @@ def parse_type_comments(lines: List[Text]) -> None:
 
 ### FunctionRecord().related_names
 
-[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L32)
+[🔍 find in source code](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L35)
 
 ```python
 @property

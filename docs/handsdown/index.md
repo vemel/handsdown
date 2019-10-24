@@ -18,6 +18,7 @@ Root of `handsdown` source code.
         - [BaseAnalyzer](ast_parser/analyzers/base_analyzer.md#baseanalyzer)
         - [ClassAnalyzer](ast_parser/analyzers/class_analyzer.md#classanalyzer)
         - [ExpressionAnalyzer](ast_parser/analyzers/expression_analyzer.md#expressionanalyzer)
+        - [FunctionAnalyzer](ast_parser/analyzers/function_analyzer.md#functionanalyzer)
         - [ModuleAnalyzer](ast_parser/analyzers/module_analyzer.md#moduleanalyzer)
       - [ModuleRecordList](ast_parser/module_record_list.md#modulerecordlist)
       - [Node Records](ast_parser/node_records/index.md#node-records)

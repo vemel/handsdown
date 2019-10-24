@@ -7,4 +7,5 @@
     - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
     - [ClassAnalyzer](class_analyzer.md#classanalyzer)
     - [ExpressionAnalyzer](expression_analyzer.md#expressionanalyzer)
+    - [FunctionAnalyzer](function_analyzer.md#functionanalyzer)
     - [ModuleAnalyzer](module_analyzer.md#moduleanalyzer)

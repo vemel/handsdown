@@ -8,6 +8,7 @@
       - [BaseAnalyzer](analyzers/base_analyzer.md#baseanalyzer)
       - [ClassAnalyzer](analyzers/class_analyzer.md#classanalyzer)
       - [ExpressionAnalyzer](analyzers/expression_analyzer.md#expressionanalyzer)
+      - [FunctionAnalyzer](analyzers/function_analyzer.md#functionanalyzer)
       - [ModuleAnalyzer](analyzers/module_analyzer.md#moduleanalyzer)
     - [ModuleRecordList](module_record_list.md#modulerecordlist)
     - [Node Records](node_records/index.md#node-records)
