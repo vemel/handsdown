@@ -10,9 +10,9 @@ jobs:
     # - os: linux
     #   python: 3.5
     #   env: TOXENV=py35
-    - os: linux
-      python: 2.7
-      env: TOXENV=py27
+    # - os: linux
+    #   python: 2.7
+    #   env: TOXENV=py27
     # - os: osx
     #   python: 3.7
     #   env: TOXENV=py37
@@ -24,7 +24,7 @@ env:
   - CODECOV_TOKEN="2ebbb6e9-4150-4f2f-80ba-7abd36be7e41"
 script:
   - handsdown -o docs_local
-  - if [ "$TOXENV" = "py27" ]; then pytest; fi
+  - if [ "$TOXENV" = "py35" ]; then pytest; fi
   - if [ "$TOXENV" = "py37" ]; then pytest --cov-report term --cov=handsdown; fi
   - if [ "$TOXENV" = "py37" ]; then mypy handsdown; fi
   - if [ "$TOXENV" = "py37" ]; then pylint handsdown; fi

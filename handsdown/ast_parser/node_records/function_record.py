@@ -45,29 +45,6 @@ class FunctionRecord(NodeRecord):
 
         return result
 
-    # def _parse_decorators(self):
-    #     # type: () -> None
-    #     assert isinstance(self.node, ast.FunctionDef)
-
-    #     self.decorators = []
-    #     for index, expr in enumerate(self.node.decorator_list):
-    #         decorator = ExpressionRecord(expr)
-
-    #         # FIXME: py38 sets start line to def/class,
-    #         # move it to the first decorator
-    #         if index == 0:
-    #             self.line_number = decorator.line_number
-
-    #         decorator_name = ""
-    #         if isinstance(decorator.node, ast.Name):
-    #             decorator_name = decorator.node.id
-    #             if decorator_name == "staticmethod":
-    #                 self.is_staticmethod = True
-    #             if decorator_name == "classmethod":
-    #                 self.is_classmethod = True
-
-    #         self.decorators.append(decorator)
-
     def _parse(self):
         # type: () -> None
         assert isinstance(self.node, ast.FunctionDef)

@@ -12,7 +12,6 @@ pytest = "==5.2.1"
 pytest-cov = "==2.8.1"
 rope = "==0.14.0"
 astroid = "==2.3.1"
-mock = "==3.0.5"
 
 [packages]
 handsdown = {path = ".", editable = true}

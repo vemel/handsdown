@@ -3,7 +3,6 @@ from typing import Optional, List, Text
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
-from handsdown.utils import isinstance_str
 import handsdown.ast_parser.smart_ast as ast
 
 
@@ -21,7 +20,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         type_hint = None
         if isinstance(arg, ast.Name):
             name = arg.id
-        elif isinstance_str(arg):
+        elif isinstance(arg, str):
             name = str(arg)
         else:
             if arg.annotation:
@@ -50,7 +49,7 @@ class FunctionAnalyzer(BaseAnalyzer):
                 record = self._get_argument_record(arg, None)
                 self.argument_records.append(record)
 
-        # FIXME: py27 ast.args does not have `kwonlyargs` attribute
+        # FIXME: `AST2` ast.args does not have `kwonlyargs` attribute
         if hasattr(node, "kwonlyargs"):
             for index, arg in enumerate(node.kwonlyargs):
                 default = None
@@ -83,7 +82,7 @@ class FunctionAnalyzer(BaseAnalyzer):
             self.visit(decorator_node)
         self.visit(node.args)
 
-        # FIXME: in py27 FunctionDef has no `returns` attribute
+        # FIXME: `AST2` FunctionDef has no `returns` attribute
         if hasattr(node, "returns") and node.returns:
             self.return_type_hint = ExpressionRecord(node.returns)
 

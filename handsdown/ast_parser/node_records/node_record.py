@@ -3,7 +3,6 @@ from typing import Text, Set, Generator, Tuple, List, Optional, TYPE_CHECKING
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.utils import isinstance_str
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
@@ -49,7 +48,7 @@ class NodeRecord(object):
     def line_number(self):
         # type: () -> int
         if self._line_number is None:
-            if isinstance_str(self.node):
+            if isinstance(self.node, str):
                 return 1
 
             self._line_number = getattr(self.node, "lineno", 1)
@@ -102,10 +101,7 @@ class NodeRecord(object):
             if isinstance(part, NodeRecord):
                 result.append(part.render(indent, allow_multiline))
 
-            if isinstance_str(part):
-                part = str(part)
-                if part.startswith("u'"):
-                    part = part[1:]
+            if isinstance(part, str):
                 result.append(part)
 
         return "".join(result).replace("\n", " ")
@@ -134,10 +130,7 @@ class NodeRecord(object):
             if isinstance(part, NodeRecord):
                 result.append(part.render(indent, allow_multiline))
 
-            if isinstance_str(part):
-                part = str(part)
-                if part.startswith("u'"):
-                    part = part[1:]
+            if isinstance(part, str):
                 result.append(part)
 
         lines = "".join(result).split("\n")
