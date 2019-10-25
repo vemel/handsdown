@@ -209,10 +209,12 @@ class Generator:
                 continue
 
             output_path = self._loader.get_output_path(module_record.source_path)
-            with MDDocument(output_path) as md_document:
-                self._generate_doc(module_record, md_document)
-                self._replace_short_links(module_record, md_document)
-                self._replace_full_links(md_document)
+
+            md_document = MDDocument(output_path)
+            self._generate_doc(module_record, md_document)
+            self._replace_short_links(module_record, md_document)
+            self._replace_full_links(md_document)
+            md_document.write()
 
             return
 
@@ -321,6 +323,7 @@ class Generator:
             + import_string_breadcrumbs
             + [module_record.title]
         )
+        print(breadcrumbs)
 
         return " / ".join(breadcrumbs)
 
@@ -337,10 +340,11 @@ class Generator:
 
         for module_record in self._module_records:
             output_path = self._loader.get_output_path(module_record.source_path)
-            with MDDocument(output_path) as md_document:
-                self._generate_doc(module_record, md_document)
-                self._replace_short_links(module_record, md_document)
-                self._replace_full_links(md_document)
+            md_document = MDDocument(output_path)
+            self._generate_doc(module_record, md_document)
+            self._replace_short_links(module_record, md_document)
+            self._replace_full_links(md_document)
+            md_document.write()
 
     def generate_index(self):
         # type: () -> None
