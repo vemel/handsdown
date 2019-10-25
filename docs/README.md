@@ -105,8 +105,13 @@ Navigate to `docs/README.md` to check your new documentation!
 ### 📦 As a Docker image
 
 - Install [Docker](https://docs.docker.com/install/)
-- Pull latest version `docker pull docker.pkg.github.com/vemel/handsdown/handsdown:latest`
-- Tag it `docker tag docker.pkg.github.com/vemel/handsdown/handsdown:latest handsdown`
+- Pull latest `handsdown` version and tag it
+
+```bash
+docker pull docker.pkg.github.com/vemel/handsdown/handsdown:latest
+docker tag docker.pkg.github.com/vemel/handsdown/handsdown:latest handsdown
+```
+
 - Generate docs for `ProjectName` in current directory
 
 ```bash
@@ -115,6 +120,9 @@ docker run -v `pwd`:/app handsdown -n ProjectName
 
 # for Python 2 project
 PYTHON_VER=2 docker run -v `pwd`:/app handsdown -n ProjectName
+
+# generate documentation for deployment
+docker run -v `pwd`:/app handsdown --external `git config --get remote.origin.url` -n ProjectName
 ```
 
 ### 📝 As a GitHub Pages manager
