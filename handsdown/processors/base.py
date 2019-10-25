@@ -32,6 +32,8 @@ class BaseDocstringProcessor(object):
         self._in_codeblock = False
         self._in_doctest_block = False
         self._in_tilde_block = False
+        self._in_md_codeblock = False
+        self._in_indent_codeblock = False
         self._codeblock_indent = 0
         self._codeblock_lines_count = 0
         self.section_map = SectionMap()
@@ -43,6 +45,8 @@ class BaseDocstringProcessor(object):
         self._in_codeblock = False
         self._in_doctest_block = False
         self._in_tilde_block = False
+        self._in_md_codeblock = False
+        self._in_indent_codeblock = False
         self.section_map = SectionMap()
         self._current_indent = 0
         self._codeblock_indent = 0
@@ -77,8 +81,13 @@ class BaseDocstringProcessor(object):
                 continue
 
             # adding new lines to a code block
-            if self._in_codeblock:
-                self._parse_code_line(line)
+            if self._in_md_codeblock:
+                self._parse_md_codeblock_line(line)
+                continue
+
+            # adding new lines to an indented code block
+            if self._in_indent_codeblock:
+                self._parse_indent_codeblock_line(line)
                 continue
 
             # adding new block on empty line outside of a code block
@@ -88,7 +97,7 @@ class BaseDocstringProcessor(object):
 
             self._parse_line(line)
 
-        if self._in_codeblock:
+        if self._in_indent_codeblock:
             self._trim_empty_lines()
             self._add_line("```", indent=0)
 
@@ -117,7 +126,7 @@ class BaseDocstringProcessor(object):
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
 
-    def _parse_code_line(self, line):
+    def _parse_md_codeblock_line(self, line):
         # type: (Text) -> None
         if not line and self._codeblock_lines_count == 0:
             return
@@ -125,9 +134,33 @@ class BaseDocstringProcessor(object):
         if self._codeblock_lines_count == 0:
             self._codeblock_indent = max(self._codeblock_indent, self._current_indent)
 
+        # end MD-style codeblock
+        if line.startswith("```"):
+            self._in_codeblock = False
+            self._in_md_codeblock = False
+            self._add_line("```", indent=0)
+            self._add_block()
+            return
+
+        self._add_line(line, indent=self._current_indent - self._codeblock_indent)
+        self._codeblock_lines_count += 1
+
+    def _parse_indent_codeblock_line(self, line):
+        # type: (Text) -> None
+        if not line and self._codeblock_lines_count == 0:
+            return
+
+        if self._codeblock_lines_count == 0:
+            self._codeblock_indent = max(self._codeblock_indent, self._current_indent)
+
+        # escape MD-style codeblock end
+        if line.startswith("```"):
+            line = "'{}".format(line[1:])
+
         # this is actually a doctest block as it starts with `>>>`
         if self._codeblock_lines_count == 0 and line.startswith(">>>"):
             self._in_doctest_block = True
+            self._in_indent_codeblock = False
             self._codeblock_indent = self._current_indent
             self._parse_doctest_line(line)
             return
@@ -135,17 +168,11 @@ class BaseDocstringProcessor(object):
         # end RST-style codeblock
         if line and self._current_indent < self._codeblock_indent:
             self._in_codeblock = False
+            self._in_indent_codeblock = False
             self._trim_empty_lines()
             self._add_line("```", indent=0)
             self._add_block()
             self._parse_line(line)
-            return
-
-        # end MD-style codeblock
-        if line.startswith("```") or line.startswith("~~~"):
-            self._add_line("```", indent=0)
-            self._add_block()
-            self._in_codeblock = False
             return
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
@@ -187,19 +214,22 @@ class BaseDocstringProcessor(object):
         # type: () -> None
         self.section_map.trim_block(self.current_section_name)
 
-    def _parse_line(self, line):
+    def _parse_codeblock_start(self, line):
         # type: (Text) -> None
+
         # MD-style codeblock starts with triple backticks
         if line.startswith("```"):
             self._in_codeblock = True
+            self._in_md_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line("```{}".format(line.replace("```", "")), indent=0)
+            self._add_line("```{}".format(line.replace("`", "")), indent=0)
             return
 
         # Tilde block starts with triple tildes
         if line.startswith("~~~"):
+            self._in_codeblock = True
             self._in_tilde_block = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
@@ -209,13 +239,20 @@ class BaseDocstringProcessor(object):
 
         # Doctest line starts with `>>>` and continues with `...` and output lines
         if line.startswith(">>>"):
-            self._in_doctest_block = True
             self._in_codeblock = True
+            self._in_doctest_block = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
             self._add_line("```python", indent=0)
             self._parse_doctest_line(line)
+            return
+
+    def _parse_line(self, line):
+        # type: (Text) -> None
+        self._parse_codeblock_start(line)
+
+        if self._in_codeblock:
             return
 
         # If there is a line with a section name - set this section as active
@@ -227,6 +264,7 @@ class BaseDocstringProcessor(object):
         if line.endswith("::") and line[:-1] in self.section_name_map:
             self.current_section_name = self.section_name_map[line[:-1]]
             self._in_codeblock = True
+            self._in_indent_codeblock = True
             self._codeblock_indent = self._current_indent + 1
             self._codeblock_lines_count = 0
             self._add_line("```python", indent=0)
@@ -260,6 +298,7 @@ class BaseDocstringProcessor(object):
         # RST-style codeblock start with `::` in the end of the line
         if line.endswith("::"):
             self._in_codeblock = True
+            self._in_indent_codeblock = True
             self._codeblock_indent = self._current_indent + 1
             self._codeblock_lines_count = 0
             self._add_line(line[:-2])

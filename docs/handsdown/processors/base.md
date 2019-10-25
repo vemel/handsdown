@@ -31,7 +31,7 @@ Base docstring processor. All docstring processors are based on top of it.
 
 ### BaseDocstringProcessor().build_sections
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L51)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/base.py#L55)
 
 ```python
 def build_sections(content: Text) -> SectionMap:
