@@ -1,5 +1,11 @@
-# pylint: disable=all
-from typing import Text, List, Union, Any, Dict, Tuple, Type, Set
+# pylint: disable=missing-docstring
+"""
+# Stub file type annotations examples
+
+## Links
+
+[Stub files](https://mypy.readthedocs.io/en/latest/stubs.html)
+"""
 
 
 class MyValue:

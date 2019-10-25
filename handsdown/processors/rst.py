@@ -1,4 +1,6 @@
 """
+# reStructuredText
+
 Docstring processor for restructured text docstring format.
 """
 

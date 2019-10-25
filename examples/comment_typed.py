@@ -1,4 +1,11 @@
-# pylint: disable=all
+# pylint: disable=missing-docstring,no-self-use,dangerous-default-value
+"""
+# PEP 484 - comment-based type annotations examples
+
+## Links
+
+[PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
+"""
 from typing import Text, List, Union, Any, Dict, Tuple, Type, Set
 
 

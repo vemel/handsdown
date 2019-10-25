@@ -1,4 +1,6 @@
 """
+# Smart AST
+
 Provides compatibility between AST 2 and 3.
 """
 import os

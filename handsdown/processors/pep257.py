@@ -1,4 +1,6 @@
 """
+# PEP257
+
 Docstring processor for PEP 257 and Google docstring format.
 """
 

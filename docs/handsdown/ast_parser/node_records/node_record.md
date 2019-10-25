@@ -4,7 +4,7 @@
 
 Base class for all node records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / NodeRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / NodeRecord
     - [NodeRecord](#noderecord)
         - [NodeRecord().get_documented_attribute_strings](#noderecordget_documented_attribute_strings)
         - [NodeRecord().get_related_import_strings](#noderecordget_related_import_strings)

@@ -1,4 +1,4 @@
-# pylint: disable=all
+# pylint: disable=missing-docstring,no-self-use
 """
 # Google docstrings examples
 

@@ -4,7 +4,7 @@
 
 AST analyzer for `ast.FunctionDef` records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
     - [FunctionAnalyzer](#functionanalyzer)
         - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
         - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzervisit_functiondef)

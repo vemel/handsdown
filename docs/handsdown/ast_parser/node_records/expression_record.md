@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.expr` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ExpressionRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ExpressionRecord
     - [ExpressionRecord](#expressionrecord)
         - [ExpressionRecord().related_names](#expressionrecordrelated_names)
 

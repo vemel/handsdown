@@ -1,10 +1,10 @@
-# Ast Parser
+# AST Parser
 
 > Auto-generated documentation for [handsdown.ast_parser](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/__init__.py) module.
 
 Record is a wrpapper on top of an AST node.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / Ast Parser
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / AST Parser
     - Modules
         - [Analyzers](analyzers/index.md#analyzers)
             - [BaseAnalyzer](analyzers/base_analyzer.md#baseanalyzer)
@@ -23,5 +23,5 @@ Record is a wrpapper on top of an AST node.
             - [ModuleRecord](node_records/module_record.md#modulerecord)
             - [NodeRecord](node_records/node_record.md#noderecord)
             - [TextRecord](node_records/text_record.md#textrecord)
-        - [Smart Ast](smart_ast.md#smart-ast)
+        - [Smart AST](smart_ast.md#smart-ast)
         - [Type Defs](type_defs.md#type-defs)

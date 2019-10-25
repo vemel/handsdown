@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.FunctionDef` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / FunctionRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / FunctionRecord
     - [FunctionRecord](#functionrecord)
         - [FunctionRecord().parse_type_comments](#functionrecordparse_type_comments)
         - [FunctionRecord().related_names](#functionrecordrelated_names)

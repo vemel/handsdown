@@ -1,16 +1,22 @@
-# Typed
+# PEP 484 - type annotations examples
 
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/master/examples/typed.py) module.
 
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Typed
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 484 - type annotations examples
+    - [Links](#links)
     - [MyValue](#myvalue)
     - [Typed](#typed)
         - [Typed.classmethod](#typedclassmethod)
     - [func](#func)
+    - [my_deco](#my_deco)
+
+## Links
+
+[PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
 
 ## MyValue
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L5)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L12)
 
 ```python
 class MyValue():
@@ -18,7 +24,7 @@ class MyValue():
 
 ## Typed
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L9)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L16)
 
 ```python
 class Typed():
@@ -39,7 +45,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L27)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L34)
 
 ```python
 @classmethod
@@ -52,7 +58,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 ## func
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L32)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L43)
 
 ```python
 @my_deco(key='value')
@@ -66,3 +72,11 @@ def func(
 #### See also
 
 - [MyValue](#myvalue)
+
+## my_deco
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L39)
+
+```python
+def my_deco(key):
+```

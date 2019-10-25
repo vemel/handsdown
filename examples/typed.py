@@ -1,4 +1,11 @@
-# pylint: disable=all
+# pylint: disable=missing-docstring
+"""
+# PEP 484 - type annotations examples
+
+## Links
+
+[PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
+"""
 from typing import Text, List, Union, Any, Dict, Tuple, Type
 
 
@@ -27,6 +34,10 @@ class Typed:
     @classmethod
     def classmethod(cls, _my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
         pass
+
+
+def my_deco(key):
+    return key
 
 
 @my_deco(key="value")
