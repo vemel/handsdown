@@ -323,7 +323,6 @@ class Generator:
             + import_string_breadcrumbs
             + [module_record.title]
         )
-        print(breadcrumbs)
 
         return " / ".join(breadcrumbs)
 
