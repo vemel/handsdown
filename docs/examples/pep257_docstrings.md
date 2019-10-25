@@ -27,9 +27,23 @@ PEP257-style class example
 - `attr1` - Description of `attr1`.
 - `attr2` - Description of `attr2`.
 
+```python
+Example of a code block
+```
+
+You can use `~~~` to start a block as well
+
+~~~
+MD block example inside a tilde block
+
+```python
+This is not a codeblock, test inside tildes rendered as it is
+```
+~~~
+
 ### ClassExample().method_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L21)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L35)
 
 ```python
 def method_example(text: Text = 'hello') -> int:
@@ -73,7 +87,7 @@ Description of return value
 
 ## function_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L54)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L68)
 
 ```python
 def function_example(real=0.0, imag=0.0):

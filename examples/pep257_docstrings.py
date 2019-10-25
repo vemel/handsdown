@@ -16,6 +16,20 @@ class ClassExample:
     Attributes:
         attr1 -- Description of `attr1`.
         attr2 -- Description of `attr2`.
+
+    ```python
+    Example of a code block
+    ```
+
+    You can use `~~~` to start a block as well
+
+    ~~~
+    MD block example inside a tilde block
+
+    ```python
+    This is not a codeblock, test inside tildes rendered as it is
+    ```
+    ~~~
     """
 
     def method_example(self, text: Text = "hello") -> int:

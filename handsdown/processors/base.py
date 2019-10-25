@@ -31,6 +31,7 @@ class BaseDocstringProcessor(object):
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
+        self._in_tilde_block = False
         self._codeblock_indent = 0
         self._codeblock_lines_count = 0
         self.section_map = SectionMap()
@@ -41,6 +42,7 @@ class BaseDocstringProcessor(object):
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
+        self._in_tilde_block = False
         self.section_map = SectionMap()
         self._current_indent = 0
         self._codeblock_indent = 0
@@ -67,6 +69,11 @@ class BaseDocstringProcessor(object):
             # adding new lines to a doctest code block
             if self._in_doctest_block:
                 self._parse_doctest_line(line)
+                continue
+
+            # adding new lines to a tilde block
+            if self._in_tilde_block:
+                self._parse_tilde_block_line(line)
                 continue
 
             # adding new lines to a code block
@@ -144,6 +151,24 @@ class BaseDocstringProcessor(object):
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
         self._codeblock_lines_count += 1
 
+    def _parse_tilde_block_line(self, line):
+        # type: (Text) -> None
+        if not line and self._codeblock_lines_count == 0:
+            return
+
+        if self._codeblock_lines_count == 0:
+            self._codeblock_indent = max(self._codeblock_indent, self._current_indent)
+
+        # end tilde block
+        if line.startswith("~~~"):
+            self._add_line("~~~", indent=0)
+            self._add_block()
+            self._in_tilde_block = False
+            return
+
+        self._add_line(line, indent=self._current_indent - self._codeblock_indent)
+        self._codeblock_lines_count += 1
+
     def _add_line(self, line, indent=None):
         # type: (Text, Optional[int]) -> None
         indent_str = " " * self._current_indent
@@ -165,12 +190,21 @@ class BaseDocstringProcessor(object):
     def _parse_line(self, line):
         # type: (Text) -> None
         # MD-style codeblock starts with triple backticks
-        if line.startswith("```") or line.startswith("~~~"):
+        if line.startswith("```"):
             self._in_codeblock = True
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line("```{}".format(line[3:]), indent=0)
+            self._add_line("```{}".format(line.replace("```", "")), indent=0)
+            return
+
+        # Tilde block starts with triple tildes
+        if line.startswith("~~~"):
+            self._in_tilde_block = True
+            self._codeblock_indent = self._current_indent
+            self._codeblock_lines_count = 0
+            self._add_block()
+            self._add_line("~~~{}".format(line.replace("~", "")), indent=0)
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines
