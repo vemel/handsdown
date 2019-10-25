@@ -75,7 +75,7 @@ class NodeRecord(object):
 
     def _get_docstring(self):
         # type: () -> Text
-        docstring = ast.get_docstring(self.node, clean=False) or ""  # type: ignore
+        docstring = ast.get_docstring(self.node, clean=False) or ""
         if isinstance(docstring, bytes):
             docstring = docstring.decode("utf-8")
         docstring = IndentTrimmer.trim_empty_lines(docstring)
