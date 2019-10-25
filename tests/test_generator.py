@@ -1,7 +1,7 @@
 import unittest
+from pathlib import Path
 
 from handsdown.generator import Generator
-from handsdown.path_finder import Path
 
 
 class TestGenerator(unittest.TestCase):

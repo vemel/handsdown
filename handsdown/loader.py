@@ -11,7 +11,7 @@ from handsdown.utils.logger import get_logger
 
 if TYPE_CHECKING:  # pragma: no cover
     import logging
-    from handsdown.path_finder import Path
+    from pathlib import Path
 
 
 class LoaderError(Exception):

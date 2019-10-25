@@ -3,10 +3,9 @@
 """
 import re
 import argparse
+from pathlib import Path
 
 from typing import Text, List
-
-from handsdown.path_finder import Path
 
 
 def git_repo(git_repo_url):

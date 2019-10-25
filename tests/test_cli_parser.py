@@ -1,7 +1,6 @@
 import unittest
 import argparse
-
-from handsdown.path_finder import Path
+from pathlib import Path
 
 
 from handsdown.cli_parser import (

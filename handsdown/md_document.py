@@ -12,8 +12,8 @@ from handsdown.path_finder import PathFinder
 from handsdown.utils import extract_md_title
 
 if TYPE_CHECKING:  # pragma: no cover
+    from pathlib import Path
     from types import TracebackType
-    from handsdown.path_finder import Path
 
 
 __all__ = ["MDDocument"]

@@ -6,12 +6,8 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 import fnmatch
 import glob
 import os
+from pathlib import Path
 from typing import Text, List, Iterable, Generator
-
-try:
-    from pathlib import Path
-except ImportError:
-    from pathlib2 import Path  # type: ignore
 
 
 __all__ = ["PathFinder", "PathFinderError"]

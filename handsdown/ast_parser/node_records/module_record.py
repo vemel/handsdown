@@ -7,10 +7,10 @@ from handsdown.utils import make_title, split_import_string
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
+    from pathlib import Path
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.class_record import ClassRecord
     from handsdown.ast_parser.node_records.import_record import ImportRecord
-    from handsdown.path_finder import Path
 
 
 class ModuleRecord(NodeRecord):

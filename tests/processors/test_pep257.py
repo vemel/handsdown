@@ -1,7 +1,7 @@
 import unittest
+from pathlib import Path
 
 from handsdown.processors.pep257 import PEP257DocstringProcessor
-from handsdown.path_finder import Path
 
 
 class TestLoader(unittest.TestCase):

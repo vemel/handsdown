@@ -2,9 +2,9 @@
 Handful utils that do not deserve a separate module.
 """
 import traceback
+from pathlib import Path
 from typing import Text, Any, Dict, Tuple, List, TYPE_CHECKING
 
-from handsdown.path_finder import Path
 from handsdown.settings import ASSETS_PATH
 
 

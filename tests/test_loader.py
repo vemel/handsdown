@@ -1,7 +1,7 @@
 import unittest
+from pathlib import Path
 
 from handsdown.loader import Loader
-from handsdown.path_finder import Path
 
 
 class TestLoader(unittest.TestCase):

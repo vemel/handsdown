@@ -1,9 +1,9 @@
 import unittest
 from unittest.mock import MagicMock, patch
 from tempfile import NamedTemporaryFile
+from pathlib import Path
 
 from handsdown.md_document import MDDocument
-from handsdown.path_finder import Path
 
 
 class TestMDDocument(unittest.TestCase):
