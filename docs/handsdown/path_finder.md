@@ -16,7 +16,7 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 
 ## PathFinder
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L26)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L20)
 
 ```python
 class PathFinder():
@@ -51,7 +51,7 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 
 ### PathFinder().exclude
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L93)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L87)
 
 ```python
 def exclude(*fn_exrps: Text) -> PathFinder:
@@ -71,7 +71,7 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L149)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L132)
 
 ```python
 def glob(glob_expr: Text) -> Generator[Path, None, None]:
@@ -86,7 +86,7 @@ Matching `Path` objects.
 
 ### PathFinder().include
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L72)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L66)
 
 ```python
 def include(*fn_exrps: Text) -> PathFinder:
@@ -106,7 +106,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L196)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L179)
 
 ```python
 def mkdir(force: bool = False) -> None:
@@ -124,7 +124,7 @@ Create directories up to `root` if they do not exist.
 
 ### PathFinder().relative
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L167)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L150)
 
 ```python
 def relative(target: Path) -> Path:
@@ -143,7 +143,7 @@ A relative path to `target`.
 
 ## PathFinderError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/path_finder.py#L14)
 
 ```python
 class PathFinderError(Exception):
