@@ -85,11 +85,8 @@ class Loader:
         import_string = self.get_import_string(source_path)
         docstring_parts = []
 
-        content = source_path.read_text()
-        source_lines = content.split("\n")
-
         try:
-            module_record = ModuleRecord(source_path, source_lines, import_string)
+            module_record = ModuleRecord(source_path, import_string)
             module_record.build_children()
         except Exception as e:
             raise LoaderError(

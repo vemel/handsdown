@@ -1,3 +1,6 @@
+"""
+Wrapper for an `ast.ClassDef` node.
+"""
 from typing import List, Set, Text, Generator, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
@@ -12,6 +15,13 @@ if TYPE_CHECKING:
 
 
 class ClassRecord(NodeRecord):
+    """
+    Wrapper for an `ast.ClassDef` node.
+
+    Arguments:
+        node -- AST node.
+    """
+
     def __init__(self, node):
         # type: (ast.ClassDef) -> None
         assert isinstance(node, ast.ClassDef)
@@ -43,11 +53,26 @@ class ClassRecord(NodeRecord):
 
     def iter_records(self):
         # type: () -> Generator[NodeRecord, None, None]
+        """
+        Iterate over Class public methods.
+
+        Yields:
+            A child record.
+        """
         for method in self.get_public_methods():
             yield method
 
     def get_public_methods(self):
         # type: () -> List[FunctionRecord]
+        """
+        Get Class public methods.
+
+        Skips methods with names starting with `_` and magic methods  `__` if
+        they have no docstring. Method `__init__` is always skipped.
+
+        Returns:
+            A list of child records.
+        """
         result = []
         for method_record in self.method_records:
             if method_record.name == "__init__":

@@ -2,13 +2,15 @@
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.argument_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py) module.
 
+Wrapper for an `ast.arg` node.
+
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [Ast Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
     - [ArgumentRecord](#argumentrecord)
         - [ArgumentRecord().related_names](#argumentrecordrelated_names)
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L15)
 
 ```python
 class ArgumentRecord(NodeRecord):
@@ -21,6 +23,12 @@ class ArgumentRecord(NodeRecord):
     ) -> None:
 ```
 
+Wrapper for an `ast.arg` node.
+
+#### Arguments
+
+- `node` - AST node.
+
 #### See also
 
 - [ExpressionRecord](expression_record.md#expressionrecord)
@@ -28,7 +36,7 @@ class ArgumentRecord(NodeRecord):
 
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L28)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L38)
 
 ```python
 @property

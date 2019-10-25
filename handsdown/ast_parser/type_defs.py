@@ -1,3 +1,6 @@
+"""
+Different AST-related types collection.
+"""
 from typing import Union, Text
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.sentinel import Sentinel

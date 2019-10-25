@@ -1,3 +1,6 @@
+"""
+Wrapper for an `ast.arg` node.
+"""
 from typing import List, Text, Set, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
@@ -10,6 +13,13 @@ if TYPE_CHECKING:
 
 
 class ArgumentRecord(NodeRecord):
+    """
+    Wrapper for an `ast.arg` node.
+
+    Arguments:
+        node -- AST node.
+    """
+
     def __init__(
         self,
         node,  # type: ast.arg

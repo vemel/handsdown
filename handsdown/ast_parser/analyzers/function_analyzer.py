@@ -1,3 +1,6 @@
+"""
+AST analyzer for `ast.FunctionDef` records.
+"""
 from typing import Optional, List, Text
 
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
@@ -7,6 +10,10 @@ import handsdown.ast_parser.smart_ast as ast
 
 
 class FunctionAnalyzer(BaseAnalyzer):
+    """
+    AST analyzer for `ast.FunctionDef` records.
+    """
+
     def __init__(self):
         # type: () -> None
         super(FunctionAnalyzer, self).__init__()
@@ -34,6 +41,46 @@ class FunctionAnalyzer(BaseAnalyzer):
 
     def visit_arguments(self, node):
         # type: (ast.arguments) -> None
+        """
+        Parse info about class method statements.
+
+        Adds new `FunctionRecord` entry to `method_records`.
+
+        Examples::
+
+            # simple arguments
+            def my_func(
+                arg1,
+                arg_default="value",
+                *args,
+                **kwargs,
+            ):
+                pass
+
+            # type annotated arguments
+            def my_func_typed(
+                arg1: Text,
+                arg_default: Text="value",
+            ):
+                pass
+
+            # keyword-only arguments
+            def my_func_kw_only(
+                *,
+                kw_only_arg
+            ):
+                pass
+
+            # pos-only arguments for py38
+            def my_func_kw_only(
+                pos_only_arg,
+                /
+            ):
+                pass
+
+        Arguments:
+            node -- AST node.
+        """
         for index, arg in enumerate(node.args):
             default = None
             default_index = len(node.defaults) - len(node.args) + index
@@ -68,18 +115,24 @@ class FunctionAnalyzer(BaseAnalyzer):
             record = self._get_argument_record(node.kwarg, None, prefix="**")
             self.argument_records.append(record)
 
-    def visit_Name(self, node):
-        # type: (ast.Name) -> None
-        self.decorator_records.append(ExpressionRecord(node))
-
-    def visit_Attribute(self, node):
-        # type: (ast.Attribute) -> None
-        self.decorator_records.append(ExpressionRecord(node))
-
     def visit_FunctionDef(self, node):
         # type: (ast.FunctionDef) -> None
+        """
+        Entrypoint for the analyzer.
+
+        Visits each node from `node.decorator_list` and `node.args`.
+        Adds new `ExpressionRecord` entries to `decorator_records`.
+
+        Examples::
+
+            def my_func():
+                pass
+
+        Arguments:
+            node -- AST node.
+        """
         for decorator_node in node.decorator_list:
-            self.visit(decorator_node)
+            self.decorator_records.append(ExpressionRecord(decorator_node))
         self.visit(node.args)
 
         # FIXME: `AST2` FunctionDef has no `returns` attribute
@@ -88,9 +141,27 @@ class FunctionAnalyzer(BaseAnalyzer):
 
     def visit_Subscript(self, node):
         # type: (ast.Subscript) -> None
+        """
+        Parse info about function return type annotation.
+
+        Sets `return_type_hint` to a new `ExpressionRecord`.
+
+        Examples::
+
+            def my_func() -> List[Text]:
+                pass
+
+        Arguments:
+            node -- AST node.
+        """
         self.return_type_hint = ExpressionRecord(node)
 
     def generic_visit(self, _node):
         # type: (ast.AST) -> None
-        # print("node", _node, type(_node), _node.value)
-        pass
+        """
+        Do nothing for unknown `ast.AST` nodes.
+
+        Arguments:
+            node -- AST node.
+        """
+        print("node", _node, ExpressionRecord(_node).render())

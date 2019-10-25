@@ -1,3 +1,4 @@
+# pylint: disable=all
 from typing import Text, List, Union, Any, Dict, Tuple, Type
 
 
@@ -28,6 +29,7 @@ class Typed:
         pass
 
 
+@my_deco(key="value")
 def func(
     _list: Tuple[List[Text], ...],
     _my_value_cls: Type[MyValue] = MyValue,

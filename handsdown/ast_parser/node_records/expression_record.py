@@ -1,3 +1,6 @@
+"""
+Wrapper for an `ast.expr` node.
+"""
 import re
 from typing import Text, Set, List, TYPE_CHECKING
 
@@ -10,6 +13,13 @@ if TYPE_CHECKING:
 
 
 class ExpressionRecord(NodeRecord):
+    """
+    Wrapper for an `ast.expr` node.
+
+    Arguments:
+        node -- AST node.
+    """
+
     _str_split_re = re.compile(r"[\]\[ ,]")
 
     def __init__(self, node):

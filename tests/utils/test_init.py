@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.utils import make_title, extract_md_title

@@ -1,3 +1,4 @@
+# pylint: disable=all
 """
 # PEP 287 - reStructuredText docstrings examples
 

@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.docstring_formatter import DocstringFormatter

@@ -1,3 +1,6 @@
+"""
+Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
+"""
 from typing import Text, Optional, List, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
@@ -8,6 +11,14 @@ if TYPE_CHECKING:
 
 
 class ImportRecord(NodeRecord):
+    """
+    Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
+
+    Arguments:
+        node -- AST node.
+        alias -- AST node with import alias.
+    """
+
     def __init__(self, node, alias):
         # type: (ASTImport, ast.alias) -> None
         super(ImportRecord, self).__init__(node)
@@ -22,6 +33,12 @@ class ImportRecord(NodeRecord):
 
     def get_import_string(self):
         # type: () -> Text
+        """
+        Get import string from a node.
+
+        Returns:
+            An absolute import string.
+        """
         if self.source:
             return "{}.{}".format(self.source, self.name)
 
@@ -43,15 +60,38 @@ class ImportRecord(NodeRecord):
 
         return ["import {}".format(self.name)]
 
-    def match(self, string):
+    def match(self, name):
         # type: (Text) -> Optional[Text]
-        if string == self.local_name:
+        """
+        Check if `name` matches or stats with a local name.
+
+        Examples::
+
+            import_node = ast.parse('from my_module import Name as LocalName')
+            import_record = ImportRecord(import_node)
+
+            import_record.match('LocalName')
+            True
+
+            import_record.match('LocalName.child')
+            True
+
+            import_record.match('OtherName')
+            False
+
+            import_record.match('LocalNameOther')
+            False
+
+        Returns:
+            True if name is imported object itself on one of his children.
+        """
+        if name == self.local_name:
             return self.get_import_string()
 
         lookup = "{}.".format(self.local_name)
-        if string.startswith(lookup):
+        if name.startswith(lookup):
             if self.source:
-                trailing_import = string[len(lookup) :]
+                trailing_import = name[len(lookup) :]
                 return "{}.{}".format(self.get_import_string(), trailing_import)
 
         return None

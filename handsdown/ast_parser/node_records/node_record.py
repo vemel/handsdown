@@ -1,4 +1,7 @@
-from typing import Text, Set, Generator, Tuple, List, Optional, TYPE_CHECKING
+"""
+Base class for all node records.
+"""
+from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
@@ -13,6 +16,10 @@ if TYPE_CHECKING:
 
 
 class NodeRecord(object):
+    """
+    Base class for all node records.
+    """
+
     LINE_LENGTH = 79
     SINGLE_LINE_LENGTH = 50
     INDENT_SPACES = 4
@@ -39,6 +46,7 @@ class NodeRecord(object):
         self.node = node
         self.name = self.node.__class__.__name__
         self.title = ""
+        self.is_method = False
         self.support_split = False
         self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
@@ -47,6 +55,12 @@ class NodeRecord(object):
     @property
     def line_number(self):
         # type: () -> int
+        """
+        Return node line number in source.
+
+        Returns:
+            A line number startign with 1.
+        """
         if self._line_number is None:
             if isinstance(self.node, str):
                 return 1
@@ -67,13 +81,17 @@ class NodeRecord(object):
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         return IndentTrimmer.trim_text(docstring)
 
-    def iter_children(self):
-        # type: () -> Generator[NodeRecord, None, None]
-        pass
-
     @property
     def related_names(self):
         # type: () -> Set[Text]
+        """
+        Get a set of referenced object names in `node`.
+
+        Returns an empty set, should be overriden by a child class.
+
+        Returns:
+            A set of referenced object name.
+        """
         return set()
 
     @abstractmethod
@@ -83,6 +101,11 @@ class NodeRecord(object):
 
     def parse(self):
         # type: () -> None
+        """
+        Get all information from a node.
+
+        Executes only once if called multiple times.
+        """
         if self.parsed:
             return
 
@@ -144,6 +167,19 @@ class NodeRecord(object):
 
     def render(self, indent=0, allow_multiline=False):
         # type: (int, bool) -> Text
+        """
+        Render node to a string.
+
+        If `allow_multiline` is True, tries to fit the result into `LINE_LENGTH`,
+        otherwise does not break lines and trims result to `SINGLE_LINE_LENGTH`.
+
+        Arguments:
+            indent -- Indent for lines after the first, `indent=2` means 8 spaces.
+            allow_multiline -- allow line breaks in redner result.
+
+        Returns:
+            A string representation of `node`.
+        """
         if not self.parsed:
             self.parse()
 
@@ -193,16 +229,64 @@ class NodeRecord(object):
         # type: (int) -> List[RenderExpr]
         pass
 
-    def is_line_fit(self, line, indent):
+    @classmethod
+    def is_line_fit(cls, line, indent):
         # type: (Text, int) -> bool
-        return len(line) < self.LINE_LENGTH - indent * self.INDENT_SPACES
+        """
+        Check if line fits to `LINE_LENGTH` with given `indent`.
 
-    def render_indent(self, indent):
+        Examples::
+
+            NodeRecord.is_line_fit("a" * 40, 0)
+            False
+
+            NodeRecord.is_line_fit("a" * 80, 0)
+            False
+
+            NodeRecord.is_line_fit("a" * 70, 2)
+            True
+
+            NodeRecord.is_line_fit("a" * 70, 4)
+            False
+
+        Returns:
+            A string representation of indent.
+        """
+        return len(line) < cls.LINE_LENGTH - indent * cls.INDENT_SPACES
+
+    @classmethod
+    def render_indent(cls, indent):
         # type: (int) -> Text
-        return " " * indent * self.INDENT_SPACES
+        """
+        Render indent to a string.
+
+        Each indent adds `INDENT_SPACES` spaces.
+
+        Examples::
+
+            NodeRecord.render_indent(0)
+            ""
+
+            NodeRecord.render_indent(1)
+            "    "
+
+            NodeRecord.render_indent(4)
+            "                "
+
+        Returns:
+            A string representation of indent.
+        """
+        return " " * indent * cls.INDENT_SPACES
 
     def get_related_import_strings(self, module_record):
         # type: (ModuleRecord) -> Set[Text]
+        """
+        Get a set of `related_names` found in module class, function,
+        method and attribute records.
+
+        Returns:
+            A set of absolute import strings found.
+        """
         result = set()  # type: Set[Text]
         related_names = self.related_names
         if not related_names:
@@ -228,6 +312,14 @@ class NodeRecord(object):
 
     def get_documented_attribute_strings(self):
         # type: () -> List[Text]
+        """
+        Render each of `attribute_records` to a Markdown string.
+
+        Includes `name`, `docstring` and `value` of an `ArgumentRecord`.
+
+        Returns::
+            A list of rendered strings.
+        """
         result = []
         for record in self.attribute_records:
             if not record.docstring:

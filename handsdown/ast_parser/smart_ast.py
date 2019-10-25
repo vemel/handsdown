@@ -1,3 +1,6 @@
+"""
+Provides compatibility between AST 2 and 3.
+"""
 import os
 from typing import Any
 

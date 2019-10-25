@@ -416,10 +416,6 @@ class Generator:
 
     def _replace_short_links(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
-        records = [i[-1] for i in module_record.iter_records()]
-        if not records:
-            return
-
         sections = md_document.sections
 
         for index, section in enumerate(sections):
@@ -471,9 +467,12 @@ class Generator:
 
     def _generate_module_doc_lines(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
-        for records in module_record.iter_records():
-            record = records[-1]
-            md_document.append_title(record.title, level=len(records))
+        for record in module_record.iter_records():
+            header_level = 2
+            if record.is_method:
+                header_level = 3
+
+            md_document.append_title(record.title, level=header_level)
 
             source_path = module_record.source_path
             source_line_number = record.line_number

@@ -1,3 +1,6 @@
+"""
+Utilities for stdout stream logger.
+"""
 import logging
 from typing import Optional
 

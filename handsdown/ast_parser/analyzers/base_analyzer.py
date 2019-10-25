@@ -1,8 +1,11 @@
+"""
+Base AST analyzer.
+"""
 from typing import List, Text, TYPE_CHECKING
 
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
     from handsdown.ast_parser.node_records.class_record import ClassRecord
@@ -13,6 +16,12 @@ if TYPE_CHECKING:
 
 
 class BaseAnalyzer(ast.NodeVisitor):
+    """
+    Base AST analyzer.
+
+    Has lists for all objects for different analyzers.
+    """
+
     def __init__(self):
         # type: () -> None
         self.import_records = []  # type: List[ImportRecord]

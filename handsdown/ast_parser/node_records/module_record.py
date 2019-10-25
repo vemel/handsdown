@@ -1,4 +1,7 @@
-from typing import List, Text, Generator, Tuple, Any, Optional, Dict, TYPE_CHECKING
+"""
+Wrapper for an `ast.Module` node with corresponding node info.
+"""
+from typing import List, Text, Generator, Any, Optional, Dict, TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
@@ -14,9 +17,19 @@ if TYPE_CHECKING:
 
 
 class ModuleRecord(NodeRecord):
-    def __init__(self, source_path, source_lines, import_string):
-        # type: (Path, List[Text], Text) -> None
-        content = "\n".join(source_lines)
+    """
+    Wrapper for an `ast.Module` node with corresponding node info.
+
+    Responsible for parsing Python source as well.
+
+    Arguments:
+        source_path -- Path to a Python source file.
+        import_string -- File absolute import string.
+    """
+
+    def __init__(self, source_path, import_string):
+        # type: (Path, Text) -> None
+        content = source_path.read_text()
         self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)
         self.source_path = source_path
@@ -33,6 +46,12 @@ class ModuleRecord(NodeRecord):
 
     def get_title_parts(self):
         # type: () -> List[Text]
+        """
+        Get Module title from a splitted `import_string`.
+
+        Returns:
+            Titles from the top parent to itself.
+        """
         parts = split_import_string(self.import_string)
         result = []
         for part in parts:
@@ -46,6 +65,15 @@ class ModuleRecord(NodeRecord):
 
     def find_record(self, import_string):
         # type: (Text) -> Optional[NodeRecord]
+        """
+        Find child in the Module by an absolute or relative import string.
+
+        Returns:
+            Found child record on None.
+        """
+        if import_string == self.import_string:
+            return self
+
         result = self.import_string_map.get(import_string)
         if result:
             return result
@@ -59,26 +87,31 @@ class ModuleRecord(NodeRecord):
         return None
 
     def iter_records(self):
-        # type: () -> Generator[Tuple[NodeRecord, ...], None, None]
-        for class_record in self.class_records:
-            yield (self, class_record)
+        # type: () -> Generator[NodeRecord, None, None]
+        """
+        Iterate over Module class, method and fucntion records.
 
-            for record in class_record.iter_records():
-                yield (self, class_record, record)
+        Yields:
+            A child record.
+        """
+        for class_record in self.class_records:
+            yield class_record
+
+            for method_record in class_record.iter_records():
+                yield method_record
 
         for function_record in self.function_records:
-            yield (self, function_record)
+            yield function_record
 
     def _set_import_strings(self):
         # type: () -> None
-        for children in self.iter_records():
+        for child in self.iter_records():
             import_string_parts = [self.import_string]
-            for child in children[1:]:
-                import_string_parts.append(child.name)
-                if not child.import_string:
-                    import_string = ".".join(import_string_parts)
-                    child.import_string = import_string
-                    self.import_string_map[import_string] = child
+            import_string_parts.append(child.name)
+            if not child.import_string:
+                import_string = ".".join(import_string_parts)
+                child.import_string = import_string
+                self.import_string_map[import_string] = child
 
         for attribute_record in self.attribute_records:
             import_string = "{}.{}".format(self.import_string, attribute_record.name)
@@ -106,6 +139,11 @@ class ModuleRecord(NodeRecord):
 
     def build_children(self):
         # type: () -> None
+        """
+        Collect full information about Module child records.
+
+        Used only when doc for this ModuleRecord is building.
+        """
         analyzer = ModuleAnalyzer()
         analyzer.visit(self.tree)
         self.class_records = sorted(analyzer.class_records, key=lambda x: x.name)

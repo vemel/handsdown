@@ -1,3 +1,6 @@
+"""
+Aggregation of `ModuleRecord` objects.
+"""
 from typing import Generator, Text, Set, Optional, Dict, List, Any, TYPE_CHECKING
 
 from handsdown.utils import split_import_string
@@ -39,17 +42,9 @@ class ModuleRecordList:
             if not module_record:
                 continue
 
-            if module_record.import_string == import_string:
+            record = module_record.find_record(import_string)
+            if record:
                 return module_record
-
-            for records in module_record.iter_records():
-                record = records[-1]
-                if record.import_string == import_string:
-                    return module_record
-
-            for attribute_record in module_record.attribute_records:
-                if attribute_record.import_string == import_string:
-                    return module_record
 
         return None
 

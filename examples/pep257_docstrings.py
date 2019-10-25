@@ -1,3 +1,4 @@
+# pylint: disable=all
 """
 # PEP 257 - PEP 257 and Google docstrings examples
 

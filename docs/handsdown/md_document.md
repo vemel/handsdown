@@ -38,7 +38,7 @@ class MDDocument(object):
 
 Markdown file builder.
 
-Can be used as a context manager, on exit context is written to `path`.
+Can be used as a context manager, on exit context is written to [MDDocument().path](#mddocumentpath).
 
 #### Examples
 
@@ -70,7 +70,7 @@ with MDDocument(path=Path('output.md')) as md_document:
 
 #### Arguments
 
-- `path` - Path to store document.
+- [MDDocument().path](#mddocumentpath) - Path to store document.
 
 #### Attributes
 
@@ -96,7 +96,7 @@ def append(content: Text) -> None:
 
 Append `content` to the document.
 Handle trimming and sectioning the content and update
-`title` and `toc_section` fields.
+[MDDocument().title](#mddocumenttitle) and [MDDocument().toc_section](#mddocumenttoc_section) fields.
 
 #### Arguments
 
@@ -110,13 +110,13 @@ Handle trimming and sectioning the content and update
 def append_title(title: int, level: Text) -> None:
 ```
 
-Append `title` of a given `level` to the document.
+Append [MDDocument().title](#mddocumenttitle) of a given `level` to the document.
 Handle trimming and sectioning the content and update
-`title` and `toc_section` fields.
+[MDDocument().title](#mddocumenttitle) and [MDDocument().toc_section](#mddocumenttoc_section) fields.
 
 #### Arguments
 
-- `title` - Title to add.
+- [MDDocument().title](#mddocumenttitle) - Title to add.
 - `level` - Title level, number of `#` symbols.
 
 ### MDDocument().generate_toc_section
@@ -209,7 +209,7 @@ Read and parse content from `source_path`.
 
 #### Arguments
 
-- `source_path` - Input file path. If not provided - `path` is used.
+- `source_path` - Input file path. If not provided - [MDDocument().path](#mddocumentpath) is used.
 
 ### MDDocument().render_doc_link
 
@@ -244,7 +244,7 @@ MDDocument.render_doc_link('my title', anchor='my-anchor')
 
 #### Arguments
 
-- `title` - Link text.
+- [MDDocument().title](#mddocumenttitle) - Link text.
 - `anchor` - Unescaped or escaped anchor tag.
 - `target_path` - Target MDDocument path.
 
@@ -275,7 +275,7 @@ MDDocument.render_link('MyClass.__init__', 'my.md')
 
 #### Arguments
 
-- `title` - Link text.
+- [MDDocument().title](#mddocumenttitle) - Link text.
 - `link` - Link target.
 
 #### Returns
@@ -298,7 +298,7 @@ Render Markdown link to `target_md_document` header path with a correct title.
 #### Arguments
 
 - `target_md_document` - Target [MDDocument](#mddocument).
-- `title` - Link text. If not provided `target_md_document.title` is used.
+- [MDDocument().title](#mddocumenttitle) - Link text. If not provided `target_md_document.title` is used.
 
 #### Returns
 
@@ -313,7 +313,7 @@ A string with Markdown link.
 def sections() -> List[Text]:
 ```
 
-All non-special `sections` of the document.
+All non-special [MDDocument().sections](#mddocumentsections) of the document.
 
 ### MDDocument().subtitle
 
@@ -383,4 +383,4 @@ def toc_section(toc_section: Text) -> None:
 def write() -> None:
 ```
 
-Write MD content to `path`.
+Write MD content to [MDDocument().path](#mddocumentpath).

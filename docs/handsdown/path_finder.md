@@ -24,7 +24,7 @@ class PathFinder():
 ```
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
-`include` and `exclude` patterns.
+[PathFinder().include](#pathfinderinclude) and [PathFinder().exclude](#pathfinderexclude) patterns.
 
 #### Examples
 
@@ -43,7 +43,7 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 #### Arguments
 
 - `root` - Path to root folder.
-- `glob_expr` - `glob` expression to lookup in `root`
+- `glob_expr` - [PathFinder().glob](#pathfinderglob) expression to lookup in `root`
 
 #### Raises
 
@@ -77,8 +77,8 @@ A copy of itself.
 def glob(glob_expr: Text) -> Generator[Path, None, None]:
 ```
 
-Find all matching `Path` objects respecting `include` and
-`exclude` patterns.
+Find all matching `Path` objects respecting [PathFinder().include](#pathfinderinclude) and
+[PathFinder().exclude](#pathfinderexclude) patterns.
 
 #### Yields
 

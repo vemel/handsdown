@@ -10,7 +10,7 @@
 
 ## MyValue
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L4)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L5)
 
 ```python
 class MyValue():
@@ -18,7 +18,7 @@ class MyValue():
 
 ## Typed
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L8)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L9)
 
 ```python
 class Typed():
@@ -39,7 +39,7 @@ class Typed():
 
 ### Typed.classmethod
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L26)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L27)
 
 ```python
 @classmethod
@@ -52,9 +52,10 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 ## func
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L31)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L32)
 
 ```python
+@my_deco(key='value')
 def func(
     _list: Tuple[List[Text], ...],
     _my_value_cls: Type[MyValue] = MyValue,

@@ -60,7 +60,7 @@ Root of `handsdown` source code.
 ### From command line
 
 Just go to your favorite project that has lots of docstrings but missing
-auto-generated docs and let `handsdown` do the thing.
+auto-generated docs and let [Handsdown](#handsdown) do the thing.
 
 ```bash
 cd ~/my/project

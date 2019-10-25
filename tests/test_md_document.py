@@ -1,3 +1,4 @@
+# pylint: disable=missing-docstring
 import unittest
 from unittest.mock import MagicMock, patch
 from tempfile import NamedTemporaryFile

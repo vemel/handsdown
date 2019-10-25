@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+"""
+Handsdown setup module for `setuptools`.
+"""
 import os
 import sys
 
@@ -18,7 +20,9 @@ description = "Python docstring-based documentation generator for lazy perfectio
 
 
 def get_long_description():
-    "Remove ToC from README.md as PyPI does not support links."
+    """
+    Remove ToC from README.md as PyPI does not support links.
+    """
     lines = []
     readme_path = os.path.join(root_path, "README.md")
     with open(readme_path) as readme_file:
@@ -29,6 +33,9 @@ def get_long_description():
 
 
 def get_install_requires():
+    """
+    Parse requirements from `requirements.txt`.
+    """
     install_requires = []
     requirements_path = os.path.join(root_path, "requirements.txt")
     with open(requirements_path) as f:

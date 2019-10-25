@@ -1,4 +1,4 @@
-# pylint: disable=W
+# pylint: disable=all
 from typing import Text, List, Union, Any, Dict, Tuple, Type, Set
 
 

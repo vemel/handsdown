@@ -1,3 +1,6 @@
+"""
+Wrapper for an `ast.FunctionDef` node.
+"""
 import re
 from typing import List, Any, Set, Text, Optional, TYPE_CHECKING
 
@@ -12,6 +15,13 @@ if TYPE_CHECKING:
 
 
 class FunctionRecord(NodeRecord):
+    """
+    Wrapper for an `ast.FunctionDef` node.
+
+    Arguments:
+        node -- AST node.
+    """
+
     _single_type_re = re.compile(r".+#\s*type:\s*(.+)")
     _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
@@ -89,6 +99,13 @@ class FunctionRecord(NodeRecord):
 
     def parse_type_comments(self, lines):
         # type: (List[Text]) -> None
+        """
+        Extract comment type annotations from a function definiition lines.
+
+        Sets `arguemnts_record` to a new `TextRecord` for each found type annotaiton.
+        Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
+        """
+        # TODO: support typed hints on different lines
         start_line_number = self.line_number
         for relative_line_number, line in enumerate(lines):
             match = self._return_type_re.match(line)
