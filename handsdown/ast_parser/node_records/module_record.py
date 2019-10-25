@@ -10,7 +10,7 @@ from handsdown.utils import make_title, split_import_string
 from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from pathlib import Path
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.class_record import ClassRecord

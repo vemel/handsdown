@@ -5,7 +5,7 @@ from typing import List, Text, Set, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.sentinel import Sentinel
     from handsdown.ast_parser.type_defs import RenderExpr

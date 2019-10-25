@@ -6,7 +6,7 @@ from typing import Text, Optional, List, TYPE_CHECKING
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.type_defs import RenderExpr, ASTImport
 
 

@@ -8,7 +8,7 @@ from handsdown.ast_parser.enums import RenderPart
 from handsdown.indent_trimmer import IndentTrimmer
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord

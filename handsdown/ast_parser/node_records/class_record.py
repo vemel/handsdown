@@ -9,7 +9,7 @@ from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import RenderExpr

@@ -7,7 +7,7 @@ from handsdown.utils import split_import_string
 from handsdown.utils.logger import get_logger
 
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.node_records.node_record import NodeRecord
 

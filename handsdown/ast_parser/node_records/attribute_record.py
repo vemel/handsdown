@@ -7,7 +7,7 @@ from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.sentinel import Sentinel
     from handsdown.ast_parser.type_defs import RenderExpr
 
