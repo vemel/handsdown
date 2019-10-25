@@ -12,6 +12,7 @@ Record is a wrpapper on top of an AST node.
             - [ExpressionAnalyzer](analyzers/expression_analyzer.md#expressionanalyzer)
             - [FunctionAnalyzer](analyzers/function_analyzer.md#functionanalyzer)
             - [ModuleAnalyzer](analyzers/module_analyzer.md#moduleanalyzer)
+        - [Enums](enums.md#enums)
         - [ModuleRecordList](module_record_list.md#modulerecordlist)
         - [Node Records](node_records/index.md#node-records)
             - [ArgumentRecord](node_records/argument_record.md#argumentrecord)

@@ -4,7 +4,7 @@ Base class for all node records.
 from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
-from handsdown.sentinel import Sentinel
+from handsdown.ast_parser.enums import RenderPart
 from handsdown.indent_trimmer import IndentTrimmer
 import handsdown.ast_parser.smart_ast as ast
 
@@ -20,20 +20,20 @@ class NodeRecord(object):
     Base class for all node records.
     """
 
+    # Max length for a multi-line render result
     LINE_LENGTH = 79
-    SINGLE_LINE_LENGTH = 50
-    INDENT_SPACES = 4
-    MAX_INDENT = 4
-    ELLIPSIS = "..."
 
-    MULTI_LINE_BREAK = Sentinel("MULTI_LINE_BREAK")
-    MULTI_LINE_INDENT = Sentinel("MULTI_LINE_INDENT")
-    MULTI_LINE_UNINDENT = Sentinel("MULTI_LINE_UNINDENT")
-    LINE_BREAK = Sentinel("LINE_BREAK")
-    LINE_INDENT = Sentinel("LINE_INDENT")
-    LINE_UNINDENT = Sentinel("LINE_UNINDENT")
-    SINGLE_LINE_SPACE = Sentinel("SINGLE_LINE_SPACE")
-    MULTI_LINE_COMMA = Sentinel("MULTI_LINE_COMMA")
+    # Max length for a single-line render result
+    SINGLE_LINE_LENGTH = 50
+
+    # Amount of spaces per `indent`
+    INDENT_SPACES = 4
+
+    # Replace render resul with ellipsis on too deep indendation
+    MAX_INDENT = 4
+
+    # Ellipsis string value
+    ELLIPSIS = "..."
 
     def __repr__(self):
         # type: () -> Text
@@ -112,11 +112,12 @@ class NodeRecord(object):
         self._parse()
         self.parsed = True
 
-    def _render_line(self, parts, indent, allow_multiline):
+    @staticmethod
+    def _render_line(parts, indent, allow_multiline):
         # type: (List[RenderExpr], int, bool) -> Text
         result = []
         for part in parts:
-            if part is self.SINGLE_LINE_SPACE:
+            if part is RenderPart.SINGLE_LINE_SPACE:
                 result.append(" ")
 
             if isinstance(part, NodeRecord):
@@ -131,21 +132,21 @@ class NodeRecord(object):
         # type: (List[RenderExpr], int, bool) -> Tuple[List[Text], int]
         result = []
         for part in parts:
-            if part is self.MULTI_LINE_BREAK:
+            if part is RenderPart.MULTI_LINE_BREAK:
                 result.append("\n")
                 result.append(self.render_indent(indent))
 
-            if part is self.MULTI_LINE_INDENT:
+            if part is RenderPart.MULTI_LINE_INDENT:
                 indent += 1
                 result.append("\n")
                 result.append(self.render_indent(indent))
 
-            if part is self.MULTI_LINE_UNINDENT:
+            if part is RenderPart.MULTI_LINE_UNINDENT:
                 indent -= 1
                 result.append("\n")
                 result.append(self.render_indent(indent))
 
-            if part is self.MULTI_LINE_COMMA:
+            if part is RenderPart.MULTI_LINE_COMMA:
                 result.append(",")
 
             if isinstance(part, NodeRecord):
@@ -187,11 +188,11 @@ class NodeRecord(object):
             return self.ELLIPSIS
 
         parts = self._render_parts(indent)
-        line_parts = []
+        line_parts = []  # type: List[RenderExpr]
         lines = []
         current_indent = indent
         for part_index, part in enumerate(parts):
-            if part not in (self.LINE_BREAK, self.LINE_INDENT, self.LINE_UNINDENT):
+            if not isinstance(part, RenderPart) or not part.is_line_break():
                 line_parts.append(part)
                 if part_index < len(parts) - 1:
                     continue
@@ -213,13 +214,13 @@ class NodeRecord(object):
             if not allow_multiline:
                 break
 
-            if part is self.LINE_INDENT:
+            if part is RenderPart.LINE_INDENT:
                 current_indent += 1
                 lines.append("\n{}".format(self.render_indent(current_indent)))
-            if part is self.LINE_UNINDENT:
+            if part is RenderPart.LINE_UNINDENT:
                 current_indent -= 1
                 lines.append("\n{}".format(self.render_indent(current_indent)))
-            if part is self.LINE_BREAK:
+            if part is RenderPart.LINE_BREAK:
                 lines.append("\n{}".format(self.render_indent(current_indent)))
 
         return "".join(lines).rstrip("\n")

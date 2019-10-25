@@ -7,6 +7,7 @@ from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.enums import RenderPart
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
@@ -110,29 +111,29 @@ class ClassRecord(NodeRecord):
         parts = []  # type: List[RenderExpr]
         for decorator in self.decorators:
             parts.append(decorator)
-            parts.append(self.LINE_BREAK)
+            parts.append(RenderPart.LINE_BREAK)
 
         parts.append("class ")
         parts.append(self.name)
         parts.append("(")
         if self.bases:
-            parts.append(self.MULTI_LINE_INDENT)
+            parts.append(RenderPart.MULTI_LINE_INDENT)
             base_count = 0
             for base in self.bases:
                 if base_count > 0:
                     parts.append(",")
-                    parts.append(self.SINGLE_LINE_SPACE)
-                    parts.append(self.MULTI_LINE_BREAK)
+                    parts.append(RenderPart.SINGLE_LINE_SPACE)
+                    parts.append(RenderPart.MULTI_LINE_BREAK)
                 base_count += 1
                 parts.append(base)
-            parts.append(self.MULTI_LINE_COMMA)
-            parts.append(self.MULTI_LINE_UNINDENT)
+            parts.append(RenderPart.MULTI_LINE_COMMA)
+            parts.append(RenderPart.MULTI_LINE_UNINDENT)
         parts.append("):")
 
         for method in self.method_records:
             if method.name == "__init__":
-                parts.append(self.LINE_INDENT)
+                parts.append(RenderPart.LINE_INDENT)
                 parts.append(method)
-                parts.append(self.LINE_UNINDENT)
+                parts.append(RenderPart.LINE_UNINDENT)
 
         return parts

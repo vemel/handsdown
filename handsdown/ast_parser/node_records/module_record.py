@@ -7,6 +7,7 @@ from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import make_title, split_import_string
+from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
@@ -124,16 +125,16 @@ class ModuleRecord(NodeRecord):
         if self.import_records:
             for import_record in self.import_records:
                 parts.append(import_record)
-                parts.append(self.LINE_BREAK)
-            parts.append(self.LINE_BREAK)
+                parts.append(RenderPart.LINE_BREAK)
+            parts.append(RenderPart.LINE_BREAK)
         if self.class_records:
             for class_record in self.class_records:
                 parts.append(class_record)
-                parts.append(self.LINE_BREAK)
-            parts.append(self.LINE_BREAK)
+                parts.append(RenderPart.LINE_BREAK)
+            parts.append(RenderPart.LINE_BREAK)
         for function_record in self.function_records:
             parts.append(function_record)
-            parts.append(self.LINE_BREAK)
+            parts.append(RenderPart.LINE_BREAK)
 
         return parts
 

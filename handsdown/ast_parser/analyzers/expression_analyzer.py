@@ -4,7 +4,7 @@ AST analyzer for `ast.expr` records.
 from typing import TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
-from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -18,15 +18,6 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     Prepares `parts` for `NodeRecord.render` method.
     """
-
-    MULTI_LINE_BREAK = NodeRecord.MULTI_LINE_BREAK
-    MULTI_LINE_INDENT = NodeRecord.MULTI_LINE_INDENT
-    MULTI_LINE_UNINDENT = NodeRecord.MULTI_LINE_UNINDENT
-    LINE_BREAK = NodeRecord.LINE_BREAK
-    LINE_INDENT = NodeRecord.LINE_INDENT
-    LINE_UNINDENT = NodeRecord.LINE_UNINDENT
-    SINGLE_LINE_SPACE = NodeRecord.SINGLE_LINE_SPACE
-    MULTI_LINE_COMMA = NodeRecord.MULTI_LINE_COMMA
 
     BINOP_SYMBOLS = {
         ast.Add: "+",
@@ -160,16 +151,16 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         args_count = 0
         if node.elts:
-            self.parts.append(self.MULTI_LINE_INDENT)
+            self.parts.append(RenderPart.MULTI_LINE_INDENT)
             for element in node.elts:
                 if args_count:
                     self.parts.append(",")
-                    self.parts.append(self.SINGLE_LINE_SPACE)
-                    self.parts.append(self.MULTI_LINE_BREAK)
+                    self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                    self.parts.append(RenderPart.MULTI_LINE_BREAK)
                 args_count += 1
                 self.parts.append(element)
-            self.parts.append(self.MULTI_LINE_COMMA)
-            self.parts.append(self.MULTI_LINE_UNINDENT)
+            self.parts.append(RenderPart.MULTI_LINE_COMMA)
+            self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
 
     def visit_List(self, node):
         # type: (ast.List) -> None
@@ -217,25 +208,25 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.func)
         self.parts.append("(")
-        self.parts.append(self.MULTI_LINE_INDENT)
+        self.parts.append(RenderPart.MULTI_LINE_INDENT)
         args_count = 0
         for element in node.args:
             if args_count:
                 self.parts.append(",")
-                self.parts.append(self.SINGLE_LINE_SPACE)
-                self.parts.append(self.MULTI_LINE_BREAK)
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(element)
         for kwelement in node.keywords:
             if args_count:
                 self.parts.append(",")
-                self.parts.append(self.SINGLE_LINE_SPACE)
-                self.parts.append(self.MULTI_LINE_BREAK)
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(kwelement)
         if args_count:
-            self.parts.append(self.MULTI_LINE_COMMA)
-        self.parts.append(self.MULTI_LINE_UNINDENT)
+            self.parts.append(RenderPart.MULTI_LINE_COMMA)
+        self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
         self.parts.append(")")
 
     def visit_Starred(self, node):
@@ -275,19 +266,19 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("{")
         if node.keys:
-            self.parts.append(self.MULTI_LINE_INDENT)
+            self.parts.append(RenderPart.MULTI_LINE_INDENT)
             key_count = 0
             for index, key in enumerate(node.keys):
                 if key_count:
                     self.parts.append(",")
-                    self.parts.append(self.SINGLE_LINE_SPACE)
-                    self.parts.append(self.MULTI_LINE_BREAK)
+                    self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                    self.parts.append(RenderPart.MULTI_LINE_BREAK)
                 key_count += 1
                 self.parts.append(key)
                 self.parts.append(": ")
                 self.parts.append(node.values[index])
-            self.parts.append(self.MULTI_LINE_COMMA)
-            self.parts.append(self.MULTI_LINE_UNINDENT)
+            self.parts.append(RenderPart.MULTI_LINE_COMMA)
+            self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
         self.parts.append("}")
 
     def visit_Compare(self, node):
@@ -373,8 +364,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         for index, arg in enumerate(node.args):
             if arg_count:
                 self.parts.append(",")
-                self.parts.append(self.SINGLE_LINE_SPACE)
-                self.parts.append(self.MULTI_LINE_BREAK)
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
             arg_count += 1
             default = None
             default_index = len(node.args) - len(node.defaults) + index
@@ -388,8 +379,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         if node.vararg is not None:
             if arg_count:
                 self.parts.append(",")
-                self.parts.append(self.SINGLE_LINE_SPACE)
-                self.parts.append(self.MULTI_LINE_BREAK)
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
 
             arg_count += 1
             self.parts.append("*")
@@ -397,15 +388,15 @@ class ExpressionAnalyzer(BaseAnalyzer):
         if node.kwarg is not None:
             if arg_count:
                 self.parts.append(",")
-                self.parts.append(self.SINGLE_LINE_SPACE)
-                self.parts.append(self.MULTI_LINE_BREAK)
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
 
             arg_count += 1
             self.parts.append("**")
             self.parts.append(node.kwarg)
 
         if arg_count:
-            self.parts.append(self.MULTI_LINE_COMMA)
+            self.parts.append(RenderPart.MULTI_LINE_COMMA)
 
     def visit_arg(self, node):
         # type: (ast.arg) -> None

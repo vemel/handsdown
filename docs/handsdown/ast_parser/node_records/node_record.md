@@ -27,9 +27,17 @@ class NodeRecord(object):
 
 Base class for all node records.
 
+#### Attributes
+
+- `ELLIPSIS` - Ellipsis string value: `'...'`
+- `INDENT_SPACES` - Amount of spaces per `indent`: `4`
+- `LINE_LENGTH` - Max length for a multi-line render result: `79`
+- `MAX_INDENT` - Replace render resul with ellipsis on too deep indendation: `4`
+- `SINGLE_LINE_LENGTH` - Max length for a single-line render result: `50`
+
 ### NodeRecord().get_documented_attribute_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L313)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L314)
 
 ```python
 def get_documented_attribute_strings() -> List[Text]:
@@ -47,7 +55,7 @@ A list of rendered strings.
 
 ### NodeRecord().get_related_import_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L281)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L282)
 
 ```python
 def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
@@ -66,7 +74,7 @@ A set of absolute import strings found.
 
 ### NodeRecord.is_line_fit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L232)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L233)
 
 ```python
 @classmethod
@@ -150,7 +158,7 @@ A set of referenced object name.
 
 ### NodeRecord().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L168)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L169)
 
 ```python
 def render(indent: bool = 0, allow_multiline: int = False) -> Text:
@@ -172,7 +180,7 @@ A string representation of `node`.
 
 ### NodeRecord.render_indent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L257)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L258)
 
 ```python
 @classmethod

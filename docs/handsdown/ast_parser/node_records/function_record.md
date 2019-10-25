@@ -11,7 +11,7 @@ Wrapper for an `ast.FunctionDef` node.
 
 ## FunctionRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L18)
 
 ```python
 class FunctionRecord(NodeRecord):
@@ -30,7 +30,7 @@ Wrapper for an `ast.FunctionDef` node.
 
 ### FunctionRecord().parse_type_comments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L100)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L101)
 
 ```python
 def parse_type_comments(lines: List[Text]) -> None:
@@ -43,7 +43,7 @@ Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
 
 ### FunctionRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L45)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L46)
 
 ```python
 @property

@@ -10,6 +10,6 @@ Different AST-related types collection.
 
 - [ASTImport](#astimport) - AST import node: `Union[ast.Import, ast.ImportFrom]`
 - [ASTIterable](#astiterable) - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
-- [DirtyRenderExpr](#dirtyrenderexpr) - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, Text, Sentinel]`
+- [DirtyRenderExpr](#dirtyrenderexpr) - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, Text, RenderPart]`
 - [Node](#node) - AST node or text: `Union[Text, ast.AST]`
-- [RenderExpr](#renderexpr) - Ready for render expression: `Union[NodeRecord, Text, Sentinel]`
+- [RenderExpr](#renderexpr) - Ready for render expression: `Union[NodeRecord, Text, RenderPart]`
