@@ -31,6 +31,7 @@ Root of `handsdown` source code.
                 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
                 - [NodeRecord](ast_parser/node_records/node_record.md#noderecord)
                 - [TextRecord](ast_parser/node_records/text_record.md#textrecord)
+            - [Smart Ast](ast_parser/smart_ast.md#smart-ast)
             - [Type Defs](ast_parser/type_defs.md#type-defs)
         - [CLI Parser](cli_parser.md#cli-parser)
         - [DocstringFormatter](docstring_formatter.md#docstringformatter)

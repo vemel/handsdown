@@ -1,10 +1,10 @@
 import re
-import ast
 from typing import List, Any, Set, Text, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -44,29 +44,6 @@ class FunctionRecord(NodeRecord):
             result.update(self.return_type_hint.related_names)
 
         return result
-
-    # def _parse_decorators(self):
-    #     # type: () -> None
-    #     assert isinstance(self.node, ast.FunctionDef)
-
-    #     self.decorators = []
-    #     for index, expr in enumerate(self.node.decorator_list):
-    #         decorator = ExpressionRecord(expr)
-
-    #         # FIXME: py38 sets start line to def/class,
-    #         # move it to the first decorator
-    #         if index == 0:
-    #             self.line_number = decorator.line_number
-
-    #         decorator_name = ""
-    #         if isinstance(decorator.node, ast.Name):
-    #             decorator_name = decorator.node.id
-    #             if decorator_name == "staticmethod":
-    #                 self.is_staticmethod = True
-    #             if decorator_name == "classmethod":
-    #                 self.is_classmethod = True
-
-    #         self.decorators.append(decorator)
 
     def _parse(self):
         # type: () -> None

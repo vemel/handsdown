@@ -1,7 +1,7 @@
-import ast
 from typing import Union, Text
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.sentinel import Sentinel
+import handsdown.ast_parser.smart_ast as ast
 
 # Ready for render expression
 RenderExpr = Union[NodeRecord, Text, Sentinel]

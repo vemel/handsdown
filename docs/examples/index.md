@@ -10,5 +10,6 @@ Can be used as a list of supported features.
         - [Comment Typed](comment_typed.md#comment-typed)
         - [Google docstrings examples](google_docstrings.md#google-docstrings-examples)
         - [PEP 257 - PEP 257 and Google docstrings examples](pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
+        - [Pyi Typed](pyi_typed.md#pyi-typed)
         - [PEP 287 - reStructuredText docstrings examples](rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
         - [Typed](typed.md#typed)

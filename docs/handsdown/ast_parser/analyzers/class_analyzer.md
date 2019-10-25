@@ -9,7 +9,7 @@
 
 ## ClassAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L8)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L7)
 
 ```python
 class ClassAnalyzer(BaseAnalyzer):
@@ -21,7 +21,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
 ### ClassAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L16)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L15)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -29,7 +29,7 @@ def visit_Assign(node: ast.Assign) -> None:
 
 ### ClassAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L9)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L8)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:

@@ -21,4 +21,5 @@
             - [ModuleRecord](node_records/module_record.md#modulerecord)
             - [NodeRecord](node_records/node_record.md#noderecord)
             - [TextRecord](node_records/text_record.md#textrecord)
+        - [Smart Ast](smart_ast.md#smart-ast)
         - [Type Defs](type_defs.md#type-defs)

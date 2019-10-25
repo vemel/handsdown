@@ -32,9 +32,10 @@ class GeneratorError(Exception):
 
 class Generator:
     """
-    Main handsdown documentation generator.
+    Main documentation generator.
 
     Arguments:
+        project_name -- Name of the project.
         input_path -- Path to repo to generate docs.
         output_path -- Path to folder with auto-generated docs to output.
         source_paths -- List of paths to source files for generation.
@@ -68,6 +69,7 @@ class Generator:
         input_path,  # type: Path
         output_path,  # type: Path
         source_paths,  # type: Iterable[Path]
+        project_name=None,  # type: Optional[Text]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
         raise_errors=False,  # type: bool
@@ -78,7 +80,7 @@ class Generator:
         self._logger = get_logger()
         self._root_path = input_path
         self._output_path = output_path
-        self._project_name = make_title(input_path.name)
+        self._project_name = project_name or make_title(input_path.name)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth

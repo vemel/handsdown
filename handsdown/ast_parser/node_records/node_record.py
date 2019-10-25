@@ -1,10 +1,9 @@
-import ast
 from typing import Text, Set, Generator, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.sentinel import Sentinel
 from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.utils import isinstance_str
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
@@ -49,9 +48,10 @@ class NodeRecord(object):
     def line_number(self):
         # type: () -> int
         if self._line_number is None:
-            if isinstance_str(self.node):
+            if isinstance(self.node, str):
                 return 1
-            self._line_number = self.node.lineno
+
+            self._line_number = getattr(self.node, "lineno", 1)
         return self._line_number or 1
 
     @line_number.setter
@@ -61,7 +61,11 @@ class NodeRecord(object):
 
     def _get_docstring(self):
         # type: () -> Text
-        docstring = ast.get_docstring(self.node) or ""  # type: ignore
+        docstring = ast.get_docstring(self.node, clean=False) or ""  # type: ignore
+        if isinstance(docstring, bytes):
+            docstring = docstring.decode("utf-8")
+        # print(type(docstring), self.name)
+        # docstring = docstring.decode("utf-8")
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         return IndentTrimmer.trim_text(docstring)
 
@@ -97,10 +101,7 @@ class NodeRecord(object):
             if isinstance(part, NodeRecord):
                 result.append(part.render(indent, allow_multiline))
 
-            if isinstance_str(part):
-                part = str(part)
-                if part.startswith("u'"):
-                    part = part[1:]
+            if isinstance(part, str):
                 result.append(part)
 
         return "".join(result).replace("\n", " ")
@@ -129,10 +130,7 @@ class NodeRecord(object):
             if isinstance(part, NodeRecord):
                 result.append(part.render(indent, allow_multiline))
 
-            if isinstance_str(part):
-                part = str(part)
-                if part.startswith("u'"):
-                    part = part[1:]
+            if isinstance(part, str):
                 result.append(part)
 
         lines = "".join(result).split("\n")

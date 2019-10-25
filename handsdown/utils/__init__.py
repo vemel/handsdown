@@ -97,30 +97,3 @@ def split_import_string(import_string):
         A list of import string parts.
     """
     return import_string.split(".")
-
-
-def isinstance_str(value):
-    # type: (Any) -> bool
-    """
-    Check if object is a string.
-
-    `py27` compatible.
-
-    Examples::
-
-        isinstance_str('my string')
-        True
-
-        isinstance_str(u'my string')
-        True
-
-        isinstance_str(123)
-        False
-
-    Arguments:
-        value -- Object to check.
-
-    Returns:
-        True if `value` is a string.
-    """
-    return isinstance(value, ("".__class__, u"".__class__))

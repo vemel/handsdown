@@ -1,6 +1,5 @@
 import unittest
-
-from mock import patch
+from unittest.mock import patch
 
 from handsdown.utils.logger import get_logger
 

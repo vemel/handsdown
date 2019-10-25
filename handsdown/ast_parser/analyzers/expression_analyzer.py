@@ -1,8 +1,8 @@
-import ast
 from typing import TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:
     from typing import Optional
@@ -278,7 +278,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(node.value)
 
     def visit_Ellipsis(self, _node):
-        # type: (ast.Ellipsis) -> None
+        # type: (ast.ASTEllipsis) -> None
         self.parts.append("...")
 
     def generic_visit(self, node):

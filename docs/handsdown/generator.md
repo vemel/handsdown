@@ -20,6 +20,7 @@ Main handsdown documentation generator.
 ```python
 class Generator():
     def __init__(
+        project_name: Text,
         input_path: Path,
         output_path: Path,
         source_paths: Iterable[Path],
@@ -35,6 +36,7 @@ Main handsdown documentation generator.
 
 #### Arguments
 
+- `project_name` - Name of the project.
 - `input_path` - Path to repo to generate docs.
 - `output_path` - Path to folder with auto-generated docs to output.
 - `source_paths` - List of paths to source files for generation.
@@ -60,7 +62,7 @@ Main handsdown documentation generator.
 
 ### Generator().cleanup_old_docs
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L153)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L155)
 
 ```python
 def cleanup_old_docs() -> None:
@@ -70,7 +72,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L194)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L196)
 
 ```python
 def generate_doc(source_path: Path) -> None:
@@ -88,7 +90,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L325)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L327)
 
 ```python
 def generate_docs() -> None:
@@ -98,7 +100,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L343)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L345)
 
 ```python
 def generate_index() -> None:
@@ -109,7 +111,7 @@ section that contains a Tree of all modules in the project.
 
 ### Generator().generate_modules
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L372)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L374)
 
 ```python
 def generate_modules() -> None:
