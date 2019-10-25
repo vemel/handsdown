@@ -14,8 +14,10 @@ from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.md_document import MDDocument
 from handsdown.utils import make_title, split_import_string
 from handsdown.utils.logger import get_logger
+from handsdown.utils.import_string import ImportString
 from handsdown.path_finder import PathFinder
 from handsdown.settings import FIND_IN_SOURCE_LABEL
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 
 if TYPE_CHECKING:  # pragma: no cover
     from pathlib import Path
@@ -212,7 +214,6 @@ class Generator:
 
             md_document = MDDocument(output_path)
             self._generate_doc(module_record, md_document)
-            self._replace_short_links(module_record, md_document)
             self._replace_full_links(md_document)
             md_document.write()
 
@@ -341,7 +342,6 @@ class Generator:
             output_path = self._loader.get_output_path(module_record.source_path)
             md_document = MDDocument(output_path)
             self._generate_doc(module_record, md_document)
-            self._replace_short_links(module_record, md_document)
             self._replace_full_links(md_document)
             md_document.write()
 
@@ -414,29 +414,6 @@ class Generator:
 
             md_modules.toc_section = "\n".join(modules_toc_lines)
 
-    def _replace_short_links(self, module_record, md_document):
-        # type: (ModuleRecord, MDDocument) -> None
-        sections = md_document.sections
-
-        for index, section in enumerate(sections):
-            for match in self._short_link_re.findall(section):
-                import_string = match.replace("`", "")
-                record = module_record.find_record(import_string)
-                if not record:
-                    continue
-
-                title = record.title
-                link = md_document.render_doc_link(
-                    title, anchor=md_document.get_anchor(title)
-                )
-                section = section.replace(match, link)
-                self._logger.debug(
-                    "Adding local link '{}' to {}".format(
-                        title, self._root_path_finder.relative(md_document.path)
-                    )
-                )
-            sections[index] = section
-
     def _replace_full_links(self, md_document):
         # type: (MDDocument) -> None
         sections = md_document.sections
@@ -468,6 +445,9 @@ class Generator:
     def _generate_module_doc_lines(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
         for record in module_record.iter_records():
+            if isinstance(record, AttributeRecord):
+                continue
+
             header_level = 2
             if record.is_method:
                 header_level = 3
@@ -501,6 +481,54 @@ class Generator:
                 module_record=module_record, record=record, md_document=md_document
             )
 
+    def _replace_links(self, module_record, record, md_document, docstring):
+        # type: (ModuleRecord, NodeRecord, MDDocument, Text) -> Text
+        record_import_string = ImportString(record.import_string)
+        parent_import_string = None
+        if not record_import_string.is_top_level():
+            parent_import_string = record_import_string.parent
+
+        for match in self._short_link_re.findall(docstring):
+            related_record_name = match.replace("`", "")
+            related_import_string = None
+            related_record = None
+
+            # find record in parent
+            if parent_import_string:
+                related_import_string = parent_import_string + related_record_name
+                if related_import_string != record_import_string:
+                    related_record = module_record.find_record(
+                        related_import_string.value
+                    )
+
+            # find by global import
+            if not related_record:
+                related_record = module_record.find_record(related_record_name)
+
+            if not related_record:
+                continue
+
+            if ImportString(related_record.import_string).startswith(
+                record_import_string
+            ):
+                continue
+
+            title = related_record.title
+            anchor = md_document.get_anchor(related_record.title)
+            if isinstance(related_record, AttributeRecord):
+                parent_related_record = module_record.find_record(
+                    ImportString(related_record.import_string).parent.value
+                )
+                if parent_related_record:
+                    anchor = md_document.get_anchor(parent_related_record.title)
+
+            link = md_document.render_doc_link(title, anchor=anchor)
+            docstring = docstring.replace(match, link)
+            self._logger.debug(
+                "Adding local link '{}' to '{}'".format(title, record.title)
+            )
+        return docstring
+
     def _render_docstring(self, module_record, record, md_document):
         # type: (ModuleRecord, NodeRecord, MDDocument) -> None
         """
@@ -508,14 +536,16 @@ class Generator:
         `handsdown.processors.base.BaseDocstringProcessor`.
 
         Arguments:
-            source_path -- Path to object source file.
-            module_object -- Object to inspect.
-            signature -- Object signature if exists.
+            module_record -- Parent ModuleRecord
+            record -- Target NodeRecord
+            md_document -- Output document.
 
         Returns:
             A module docstring with valid markdown.
         """
         docstring = record.docstring
+        docstring = self._replace_links(module_record, record, md_document, docstring)
+
         section_map = self._docstring_processor.build_sections(docstring)
 
         for attrubute in record.get_documented_attribute_strings():

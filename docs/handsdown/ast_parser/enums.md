@@ -16,7 +16,7 @@ Enums for AST parsing.
 class RenderPart(enum.Enum):
 ```
 
-Special render part for `handsdown.ast_parser.node_records.node_record.NodeRecord.render`
+Special render part for [render](node_records/node_record.md#render)
 function.
 
 #### Attributes

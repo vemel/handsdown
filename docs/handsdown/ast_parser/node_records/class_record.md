@@ -6,6 +6,7 @@ Wrapper for an `ast.ClassDef` node.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ClassRecord
     - [ClassRecord](#classrecord)
+        - [ClassRecord().find_record](#classrecordfind_record)
         - [ClassRecord().get_public_methods](#classrecordget_public_methods)
         - [ClassRecord().iter_records](#classrecorditer_records)
         - [ClassRecord().related_names](#classrecordrelated_names)
@@ -29,9 +30,31 @@ Wrapper for an `ast.ClassDef` node.
 
 - [NodeRecord](node_record.md#noderecord)
 
+### ClassRecord().find_record
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L40)
+
+```python
+def find_record(name: Text) -> Optional[NodeRecord]:
+```
+
+Find child method or attribute record.
+
+#### Arguments
+
+- `name` - Record name to lookup.
+
+#### Returns
+
+Itself or None.
+
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### ClassRecord().get_public_methods
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L66)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L93)
 
 ```python
 def get_public_methods() -> List[FunctionRecord]:
@@ -52,7 +75,7 @@ A list of child records.
 
 ### ClassRecord().iter_records
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L55)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L79)
 
 ```python
 def iter_records() -> Generator[NodeRecord, None, None]:
@@ -70,7 +93,7 @@ A child record.
 
 ### ClassRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L40)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L64)
 
 ```python
 @property

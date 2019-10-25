@@ -1,6 +1,7 @@
 """
 Base class for all node records.
 """
+import re
 from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
@@ -19,6 +20,9 @@ class NodeRecord(object):
     """
     Base class for all node records.
     """
+
+    # RegExp to find object names in a docstring
+    LOCAL_LINK_RE = re.compile(r"`+[A-Za-z]\S+`+")
 
     # Max length for a multi-line render result
     LINE_LENGTH = 79

@@ -84,7 +84,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 #### Raises
 
-- [LoaderError](#loadererror) - If python source cannot be loaded.
+- `LoaderError` - If python source cannot be loaded.
 
 #### See also
 
@@ -121,7 +121,7 @@ Parse `ModuleRecord` children and fully load a tree for it.
 
 #### Raises
 
-- [LoaderError](#loadererror) - If python source cannot be parsed.
+- `LoaderError` - If python source cannot be parsed.
 
 #### See also
 

@@ -79,12 +79,6 @@ class ModuleRecord(NodeRecord):
         if result:
             return result
 
-        result = self.import_string_map.get(
-            "{}.{}".format(self.import_string, import_string)
-        )
-        if result:
-            return result
-
         return None
 
     def iter_records(self):
@@ -106,18 +100,31 @@ class ModuleRecord(NodeRecord):
 
     def _set_import_strings(self):
         # type: () -> None
-        for child in self.iter_records():
-            import_string_parts = [self.import_string]
-            import_string_parts.append(child.name)
-            if not child.import_string:
-                import_string = ".".join(import_string_parts)
-                child.import_string = import_string
-                self.import_string_map[import_string] = child
+        for class_record in self.class_records:
+            class_record.import_string = "{}.{}".format(
+                self.import_string, class_record.name
+            )
+            self.import_string_map[class_record.import_string] = class_record
+
+            for class_child_record in class_record.iter_records():
+                class_child_record.import_string = "{}.{}".format(
+                    class_record.import_string, class_child_record.name
+                )
+                self.import_string_map[
+                    class_child_record.import_string
+                ] = class_child_record
+
+        for function_record in self.function_records:
+            function_record.import_string = "{}.{}".format(
+                self.import_string, function_record.name
+            )
+            self.import_string_map[function_record.import_string] = function_record
 
         for attribute_record in self.attribute_records:
-            import_string = "{}.{}".format(self.import_string, attribute_record.name)
-            attribute_record.import_string = import_string
-            self.import_string_map[import_string] = attribute_record
+            attribute_record.import_string = "{}.{}".format(
+                self.import_string, attribute_record.name
+            )
+            self.import_string_map[attribute_record.import_string] = attribute_record
 
     def _render_parts(self, indent=0):
         # type: (int) -> List[Any]

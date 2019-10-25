@@ -1,7 +1,7 @@
 """
 Wrapper for an `ast.ClassDef` node.
 """
-from typing import List, Set, Text, Generator, TYPE_CHECKING
+from typing import List, Set, Text, Generator, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -37,6 +37,30 @@ class ClassRecord(NodeRecord):
         self.title = self.name
         self.docstring = self._get_docstring()
 
+    def find_record(self, name):
+        # type: (Text) -> Optional[NodeRecord]
+        """
+        Find child method or attribute record.
+
+        Arguments:
+            name -- Record name to lookup.
+
+        Returns:
+            Itself or None.
+        """
+        if name == self.name:
+            return self
+
+        for method_record in self.method_records:
+            if method_record.name == name:
+                return method_record
+
+        for argument_record in self.argument_records:
+            if argument_record.name == name:
+                return argument_record
+
+        return None
+
     @property
     def related_names(self):
         # type: () -> Set[Text]
@@ -62,6 +86,9 @@ class ClassRecord(NodeRecord):
         """
         for method in self.get_public_methods():
             yield method
+
+        for attribute_record in self.attribute_records:
+            yield attribute_record
 
     def get_public_methods(self):
         # type: () -> List[FunctionRecord]

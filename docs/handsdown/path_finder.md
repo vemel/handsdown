@@ -24,7 +24,7 @@ class PathFinder():
 ```
 
 Glob helper for matching paths inside `root` path with `.gitignore`-like
-[PathFinder().include](#pathfinderinclude) and [PathFinder().exclude](#pathfinderexclude) patterns.
+`include` and `exclude` patterns.
 
 #### Examples
 
@@ -43,11 +43,11 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 #### Arguments
 
 - `root` - Path to root folder.
-- `glob_expr` - [PathFinder().glob](#pathfinderglob) expression to lookup in `root`
+- `glob_expr` - `glob` expression to lookup in `root`
 
 #### Raises
 
-- [PathFinderError](#pathfindererror) - If `root` is not absolute or not a directory.
+- `PathFinderError` - If `root` is not absolute or not a directory.
 
 ### PathFinder().exclude
 
@@ -120,7 +120,7 @@ Create directories up to `root` if they do not exist.
 
 #### Raises
 
-- [PathFinderError](#pathfindererror) - If any existing parent is not a directory and not in `safe` mode.
+- `PathFinderError` - If any existing parent is not a directory and not in `safe` mode.
 
 ### PathFinder().relative
 

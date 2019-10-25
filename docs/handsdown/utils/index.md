@@ -10,6 +10,7 @@ Handful utils that do not deserve a separate module.
     - [render_asset](#render_asset)
     - [split_import_string](#split_import_string)
     - Modules
+        - [ImportString](import_string.md#importstring)
         - [Logger](logger.md#logger)
 
 ## extract_md_title
