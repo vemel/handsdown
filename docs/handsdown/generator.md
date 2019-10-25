@@ -15,7 +15,7 @@ Main handsdown documentation generator.
 
 ## Generator
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L33)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L35)
 
 ```python
 class Generator():
@@ -62,7 +62,7 @@ Main documentation generator.
 
 ### Generator().cleanup_old_docs
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L155)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L157)
 
 ```python
 def cleanup_old_docs() -> None:
@@ -72,7 +72,7 @@ Remove old docs generated for this module.
 
 ### Generator().generate_doc
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L196)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L198)
 
 ```python
 def generate_doc(source_path: Path) -> None:
@@ -86,11 +86,11 @@ Generate one module doc at once.
 
 #### Raises
 
-- [GeneratorError](#generatorerror) - If `source_path` not found in current repo.
+- `GeneratorError` - If `source_path` not found in current repo.
 
 ### Generator().generate_docs
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L329)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L335)
 
 ```python
 def generate_docs() -> None:
@@ -100,7 +100,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L348)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L352)
 
 ```python
 def generate_index() -> None:
@@ -111,7 +111,7 @@ section that contains a Tree of all modules in the project.
 
 ### Generator().generate_modules
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L377)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L381)
 
 ```python
 def generate_modules() -> None:
@@ -122,7 +122,7 @@ section that contains a Tree of all modules in the project.
 
 ## GeneratorError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L27)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/generator.py#L29)
 
 ```python
 class GeneratorError(Exception):

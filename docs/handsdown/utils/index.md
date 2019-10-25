@@ -8,8 +8,8 @@ Handful utils that do not deserve a separate module.
     - [extract_md_title](#extract_md_title)
     - [make_title](#make_title)
     - [render_asset](#render_asset)
-    - [split_import_string](#split_import_string)
     - Modules
+        - [ImportString](import_string.md#importstring)
         - [Logger](logger.md#logger)
 
 ## extract_md_title
@@ -89,28 +89,3 @@ Render `assets/<name>` file to `target_path`.
 - `name` - Asset file name.
 - `target_path` - Path of output file.
 - `format_dict` - Format asset with values from the dict before writing.
-
-## split_import_string
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L83)
-
-```python
-def split_import_string(import_string: Text) -> List[Text]:
-```
-
-Split import string by dots.
-
-#### Examples
-
-```python
-split_import_string('my_module.new_class.NewClass')
-['my_module', 'new_class', 'NewClass']
-```
-
-#### Arguments
-
-- `import_string` - Python import string.
-
-#### Returns
-
-A list of import string parts.

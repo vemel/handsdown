@@ -22,6 +22,7 @@ class DocstringFormatter:
         # type: (Text) -> None
         docstring = self._cleanup(docstring)
         docstring = IndentTrimmer.trim_empty_lines(docstring)
+        docstring = IndentTrimmer.trim_text(docstring)
         lines = docstring.split("\n")
         self._lines = IndentTrimmer.trim_lines(lines)
 

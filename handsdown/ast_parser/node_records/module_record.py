@@ -6,7 +6,7 @@ from typing import List, Text, Generator, Any, Optional, Dict, TYPE_CHECKING
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.utils import make_title, split_import_string
+from handsdown.utils import make_title
 from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 
@@ -15,6 +15,7 @@ if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.class_record import ClassRecord
     from handsdown.ast_parser.node_records.import_record import ImportRecord
+    from handsdown.utils.import_string import ImportString
 
 
 class ModuleRecord(NodeRecord):
@@ -29,7 +30,7 @@ class ModuleRecord(NodeRecord):
     """
 
     def __init__(self, source_path, import_string):
-        # type: (Path, Text) -> None
+        # type: (Path, ImportString) -> None
         content = source_path.read_text()
         self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)
@@ -39,10 +40,10 @@ class ModuleRecord(NodeRecord):
         self.import_records = []  # type: List[ImportRecord]
         self.source_lines = self.source_path.read_text().split("\n")
         self.main_class_lookup_name = source_path.stem.replace("_", "")
-        self.name = split_import_string(import_string)[-1]
+        self.name = import_string.parts[-1]
         self.title = make_title(self.name)
         self.import_string = import_string
-        self.import_string_map = {}  # type: Dict[Text, NodeRecord]
+        self.import_string_map = {}  # type: Dict[ImportString, NodeRecord]
         self.docstring = self._get_docstring()
 
     def get_title_parts(self):
@@ -53,7 +54,7 @@ class ModuleRecord(NodeRecord):
         Returns:
             Titles from the top parent to itself.
         """
-        parts = split_import_string(self.import_string)
+        parts = self.import_string.parts
         result = []
         for part in parts:
             part = make_title(part)
@@ -65,9 +66,12 @@ class ModuleRecord(NodeRecord):
         return result
 
     def find_record(self, import_string):
-        # type: (Text) -> Optional[NodeRecord]
+        # type: (ImportString) -> Optional[NodeRecord]
         """
         Find child in the Module by an absolute or relative import string.
+
+        Attributes:
+            import_string -- record import string.
 
         Returns:
             Found child record on None.
@@ -76,12 +80,6 @@ class ModuleRecord(NodeRecord):
             return self
 
         result = self.import_string_map.get(import_string)
-        if result:
-            return result
-
-        result = self.import_string_map.get(
-            "{}.{}".format(self.import_string, import_string)
-        )
         if result:
             return result
 
@@ -106,18 +104,26 @@ class ModuleRecord(NodeRecord):
 
     def _set_import_strings(self):
         # type: () -> None
-        for child in self.iter_records():
-            import_string_parts = [self.import_string]
-            import_string_parts.append(child.name)
-            if not child.import_string:
-                import_string = ".".join(import_string_parts)
-                child.import_string = import_string
-                self.import_string_map[import_string] = child
+        for class_record in self.class_records:
+            class_record.import_string = self.import_string + class_record.name
+            self.import_string_map[class_record.import_string] = class_record
+
+            for class_child_record in class_record.iter_records():
+                class_child_record.import_string = (
+                    class_record.import_string + class_child_record.name
+                )
+
+                self.import_string_map[
+                    class_child_record.import_string
+                ] = class_child_record
+
+        for function_record in self.function_records:
+            function_record.import_string = self.import_string + function_record.name
+            self.import_string_map[function_record.import_string] = function_record
 
         for attribute_record in self.attribute_records:
-            import_string = "{}.{}".format(self.import_string, attribute_record.name)
-            attribute_record.import_string = import_string
-            self.import_string_map[import_string] = attribute_record
+            attribute_record.import_string = self.import_string + attribute_record.name
+            self.import_string_map[attribute_record.import_string] = attribute_record
 
     def _render_parts(self, indent=0):
         # type: (int) -> List[Any]

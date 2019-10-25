@@ -67,7 +67,7 @@ def replace_test():
 ```
 
 Check if all attribute `attributes`, ``data`` and exception `Exception` in
-class [RSTExample](#rstexample) and class [RSTExample](#rstexample) look good.
+:class:[RSTExample](#rstexample) and :class:[RSTExample](#rstexample) look good.
 
 ### RSTExample.rtype_test
 

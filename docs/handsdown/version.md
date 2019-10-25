@@ -8,4 +8,4 @@ Handsdown package version
 
 #### Attributes
 
-- [version](#version) - Package version: `'0.3.0'`
+- `version` - Package version: `'0.3.0'`

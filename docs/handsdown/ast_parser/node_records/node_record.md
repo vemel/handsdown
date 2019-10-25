@@ -18,7 +18,7 @@ Base class for all node records.
 
 ## NodeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L18)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L19)
 
 ```python
 class NodeRecord(object):
@@ -58,7 +58,9 @@ A list of rendered strings.
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L282)
 
 ```python
-def get_related_import_strings(module_record: ModuleRecord) -> Set[Text]:
+def get_related_import_strings(
+    module_record: ModuleRecord,
+) -> Set[ImportString]:
 ```
 
 Get a set of [NodeRecord().related_names](#noderecordrelated_names) found in module class, function,
@@ -70,6 +72,7 @@ A set of absolute import strings found.
 
 #### See also
 
+- [ImportString](../../utils/import_string.md#importstring)
 - [ModuleRecord](module_record.md#modulerecord)
 
 ### NodeRecord.is_line_fit
@@ -81,7 +84,7 @@ A set of absolute import strings found.
 def is_line_fit(line: int, indent: Text) -> bool:
 ```
 
-Check if line fits to `LINE_LENGTH` with given `indent`.
+Check if line fits to [LINE_LENGTH](#noderecord) with given `indent`.
 
 #### Examples
 
@@ -166,8 +169,8 @@ def render(indent: bool = 0, allow_multiline: int = False) -> Text:
 
 Render node to a string.
 
-If `allow_multiline` is True, tries to fit the result into `LINE_LENGTH`,
-otherwise does not break lines and trims result to `SINGLE_LINE_LENGTH`.
+If `allow_multiline` is True, tries to fit the result into [LINE_LENGTH](#noderecord),
+otherwise does not break lines and trims result to [SINGLE_LINE_LENGTH](#noderecord).
 
 #### Arguments
 
@@ -189,7 +192,7 @@ def render_indent(indent: int) -> Text:
 
 Render indent to a string.
 
-Each indent adds `INDENT_SPACES` spaces.
+Each indent adds [INDENT_SPACES](#noderecord) spaces.
 
 #### Examples
 

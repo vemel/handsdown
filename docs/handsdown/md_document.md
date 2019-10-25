@@ -38,7 +38,7 @@ class MDDocument(object):
 
 Markdown file builder.
 
-Can be used as a context manager, on exit context is written to [MDDocument().path](#mddocumentpath).
+Can be used as a context manager, on exit context is written to `path`.
 
 #### Examples
 
@@ -70,7 +70,7 @@ with MDDocument(path=Path('output.md')) as md_document:
 
 #### Arguments
 
-- [MDDocument().path](#mddocumentpath) - Path to store document.
+- `path` - Path to store document.
 
 #### Attributes
 
@@ -116,7 +116,7 @@ Handle trimming and sectioning the content and update
 
 #### Arguments
 
-- [MDDocument().title](#mddocumenttitle) - Title to add.
+- `title` - Title to add.
 - `level` - Title level, number of `#` symbols.
 
 ### MDDocument().generate_toc_section
@@ -244,7 +244,7 @@ MDDocument.render_doc_link('my title', anchor='my-anchor')
 
 #### Arguments
 
-- [MDDocument().title](#mddocumenttitle) - Link text.
+- `title` - Link text.
 - `anchor` - Unescaped or escaped anchor tag.
 - `target_path` - Target MDDocument path.
 
@@ -275,7 +275,7 @@ MDDocument.render_link('MyClass.__init__', 'my.md')
 
 #### Arguments
 
-- [MDDocument().title](#mddocumenttitle) - Link text.
+- `title` - Link text.
 - `link` - Link target.
 
 #### Returns
@@ -298,7 +298,7 @@ Render Markdown link to `target_md_document` header path with a correct title.
 #### Arguments
 
 - `target_md_document` - Target [MDDocument](#mddocument).
-- [MDDocument().title](#mddocumenttitle) - Link text. If not provided `target_md_document.title` is used.
+- `title` - Link text. If not provided `target_md_document.title` is used.
 
 #### Returns
 
@@ -313,7 +313,7 @@ A string with Markdown link.
 def sections() -> List[Text]:
 ```
 
-All non-special [MDDocument().sections](#mddocumentsections) of the document.
+All non-special `sections` of the document.
 
 ### MDDocument().subtitle
 

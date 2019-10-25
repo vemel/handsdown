@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/master/handsdown/main.py) module.
 
-Main CLI entrypoint for `handsdown`
+Main CLI entrypoint for [Handsdown](index.md#handsdown)
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Main
     - [create_external_configs](#create_external_configs)

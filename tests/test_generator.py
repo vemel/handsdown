@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock
 from pathlib import Path
 
 from handsdown.generator import Generator
+from handsdown.utils.import_string import ImportString
 
 
 class TestGenerator(unittest.TestCase):
@@ -50,7 +51,8 @@ class TestGenerator(unittest.TestCase):
 
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
-        module_record_mock.import_string = "my.import.string"
+        module_record_mock.docstring = "Docstring"
+        module_record_mock.import_string = ImportString("my.import.string")
         ModuleRecordListMock().__iter__ = MagicMock(
             return_value=iter([module_record_mock])
         )

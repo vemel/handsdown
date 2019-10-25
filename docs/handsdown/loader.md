@@ -14,7 +14,7 @@ Loader for python source code.
 
 ## Loader
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L23)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L24)
 
 ```python
 class Loader():
@@ -37,7 +37,7 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L130)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L131)
 
 ```python
 def get_import_string(source_path: Path) -> Text:
@@ -66,7 +66,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L66)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
@@ -84,7 +84,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 #### Raises
 
-- [LoaderError](#loadererror) - If python source cannot be loaded.
+- `LoaderError` - If python source cannot be loaded.
 
 #### See also
 
@@ -92,7 +92,7 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 ### Loader().get_output_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L44)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L45)
 
 ```python
 def get_output_path(source_path: Path) -> Path:
@@ -110,7 +110,7 @@ A path to the output `.md` file even if it does not exist yet.
 
 ### Loader.parse_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L112)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L113)
 
 ```python
 @staticmethod
@@ -121,7 +121,7 @@ Parse `ModuleRecord` children and fully load a tree for it.
 
 #### Raises
 
-- [LoaderError](#loadererror) - If python source cannot be parsed.
+- `LoaderError` - If python source cannot be parsed.
 
 #### See also
 
@@ -129,7 +129,7 @@ Parse `ModuleRecord` children and fully load a tree for it.
 
 ## LoaderError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L18)
 
 ```python
 class LoaderError(Exception):

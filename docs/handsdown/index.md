@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [handsdown](https://github.com/vemel/handsdown/blob/master/handsdown/__init__.py) module.
 
-Root of `handsdown` source code.
+Root of [Handsdown](#handsdown) source code.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Handsdown
 - [Handsdown](#handsdown)
@@ -51,6 +51,7 @@ Root of `handsdown` source code.
         - [Sentinel](sentinel.md#sentinel)
         - [Settings](settings.md#settings)
         - [Utils](utils/index.md#utils)
+            - [ImportString](utils/import_string.md#importstring)
             - [Logger](utils/logger.md#logger)
         - [Version](version.md#version)
 

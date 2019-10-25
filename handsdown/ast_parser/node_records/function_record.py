@@ -35,7 +35,6 @@ class FunctionRecord(NodeRecord):
         self.is_method = is_method
         self.return_type_hint = None  # type: Optional[ExpressionRecord]
         self.decorator_records = []  # type: List[ExpressionRecord]
-        self.definition_lines = []  # type: List[Text]
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
