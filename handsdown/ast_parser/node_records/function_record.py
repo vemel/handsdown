@@ -126,9 +126,18 @@ class FunctionRecord(NodeRecord):
             if match:
                 arg_type = match.group(1)
                 line_number = start_line_number + relative_line_number
-                for argument in self.argument_records:
-                    if argument.line_number == line_number:
-                        argument.type_hint = TextRecord(argument.node, arg_type.strip())
+
+                # find argument index of the next argument
+                # because type annotation can be on a different line
+                for argument_index, argument in enumerate(self.argument_records):
+                    if argument.line_number > line_number:
+                        argument_index -= 1
+                        break
+
+
+                if argument_index >= 0:
+                    argument = self.argument_records[argument_index]
+                    argument.type_hint = TextRecord(argument.node, arg_type.strip())
 
     def _render_parts(self, indent):
         # type: (int) -> List[Any]

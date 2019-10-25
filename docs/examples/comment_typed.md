@@ -32,7 +32,7 @@ class Typed():
         my_bool: bool = one & ~two == 'three' and not -4,
         my_lambda=lambda x, y, *args, **kwargs: x + y,
         my_set: Set = {1, 2, [3, 4], {5: 6}, (7, 8)},
-        _value=MyValue('asd', *args, kwarg=123, **extras),
+        _value: Union[List[Text], Text, MyValue] = MyValue('asd', *args, kwarg=123, **extras),
         _name: Text = 'default',
     ) -> Dict[Text, MyValue]:
 ```
