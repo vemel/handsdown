@@ -79,6 +79,7 @@ def main():
 
     try:
         generator = Generator(
+            project_name=args.project_name,
             input_path=args.input_path,
             output_path=args.output_path,
             source_paths=path_finder.glob(SOURCES_GLOB),

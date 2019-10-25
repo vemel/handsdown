@@ -167,7 +167,8 @@ mkdocs build
 ### 🧩 As a module
 
 ```python
-from handsdown import Generator, PathFinder
+from handsdown.generator import Generator
+from handsdown.path_finder import PathFinder
 
 # this is our project root directory
 repo_path = Path.cwd()

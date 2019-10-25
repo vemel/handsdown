@@ -154,6 +154,13 @@ def parse_args(args):
     parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"
     )
+    parser.add_argument(
+        "-n",
+        "--name",
+        dest="project_name",
+        help="Project name",
+        default=Path.cwd().stem,
+    )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(
         "-v", "--version", action="store_true", help="Show pacakge version"
