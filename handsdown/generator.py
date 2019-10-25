@@ -66,10 +66,10 @@ class Generator:
 
     def __init__(
         self,
-        project_name,  # type: Text
         input_path,  # type: Path
         output_path,  # type: Path
         source_paths,  # type: Iterable[Path]
+        project_name=None,  # type: Optional[Text]
         docstring_processor=None,  # type: Optional[BaseDocstringProcessor]
         loader=None,  # type: Optional[Loader]
         raise_errors=False,  # type: bool
@@ -80,7 +80,7 @@ class Generator:
         self._logger = get_logger()
         self._root_path = input_path
         self._output_path = output_path
-        self._project_name = project_name
+        self._project_name = project_name or make_title(input_path.name)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth
