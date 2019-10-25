@@ -21,4 +21,6 @@ RUN adduser \
 USER handsdown
 WORKDIR /app
 
+ENV PYTHON_VER "3"
+
 ENTRYPOINT ["handsdown"]

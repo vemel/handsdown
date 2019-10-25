@@ -20,10 +20,10 @@ Main handsdown documentation generator.
 ```python
 class Generator():
     def __init__(
-        project_name: Text,
         input_path: Path,
         output_path: Path,
         source_paths: Iterable[Path],
+        project_name: Optional[Text] = None,
         docstring_processor: Optional[BaseDocstringProcessor] = None,
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
@@ -32,7 +32,7 @@ class Generator():
     ) -> None:
 ```
 
-Main handsdown documentation generator.
+Main documentation generator.
 
 #### Arguments
 

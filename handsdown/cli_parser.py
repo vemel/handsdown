@@ -159,7 +159,7 @@ def parse_args(args):
         "--name",
         dest="project_name",
         help="Project name",
-        default=Path.cwd().stem,
+        default=Path.cwd().stem.capitalize(),
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(

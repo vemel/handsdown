@@ -53,15 +53,20 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     def visit_Str(self, node):
         # type: (ast.Str) -> None
-        self.parts.append(repr(node.s))
+        value = node.s
+        if isinstance(value, bytes):
+            value = value.decode("utf-8")
+        self.parts.append(repr(value))
 
     def visit_Bytes(self, node):
         # type: (ast.Bytes) -> None
-        self.parts.append(repr(node.s))
+        value = node.s
+        self.parts.append(repr(value))
 
     def visit_Num(self, node):
         # type: (ast.Num) -> None
-        self.parts.append(repr(node.n))
+        value = node.n
+        self.parts.append(repr(value))
 
     def visit_Name(self, node):
         # type: (ast.Name) -> None

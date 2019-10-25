@@ -15,6 +15,7 @@ Python docstring-based documentation generator for lazy perfectionists.
   - [Examples](#examples)
   - [Usage](#usage)
     - [💻 From command line](#%f0%9f%92%bb-from-command-line)
+    - [📦 As a Docker image](#%f0%9f%93%a6-as-a-docker-image)
     - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
     - [🐏 Deploy on Read the Docs](#%f0%9f%90%8f-deploy-on-read-the-docs)
     - [📋 Build static HTML](#%f0%9f%93%8b-build-static-html)
@@ -95,6 +96,21 @@ handsdown --exclude */migrations
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
+
+### 📦 As a Docker image
+
+- Install [Docker](https://docs.docker.com/install/)
+- Pull latest version `docker pull docker.pkg.github.com/vemel/handsdown/handsdown:latest`
+- Tag it `docker tag docker.pkg.github.com/vemel/handsdown/handsdown:latest handsdown`
+- Generate docs for `ProjectName` in current directory
+
+```bash
+# for Python 3 project
+docker run -v `pwd`:/app handsdown -n ProjectName
+
+# for Python 2 project
+PYTHON_VER=2 docker run -v `pwd`:/app handsdown -n ProjectName
+```
 
 ### 📝 As a GitHub Pages manager
 
