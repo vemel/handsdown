@@ -25,7 +25,7 @@ Translator of docstrings to Markdown format.
 
 ### DocstringFormatter().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L62)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/docstring_formatter.py#L63)
 
 ```python
 def render() -> Text:

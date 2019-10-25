@@ -18,7 +18,7 @@ Base class for all node records.
 
 ## NodeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L19)
 
 ```python
 class NodeRecord(object):
@@ -32,13 +32,12 @@ Base class for all node records.
 - `ELLIPSIS` - Ellipsis string value: `'...'`
 - `INDENT_SPACES` - Amount of spaces per `indent`: `4`
 - `LINE_LENGTH` - Max length for a multi-line render result: `79`
-- `LOCAL_LINK_RE` - RegExp to find object names in a docstring: `re.compile('`+[A-Za-z]\\S+`+')`
 - `MAX_INDENT` - Replace render resul with ellipsis on too deep indendation: `4`
 - `SINGLE_LINE_LENGTH` - Max length for a single-line render result: `50`
 
 ### NodeRecord().get_documented_attribute_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L319)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L314)
 
 ```python
 def get_documented_attribute_strings() -> List[Text]:
@@ -56,7 +55,7 @@ A list of rendered strings.
 
 ### NodeRecord().get_related_import_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L287)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L282)
 
 ```python
 def get_related_import_strings(
@@ -78,7 +77,7 @@ A set of absolute import strings found.
 
 ### NodeRecord.is_line_fit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L238)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L233)
 
 ```python
 @classmethod
@@ -109,7 +108,7 @@ A string representation of indent.
 
 ### NodeRecord().line_number
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L60)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L55)
 
 ```python
 @property
@@ -124,7 +123,7 @@ A line number startign with 1.
 
 ### NodeRecord().line_number
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L76)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L71)
 
 ```python
 @line_number.setter
@@ -133,7 +132,7 @@ def line_number(value: int) -> None:
 
 ### NodeRecord().parse
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L107)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L102)
 
 ```python
 def parse() -> None:
@@ -145,7 +144,7 @@ Executes only once if called multiple times.
 
 ### NodeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L89)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L84)
 
 ```python
 @property
@@ -162,7 +161,7 @@ A set of referenced object name.
 
 ### NodeRecord().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L174)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L169)
 
 ```python
 def render(indent: bool = 0, allow_multiline: int = False) -> Text:
@@ -184,7 +183,7 @@ A string representation of `node`.
 
 ### NodeRecord.render_indent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L263)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L258)
 
 ```python
 @classmethod

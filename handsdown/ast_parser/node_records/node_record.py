@@ -5,7 +5,7 @@ from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.ast_parser.enums import RenderPart
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.docstring_formatter import DocstringFormatter
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.utils.import_string import ImportString
 
@@ -78,8 +78,8 @@ class NodeRecord(object):
         docstring = ast.get_docstring(self.node, clean=False) or ""
         if isinstance(docstring, bytes):
             docstring = docstring.decode("utf-8")
-        docstring = IndentTrimmer.trim_empty_lines(docstring)
-        return IndentTrimmer.trim_text(docstring)
+
+        return DocstringFormatter(docstring).render()
 
     @property
     def related_names(self):
