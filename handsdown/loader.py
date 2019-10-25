@@ -8,6 +8,7 @@ from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.path_finder import PathFinder
 from handsdown.utils import extract_md_title
 from handsdown.utils.logger import get_logger
+from handsdown.utils.import_string import ImportString
 
 if TYPE_CHECKING:  # pragma: no cover
     import logging
@@ -86,7 +87,7 @@ class Loader:
         docstring_parts = []
 
         try:
-            module_record = ModuleRecord(source_path, import_string)
+            module_record = ModuleRecord(source_path, ImportString(import_string))
             module_record.build_children()
         except Exception as e:
             raise LoaderError(

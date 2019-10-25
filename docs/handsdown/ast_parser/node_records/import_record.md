@@ -11,7 +11,7 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ## ImportRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L14)
 
 ```python
 class ImportRecord(NodeRecord):
@@ -32,10 +32,10 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ### ImportRecord().get_import_string
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L34)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L35)
 
 ```python
-def get_import_string() -> Text:
+def get_import_string() -> ImportString:
 ```
 
 Get import string from a node.
@@ -44,12 +44,16 @@ Get import string from a node.
 
 An absolute import string.
 
+#### See also
+
+- [ImportString](../../utils/import_string.md#importstring)
+
 ### ImportRecord().match
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L63)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L64)
 
 ```python
-def match(name: Text) -> Optional[Text]:
+def match(name: Text) -> Optional[ImportString]:
 ```
 
 Check if `name` matches or stats with a local name.
@@ -76,3 +80,7 @@ False
 #### Returns
 
 True if name is imported object itself on one of his children.
+
+#### See also
+
+- [ImportString](../../utils/import_string.md#importstring)

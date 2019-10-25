@@ -2,7 +2,7 @@
 
 > Auto-generated documentation for [examples](https://github.com/vemel/handsdown/blob/master/examples/__init__.py) module.
 
-Examples of different docstring formats supported by `handsdown`.
+Examples of different docstring formats supported by [Handsdown](../handsdown/index.md#handsdown).
 Can be used as a list of supported features.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Examples

@@ -3,13 +3,13 @@ Aggregation of `ModuleRecord` objects.
 """
 from typing import Generator, Text, Set, Optional, Dict, List, Any, TYPE_CHECKING
 
-from handsdown.utils import split_import_string
 from handsdown.utils.logger import get_logger
 
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.node_records.node_record import NodeRecord
+    from handsdown.utils.import_string import ImportString
 
 
 class ModuleRecordList:
@@ -21,10 +21,10 @@ class ModuleRecordList:
         # type: () -> None
         self._logger = get_logger()
         self.data = []  # type: List[ModuleRecord]
-        self.import_string_map = {}  # type: Dict[Text, Any]
+        self.import_string_map = {}  # type: Dict[ImportString, Any]
 
     def find_module_record(self, import_string):
-        # type: (Text) -> Optional[ModuleRecord]
+        # type: (ImportString) -> Optional[ModuleRecord]
         """
         Find `ModuleRecord` by it's import string.
 
@@ -34,17 +34,15 @@ class ModuleRecordList:
         Returns:
             Found `NodeRecord` instance or None.
         """
-        import_string_parts = split_import_string(import_string)
-        while import_string_parts:
-            module_import_string = ".".join(import_string_parts)
-            import_string_parts.pop()
-            module_record = self.import_string_map.get(module_import_string)
-            if not module_record:
-                continue
-
-            record = module_record.find_record(import_string)
-            if record:
+        while True:
+            module_record = self.import_string_map.get(import_string)
+            if module_record:
                 return module_record
+
+            if import_string.is_top_level():
+                break
+
+            import_string = import_string.parent
 
         return None
 
@@ -56,7 +54,7 @@ class ModuleRecordList:
         Returns:
             A set of top level imports as strings.
         """
-        return {i.import_string.split(".")[0] for i in self}
+        return {i.import_string.parts[0] for i in self}
 
     def add(self, module_record):
         # type: (ModuleRecord) -> None

@@ -12,7 +12,7 @@ from handsdown.loader import Loader, LoaderError
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.md_document import MDDocument
-from handsdown.utils import make_title, split_import_string
+from handsdown.utils import make_title
 from handsdown.utils.logger import get_logger
 from handsdown.utils.import_string import ImportString
 from handsdown.path_finder import PathFinder
@@ -214,7 +214,6 @@ class Generator:
 
             md_document = MDDocument(output_path)
             self._generate_doc(module_record, md_document)
-            self._replace_full_links(md_document)
             md_document.write()
 
             return
@@ -239,14 +238,15 @@ class Generator:
             return
 
         source_link = md_document.render_doc_link(
-            title=module_record.import_string, target_path=module_record.source_path
+            title=module_record.import_string.value,
+            target_path=module_record.source_path,
         )
         if self._source_code_url:
             relative_path_str = self._root_path_finder.relative(
                 module_record.source_path
             ).as_posix()
             source_link = md_document.render_link(
-                title=module_record.import_string,
+                title=module_record.import_string.value,
                 link="{}{}".format(self._source_code_url, relative_path_str),
             )
 
@@ -292,17 +292,22 @@ class Generator:
     def _build_breadcrumbs_string(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> Text
         import_string_breadcrumbs = []  # type: List[Text]
+        parent_import_strings = []
+        import_string = module_record.import_string
+        while not import_string.is_top_level():
+            import_string = import_string.parent
+            parent_import_strings.append(import_string)
 
-        import_string_parts = split_import_string(module_record.import_string)
-        parent_import_parts = []  # type: List[Text]
-        for part in import_string_parts[:-1]:
-            parent_import_parts.append(part)
-            parent_import = ".".join(parent_import_parts)
+        parent_import_strings.reverse()
+
+        for parent_import_string in parent_import_strings:
             parent_module_record = self._module_records.find_module_record(
-                parent_import
+                parent_import_string
             )
             if not parent_module_record:
-                import_string_breadcrumbs.append("`{}`".format(make_title(part)))
+                import_string_breadcrumbs.append(
+                    "`{}`".format(make_title(parent_import_string.parts[-1]))
+                )
                 continue
 
             output_path = self._loader.get_output_path(parent_module_record.source_path)
@@ -342,7 +347,6 @@ class Generator:
             output_path = self._loader.get_output_path(module_record.source_path)
             md_document = MDDocument(output_path)
             self._generate_doc(module_record, md_document)
-            self._replace_full_links(md_document)
             md_document.write()
 
     def generate_index(self):
@@ -406,41 +410,16 @@ class Generator:
             md_modules.subtitle = "\n\n".join(subtitle_parts)
 
             modules_toc_lines = self._build_modules_toc_lines(
-                import_string="", max_depth=10, md_document=md_modules, start_level=1
+                import_string=ImportString(""),
+                max_depth=10,
+                md_document=md_modules,
+                start_level=1,
             )
 
             md_doc_link = md_modules.render_md_doc_link(self.md_index)
             modules_toc_lines.insert(0, md_modules.get_toc_line(md_doc_link, level=0))
 
             md_modules.toc_section = "\n".join(modules_toc_lines)
-
-    def _replace_full_links(self, md_document):
-        # type: (MDDocument) -> None
-        sections = md_document.sections
-
-        for index, section in enumerate(sections):
-            for match in re.findall(self._docstring_links_re, section):
-                import_string = match.replace("`", "")
-                module_record = self._module_records.find_module_record(import_string)
-                if module_record is None:
-                    continue
-
-                node_record = module_record.find_record(import_string)
-                if not node_record:
-                    continue
-
-                title = node_record.title
-                output_path = self._loader.get_output_path(module_record.source_path)
-                link = md_document.render_doc_link(
-                    title, target_path=output_path, anchor=md_document.get_anchor(title)
-                )
-                section = section.replace(match, link)
-                self._logger.debug(
-                    "Adding link '{}' to {}".format(
-                        title, self._root_path_finder.relative(md_document.path)
-                    )
-                )
-            sections[index] = section
 
     def _generate_module_doc_lines(self, module_record, md_document):
         # type: (ModuleRecord, MDDocument) -> None
@@ -483,46 +462,61 @@ class Generator:
 
     def _replace_links(self, module_record, record, md_document, docstring):
         # type: (ModuleRecord, NodeRecord, MDDocument, Text) -> Text
-        record_import_string = ImportString(record.import_string)
         parent_import_string = None
-        if not record_import_string.is_top_level():
-            parent_import_string = record_import_string.parent
+        if not record.import_string.is_top_level():
+            parent_import_string = record.import_string.parent
 
         for match in self._short_link_re.findall(docstring):
             related_record_name = match.replace("`", "")
             related_import_string = None
             related_record = None
+            target_path = md_document.path
 
             # find record in parent
             if parent_import_string:
                 related_import_string = parent_import_string + related_record_name
-                if related_import_string != record_import_string:
-                    related_record = module_record.find_record(
-                        related_import_string.value
-                    )
+                if related_import_string != record.import_string:
+                    related_record = module_record.find_record(related_import_string)
 
-            # find by global import
+            # find record in module
             if not related_record:
-                related_record = module_record.find_record(related_record_name)
+                related_import_string = (
+                    module_record.import_string + related_record_name
+                )
+                related_record = module_record.find_record(related_import_string)
+
+            # find record globally
+            if not related_record:
+                related_import_string = ImportString(related_record_name)
+                related_module_record = self._module_records.find_module_record(
+                    related_import_string
+                )
+                if related_module_record:
+                    related_record = related_module_record.find_record(
+                        related_import_string
+                    )
+                    target_path = self._loader.get_output_path(
+                        related_module_record.source_path
+                    )
 
             if not related_record:
                 continue
 
-            if ImportString(related_record.import_string).startswith(
-                record_import_string
-            ):
+            if related_record.import_string.startswith(record.import_string):
                 continue
 
             title = related_record.title
             anchor = md_document.get_anchor(related_record.title)
             if isinstance(related_record, AttributeRecord):
                 parent_related_record = module_record.find_record(
-                    ImportString(related_record.import_string).parent.value
+                    related_record.import_string.parent
                 )
                 if parent_related_record:
                     anchor = md_document.get_anchor(parent_related_record.title)
 
-            link = md_document.render_doc_link(title, anchor=anchor)
+            link = md_document.render_doc_link(
+                title, anchor=anchor, target_path=target_path
+            )
             docstring = docstring.replace(match, link)
             self._logger.debug(
                 "Adding local link '{}' to '{}'".format(title, record.title)
@@ -595,11 +589,9 @@ class Generator:
     def _build_modules_toc_lines(
         self, import_string, max_depth, md_document, start_level
     ):
-        # type: (Text, int, MDDocument, int) -> List[Text]
+        # type: (ImportString, int, MDDocument, int) -> List[Text]
         lines = []  # type: List[Text]
-        parts = []  # type: List[Text]
-        if import_string:
-            parts = import_string.split(".")
+        parts = import_string.parts
 
         last_import_string_parts = []  # type: List[Text]
         for module_record in self._module_records:
@@ -608,11 +600,11 @@ class Generator:
                 continue
 
             if import_string and not module_record.import_string.startswith(
-                "{}.".format(import_string)
+                import_string
             ):
                 continue
 
-            import_string_parts = split_import_string(module_record.import_string)
+            import_string_parts = module_record.import_string.parts
             if len(import_string_parts) > len(parts) + max_depth:
                 continue
 

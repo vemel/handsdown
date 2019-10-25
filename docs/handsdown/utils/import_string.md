@@ -29,7 +29,7 @@ Wrapper for python import strings.
 
 ### ImportString().is_top_level
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L55)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L59)
 
 ```python
 def is_top_level() -> bool:
@@ -43,7 +43,7 @@ True if it has no parents.
 
 ### ImportString().parent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L69)
 
 ```python
 @property
@@ -54,11 +54,11 @@ Parent import string.
 
 #### Returns
 
-A new `ImportString` instance.
+A new [ImportString](#importstring) instance.
 
 ### ImportString().parts
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L44)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L48)
 
 ```python
 @property
@@ -73,7 +73,7 @@ A list of import string parts.
 
 ### ImportString().startswith
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L80)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L84)
 
 ```python
 def startswith(import_string: ImportString) -> bool:

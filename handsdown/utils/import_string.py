@@ -34,6 +34,10 @@ class ImportString:
         # type: (Text) -> ImportString
         return ImportString("{}.{}".format(self.value, other))
 
+    def __bool__(self):
+        # type: () -> bool
+        return bool(self.value)
+
     def __eq__(self, other):
         # type: (object) -> bool
         if not isinstance(other, ImportString):

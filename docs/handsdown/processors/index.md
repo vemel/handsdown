@@ -12,5 +12,5 @@ Docstrings processors.
         - [SectionMap](section_map.md#sectionmap)
         - [Smart](smart.md#smart)
 
-- [PEP257DocstringProcessor](pep257.md#pep257docstringprocessor)
-- [RSTDocstringProcessor](rst.md#rstdocstringprocessor)
+- `handsdown.processors.pep257.PEP257DocstringProcessor`
+- `handsdown.processors.rst.RSTDocstringProcessor`

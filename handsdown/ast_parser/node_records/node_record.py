@@ -1,13 +1,13 @@
 """
 Base class for all node records.
 """
-import re
 from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
 from abc import abstractmethod
 from handsdown.ast_parser.enums import RenderPart
 from handsdown.indent_trimmer import IndentTrimmer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.utils.import_string import ImportString
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
@@ -20,9 +20,6 @@ class NodeRecord(object):
     """
     Base class for all node records.
     """
-
-    # RegExp to find object names in a docstring
-    LOCAL_LINK_RE = re.compile(r"`+[A-Za-z]\S+`+")
 
     # Max length for a multi-line render result
     LINE_LENGTH = 79
@@ -46,12 +43,11 @@ class NodeRecord(object):
     def __init__(self, node):
         # type: (ast.AST) -> None
         self.docstring = ""
-        self.import_string = ""
+        self.import_string = ImportString("")
         self.node = node
         self.name = self.node.__class__.__name__
         self.title = ""
         self.is_method = False
-        self.support_split = False
         self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
         self._line_number = None  # type: Optional[int]
@@ -284,7 +280,7 @@ class NodeRecord(object):
         return " " * indent * cls.INDENT_SPACES
 
     def get_related_import_strings(self, module_record):
-        # type: (ModuleRecord) -> Set[Text]
+        # type: (ModuleRecord) -> Set[ImportString]
         """
         Get a set of `related_names` found in module class, function,
         method and attribute records.
@@ -292,7 +288,7 @@ class NodeRecord(object):
         Returns:
             A set of absolute import strings found.
         """
-        result = set()  # type: Set[Text]
+        result = set()  # type: Set[ImportString]
         related_names = self.related_names
         if not related_names:
             return result

@@ -297,7 +297,7 @@ Render Markdown link to `target_md_document` header path with a correct title.
 
 #### Arguments
 
-- `target_md_document` - Target `MDDocument`.
+- `target_md_document` - Target [MDDocument](#mddocument).
 - `title` - Link text. If not provided `target_md_document.title` is used.
 
 #### Returns
@@ -324,7 +324,7 @@ All non-special `sections` of the document.
 def subtitle() -> Text:
 ```
 
-`MDDocument` subtitle or an empty string.
+[MDDocument](#mddocument) subtitle or an empty string.
 
 ### MDDocument().subtitle
 
@@ -344,7 +344,7 @@ def subtitle(subtitle: Text) -> None:
 def title() -> Text:
 ```
 
-`MDDocument` title or an empty string.
+[MDDocument](#mddocument) title or an empty string.
 
 ### MDDocument().title
 

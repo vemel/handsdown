@@ -102,8 +102,8 @@ Value is a related [Section](#section) instance.
 def add_block(section_name: Text) -> None:
 ```
 
-Add new `SectionBlock` to section `section_name`.
-If `Section` does not exist - it is not created.
+Add new [SectionBlock](#sectionblock) to section `section_name`.
+If [Section](#section) does not exist - it is not created.
 
 #### Arguments
 
@@ -117,7 +117,7 @@ If `Section` does not exist - it is not created.
 def add_line(section_name: Text, line: Text) -> None:
 ```
 
-Add new `line` to the last `SectionBlock` of section `section_name`.
+Add new `line` to the last [SectionBlock](#sectionblock) of section `section_name`.
 If line and section are empty - section is not created.
 
 #### Arguments
@@ -149,11 +149,11 @@ Add line respecting indent of the current section block.
 def sections() -> Generator[Section, None, None]:
 ```
 
-Iterate over existing `Section` objects.
+Iterate over existing [Section](#section) objects.
 
 #### Yields
 
-`Section` objects in order of appearance.
+[Section](#section) objects in order of appearance.
 
 #### See also
 
@@ -167,8 +167,8 @@ Iterate over existing `Section` objects.
 def trim_block(section_name: Text) -> None:
 ```
 
-Delete last empty lines from the last `SectionBlock`.
-If `Section` does not exist - it is not created.
+Delete last empty lines from the last [SectionBlock](#sectionblock).
+If [Section](#section) does not exist - it is not created.
 
 #### Arguments
 
