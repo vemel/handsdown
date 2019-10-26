@@ -76,7 +76,7 @@ class Generator:
         loader=None,  # type: Optional[Loader]
         raise_errors=False,  # type: bool
         source_code_url=None,  # type: Optional[Text]
-        toc_depth=3,  # type: int
+        toc_depth=1,  # type: int
     ):
         # type: (...) -> None
         self._logger = get_logger()

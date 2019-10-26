@@ -148,7 +148,7 @@ def parse_args(args):
         type=git_repo,
     )
     parser.add_argument(
-        "--toc-depth", help="Maximum depth of child modules ToC", default=3, type=int
+        "--toc-depth", help="Maximum depth of child modules ToC", default=1, type=int
     )
     parser.add_argument(
         "-d", "--debug", action="store_true", help="Show debug messages"

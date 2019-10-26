@@ -28,7 +28,7 @@ class Generator():
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
         source_code_url: Optional[Text] = None,
-        toc_depth: int = 3,
+        toc_depth: int = 1,
     ) -> None:
 ```
 
