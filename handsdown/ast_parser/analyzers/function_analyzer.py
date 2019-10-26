@@ -164,4 +164,3 @@ class FunctionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        print("node", _node, ExpressionRecord(_node).render())

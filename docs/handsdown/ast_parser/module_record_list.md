@@ -6,6 +6,7 @@ Aggregation of `ModuleRecord` objects.
 
 - [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / ModuleRecordList
     - [ModuleRecordList](#modulerecordlist)
+        - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
         - [ModuleRecordList().add](#modulerecordlistadd)
         - [ModuleRecordList().find_module_record](#modulerecordlistfind_module_record)
         - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
@@ -20,6 +21,24 @@ class ModuleRecordList():
 ```
 
 Aggregation of `ModuleRecord` objects.
+
+### ModuleRecordList().\_\_iter\_\_
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L70)
+
+```python
+def __iter__() -> Generator[ModuleRecord, None, None]:
+```
+
+Iterate over all added `ModuleRecord` entries.
+
+#### Yields
+
+`ModuleRecord` entries.
+
+#### See also
+
+- [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().add
 

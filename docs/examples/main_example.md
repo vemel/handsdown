@@ -7,6 +7,7 @@ This is a module docstring. It will appear in documentation.
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Main Example
     - [Notes](#notes)
     - [MyClass](#myclass)
+        - [MyClass().\_\_bool\_\_](#myclass__bool__)
         - [MyClass.do_something](#myclassdo_something)
     - [hello](#hello)
 
@@ -37,6 +38,20 @@ This time we use RST docstrings format.
 #### Attributes
 
 - `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
+
+### MyClass().\_\_bool\_\_
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L88)
+
+```python
+def __bool__() -> bool:
+```
+
+Magic methods are added to docs only if they have docstrings.
+
+#### Returns
+
+True if [STUFF_COUNT](#myclass) is not zero
 
 ### MyClass.do_something
 

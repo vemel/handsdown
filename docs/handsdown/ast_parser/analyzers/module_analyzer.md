@@ -14,10 +14,11 @@ AST analyzer for `ast.Module` records.
 
 ## ModuleAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L14)
 
 ```python
 class ModuleAnalyzer(BaseAnalyzer):
+    def __init__() -> None:
 ```
 
 AST analyzer for `ast.Module` records.
@@ -28,7 +29,7 @@ AST analyzer for `ast.Module` records.
 
 ### ModuleAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L93)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L100)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -50,7 +51,7 @@ MY_MODULE_ATTR = 'value'
 
 ### ModuleAnalyzer().visit_ClassDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L57)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L64)
 
 ```python
 def visit_ClassDef(node: ast.ClassDef) -> None:
@@ -73,7 +74,7 @@ class MyClass():
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L75)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L82)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -96,7 +97,7 @@ def my_func(arg1):
 
 ### ModuleAnalyzer().visit_Import
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
 
 ```python
 def visit_Import(node: ast.Import) -> None:
@@ -121,7 +122,7 @@ import my_module.my_class as my_class
 
 ### ModuleAnalyzer().visit_ImportFrom
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L38)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L45)
 
 ```python
 def visit_ImportFrom(node: ast.ImportFrom) -> None:

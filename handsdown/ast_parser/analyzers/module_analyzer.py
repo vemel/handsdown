@@ -1,6 +1,8 @@
 """
 AST analyzer for `ast.Module` records.
 """
+from typing import List, Text
+
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.class_record import ClassRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
@@ -13,6 +15,11 @@ class ModuleAnalyzer(BaseAnalyzer):
     """
     AST analyzer for `ast.Module` records.
     """
+
+    def __init__(self):
+        # type: () -> None
+        super(ModuleAnalyzer, self).__init__()
+        self.all_names = []  # type: List[Text]
 
     def visit_Import(self, node):
         # type: (ast.Import) -> None
@@ -109,6 +116,21 @@ class ModuleAnalyzer(BaseAnalyzer):
             return
         # skip complex assignments
         if not isinstance(node.targets[0], ast.Name):
+            return
+
+        name = node.targets[0].id
+
+        # gather public names from `__all__` directive
+        if name == "__all__" and isinstance(node.value, ast.List):
+            for element in node.value.elts:
+                if isinstance(element, ast.Str):
+                    value = element.s
+                    if isinstance(value, bytes):
+                        value = value.decode("utf-8")
+                    self.all_names.append(value)
+
+        # skip private attributes
+        if name.startswith("_"):
             return
 
         record = AttributeRecord(node)

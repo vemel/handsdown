@@ -35,6 +35,7 @@ class ModuleRecord(NodeRecord):
         self.tree = ast.parse(content)
         super(ModuleRecord, self).__init__(self.tree)
         self.source_path = source_path
+        self.all_names = []  # type: List[Text]
         self.class_records = []  # type: List[ClassRecord]
         self.function_records = []  # type: List[FunctionRecord]
         self.import_records = []  # type: List[ImportRecord]
@@ -94,12 +95,18 @@ class ModuleRecord(NodeRecord):
             A child record.
         """
         for class_record in self.class_records:
+            if self.all_names and class_record.name not in self.all_names:
+                continue
+
             yield class_record
 
             for method_record in class_record.iter_records():
                 yield method_record
 
         for function_record in self.function_records:
+            if self.all_names and function_record.name not in self.all_names:
+                continue
+
             yield function_record
 
     def _set_import_strings(self):
@@ -155,6 +162,7 @@ class ModuleRecord(NodeRecord):
         analyzer.visit(self.tree)
         self.class_records = sorted(analyzer.class_records, key=lambda x: x.name)
         self.function_records = sorted(analyzer.function_records, key=lambda x: x.name)
+        self.all_names = analyzer.all_names
         self.attribute_records = sorted(
             analyzer.attribute_records, key=lambda x: x.name
         )
@@ -176,10 +184,6 @@ class ModuleRecord(NodeRecord):
         for class_record in self.class_records:
             class_record.parse()
             for attribute_record in class_record.attribute_records:
-                # skip private attributes
-                if attribute_record.name.startswith("_"):
-                    continue
-
                 attribute_record.docstring = self._get_comment_docstring(
                     attribute_record
                 )
