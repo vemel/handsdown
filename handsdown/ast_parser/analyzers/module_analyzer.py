@@ -68,6 +68,8 @@ class ModuleAnalyzer(BaseAnalyzer):
 
         Adds new `ClassRecord` entry to `class_records`.
 
+        Skips classes with names starting with `_`.
+
         Examples::
 
             class MyClass():
@@ -76,6 +78,13 @@ class ModuleAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
+
+        name = node.name
+
+        # skip private classes
+        if name.startswith("_"):
+            return
+
         record = ClassRecord(node)
         self.class_records.append(record)
 
@@ -86,6 +95,8 @@ class ModuleAnalyzer(BaseAnalyzer):
 
         Adds new `FunctionRecord` entry to `function_records`.
 
+        Skips functions with names starting with `_`.
+
         Examples::
 
             def my_func(arg1):
@@ -94,6 +105,13 @@ class ModuleAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
+
+        name = node.name
+
+        # skip private functions
+        if name.startswith("_"):
+            return
+
         record = FunctionRecord(node, is_method=False)
         self.function_records.append(record)
 

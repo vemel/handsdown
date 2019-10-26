@@ -29,7 +29,7 @@ AST analyzer for `ast.Module` records.
 
 ### ModuleAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L100)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L118)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -61,6 +61,8 @@ Parse info about module `class ...` statements.
 
 Adds new `ClassRecord` entry to `class_records`.
 
+Skips classes with names starting with `_`.
+
 #### Examples
 
 ```python
@@ -74,7 +76,7 @@ class MyClass():
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L82)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -83,6 +85,8 @@ def visit_FunctionDef(node: ast.FunctionDef) -> None:
 Parse info about module `def ...` statements.
 
 Adds new `FunctionRecord` entry to `function_records`.
+
+Skips functions with names starting with `_`.
 
 #### Examples
 
