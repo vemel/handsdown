@@ -80,13 +80,13 @@ auto-generated docs and let `handsdown` do the thing.
 ```bash
 cd ~/my/project
 
-# output buolt MD files to docs/*
+# build documentation *.md* files in docs/* directory
 handsdown
 
-# or provide custom output: output_dir/*
+# or provide custom output directory: output_dir/*
 handsdown -o output_dir
 
-# generate docs only for my_module, but no migrations, plz
+# generate docs only for my_module, but exclude migrations
 handsdown my_module --exclude my_module/migrations
 
 # generate documentation for deployment
