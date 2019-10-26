@@ -155,7 +155,7 @@ handsdown
 # or provide custom output directory: output_dir/*
 handsdown -o output_dir
 
-# generate docs only for my_module, but no migrations, plz
+# generate docs only for my_module, but exclude migrations
 handsdown my_module --exclude my_module/migrations
 
 # generate documentation for deployment
