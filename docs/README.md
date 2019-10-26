@@ -96,11 +96,8 @@ handsdown -o output_dir
 # generate docs only for my_module, but no migrations, plz
 handsdown my_module --exclude my_module/migrations
 
-# okay, what about Django?
-# you need to set `DJANGO_SETTINGS_MODULE`
-# and exclude migrations folders as they usually are not very interesting
-export DJANGO_SETTINGS_MODULE="settings" # use your path to settings
-handsdown --exclude */migrations
+# generate documentation for deployment
+handsdown --external `git config --get remote.origin.url` -n ProjectName
 ```
 
 Navigate to `docs/README.md` to check your new documentation!

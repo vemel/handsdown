@@ -157,6 +157,9 @@ handsdown -o output_dir
 
 # generate docs only for my_module, but no migrations, plz
 handsdown my_module --exclude my_module/migrations
+
+# generate documentation for deployment
+handsdown --external `git config --get remote.origin.url` -n ProjectName
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
