@@ -123,12 +123,14 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
 
             if directive_name in self.section_directive_map:
                 self.current_section_name = self.section_directive_map[directive_name]
+                self._add_line("")
 
             if directive_name in self.version_directive_map:
                 self.current_section_name = "Notes"
                 line = self.version_directive_map[directive_name]
                 if body:
                     line = "{} in version {}".format(line, body)
+                self._add_line("")
                 self._add_line(line)
                 return
 
@@ -138,6 +140,7 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
                 self._codeblock_indent = self._current_indent
                 self._codeblock_lines_count = 0
                 self._add_block()
+                self._add_line("")
                 self._add_line("```{}".format(body or "python"))
                 return
 
