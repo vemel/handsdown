@@ -167,7 +167,8 @@ Navigate to `docs/README.md` to check your new documentation!
 ### As a module
 
 ```python
-from handsdown import Generator, PathFinder
+from handsdown.generator import Generator
+from handsdown.utils.path_finder import PathFinder
 
 # this is our project root directory
 repo_path = Path.cwd()

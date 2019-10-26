@@ -7,9 +7,9 @@ import traceback
 import re
 from typing import Text, Optional, List, Type, TYPE_CHECKING
 
-from handsdown.indent_trimmer import IndentTrimmer
-from handsdown.path_finder import PathFinder
 from handsdown.utils import extract_md_title
+from handsdown.utils.indent_trimmer import IndentTrimmer
+from handsdown.utils.path_finder import PathFinder
 
 if TYPE_CHECKING:  # pragma: no cover
     from pathlib import Path

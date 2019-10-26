@@ -5,8 +5,8 @@ from typing import List, Text, Generator, Any, Optional, Dict, TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.indent_trimmer import IndentTrimmer
 from handsdown.utils import make_title
+from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 

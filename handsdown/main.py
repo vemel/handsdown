@@ -7,10 +7,10 @@ import sys
 from typing import TYPE_CHECKING
 
 from handsdown.generator import Generator, GeneratorError
-from handsdown.path_finder import PathFinder
 from handsdown.cli_parser import parse_args
 from handsdown.utils import render_asset, make_title
 from handsdown.utils.logger import get_logger
+from handsdown.utils.path_finder import PathFinder
 from handsdown.settings import SOURCES_GLOB, EXCLUDE_EXPRS
 from handsdown.version import version
 

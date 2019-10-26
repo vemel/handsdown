@@ -39,5 +39,5 @@ class TestMain(unittest.TestCase):
             raise_errors=False,
             source_code_url=None,
             source_paths=path_finder_mock().exclude().include().glob(),
-            toc_depth=3,
+            toc_depth=1,
         )

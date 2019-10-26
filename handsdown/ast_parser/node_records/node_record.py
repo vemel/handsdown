@@ -1,12 +1,12 @@
 """
 Base class for all node records.
 """
+from abc import abstractmethod
 from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
 
-from abc import abstractmethod
-from handsdown.ast_parser.enums import RenderPart
-from handsdown.docstring_formatter import DocstringFormatter
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.enums import RenderPart
+from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
 
 if TYPE_CHECKING:  # pragma: no cover

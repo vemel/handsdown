@@ -1,7 +1,7 @@
 # pylint: disable=missing-docstring
 import unittest
 
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
 class TestIndentTrimmer(unittest.TestCase):

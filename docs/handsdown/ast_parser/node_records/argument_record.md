@@ -10,7 +10,7 @@ Wrapper for an `ast.arg` node.
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L14)
 
 ```python
 class ArgumentRecord(NodeRecord):
@@ -36,7 +36,7 @@ Wrapper for an `ast.arg` node.
 
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L38)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L37)
 
 ```python
 @property

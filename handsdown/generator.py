@@ -15,7 +15,7 @@ from handsdown.md_document import MDDocument
 from handsdown.utils import make_title
 from handsdown.utils.logger import get_logger
 from handsdown.utils.import_string import ImportString
-from handsdown.path_finder import PathFinder
+from handsdown.utils.path_finder import PathFinder
 from handsdown.settings import FIND_IN_SOURCE_LABEL
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 

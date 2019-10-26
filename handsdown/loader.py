@@ -5,8 +5,8 @@ Loader for python source code.
 from typing import Optional, Text, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
-from handsdown.path_finder import PathFinder
 from handsdown.utils import extract_md_title
+from handsdown.utils.path_finder import PathFinder
 from handsdown.utils.logger import get_logger
 from handsdown.utils.import_string import ImportString
 

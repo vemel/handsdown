@@ -16,15 +16,11 @@ Root of [Handsdown](#handsdown) source code.
         - [Main](magic_main.md#main)
         - [AST Parser](ast_parser/index.md#ast-parser)
         - [CLI Parser](cli_parser.md#cli-parser)
-        - [DocstringFormatter](docstring_formatter.md#docstringformatter)
         - [Generator](generator.md#generator)
-        - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
         - [Loader](loader.md#loader)
         - [Main](main.md#main)
         - [MDDocument](md_document.md#mddocument)
-        - [PathFinder](path_finder.md#pathfinder)
         - [Processors](processors/index.md#processors)
-        - [Sentinel](sentinel.md#sentinel)
         - [Settings](settings.md#settings)
         - [Utils](utils/index.md#utils)
         - [Version](version.md#version)
@@ -198,7 +194,8 @@ Navigate to `docs/README.md` to check your new documentation!
 ### As a module
 
 ```python
-from handsdown import Generator, PathFinder
+from handsdown.generator import Generator
+from handsdown.utils.path_finder import PathFinder
 
 # this is our project root directory
 repo_path = Path.cwd()

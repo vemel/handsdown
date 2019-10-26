@@ -9,8 +9,12 @@ Handful utils that do not deserve a separate module.
     - [make_title](#make_title)
     - [render_asset](#render_asset)
     - Modules
+        - [DocstringFormatter](docstring_formatter.md#docstringformatter)
         - [ImportString](import_string.md#importstring)
+        - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
         - [Logger](logger.md#logger)
+        - [PathFinder](path_finder.md#pathfinder)
+        - [Sentinel](sentinel.md#sentinel)
 
 ## extract_md_title
 

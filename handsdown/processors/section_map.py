@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 
 from typing import Text, List, Generator
 
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
 class SectionBlock:

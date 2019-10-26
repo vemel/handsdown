@@ -20,7 +20,7 @@ Base class for all docstring processors:
 from typing import Text, Dict, Pattern, Optional, Tuple
 
 from handsdown.processors.section_map import SectionMap
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
 class BaseDocstringProcessor(object):

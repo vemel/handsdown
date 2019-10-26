@@ -4,7 +4,7 @@ Translator of docstrings to Markdown format.
 
 from typing import Text
 
-from handsdown.indent_trimmer import IndentTrimmer
+from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
 __all__ = ["DocstringFormatter"]
