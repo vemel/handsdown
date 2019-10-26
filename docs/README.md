@@ -68,11 +68,14 @@ And probably *do not* if you:
 
 ## Examples
 
-`handsdown` built a nice
-[documentation](https://vemel.github.io/handsdown/#-handsdown---python-documentation-generator) for
-itself to show it's abilities. Check how it works under the hood or discover
-[examples](https://vemel.github.io/handsdown/examples/#examples)
-with different docstrings format.
+- [All documentation](https://vemel.github.io/handsdown/) in this project
+- [Main](https://github.com/vemel/handsdown/blob/master/examples/main_example.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/main_example.md)
+- [RST docstrings](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/rst_docstrings.md)
+- [Google docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/google_docstrings.md)
+- [PEP 257 docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/pep257_docstrings.md)
+- [Sphinx docstrings](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/sphinx_docstrings.md)
+- [Type annotations](https://github.com/vemel/handsdown/blob/master/examples/typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/typed.md)
+- [Comment-style type annotations](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/comment_typed.md)
 
 ## Usage
 
