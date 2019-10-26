@@ -59,8 +59,6 @@ You definitely *do* if you:
 
 And probably *do not* if you:
 
-- plan to build html pages locally (Look at
-- [pydocmd](https://pypi.org/project/pydoc-markdown/), they are doing a great job!)
 - not very into docstrings and type annotations
 - like to abstract a documentation away from the way things really are
 - use [Pandas docstrings](https://pandas.pydata.org/pandas-docs/stable/development/contributing_docstring.html)
