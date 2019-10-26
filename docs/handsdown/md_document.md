@@ -163,9 +163,10 @@ def get_toc_line(line: int, level: Text = 0) -> Text:
 
 Get ToC `line` of given `level`.
 
-Argumemnts:
-    - `line` - Line to prepare.
-    - `level` - Line level, starts with `0`.
+#### Arguments
+
+- `line` - Line to prepare.
+- `level` - Line level, starts with `0`.
 
 #### Returns
 

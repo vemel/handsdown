@@ -1,5 +1,7 @@
 """
-    Docstring processor that selects a `DocstringProcessor` based on a docstring content:
+# Smart Docstring Processor
+
+Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
 - `handsdown.processors.pep257.PEP257DocstringProcessor`
 - `handsdown.processors.rst.RSTDocstringProcessor`

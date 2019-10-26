@@ -1,9 +1,20 @@
 """
+# Base Docstring Processor
+
 Base class for all docstring processors:
+
+## Links
 
 - `handsdown.processors.pep257.PEP257DocstringProcessor`
 - `handsdown.processors.rst.RSTDocstringProcessor`
 - `handsdown.processors.smart.SmartDocstringProcessor`
+
+## Supported features
+
+- `<triple_backticks><?language>` starts a new Markdown-style code block, ended with triple backticks
+- `<line>::` starts a new Markdown-style Python code block, ended with unindent
+- `<triple_tildes><?language>` starts a new Markdown-style block, ends with `<triple_tildes>`
+- `>>>` starts a new Markdown-style Python block, ended with unindent or line not starting with `>>>` or `...`
 """
 
 from typing import Text, Dict, Pattern, Optional, Tuple
@@ -255,10 +266,10 @@ class BaseDocstringProcessor(object):
         if self._in_codeblock:
             return
 
-        # If there is a line with a section name - set this section as active
-        if line in self.section_name_map:
-            self.current_section_name = self.section_name_map[line]
-            return
+        self._parse_regular_line(line)
+
+    def _parse_regular_line(self, line):
+        # type: (Text) -> None
 
         # If section name ends with `::` - add section and start RST code block
         if line.endswith("::") and line[:-1] in self.section_name_map:

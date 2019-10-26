@@ -408,7 +408,7 @@ class MDDocument(object):
         """
         Get ToC `line` of given `level`.
 
-        Argumemnts:
+        Arguments:
             line -- Line to prepare.
             level -- Line level, starts with `0`.
 

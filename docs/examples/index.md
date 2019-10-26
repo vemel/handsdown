@@ -12,4 +12,5 @@ Can be used as a list of supported features.
         - [PEP 257 - PEP 257 and Google docstrings examples](pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)
         - [Stub file type annotations examples](pyi_typed.md#stub-file-type-annotations-examples)
         - [PEP 287 - reStructuredText docstrings examples](rst_docstrings.md#pep-287---restructuredtext-docstrings-examples)
+        - [Sphinx docstrings examples](sphinx_docstrings.md#sphinx-docstrings-examples)
         - [PEP 484 - type annotations examples](typed.md#pep-484---type-annotations-examples)

@@ -1,10 +1,10 @@
-# Smart
+# Smart Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py) module.
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart Docstring Processor
     - [SmartDocstringProcessor](#smartdocstringprocessor)
         - [SmartDocstringProcessor().build_sections](#smartdocstringprocessorbuild_sections)
 
@@ -13,7 +13,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 
 ## SmartDocstringProcessor
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L18)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L20)
 
 ```python
 class SmartDocstringProcessor(BaseDocstringProcessor):
@@ -28,7 +28,7 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 
 ### SmartDocstringProcessor().build_sections
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L33)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/smart.py#L35)
 
 ```python
 def build_sections(content: Text) -> SectionMap:
