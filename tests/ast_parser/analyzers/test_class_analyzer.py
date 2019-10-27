@@ -1,6 +1,6 @@
 # pylint: disable=missing-docstring
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
@@ -13,15 +13,20 @@ class TestClassAnalyzer(unittest.TestCase):
         self.assertEqual(analyzer.decorator_nodes, [])
         self.assertEqual(analyzer.method_nodes, [])
         self.assertEqual(analyzer.attribute_nodes, [])
+        analyzer.generic_visit("node")
 
-    def test_visit_ClassDef(self):
+    @patch("handsdown.ast_parser.analyzers.class_analyzer.ClassAnalyzer.visit")
+    def test_visit_ClassDef(self, visit_mock):
         analyzer = ClassAnalyzer()
         node = MagicMock()
         node.decorator_list = ["decorator"]
         node.bases = ["base", "base2"]
+        node.body = ["body1", "body2"]
         self.assertIsNone(analyzer.visit_ClassDef(node))
         self.assertEqual(analyzer.decorator_nodes, ["decorator"])
         self.assertEqual(analyzer.base_nodes, ["base", "base2"])
+        visit_mock.assert_any_call("body1")
+        visit_mock.assert_any_call("body2")
 
     def test_visit_FunctionDef(self):
         analyzer = ClassAnalyzer()
