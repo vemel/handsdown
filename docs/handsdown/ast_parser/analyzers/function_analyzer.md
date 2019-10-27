@@ -8,12 +8,11 @@ AST analyzer for `ast.FunctionDef` records.
     - [FunctionAnalyzer](#functionanalyzer)
         - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
         - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzervisit_functiondef)
-        - [FunctionAnalyzer().visit_Subscript](#functionanalyzervisit_subscript)
         - [FunctionAnalyzer().visit_arguments](#functionanalyzervisit_arguments)
 
 ## FunctionAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L11)
 
 ```python
 class FunctionAnalyzer(BaseAnalyzer):
@@ -28,7 +27,7 @@ AST analyzer for `ast.FunctionDef` records.
 
 ### FunctionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L159)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L160)
 
 ```python
 def generic_visit(_node: ast.AST) -> None:
@@ -42,7 +41,7 @@ Do nothing for unknown `ast.AST` nodes.
 
 ### FunctionAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L118)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L117)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -50,8 +49,10 @@ def visit_FunctionDef(node: ast.FunctionDef) -> None:
 
 Entrypoint for the analyzer.
 
-Visits each node from `node.decorator_list` and `node.args`.
-Adds new `ExpressionRecord` entries to `decorator_records`.
+Visits each node from `node.args`.
+Adds new `ast.expr` entry to `decorator_nodes` for each node
+from `node.decorator_list`.
+Sets `return_type_hint` to `node.returns` if it defined.
 
 #### Examples
 
@@ -64,32 +65,9 @@ def my_func():
 
 - `node` - AST node.
 
-### FunctionAnalyzer().visit_Subscript
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
-
-```python
-def visit_Subscript(node: ast.Subscript) -> None:
-```
-
-Parse info about function return type annotation.
-
-Sets `return_type_hint` to a new `ExpressionRecord`.
-
-#### Examples
-
-```python
-def my_func() -> List[Text]:
-    pass
-```
-
-#### Arguments
-
-- `node` - AST node.
-
 ### FunctionAnalyzer().visit_arguments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L42)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L41)
 
 ```python
 def visit_arguments(node: ast.arguments) -> None:
@@ -97,7 +75,7 @@ def visit_arguments(node: ast.arguments) -> None:
 
 Parse info about class method statements.
 
-Adds new `FunctionRecord` entry to `method_records`.
+Adds new `ArgumentRecord` entry to `argument_records` for each argument.
 
 #### Examples
 

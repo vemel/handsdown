@@ -7,12 +7,13 @@ from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.node_records.function_record import FunctionRecord
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import RenderExpr
-    from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
 
 class ClassRecord(NodeRecord):
@@ -115,12 +116,21 @@ class ClassRecord(NodeRecord):
 
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)
-        self.method_records = sorted(analyzer.method_records, key=lambda x: x.name)
-        self.attribute_records = sorted(
-            analyzer.attribute_records, key=lambda x: x.name
-        )
-        self.base_records = analyzer.base_records
-        self.decorator_records = analyzer.decorator_records
+
+        for method_node in analyzer.method_nodes:
+            self.method_records.append(FunctionRecord(method_node, is_method=True))
+
+        for base_node in analyzer.base_nodes:
+            self.base_records.append(ExpressionRecord(base_node))
+
+        for decorator_node in analyzer.decorator_nodes:
+            self.decorator_records.append(ExpressionRecord(decorator_node))
+
+        for attribute_node in analyzer.attribute_nodes:
+            self.attribute_records.append(AttributeRecord(attribute_node))
+
+        self.method_records.sort(key=lambda x: x.name)
+        self.attribute_records.sort(key=lambda x: x.name)
 
     def _render_parts(self, indent=0):
         # type: (int) -> List[RenderExpr]

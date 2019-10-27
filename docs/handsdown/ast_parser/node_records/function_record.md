@@ -30,7 +30,7 @@ Wrapper for an `ast.FunctionDef` node.
 
 ### FunctionRecord().parse_type_comments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L100)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L104)
 
 ```python
 def parse_type_comments(lines: List[Text]) -> None:

@@ -14,7 +14,7 @@ AST analyzer for `ast.Module` records.
 
 ## ModuleAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L14)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L13)
 
 ```python
 class ModuleAnalyzer(BaseAnalyzer):
@@ -29,7 +29,7 @@ AST analyzer for `ast.Module` records.
 
 ### ModuleAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L122)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L113)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -37,12 +37,24 @@ def visit_Assign(node: ast.Assign) -> None:
 
 Parse info about module attribute statements.
 
-Adds new `AttributeRecord` entry to `attribute_records`.
+Adds new `ast.Assign` entry to `attribute_nodes`.
+Skips assignments to anything pther that a new variable.
+Skips multiple assignments.
+Skips assignments with names starting with `_`.
+Parses `__all__` and add all values to `all_names`
 
 #### Examples
 
 ```python
 MY_MODULE_ATTR = 'value'
+    my_attr = "value"
+__all__ = ['MyClass', 'my_func']
+
+# these entries are skipped
+_MY_MODULE_ATTR = "value"
+multi_attr_1, multi_attr_2 = [1, 2]
+my_object.name = "value"
+__all__ = all_list
 ```
 
 #### Arguments
@@ -51,7 +63,7 @@ MY_MODULE_ATTR = 'value'
 
 ### ModuleAnalyzer().visit_ClassDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L68)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L63)
 
 ```python
 def visit_ClassDef(node: ast.ClassDef) -> None:
@@ -59,9 +71,8 @@ def visit_ClassDef(node: ast.ClassDef) -> None:
 
 Parse info about module `class ...` statements.
 
-Adds new `ClassRecord` entry to `class_records`.
-
-Skips classes with names starting with `_`.
+Adds `node` entry to `class_nodes`.
+Skips nodes with names starting with `_`.
 
 #### Examples
 
@@ -76,7 +87,7 @@ class MyClass():
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L95)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L88)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -84,9 +95,8 @@ def visit_FunctionDef(node: ast.FunctionDef) -> None:
 
 Parse info about module `def ...` statements.
 
-Adds new `FunctionRecord` entry to `function_records`.
-
-Skips functions with names starting with `_`.
+Adds `node` entry to `function_nodes`.
+Skips nodes with names starting with `_`.
 
 #### Examples
 
@@ -101,7 +111,7 @@ def my_func(arg1):
 
 ### ModuleAnalyzer().visit_Import
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L28)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L27)
 
 ```python
 def visit_Import(node: ast.Import) -> None:
@@ -109,7 +119,7 @@ def visit_Import(node: ast.Import) -> None:
 
 Parse info about module `import ...` statements.
 
-Adds new `ImportRecord` entry to `import_records`.
+Adds `node` to `import_nodes`.
 
 #### Examples
 
@@ -126,7 +136,7 @@ import my_module.my_class as my_class
 
 ### ModuleAnalyzer().visit_ImportFrom
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L49)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L46)
 
 ```python
 def visit_ImportFrom(node: ast.ImportFrom) -> None:
@@ -134,7 +144,7 @@ def visit_ImportFrom(node: ast.ImportFrom) -> None:
 
 Parse info about module `import ... from ...` statements.
 
-Adds new `ImportRecord` entry to `import_records`.
+Adds `node` to `import_nodes`.
 
 #### Examples
 

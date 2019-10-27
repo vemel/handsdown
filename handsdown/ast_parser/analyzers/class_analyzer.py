@@ -3,9 +3,6 @@ AST analyzer for `ast.ClassDef` records.
 """
 from typing import List
 
-from handsdown.ast_parser.node_records.function_record import FunctionRecord
-from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 
@@ -18,18 +15,21 @@ class ClassAnalyzer(BaseAnalyzer):
     def __init__(self):
         # type: () -> None
         super(ClassAnalyzer, self).__init__()
-        self.base_records = []  # type: List[ExpressionRecord]
-        self.decorator_records = []  # type: List[ExpressionRecord]
-        self.method_records = []  # type: List[FunctionRecord]
-        self.attribute_records = []  # type: List[AttributeRecord]
+        self.base_nodes = []  # type: List[ast.expr]
+        self.decorator_nodes = []  # type: List[ast.expr]
+        self.method_nodes = []  # type: List[ast.FunctionDef]
+        self.attribute_nodes = []  # type: List[ast.Assign]
 
     def visit_ClassDef(self, node):
         # type: (ast.ClassDef) -> None
         """
         Entrypoint for the analyzer.
 
-        Visits each node from `node.decorator_list` and `node.args`.
-        Adds new `ExpressionRecord` entries to `decorator_records`.
+        Adds new `ast.expr` entry to `decorator_nodes` for each node
+        from `node.decorator_list`.
+        Adds new `ast.expr` entry to `base_nodes` for each node
+        from `node.bases`.
+        Visits each node from `node.body` list to parse methods.
 
         Examples::
 
@@ -40,9 +40,9 @@ class ClassAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         for decorator_node in node.decorator_list:
-            self.decorator_records.append(ExpressionRecord(decorator_node))
+            self.decorator_nodes.append(decorator_node)
         for base_node in node.bases:
-            self.base_records.append(ExpressionRecord(base_node))
+            self.base_nodes.append(base_node)
         for element in node.body:
             self.visit(element)
 
@@ -74,21 +74,28 @@ class ClassAnalyzer(BaseAnalyzer):
             if name.startswith("__") and not ast.get_docstring(node):
                 return
 
-        record = FunctionRecord(node, is_method=True)
-        self.method_records.append(record)
+        self.method_nodes.append(node)
 
     def visit_Assign(self, node):
         # type: (ast.Assign) -> None
         """
         Parse info about class attribute statements.
 
-        Adds new `AttributeRecord` entry to `attribute_records` if it is
-        a simple one-item assign.
+        Adds new `ast.Assign` entry to `attribute_nodes`.
+        Skips assignments to anything pther that a new variable.
+        Skips multiple assignments.
+        Skips assignments with names starting with `_`.
 
         Examples::
 
             class MyClass:
-                MY_MODULE_ATTR = 'value'
+                MY_MODULE_ATTR = "value"
+                my_attr = "value"
+
+                # these entries are skipped
+                _MY_MODULE_ATTR = "value"
+                multi_attr_1, multi_attr_2 = [1, 2]
+                my_object.name = "value"
 
         Arguments:
             node -- AST node.
@@ -107,8 +114,7 @@ class ClassAnalyzer(BaseAnalyzer):
         if name.startswith("_"):
             return
 
-        record = AttributeRecord(node)
-        self.attribute_records.append(record)
+        self.attribute_nodes.append(node)
 
     def generic_visit(self, _node):
         # type: (ast.AST) -> None

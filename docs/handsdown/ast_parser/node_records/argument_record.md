@@ -17,8 +17,8 @@ class ArgumentRecord(NodeRecord):
     def __init__(
         node: ast.arg,
         name: Text,
-        default: Optional[ExpressionRecord] = None,
-        type_hint: Optional[ExpressionRecord] = None,
+        default: Optional[ast.expr] = None,
+        type_hint: Optional[ast.expr] = None,
         prefix: Text = '',
     ) -> None:
 ```
@@ -31,12 +31,11 @@ Wrapper for an `ast.arg` node.
 
 #### See also
 
-- [ExpressionRecord](expression_record.md#expressionrecord)
 - [NodeRecord](node_record.md#noderecord)
 
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L37)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L41)
 
 ```python
 @property

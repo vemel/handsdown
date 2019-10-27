@@ -1,14 +1,13 @@
 """
 AST analyzer for `ast.Module` records.
 """
-from typing import List, Text
+from typing import List, Text, TYPE_CHECKING
 
-from handsdown.ast_parser.node_records.import_record import ImportRecord
-from handsdown.ast_parser.node_records.class_record import ClassRecord
-from handsdown.ast_parser.node_records.function_record import FunctionRecord
-from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+
+if TYPE_CHECKING:
+    from handsdown.ast_parser.type_defs import ASTImport
 
 
 class ModuleAnalyzer(BaseAnalyzer):
@@ -20,17 +19,17 @@ class ModuleAnalyzer(BaseAnalyzer):
         # type: () -> None
         super(ModuleAnalyzer, self).__init__()
         self.all_names = []  # type: List[Text]
-        self.import_records = []  # type: List[ImportRecord]
-        self.function_records = []  # type: List[FunctionRecord]
-        self.attribute_records = []  # type: List[AttributeRecord]
-        self.class_records = []  # type: List[ClassRecord]
+        self.import_nodes = []  # type: List[ASTImport]
+        self.function_nodes = []  # type: List[ast.FunctionDef]
+        self.attribute_nodes = []  # type: List[ast.Assign]
+        self.class_nodes = []  # type: List[ast.ClassDef]
 
     def visit_Import(self, node):
         # type: (ast.Import) -> None
         """
         Parse info about module `import ...` statements.
 
-        Adds new `ImportRecord` entry to `import_records`.
+        Adds `node` to `import_nodes`.
 
         Examples::
 
@@ -42,16 +41,14 @@ class ModuleAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        for alias in node.names:
-            record = ImportRecord(node, alias)
-            self.import_records.append(record)
+        self.import_nodes.append(node)
 
     def visit_ImportFrom(self, node):
         # type: (ast.ImportFrom) -> None
         """
         Parse info about module `import ... from ...` statements.
 
-        Adds new `ImportRecord` entry to `import_records`.
+        Adds `node` to `import_nodes`.
 
         Examples::
 
@@ -61,18 +58,15 @@ class ModuleAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        for alias in node.names:
-            record = ImportRecord(node, alias)
-            self.import_records.append(record)
+        self.import_nodes.append(node)
 
     def visit_ClassDef(self, node):
         # type: (ast.ClassDef) -> None
         """
         Parse info about module `class ...` statements.
 
-        Adds new `ClassRecord` entry to `class_records`.
-
-        Skips classes with names starting with `_`.
+        Adds `node` entry to `class_nodes`.
+        Skips nodes with names starting with `_`.
 
         Examples::
 
@@ -89,17 +83,15 @@ class ModuleAnalyzer(BaseAnalyzer):
         if name.startswith("_"):
             return
 
-        record = ClassRecord(node)
-        self.class_records.append(record)
+        self.class_nodes.append(node)
 
     def visit_FunctionDef(self, node):
         # type: (ast.FunctionDef) -> None
         """
         Parse info about module `def ...` statements.
 
-        Adds new `FunctionRecord` entry to `function_records`.
-
-        Skips functions with names starting with `_`.
+        Adds `node` entry to `function_nodes`.
+        Skips nodes with names starting with `_`.
 
         Examples::
 
@@ -116,19 +108,30 @@ class ModuleAnalyzer(BaseAnalyzer):
         if name.startswith("_"):
             return
 
-        record = FunctionRecord(node, is_method=False)
-        self.function_records.append(record)
+        self.function_nodes.append(node)
 
     def visit_Assign(self, node):
         # type: (ast.Assign) -> None
         """
         Parse info about module attribute statements.
 
-        Adds new `AttributeRecord` entry to `attribute_records`.
+        Adds new `ast.Assign` entry to `attribute_nodes`.
+        Skips assignments to anything pther that a new variable.
+        Skips multiple assignments.
+        Skips assignments with names starting with `_`.
+        Parses `__all__` and add all values to `all_names`
 
         Examples::
 
             MY_MODULE_ATTR = 'value'
+                my_attr = "value"
+            __all__ = ['MyClass', 'my_func']
+
+            # these entries are skipped
+            _MY_MODULE_ATTR = "value"
+            multi_attr_1, multi_attr_2 = [1, 2]
+            my_object.name = "value"
+            __all__ = all_list
 
         Arguments:
             node -- AST node.
@@ -155,5 +158,4 @@ class ModuleAnalyzer(BaseAnalyzer):
         if name.startswith("_"):
             return
 
-        record = AttributeRecord(node)
-        self.attribute_records.append(record)
+        self.attribute_nodes.append(node)

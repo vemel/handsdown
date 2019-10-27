@@ -13,7 +13,7 @@ Wrapper for an `ast.Module` node with corresponding node info.
 
 ## ModuleRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L21)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L22)
 
 ```python
 class ModuleRecord(NodeRecord):

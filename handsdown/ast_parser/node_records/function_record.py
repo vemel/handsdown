@@ -6,12 +6,12 @@ from typing import List, Any, Set, Text, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 
 
@@ -62,8 +62,12 @@ class FunctionRecord(NodeRecord):
         analyzer = FunctionAnalyzer()
         analyzer.visit(self.node)
         self.argument_records = analyzer.argument_records
-        self.decorator_records = analyzer.decorator_records
-        self.return_type_hint = analyzer.return_type_hint
+
+        for decorator_node in analyzer.decorator_nodes:
+            self.decorator_records.append(ExpressionRecord(decorator_node))
+
+        if analyzer.return_type_hint:
+            self.return_type_hint = ExpressionRecord(analyzer.return_type_hint)
 
         # FIXME: py38 sets start line to def/class,
         # move it to the first decorator

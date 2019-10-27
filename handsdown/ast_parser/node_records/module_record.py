@@ -8,13 +8,14 @@ from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.utils import make_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.import_record import ImportRecord
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.class_record import ClassRecord
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:  # pragma: no cover
     from pathlib import Path
-    from handsdown.ast_parser.node_records.function_record import FunctionRecord
-    from handsdown.ast_parser.node_records.class_record import ClassRecord
-    from handsdown.ast_parser.node_records.import_record import ImportRecord
     from handsdown.utils.import_string import ImportString
 
 
@@ -40,7 +41,6 @@ class ModuleRecord(NodeRecord):
         self.function_records = []  # type: List[FunctionRecord]
         self.import_records = []  # type: List[ImportRecord]
         self.source_lines = self.source_path.read_text().split("\n")
-        self.main_class_lookup_name = source_path.stem.replace("_", "")
         self.name = import_string.parts[-1]
         self.title = make_title(self.name)
         self.import_string = import_string
@@ -160,17 +160,31 @@ class ModuleRecord(NodeRecord):
         """
         analyzer = ModuleAnalyzer()
         analyzer.visit(self.tree)
-        self.class_records = sorted(analyzer.class_records, key=lambda x: x.name)
-        self.function_records = sorted(analyzer.function_records, key=lambda x: x.name)
+
         self.all_names = analyzer.all_names
-        self.attribute_records = sorted(
-            analyzer.attribute_records, key=lambda x: x.name
-        )
-        self.import_records = analyzer.import_records
+
+        for class_node in analyzer.class_nodes:
+            self.class_records.append(ClassRecord(class_node))
+
+        for function_node in analyzer.function_nodes:
+            self.function_records.append(FunctionRecord(function_node, is_method=False))
+
+        for attribute_node in analyzer.attribute_nodes:
+            self.attribute_records.append(AttributeRecord(attribute_node))
+
+        for import_node in analyzer.import_nodes:
+            for alias in import_node.names:
+                self.import_records.append(ImportRecord(import_node, alias))
+
+        self.class_records.sort(key=lambda x: x.name)
+        self.function_records.sort(key=lambda x: x.name)
+        self.attribute_records.sort(key=lambda x: x.name)
+
+        main_class_lookup_name = self.source_path.stem.replace("_", "")
         for class_record in self.class_records:
             class_record.parse()
             # find real title
-            if class_record.name.lower() == self.main_class_lookup_name:
+            if class_record.name.lower() == main_class_lookup_name:
                 self.title = class_record.name
 
         self._set_import_strings()

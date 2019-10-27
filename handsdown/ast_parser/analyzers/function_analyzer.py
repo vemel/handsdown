@@ -4,7 +4,6 @@ AST analyzer for `ast.FunctionDef` records.
 from typing import Optional, List, Text
 
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 
@@ -18,12 +17,12 @@ class FunctionAnalyzer(BaseAnalyzer):
         # type: () -> None
         super(FunctionAnalyzer, self).__init__()
         self.argument_records = []  # type: List[ArgumentRecord]
-        self.decorator_records = []  # type: List[ExpressionRecord]
-        self.return_type_hint = None  # type: Optional[ExpressionRecord]
+        self.decorator_nodes = []  # type: List[ast.expr]
+        self.return_type_hint = None  # type: Optional[ast.expr]
 
     @staticmethod
     def _get_argument_record(arg, default, prefix=""):
-        # type: (ast.arg, Optional[ExpressionRecord], Text) -> ArgumentRecord
+        # type: (ast.arg, Optional[ast.expr], Text) -> ArgumentRecord
         type_hint = None
         if isinstance(arg, ast.Name):
             name = arg.id
@@ -31,7 +30,7 @@ class FunctionAnalyzer(BaseAnalyzer):
             name = str(arg)
         else:
             if arg.annotation:
-                type_hint = ExpressionRecord(arg.annotation)
+                type_hint = arg.annotation
 
             name = arg.arg
 
@@ -44,7 +43,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         """
         Parse info about class method statements.
 
-        Adds new `FunctionRecord` entry to `method_records`.
+        Adds new `ArgumentRecord` entry to `argument_records` for each argument.
 
         Examples::
 
@@ -85,7 +84,7 @@ class FunctionAnalyzer(BaseAnalyzer):
             default = None
             default_index = len(node.defaults) - len(node.args) + index
             if default_index >= 0:
-                default = ExpressionRecord(node.defaults[default_index])
+                default = node.defaults[default_index]
 
             record = self._get_argument_record(arg, default)
             self.argument_records.append(record)
@@ -102,7 +101,7 @@ class FunctionAnalyzer(BaseAnalyzer):
                 default = None
                 default_index = len(node.kw_defaults) - len(node.kwonlyargs) + index
                 if default_index >= 0:
-                    default = ExpressionRecord(node.kw_defaults[default_index])
+                    default = node.kw_defaults[default_index]
 
                 record = self._get_argument_record(arg, default)
                 self.argument_records.append(record)
@@ -120,8 +119,10 @@ class FunctionAnalyzer(BaseAnalyzer):
         """
         Entrypoint for the analyzer.
 
-        Visits each node from `node.decorator_list` and `node.args`.
-        Adds new `ExpressionRecord` entries to `decorator_records`.
+        Visits each node from `node.args`.
+        Adds new `ast.expr` entry to `decorator_nodes` for each node
+        from `node.decorator_list`.
+        Sets `return_type_hint` to `node.returns` if it defined.
 
         Examples::
 
@@ -132,29 +133,29 @@ class FunctionAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         for decorator_node in node.decorator_list:
-            self.decorator_records.append(ExpressionRecord(decorator_node))
+            self.decorator_nodes.append(decorator_node)
         self.visit(node.args)
 
         # FIXME: `AST2` FunctionDef has no `returns` attribute
         if hasattr(node, "returns") and node.returns:
-            self.return_type_hint = ExpressionRecord(node.returns)
+            self.return_type_hint = node.returns
 
-    def visit_Subscript(self, node):
-        # type: (ast.Subscript) -> None
-        """
-        Parse info about function return type annotation.
+    # def visit_Subscript(self, node):
+    #     # type: (ast.Subscript) -> None
+    #     """
+    #     Parse info about function return type annotation.
 
-        Sets `return_type_hint` to a new `ExpressionRecord`.
+    #     Sets `return_type_hint` to `node`.
 
-        Examples::
+    #     Examples::
 
-            def my_func() -> List[Text]:
-                pass
+    #         def my_func() -> List[Text]:
+    #             pass
 
-        Arguments:
-            node -- AST node.
-        """
-        self.return_type_hint = ExpressionRecord(node)
+    #     Arguments:
+    #         node -- AST node.
+    #     """
+    #     self.return_type_hint = node
 
     def generic_visit(self, _node):
         # type: (ast.AST) -> None
