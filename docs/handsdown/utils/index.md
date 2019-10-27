@@ -14,7 +14,6 @@ Handful utils that do not deserve a separate module.
         - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
         - [Logger](logger.md#logger)
         - [PathFinder](path_finder.md#pathfinder)
-        - [Sentinel](sentinel.md#sentinel)
 
 ## extract_md_title
 
