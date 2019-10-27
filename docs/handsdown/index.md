@@ -13,7 +13,7 @@ Root of [Handsdown](#handsdown) source code.
     - [Installation](#installation)
     - [More examples](#more-examples)
     - Modules
-        - [Main](magic_main.md#main)
+        - [Module](module.md#module)
         - [AST Parser](ast_parser/index.md#ast-parser)
         - [CLI Parser](cli_parser.md#cli-parser)
         - [Generator](generator.md#generator)

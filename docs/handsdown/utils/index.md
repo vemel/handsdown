@@ -18,7 +18,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L54)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L66)
 
 ```python
 def extract_md_title(content: Text) -> Tuple[Text, Text]:
@@ -47,7 +47,7 @@ A tuple fo title and remaining content.
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L11)
 
 ```python
-def make_title(path_part: Text) -> Text:
+def make_title(file_stem: Text) -> Text:
 ```
 
 Convert `pathlib.Path` part or any other string to a human-readable title.
@@ -56,19 +56,22 @@ Replace underscores with spaces and capitalize result.
 #### Examples
 
 ```python
-make_title("my_path.py")
-"My Path Py"
+make_title(Path("my_module/my_path.py").stem)
+"My Path"
 
 make_title("my_title")
 "My Title"
 
 make_title("__init__.py")
 "Init Py"
+
+make_title(Path("my_module/__main__.py").stem)
+"Module"
 ```
 
 #### Arguments
 
-- `path_part` - Part of filename path.
+- `file_stem` - Stem from path.
 
 #### Returns
 
@@ -76,7 +79,7 @@ A human-readable title as a string.
 
 ## render_asset
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L39)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L51)
 
 ```python
 def render_asset(

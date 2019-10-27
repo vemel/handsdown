@@ -57,7 +57,7 @@ class Loader:
         if relative_source_path.stem == "__init__":
             relative_source_path = relative_source_path.parent / "index"
         if relative_source_path.stem == "__main__":
-            relative_source_path = relative_source_path.parent / "magic_main"
+            relative_source_path = relative_source_path.parent / "module"
 
         file_name = "{}.md".format(relative_source_path.stem)
         relative_output_path = relative_source_path.parent / file_name

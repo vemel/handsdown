@@ -8,7 +8,7 @@ from typing import Text, Any, Dict, Tuple, List, TYPE_CHECKING
 from handsdown.settings import ASSETS_PATH
 
 
-def make_title(path_part):
+def make_title(file_stem):
     # type: (Text) -> Text
     """
     Convert `pathlib.Path` part or any other string to a human-readable title.
@@ -16,8 +16,8 @@ def make_title(path_part):
 
     Examples::
 
-        make_title("my_path.py")
-        "My Path Py"
+        make_title(Path("my_module/my_path.py").stem)
+        "My Path"
 
         make_title("my_title")
         "My Title"
@@ -25,15 +25,27 @@ def make_title(path_part):
         make_title("__init__.py")
         "Init Py"
 
+        make_title(Path("my_module/__main__.py").stem)
+        "Module"
+
     Arguments:
-        path_part -- Part of filename path.
+        file_stem -- Stem from path.
 
     Returns:
         A human-readable title as a string.
     """
-    parts = path_part.replace(".", "_").split("_")
-    parts = [i.strip().capitalize() for i in parts if i.strip()]
-    return " ".join(parts)
+    if file_stem == "__main__":
+        return "Module"
+
+    parts = file_stem.replace(".", "_").split("_")
+    name_parts = []  # type: List[Text]
+    for part in parts:
+        if not part:
+            continue
+        name_part = part.strip().capitalize()
+        name_parts.append(name_part)
+
+    return " ".join(name_parts)
 
 
 def render_asset(name, target_path, format_dict):
