@@ -27,7 +27,7 @@ AST analyzer for `ast.FunctionDef` records.
 
 ### FunctionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L160)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L141)
 
 ```python
 def generic_visit(_node: ast.AST) -> None:
@@ -41,7 +41,7 @@ Do nothing for unknown `ast.AST` nodes.
 
 ### FunctionAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L117)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L115)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -67,7 +67,7 @@ def my_func():
 
 ### FunctionAnalyzer().visit_arguments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L41)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L39)
 
 ```python
 def visit_arguments(node: ast.arguments) -> None:

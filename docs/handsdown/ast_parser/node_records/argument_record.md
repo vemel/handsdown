@@ -6,18 +6,19 @@ Wrapper for an `ast.arg` node.
 
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
     - [ArgumentRecord](#argumentrecord)
+        - [ArgumentRecord().default](#argumentrecorddefault)
         - [ArgumentRecord().related_names](#argumentrecordrelated_names)
+        - [ArgumentRecord().set_default](#argumentrecordset_default)
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L14)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L15)
 
 ```python
 class ArgumentRecord(NodeRecord):
     def __init__(
         node: ast.arg,
         name: Text,
-        default: Optional[ast.expr] = None,
         type_hint: Optional[ast.expr] = None,
         prefix: Text = '',
     ) -> None:
@@ -33,11 +34,48 @@ Wrapper for an `ast.arg` node.
 
 - [NodeRecord](node_record.md#noderecord)
 
+### ArgumentRecord().default
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L39)
+
+```python
+@property
+def default() -> Optional[ExpressionRecord]:
+```
+
+Default value of the argument.
+
+#### Returns
+
+Default exression or None.
+
+#### See also
+
+- [ExpressionRecord](expression_record.md#expressionrecord)
+
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L41)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L63)
 
 ```python
 @property
 def related_names() -> Set[Text]:
 ```
+
+### ArgumentRecord().set_default
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L50)
+
+```python
+def set_default(node: Node) -> None:
+```
+
+Set default expression from test or `ast.AST` node.
+
+#### Arguments
+
+- `node` - Text or AST node.
+
+#### See also
+
+- [Node](../type_defs.md#node)

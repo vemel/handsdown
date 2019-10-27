@@ -88,15 +88,21 @@ class FunctionAnalyzer(BaseAnalyzer):
             record = self._get_argument_record(arg)
             self.argument_records.append(record)
 
+        for index, default in enumerate(node.defaults):
+            argument_index = len(self.argument_records) - len(node.defaults) + index
+            self.argument_records[argument_index].set_default(default)
+
         # FIXME: `AST2` ast.args does not have `kwonlyargs` attribute
         if hasattr(node, "kwonlyargs"):
             for arg in node.kwonlyargs:
                 record = self._get_argument_record(arg)
                 self.argument_records.append(record)
 
-        for index, default in enumerate(node.defaults):
-            argument_index = len(self.argument_records) - len(node.defaults) + index
-            self.argument_records[argument_index].set_default(default)
+            for index, default in enumerate(node.kw_defaults):
+                argument_index = (
+                    len(self.argument_records) - len(node.kw_defaults) + index
+                )
+                self.argument_records[argument_index].set_default(default)
 
         if node.vararg is not None:
             record = self._get_argument_record(node.vararg, prefix="*")
