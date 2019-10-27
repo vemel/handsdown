@@ -21,14 +21,14 @@ function.
 
 #### Attributes
 
+- `MULTI_LINE_BREAK` - Replaced with a line break for a multi-line render, does not change indent: `'MULTI_LINE_BREAK'`
+- `MULTI_LINE_INDENT` - Replaced with a line break for a multi-line render, adds one indent level: `'MULTI_LINE_INDENT'`
+- `MULTI_LINE_UNINDENT` - Replaced with a line break for a multi-line render, removes one indent level: `'MULTI_LINE_UNINDENT'`
 - `LINE_BREAK` - Replaced with a line break, does not change indent: `'LINE_BREAK'`
 - `LINE_INDENT` - Replaced with a line break, adds one indent level: `'LINE_INDENT'`
 - `LINE_UNINDENT` - Replaced with a line break, removes one indent level: `'LINE_UNINDENT'`
-- `MULTI_LINE_BREAK` - Replaced with a line break for a multi-line render, does not change indent: `'MULTI_LINE_BREAK'`
-- `MULTI_LINE_COMMA` - Replaced with a comma in a multi-line render: `'MULTI_LINE_COMMA'`
-- `MULTI_LINE_INDENT` - Replaced with a line break for a multi-line render, adds one indent level: `'MULTI_LINE_INDENT'`
-- `MULTI_LINE_UNINDENT` - Replaced with a line break for a multi-line render, removes one indent level: `'MULTI_LINE_UNINDENT'`
 - `SINGLE_LINE_SPACE` - Replaced with a space in a single-line render: `'SINGLE_LINE_SPACE'`
+- `MULTI_LINE_COMMA` - Replaced with a comma in a multi-line render: `'MULTI_LINE_COMMA'`
 
 ### RenderPart().is_line_break
 

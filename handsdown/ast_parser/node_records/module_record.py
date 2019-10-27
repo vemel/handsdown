@@ -178,7 +178,6 @@ class ModuleRecord(NodeRecord):
 
         self.class_records.sort(key=lambda x: x.name)
         self.function_records.sort(key=lambda x: x.name)
-        self.attribute_records.sort(key=lambda x: x.name)
 
         main_class_lookup_name = self.source_path.stem.replace("_", "")
         for class_record in self.class_records:

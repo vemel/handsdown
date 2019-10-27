@@ -49,9 +49,9 @@ Main documentation generator.
 
 #### Attributes
 
+- `LOGGER_NAME` - Name of logger: `'handsdown'`
 - `INDEX_NAME` - Docs index filename: `'README.md'`
 - `INDEX_TITLE` - Docs index title: `'Index'`
-- `LOGGER_NAME` - Name of logger: `'handsdown'`
 - `MODULES_NAME` - Docs modules filename: `'MODULES.md'`
 - `MODULES_TITLE` - Docs modules title: `'Modules'`
 

@@ -536,6 +536,104 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(node.value)
         self.parts.append("}")
 
+    def visit_comprehension(self, node):
+        # type: (ast.comprehension) -> None
+        """
+        Parse info from `ast.comprehension` node and put it to `parts`.
+
+        Examples::
+
+            for k in range(3)
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("for ")
+        self.parts.append(node.target)
+        self.parts.append(" in ")
+        self.parts.append(node.iter)
+        for expr in node.ifs:
+            self.parts.append(" if ")
+            self.parts.append(expr)
+
+    def visit_DictComp(self, node):
+        # type: (ast.DictComp) -> None
+        """
+        Parse info from `ast.DictComp` node and put it to `parts`.
+
+        Examples::
+
+            {k: 1 for k in range(3)}
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("{")
+        self.parts.append(node.key)
+        self.parts.append(": ")
+        self.parts.append(node.value)
+        self.parts.append(" ")
+        for comprehension in node.generators:
+            self.parts.append(comprehension)
+        self.parts.append("}")
+
+    def visit_ListComp(self, node):
+        # type: (ast.ListComp) -> None
+        """
+        Parse info from `ast.ListComp` node and put it to `parts`.
+
+        Examples::
+
+            [k + 1 for k in range(3)]
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("[")
+        self.parts.append(node.elt)
+        self.parts.append(" ")
+        for comprehension in node.generators:
+            self.parts.append(comprehension)
+        self.parts.append("]")
+
+    def visit_SetComp(self, node):
+        # type: (ast.SetComp) -> None
+        """
+        Parse info from `ast.SetComp` node and put it to `parts`.
+
+        Examples::
+
+            {k + 1 for k in range(3)}
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("{")
+        self.parts.append(node.elt)
+        self.parts.append(" ")
+        for comprehension in node.generators:
+            self.parts.append(comprehension)
+        self.parts.append("}")
+
+    def visit_GeneratorExp(self, node):
+        # type: (ast.GeneratorExp) -> None
+        """
+        Parse info from `ast.GeneratorExp` node and put it to `parts`.
+
+        Examples::
+
+            (k + 1 for k in range(3))
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("(")
+        self.parts.append(node.elt)
+        self.parts.append(" ")
+        for comprehension in node.generators:
+            self.parts.append(comprehension)
+        self.parts.append(")")
+
     def generic_visit(self, node):
         # type: (ast.AST) -> None
         """
@@ -545,6 +643,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         self._logger.warning(
-            "Could not render node {}, replaced with `...`".format(node)
+            "Could not render node {}, replaced with `...`".format(
+                node.__class__.__name__
+            )
         )
         self.parts.append("...")

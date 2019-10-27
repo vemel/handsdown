@@ -29,11 +29,11 @@ Base class for all node records.
 
 #### Attributes
 
-- `ELLIPSIS` - Ellipsis string value: `'...'`
-- `INDENT_SPACES` - Amount of spaces per `indent`: `4`
 - `LINE_LENGTH` - Max length for a multi-line render result: `79`
-- `MAX_INDENT` - Replace render resul with ellipsis on too deep indendation: `4`
 - `SINGLE_LINE_LENGTH` - Max length for a single-line render result: `50`
+- `INDENT_SPACES` - Amount of spaces per `indent`: `4`
+- `MAX_INDENT` - Replace render resul with ellipsis on too deep indendation: `4`
+- `ELLIPSIS` - Ellipsis string value: `'...'`
 
 ### NodeRecord().get_documented_attribute_strings
 

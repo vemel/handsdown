@@ -130,7 +130,6 @@ class ClassRecord(NodeRecord):
             self.attribute_records.append(AttributeRecord(attribute_node))
 
         self.method_records.sort(key=lambda x: x.name)
-        self.attribute_records.sort(key=lambda x: x.name)
 
     def _render_parts(self, indent=0):
         # type: (int) -> List[RenderExpr]

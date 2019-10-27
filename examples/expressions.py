@@ -33,3 +33,15 @@ TUPLE = (1, 2, 3)
 
 # dict example
 DICT = (1, 2, 3)
+
+# dict comprehension example
+DICT_COMP = {k: 1 for k in range(3) if k > -10}
+
+# list comprehension example
+LIST_COMP = [k + 1 for k in range(3)]
+
+# set comprehension example
+SET_COMP = {k + 1 for k in range(3)}
+
+# generator expression example
+GEN_EXPR = (k + 1 for k in range(3))

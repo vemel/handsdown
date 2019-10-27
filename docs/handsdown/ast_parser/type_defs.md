@@ -8,8 +8,8 @@ Different AST-related types collection.
 
 #### Attributes
 
-- `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
-- `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
-- `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, Text, RenderPart]`
-- `Node` - AST node or text: `Union[Text, ast.AST]`
 - `RenderExpr` - Ready for render expression: `Union[NodeRecord, Text, RenderPart]`
+- `Node` - AST node or text: `Union[Text, ast.AST]`
+- `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, Text, RenderPart]`
+- `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
+- `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
