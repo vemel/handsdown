@@ -22,6 +22,7 @@ Python docstring-based documentation generator for lazy perfectionists.
     - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
   - [Installation](#installation)
   - [Development](#development)
+  - [Changelog](#changelog)
 
 ## Features
 
@@ -240,3 +241,7 @@ pip install git+https://github.com/vemel/handsdown.git
 - Install [pipenv](https://pypi.org/project/pipenv/)
 - Run `pipenv install -d`
 - Use `black` formatter in your IDE
+
+## Changelog
+
+Changelog can be found in [Releases](https://github.com/vemel/handsdown/releases)
