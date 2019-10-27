@@ -36,10 +36,6 @@ class NodeRecord(object):
     # Ellipsis string value
     ELLIPSIS = "..."
 
-    def __repr__(self):
-        # type: () -> Text
-        return "<{} name={}>".format(self.__class__.__name__, self.name)
-
     def __init__(self, node):
         # type: (ast.AST) -> None
         self.docstring = ""
@@ -51,6 +47,10 @@ class NodeRecord(object):
         self.attribute_records = []  # type: List[AttributeRecord]
         self.parsed = False
         self._line_number = None  # type: Optional[int]
+
+    def __repr__(self):
+        # type: () -> Text
+        return "<{} name={}>".format(self.__class__.__name__, self.name)
 
     @property
     def line_number(self):

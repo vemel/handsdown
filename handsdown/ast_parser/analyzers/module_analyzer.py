@@ -6,7 +6,7 @@ from typing import List, Text, TYPE_CHECKING
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.type_defs import ASTImport
 
 

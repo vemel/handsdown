@@ -21,8 +21,8 @@ class FunctionAnalyzer(BaseAnalyzer):
         self.return_type_hint = None  # type: Optional[ast.expr]
 
     @staticmethod
-    def _get_argument_record(arg, default, prefix=""):
-        # type: (ast.arg, Optional[ast.expr], Text) -> ArgumentRecord
+    def _get_argument_record(arg, prefix=""):
+        # type: (ast.arg, Text) -> ArgumentRecord
         type_hint = None
         if isinstance(arg, ast.Name):
             name = arg.id
@@ -34,9 +34,7 @@ class FunctionAnalyzer(BaseAnalyzer):
 
             name = arg.arg
 
-        return ArgumentRecord(
-            arg, name=name, default=default, type_hint=type_hint, prefix=prefix
-        )
+        return ArgumentRecord(arg, name=name, type_hint=type_hint, prefix=prefix)
 
     def visit_arguments(self, node):
         # type: (ast.arguments) -> None
@@ -80,38 +78,32 @@ class FunctionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        for index, arg in enumerate(node.args):
-            default = None
-            default_index = len(node.defaults) - len(node.args) + index
-            if default_index >= 0:
-                default = node.defaults[default_index]
-
-            record = self._get_argument_record(arg, default)
-            self.argument_records.append(record)
-
         # FIXME: this works only for py38
         if hasattr(node, "posonlyargs"):
             for arg in getattr(node, "posonlyargs"):
-                record = self._get_argument_record(arg, None)
+                record = self._get_argument_record(arg)
                 self.argument_records.append(record)
+
+        for arg in node.args:
+            record = self._get_argument_record(arg)
+            self.argument_records.append(record)
 
         # FIXME: `AST2` ast.args does not have `kwonlyargs` attribute
         if hasattr(node, "kwonlyargs"):
-            for index, arg in enumerate(node.kwonlyargs):
-                default = None
-                default_index = len(node.kw_defaults) - len(node.kwonlyargs) + index
-                if default_index >= 0:
-                    default = node.kw_defaults[default_index]
-
-                record = self._get_argument_record(arg, default)
+            for arg in node.kwonlyargs:
+                record = self._get_argument_record(arg)
                 self.argument_records.append(record)
 
+        for index, default in enumerate(node.defaults):
+            argument_index = len(self.argument_records) - len(node.defaults) + index
+            self.argument_records[argument_index].set_default(default)
+
         if node.vararg is not None:
-            record = self._get_argument_record(node.vararg, None, prefix="*")
+            record = self._get_argument_record(node.vararg, prefix="*")
             self.argument_records.append(record)
 
         if node.kwarg is not None:
-            record = self._get_argument_record(node.kwarg, None, prefix="**")
+            record = self._get_argument_record(node.kwarg, prefix="**")
             self.argument_records.append(record)
 
     def visit_FunctionDef(self, node):
@@ -139,23 +131,6 @@ class FunctionAnalyzer(BaseAnalyzer):
         # FIXME: `AST2` FunctionDef has no `returns` attribute
         if hasattr(node, "returns") and node.returns:
             self.return_type_hint = node.returns
-
-    # def visit_Subscript(self, node):
-    #     # type: (ast.Subscript) -> None
-    #     """
-    #     Parse info about function return type annotation.
-
-    #     Sets `return_type_hint` to `node`.
-
-    #     Examples::
-
-    #         def my_func() -> List[Text]:
-    #             pass
-
-    #     Arguments:
-    #         node -- AST node.
-    #     """
-    #     self.return_type_hint = node
 
     def generic_visit(self, _node):
         # type: (ast.AST) -> None

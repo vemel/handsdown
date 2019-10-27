@@ -5,10 +5,11 @@ from typing import List, Text, Set, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.text_record import TextRecord
+import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import RenderExpr
-    import handsdown.ast_parser.smart_ast as ast
+    from handsdown.ast_parser.type_defs import RenderExpr, Node
 
 
 class ArgumentRecord(NodeRecord):
@@ -23,20 +24,41 @@ class ArgumentRecord(NodeRecord):
         self,
         node,  # type: ast.arg
         name,  # type: Text
-        default=None,  # type: Optional[ast.expr]
         type_hint=None,  # type: Optional[ast.expr]
         prefix="",  # type: Text
     ):
         # type: (...) -> None
         super(ArgumentRecord, self).__init__(node)
-        self.default = None  # type: Optional[ExpressionRecord]
-        if default:
-            self.default = ExpressionRecord(default)
+        self._default = None  # type: Optional[ExpressionRecord]
         self.type_hint = None  # type: Optional[ExpressionRecord]
         if type_hint:
             self.type_hint = ExpressionRecord(type_hint)
         self.prefix = prefix
         self.name = name
+
+    @property
+    def default(self):
+        # type: () -> Optional[ExpressionRecord]
+        """
+        Default value of the argument.
+
+        Returns:
+            Default exression or None.
+        """
+        return self._default
+
+    def set_default(self, node):
+        # type: (Node) -> None
+        """
+        Set default expression from test or `ast.AST` node.
+
+        Arguments:
+            node -- Text or AST node.
+        """
+        if isinstance(node, str):
+            self._default = TextRecord(self.node, node)
+        if isinstance(node, ast.AST):
+            self._default = ExpressionRecord(node)
 
     @property
     def related_names(self):
