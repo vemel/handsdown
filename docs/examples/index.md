@@ -8,6 +8,7 @@ Can be used as a list of supported features.
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / Examples
     - Modules
         - [PEP 484 - comment-based type annotations examples](comment_typed.md#pep-484---comment-based-type-annotations-examples)
+        - [Supported expressions examples](expressions.md#supported-expressions-examples)
         - [Google docstrings examples](google_docstrings.md#google-docstrings-examples)
         - [Main Example](main_example.md#main-example)
         - [PEP 257 - PEP 257 and Google docstrings examples](pep257_docstrings.md#pep-257---pep-257-and-google-docstrings-examples)

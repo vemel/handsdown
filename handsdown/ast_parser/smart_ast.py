@@ -31,6 +31,7 @@ if os.environ.get("PYTHON_VER", "3") == "3":
         Eq,
         expr,
         FloorDiv,
+        FormattedValue,
         FunctionDef,
         get_docstring,
         Gt,
@@ -42,6 +43,7 @@ if os.environ.get("PYTHON_VER", "3") == "3":
         Invert,
         Is,
         IsNot,
+        JoinedStr,
         keyword,
         Lambda,
         List,
@@ -62,6 +64,7 @@ if os.environ.get("PYTHON_VER", "3") == "3":
         Pow,
         RShift,
         Set,
+        Slice,
         Starred,
         stmt,
         Str,
@@ -125,6 +128,7 @@ else:
         Pow,
         RShift,
         Set,
+        Slice,
         stmt,
         Str,
         Sub,
@@ -139,6 +143,8 @@ else:
     Bytes = Any
     NameConstant = Any
     Starred = Any
+    JoinedStr = Any
+    FormattedValue = Any
 
 __all__ = [
     "Add",
@@ -164,6 +170,7 @@ __all__ = [
     "Eq",
     "expr",
     "FloorDiv",
+    "FormattedValue",
     "FunctionDef",
     "get_docstring",
     "Gt",
@@ -175,6 +182,7 @@ __all__ = [
     "Invert",
     "Is",
     "IsNot",
+    "JoinedStr",
     "keyword",
     "Lambda",
     "List",
@@ -195,6 +203,7 @@ __all__ = [
     "Pow",
     "RShift",
     "Set",
+    "Slice",
     "Starred",
     "stmt",
     "Str",

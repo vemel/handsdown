@@ -3,6 +3,7 @@ AST analyzer for `ast.expr` records.
 """
 from typing import TYPE_CHECKING
 
+from handsdown.utils.logger import get_logger
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
@@ -22,6 +23,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
     def __init__(self):
         # type: () -> None
         super(ExpressionAnalyzer, self).__init__()
+        self._logger = get_logger()
         self.parts = []  # type: List[DirtyRenderExpr]
 
     BINOP_SYMBOLS = {
@@ -61,6 +63,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Str` node and put it to `parts`.
 
+        Examples::
+
+            "my_string"
+
         Arguments:
             node -- AST node.
         """
@@ -74,6 +80,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Bytes` node and put it to `parts`.
 
+        Examples::
+
+            b"my_string"
+
         Arguments:
             node -- AST node.
         """
@@ -84,6 +94,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.Num) -> None
         """
         Parse info from `ast.Num` node and put it to `parts`.
+
+        Examples::
+
+            123
+            123.456
 
         Arguments:
             node -- AST node.
@@ -96,6 +111,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Name` node and put it to `parts`.
 
+        Examples::
+
+            my_value
+
         Arguments:
             node -- AST node.
         """
@@ -106,6 +125,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.NameConstant) -> None
         """
         Parse info from `ast.NameConstant` node and put it to `parts`.
+
+        Examples::
+
+            None
+            True
 
         Arguments:
             node -- AST node.
@@ -118,6 +142,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Parse info from `ast.Subscript` node and put it to `parts`.
 
         Type annotations are also matched by this method.
+
+        Examples::
+
+            Union[Name, bool]
+            list[1:4]
 
         Arguments:
             node -- AST node.
@@ -136,6 +165,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.Attribute) -> None
         """
         Parse info from `ast.Attribute` node and put it to `parts`.
+
+        Examples::
+
+            my_object.attribute
 
         Arguments:
             node -- AST node.
@@ -439,6 +472,66 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("...")
 
+    def visit_Slice(self, node):
+        # type: (ast.Slice) -> None
+        """
+        Parse info from `ast.Slice` node and put it to `parts`.
+
+        Examples::
+
+            [1:]
+            [:2]
+            [1:2]
+            [1:2:-1]
+            [::-1]
+
+        Arguments:
+            node -- AST node.
+        """
+        if node.lower:
+            self.parts.append(node.lower)
+        self.parts.append(":")
+        if node.upper:
+            self.parts.append(node.upper)
+        if node.step:
+            self.parts.append(":")
+            self.parts.append(node.step)
+
+    def visit_JoinedStr(self, node):
+        # type: (ast.JoinedStr) -> None
+        """
+        Parse info from `ast.JoinedStr` node and put it to `parts`.
+
+        Examples::
+
+            f'str: {my_string}'
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("f'")
+        for value in node.values:
+            if isinstance(value, ast.Str):
+                str_value = value.s
+                if isinstance(str_value, bytes):
+                    str_value = str_value.decode("utf-8")
+                self.parts.append(str_value)
+            else:
+                self.parts.append(value)
+        self.parts.append("'")
+
+    def visit_FormattedValue(self, node):
+        # type: (ast.FormattedValue) -> None
+        """
+        Parse info from `ast.FormattedValue` node and put it to `parts`.
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("{")
+        self.parts.append(node.value)
+        self.parts.append("}")
+
     def generic_visit(self, node):
         # type: (ast.AST) -> None
         """
@@ -447,4 +540,5 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
+        self._logger.warning("Cound not represent node {}".format(node))
         self.parts.append("...")
