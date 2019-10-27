@@ -71,7 +71,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
         # skip magic methods with no docstrings
         if name != "__init__":
-            if name.startswith("__") and not ast.get_docstring(node):
+            if name.startswith("__") and not ast.get_docstring(node, clean=False):
                 return
 
         self.method_nodes.append(node)
