@@ -4,7 +4,6 @@ from unittest.mock import patch, MagicMock
 from pathlib import Path
 
 from handsdown.generator import Generator, GeneratorError
-from handsdown.loader import LoaderError
 from handsdown.utils.import_string import ImportString
 
 
@@ -113,11 +112,11 @@ class TestGenerator(unittest.TestCase):
         with self.assertRaises(GeneratorError):
             generator.generate_doc(Path("/input/source2.py"))
 
-        LoaderMock().parse_module_record.side_effect = LoaderError("loader_error")
+        LoaderMock().parse_module_record.side_effect = ValueError("loader_error")
         ModuleRecordListMock().__iter__ = MagicMock(
             return_value=iter([module_record_mock2])
         )
-        with self.assertRaises(GeneratorError):
+        with self.assertRaises(ValueError):
             generator.generate_doc(Path("/input/source2.py"))
 
     @patch("handsdown.generator.Loader")
