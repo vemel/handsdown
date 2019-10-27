@@ -41,6 +41,9 @@ class TestFunctionAnalyzer(unittest.TestCase):
         ast3_arg_2 = MagicMock()
         ast3_arg_2.mock_add_spec(ast.Name)
         ast3_arg_2.id = "ast3_arg_2"
+        kw_only_arg = MagicMock()
+        kw_only_arg.mock_add_spec(ast.Name)
+        kw_only_arg.id = "kw_only_arg"
         vararg = MagicMock()
         vararg.mock_add_spec(ast.Name)
         vararg.id = "vararg"
@@ -49,18 +52,22 @@ class TestFunctionAnalyzer(unittest.TestCase):
         vararg.mock_add_spec(ast.Name)
         kwarg.arg = "kwarg"
         node.kwarg = kwarg
-        node.args = [ast2_arg]
+        node.args = [ast2_arg, ast3_arg_2]
         node.posonlyargs = [ast3_arg]
-        node.kwonlyargs = [ast3_arg_2]
+        node.kwonlyargs = [kw_only_arg]
         default = MagicMock()
         default.mock_add_spec(ast.expr)
         default.node = "default"
         default1 = MagicMock()
         default1.mock_add_spec(ast.expr)
         default1.node = "default1"
+        kw_default1 = MagicMock()
+        kw_default1.mock_add_spec(ast.expr)
+        kw_default1.node = "default1"
         node.defaults = [default, default1]
+        node.kw_defaults = [kw_default1]
         self.assertIsNone(analyzer.visit_arguments(node))
-        self.assertEqual(len(analyzer.argument_records), 5)
+        self.assertEqual(len(analyzer.argument_records), 6)
 
         self.assertEqual(analyzer.argument_records[0].name, "ast3_arg")
         self.assertEqual(analyzer.argument_records[0].default, None)
@@ -77,12 +84,17 @@ class TestFunctionAnalyzer(unittest.TestCase):
         self.assertEqual(analyzer.argument_records[2].prefix, "")
         self.assertEqual(analyzer.argument_records[2].type_hint, None)
 
-        self.assertEqual(analyzer.argument_records[3].name, "vararg")
-        self.assertEqual(analyzer.argument_records[3].default, None)
-        self.assertEqual(analyzer.argument_records[3].prefix, "*")
+        self.assertEqual(analyzer.argument_records[3].name, "kw_only_arg")
+        self.assertEqual(analyzer.argument_records[3].default.node, kw_default1)
+        self.assertEqual(analyzer.argument_records[3].prefix, "")
         self.assertEqual(analyzer.argument_records[3].type_hint, None)
 
-        self.assertEqual(analyzer.argument_records[4].name, "kwarg")
+        self.assertEqual(analyzer.argument_records[4].name, "vararg")
         self.assertEqual(analyzer.argument_records[4].default, None)
-        self.assertEqual(analyzer.argument_records[4].prefix, "**")
-        self.assertEqual(analyzer.argument_records[4].type_hint.node, kwarg.annotation)
+        self.assertEqual(analyzer.argument_records[4].prefix, "*")
+        self.assertEqual(analyzer.argument_records[4].type_hint, None)
+
+        self.assertEqual(analyzer.argument_records[5].name, "kwarg")
+        self.assertEqual(analyzer.argument_records[5].default, None)
+        self.assertEqual(analyzer.argument_records[5].prefix, "**")
+        self.assertEqual(analyzer.argument_records[5].type_hint.node, kwarg.annotation)
