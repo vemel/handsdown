@@ -29,6 +29,9 @@ Wrapper for an `ast.arg` node.
 #### Arguments
 
 - `node` - AST node.
+- `name` - Argument name.
+- `type_hint` - Argument type hint.
+- `prefix` - Prefix for arguemnt name, used for starargs.
 
 #### See also
 
@@ -36,7 +39,7 @@ Wrapper for an `ast.arg` node.
 
 ### ArgumentRecord().default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L39)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L42)
 
 ```python
 @property
@@ -55,7 +58,7 @@ Default exression or None.
 
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L63)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L66)
 
 ```python
 @property
@@ -64,7 +67,7 @@ def related_names() -> Set[Text]:
 
 ### ArgumentRecord().set_default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L50)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L53)
 
 ```python
 def set_default(node: Node) -> None:

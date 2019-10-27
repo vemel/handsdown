@@ -18,6 +18,9 @@ class ArgumentRecord(NodeRecord):
 
     Arguments:
         node -- AST node.
+        name -- Argument name.
+        type_hint -- Argument type hint.
+        prefix -- Prefix for arguemnt name, used for starargs.
     """
 
     def __init__(
