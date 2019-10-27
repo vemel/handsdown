@@ -145,7 +145,7 @@ class Generator:
                 module_record = self._loader.get_module_record(source_path)
             except LoaderError as e:
                 if self._raise_errors:
-                    raise GeneratorError("Error while building: {}".format(e))
+                    raise
 
                 self._logger.warning("Skipping: {}".format(e))
                 continue
@@ -232,7 +232,7 @@ class Generator:
             self._loader.parse_module_record(module_record)
         except LoaderError as e:
             if self._raise_errors:
-                raise GeneratorError("Error while loading: {}".format(e))
+                raise
 
             self._logger.warning("Skipping: {}".format(e))
             return
