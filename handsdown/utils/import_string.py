@@ -32,7 +32,10 @@ class ImportString:
 
     def __add__(self, other):
         # type: (Text) -> ImportString
-        return ImportString("{}.{}".format(self.value, other))
+        if self.value:
+            return ImportString("{}.{}".format(self.value, other))
+
+        return ImportString(other)
 
     def __bool__(self):
         # type: () -> bool
