@@ -263,9 +263,11 @@ class ModuleRecord(NodeRecord):
         start_index = node_record.node.lineno - 2
         start_line = self.source_lines[start_index].strip()
         while start_index >= 0 and start_line.startswith("#"):
-            result.append(start_line[1:].strip())
+            line = start_line[1:].strip()
+            if not line.startswith("FIXME") and not line.startswith("TODO"):
+                result.append(line)
             start_index -= 1
             start_line = self.source_lines[start_index].strip()
 
         result.reverse()
-        return " ".join(result)
+        return "\n  ".join(result)

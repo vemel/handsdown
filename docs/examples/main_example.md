@@ -19,11 +19,12 @@ and it will be transformed to a link.
 
 #### Attributes
 
-- `MODULE_NAME` - This is a comment-style documented global variable, so it is added to `main_example` module attributes with this comment as a documentation for it: `'My Module'`
+- `MODULE_NAME` - This is a comment-style documented global variable, so it is added to
+  `main_example` module attributes with this comment as a documentation for it: `'My Module'`
 
 ## MyClass
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L50)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L54)
 
 ```python
 class MyClass(BaseClass):
@@ -37,11 +38,12 @@ This time we use RST docstrings format.
 
 #### Attributes
 
-- `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
+- `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to
+  `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
 
 ### MyClass().\_\_bool\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L88)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L92)
 
 ```python
 def __bool__() -> bool:
@@ -55,7 +57,7 @@ True if [STUFF_COUNT](#myclass) is not zero
 
 ### MyClass.do_something
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L61)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L65)
 
 ```python
 @classmethod
@@ -94,7 +96,7 @@ Changed in version 1.4
 
 ## hello
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L23)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L27)
 
 ```python
 def hello(name: Text) -> Text:

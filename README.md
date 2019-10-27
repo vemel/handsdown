@@ -27,9 +27,10 @@ Python docstring-based documentation generator for lazy perfectionists.
 ## Features
 
 - [PEP 257](https://www.python.org/dev/peps/pep-0257/),
-  [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+  [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings),
+  [Sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
   and [reStructuredText](https://www.python.org/dev/peps/pep-0287/)
-  docstrings support. All of them are converted to a valid markdown.
+  docstrings support. All of them are converted to a valid Markdown.
 - Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
 - Can be used locally, or
   [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or even deployed on

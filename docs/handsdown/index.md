@@ -88,7 +88,11 @@ if TYPE_CHECKING:
 
 # This is a comment-style documented global variable, so it is added to
 # `main_example` module attributes with this comment as a documentation for it
+# FIXME: FIXME and TODO comments are igonred
 MODULE_NAME = "My Module"
+
+# Private args never appear in docs
+_PRIVATE_ATTR = "Private attr"
 
 
 def hello(name: Text) -> Text:
