@@ -259,6 +259,18 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append(RenderPart.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(element)
+
+        # FIXME: `AST2` ast.Call stores star argument in `starargs`
+        starargs = getattr(node, "starargs", None)
+        if starargs:
+            if args_count:
+                self.parts.append(",")
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
+            args_count += 1
+            self.parts.append("*")
+            self.parts.append(starargs)
+
         for kwelement in node.keywords:
             if args_count:
                 self.parts.append(",")
@@ -266,6 +278,18 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append(RenderPart.MULTI_LINE_BREAK)
             args_count += 1
             self.parts.append(kwelement)
+
+        # FIXME: `AST2` ast.Call stores kwarg argument in `kwargs`
+        kwargs = getattr(node, "kwargs", None)
+        if kwargs:
+            if args_count:
+                self.parts.append(",")
+                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
+                self.parts.append(RenderPart.MULTI_LINE_BREAK)
+            args_count += 1
+            self.parts.append("**")
+            self.parts.append(kwargs)
+
         if args_count:
             self.parts.append(RenderPart.MULTI_LINE_COMMA)
         self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
