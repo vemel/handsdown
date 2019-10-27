@@ -26,6 +26,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self._logger = get_logger()
         self.parts = []  # type: List[DirtyRenderExpr]
 
+    # representation map for binary operators
     BINOP_SYMBOLS = {
         ast.Add: "+",
         ast.Sub: "-",
@@ -41,8 +42,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         ast.FloorDiv: "//",
     }
 
+    # representation map for boolean operators
     BOOLOP_SYMBOLS = {ast.And: "and", ast.Or: "or"}
 
+    # representation map for comparison operators
     CMPOP_SYMBOLS = {
         ast.Eq: "==",
         ast.NotEq: "!=",
@@ -56,6 +59,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         ast.NotIn: "not in",
     }
 
+    # representation map for unary operators
     UNARYOP_SYMBOLS = {ast.Invert: "~", ast.Not: "not", ast.UAdd: "+", ast.USub: "-"}
 
     def visit_Str(self, node):
@@ -540,5 +544,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        self._logger.warning("Cound not represent node {}".format(node))
+        self._logger.warning(
+            "Could not render node {}, replaced with `...`".format(node)
+        )
         self.parts.append("...")
