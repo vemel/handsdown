@@ -562,7 +562,6 @@ class Generator:
                 continue
 
             title = related_record.title
-            output_path = self._loader.get_output_path(module_record.source_path)
             target_path = self._loader.get_output_path(
                 related_module_record.source_path
             )
@@ -575,8 +574,8 @@ class Generator:
         for link in links:
             section_map.add_line("See also", "- {}".format(link))
             self._logger.debug(
-                "Adding link '{}' to {} 'See also' section".format(
-                    title, self._root_path_finder.relative(output_path)
+                "Adding link `{}` to `{}` `See also` section".format(
+                    title, record.title
                 )
             )
 
