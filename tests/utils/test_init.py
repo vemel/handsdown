@@ -1,7 +1,8 @@
 # pylint: disable=missing-docstring
 import unittest
+from unittest.mock import patch
 
-from handsdown.utils import make_title, extract_md_title
+from handsdown.utils import make_title, extract_md_title, render_asset
 
 
 class TestUtils(unittest.TestCase):
@@ -18,3 +19,10 @@ class TestUtils(unittest.TestCase):
             extract_md_title("## test\n\ncontent"), ("", "## test\n\ncontent")
         )
         self.assertEqual(extract_md_title("# test"), ("test", ""))
+
+    @patch("handsdown.utils.Path")
+    def test_render_asset(self, PathMock):
+        target_path = PathMock("target")
+        PathMock().__truediv__().read_text.return_value = "this is {title}"
+        self.assertIsNone(render_asset("name", target_path, {"title": "My title"}))
+        target_path.write_text.assert_called_with("this is My title")
