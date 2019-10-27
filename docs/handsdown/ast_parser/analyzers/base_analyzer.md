@@ -9,7 +9,7 @@ Base AST analyzer.
 
 ## BaseAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py#L18)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py#L17)
 
 ```python
 class BaseAnalyzer(ast.NodeVisitor):

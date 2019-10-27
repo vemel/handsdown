@@ -28,7 +28,7 @@ AST analyzer for `ast.ClassDef` records.
 
 ### ClassAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L111)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L113)
 
 ```python
 def generic_visit(_node: ast.AST) -> None:
@@ -42,7 +42,7 @@ Do nothing for unknown `ast.AST` nodes.
 
 ### ClassAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L78)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L80)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -66,7 +66,7 @@ class MyClass:
 
 ### ClassAnalyzer().visit_ClassDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L24)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L26)
 
 ```python
 def visit_ClassDef(node: ast.ClassDef) -> None:
@@ -90,7 +90,7 @@ def my_func():
 
 ### ClassAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L47)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L49)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
