@@ -20,6 +20,10 @@ class ModuleAnalyzer(BaseAnalyzer):
         # type: () -> None
         super(ModuleAnalyzer, self).__init__()
         self.all_names = []  # type: List[Text]
+        self.import_records = []  # type: List[ImportRecord]
+        self.function_records = []  # type: List[FunctionRecord]
+        self.attribute_records = []  # type: List[AttributeRecord]
+        self.class_records = []  # type: List[ClassRecord]
 
     def visit_Import(self, node):
         # type: (ast.Import) -> None
@@ -139,7 +143,7 @@ class ModuleAnalyzer(BaseAnalyzer):
         name = node.targets[0].id
 
         # gather public names from `__all__` directive
-        if name == "__all__" and isinstance(node.value, ast.List):
+        if name == "__all__" and isinstance(node.value, (ast.List, ast.Tuple, ast.Set)):
             for element in node.value.elts:
                 if isinstance(element, ast.Str):
                     value = element.s

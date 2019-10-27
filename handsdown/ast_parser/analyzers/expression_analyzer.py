@@ -8,8 +8,8 @@ from handsdown.ast_parser.enums import RenderPart
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Optional
-    from handsdown.ast_parser.type_defs import ASTIterable
+    from typing import Optional, List
+    from handsdown.ast_parser.type_defs import ASTIterable, DirtyRenderExpr
 
 
 class ExpressionAnalyzer(BaseAnalyzer):
@@ -18,6 +18,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     Prepares `parts` for `NodeRecord.render` method.
     """
+
+    def __init__(self):
+        # type: () -> None
+        super(ExpressionAnalyzer, self).__init__()
+        self.parts = []  # type: List[DirtyRenderExpr]
 
     BINOP_SYMBOLS = {
         ast.Add: "+",

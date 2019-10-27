@@ -20,6 +20,8 @@ class ClassAnalyzer(BaseAnalyzer):
         super(ClassAnalyzer, self).__init__()
         self.base_records = []  # type: List[ExpressionRecord]
         self.decorator_records = []  # type: List[ExpressionRecord]
+        self.method_records = []  # type: List[FunctionRecord]
+        self.attribute_records = []  # type: List[AttributeRecord]
 
     def visit_ClassDef(self, node):
         # type: (ast.ClassDef) -> None

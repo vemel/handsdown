@@ -134,7 +134,6 @@ class FunctionRecord(NodeRecord):
                         argument_index -= 1
                         break
 
-
                 if argument_index >= 0:
                     argument = self.argument_records[argument_index]
                     argument.type_hint = TextRecord(argument.node, arg_type.strip())
