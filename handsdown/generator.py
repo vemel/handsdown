@@ -611,8 +611,7 @@ class Generator:
             if len(import_string_parts) > len(parts) + max_depth:
                 continue
 
-            title_parts = module_record.get_title_parts()
-            for index, title_part in enumerate(title_parts[:-1]):
+            for index, import_string_part in enumerate(import_string_parts[:-1]):
                 if index < len(parts):
                     continue
 
@@ -621,19 +620,21 @@ class Generator:
                     and last_import_string_parts[index] == import_string_parts[index]
                 ):
                     continue
+
+                title = make_title(import_string_part)
                 toc_line = md_document.get_toc_line(
-                    title_part, level=index - len(parts) + start_level
+                    title, level=index - len(parts) + start_level
                 )
                 lines.append(toc_line)
 
             last_import_string_parts = import_string_parts
             link = md_document.render_doc_link(
-                title=title_parts[-1],
+                title=module_record.title,
                 target_path=output_path,
-                anchor=md_document.get_anchor(title_parts[-1]),
+                anchor=md_document.get_anchor(module_record.title),
             )
             toc_line = md_document.get_toc_line(
-                link, level=len(title_parts) - len(parts) - 1 + start_level
+                link, level=len(import_string_parts) - len(parts) - 1 + start_level
             )
             lines.append(toc_line)
         return lines

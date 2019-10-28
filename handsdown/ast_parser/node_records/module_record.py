@@ -1,22 +1,20 @@
 """
 Wrapper for an `ast.Module` node with corresponding node info.
 """
-from typing import List, Text, Generator, Any, Optional, Dict, TYPE_CHECKING
+from pathlib import Path
+from typing import List, Text, Generator, Any, Optional, Dict
 
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.utils import make_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
+from handsdown.utils.import_string import ImportString
 from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.class_record import ClassRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 import handsdown.ast_parser.smart_ast as ast
-
-if TYPE_CHECKING:  # pragma: no cover
-    from pathlib import Path
-    from handsdown.utils.import_string import ImportString
 
 
 class ModuleRecord(NodeRecord):
@@ -26,45 +24,47 @@ class ModuleRecord(NodeRecord):
     Responsible for parsing Python source as well.
 
     Arguments:
-        source_path -- Path to a Python source file.
-        import_string -- File absolute import string.
+        node -- Result of `ast.parse`.
     """
 
-    def __init__(self, source_path, import_string):
-        # type: (Path, ImportString) -> None
-        content = source_path.read_text()
-        self.tree = ast.parse(content)
-        super(ModuleRecord, self).__init__(self.tree)
-        self.source_path = source_path
+    def __init__(self, node):
+        # type: (ast.Module) -> None
+        super(ModuleRecord, self).__init__(node)
         self.all_names = []  # type: List[Text]
         self.class_records = []  # type: List[ClassRecord]
         self.function_records = []  # type: List[FunctionRecord]
         self.import_records = []  # type: List[ImportRecord]
-        self.source_lines = self.source_path.read_text().split("\n")
-        self.name = import_string.parts[-1]
-        self.title = make_title(self.name)
-        self.import_string = import_string
+        self.source_path = Path("")
+        self.source_lines = []  # type: List[Text]
+        self.name = "module"
+        self.title = "Module"
+        self.import_string = ImportString("")
         self.import_string_map = {}  # type: Dict[ImportString, NodeRecord]
         self.docstring = self._get_docstring()
 
-    def get_title_parts(self):
-        # type: () -> List[Text]
+    @classmethod
+    def create_from_source(cls, source_path, import_string):
+        # type: (Path, ImportString) -> ModuleRecord
         """
-        Get Module title from a splitted `import_string`.
+        Create new `ModuleRecord` from path.
+
+        Arguments:
+            source_path -- Path to a Python source file.
+            import_string -- File absolute import string.
 
         Returns:
-            Titles from the top parent to itself.
+            New `ModuleRecord` instance.
         """
-        parts = self.import_string.parts
-        result = []
-        for part in parts:
-            part = make_title(part)
-            result.append(part)
-
-        if self.title and result:
-            result[-1] = self.title
-
-        return result
+        content = source_path.read_text()
+        node = ast.parse(content)
+        assert isinstance(node, ast.Module)
+        record = cls(node)
+        record.import_string = import_string
+        record.name = import_string.parts[-1]
+        record.title = make_title(record.name)
+        record.source_path = source_path
+        record.source_lines = source_path.read_text().split("\n")
+        return record
 
     def find_record(self, import_string):
         # type: (ImportString) -> Optional[NodeRecord]
@@ -159,7 +159,7 @@ class ModuleRecord(NodeRecord):
         Used only when doc for this ModuleRecord is building.
         """
         analyzer = ModuleAnalyzer()
-        analyzer.visit(self.tree)
+        analyzer.visit(self.node)
 
         self.all_names = analyzer.all_names
 

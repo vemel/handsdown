@@ -87,7 +87,9 @@ class Loader:
         docstring_parts = []
 
         try:
-            module_record = ModuleRecord(source_path, ImportString(import_string))
+            module_record = ModuleRecord.create_from_source(
+                source_path, ImportString(import_string)
+            )
             module_record.build_children()
         except Exception as e:
             raise LoaderError(
