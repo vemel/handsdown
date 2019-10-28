@@ -43,10 +43,13 @@ class ImportString:
 
     def __eq__(self, other):
         # type: (object) -> bool
-        if not isinstance(other, ImportString):
-            return False
+        if isinstance(other, str):
+            return self.value == other
 
-        return self.value == other.value
+        if isinstance(other, ImportString):
+            return self.value == other.value
+
+        return False
 
     @property
     def parts(self):
