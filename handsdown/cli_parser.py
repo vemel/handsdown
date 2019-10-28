@@ -87,7 +87,7 @@ def existing_dir_abs_path(path_str):
     if not path.exists():
         raise argparse.ArgumentTypeError("Path {} does not exist".format(path))
     if not path.is_dir():
-        raise argparse.ArgumentTypeError("Path {}  is not a directory".format(path))
+        raise argparse.ArgumentTypeError("Path {} is not a directory".format(path))
     return path
 
 
