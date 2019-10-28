@@ -4,7 +4,7 @@
 [![PyPI - Handsdown](https://img.shields.io/pypi/v/handsdown.svg?color=blue&style=for-the-badge)](https://pypi.org/project/handsdown)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown.svg?color=blue&style=for-the-badge)](https://pypi.org/project/handsdown)
 [![Build Status](https://img.shields.io/travis/vemel/handsdown.svg?style=for-the-badge)](https://travis-ci.org/vemel/handsdown)
-[![Code Coverage](https://img.shields.io/codecov/c/gh/vemel/handsdown.svg?style=for-the-badge)](https://codecov.io/gh/vemel/handsdown)
+[![Code Coverage](https://img.shields.io/codecov/c/gh/vemel/handsdown.svg?style=for-the-badge)](https://codecov.io/gh/vemel/handsdown/tree/master/handsdown)
 [![Docs](https://img.shields.io/readthedocs/handsdown.svg?color=blue&style=for-the-badge)](https://handsdown.readthedocs.io/)
 
 Python docstring-based documentation generator for lazy perfectionists.
