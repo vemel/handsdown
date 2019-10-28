@@ -758,6 +758,24 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(comprehension)
         self.parts.append(")")
 
+    def visit_IfExp(self, node):
+        # type: (ast.IfExp) -> None
+        """
+        Parse info from `ast.IfExp` node and put it to `parts`.
+
+        Examples::
+
+            5 if my_value else 6
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append(node.body)
+        self.parts.append(" if ")
+        self.parts.append(node.test)
+        self.parts.append(" else ")
+        self.parts.append(node.orelse)
+
     def generic_visit(self, node):
         # type: (ast.AST) -> None
         """

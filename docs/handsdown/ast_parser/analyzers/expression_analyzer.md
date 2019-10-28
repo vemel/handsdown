@@ -18,6 +18,7 @@ AST analyzer for `ast.expr` records.
         - [ExpressionAnalyzer().visit_Ellipsis](#expressionanalyzervisit_ellipsis)
         - [ExpressionAnalyzer().visit_FormattedValue](#expressionanalyzervisit_formattedvalue)
         - [ExpressionAnalyzer().visit_GeneratorExp](#expressionanalyzervisit_generatorexp)
+        - [ExpressionAnalyzer().visit_IfExp](#expressionanalyzervisit_ifexp)
         - [ExpressionAnalyzer().visit_Index](#expressionanalyzervisit_index)
         - [ExpressionAnalyzer().visit_JoinedStr](#expressionanalyzervisit_joinedstr)
         - [ExpressionAnalyzer().visit_Lambda](#expressionanalyzervisit_lambda)
@@ -66,7 +67,7 @@ Prepares `parts` for `NodeRecord.render` method.
 
 ### ExpressionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L761)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L779)
 
 ```python
 def generic_visit(node: ast.AST) -> None:
@@ -285,6 +286,26 @@ Parse info from `ast.GeneratorExp` node and put it to `parts`.
 
 ```python
 (k + 1 for k in range(3))
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+### ExpressionAnalyzer().visit_IfExp
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L761)
+
+```python
+def visit_IfExp(node: ast.IfExp) -> None:
+```
+
+Parse info from `ast.IfExp` node and put it to `parts`.
+
+#### Examples
+
+```python
+5 if my_value else 6
 ```
 
 #### Arguments

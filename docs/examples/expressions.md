@@ -22,3 +22,4 @@ Test for [ExpressionAnalyzer](../handsdown/ast_parser/analyzers/expression_analy
 - `LIST_COMP` - list comprehension example: `[k + 1 for k in range(3)]`
 - `SET_COMP` - set comprehension example: `{k + 1 for k in range(3)}`
 - `GEN_EXPR` - generator expression example: `(k + 1 for k in range(3))`
+- `IF_EXPR` - if expression example: `5 if STRING else 6`

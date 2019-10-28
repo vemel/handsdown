@@ -468,6 +468,16 @@ class TestClassAnalyzer(unittest.TestCase):
             analyzer.parts, ["(", "elt", " ", "generator1", "generator2", ")"]
         )
 
+    def test_visit_IfExp(self):
+        node = MagicMock()
+        node.body = "body"
+        node.test = "test"
+        node.orelse = "orelse"
+
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_IfExp(node))
+        self.assertEqual(analyzer.parts, ["body", " if ", "test", " else ", "orelse"])
+
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
     def test_generic_visit(self, get_logger_mock):
         node = MagicMock()
