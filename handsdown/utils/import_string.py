@@ -54,6 +54,9 @@ class ImportString:
             ImportString("") + "MyClass"
             ImportString("MyClass")
 
+        Arguments:
+            other -- Import string part.
+
         Returns:
             A new `ImportString` instance.
         """
@@ -85,6 +88,26 @@ class ImportString:
         """
         Compare to another `ImportString` or a string.
 
+        Examples::
+
+            ImportString("my_module.MyClass") == ImportString("my_module.MyClass")
+            True
+
+            ImportString("my_module.MyClass") == ImportString("my_module.OtherClass")
+            False
+
+            ImportString("my_module.MyClass") == "my_module.MyClass"
+            True
+
+            ImportString("my_module.MyClass") == "my_module"
+            False
+
+            ImportString("my_module.MyClass") == b"my_module.MyClass"
+            False
+
+        Arguments:
+            other - ImportString instance or a string.
+
         Returns:
             True if import strings are equal.
         """
@@ -101,6 +124,14 @@ class ImportString:
         # type: () -> List[Text]
         """
         Parts of import string splitted by dots.
+
+        Examples::
+
+            ImportString("my_module.MyClass")
+            ["my_module", "MyClass"]
+
+            ImportString("")
+            []
 
         Returns:
             A list of import string parts.

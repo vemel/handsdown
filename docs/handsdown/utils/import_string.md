@@ -51,13 +51,17 @@ ImportString("") + "MyClass"
 ImportString("MyClass")
 ```
 
+#### Arguments
+
+- `other` - Import string part.
+
 #### Returns
 
 A new [ImportString](#importstring) instance.
 
 ### ImportString().\_\_bool\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L68)
 
 ```python
 def __bool__() -> bool:
@@ -81,13 +85,36 @@ True if not empty.
 
 ### ImportString().\_\_eq\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L83)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L86)
 
 ```python
 def __eq__(other: object) -> bool:
 ```
 
 Compare to another [ImportString](#importstring) or a string.
+
+#### Examples
+
+```python
+ImportString("my_module.MyClass") == ImportString("my_module.MyClass")
+True
+
+ImportString("my_module.MyClass") == ImportString("my_module.OtherClass")
+False
+
+ImportString("my_module.MyClass") == "my_module.MyClass"
+True
+
+ImportString("my_module.MyClass") == "my_module"
+False
+
+ImportString("my_module.MyClass") == b"my_module.MyClass"
+False
+```
+
+#### Arguments
+
+other - ImportString instance or a string.
 
 #### Returns
 
@@ -116,7 +143,7 @@ Original import string.
 
 ### ImportString().is_top_level
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L110)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L141)
 
 ```python
 def is_top_level() -> bool:
@@ -130,7 +157,7 @@ True if it has no parents.
 
 ### ImportString().parent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L120)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L151)
 
 ```python
 @property
@@ -145,7 +172,7 @@ A new [ImportString](#importstring) instance.
 
 ### ImportString().parts
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L99)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L122)
 
 ```python
 @property
@@ -154,13 +181,23 @@ def parts() -> List[Text]:
 
 Parts of import string splitted by dots.
 
+#### Examples
+
+```python
+ImportString("my_module.MyClass")
+["my_module", "MyClass"]
+
+ImportString("")
+[]
+```
+
 #### Returns
 
 A list of import string parts.
 
 ### ImportString().startswith
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L135)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L166)
 
 ```python
 def startswith(import_string: ImportString) -> bool:
