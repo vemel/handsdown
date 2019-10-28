@@ -381,13 +381,19 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Compare` node and put it to `parts`.
 
+        Examples::
+
+            value < 5
+            1 < weekday < 7
+
         Arguments:
             node -- AST node.
         """
         self.parts.append(node.left)
-        for op, right in zip(node.ops, node.comparators):
+        for index, right in enumerate(node.comparators):
+            operator = node.ops[index]
             self.parts.append(" ")
-            self.parts.append(self.CMPOP_SYMBOLS[type(op)])
+            self.parts.append(self.CMPOP_SYMBOLS[type(operator)])
             self.parts.append(" ")
             self.parts.append(right)
 
@@ -395,6 +401,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.BinOp) -> None
         """
         Parse info from `ast.BinOp` node and put it to `parts`.
+
+        Examples::
+
+            1 + 5
+            value + 1
 
         Arguments:
             node -- AST node.
@@ -410,13 +421,19 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.BoolOp` node and put it to `parts`.
 
+        Examples::
+
+            value or True
+            a and b
+
         Arguments:
             node -- AST node.
         """
-        for idx, value in enumerate(node.values):
-            if idx:
+        operator = self.BOOLOP_SYMBOLS[type(node.op)]
+        for index, value in enumerate(node.values):
+            if index:
                 self.parts.append(" ")
-                self.parts.append(self.BOOLOP_SYMBOLS[type(node.op)])
+                self.parts.append(operator)
                 self.parts.append(" ")
             self.parts.append(value)
 
@@ -425,12 +442,19 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.UnaryOp` node and put it to `parts`.
 
+        Examples::
+
+            +5
+            -12
+            ~1
+            not True
+
         Arguments:
             node -- AST node.
         """
-        op = self.UNARYOP_SYMBOLS[type(node.op)]
-        self.parts.append(op)
-        if op == "not":
+        operator = self.UNARYOP_SYMBOLS[type(node.op)]
+        self.parts.append(operator)
+        if operator == "not":
             self.parts.append(" ")
         self.parts.append(node.operand)
 
@@ -438,6 +462,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.Lambda) -> None
         """
         Parse info from `ast.Lambda` node and put it to `parts`.
+
+        Examples::
+
+            lambda x: x + 5
 
         Arguments:
             node -- AST node.
@@ -451,6 +479,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.arguments) -> None
         """
         Parse info from `ast.arguments` node and put it to `parts`.
+
+        Examples::
+
+            def my_func(arg, *args, **kwargs)
 
         Arguments:
             node -- AST node.
@@ -498,6 +530,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.arg` node and put it to `parts`.
 
+        Examples::
+
+            def my_func(arg)
+            def my_func(arg: Text)
+
         Arguments:
             node -- AST node.
         """
@@ -511,6 +548,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Index` node and put it to `parts`.
 
+        Examples::
+
+            Union[Text, bool]
+            Union[Text]
+
         Arguments:
             node -- AST node.
         """
@@ -523,6 +565,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.ASTEllipsis) -> None
         """
         Parse info from `ast.Ellipsis` node and put it to `parts`.
+
+        Examples::
+
+            ...
 
         Arguments:
             node -- AST node.
@@ -582,6 +628,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.FormattedValue` node and put it to `parts`.
 
+        Examples::
+
+            f"{formatted_value}"
+
         Arguments:
             node -- AST node.
         """
@@ -596,7 +646,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
         Examples::
 
-            for k in range(3)
+            for k in range(3) if k > 0 if True
 
         Arguments:
             node -- AST node.
@@ -691,6 +741,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.AST) -> None
         """
         Parse info from an unknown `ast.AST` node and put `...` to `parts`.
+
+        Logs warning with node class.
 
         Arguments:
             node -- AST node.
