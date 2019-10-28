@@ -21,7 +21,7 @@ Validate `path_str` and make it absolute.
 
 #### Arguments
 
-- `path` - A path to check.
+- `path_str` - A path to check.
 
 #### Returns
 
@@ -39,7 +39,7 @@ Validate directory `path_str` and make it absolute.
 
 #### Arguments
 
-- `path` - A path to check.
+- `path_str` - A path to check.
 
 #### Returns
 
@@ -61,7 +61,7 @@ Validate existing directory `path_str` and make it absolute.
 
 #### Arguments
 
-- `path` - A path to check.
+- `path_str` - A path to check.
 
 #### Returns
 

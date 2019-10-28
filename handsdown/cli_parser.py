@@ -41,7 +41,7 @@ def abs_path(path_str):
     Validate `path_str` and make it absolute.
 
     Arguments:
-        path -- A path to check.
+        path_str -- A path to check.
 
     Returns:
         An absolute path.
@@ -55,7 +55,7 @@ def dir_abs_path(path_str):
     Validate directory `path_str` and make it absolute.
 
     Arguments:
-        path -- A path to check.
+        path_str -- A path to check.
 
     Returns:
         An absolute path.
@@ -75,7 +75,7 @@ def existing_dir_abs_path(path_str):
     Validate existing directory `path_str` and make it absolute.
 
     Arguments:
-        path -- A path to check.
+        path_str -- A path to check.
 
     Returns:
         An absolute path.
