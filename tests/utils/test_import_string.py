@@ -17,6 +17,7 @@ class TestImportString(unittest.TestCase):
         self.assertEqual(ImportString("value"), "value")
         self.assertNotEqual(ImportString("value"), ImportString("value1"))
         self.assertNotEqual(ImportString("value"), "value1")
+        self.assertNotEqual(ImportString("value"), b"value")
         self.assertEqual(
             ImportString("parent.parent2.value").parent.value, "parent.parent2"
         )

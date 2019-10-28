@@ -4,6 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
+from handsdown.utils.import_string import ImportString
 
 
 class TestFunctionRecord(unittest.TestCase):
@@ -93,10 +94,15 @@ class TestFunctionRecord(unittest.TestCase):
         node.body = ["body"]
         node.mock_add_spec(ast.Module)
         record = ModuleRecord(node)
+        record.import_string = ImportString("my_module")
         record.name = "class_node"
         class_node = MagicMock()
         class_node.name = "ClassNode"
-        class_node.body = ["class_body"]
+        method_node = MagicMock()
+        method_node.name = "class_method"
+        method_node.body = ["class_method"]
+        method_node.mock_add_spec(ast.FunctionDef)
+        class_node.body = [method_node]
         class_node.decorator_list = []
         class_node.bases = []
         class_node.mock_add_spec(ast.ClassDef)
@@ -132,3 +138,103 @@ class TestFunctionRecord(unittest.TestCase):
         self.assertEqual(record.import_records[0].name, "import_name")
         self.assertEqual(record.import_records[1].node, import_node)
         self.assertEqual(record.import_records[1].name, "import_name_2")
+        self.assertEqual(
+            record.class_records[0].import_string.value, "my_module.ClassNode"
+        )
+        self.assertEqual(
+            record.class_records[0].method_records[0].import_string.value,
+            "my_module.ClassNode.class_method",
+        )
+        self.assertEqual(
+            record.function_records[0].import_string.value, "my_module.function_node"
+        )
+
+    def test_parse(self):
+        node = MagicMock()
+        node.name = "name"
+        node.body = ["body"]
+        node.mock_add_spec(ast.Module)
+        record = ModuleRecord(node)
+
+        record.source_lines = [
+            "# attribute docstring",
+            "# attribute docstring 2",
+            "# FIXME: ingored",
+            "",
+            "function_line 1",
+            "function_line 2",
+            "function body line",
+        ]
+
+        attribute_record = MagicMock()
+        attribute_record.node.mock_add_spec(ast.Assign)
+        attribute_record.node.lineno = 4
+        record.attribute_records = [attribute_record]
+
+        method_record = MagicMock()
+        method_record.name = "method_record"
+        method_record.node.mock_add_spec(ast.FunctionDef)
+        method_record_body = MagicMock()
+        method_record_body.lineno = 999
+        method_record.node.body = [method_record_body]
+        method_record.is_classmethod = False
+        method_record.is_staticmethod = False
+        static_method_record = MagicMock()
+        static_method_record.name = "static_method_record"
+        static_method_record_body = MagicMock()
+        static_method_record_body.lineno = 999
+        static_method_record.node.body = [static_method_record_body]
+        static_method_record.node.mock_add_spec(ast.FunctionDef)
+        static_method_record.is_classmethod = True
+        static_method_record.is_staticmethod = False
+
+        class_record = MagicMock()
+        class_record.name = "class_record"
+        class_record.node.mock_add_spec(ast.ClassDef)
+        class_attribute_record = MagicMock()
+        class_attribute_record.node.mock_add_spec(ast.Assign)
+        class_attribute_record.node.lineno = 999
+        class_record.attribute_records = [class_attribute_record]
+        class_record.method_records = [method_record, static_method_record]
+        record.class_records = [class_record]
+
+        function_record = MagicMock()
+        function_record.line_number = 5
+        body_mock = MagicMock()
+        body_mock.lineno = 7
+        function_record.node.body = [body_mock]
+        function_record.node.lineno = 7
+        function_record.node.mock_add_spec(ast.FunctionDef)
+        record.function_records = [function_record]
+
+        self.assertIsNone(record.parse())
+        self.assertEqual(
+            attribute_record.docstring, "attribute docstring\n  attribute docstring 2"
+        )
+        self.assertEqual(class_attribute_record.docstring, "")
+
+        self.assertEqual(method_record.title, "class_record().method_record")
+        self.assertEqual(
+            static_method_record.title, "class_record.static_method_record"
+        )
+
+        function_record.parse_type_comments.assert_called_once_with(
+            ["function_line 1", "function_line 2"]
+        )
+
+    def test_render(self):
+        node = MagicMock()
+        node.name = "name"
+        node.body = ["body"]
+        node.mock_add_spec(ast.Module)
+        record = ModuleRecord(node)
+        record.parse()
+        record.class_records = ["class_record"]
+        record.function_records = ["function_record"]
+        record.import_records = ["import_record"]
+
+        self.assertEqual(record.render(), "import_record")
+        self.assertEqual(
+            record.render(allow_multiline=True),
+            "import_record\n\nclass_record\n\nfunction_record",
+        )
