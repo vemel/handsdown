@@ -258,7 +258,12 @@ class ModuleRecord(NodeRecord):
 
         result = []  # type: List[Text]
         start_index = node_record.node.lineno - 2
-        start_line = self.source_lines[start_index].strip()
+
+        try:
+            start_line = self.source_lines[start_index].strip()
+        except IndexError:
+            return ""
+
         while start_index >= 0 and start_line.startswith("#"):
             line = start_line[1:].strip()
             if not line.startswith("FIXME") and not line.startswith("TODO"):
