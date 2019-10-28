@@ -112,6 +112,7 @@ class PathFinder:
 
         posix_path = path.as_posix()
         for include_expr in self.include_exprs:
+            print(posix_path, include_expr, fnmatch.fnmatch(posix_path, include_expr))
             if fnmatch.fnmatch(posix_path, include_expr):
                 return True
 
@@ -185,7 +186,7 @@ class PathFinder:
             force -- Delete existing parent if it is not a directory.
 
         Raises:
-            PathFinderError -- If any existing parent is not a directory and not in `safe` mode.
+            PathFinderError -- If any existing parent is not a directory and not in `force` mode.
         """
         parents = [self._root] + list(self._root.parents)
         missing_parents = []
@@ -196,6 +197,7 @@ class PathFinder:
 
             if not parent.is_dir() and force:
                 parent.unlink()
+                missing_parents.append(parent)
                 continue
 
             if not parent.is_dir():

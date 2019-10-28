@@ -71,7 +71,7 @@ A copy of itself.
 
 ### PathFinder().glob
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L132)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L133)
 
 ```python
 def glob(glob_expr: Text) -> Generator[Path, None, None]:
@@ -106,7 +106,7 @@ A copy of itself.
 
 ### PathFinder().mkdir
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L179)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L180)
 
 ```python
 def mkdir(force: bool = False) -> None:
@@ -120,11 +120,11 @@ Create directories up to `root` if they do not exist.
 
 #### Raises
 
-- `PathFinderError` - If any existing parent is not a directory and not in `safe` mode.
+- `PathFinderError` - If any existing parent is not a directory and not in `force` mode.
 
 ### PathFinder().relative
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L150)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/path_finder.py#L151)
 
 ```python
 def relative(target: Path) -> Path:
