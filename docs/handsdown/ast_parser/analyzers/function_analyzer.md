@@ -48,7 +48,7 @@ Do nothing for unknown `ast.AST` nodes.
 def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
 ```
 
-Entrypoint for the analyzer for asyncronous functions.
+Entrypoint for the analyzer for asynchronous functions.
 
 Visits each node from `node.args`.
 Adds new `ast.expr` entry to `decorator_nodes` for each node

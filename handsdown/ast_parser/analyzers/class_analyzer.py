@@ -85,7 +85,7 @@ class ClassAnalyzer(BaseAnalyzer):
     def visit_AsyncFunctionDef(self, node):
         # type: (ast.AsyncFunctionDef) -> None
         """
-        Parse info about class asyncronous method statements.
+        Parse info about class asynchronous method statements.
 
         Adds new `FunctionRecord` entry to `method_records`.
 

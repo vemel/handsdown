@@ -148,7 +148,7 @@ class FunctionAnalyzer(BaseAnalyzer):
     def visit_AsyncFunctionDef(self, node):
         # type: (ast.AsyncFunctionDef) -> None
         """
-        Entrypoint for the analyzer for asyncronous functions.
+        Entrypoint for the analyzer for asynchronous functions.
 
         Visits each node from `node.args`.
         Adds new `ast.expr` entry to `decorator_nodes` for each node
