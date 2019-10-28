@@ -188,6 +188,13 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
         Used for `ast.Tuple`, `ast.Subscript`, `ast.List`, `ast.Set`
 
+        Examples::
+
+            [1, 2, 3]
+            {1, 2, 3}
+            (1, 2, 3)
+            Union[Text, bool]
+
         Arguments:
             node -- AST node.
         """
@@ -209,6 +216,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.List` node and put it to `parts`.
 
+        Examples::
+
+            [1, 2, 3]
+
         Arguments:
             node -- AST node.
         """
@@ -221,6 +232,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Set` node and put it to `parts`.
 
+        Examples::
+
+            {1, 2, 3}
+
         Arguments:
             node -- AST node.
         """
@@ -232,6 +247,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         # type: (ast.Tuple) -> None
         """
         Parse info from `ast.Tuple` node and put it to `parts`.
+
+        Examples::
+
+            (1, 2, 3)
 
         Arguments:
             node -- AST node.
@@ -300,6 +319,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.Starred` node and put it to `parts`.
 
+        Examples::
+
+            *arg
+
         Arguments:
             node -- AST node.
         """
@@ -311,16 +334,22 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         Parse info from `ast.keyword` node and put it to `parts`.
 
+        Examples::
+
+            my_func(**{"kwarg": "value"})
+            my_func(kwarg="value")
+
         Arguments:
             node -- AST node.
         """
         if not node.arg:
             self.parts.append("**")
             self.parts.append(node.value)
-        else:
-            self.parts.append(node.arg)
-            self.parts.append("=")
-            self.parts.append(node.value)
+            return
+
+        self.parts.append(node.arg)
+        self.parts.append("=")
+        self.parts.append(node.value)
 
     def visit_Dict(self, node):
         # type: (ast.Dict) -> None
