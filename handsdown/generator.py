@@ -163,6 +163,7 @@ class Generator:
         preserve_paths = {
             self._loader.get_output_path(i.source_path) for i in self._module_records
         }
+        orphaned_dirs = []
         preserve_paths.add(self.md_index.path)
         preserve_paths.add(self.md_modules.path)
 
@@ -188,12 +189,15 @@ class Generator:
             # remove parent directory if it is empty
             children = list(doc_path.parent.iterdir())
             if not children:
-                self._logger.info(
-                    "Deleting orphaned directory {}".format(
-                        self._root_path_finder.relative(doc_path.parent)
-                    )
+                orphaned_dirs.append(doc_path.parent)
+
+        for orphaned_dir in orphaned_dirs:
+            self._logger.info(
+                "Deleting orphaned directory {}".format(
+                    self._root_path_finder.relative(orphaned_dir)
                 )
-                doc_path.parent.rmdir()
+            )
+            orphaned_dir.rmdir()
 
     def generate_doc(self, source_path):
         # type: (Path) -> None
