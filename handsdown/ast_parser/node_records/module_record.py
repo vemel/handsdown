@@ -6,7 +6,6 @@ from typing import List, Text, Generator, Any, Optional, Dict
 
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.utils import make_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.import_string import ImportString
 from handsdown.ast_parser.enums import RenderPart
@@ -37,7 +36,7 @@ class ModuleRecord(NodeRecord):
         self.source_path = Path("")
         self.source_lines = []  # type: List[Text]
         self.name = "module"
-        self.title = "Module"
+        self.title = ""
         self.import_string = ImportString("")
         self.import_string_map = {}  # type: Dict[ImportString, NodeRecord]
         self.docstring = self._get_docstring()
@@ -61,7 +60,6 @@ class ModuleRecord(NodeRecord):
         record = cls(node)
         record.import_string = import_string
         record.name = import_string.parts[-1]
-        record.title = make_title(record.name)
         record.source_path = source_path
         record.source_lines = source_path.read_text().split("\n")
         return record

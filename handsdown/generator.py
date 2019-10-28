@@ -150,6 +150,8 @@ class Generator:
                 self._logger.warning("Skipping: {}".format(e))
                 continue
             if module_record:
+                if not module_record.title:
+                    module_record.title = make_title(module_record.name)
                 module_record_list.add(module_record)
 
         return module_record_list
