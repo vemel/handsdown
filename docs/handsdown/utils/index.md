@@ -82,9 +82,9 @@ A human-readable title as a string.
 
 ```python
 def render_asset(
-    name: Dict[Text, Text],
+    name: Text,
     target_path: Path,
-    format_dict: Text,
+    format_dict: Dict[Text, Text],
 ) -> None:
 ```
 

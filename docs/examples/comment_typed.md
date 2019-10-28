@@ -51,7 +51,7 @@ class Typed():
 
 ```python
 @classmethod
-def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
+def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> Typed:
 ```
 
 #### See also
@@ -64,9 +64,9 @@ def classmethod(_my_value: Any, *_args: Text, **_kwargs: MyValue) -> Typed:
 
 ```python
 def func(
-    _list: None,
+    _list: Tuple[List[Text], ...],
     _my_value_cls: Type[MyValue] = MyValue,
-    **_kwargs: Tuple[List[Text], ...],
+    **_kwargs: None,
 ) -> Any:
 ```
 
@@ -80,9 +80,9 @@ def func(
 
 ```python
 def func_any(
-    _list: None,
+    _list: Tuple[List[Text], ...],
     _my_value_cls: Any = MyValue,
-    **_kwargs: Tuple[List[Text], ...],
+    **_kwargs: None,
 ) -> Any:
 ```
 

@@ -22,7 +22,7 @@ Module for splitting docstring into `Section` groups.
 
 ```python
 class Section():
-    def __init__(title: List[SectionBlock], blocks: Text) -> None:
+    def __init__(title: Text, blocks: List[SectionBlock]) -> None:
 ```
 
 Dataclass representing a section in a [SectionMap](#sectionmap).

@@ -14,7 +14,7 @@ Wrapper for a text-only `ast.expr` node.
 
 ```python
 class TextRecord(ExpressionRecord):
-    def __init__(node: Text, text: ast.AST) -> None:
+    def __init__(node: ast.AST, text: Text) -> None:
 ```
 
 Wrapper for a text-only `ast.expr` node.

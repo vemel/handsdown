@@ -81,7 +81,7 @@ A set of absolute import strings found.
 
 ```python
 @classmethod
-def is_line_fit(line: int, indent: Text) -> bool:
+def is_line_fit(line: Text, indent: int) -> bool:
 ```
 
 Check if line fits to [LINE_LENGTH](#noderecord) with given `indent`.
@@ -164,7 +164,7 @@ A set of referenced object name.
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L169)
 
 ```python
-def render(indent: bool = 0, allow_multiline: int = False) -> Text:
+def render(indent: int = 0, allow_multiline: bool = False) -> Text:
 ```
 
 Render node to a string.

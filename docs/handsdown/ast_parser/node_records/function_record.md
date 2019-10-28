@@ -15,7 +15,7 @@ Wrapper for an `ast.FunctionDef` node.
 
 ```python
 class FunctionRecord(NodeRecord):
-    def __init__(node: bool, is_method: ast.FunctionDef) -> None:
+    def __init__(node: ast.FunctionDef, is_method: bool) -> None:
 ```
 
 Wrapper for an `ast.FunctionDef` node.

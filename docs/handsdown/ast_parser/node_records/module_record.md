@@ -17,7 +17,7 @@ Wrapper for an `ast.Module` node with corresponding node info.
 
 ```python
 class ModuleRecord(NodeRecord):
-    def __init__(source_path: ImportString, import_string: Path) -> None:
+    def __init__(source_path: Path, import_string: ImportString) -> None:
 ```
 
 Wrapper for an `ast.Module` node with corresponding node info.

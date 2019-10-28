@@ -58,7 +58,7 @@ A number of indentation characters in a beginning of the line.
 
 ```python
 @staticmethod
-def indent_line(line: int, indent: Text) -> Text:
+def indent_line(line: Text, indent: int) -> Text:
 ```
 
 Indent line with givent length `indent`
@@ -108,7 +108,7 @@ A stripped string.
 
 ```python
 @staticmethod
-def trim_line(line: int, indent: Text) -> Text:
+def trim_line(line: Text, indent: int) -> Text:
 ```
 
 Trim indent from line if it is empty.

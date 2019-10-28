@@ -15,7 +15,7 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ```python
 class ImportRecord(NodeRecord):
-    def __init__(node: ast.alias, alias: ASTImport) -> None:
+    def __init__(node: ASTImport, alias: ast.alias) -> None:
 ```
 
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.

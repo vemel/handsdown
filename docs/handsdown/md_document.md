@@ -107,7 +107,7 @@ Handle trimming and sectioning the content and update
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L348)
 
 ```python
-def append_title(title: int, level: Text) -> None:
+def append_title(title: Text, level: int) -> None:
 ```
 
 Append [MDDocument().title](#mddocumenttitle) of a given `level` to the document.
@@ -158,7 +158,7 @@ A test of anchor link.
 
 ```python
 @classmethod
-def get_toc_line(line: int, level: Text = 0) -> Text:
+def get_toc_line(line: Text, level: int = 0) -> Text:
 ```
 
 Get ToC `line` of given `level`.
@@ -218,9 +218,9 @@ Read and parse content from `source_path`.
 
 ```python
 def render_doc_link(
-    title: Optional[Path],
+    title: Text,
     anchor: Text = '',
-    target_path: Text = None,
+    target_path: Optional[Path] = None,
 ) -> Text:
 ```
 
@@ -289,8 +289,8 @@ A string with Markdown link.
 
 ```python
 def render_md_doc_link(
-    target_md_document: Optional[Text],
-    title: MDDocument = None,
+    target_md_document: MDDocument,
+    title: Optional[Text] = None,
 ) -> Text:
 ```
 
