@@ -48,3 +48,6 @@ GEN_EXPR = (k + 1 for k in range(3))
 
 # if expression example
 IF_EXPR = 5 if STRING else 6
+
+# await example
+AWAIT = await STRING

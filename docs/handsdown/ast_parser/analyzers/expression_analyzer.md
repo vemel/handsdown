@@ -8,6 +8,7 @@ AST analyzer for `ast.expr` records.
     - [ExpressionAnalyzer](#expressionanalyzer)
         - [ExpressionAnalyzer().generic_visit](#expressionanalyzergeneric_visit)
         - [ExpressionAnalyzer().visit_Attribute](#expressionanalyzervisit_attribute)
+        - [ExpressionAnalyzer().visit_Await](#expressionanalyzervisit_await)
         - [ExpressionAnalyzer().visit_BinOp](#expressionanalyzervisit_binop)
         - [ExpressionAnalyzer().visit_BoolOp](#expressionanalyzervisit_boolop)
         - [ExpressionAnalyzer().visit_Bytes](#expressionanalyzervisit_bytes)
@@ -35,6 +36,8 @@ AST analyzer for `ast.expr` records.
         - [ExpressionAnalyzer().visit_Subscript](#expressionanalyzervisit_subscript)
         - [ExpressionAnalyzer().visit_Tuple](#expressionanalyzervisit_tuple)
         - [ExpressionAnalyzer().visit_UnaryOp](#expressionanalyzervisit_unaryop)
+        - [ExpressionAnalyzer().visit_Yield](#expressionanalyzervisit_yield)
+        - [ExpressionAnalyzer().visit_YieldFrom](#expressionanalyzervisit_yieldfrom)
         - [ExpressionAnalyzer().visit_arg](#expressionanalyzervisit_arg)
         - [ExpressionAnalyzer().visit_arguments](#expressionanalyzervisit_arguments)
         - [ExpressionAnalyzer().visit_comprehension](#expressionanalyzervisit_comprehension)
@@ -67,7 +70,7 @@ Prepares `parts` for `NodeRecord.render` method.
 
 ### ExpressionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L779)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L827)
 
 ```python
 def generic_visit(node: ast.AST) -> None:
@@ -95,6 +98,26 @@ Parse info from `ast.Attribute` node and put it to `parts`.
 
 ```python
 my_object.attribute
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+### ExpressionAnalyzer().visit_Await
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L779)
+
+```python
+def visit_Await(node: ast.Await) -> None:
+```
+
+Parse info from `ast.Await` node and put it to `parts`.
+
+#### Examples
+
+```python
+await result
 ```
 
 #### Arguments
@@ -639,6 +662,47 @@ Parse info from `ast.UnaryOp` node and put it to `parts`.
 -12
 ~1
 not True
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+### ExpressionAnalyzer().visit_Yield
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L794)
+
+```python
+def visit_Yield(node: ast.Yield) -> None:
+```
+
+Parse info from `ast.Yield` node and put it to `parts`.
+
+#### Examples
+
+```python
+yield
+yield value
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+### ExpressionAnalyzer().visit_YieldFrom
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/expression_analyzer.py#L812)
+
+```python
+def visit_YieldFrom(node: ast.YieldFrom) -> None:
+```
+
+Parse info from `ast.YieldFrom` node and put it to `parts`.
+
+#### Examples
+
+```python
+yield from my_generator
 ```
 
 #### Arguments

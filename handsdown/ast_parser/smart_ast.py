@@ -17,6 +17,7 @@ if os.environ.get("PYTHON_VER", "3") == "3":
         AST,
         AsyncFunctionDef,
         Attribute,
+        Await,
         BinOp,
         BitAnd,
         BitOr,
@@ -82,6 +83,8 @@ if os.environ.get("PYTHON_VER", "3") == "3":
         UAdd,
         UnaryOp,
         USub,
+        Yield,
+        YieldFrom,
     )
 else:
     from typed_ast.ast27 import (  # pylint: disable=no-name-in-module
@@ -93,6 +96,7 @@ else:
         AST,
         AsyncFunctionDef,
         Attribute,
+        Await,
         BinOp,
         BitAnd,
         BitOr,
@@ -153,6 +157,8 @@ else:
         UAdd,
         UnaryOp,
         USub,
+        Yield,
+        YieldFrom,
     )
 
     arg = Any
@@ -172,6 +178,7 @@ __all__ = [
     "AST",
     "AsyncFunctionDef",
     "Attribute",
+    "Await",
     "BinOp",
     "BitAnd",
     "BitOr",
@@ -237,4 +244,6 @@ __all__ = [
     "UAdd",
     "UnaryOp",
     "USub",
+    "Yield",
+    "YieldFrom",
 ]

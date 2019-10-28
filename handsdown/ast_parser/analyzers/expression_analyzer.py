@@ -776,6 +776,54 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(" else ")
         self.parts.append(node.orelse)
 
+    def visit_Await(self, node):
+        # type: (ast.Await) -> None
+        """
+        Parse info from `ast.Await` node and put it to `parts`.
+
+        Examples::
+
+            await result
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("await ")
+        self.parts.append(node.value)
+
+    def visit_Yield(self, node):
+        # type: (ast.Yield) -> None
+        """
+        Parse info from `ast.Yield` node and put it to `parts`.
+
+        Examples::
+
+            yield
+            yield value
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("yield")
+        if node.value:
+            self.parts.append(" ")
+            self.parts.append(node.value)
+
+    def visit_YieldFrom(self, node):
+        # type: (ast.YieldFrom) -> None
+        """
+        Parse info from `ast.YieldFrom` node and put it to `parts`.
+
+        Examples::
+
+            yield from my_generator
+
+        Arguments:
+            node -- AST node.
+        """
+        self.parts.append("yield from ")
+        self.parts.append(node.value)
+
     def generic_visit(self, node):
         # type: (ast.AST) -> None
         """

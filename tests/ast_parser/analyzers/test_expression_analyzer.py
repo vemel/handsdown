@@ -478,6 +478,35 @@ class TestClassAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_IfExp(node))
         self.assertEqual(analyzer.parts, ["body", " if ", "test", " else ", "orelse"])
 
+    def test_visit_Await(self):
+        node = MagicMock()
+        node.value = "value"
+
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_Await(node))
+        self.assertEqual(analyzer.parts, ["await ", "value"])
+
+    def test_visit_Yield(self):
+        node = MagicMock()
+        node.value = None
+
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_Yield(node))
+        self.assertEqual(analyzer.parts, ["yield"])
+
+        node.value = "value"
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_Yield(node))
+        self.assertEqual(analyzer.parts, ["yield", " ", "value"])
+
+    def test_visit_YieldFrom(self):
+        node = MagicMock()
+        node.value = "value"
+
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_YieldFrom(node))
+        self.assertEqual(analyzer.parts, ["yield from ", "value"])
+
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
     def test_generic_visit(self, get_logger_mock):
         node = MagicMock()
