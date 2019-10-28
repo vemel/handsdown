@@ -32,7 +32,7 @@ Wrapper for an `ast.ClassDef` node.
 
 ### ClassRecord().find_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L41)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L39)
 
 ```python
 def find_record(name: Text) -> Optional[NodeRecord]:
@@ -54,7 +54,7 @@ Itself or None.
 
 ### ClassRecord().get_public_methods
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L94)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L92)
 
 ```python
 def get_public_methods() -> List[FunctionRecord]:
@@ -75,7 +75,7 @@ A list of child records.
 
 ### ClassRecord().iter_records
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L80)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L78)
 
 ```python
 def iter_records() -> Generator[NodeRecord, None, None]:
@@ -93,7 +93,7 @@ A child record.
 
 ### ClassRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/class_record.py#L63)
 
 ```python
 @property

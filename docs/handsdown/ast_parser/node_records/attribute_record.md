@@ -29,7 +29,7 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 ### AttributeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L34)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L32)
 
 ```python
 @property

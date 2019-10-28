@@ -31,6 +31,22 @@ class TestFunctionAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_FunctionDef(node))
         self.assertEqual(analyzer.return_type_hint, "returns")
 
+    @patch("handsdown.ast_parser.analyzers.function_analyzer.FunctionAnalyzer.visit")
+    def test_visit_AsyncFunctionDef(self, visit_mock):
+        analyzer = FunctionAnalyzer()
+        node = MagicMock()
+        node.decorator_list = ["decorator"]
+        node.returns = None
+        node.args = "args"
+        self.assertIsNone(analyzer.visit_AsyncFunctionDef(node))
+        self.assertEqual(analyzer.decorator_nodes, ["decorator"])
+        self.assertEqual(analyzer.return_type_hint, None)
+        visit_mock.assert_called_once_with("args")
+
+        node.returns = "returns"
+        self.assertIsNone(analyzer.visit_AsyncFunctionDef(node))
+        self.assertEqual(analyzer.return_type_hint, "returns")
+
     def test_visit_arguments(self):
         analyzer = FunctionAnalyzer()
         node = MagicMock()

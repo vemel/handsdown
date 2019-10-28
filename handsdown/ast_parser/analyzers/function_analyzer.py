@@ -1,11 +1,14 @@
 """
 AST analyzer for `ast.FunctionDef` records.
 """
-from typing import Optional, List, Text
+from typing import Optional, List, Text, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+
+if TYPE_CHECKING:  # pragma: no cover
+    from handsdown.ast_parser.type_defs import ASTFunctionDef
 
 
 class FunctionAnalyzer(BaseAnalyzer):
@@ -112,6 +115,16 @@ class FunctionAnalyzer(BaseAnalyzer):
             record = self._get_argument_record(node.kwarg, prefix="**")
             self.argument_records.append(record)
 
+    def _visit_FunctionDef(self, node):
+        # type: (ASTFunctionDef) -> None
+        for decorator_node in node.decorator_list:
+            self.decorator_nodes.append(decorator_node)
+        self.visit(node.args)
+
+        # FIXME: `AST2` FunctionDef has no `returns` attribute
+        if hasattr(node, "returns") and node.returns:
+            self.return_type_hint = node.returns
+
     def visit_FunctionDef(self, node):
         # type: (ast.FunctionDef) -> None
         """
@@ -125,18 +138,32 @@ class FunctionAnalyzer(BaseAnalyzer):
         Examples::
 
             def my_func():
-                pass
+                return result
 
         Arguments:
             node -- AST node.
         """
-        for decorator_node in node.decorator_list:
-            self.decorator_nodes.append(decorator_node)
-        self.visit(node.args)
+        self._visit_FunctionDef(node)
 
-        # FIXME: `AST2` FunctionDef has no `returns` attribute
-        if hasattr(node, "returns") and node.returns:
-            self.return_type_hint = node.returns
+    def visit_AsyncFunctionDef(self, node):
+        # type: (ast.AsyncFunctionDef) -> None
+        """
+        Entrypoint for the analyzer for asyncronous functions.
+
+        Visits each node from `node.args`.
+        Adds new `ast.expr` entry to `decorator_nodes` for each node
+        from `node.decorator_list`.
+        Sets `return_type_hint` to `node.returns` if it defined.
+
+        Examples::
+
+            async def my_func():
+                return await result
+
+        Arguments:
+            node -- AST node.
+        """
+        self._visit_FunctionDef(node)
 
     def generic_visit(self, _node):
         # type: (ast.AST) -> None

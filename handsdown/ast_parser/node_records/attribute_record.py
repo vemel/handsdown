@@ -21,8 +21,6 @@ class AttributeRecord(NodeRecord):
 
     def __init__(self, node):
         # type: (ast.Assign) -> None
-        assert isinstance(node, ast.Assign)
-
         super(AttributeRecord, self).__init__(node)
         self.default = None  # type: Optional[ExpressionRecord]
         first_target = node.targets[0]

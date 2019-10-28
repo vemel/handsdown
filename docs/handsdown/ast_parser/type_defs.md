@@ -13,3 +13,4 @@ Different AST-related types collection.
 - `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, Text, RenderPart]`
 - `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
 - `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
+- `ASTFunctionDef` - AST import node: `Union[ast.FunctionDef, ast.AsyncFunctionDef]`

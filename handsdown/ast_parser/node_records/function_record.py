@@ -13,11 +13,12 @@ from handsdown.ast_parser.enums import RenderPart
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
+    from handsdown.ast_parser.type_defs import ASTFunctionDef
 
 
 class FunctionRecord(NodeRecord):
     """
-    Wrapper for an `ast.FunctionDef` node.
+    Wrapper for an `ast.FunctionDef` and `ast.AsyncFunctionDef` node.
 
     Arguments:
         node -- AST node.
@@ -27,9 +28,7 @@ class FunctionRecord(NodeRecord):
     _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
     def __init__(self, node, is_method):
-        # type: (ast.FunctionDef, bool) -> None
-        assert isinstance(node, ast.FunctionDef)
-
+        # type: (ASTFunctionDef, bool) -> None
         super(FunctionRecord, self).__init__(node)
         self.argument_records = []  # type: List[ArgumentRecord]
         self.is_method = is_method
@@ -38,6 +37,7 @@ class FunctionRecord(NodeRecord):
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
+        self.is_async = isinstance(node, ast.AsyncFunctionDef)
         self.name = node.name
         self.title = self.name
         self.docstring = self._get_docstring()
@@ -57,8 +57,6 @@ class FunctionRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
-        assert isinstance(self.node, ast.FunctionDef)
-
         analyzer = FunctionAnalyzer()
         analyzer.visit(self.node)
         self.argument_records = analyzer.argument_records
@@ -148,6 +146,9 @@ class FunctionRecord(NodeRecord):
             parts.append("@")
             parts.append(decorator)
             parts.append(RenderPart.LINE_BREAK)
+
+        if self.is_async:
+            parts.append("async ")
 
         parts.append("def ")
         parts.append(self.name)

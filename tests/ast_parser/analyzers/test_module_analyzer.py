@@ -53,6 +53,18 @@ class TestModuleAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_FunctionDef(node))
         self.assertEqual(len(analyzer.function_nodes), 1)
 
+    def test_visit_AsyncFunctionDef(self):
+        analyzer = ModuleAnalyzer()
+        node = MagicMock()
+        node.name = "my_func"
+        self.assertIsNone(analyzer.visit_AsyncFunctionDef(node))
+        self.assertEqual(len(analyzer.function_nodes), 1)
+        self.assertEqual(analyzer.function_nodes[0], node)
+
+        node.name = "_private_func"
+        self.assertIsNone(analyzer.visit_AsyncFunctionDef(node))
+        self.assertEqual(len(analyzer.function_nodes), 1)
+
     def test_visit_Assign(self):
         analyzer = ModuleAnalyzer()
         node = MagicMock()

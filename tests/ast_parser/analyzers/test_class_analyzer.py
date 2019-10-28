@@ -45,6 +45,15 @@ class TestClassAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_FunctionDef(node))
         self.assertEqual(len(analyzer.method_nodes), 1)
 
+    def test_visit_AsyncFunctionDef(self):
+        analyzer = ClassAnalyzer()
+        node = MagicMock()
+        node.mock_add_spec(ast.FunctionDef)
+        node.name = "FunctionDef"
+        node.body = ["body_node"]
+        self.assertIsNone(analyzer.visit_AsyncFunctionDef(node))
+        self.assertEqual(analyzer.method_nodes, [node])
+
     def test_visit_Assign(self):
         analyzer = ClassAnalyzer()
         node = MagicMock()

@@ -35,6 +35,9 @@ class Typed:
     def classmethod(cls, _my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
         pass
 
+    async def async_method(self, _value: Text) -> Text:
+        return await self.classmethod(_value)
+
 
 def my_deco(key):
     return key

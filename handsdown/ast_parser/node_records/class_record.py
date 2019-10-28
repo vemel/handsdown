@@ -5,7 +5,6 @@ from typing import List, Set, Text, Generator, Optional, TYPE_CHECKING
 
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
-import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -14,6 +13,7 @@ from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import RenderExpr
+    import handsdown.ast_parser.smart_ast as ast
 
 
 class ClassRecord(NodeRecord):
@@ -26,8 +26,6 @@ class ClassRecord(NodeRecord):
 
     def __init__(self, node):
         # type: (ast.ClassDef) -> None
-        assert isinstance(node, ast.ClassDef)
-
         super(ClassRecord, self).__init__(node)
         self.method_records = []  # type: List[FunctionRecord]
         self.decorator_records = []  # type: List[ExpressionRecord]
@@ -112,8 +110,6 @@ class ClassRecord(NodeRecord):
 
     def _parse(self):
         # type: () -> None
-        assert isinstance(self.node, ast.ClassDef)
-
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)
 

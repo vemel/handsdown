@@ -116,6 +116,8 @@ class TestFunctionRecord(unittest.TestCase):
         argument_3.render.return_value = "arg3"
 
         decorator_1 = MagicMock()
+        decorator_1.mock_add_spec(ast.Name)
+        decorator_1.id = "my_deco"
         decorator_1.related_names = ["decorator_1_related", "decorator_1_related_2"]
         decorator_2 = MagicMock()
         decorator_2.mock_add_spec(ast.Name)
@@ -124,7 +126,15 @@ class TestFunctionRecord(unittest.TestCase):
         FunctionAnalyzerMock().argument_records = [argument_1, argument_2, argument_3]
         FunctionAnalyzerMock().decorator_nodes = [decorator_1, decorator_2]
         FunctionAnalyzerMock().return_type_hint = "return_type_hint"
-        print(record.render(allow_multiline=True))
+        self.assertEqual(record.render(), "@my_deco")
         self.assertEqual(
-            record.render(allow_multiline=True), "@\n@classmethod\ndef name(, ) -> :"
+            record.render(allow_multiline=True),
+            "@my_deco\n@classmethod\ndef name(, ) -> :",
+        )
+
+        node.mock_add_spec(ast.AsyncFunctionDef)
+        record = FunctionRecord(node, is_method=True)
+        self.assertEqual(
+            record.render(allow_multiline=True),
+            "@my_deco\n@classmethod\nasync def name(, ) -> :",
         )

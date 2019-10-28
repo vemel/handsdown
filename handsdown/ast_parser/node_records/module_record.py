@@ -231,7 +231,7 @@ class ModuleRecord(NodeRecord):
         Returns:
             Function definition lines as an array.
         """
-        assert isinstance(function_record.node, ast.FunctionDef)
+        assert isinstance(function_record.node, (ast.AsyncFunctionDef, ast.FunctionDef))
 
         result = []  # type: List[Text]
         start_index = function_record.line_number - 1

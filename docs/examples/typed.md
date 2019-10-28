@@ -6,6 +6,7 @@
     - [Links](#links)
     - [MyValue](#myvalue)
     - [Typed](#typed)
+        - [Typed().async_method](#typedasync_method)
         - [Typed.classmethod](#typedclassmethod)
     - [func](#func)
     - [my_deco](#my_deco)
@@ -43,6 +44,14 @@ class Typed():
     ) -> Dict[Text, MyValue]:
 ```
 
+### Typed().async_method
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L38)
+
+```python
+async def async_method(_value: Text) -> Text:
+```
+
 ### Typed.classmethod
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L34)
@@ -58,7 +67,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 
 ## func
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L43)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L46)
 
 ```python
 @my_deco(key='value')
@@ -75,7 +84,7 @@ def func(
 
 ## my_deco
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L39)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L42)
 
 ```python
 def my_deco(key):

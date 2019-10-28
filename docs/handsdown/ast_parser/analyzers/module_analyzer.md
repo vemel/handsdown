@@ -7,6 +7,7 @@ AST analyzer for `ast.Module` records.
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ModuleAnalyzer
     - [ModuleAnalyzer](#moduleanalyzer)
         - [ModuleAnalyzer().visit_Assign](#moduleanalyzervisit_assign)
+        - [ModuleAnalyzer().visit_AsyncFunctionDef](#moduleanalyzervisit_asyncfunctiondef)
         - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzervisit_classdef)
         - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzervisit_functiondef)
         - [ModuleAnalyzer().visit_Import](#moduleanalyzervisit_import)
@@ -29,7 +30,7 @@ AST analyzer for `ast.Module` records.
 
 ### ModuleAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L113)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L136)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -55,6 +56,30 @@ _MY_MODULE_ATTR = "value"
 multi_attr_1, multi_attr_2 = [1, 2]
 my_object.name = "value"
 __all__ = all_list
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+### ModuleAnalyzer().visit_AsyncFunctionDef
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L117)
+
+```python
+def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
+```
+
+Parse info about module `def ...` statements.
+
+Adds `node` entry to `function_nodes`.
+Skips nodes with names starting with `_`.
+
+#### Examples
+
+```python
+async def my_func(arg1):
+    return await arg1
 ```
 
 #### Arguments
@@ -87,7 +112,7 @@ class MyClass():
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L88)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/module_analyzer.py#L98)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -102,7 +127,7 @@ Skips nodes with names starting with `_`.
 
 ```python
 def my_func(arg1):
-    pass
+    return arg1
 ```
 
 #### Arguments

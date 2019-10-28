@@ -21,3 +21,6 @@ ASTIterable = Union[ast.List, ast.Set, ast.Tuple]
 
 # AST import node
 ASTImport = Union[ast.Import, ast.ImportFrom]
+
+# AST import node
+ASTFunctionDef = Union[ast.FunctionDef, ast.AsyncFunctionDef]

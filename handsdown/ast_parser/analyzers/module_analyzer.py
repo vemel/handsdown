@@ -7,7 +7,7 @@ from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import ASTImport
+    from handsdown.ast_parser.type_defs import ASTImport, ASTFunctionDef
 
 
 class ModuleAnalyzer(BaseAnalyzer):
@@ -20,7 +20,7 @@ class ModuleAnalyzer(BaseAnalyzer):
         super(ModuleAnalyzer, self).__init__()
         self.all_names = []  # type: List[Text]
         self.import_nodes = []  # type: List[ASTImport]
-        self.function_nodes = []  # type: List[ast.FunctionDef]
+        self.function_nodes = []  # type: List[ASTFunctionDef]
         self.attribute_nodes = []  # type: List[ast.Assign]
         self.class_nodes = []  # type: List[ast.ClassDef]
 
@@ -85,6 +85,16 @@ class ModuleAnalyzer(BaseAnalyzer):
 
         self.class_nodes.append(node)
 
+    def _visit_FunctionDef(self, node):
+        # type: (ASTFunctionDef) -> None
+        name = node.name
+
+        # skip private functions
+        if name.startswith("_"):
+            return
+
+        self.function_nodes.append(node)
+
     def visit_FunctionDef(self, node):
         # type: (ast.FunctionDef) -> None
         """
@@ -96,19 +106,32 @@ class ModuleAnalyzer(BaseAnalyzer):
         Examples::
 
             def my_func(arg1):
-                pass
+                return arg1
 
         Arguments:
             node -- AST node.
         """
 
-        name = node.name
+        return self._visit_FunctionDef(node)
 
-        # skip private functions
-        if name.startswith("_"):
-            return
+    def visit_AsyncFunctionDef(self, node):
+        # type: (ast.AsyncFunctionDef) -> None
+        """
+        Parse info about module `def ...` statements.
 
-        self.function_nodes.append(node)
+        Adds `node` entry to `function_nodes`.
+        Skips nodes with names starting with `_`.
+
+        Examples::
+
+            async def my_func(arg1):
+                return await arg1
+
+        Arguments:
+            node -- AST node.
+        """
+
+        return self._visit_FunctionDef(node)
 
     def visit_Assign(self, node):
         # type: (ast.Assign) -> None

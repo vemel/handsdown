@@ -1,10 +1,13 @@
 """
 AST analyzer for `ast.ClassDef` records.
 """
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+
+if TYPE_CHECKING:  # pragma: no cover
+    from handsdown.ast_parser.type_defs import ASTFunctionDef
 
 
 class ClassAnalyzer(BaseAnalyzer):
@@ -17,7 +20,7 @@ class ClassAnalyzer(BaseAnalyzer):
         super(ClassAnalyzer, self).__init__()
         self.base_nodes = []  # type: List[ast.expr]
         self.decorator_nodes = []  # type: List[ast.expr]
-        self.method_nodes = []  # type: List[ast.FunctionDef]
+        self.method_nodes = []  # type: List[ASTFunctionDef]
         self.attribute_nodes = []  # type: List[ast.Assign]
 
     def visit_ClassDef(self, node):
@@ -46,23 +49,8 @@ class ClassAnalyzer(BaseAnalyzer):
         for element in node.body:
             self.visit(element)
 
-    def visit_FunctionDef(self, node):
-        # type: (ast.FunctionDef) -> None
-        """
-        Parse info about class method statements.
-
-        Adds new `FunctionRecord` entry to `method_records`.
-
-        Examples:
-
-            class MyClass:
-                def my_method(self, arg):
-                    pass
-
-        Arguments:
-            node -- AST node.
-        """
-
+    def _visit_FunctionDef(self, node):
+        # type: (ASTFunctionDef) -> None
         name = node.name
 
         # skip private methods
@@ -75,6 +63,42 @@ class ClassAnalyzer(BaseAnalyzer):
                 return
 
         self.method_nodes.append(node)
+
+    def visit_FunctionDef(self, node):
+        # type: (ast.FunctionDef) -> None
+        """
+        Parse info about class method statements.
+
+        Adds new `FunctionRecord` entry to `method_records`.
+
+        Examples:
+
+            class MyClass:
+                def my_method(self, arg):
+                    return arg
+
+        Arguments:
+            node -- AST node.
+        """
+        self._visit_FunctionDef(node)
+
+    def visit_AsyncFunctionDef(self, node):
+        # type: (ast.AsyncFunctionDef) -> None
+        """
+        Parse info about class asyncronous method statements.
+
+        Adds new `FunctionRecord` entry to `method_records`.
+
+        Examples:
+
+            class MyClass:
+                async def my_method(self, arg):
+                    return await arg
+
+        Arguments:
+            node -- AST node.
+        """
+        self._visit_FunctionDef(node)
 
     def visit_Assign(self, node):
         # type: (ast.Assign) -> None
