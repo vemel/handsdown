@@ -98,8 +98,8 @@ class ModuleRecord(NodeRecord):
 
             yield class_record
 
-            for method_record in class_record.iter_records():
-                yield method_record
+            for class_child_record in class_record.iter_records():
+                yield class_child_record
 
         for function_record in self.function_records:
             if self.all_names and function_record.name not in self.all_names:
@@ -177,7 +177,7 @@ class ModuleRecord(NodeRecord):
         self.class_records.sort(key=lambda x: x.name)
         self.function_records.sort(key=lambda x: x.name)
 
-        main_class_lookup_name = self.source_path.stem.replace("_", "")
+        main_class_lookup_name = self.name.replace("_", "")
         for class_record in self.class_records:
             class_record.parse()
             # find real title
