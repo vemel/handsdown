@@ -24,6 +24,17 @@ class ImportString:
 
     def __str__(self):
         # type: () -> Text
+        """
+        Get string value.
+
+        Examples::
+
+            str(ImportString("my_module"))
+            "my_module"
+
+        Returns:
+            Original import string.
+        """
         return self.value
 
     def __hash__(self):
@@ -32,6 +43,20 @@ class ImportString:
 
     def __add__(self, other):
         # type: (Text) -> ImportString
+        """
+        Add new import part.
+
+        Examples::
+
+            ImportString("my_module") + "MyClass"
+            ImportString("my_module.MyClass")
+
+            ImportString("") + "MyClass"
+            ImportString("MyClass")
+
+        Returns:
+            A new `ImportString` instance.
+        """
         if self.value:
             return ImportString("{}.{}".format(self.value, other))
 
@@ -39,10 +64,30 @@ class ImportString:
 
     def __bool__(self):
         # type: () -> bool
+        """
+        Check if not empty.
+
+        Examples::
+
+            bool(ImportString("my_module"))
+            True
+
+            bool(ImportString(""))
+            False
+
+        Returns:
+            True if not empty.
+        """
         return bool(self.value)
 
     def __eq__(self, other):
         # type: (object) -> bool
+        """
+        Compare to another `ImportString` or a string.
+
+        Returns:
+            True if import strings are equal.
+        """
         if isinstance(other, str):
             return self.value == other
 
