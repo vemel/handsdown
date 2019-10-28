@@ -26,6 +26,9 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self._logger = get_logger()
         self.parts = []  # type: List[DirtyRenderExpr]
 
+    # dummy value to replace unknown nodes and operators
+    UNKNOWN = "..."
+
     # representation map for binary operators
     BINOP_SYMBOLS = {
         ast.Add: "+",
@@ -391,9 +394,14 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.left)
         for index, right in enumerate(node.comparators):
-            operator = node.ops[index]
+            operator_class = type(node.ops[index])
             self.parts.append(" ")
-            self.parts.append(self.CMPOP_SYMBOLS[type(operator)])
+            operator = self.CMPOP_SYMBOLS.get(operator_class, self.UNKNOWN)
+            if operator == self.UNKNOWN:
+                self._logger.warning(
+                    "Unknown omparison operator: {}".format(operator_class.__name__)
+                )
+            self.parts.append(operator)
             self.parts.append(" ")
             self.parts.append(right)
 
@@ -412,7 +420,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.left)
         self.parts.append(" ")
-        self.parts.append(self.BINOP_SYMBOLS[type(node.op)])
+        operator = self.BINOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
+        if operator == self.UNKNOWN:
+            self._logger.warning(
+                "Unknown binary operator: {}".format(node.op.__class__.__name__)
+            )
+        self.parts.append(operator)
         self.parts.append(" ")
         self.parts.append(node.right)
 
@@ -429,7 +442,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        operator = self.BOOLOP_SYMBOLS[type(node.op)]
+        operator = self.BOOLOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
+        if operator == self.UNKNOWN:
+            self._logger.warning(
+                "Unknown boolean operator: {}".format(node.op.__class__.__name__)
+            )
         for index, value in enumerate(node.values):
             if index:
                 self.parts.append(" ")
@@ -452,7 +469,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        operator = self.UNARYOP_SYMBOLS[type(node.op)]
+        operator = self.UNARYOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
+        if operator == self.UNKNOWN:
+            self._logger.warning(
+                "Unknown unary operator: {}".format(node.op.__class__.__name__)
+            )
         self.parts.append(operator)
         if operator == "not":
             self.parts.append(" ")
@@ -748,8 +769,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         self._logger.warning(
-            "Could not render node {}, replaced with `...`".format(
-                node.__class__.__name__
+            "Could not render node {}, replaced with `{}`".format(
+                node.__class__.__name__, self.UNKNOWN
             )
         )
-        self.parts.append("...")
+        self.parts.append(self.UNKNOWN)

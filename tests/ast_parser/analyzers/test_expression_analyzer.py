@@ -1,6 +1,6 @@
 # pylint: disable=missing-docstring
 import unittest
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, ANY
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
@@ -207,7 +207,8 @@ class TestClassAnalyzer(unittest.TestCase):
             ],
         )
 
-    def test_visit_Compare(self):
+    @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
+    def test_visit_Compare(self, get_logger_mock):
         node = MagicMock()
         node.left = "left"
         node.comparators = ["middle", "right"]
@@ -219,7 +220,16 @@ class TestClassAnalyzer(unittest.TestCase):
             ["left", " ", "<=", " ", "middle", " ", "is not", " ", "right"],
         )
 
-    def test_visit_BinOp(self):
+        node.ops = [ast.LtE(), ast.Import]
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_Compare(node))
+        self.assertEqual(
+            analyzer.parts, ["left", " ", "<=", " ", "middle", " ", "...", " ", "right"]
+        )
+        get_logger_mock().warning.assert_called_once_with(ANY)
+
+    @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
+    def test_visit_BinOp(self, get_logger_mock):
         node = MagicMock()
         node.left = "left"
         node.right = "right"
@@ -229,7 +239,14 @@ class TestClassAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_BinOp(node))
         self.assertEqual(analyzer.parts, ["left", " ", "<<", " ", "right"])
 
-    def test_visit_BoolOp(self):
+        node.op = ast.Import()
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_BinOp(node))
+        self.assertEqual(analyzer.parts, ["left", " ", "...", " ", "right"])
+        get_logger_mock().warning.assert_called_once_with(ANY)
+
+    @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
+    def test_visit_BoolOp(self, get_logger_mock):
         node = MagicMock()
         node.values = ["left", "right"]
         node.op = ast.And()
@@ -243,7 +260,14 @@ class TestClassAnalyzer(unittest.TestCase):
         self.assertIsNone(analyzer.visit_BoolOp(node))
         self.assertEqual(analyzer.parts, ["left", " ", "or", " ", "right"])
 
-    def test_visit_UnaryOp(self):
+        node.op = ast.Import()
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_BoolOp(node))
+        self.assertEqual(analyzer.parts, ["left", " ", "...", " ", "right"])
+        get_logger_mock().warning.assert_called_once_with(ANY)
+
+    @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
+    def test_visit_UnaryOp(self, get_logger_mock):
         node = MagicMock()
         node.operand = "operand"
         node.op = ast.Not()
@@ -266,6 +290,12 @@ class TestClassAnalyzer(unittest.TestCase):
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.visit_UnaryOp(node))
         self.assertEqual(analyzer.parts, ["-", "operand"])
+
+        node.op = ast.Import()
+        analyzer = ExpressionAnalyzer()
+        self.assertIsNone(analyzer.visit_UnaryOp(node))
+        self.assertEqual(analyzer.parts, ["...", "operand"])
+        get_logger_mock().warning.assert_called_once_with(ANY)
 
     def test_visit_Lambda(self):
         node = MagicMock()
@@ -446,6 +476,4 @@ class TestClassAnalyzer(unittest.TestCase):
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.generic_visit(node))
         self.assertEqual(analyzer.parts, ["..."])
-        get_logger_mock().warning.assert_called_once_with(
-            "Could not render node Import, replaced with `...`"
-        )
+        get_logger_mock().warning.assert_called_once_with(ANY)
