@@ -109,7 +109,6 @@ class FunctionRecord(NodeRecord):
         Sets `arguemnts_record` to a new `TextRecord` for each found type annotaiton.
         Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
         """
-        # TODO: support typed hints on different lines
         start_line_number = self.line_number
         for relative_line_number, line in enumerate(lines):
             match = self._return_type_re.match(line)
@@ -118,7 +117,7 @@ class FunctionRecord(NodeRecord):
                 self.return_type_hint = TextRecord(self.node, return_type)
                 arg_types = self._strip_arg_type(arg_type)
                 for index, arg_type in enumerate(arg_types):
-                    argument_index = len(self.argument_records) - 1 - index
+                    argument_index = len(self.argument_records) - len(arg_types) + index
                     if argument_index < 0:
                         continue
 
