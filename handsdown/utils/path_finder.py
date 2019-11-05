@@ -112,7 +112,6 @@ class PathFinder:
 
         posix_path = path.as_posix()
         for include_expr in self.include_exprs:
-            print(posix_path, include_expr, fnmatch.fnmatch(posix_path, include_expr))
             if fnmatch.fnmatch(posix_path, include_expr):
                 return True
 
