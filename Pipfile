@@ -12,6 +12,7 @@ pytest = "==5.2.2"
 pytest-cov = "==2.8.1"
 rope = "==0.14.0"
 astroid = "==2.3.2"
+twine = "==3.1.1"
 
 [packages]
 handsdown = {path = ".", editable = true}
