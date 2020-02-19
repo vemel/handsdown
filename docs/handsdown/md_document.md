@@ -154,7 +154,7 @@ A test of anchor link.
 
 ### MDDocument.get_toc_line
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L404)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/md_document.py#L411)
 
 ```python
 @classmethod
