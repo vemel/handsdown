@@ -385,6 +385,9 @@ class MDDocument(object):
             if "\n" in section:
                 continue
 
+            if " " in section:
+                continue
+
             section = section.rstrip()
 
             header_symbols, title = section.split(" ", 1)
