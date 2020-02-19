@@ -385,12 +385,16 @@ class MDDocument(object):
             if "\n" in section:
                 continue
 
-            if " " in section:
+            if "# " not in section:
                 continue
 
             section = section.rstrip()
 
             header_symbols, title = section.split(" ", 1)
+            title = title.strip()
+            if not title:
+                continue
+
             if header_symbols.replace("#", ""):
                 continue
 
