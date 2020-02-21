@@ -3,4 +3,4 @@ Handsdown package version
 """
 
 # Package version
-version = "0.3.6"
+version = "0.3.7"
