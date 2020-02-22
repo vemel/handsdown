@@ -17,8 +17,8 @@ class TestCLIParser(unittest.TestCase):
     def test_git_repo(self):
         self.assertEqual(git_repo("https://test.test"), "https://test.test")
         self.assertEqual(
-            git_repo("git@github.com:user/project.git"),
-            "https://github.com/user/project/blob/master/",
+            git_repo("git@github.com:myuser/project.git"),
+            "https://github.com/myuser/project/blob/master/",
         )
         self.assertEqual(
             git_repo("https://github.com/myuser/project.git"),
@@ -27,6 +27,10 @@ class TestCLIParser(unittest.TestCase):
         self.assertEqual(
             git_repo("https://github.com/myuser/project/blob/develop/"),
             "https://github.com/myuser/project/blob/develop/",
+        )
+        self.assertEqual(
+            git_repo("https://github.com/myuser/project"),
+            "https://github.com/myuser/project/blob/master/",
         )
 
     def test_abs_path(self):

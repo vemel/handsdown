@@ -19,16 +19,26 @@ def git_repo(git_repo_url):
     Returns:
         A GitHub URL.
     """
-    https_repo_re = re.compile(r"https://github.com/(?P<user>\S+)/(?P<repo>\S+)\.git")
-    ssh_repo_re = re.compile(r"git@github\.com:(?P<user>\S+)/(?P<repo>\S+)\.git")
+    https_repo_re = re.compile(
+        r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$"
+    )
+    ssh_repo_re = re.compile(r"^git@github\.com:(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
+    short_https_repo_re = re.compile(
+        r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)/?$"
+    )
     match = https_repo_re.match(git_repo_url)
     if match:
-        git_repo_url = "https://github.com/{user}/{repo}/blob/master/".format(
+        return "https://github.com/{user}/{repo}/blob/master/".format(
             **match.groupdict()
         )
     match = ssh_repo_re.match(git_repo_url)
     if match:
-        git_repo_url = "https://github.com/{user}/{repo}/blob/master/".format(
+        return "https://github.com/{user}/{repo}/blob/master/".format(
+            **match.groupdict()
+        )
+    match = short_https_repo_re.match(git_repo_url)
+    if match:
+        return "https://github.com/{user}/{repo}/blob/master/".format(
             **match.groupdict()
         )
 
