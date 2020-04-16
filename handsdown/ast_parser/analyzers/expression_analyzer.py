@@ -635,7 +635,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("f'")
         for value in node.values:
-            if isinstance(value, ast.Str):
+            if isinstance(value, (ast.Str, ast.Constant)):
                 str_value = value.s
                 if isinstance(str_value, bytes):
                     str_value = str_value.decode("utf-8")
