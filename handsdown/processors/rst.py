@@ -13,8 +13,10 @@ Supported features:
 - `.. seealso::` directive is added to `See also` section
 - `.. note::` directive is added to `Notes` section
 - `.. warning:: <version>` directive is added to `Warnings` section
-- `.. versionadded:: <version>` directive is formatted in Sphinx-style and added to `Notes` section
-- `.. versionchanged:: <version>` directive is formatted in Sphinx-style and added to `Notes` section
+- `.. versionadded:: <version>` directive is formatted in Sphinx-style and added
+  to `Notes` section
+- `.. versionchanged:: <version>` directive is formatted in Sphinx-style and added
+  to `Notes` section
 - `.. deprecated::` directive is formatted in Sphinx-style and added to `Notes` section
 - `.. code-block::` directive is formatted as Markdown Python codeblock
 - `.. code-block:: <language>` directive is formatted as Markdown codeblock
@@ -24,7 +26,6 @@ Supported features:
 """
 
 import re
-from typing import Text
 
 from handsdown.processors.base import BaseDocstringProcessor
 
@@ -40,22 +41,19 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
         # PEP 287 arg typed with description
         (
             re.compile(
-                r"^:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"
+                r"^:(?P<section>param|parameter)\s+(?P<type>\w+)"
+                r"\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"
             ),
             "- `{param}` *{type}* - {desc}",
         ),
         # PEP 287 arg with description
         (
-            re.compile(
-                r"^:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"
-            ),
+            re.compile(r"^:(?P<section>param|parameter)\s+(?P<param>\w+)\s*:\s*(?P<desc>.+)$"),
             "- `{param}` - {desc}",
         ),
         # PEP 287 arg typed
         (
-            re.compile(
-                r"^:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:$"
-            ),
+            re.compile(r"^:(?P<section>param|parameter)\s+(?P<type>\w+)\s+(?P<param>\w+)\s*:$"),
             "- `{param}` *{type}*",
         ),
         # PEP 287 arg
@@ -114,8 +112,7 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
         "deprecated": "Deprecated",
     }
 
-    def _parse_regular_line(self, line):
-        # type: (Text) -> None
+    def _parse_regular_line(self, line: str) -> None:
         section_match = self._section_re.match(line)
         if section_match:
             directive_name = section_match.groupdict()["section"]
@@ -149,4 +146,4 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
 
             line = body
 
-        super(RSTDocstringProcessor, self)._parse_regular_line(line)
+        super()._parse_regular_line(line)

@@ -6,7 +6,6 @@
 
 [PEP 257 - Docstring Conventions](https://www.python.org/dev/peps/pep-0287/)
 """
-from typing import Text
 
 
 class ClassExample:
@@ -32,7 +31,7 @@ class ClassExample:
     ~~~
     """
 
-    def method_example(self, text: Text = "hello") -> int:
+    def method_example(self, text: str = "hello") -> int:
         """Summary line.
 
         Extended description of method.

@@ -3,9 +3,9 @@ Markdown file builder.
 """
 from __future__ import unicode_literals
 
-import traceback
 import re
-from typing import Text, Optional, List, Type, TYPE_CHECKING
+import traceback
+from typing import TYPE_CHECKING, List, Optional, Text, Type
 
 from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
@@ -120,11 +120,7 @@ class MDDocument(object):
             self._sections.append(section)
 
         # extract subtitle from the first section if it is not a title
-        if (
-            not self._subtitle
-            and self._sections
-            and not self._sections[0].startswith("#")
-        ):
+        if not self._subtitle and self._sections and not self._sections[0].startswith("#"):
             self._subtitle = self._sections.pop(0)
 
     def add_toc_if_not_exists(self):
@@ -215,7 +211,11 @@ class MDDocument(object):
         Examples::
 
             md_doc = MDDocument(path='/root/parent/doc.md')
-            MDDocument.render_doc_link('my title', anchor='my-anchor', target_path=Path('/root/parent/doc.md')
+            MDDocument.render_doc_link(
+                'my title',
+                anchor='my-anchor',
+                target_path=Path('/root/parent/doc.md'
+            )
             '[my title](#my-anchor)'
 
             MDDocument.render_doc_link('my title', target_path=Path('/root/parent/other.md'))

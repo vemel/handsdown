@@ -1,11 +1,11 @@
 """
 Wrapper for an `ast.Assign` node of a module or class attribute.
 """
-from typing import List, Text, Set, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional, Set
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.type_defs import RenderExpr
@@ -19,10 +19,9 @@ class AttributeRecord(NodeRecord):
         node -- AST node.
     """
 
-    def __init__(self, node):
-        # type: (ast.Assign) -> None
-        super(AttributeRecord, self).__init__(node)
-        self.default = None  # type: Optional[ExpressionRecord]
+    def __init__(self, node: ast.Assign) -> None:
+        super().__init__(node)
+        self.default: Optional[ExpressionRecord] = None
         first_target = node.targets[0]
         assert isinstance(first_target, ast.Name)
         self.name = first_target.id
@@ -30,23 +29,20 @@ class AttributeRecord(NodeRecord):
         self.value = ExpressionRecord(node.value)
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
-        result = set()  # type: Set[Text]
+    def related_names(self) -> Set[str]:
+        result = set()
         if self.value:
             result.update(self.value.related_names)
 
         return result
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
-        parts = []  # type: List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+        parts: List[RenderExpr] = []
         parts.append(self.name)
         parts.append(" = ")
         parts.append(self.value)
         return parts
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         if self.value:
             self.value.parse()

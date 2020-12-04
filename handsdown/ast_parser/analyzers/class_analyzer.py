@@ -1,10 +1,10 @@
 """
 AST analyzer for `ast.ClassDef` records.
 """
-from typing import List, TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
-from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.type_defs import ASTFunctionDef
@@ -17,7 +17,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
     def __init__(self):
         # type: () -> None
-        super(ClassAnalyzer, self).__init__()
+        super().__init__()
         self.base_nodes = []  # type: List[ast.expr]
         self.decorator_nodes = []  # type: List[ast.expr]
         self.method_nodes = []  # type: List[ASTFunctionDef]

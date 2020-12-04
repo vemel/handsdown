@@ -1,14 +1,14 @@
 """
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 """
-from typing import Text, Optional, List, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.utils.import_string import ImportString
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import RenderExpr, ASTImport
+    from handsdown.ast_parser.type_defs import ASTImport, RenderExpr
 
 
 class ImportRecord(NodeRecord):
@@ -20,9 +20,8 @@ class ImportRecord(NodeRecord):
         alias -- AST node with import alias.
     """
 
-    def __init__(self, node, alias):
-        # type: (ASTImport, ast.alias) -> None
-        super(ImportRecord, self).__init__(node)
+    def __init__(self, node: ASTImport, alias: ast.alias) -> None:
+        super().__init__(node)
         self.source = None
         if isinstance(node, ast.ImportFrom):
             self.name = alias.name
@@ -32,8 +31,7 @@ class ImportRecord(NodeRecord):
             self.name = alias.name
             self.local_name = alias.asname or alias.name
 
-    def get_import_string(self):
-        # type: () -> ImportString
+    def get_import_string(self) -> ImportString:
         """
         Get import string from a node.
 
@@ -45,15 +43,10 @@ class ImportRecord(NodeRecord):
 
         return ImportString(self.name)
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
         if self.source:
             if self.local_name != self.name:
-                return [
-                    "from {} import {} as {}".format(
-                        self.source, self.name, self.local_name
-                    )
-                ]
+                return ["from {} import {} as {}".format(self.source, self.name, self.local_name)]
             return ["from {} import {}".format(self.source, self.name)]
 
         if self.local_name != self.name:
@@ -61,8 +54,7 @@ class ImportRecord(NodeRecord):
 
         return ["import {}".format(self.name)]
 
-    def match(self, name):
-        # type: (Text) -> Optional[ImportString]
+    def match(self, name: str) -> Optional[ImportString]:
         """
         Check if `name` matches or stats with a local name.
 
@@ -93,9 +85,7 @@ class ImportRecord(NodeRecord):
         if name.startswith(lookup):
             if self.source:
                 trailing_import = name[len(lookup) :]
-                return ImportString(
-                    "{}.{}".format(self.get_import_string(), trailing_import)
-                )
+                return ImportString("{}.{}".format(self.get_import_string(), trailing_import))
 
         return None
 

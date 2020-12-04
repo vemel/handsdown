@@ -4,9 +4,10 @@
 
 ## Links
 
-[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+[Google Python Style Guide](
+    http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
+)
 """
-from typing import Text
 
 
 class ClassExample:
@@ -18,7 +19,7 @@ class ClassExample:
         attr2 (:obj:`int`, optional): Description of `attr2`.
     """
 
-    def method_example(self, text: Text = "hello") -> int:
+    def method_example(self, text: str = "hello") -> int:
         """Summary line.
 
         Extended description of method.

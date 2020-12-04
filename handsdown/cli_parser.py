@@ -1,15 +1,13 @@
 """
 # CLI Parser
 """
-import re
 import argparse
+import re
 from pathlib import Path
+from typing import Iterable
 
-from typing import Text, List
 
-
-def git_repo(git_repo_url):
-    # type: (Text) -> Text
+def git_repo(git_repo_url: str) -> str:
     """
     Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
@@ -19,34 +17,23 @@ def git_repo(git_repo_url):
     Returns:
         A GitHub URL.
     """
-    https_repo_re = re.compile(
-        r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$"
-    )
+    https_repo_re = re.compile(r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
     ssh_repo_re = re.compile(r"^git@github\.com:(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
-    short_https_repo_re = re.compile(
-        r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)/?$"
-    )
+    short_https_repo_re = re.compile(r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)/?$")
     match = https_repo_re.match(git_repo_url)
     if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(
-            **match.groupdict()
-        )
+        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
     match = ssh_repo_re.match(git_repo_url)
     if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(
-            **match.groupdict()
-        )
+        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
     match = short_https_repo_re.match(git_repo_url)
     if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(
-            **match.groupdict()
-        )
+        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
 
     return git_repo_url
 
 
-def abs_path(path_str):
-    # type: (Text) -> Path
+def abs_path(path_str: str) -> Path:
     """
     Validate `path_str` and make it absolute.
 
@@ -59,8 +46,7 @@ def abs_path(path_str):
     return Path(path_str).absolute()
 
 
-def dir_abs_path(path_str):
-    # type: (Text) -> Path
+def dir_abs_path(path_str: str) -> Path:
     """
     Validate directory `path_str` and make it absolute.
 
@@ -79,8 +65,7 @@ def dir_abs_path(path_str):
     return path
 
 
-def existing_dir_abs_path(path_str):
-    # type: (Text) -> Path
+def existing_dir_abs_path(path_str: str) -> Path:
     """
     Validate existing directory `path_str` and make it absolute.
 
@@ -101,8 +86,7 @@ def existing_dir_abs_path(path_str):
     return path
 
 
-def parse_args(args):
-    # type: (List[Text]) -> argparse.Namespace
+def parse_args(args: Iterable[str]) -> argparse.Namespace:
     """
     Get CLI arguments parser.
 
@@ -112,9 +96,7 @@ def parse_args(args):
     parser = argparse.ArgumentParser(
         "handsdown", description="Docstring-based python documentation generator."
     )
-    parser.add_argument(
-        "--panic", action="store_true", help="Panic and die on import error"
-    )
+    parser.add_argument("--panic", action="store_true", help="Panic and die on import error")
     parser.add_argument(
         "-i",
         "--input-path",
@@ -122,12 +104,8 @@ def parse_args(args):
         default=Path.cwd(),
         type=existing_dir_abs_path,
     )
-    parser.add_argument(
-        "--exclude", nargs="*", help="Path expressions to exclude", default=[]
-    )
-    parser.add_argument(
-        "include", nargs="*", help="Path expressions to include", default=[]
-    )
+    parser.add_argument("--exclude", nargs="*", help="Path expressions to exclude", default=[])
+    parser.add_argument("include", nargs="*", help="Path expressions to include", default=[])
     parser.add_argument(
         "--cleanup", action="store_true", help="Remove orphaned auto-generated docs."
     )
@@ -160,9 +138,7 @@ def parse_args(args):
     parser.add_argument(
         "--toc-depth", help="Maximum depth of child modules ToC", default=1, type=int
     )
-    parser.add_argument(
-        "-d", "--debug", action="store_true", help="Show debug messages"
-    )
+    parser.add_argument("-d", "--debug", action="store_true", help="Show debug messages")
     parser.add_argument(
         "-n",
         "--name",
@@ -171,7 +147,5 @@ def parse_args(args):
         default=Path.cwd().stem.capitalize(),
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
-    parser.add_argument(
-        "-v", "--version", action="store_true", help="Show pacakge version"
-    )
-    return parser.parse_args(args)
+    parser.add_argument("-v", "--version", action="store_true", help="Show pacakge version")
+    return parser.parse_args(list(args))

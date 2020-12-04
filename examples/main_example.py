@@ -8,7 +8,7 @@ You can use Markdown here to make it nicer. Also, in any docstring you
 can put a global object import string in backticks, like `other_module.OtherClass`,
 and it will be transformed to a link.
 """
-from typing import Text, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from my_project.other_module import BaseClass  # pylint: disable=import-error
 
@@ -24,7 +24,7 @@ MODULE_NAME = "My Module"
 _PRIVATE_ATTR = "Private attr"
 
 
-def hello(name: Text) -> Text:
+def hello(name: str) -> str:
     """
     This is module function and it is added to documentation even if it does
     not have a docstring. Function signature will be also generated respecting

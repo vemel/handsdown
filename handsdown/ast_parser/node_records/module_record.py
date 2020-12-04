@@ -2,18 +2,18 @@
 Wrapper for an `ast.Module` node with corresponding node info.
 """
 from pathlib import Path
-from typing import List, Text, Generator, Any, Optional, Dict
+from typing import Any, Dict, Generator, List, Optional
 
-from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
-from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.utils.indent_trimmer import IndentTrimmer
-from handsdown.utils.import_string import ImportString
-from handsdown.ast_parser.enums import RenderPart
-from handsdown.ast_parser.node_records.import_record import ImportRecord
-from handsdown.ast_parser.node_records.function_record import FunctionRecord
-from handsdown.ast_parser.node_records.class_record import ClassRecord
-from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
+from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
+from handsdown.ast_parser.node_records.class_record import ClassRecord
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.import_record import ImportRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.utils.import_string import ImportString
+from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
 class ModuleRecord(NodeRecord):
@@ -26,24 +26,22 @@ class ModuleRecord(NodeRecord):
         node -- Result of `ast.parse`.
     """
 
-    def __init__(self, node):
-        # type: (ast.Module) -> None
-        super(ModuleRecord, self).__init__(node)
-        self.all_names = []  # type: List[Text]
-        self.class_records = []  # type: List[ClassRecord]
-        self.function_records = []  # type: List[FunctionRecord]
-        self.import_records = []  # type: List[ImportRecord]
+    def __init__(self, node: ast.Module) -> None:
+        super().__init__(node)
+        self.all_names: List[str] = []
+        self.class_records: List[ClassRecord] = []
+        self.function_records: List[FunctionRecord] = []
+        self.import_records: List[ImportRecord] = []
         self.source_path = Path("")
-        self.source_lines = []  # type: List[Text]
+        self.source_lines: List[str] = []
         self.name = "module"
         self.title = ""
         self.import_string = ImportString("")
-        self.import_string_map = {}  # type: Dict[ImportString, NodeRecord]
+        self.import_string_map: Dict[ImportString, NodeRecord] = {}
         self.docstring = self._get_docstring()
 
     @classmethod
-    def create_from_source(cls, source_path, import_string):
-        # type: (Path, ImportString) -> ModuleRecord
+    def create_from_source(cls, source_path: Path, import_string: ImportString) -> "ModuleRecord":
         """
         Create new `ModuleRecord` from path.
 
@@ -118,9 +116,7 @@ class ModuleRecord(NodeRecord):
                     class_record.import_string + class_child_record.name
                 )
 
-                self.import_string_map[
-                    class_child_record.import_string
-                ] = class_child_record
+                self.import_string_map[class_child_record.import_string] = class_child_record
 
         for function_record in self.function_records:
             function_record.import_string = self.import_string + function_record.name
@@ -130,9 +126,8 @@ class ModuleRecord(NodeRecord):
             attribute_record.import_string = self.import_string + attribute_record.name
             self.import_string_map[attribute_record.import_string] = attribute_record
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[Any]
-        parts = []  # type: List[Any]
+    def _render_parts(self, indent: int = 0) -> List[Any]:
+        parts: List[Any] = []
         if self.import_records:
             for import_record in self.import_records:
                 parts.append(import_record)
@@ -149,8 +144,7 @@ class ModuleRecord(NodeRecord):
 
         return parts
 
-    def build_children(self):
-        # type: () -> None
+    def build_children(self) -> None:
         """
         Collect full information about Module child records.
 
@@ -186,29 +180,21 @@ class ModuleRecord(NodeRecord):
 
         self._set_import_strings()
 
-    def _parse(self):
-        # type: () -> None
-
+    def _parse(self) -> None:
         for attribute_record in self.attribute_records:
             attribute_record.docstring = self._get_comment_docstring(attribute_record)
 
         for class_record in self.class_records:
             class_record.parse()
             for attribute_record in class_record.attribute_records:
-                attribute_record.docstring = self._get_comment_docstring(
-                    attribute_record
-                )
+                attribute_record.docstring = self._get_comment_docstring(attribute_record)
 
             for method_record in class_record.method_records:
                 method_record.parse()
                 if method_record.is_classmethod or method_record.is_staticmethod:
-                    method_record.title = "{}.{}".format(
-                        class_record.name, method_record.name
-                    )
+                    method_record.title = "{}.{}".format(class_record.name, method_record.name)
                 else:
-                    method_record.title = "{}().{}".format(
-                        class_record.name, method_record.name
-                    )
+                    method_record.title = "{}().{}".format(class_record.name, method_record.name)
                 function_lines = self._get_function_def_lines(method_record)
                 method_record.parse_type_comments(function_lines)
 
@@ -217,8 +203,7 @@ class ModuleRecord(NodeRecord):
             function_lines = self._get_function_def_lines(function_record)
             function_record.parse_type_comments(function_lines)
 
-    def _get_function_def_lines(self, function_record):
-        # type: (FunctionRecord) -> List[Text]
+    def _get_function_def_lines(self, function_record: FunctionRecord) -> List[str]:
         """
         Get all function definition lines for comment type
         hints lookup.
@@ -233,7 +218,7 @@ class ModuleRecord(NodeRecord):
         """
         assert isinstance(function_record.node, (ast.AsyncFunctionDef, ast.FunctionDef))
 
-        result = []  # type: List[Text]
+        result: List[str] = []
         start_index = function_record.line_number - 1
         end_index = function_record.node.body[0].lineno - 1
         result = self.source_lines[start_index:end_index]
@@ -241,8 +226,7 @@ class ModuleRecord(NodeRecord):
         result = IndentTrimmer.trim_lines(result)
         return result
 
-    def _get_comment_docstring(self, node_record):
-        # type: (NodeRecord) -> Text
+    def _get_comment_docstring(self, node_record: NodeRecord) -> str:
         """
         Get comment docstring preceding the object from the source code.
 
@@ -256,7 +240,7 @@ class ModuleRecord(NodeRecord):
         """
         assert isinstance(node_record.node, ast.Assign)
 
-        result = []  # type: List[Text]
+        result: List[str] = []
         start_index = node_record.node.lineno - 2
 
         try:

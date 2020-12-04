@@ -2,16 +2,15 @@
 Loader for python source code.
 """
 
-from typing import Optional, Text, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.utils import extract_md_title
-from handsdown.utils.path_finder import PathFinder
-from handsdown.utils.logger import get_logger
 from handsdown.utils.import_string import ImportString
+from handsdown.utils.logger import get_logger
+from handsdown.utils.path_finder import PathFinder
 
 if TYPE_CHECKING:  # pragma: no cover
-    import logging
     from pathlib import Path
 
 
@@ -35,15 +34,13 @@ class Loader:
         output_path -- Docs output path.
     """
 
-    def __init__(self, root_path, output_path):
-        # type: (Path, Path) -> None
+    def __init__(self, root_path: Path, output_path: Path) -> None:
         self._logger = get_logger()
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
 
-    def get_output_path(self, source_path):
-        # type: (Path) -> Path
+    def get_output_path(self, source_path: Path) -> Path:
         """
         Get output MD document path based on `source_path`.
 
@@ -63,8 +60,7 @@ class Loader:
         relative_output_path = relative_source_path.parent / file_name
         return self._output_path / relative_output_path
 
-    def get_module_record(self, source_path):
-        # type: (Path) -> Optional[ModuleRecord]
+    def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
         """
         Build `ModuleRecord` for given `source_path`.
 
@@ -94,7 +90,7 @@ class Loader:
         except Exception as e:
             raise LoaderError(
                 "{} while loading {}: {}".format(e.__class__.__name__, source_path, e)
-            )
+            ) from e
 
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
@@ -113,8 +109,7 @@ class Loader:
         return module_record
 
     @staticmethod
-    def parse_module_record(module_record):
-        # type: (ModuleRecord) -> None
+    def parse_module_record(module_record: ModuleRecord) -> None:
         """
         Parse `ModuleRecord` children and fully load a tree for it.
 
@@ -125,13 +120,10 @@ class Loader:
             module_record.parse()
         except Exception as e:
             raise LoaderError(
-                "{} while parsing {}: {}".format(
-                    e.__class__.__name__, module_record.source_path, e
-                )
-            )
+                "{} while parsing {}: {}".format(e.__class__.__name__, module_record.source_path, e)
+            ) from e
 
-    def get_import_string(self, source_path):
-        # type: (Path) -> Text
+    def get_import_string(self, source_path: Path) -> str:
         """
         Get Python import string for a source `source_path` relative to `root_path`.
 

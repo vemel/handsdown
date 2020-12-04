@@ -1,15 +1,13 @@
 """
 Handful utils that do not deserve a separate module.
 """
-import traceback
 from pathlib import Path
-from typing import Text, Any, Dict, Tuple, List, TYPE_CHECKING
+from typing import Dict, List, Tuple
 
 from handsdown.settings import ASSETS_PATH
 
 
-def make_title(file_stem):
-    # type: (Text) -> Text
+def make_title(file_stem: str) -> str:
     """
     Convert `pathlib.Path` part or any other string to a human-readable title.
     Replace underscores with spaces and capitalize result.
@@ -38,7 +36,7 @@ def make_title(file_stem):
         return "Module"
 
     parts = file_stem.replace(".", "_").split("_")
-    name_parts = []  # type: List[Text]
+    name_parts: List[str] = []
     for part in parts:
         if not part:
             continue
@@ -48,8 +46,7 @@ def make_title(file_stem):
     return " ".join(name_parts)
 
 
-def render_asset(name, target_path, format_dict):
-    # type: (Text, Path, Dict[Text, Text]) -> None
+def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> None:
     """
     Render `assets/<name>` file to `target_path`.
 
@@ -63,8 +60,7 @@ def render_asset(name, target_path, format_dict):
     target_path.write_text(content)
 
 
-def extract_md_title(content):
-    # type: (Text) -> Tuple[Text, Text]
+def extract_md_title(content: str) -> Tuple[str, str]:
     """
     Extract title from the first line of content.
     If title is present -  return a title and a remnaing content.

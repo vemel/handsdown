@@ -1,7 +1,7 @@
 """
 Wrapper for python import strings.
 """
-from typing import Text, List
+from typing import List, Any
 
 
 class ImportStringError(Exception):
@@ -18,12 +18,10 @@ class ImportString:
         value -- Import string.
     """
 
-    def __init__(self, value):
-        # type: (Text) -> None
+    def __init__(self, value: str) -> None:
         self.value = value
 
-    def __str__(self):
-        # type: () -> Text
+    def __str__(self) -> str:
         """
         Get string value.
 
@@ -37,12 +35,10 @@ class ImportString:
         """
         return self.value
 
-    def __hash__(self):
-        # type: () -> int
+    def __hash__(self) -> int:
         return hash(self.value)
 
-    def __add__(self, other):
-        # type: (Text) -> ImportString
+    def __add__(self, other: str) -> "ImportString":
         """
         Add new import part.
 
@@ -65,8 +61,7 @@ class ImportString:
 
         return ImportString(other)
 
-    def __bool__(self):
-        # type: () -> bool
+    def __bool__(self) -> bool:
         """
         Check if not empty.
 
@@ -83,8 +78,7 @@ class ImportString:
         """
         return bool(self.value)
 
-    def __eq__(self, other):
-        # type: (object) -> bool
+    def __eq__(self, other: Any) -> bool:
         """
         Compare to another `ImportString` or a string.
 
@@ -120,8 +114,7 @@ class ImportString:
         return False
 
     @property
-    def parts(self):
-        # type: () -> List[Text]
+    def parts(self) -> List[str]:
         """
         Parts of import string splitted by dots.
 
@@ -138,8 +131,7 @@ class ImportString:
         """
         return self.value.split(".")
 
-    def is_top_level(self):
-        # type: () -> bool
+    def is_top_level(self) -> bool:
         """
         Check if import string has no parents.
 
@@ -149,8 +141,7 @@ class ImportString:
         return "." not in self.value
 
     @property
-    def parent(self):
-        # type: () -> ImportString
+    def parent(self) -> "ImportString":
         """
         Parent import string.
 
@@ -163,8 +154,7 @@ class ImportString:
         parent_import_string_parts = self.value.split(".")[:-1]
         return ImportString(".".join(parent_import_string_parts))
 
-    def startswith(self, import_string):
-        # type: (ImportString) -> bool
+    def startswith(self, import_string: "ImportString") -> bool:
         """
         Check if it starts with `import_string`.
 

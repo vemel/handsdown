@@ -7,17 +7,13 @@ import os
 import sys
 from typing import Any
 
-
 if os.environ.get("PYTHON_VER", "3") == "3":
     if sys.version_info >= (3, 8):
-        from ast import (  # pylint: disable=no-name-in-module
-            Add,
-            alias,
-            And,
-            arg,
-            arguments,
-            Assign,
+        from ast import (
             AST,
+            Add,
+            And,
+            Assign,
             AsyncFunctionDef,
             Attribute,
             Await,
@@ -30,19 +26,18 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             Call,
             ClassDef,
             Compare,
-            comprehension,
             Constant,
             Dict,
             DictComp,
             Div,
-            Ellipsis as ASTEllipsis,
+        )
+        from ast import Ellipsis as ASTEllipsis  # pylint: disable=no-name-in-module
+        from ast import (
             Eq,
-            expr,
             FloorDiv,
             FormattedValue,
             FunctionDef,
             GeneratorExp,
-            get_docstring,
             Gt,
             GtE,
             IfExp,
@@ -54,7 +49,6 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             Is,
             IsNot,
             JoinedStr,
-            keyword,
             Lambda,
             List,
             ListComp,
@@ -72,14 +66,12 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             NotIn,
             Num,
             Or,
-            parse,
             Pow,
             RShift,
             Set,
             SetComp,
             Slice,
             Starred,
-            stmt,
             Str,
             Sub,
             Subscript,
@@ -89,16 +81,22 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             USub,
             Yield,
             YieldFrom,
+            alias,
+            arg,
+            arguments,
+            comprehension,
+            expr,
+            get_docstring,
+            keyword,
+            parse,
+            stmt,
         )
     else:
-        from typed_ast.ast3 import (  # pylint: disable=no-name-in-module
-            Add,
-            alias,
-            And,
-            arg,
-            arguments,
-            Assign,
+        from typed_ast.ast3 import (
             AST,
+            Add,
+            And,
+            Assign,
             AsyncFunctionDef,
             Attribute,
             Await,
@@ -112,18 +110,17 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             ClassDef,
             Compare,
             Constant,
-            comprehension,
             Dict,
             DictComp,
             Div,
-            Ellipsis as ASTEllipsis,
+        )
+        from typed_ast.ast3 import Ellipsis as ASTEllipsis  # pylint: disable=no-name-in-module
+        from typed_ast.ast3 import (
             Eq,
-            expr,
             FloorDiv,
             FormattedValue,
             FunctionDef,
             GeneratorExp,
-            get_docstring,
             Gt,
             GtE,
             IfExp,
@@ -135,7 +132,6 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             Is,
             IsNot,
             JoinedStr,
-            keyword,
             Lambda,
             List,
             ListComp,
@@ -153,14 +149,12 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             NotIn,
             Num,
             Or,
-            parse,
             Pow,
             RShift,
             Set,
             SetComp,
             Slice,
             Starred,
-            stmt,
             Str,
             Sub,
             Subscript,
@@ -170,18 +164,23 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             USub,
             Yield,
             YieldFrom,
+            alias,
+            arg,
+            arguments,
+            comprehension,
+            expr,
+            get_docstring,
+            keyword,
+            parse,
+            stmt,
         )
 else:
-    from typed_ast.ast27 import (  # pylint: disable=no-name-in-module
-        Add,
-        alias,
-        And,
-        arguments,
-        Assign,
+    from typed_ast.ast27 import (
         AST,
-        AsyncFunctionDef,
+        Add,
+        And,
+        Assign,
         Attribute,
-        Await,
         BinOp,
         BitAnd,
         BitOr,
@@ -190,17 +189,16 @@ else:
         Call,
         ClassDef,
         Compare,
-        comprehension,
         Dict,
         DictComp,
         Div,
-        Ellipsis as ASTEllipsis,
+    )
+    from typed_ast.ast27 import Ellipsis as ASTEllipsis  # pylint: disable=no-name-in-module
+    from typed_ast.ast27 import (
         Eq,
-        expr,
         FloorDiv,
         FunctionDef,
         GeneratorExp,
-        get_docstring,
         Gt,
         GtE,
         IfExp,
@@ -211,7 +209,6 @@ else:
         Invert,
         Is,
         IsNot,
-        keyword,
         Lambda,
         List,
         ListComp,
@@ -228,13 +225,11 @@ else:
         NotIn,
         Num,
         Or,
-        parse,
         Pow,
         RShift,
         Set,
         SetComp,
         Slice,
-        stmt,
         Str,
         Sub,
         Subscript,
@@ -243,7 +238,14 @@ else:
         UnaryOp,
         USub,
         Yield,
-        YieldFrom,
+        alias,
+        arguments,
+        comprehension,
+        expr,
+        get_docstring,
+        keyword,
+        parse,
+        stmt,
     )
 
     arg = Any
@@ -253,6 +255,9 @@ else:
     Starred = Any
     JoinedStr = Any
     FormattedValue = Any
+    YieldFrom = Any
+    AsyncFunctionDef = Any
+    Await = Any
 
 __all__ = [
     "Add",

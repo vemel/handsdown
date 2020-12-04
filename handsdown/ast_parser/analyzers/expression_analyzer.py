@@ -3,13 +3,14 @@ AST analyzer for `ast.expr` records.
 """
 from typing import TYPE_CHECKING
 
-from handsdown.utils.logger import get_logger
+import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.enums import RenderPart
-import handsdown.ast_parser.smart_ast as ast
+from handsdown.utils.logger import get_logger
 
 if TYPE_CHECKING:  # pragma: no cover
-    from typing import Optional, List
+    from typing import List
+
     from handsdown.ast_parser.type_defs import ASTIterable, DirtyRenderExpr
 
 
@@ -22,7 +23,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
     def __init__(self):
         # type: () -> None
-        super(ExpressionAnalyzer, self).__init__()
+        super().__init__()
         self._logger = get_logger()
         self.parts = []  # type: List[DirtyRenderExpr]
 
@@ -160,9 +161,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.value)
         self.parts.append("[")
-        if isinstance(node.slice, ast.Index) and isinstance(
-            node.slice.value, ast.Tuple
-        ):
+        if isinstance(node.slice, ast.Index) and isinstance(node.slice.value, ast.Tuple):
             self._visit_iterable(node.slice.value)
         else:
             self.parts.append(node.slice)
@@ -196,7 +195,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             [1, 2, 3]
             {1, 2, 3}
             (1, 2, 3)
-            Union[Text, bool]
+            Union[str, bool]
 
         Arguments:
             node -- AST node.
@@ -422,9 +421,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(" ")
         operator = self.BINOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning(
-                "Unknown binary operator: {}".format(node.op.__class__.__name__)
-            )
+            self._logger.warning("Unknown binary operator: {}".format(node.op.__class__.__name__))
         self.parts.append(operator)
         self.parts.append(" ")
         self.parts.append(node.right)
@@ -444,9 +441,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         operator = self.BOOLOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning(
-                "Unknown boolean operator: {}".format(node.op.__class__.__name__)
-            )
+            self._logger.warning("Unknown boolean operator: {}".format(node.op.__class__.__name__))
         for index, value in enumerate(node.values):
             if index:
                 self.parts.append(" ")
@@ -471,9 +466,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         operator = self.UNARYOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning(
-                "Unknown unary operator: {}".format(node.op.__class__.__name__)
-            )
+            self._logger.warning("Unknown unary operator: {}".format(node.op.__class__.__name__))
         self.parts.append(operator)
         if operator == "not":
             self.parts.append(" ")
@@ -554,7 +547,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Examples::
 
             def my_func(arg)
-            def my_func(arg: Text)
+            def my_func(arg: str)
 
         Arguments:
             node -- AST node.
@@ -571,8 +564,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
         Examples::
 
-            Union[Text, bool]
-            Union[Text]
+            Union[str, bool]
+            Union[str]
 
         Arguments:
             node -- AST node.

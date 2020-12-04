@@ -4,7 +4,6 @@ Various project constants.
 """
 import os
 
-
 # Path to handsdown root directory.
 HANDSDOWN_PATH = os.path.dirname(__file__)
 

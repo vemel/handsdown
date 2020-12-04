@@ -1,11 +1,7 @@
 """
 Translator of docstrings to Markdown format.
 """
-
-from typing import Text
-
 from handsdown.utils.indent_trimmer import IndentTrimmer
-
 
 __all__ = ["DocstringFormatter"]
 
@@ -18,8 +14,7 @@ class DocstringFormatter:
         docstring -- Raw docstring.
     """
 
-    def __init__(self, docstring):
-        # type: (Text) -> None
+    def __init__(self, docstring: str) -> None:
         docstring = self._cleanup(docstring)
         docstring = IndentTrimmer.trim_empty_lines(docstring)
         docstring = IndentTrimmer.trim_text(docstring)
@@ -27,8 +22,7 @@ class DocstringFormatter:
         self._lines = IndentTrimmer.trim_lines(lines)
 
     @staticmethod
-    def _cleanup(docstring):
-        # type: (Text) -> Text
+    def _cleanup(docstring: str) -> str:
         """
         Fix multiline docstrings starting with no newline after quotes.
 
@@ -51,8 +45,7 @@ class DocstringFormatter:
 
         return IndentTrimmer.trim_text(docstring)
 
-    def _parse_flask_title(self):
-        # type: () -> None
+    def _parse_flask_title(self) -> None:
         lines = list(self._lines)
         for index, line in enumerate(lines):
             if line.startswith("~~~~"):
@@ -60,8 +53,7 @@ class DocstringFormatter:
                     self._lines[index - 1] = "# {}".format(self._lines[index - 1])
                 self._lines.pop(index)
 
-    def render(self):
-        # type: () -> Text
+    def render(self) -> str:
         """
         Get Markdown-friendly docstring.
 

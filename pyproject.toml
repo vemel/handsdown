@@ -1,0 +1,17 @@
+[tool.black]
+line-length = 100
+include = "(handsdown|tests)/.*\\.pyi?$"
+target-version = [
+    "py36",
+    "py37",
+    "py38",
+]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = [
+    "handsdown",
+    "tests",
+]
+src_paths = []

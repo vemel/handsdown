@@ -6,14 +6,13 @@ import logging
 import sys
 from typing import TYPE_CHECKING
 
-from handsdown.generator import Generator, GeneratorError
 from handsdown.cli_parser import parse_args
-from handsdown.utils import render_asset, make_title
+from handsdown.generator import Generator, GeneratorError
+from handsdown.settings import EXCLUDE_EXPRS, SOURCES_GLOB
+from handsdown.utils import make_title, render_asset
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
-from handsdown.settings import SOURCES_GLOB, EXCLUDE_EXPRS
 from handsdown.version import version
-
 
 if TYPE_CHECKING:  # pragma: no cover
     import argparse
@@ -66,9 +65,7 @@ def main():
     logger = get_logger(level=log_level)
 
     path_finder = (
-        PathFinder(args.input_path)
-        .exclude(*(EXCLUDE_EXPRS + args.exclude))
-        .include(*args.include)
+        PathFinder(args.input_path).exclude(*(EXCLUDE_EXPRS + args.exclude)).include(*args.include)
     )
 
     try:

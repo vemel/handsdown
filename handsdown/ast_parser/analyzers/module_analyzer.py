@@ -1,13 +1,13 @@
 """
 AST analyzer for `ast.Module` records.
 """
-from typing import List, Text, TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 
-from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import ASTImport, ASTFunctionDef
+    from handsdown.ast_parser.type_defs import ASTFunctionDef, ASTImport
 
 
 class ModuleAnalyzer(BaseAnalyzer):
@@ -15,17 +15,15 @@ class ModuleAnalyzer(BaseAnalyzer):
     AST analyzer for `ast.Module` records.
     """
 
-    def __init__(self):
-        # type: () -> None
-        super(ModuleAnalyzer, self).__init__()
-        self.all_names = []  # type: List[Text]
-        self.import_nodes = []  # type: List[ASTImport]
-        self.function_nodes = []  # type: List[ASTFunctionDef]
-        self.attribute_nodes = []  # type: List[ast.Assign]
-        self.class_nodes = []  # type: List[ast.ClassDef]
+    def __init__(self) -> None:
+        super().__init__()
+        self.all_names: List[str] = []
+        self.import_nodes: List[ASTImport] = []
+        self.function_nodes: List[ASTFunctionDef] = []
+        self.attribute_nodes: List[ast.Assign] = []
+        self.class_nodes: List[ast.ClassDef] = []
 
-    def visit_Import(self, node):
-        # type: (ast.Import) -> None
+    def visit_Import(self, node: ast.Import) -> None:
         """
         Parse info about module `import ...` statements.
 

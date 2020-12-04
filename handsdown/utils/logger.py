@@ -23,9 +23,7 @@ def get_logger(level=None):
         logger.setLevel(level)
 
     if not logger.handlers:
-        formatter = logging.Formatter(
-            fmt="%(levelname)-8s %(message)s", datefmt="%H:%M:%S"
-        )
+        formatter = logging.Formatter(fmt="%(levelname)-8s %(message)s", datefmt="%H:%M:%S")
         handler = logging.StreamHandler()
         if level is not None:
             handler.setLevel(level)

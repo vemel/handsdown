@@ -2,20 +2,18 @@
 Utility for removing indentation for sections and lines.
 """
 
-from typing import Iterable, Text, List
-
+from typing import Iterable, List
 
 __all__ = ["IndentTrimmer"]
 
 
-class IndentTrimmer(object):
+class IndentTrimmer:
     """
     Utility for removing indentation for sections and lines.
     """
 
     @staticmethod
-    def trim_empty_lines(text):
-        # type: (Text) -> Text
+    def trim_empty_lines(text: str) -> str:
         """
         Trim empty lines in the begging and the end of the text.
 
@@ -37,8 +35,7 @@ class IndentTrimmer(object):
         return "\n".join(lines)
 
     @classmethod
-    def trim_text(cls, text):
-        # type: (Text) -> Text
+    def trim_text(cls, text: str) -> str:
         """
         Trim minimum indent from each line of text.
 
@@ -57,8 +54,7 @@ class IndentTrimmer(object):
         return "\n".join(new_lines)
 
     @classmethod
-    def trim_lines(cls, lines):
-        # type: (Iterable[Text]) -> List[Text]
+    def trim_lines(cls, lines: Iterable[str]) -> List[str]:
         """
         Trim minimum indent from each line of text.
 
@@ -93,8 +89,7 @@ class IndentTrimmer(object):
         return new_lines
 
     @staticmethod
-    def trim_line(line, indent):
-        # type: (Text, int) -> Text
+    def trim_line(line: str, indent: int) -> str:
         """
         Trim indent from line if it is empty.
 
@@ -121,8 +116,7 @@ class IndentTrimmer(object):
         return line.lstrip()
 
     @staticmethod
-    def get_line_indent(line):
-        # type: (Text) -> int
+    def get_line_indent(line: str) -> int:
         """
         Get indent length of the line.
 
@@ -143,8 +137,7 @@ class IndentTrimmer(object):
         return len(line) - len(line.lstrip())
 
     @staticmethod
-    def indent_line(line, indent):
-        # type: (Text, int) -> Text
+    def indent_line(line: str, indent: int) -> str:
         """
         Indent line with givent length `indent`
 
@@ -160,4 +153,4 @@ class IndentTrimmer(object):
         Returns:
             An indented line.
         """
-        return u"{}{}".format(" " * indent, line)
+        return "{}{}".format(" " * indent, line)

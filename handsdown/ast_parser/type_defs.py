@@ -1,20 +1,20 @@
 """
 Different AST-related types collection.
 """
-from typing import Union, Text
+from typing import Union
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 # Ready for render expression
-RenderExpr = Union[NodeRecord, Text, RenderPart]
+RenderExpr = Union[NodeRecord, str, RenderPart]
 
 # AST node or text
-Node = Union[Text, ast.AST]
+Node = Union[str, ast.AST]
 
 # Not ready for render expression, AST has to be wrapped
-DirtyRenderExpr = Union[ast.AST, Text, RenderPart]
+DirtyRenderExpr = Union[ast.AST, str, RenderPart]
 
 # Iterable AST types
 ASTIterable = Union[ast.List, ast.Set, ast.Tuple]

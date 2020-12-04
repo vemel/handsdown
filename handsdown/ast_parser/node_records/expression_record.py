@@ -2,14 +2,14 @@
 Wrapper for an `ast.expr` node.
 """
 import re
-from typing import Text, Set, List, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Set
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import RenderExpr, DirtyRenderExpr
+    from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
 
 
 class ExpressionRecord(NodeRecord):
@@ -22,19 +22,16 @@ class ExpressionRecord(NodeRecord):
 
     _str_split_re = re.compile(r"[\]\[ ,]")
 
-    def __init__(self, node):
-        # type: (ast.AST) -> None
-        super(ExpressionRecord, self).__init__(node)
-        self.parts = []  # type: List[DirtyRenderExpr]
+    def __init__(self, node: ast.AST) -> None:
+        super().__init__(node)
+        self.parts: List[DirtyRenderExpr] = []
         self.analyzer = ExpressionAnalyzer()
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
+    def related_names(self) -> Set[str]:
         return set(self.analyzer.related_names)
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         if isinstance(self.node, ast.Name):
             self.name = self.node.id
 
@@ -43,9 +40,8 @@ class ExpressionRecord(NodeRecord):
             self.parts = self.analyzer.parts
             return
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
-        result = []  # type: List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+        result: List[RenderExpr] = []
         for part in self.parts:
             if isinstance(part, ast.AST):
                 result.append(ExpressionRecord(part))

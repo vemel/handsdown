@@ -5,7 +5,9 @@ Docstring processor for PEP 257 and Google docstring format.
 
 ## Links
 
-- [Supported section names](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/index.html#docstring-sections)
+- [Supported section names](
+    https://sphinxcontrib-napoleon.readthedocs.io/en/latest/index.html#docstring-sections
+  )
 
 ## Supported features
 
@@ -24,8 +26,6 @@ Docstring processor for PEP 257 and Google docstring format.
 """
 
 import re
-from typing import Text
-
 
 from handsdown.processors.base import BaseDocstringProcessor
 
@@ -40,16 +40,12 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
         (re.compile(r"^\s*(?P<param>\S+):\s+(?P<desc>.+)$"), "- `{param}` - {desc}"),
         # Google typed with parentheses
         (
-            re.compile(
-                r"^\s*(?P<param>\S+)\s+\((?P<type>\S+(?:,\s+optional)?)\):\s+(?P<desc>.+)$"
-            ),
+            re.compile(r"^\s*(?P<param>\S+)\s+\((?P<type>\S+(?:,\s+optional)?)\):\s+(?P<desc>.+)$"),
             "- `{param}` *{type}* - {desc}",
         ),
         # Google typed without parentheses
         (
-            re.compile(
-                r"^\s*(?P<param>\S+)\s+(?P<type>\S+(?:,\s+optional)?):\s+(?P<desc>.+)$"
-            ),
+            re.compile(r"^\s*(?P<param>\S+)\s+(?P<type>\S+(?:,\s+optional)?):\s+(?P<desc>.+)$"),
             "- `{param}` *{type}* - {desc}",
         ),
         # PEP257 non-typed
@@ -64,9 +60,7 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
         ),
         # PEP257 typed
         (
-            re.compile(
-                r"^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$"
-            ),
+            re.compile(r"^\s*(?P<param>\S+)\s+\{\[(?P<type>\S+)\]\}\s+--\s+(?P<desc>.+)$"),
             "- `{param}` *{type}* - {desc}",
         ),
     )
@@ -100,9 +94,7 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
         "Yields:": "Yields",
     }
 
-    def _parse_regular_line(self, line):
-        # type: (Text) -> None
-
+    def _parse_regular_line(self, line: str) -> None:
         # If there is a line with a section name - set this section as active
         if line in self.section_name_map:
             self.current_section_name = self.section_name_map[line]
@@ -123,4 +115,4 @@ class PEP257DocstringProcessor(BaseDocstringProcessor):
                     self._add_line(line_part)
                 return
 
-        super(PEP257DocstringProcessor, self)._parse_regular_line(line)
+        super()._parse_regular_line(line)

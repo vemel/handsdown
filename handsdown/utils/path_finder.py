@@ -5,8 +5,7 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 
 import fnmatch
 from pathlib import Path
-from typing import Text, List, Iterable, Generator
-
+from typing import Iterator, Iterable, List
 
 __all__ = ["PathFinder", "PathFinderError"]
 
@@ -42,8 +41,7 @@ class PathFinder:
         PathFinderError -- If `root` is not absolute or not a directory.
     """
 
-    def __init__(self, root):
-        # type: (Path) -> None
+    def __init__(self, root: Path) -> None:
         if not root.is_absolute():
             raise PathFinderError("Root path {} is not absolute".format(root))
         try:
@@ -53,18 +51,16 @@ class PathFinder:
             pass
 
         self._root = root
-        self.include_exprs = []  # type: List[Text]
-        self.exclude_exprs = []  # type: List[Text]
+        self.include_exprs: List[str] = []
+        self.exclude_exprs: List[str] = []
 
-    def _copy(self, include_exprs, exclude_exprs):
-        # type: (Iterable[Text], Iterable[Text]) -> PathFinder
+    def _copy(self, include_exprs: Iterable[str], exclude_exprs: Iterable[str]) -> "PathFinder":
         new_copy = PathFinder(self._root)
         new_copy.include_exprs = list(include_exprs)
         new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy
 
-    def include(self, *fn_exrps):
-        # type: (Text) -> PathFinder
+    def include(self, *fn_exrps: str) -> "PathFinder":
         """
         Add `fnmatch` expression to white list.
         If white list is empty - no white list filtration applied.
@@ -84,8 +80,7 @@ class PathFinder:
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
 
-    def exclude(self, *fn_exrps):
-        # type: (Text) -> PathFinder
+    def exclude(self, *fn_exrps: str) -> "PathFinder":
         """
         Add `fnmatch` expression to black list.
         If black list is empty - no black list filtration applied.
@@ -105,8 +100,7 @@ class PathFinder:
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
 
-    def _match_include(self, path):
-        # type: (Path) -> bool
+    def _match_include(self, path: Path) -> bool:
         if not self.include_exprs:
             return True
 
@@ -117,8 +111,7 @@ class PathFinder:
 
         return False
 
-    def _match_exclude(self, path):
-        # type: (Path) -> bool
+    def _match_exclude(self, path: Path) -> bool:
         if not self.exclude_exprs:
             return False
 
@@ -129,8 +122,7 @@ class PathFinder:
 
         return False
 
-    def glob(self, glob_expr):
-        # type: (Text) -> Generator[Path, None, None]
+    def glob(self, glob_expr: str) -> Iterator[Path]:
         """
         Find all matching `Path` objects respecting `include` and
         `exclude` patterns.
@@ -147,8 +139,7 @@ class PathFinder:
 
             yield path
 
-    def relative(self, target):
-        # type: (Path) -> Path
+    def relative(self, target: Path) -> Path:
         """
         Find a relative path from `root` to `target`.
         `target` should be an absolute path.
@@ -176,8 +167,7 @@ class PathFinder:
 
         return up_path / relative_target
 
-    def mkdir(self, force=False):
-        # type: (bool) -> None
+    def mkdir(self, force: bool = False) -> None:
         """
         Create directories up to `root` if they do not exist.
 
@@ -200,9 +190,7 @@ class PathFinder:
                 continue
 
             if not parent.is_dir():
-                raise PathFinderError(
-                    "{} is not a directory, delete it manually".format(parent)
-                )
+                raise PathFinderError("{} is not a directory, delete it manually".format(parent))
 
             break
 

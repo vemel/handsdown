@@ -1,11 +1,11 @@
 """
 AST analyzer for `ast.FunctionDef` records.
 """
-from typing import Optional, List, Text, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional
 
-from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
-from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
+from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.type_defs import ASTFunctionDef
@@ -16,16 +16,14 @@ class FunctionAnalyzer(BaseAnalyzer):
     AST analyzer for `ast.FunctionDef` records.
     """
 
-    def __init__(self):
-        # type: () -> None
-        super(FunctionAnalyzer, self).__init__()
+    def __init__(self) -> None:
+        super().__init__()
         self.argument_records = []  # type: List[ArgumentRecord]
         self.decorator_nodes = []  # type: List[ast.expr]
         self.return_type_hint = None  # type: Optional[ast.expr]
 
     @staticmethod
-    def _get_argument_record(arg, prefix=""):
-        # type: (ast.arg, Text) -> ArgumentRecord
+    def _get_argument_record(arg: ast.arg, prefix: str = "") -> ArgumentRecord:
         type_hint = None
         if isinstance(arg, ast.Name):
             name = arg.id
@@ -39,8 +37,7 @@ class FunctionAnalyzer(BaseAnalyzer):
 
         return ArgumentRecord(arg, name=name, type_hint=type_hint, prefix=prefix)
 
-    def visit_arguments(self, node):
-        # type: (ast.arguments) -> None
+    def visit_arguments(self, node: ast.arguments) -> None:
         """
         Parse info about class method statements.
 
@@ -59,8 +56,8 @@ class FunctionAnalyzer(BaseAnalyzer):
 
             # type annotated arguments
             def my_func_typed(
-                arg1: Text,
-                arg_default: Text="value",
+                arg1: str,
+                arg_default: str = "value",
             ):
                 pass
 
@@ -102,9 +99,7 @@ class FunctionAnalyzer(BaseAnalyzer):
                 self.argument_records.append(record)
 
             for index, default in enumerate(node.kw_defaults):
-                argument_index = (
-                    len(self.argument_records) - len(node.kw_defaults) + index
-                )
+                argument_index = len(self.argument_records) - len(node.kw_defaults) + index
                 self.argument_records[argument_index].set_default(default)
 
         if node.vararg is not None:
@@ -115,8 +110,7 @@ class FunctionAnalyzer(BaseAnalyzer):
             record = self._get_argument_record(node.kwarg, prefix="**")
             self.argument_records.append(record)
 
-    def _visit_FunctionDef(self, node):
-        # type: (ASTFunctionDef) -> None
+    def _visit_FunctionDef(self, node: ASTFunctionDef) -> None:
         for decorator_node in node.decorator_list:
             self.decorator_nodes.append(decorator_node)
         self.visit(node.args)
@@ -125,8 +119,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         if hasattr(node, "returns") and node.returns:
             self.return_type_hint = node.returns
 
-    def visit_FunctionDef(self, node):
-        # type: (ast.FunctionDef) -> None
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         """
         Entrypoint for the analyzer.
 
@@ -145,8 +138,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         """
         self._visit_FunctionDef(node)
 
-    def visit_AsyncFunctionDef(self, node):
-        # type: (ast.AsyncFunctionDef) -> None
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         """
         Entrypoint for the analyzer for asynchronous functions.
 
@@ -165,8 +157,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         """
         self._visit_FunctionDef(node)
 
-    def generic_visit(self, _node):
-        # type: (ast.AST) -> None
+    def generic_visit(self, _node: ast.AST) -> None:
         """
         Do nothing for unknown `ast.AST` nodes.
 

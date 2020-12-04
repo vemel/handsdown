@@ -1,15 +1,15 @@
 """
 Wrapper for an `ast.arg` node.
 """
-from typing import List, Text, Set, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional, Set
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
-from handsdown.ast_parser.node_records.text_record import TextRecord
 import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.node_records.text_record import TextRecord
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import RenderExpr, Node
+    from handsdown.ast_parser.type_defs import Node, RenderExpr
 
 
 class ArgumentRecord(NodeRecord):
@@ -25,13 +25,12 @@ class ArgumentRecord(NodeRecord):
 
     def __init__(
         self,
-        node,  # type: ast.arg
-        name,  # type: Text
-        type_hint=None,  # type: Optional[ast.expr]
-        prefix="",  # type: Text
-    ):
-        # type: (...) -> None
-        super(ArgumentRecord, self).__init__(node)
+        node: ast.arg,
+        name: str,
+        type_hint: Optional[ast.expr] = None,
+        prefix: str = "",
+    ) -> None:
+        super().__init__(node)
         self._default = None  # type: Optional[ExpressionRecord]
         self.type_hint = None  # type: Optional[ExpressionRecord]
         if type_hint:
@@ -50,8 +49,7 @@ class ArgumentRecord(NodeRecord):
         """
         return self._default
 
-    def set_default(self, node):
-        # type: (Node) -> None
+    def set_default(self, node: Node) -> None:
         """
         Set default expression from test or `ast.AST` node.
 
@@ -64,9 +62,8 @@ class ArgumentRecord(NodeRecord):
             self._default = ExpressionRecord(node)
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
-        result = set()  # type: Set[Text]
+    def related_names(self) -> Set[str]:
+        result = set()
         if self.default:
             result.update(self.default.related_names)
         if self.type_hint:
@@ -74,9 +71,8 @@ class ArgumentRecord(NodeRecord):
 
         return result
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
-        parts = []  # type: List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+        parts = []
         if self.prefix:
             parts.append(self.prefix)
 
@@ -93,8 +89,7 @@ class ArgumentRecord(NodeRecord):
 
         return parts
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         if self.default:
             self.default.parse()
         if self.type_hint:

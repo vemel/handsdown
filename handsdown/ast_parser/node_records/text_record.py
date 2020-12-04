@@ -2,13 +2,13 @@
 Wrapper for a text-only `ast.expr` node.
 """
 import re
-from typing import Text, Set, List, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Set
 
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
 if TYPE_CHECKING:  # pragma: no cover
     import handsdown.ast_parser.smart_ast as ast
-    from handsdown.ast_parser.type_defs import Node, RenderExpr
+    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class TextRecord(ExpressionRecord):
@@ -22,22 +22,20 @@ class TextRecord(ExpressionRecord):
 
     _str_split_re = re.compile(r"[\]\[ ,]")
 
-    def __init__(self, node, text):
-        # type: (ast.AST, Text) -> None
-        super(TextRecord, self).__init__(node)
+    def __init__(self, node: ast.AST, text: str) -> None:
+        super().__init__(node)
         self.name = text
         self.title = text
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
+    def related_names(self) -> Set[str]:
         """
         A list of fake `ast.Name.id` records inside the node.
 
         Examples::
 
-            TextRecord(ast_node, 'Union[Text, MyClass]').related_names
-            {'Union', 'Text', 'MyClass'}
+            TextRecord(ast_node, 'Union[str, MyClass]').related_names
+            {'Union', 'str', 'MyClass'}
 
         Returns:
             A set of related names.
@@ -48,10 +46,8 @@ class TextRecord(ExpressionRecord):
 
         return result
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         return
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
         return [self.name]

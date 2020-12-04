@@ -1,19 +1,19 @@
 """
 Wrapper for an `ast.ClassDef` node.
 """
-from typing import List, Set, Text, Generator, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterator, List, Optional, Set
 
-from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 from handsdown.ast_parser.enums import RenderPart
-from handsdown.ast_parser.node_records.function_record import FunctionRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
+from handsdown.ast_parser.node_records.function_record import FunctionRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 
 if TYPE_CHECKING:  # pragma: no cover
+    import handsdown.ast_parser.smart_ast as ast
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import RenderExpr
-    import handsdown.ast_parser.smart_ast as ast
 
 
 class ClassRecord(NodeRecord):
@@ -26,7 +26,7 @@ class ClassRecord(NodeRecord):
 
     def __init__(self, node):
         # type: (ast.ClassDef) -> None
-        super(ClassRecord, self).__init__(node)
+        super().__init__(node)
         self.method_records = []  # type: List[FunctionRecord]
         self.decorator_records = []  # type: List[ExpressionRecord]
         self.argument_records = []  # type: List[ArgumentRecord]
@@ -36,8 +36,7 @@ class ClassRecord(NodeRecord):
         self.title = self.name
         self.docstring = self._get_docstring()
 
-    def find_record(self, name):
-        # type: (Text) -> Optional[NodeRecord]
+    def find_record(self, name: str) -> Optional[NodeRecord]:
         """
         Find child method or attribute record.
 
@@ -61,9 +60,8 @@ class ClassRecord(NodeRecord):
         return None
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
-        result = set()  # type: Set[Text]
+    def related_names(self) -> Set[str]:
+        result: Set[str] = set()
         for decorator in self.decorator_records:
             result.add(decorator.name)
             result.update(decorator.related_names)
@@ -75,8 +73,7 @@ class ClassRecord(NodeRecord):
                 result.update(method_record.related_names)
         return result
 
-    def iter_records(self):
-        # type: () -> Generator[NodeRecord, None, None]
+    def iter_records(self) -> Iterator[NodeRecord]:
         """
         Iterate over Class public methods.
 
@@ -89,8 +86,7 @@ class ClassRecord(NodeRecord):
         for attribute_record in self.attribute_records:
             yield attribute_record
 
-    def get_public_methods(self):
-        # type: () -> List[FunctionRecord]
+    def get_public_methods(self) -> List[FunctionRecord]:
         """
         Get Class public methods.
 
@@ -108,8 +104,7 @@ class ClassRecord(NodeRecord):
             result.append(method_record)
         return result
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         analyzer = ClassAnalyzer()
         analyzer.visit(self.node)
 
@@ -127,9 +122,8 @@ class ClassRecord(NodeRecord):
 
         self.method_records.sort(key=lambda x: x.name)
 
-    def _render_parts(self, indent=0):
-        # type: (int) -> List[RenderExpr]
-        parts = []  # type: List[RenderExpr]
+    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+        parts: List[RenderExpr] = []
         for decorator_record in self.decorator_records:
             parts.append(decorator_record)
             parts.append(RenderPart.LINE_BREAK)

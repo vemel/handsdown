@@ -2,7 +2,7 @@
 Base class for all node records.
 """
 from abc import abstractmethod
-from typing import Text, Set, Tuple, List, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, List, Optional, Set, Tuple, Iterable
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
@@ -10,13 +10,12 @@ from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
 
 if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.node_records.module_record import ModuleRecord
-    from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
+    from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.type_defs import RenderExpr
 
 
-class NodeRecord(object):
+class NodeRecord:
     """
     Base class for all node records.
     """
@@ -36,25 +35,22 @@ class NodeRecord(object):
     # Ellipsis string value
     ELLIPSIS = "..."
 
-    def __init__(self, node):
-        # type: (ast.AST) -> None
+    def __init__(self, node: ast.AST) -> None:
         self.docstring = ""
         self.import_string = ImportString("")
         self.node = node
         self.name = self.node.__class__.__name__
         self.title = ""
         self.is_method = False
-        self.attribute_records = []  # type: List[AttributeRecord]
+        self.attribute_records: List[AttributeRecord] = []
         self.parsed = False
-        self._line_number = None  # type: Optional[int]
+        self._line_number: Optional[int] = None
 
-    def __repr__(self):
-        # type: () -> Text
+    def __repr__(self) -> str:
         return "<{} name={}>".format(self.__class__.__name__, self.name)
 
     @property
-    def line_number(self):
-        # type: () -> int
+    def line_number(self) -> int:
         """
         Return node line number in source.
 
@@ -69,12 +65,10 @@ class NodeRecord(object):
         return self._line_number or 1
 
     @line_number.setter
-    def line_number(self, value):
-        # type: (int) -> None
+    def line_number(self, value: int) -> None:
         self._line_number = value
 
-    def _get_docstring(self):
-        # type: () -> Text
+    def _get_docstring(self) -> str:
         docstring = ast.get_docstring(self.node, clean=False) or ""
         if isinstance(docstring, bytes):
             docstring = docstring.decode("utf-8")
@@ -82,8 +76,7 @@ class NodeRecord(object):
         return DocstringFormatter(docstring).render()
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
+    def related_names(self) -> Set[str]:
         """
         Get a set of referenced object names in `node`.
 
@@ -95,12 +88,10 @@ class NodeRecord(object):
         return set()
 
     @abstractmethod
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         pass
 
-    def parse(self):
-        # type: () -> None
+    def parse(self) -> None:
         """
         Get all information from a node.
 
@@ -113,8 +104,7 @@ class NodeRecord(object):
         self.parsed = True
 
     @staticmethod
-    def _render_line(parts, indent, allow_multiline):
-        # type: (List[RenderExpr], int, bool) -> Text
+    def _render_line(parts: Iterable[RenderExpr], indent: int, allow_multiline: bool) -> str:
         result = []
         for part in parts:
             if part is RenderPart.SINGLE_LINE_SPACE:
@@ -128,8 +118,12 @@ class NodeRecord(object):
 
         return "".join(result).replace("\n", " ")
 
-    def _render_multi_line(self, parts, indent, allow_multiline):
-        # type: (List[RenderExpr], int, bool) -> Tuple[List[Text], int]
+    def _render_multi_line(
+        self,
+        parts: Iterable[RenderExpr],
+        indent: int,
+        allow_multiline: bool,
+    ) -> Tuple[List[str], int]:
         result = []
         for part in parts:
             if part is RenderPart.MULTI_LINE_BREAK:
@@ -158,16 +152,12 @@ class NodeRecord(object):
         lines = "".join(result).split("\n")
         return lines, indent
 
-    def _fit_single_line(self, line):
-        # type: (Text) -> Text
+    def _fit_single_line(self, line: str) -> str:
         if len(line) < self.SINGLE_LINE_LENGTH:
             return line
-        return "{}{}".format(
-            line[: self.SINGLE_LINE_LENGTH - len(self.ELLIPSIS)], self.ELLIPSIS
-        )
+        return "{}{}".format(line[: self.SINGLE_LINE_LENGTH - len(self.ELLIPSIS)], self.ELLIPSIS)
 
-    def render(self, indent=0, allow_multiline=False):
-        # type: (int, bool) -> Text
+    def render(self, indent: int = 0, allow_multiline: bool = False) -> str:
         """
         Render node to a string.
 
@@ -188,7 +178,7 @@ class NodeRecord(object):
             return self.ELLIPSIS
 
         parts = self._render_parts(indent)
-        line_parts = []  # type: List[RenderExpr]
+        line_parts: List[RenderExpr] = []
         lines = []
         current_indent = indent
         for part_index, part in enumerate(parts):
@@ -197,9 +187,7 @@ class NodeRecord(object):
                 if part_index < len(parts) - 1:
                     continue
 
-            result_lines = [
-                self._render_line(line_parts, current_indent, allow_multiline)
-            ]
+            result_lines = [self._render_line(line_parts, current_indent, allow_multiline)]
             if not self.is_line_fit(result_lines[-1], current_indent):
                 if not allow_multiline:
                     return self._fit_single_line("".join(result_lines))
@@ -226,13 +214,11 @@ class NodeRecord(object):
         return "".join(lines).rstrip("\n")
 
     @abstractmethod
-    def _render_parts(self, indent):
-        # type: (int) -> List[RenderExpr]
+    def _render_parts(self, indent: int) -> List[RenderExpr]:
         pass
 
     @classmethod
-    def is_line_fit(cls, line, indent):
-        # type: (Text, int) -> bool
+    def is_line_fit(cls, line: str, indent: int) -> bool:
         """
         Check if line fits to `LINE_LENGTH` with given `indent`.
 
@@ -256,8 +242,7 @@ class NodeRecord(object):
         return len(line) < cls.LINE_LENGTH - indent * cls.INDENT_SPACES
 
     @classmethod
-    def render_indent(cls, indent):
-        # type: (int) -> Text
+    def render_indent(cls, indent: int) -> str:
         """
         Render indent to a string.
 
@@ -279,8 +264,7 @@ class NodeRecord(object):
         """
         return " " * indent * cls.INDENT_SPACES
 
-    def get_related_import_strings(self, module_record):
-        # type: (ModuleRecord) -> Set[ImportString]
+    def get_related_import_strings(self, module_record: ModuleRecord) -> Set[ImportString]:
         """
         Get a set of `related_names` found in module class, function,
         method and attribute records.
@@ -288,7 +272,7 @@ class NodeRecord(object):
         Returns:
             A set of absolute import strings found.
         """
-        result = set()  # type: Set[ImportString]
+        result: Set[ImportString] = set()  # type: Set[ImportString]
         related_names = self.related_names
         if not related_names:
             return result
@@ -311,8 +295,7 @@ class NodeRecord(object):
 
         return result
 
-    def get_documented_attribute_strings(self):
-        # type: () -> List[Text]
+    def get_documented_attribute_strings(self) -> List[str]:
         """
         Render each of `attribute_records` to a Markdown string.
 
@@ -326,9 +309,7 @@ class NodeRecord(object):
             if not record.docstring:
                 continue
 
-            line = "`{}` - {}: `{}`".format(
-                record.name, record.docstring, record.value.render()
-            )
+            line = "`{}` - {}: `{}`".format(record.name, record.docstring, record.value.render())
             result.append(line)
 
         return result

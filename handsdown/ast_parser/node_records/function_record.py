@@ -2,14 +2,14 @@
 Wrapper for an `ast.FunctionDef` node.
 """
 import re
-from typing import List, Any, Set, Text, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, List, Optional, Set, Iterable
 
+import handsdown.ast_parser.smart_ast as ast
+from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
+from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
-from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
-from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
-import handsdown.ast_parser.smart_ast as ast
-from handsdown.ast_parser.enums import RenderPart
 
 if TYPE_CHECKING:  # pragma: no cover
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
@@ -27,13 +27,12 @@ class FunctionRecord(NodeRecord):
     _single_type_re = re.compile(r".+#\s*type:\s*(.+)")
     _return_type_re = re.compile(r".*#\s*type:\s*\((.*)\)\s*->\s*(.+)")
 
-    def __init__(self, node, is_method):
-        # type: (ASTFunctionDef, bool) -> None
-        super(FunctionRecord, self).__init__(node)
-        self.argument_records = []  # type: List[ArgumentRecord]
+    def __init__(self, node: ASTFunctionDef, is_method: bool) -> None:
+        super().__init__(node)
+        self.argument_records: List[ArgumentRecord] = []
         self.is_method = is_method
-        self.return_type_hint = None  # type: Optional[ExpressionRecord]
-        self.decorator_records = []  # type: List[ExpressionRecord]
+        self.return_type_hint: Optional[ExpressionRecord] = None
+        self.decorator_records: List[ExpressionRecord] = []
         self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
@@ -43,9 +42,8 @@ class FunctionRecord(NodeRecord):
         self.docstring = self._get_docstring()
 
     @property
-    def related_names(self):
-        # type: () -> Set[Text]
-        result = set()  # type: Set[Text]
+    def related_names(self) -> Set[str]:
+        result: Set[str] = set()
         for decorator_record in self.decorator_records:
             result.update(decorator_record.related_names)
         for argument_record in self.argument_records:
@@ -55,8 +53,7 @@ class FunctionRecord(NodeRecord):
 
         return result
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         analyzer = FunctionAnalyzer()
         analyzer.visit(self.node)
         self.argument_records = analyzer.argument_records
@@ -81,8 +78,7 @@ class FunctionRecord(NodeRecord):
                     self.is_classmethod = True
 
     @staticmethod
-    def _strip_arg_type(arg_type):
-        # type: (Text) -> List[Text]
+    def _strip_arg_type(arg_type: str) -> List[str]:
         bracket_count = 0
         result = [""]
         for c in arg_type:
@@ -99,8 +95,7 @@ class FunctionRecord(NodeRecord):
         result = [i.strip() for i in result if i.strip() and i.strip() != "..."]
         return result
 
-    def parse_type_comments(self, lines):
-        # type: (List[Text]) -> None
+    def parse_type_comments(self, lines: Iterable[str]) -> None:
         """
         Extract comment type annotations from a function definiition lines.
 
@@ -130,6 +125,7 @@ class FunctionRecord(NodeRecord):
 
                 # find argument index of the next argument
                 # because type annotation can be on a different line
+                argument_index = -1
                 for argument_index, argument in enumerate(self.argument_records):
                     if argument.line_number > line_number:
                         argument_index -= 1
@@ -139,9 +135,8 @@ class FunctionRecord(NodeRecord):
                     argument = self.argument_records[argument_index]
                     argument.type_hint = TextRecord(argument.node, arg_type.strip())
 
-    def _render_parts(self, indent):
-        # type: (int) -> List[Any]
-        parts = []  # type: List[Any]
+    def _render_parts(self, indent: int) -> List[Any]:
+        parts: List[Any] = []
         for decorator in self.decorator_records:
             parts.append("@")
             parts.append(decorator)

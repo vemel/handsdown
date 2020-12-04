@@ -11,13 +11,15 @@ Base class for all docstring processors:
 
 ## Supported features
 
-- `<triple_backticks><?language>` starts a new Markdown-style code block, ended with triple backticks
+- `<triple_backticks><?language>` starts a new Markdown-style code block,
+  ended with triple backticks
 - `<line>::` starts a new Markdown-style Python code block, ended with unindent
 - `<triple_tildes><?language>` starts a new Markdown-style block, ends with `<triple_tildes>`
-- `>>>` starts a new Markdown-style Python block, ended with unindent or line not starting with `>>>` or `...`
+- `>>>` starts a new Markdown-style Python block, ended with unindent
+  or line not starting with `>>>` or `...`
 """
 
-from typing import Text, Dict, Pattern, Optional, Tuple
+from typing import Dict, Optional, Pattern, Tuple
 
 from handsdown.processors.section_map import SectionMap
 from handsdown.utils.indent_trimmer import IndentTrimmer
@@ -33,12 +35,11 @@ class BaseDocstringProcessor(object):
         replace_map -- Mapping of string to replace to replacer
     """
 
-    line_re_map = tuple()  # type: Tuple[Tuple[Pattern, Text], ...]
-    section_name_map = {}  # type: Dict[Text, Text]
-    replace_map = {}  # type: Dict[Text, Text]
+    line_re_map: Tuple[Tuple[Pattern, str], ...] = tuple()
+    section_name_map: Dict[str, str] = {}
+    replace_map: Dict[str, str] = {}
 
-    def __init__(self):
-        # type: () -> None
+    def __init__(self) -> None:
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
@@ -50,8 +51,7 @@ class BaseDocstringProcessor(object):
         self.section_map = SectionMap()
         self._current_indent = 0
 
-    def _reset(self):
-        # type: () -> None
+    def _reset(self) -> None:
         self.current_section_name = ""
         self._in_codeblock = False
         self._in_doctest_block = False
@@ -63,8 +63,7 @@ class BaseDocstringProcessor(object):
         self._codeblock_indent = 0
         self._codeblock_lines_count = 0
 
-    def build_sections(self, content):
-        # type: (Text) -> SectionMap
+    def build_sections(self, content: str) -> SectionMap:
         """
         Parse docstring and split it to sections with arrays of strings.
 
@@ -114,8 +113,7 @@ class BaseDocstringProcessor(object):
 
         return self.section_map
 
-    def _parse_doctest_line(self, line):
-        # type: (Text) -> None
+    def _parse_doctest_line(self, line: str) -> None:
         # end doctest codeblock
         if not line:
             self._in_doctest_block = False
@@ -137,8 +135,7 @@ class BaseDocstringProcessor(object):
 
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
 
-    def _parse_md_codeblock_line(self, line):
-        # type: (Text) -> None
+    def _parse_md_codeblock_line(self, line: str) -> None:
         if not line and self._codeblock_lines_count == 0:
             return
 
@@ -156,8 +153,7 @@ class BaseDocstringProcessor(object):
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
         self._codeblock_lines_count += 1
 
-    def _parse_indent_codeblock_line(self, line):
-        # type: (Text) -> None
+    def _parse_indent_codeblock_line(self, line: str) -> None:
         if not line and self._codeblock_lines_count == 0:
             return
 
@@ -189,8 +185,7 @@ class BaseDocstringProcessor(object):
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
         self._codeblock_lines_count += 1
 
-    def _parse_tilde_block_line(self, line):
-        # type: (Text) -> None
+    def _parse_tilde_block_line(self, line: str) -> None:
         if not line and self._codeblock_lines_count == 0:
             return
 
@@ -207,27 +202,20 @@ class BaseDocstringProcessor(object):
         self._add_line(line, indent=self._current_indent - self._codeblock_indent)
         self._codeblock_lines_count += 1
 
-    def _add_line(self, line, indent=None):
-        # type: (Text, Optional[int]) -> None
+    def _add_line(self, line: str, indent: Optional[int] = None) -> None:
         indent_str = " " * self._current_indent
         if indent is not None:
             indent_str = " " * indent
 
-        self.section_map.add_line(
-            self.current_section_name, "{}{}".format(indent_str, line)
-        )
+        self.section_map.add_line(self.current_section_name, "{}{}".format(indent_str, line))
 
-    def _add_block(self):
-        # type: () -> None
+    def _add_block(self) -> None:
         self.section_map.add_block(self.current_section_name)
 
-    def _trim_empty_lines(self):
-        # type: () -> None
+    def _trim_empty_lines(self) -> None:
         self.section_map.trim_block(self.current_section_name)
 
-    def _parse_codeblock_start(self, line):
-        # type: (Text) -> None
-
+    def _parse_codeblock_start(self, line: str) -> None:
         # MD-style codeblock starts with triple backticks
         if line.startswith("```"):
             self._in_codeblock = True
@@ -259,8 +247,7 @@ class BaseDocstringProcessor(object):
             self._parse_doctest_line(line)
             return
 
-    def _parse_line(self, line):
-        # type: (Text) -> None
+    def _parse_line(self, line: str) -> None:
         self._parse_codeblock_start(line)
 
         if self._in_codeblock:
@@ -268,9 +255,7 @@ class BaseDocstringProcessor(object):
 
         self._parse_regular_line(line)
 
-    def _parse_regular_line(self, line):
-        # type: (Text) -> None
-
+    def _parse_regular_line(self, line: str) -> None:
         # If section name ends with `::` - add section and start RST code block
         if line.endswith("::") and line[:-1] in self.section_name_map:
             self.current_section_name = self.section_name_map[line[:-1]]
@@ -295,10 +280,7 @@ class BaseDocstringProcessor(object):
 
             match_dict = match.groupdict()
 
-            if (
-                "section" in match_dict
-                and match_dict["section"] in self.section_name_map
-            ):
+            if "section" in match_dict and match_dict["section"] in self.section_name_map:
                 self.current_section_name = self.section_name_map[match_dict["section"]]
 
             formatted_line = line_format.format(**match_dict)
