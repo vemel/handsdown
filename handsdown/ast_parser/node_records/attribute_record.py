@@ -1,6 +1,8 @@
 """
 Wrapper for an `ast.Assign` node of a module or class attribute.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast

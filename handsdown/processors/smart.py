@@ -7,6 +7,8 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 - `handsdown.processors.rst.RSTDocstringProcessor`
 """
 
+from __future__ import annotations
+
 from typing import TYPE_CHECKING
 
 from handsdown.processors.base import BaseDocstringProcessor

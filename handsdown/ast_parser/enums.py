@@ -34,8 +34,7 @@ class RenderPart(enum.Enum):
     # Replaced with a comma in a multi-line render
     MULTI_LINE_COMMA = "MULTI_LINE_COMMA"
 
-    def is_line_break(self):
-        # type: () -> bool
+    def is_line_break(self) -> bool:
         """
         Check if it is a mandatory line break.
 

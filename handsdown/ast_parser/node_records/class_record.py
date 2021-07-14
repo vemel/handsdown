@@ -1,6 +1,8 @@
 """
 Wrapper for an `ast.ClassDef` node.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, Iterator, List, Optional, Set
 
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer

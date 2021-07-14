@@ -2,16 +2,14 @@
 Loader for python source code.
 """
 
-from typing import TYPE_CHECKING, Optional
+from pathlib import Path
+from typing import Optional
 
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.utils import extract_md_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
-
-if TYPE_CHECKING:  # pragma: no cover
-    from pathlib import Path
 
 
 class LoaderError(Exception):

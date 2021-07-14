@@ -1,6 +1,8 @@
 """
 Wrapper for an `ast.arg` node.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast

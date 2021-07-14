@@ -15,3 +15,99 @@ known_first_party = [
     "tests",
 ]
 src_paths = []
+
+
+[tool.poetry]
+name = "handsdown"
+version = "0.3.9"
+description = "Python docstring-based documentation generator for lazy perfectionists."
+authors = ["Vlad Emelianov <vlad.emelianov.nz@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://vemel.github.io/handsdown/"
+repository = "https://github.com/vemel/handsdown"
+documentation = "https://vemel.github.io/handsdown/"
+keywords = ["autodoc", "documentation", "generator", "markdown"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Framework :: Django",
+    "Framework :: Flask",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Typing :: Typed",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+packages = [
+    { include = "handsdown" },
+]
+include = [
+    "handsdown/assets/*.yml",
+]
+
+[tool.poetry.scripts]
+handsdown = 'handsdown.main:main'
+
+[tool.poetry.urls]
+"Documentation" = "https://handsdown.readthedocs.io/en/latest/"
+"Source" = "https://github.com/vemel/handsdown"
+"Bug Tracker" = "https://github.com/vemel/handsdown/issues"
+
+[tool.poetry.dependencies]
+python = "^3.6.2"
+pip = "*"
+typed-ast = "*"
+
+[tool.poetry.dev-dependencies]
+black = "21.5b2"
+isort = "5.6.4"
+codecov = "2.1.11"
+mypy = "0.910"
+flake8 = "3.9.2"
+pytest = "6.2.4"
+pytest-cov = "2.12.1"
+rope = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.report]
+exclude_lines = [
+    "if self.debug:",
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "@overload",
+]
+ignore_errors = true
+omit = [
+    "tests/*",
+]
+
+[tool.pyright]
+include = [
+    "handsdown",
+]
+exclude = [
+    "**/__pycache__",
+    "tests",
+    "typestubs",
+]
+reportMissingImports = true
+reportMissingTypeStubs = false
+reportMissingTypeArgument = "error"
+reportIncompatibleMethodOverride = "error"
+reportIncompatibleVariableOverride = "error"
+reportUnknownParameterType = "error"

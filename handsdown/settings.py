@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
 """
 Various project constants.
 """
-import os
+from pathlib import Path
 
 # Path to handsdown root directory.
-HANDSDOWN_PATH = os.path.dirname(__file__)
+HANDSDOWN_PATH = Path(__file__)
 
 # Path to `assets` directory from root.
-ASSETS_PATH = os.path.join(HANDSDOWN_PATH, "assets")
+ASSETS_PATH = HANDSDOWN_PATH / "assets"
 
 # Global `logging.Logger` name.
 LOGGER_NAME = "handsdown"

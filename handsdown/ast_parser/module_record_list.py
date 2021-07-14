@@ -1,6 +1,8 @@
 """
 Aggregation of `ModuleRecord` objects.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Optional, Set
 
 from handsdown.utils.logger import get_logger

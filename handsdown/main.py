@@ -1,10 +1,10 @@
 """
-Main CLI entrypoint for `handsdown`
+Main CLI entrypoint for `handsdown`.
 """
 
+import argparse
 import logging
 import sys
-from typing import TYPE_CHECKING
 
 from handsdown.cli_parser import parse_args
 from handsdown.generator import Generator, GeneratorError
@@ -12,10 +12,6 @@ from handsdown.settings import EXCLUDE_EXPRS, SOURCES_GLOB
 from handsdown.utils import make_title, render_asset
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
-from handsdown.version import version
-
-if TYPE_CHECKING:  # pragma: no cover
-    import argparse
 
 
 def create_external_configs(namespace):
@@ -46,15 +42,11 @@ def create_external_configs(namespace):
         )
 
 
-def main():
-    # type: () -> None
+def main() -> None:
     """
     Main entrypoint for CLI.
     """
     args = parse_args(sys.argv[1:])
-    if args.version:
-        print(version)
-        return
 
     log_level = logging.INFO
     if args.debug:
@@ -95,5 +87,5 @@ def main():
         sys.exit(1)
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     main()

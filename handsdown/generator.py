@@ -2,9 +2,10 @@
 Main handsdown documentation generator.
 """
 
-from __future__ import unicode_literals
+from __future__ import annotations
 
 import re
+from pathlib import Path
 from typing import TYPE_CHECKING, Iterable, List, Optional, Set
 
 from handsdown.ast_parser.module_record_list import ModuleRecordList
@@ -19,8 +20,6 @@ from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
 
 if TYPE_CHECKING:  # pragma: no cover
-    from pathlib import Path
-
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.node_records.node_record import NodeRecord
     from handsdown.processors.base import BaseDocstringProcessor
@@ -28,7 +27,7 @@ if TYPE_CHECKING:  # pragma: no cover
 
 class GeneratorError(Exception):
     """
-    Main error for `Generator`
+    Main error for `Generator`.
     """
 
 

@@ -1,25 +1,22 @@
 """
 Markdown file builder.
 """
-from __future__ import unicode_literals
+from __future__ import annotations
 
 import re
 import traceback
-from typing import TYPE_CHECKING, List, Optional, Text, Type
+from pathlib import Path
+from types import TracebackType
+from typing import List, Optional, Text, Type
 
 from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.path_finder import PathFinder
 
-if TYPE_CHECKING:  # pragma: no cover
-    from pathlib import Path
-    from types import TracebackType
-
-
 __all__ = ["MDDocument"]
 
 
-class MDDocument(object):
+class MDDocument:
     """
     Markdown file builder.
 
@@ -62,9 +59,8 @@ class MDDocument(object):
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
-    def __init__(self, path):
-        # type: (Path) -> None
-        self._sections = []  # type: List[Text]
+    def __init__(self, path: Path) -> None:
+        self._sections: List[str] = []
         self._content = ""
         self._title = ""
         self._subtitle = ""
@@ -72,24 +68,21 @@ class MDDocument(object):
         self._path = path
         self._path_finder = PathFinder(self._path.parent)
 
-    def __enter__(self):
-        # type: () -> MDDocument
+    def __enter__(self) -> "MDDocument":
         return self
 
     def __exit__(
         self,
-        exc_type,  # type: Optional[Type[BaseException]]
-        exc_value,  # type: Optional[BaseException]
-        tb,  # type: Optional[TracebackType]
-    ):
-        # type: (...) -> None
+        exc_type: Optional[Type[BaseException]],
+        exc_value: Optional[BaseException],
+        tb: Optional[TracebackType],
+    ) -> None:
         if exc_value:
             traceback.print_tb(tb)
             raise exc_value
         return self.write()
 
-    def read(self, source_path=None):
-        # type: (Optional[Path]) -> None
+    def read(self, source_path: Optional[Path] = None) -> None:
         """
         Read and parse content from `source_path`.
 
@@ -123,8 +116,7 @@ class MDDocument(object):
         if not self._subtitle and self._sections and not self._sections[0].startswith("#"):
             self._subtitle = self._sections.pop(0)
 
-    def add_toc_if_not_exists(self):
-        # type: () -> None
+    def add_toc_if_not_exists(self) -> None:
         """
         Check if ToC exists in the document or create one.
         """
@@ -132,8 +124,7 @@ class MDDocument(object):
             self._toc_section = self.generate_toc_section()
 
     @classmethod
-    def get_anchor(cls, title):
-        # type: (Text) -> Text
+    def get_anchor(cls, title: str) -> str:
         """
         Convert title to a GitHub-friendly anchor link.
 
@@ -145,8 +136,7 @@ class MDDocument(object):
         return result
 
     @staticmethod
-    def is_toc(section):
-        # type: (Text) -> bool
+    def is_toc(section: str) -> bool:
         """
         Check if the section is Tree of Contents.
 
@@ -163,8 +153,7 @@ class MDDocument(object):
         return True
 
     @classmethod
-    def render_link(cls, title, link):
-        # type: (Text, Text) -> Text
+    def render_link(cls, title: str, link: str) -> str:
         """
         Render Markdown link wih escaped title.
 

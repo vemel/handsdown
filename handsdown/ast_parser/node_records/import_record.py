@@ -1,6 +1,8 @@
 """
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, List, Optional
 
 import handsdown.ast_parser.smart_ast as ast

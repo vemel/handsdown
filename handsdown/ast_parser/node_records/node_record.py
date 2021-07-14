@@ -1,8 +1,10 @@
 """
 Base class for all node records.
 """
+from __future__ import annotations
+
 from abc import abstractmethod
-from typing import TYPE_CHECKING, List, Optional, Set, Tuple, Iterable
+from typing import TYPE_CHECKING, Iterable, List, Optional, Set, Tuple
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart

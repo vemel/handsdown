@@ -1,8 +1,10 @@
 """
 Wrapper for an `ast.FunctionDef` node.
 """
+from __future__ import annotations
+
 import re
-from typing import TYPE_CHECKING, Any, List, Optional, Set, Iterable
+from typing import TYPE_CHECKING, Any, Iterable, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer

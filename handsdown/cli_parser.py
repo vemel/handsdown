@@ -6,6 +6,8 @@ import re
 from pathlib import Path
 from typing import Iterable
 
+import pkg_resources
+
 
 def git_repo(git_repo_url: str) -> str:
     """
@@ -80,9 +82,9 @@ def existing_dir_abs_path(path_str: str) -> Path:
     """
     path = Path(path_str).absolute()
     if not path.exists():
-        raise argparse.ArgumentTypeError("Path {} does not exist".format(path))
+        raise argparse.ArgumentTypeError(f"Path {path} does not exist")
     if not path.is_dir():
-        raise argparse.ArgumentTypeError("Path {} is not a directory".format(path))
+        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
 
 
@@ -93,6 +95,11 @@ def parse_args(args: Iterable[str]) -> argparse.Namespace:
     Returns:
         An `argparse.ArgumentParser` instance.
     """
+    try:
+        version = pkg_resources.get_distribution("handsdown").version
+    except pkg_resources.DistributionNotFound:
+        version = "0.0.0"
+
     parser = argparse.ArgumentParser(
         "handsdown", description="Docstring-based python documentation generator."
     )
@@ -147,5 +154,5 @@ def parse_args(args: Iterable[str]) -> argparse.Namespace:
         default=Path.cwd().stem.capitalize(),
     )
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
-    parser.add_argument("-v", "--version", action="store_true", help="Show pacakge version")
+    parser.add_argument("-V", "--version", action="version", version=version)
     return parser.parse_args(list(args))

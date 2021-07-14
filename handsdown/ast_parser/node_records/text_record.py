@@ -1,6 +1,8 @@
 """
 Wrapper for a text-only `ast.expr` node.
 """
+from __future__ import annotations
+
 import re
 from typing import TYPE_CHECKING, List, Set
 

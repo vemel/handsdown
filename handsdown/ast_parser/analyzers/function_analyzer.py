@@ -1,6 +1,8 @@
 """
 AST analyzer for `ast.FunctionDef` records.
 """
+from __future__ import annotations
+
 from typing import TYPE_CHECKING, List, Optional
 
 import handsdown.ast_parser.smart_ast as ast
