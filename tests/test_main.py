@@ -1,7 +1,7 @@
 # pylint: disable=missing-docstring
 import unittest
-from unittest.mock import patch
 from pathlib import Path
+from unittest.mock import patch
 
 from handsdown.main import main
 
@@ -37,7 +37,7 @@ class TestMain(unittest.TestCase):
             output_path=Path("/output-path"),
             project_name="Handsdown",
             raise_errors=False,
-            source_code_url=None,
+            source_code_url="/blob/master/",
             source_paths=path_finder_mock().exclude().include().glob(),
             toc_depth=1,
         )

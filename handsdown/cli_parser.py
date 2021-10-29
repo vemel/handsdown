@@ -2,11 +2,46 @@
 CLI Parser.
 """
 import argparse
+import logging
 import re
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, List
 
 import pkg_resources
+
+
+class CLINamespace:
+    """
+    Main CLI Namespace.
+    """
+
+    def __init__(
+        self,
+        panic: bool,
+        input_path: Path,
+        output_path: Path,
+        toc_depth: int,
+        log_level: int,
+        include: Iterable[str],
+        exclude: Iterable[str],
+        source_code_url: str,
+        branch: str,
+        project_name: str,
+        files: Iterable[Path],
+        cleanup: bool,
+    ) -> None:
+        self.panic = panic
+        self.input_path = input_path
+        self.output_path = output_path
+        self.log_level = log_level
+        self.toc_depth = toc_depth
+        self.include: List[str] = list(include)
+        self.exclude: List[str] = list(exclude)
+        self.source_code_url = source_code_url
+        self.branch = branch
+        self.project_name = project_name
+        self.files: List[Path] = list(files)
+        self.cleanup = cleanup
 
 
 def git_repo(git_repo_url: str) -> str:
@@ -19,6 +54,8 @@ def git_repo(git_repo_url: str) -> str:
     Returns:
         A GitHub URL.
     """
+    if not git_repo_url:
+        return git_repo_url
     https_repo_re = re.compile(r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
     ssh_repo_re = re.compile(r"^git@github\.com:(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
     short_https_repo_re = re.compile(r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)/?$")
@@ -27,12 +64,12 @@ def git_repo(git_repo_url: str) -> str:
         match = ssh_repo_re.match(git_repo_url)
     if not match:
         match = short_https_repo_re.match(git_repo_url)
-    if match:
-        user = match.groupdict()["user"]
-        repo = match.groupdict()["repo"]
-        return f"https://github.com/{user}/{repo}/blob/master/"
+    if not match:
+        raise argparse.ArgumentTypeError(f"Cannot parse Git URL {git_repo_url}")
 
-    return git_repo_url
+    user = match.groupdict()["user"]
+    repo = match.groupdict()["repo"]
+    return f"https://github.com/{user}/{repo}/"
 
 
 def abs_path(path_str: str) -> Path:
@@ -88,7 +125,7 @@ def existing_dir_abs_path(path_str: str) -> Path:
     return path
 
 
-def parse_args(args: Iterable[str]) -> argparse.Namespace:
+def parse_args(args: Iterable[str]) -> CLINamespace:
     """
     Get CLI arguments parser.
 
@@ -135,17 +172,19 @@ def parse_args(args: Iterable[str]) -> argparse.Namespace:
         "--external",
         help=(
             "Build docs and config for external hosting, GitHub Pages or Read the Docs."
-            " Provide the project GitHub .../blob/master/ URL here."
+            " Provide the project GitHub .../blob/main/ URL here."
         ),
         dest="source_code_url",
         metavar="REPO_URL",
-        default=None,
+        default="",
         type=git_repo,
     )
+    parser.add_argument("--branch", help="Main branch name", default="master")
     parser.add_argument(
         "--toc-depth", help="Maximum depth of child modules ToC", default=1, type=int
     )
     parser.add_argument("-d", "--debug", action="store_true", help="Show debug messages")
+    parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument(
         "-n",
         "--name",
@@ -153,6 +192,26 @@ def parse_args(args: Iterable[str]) -> argparse.Namespace:
         help="Project name",
         default=Path.cwd().stem.capitalize(),
     )
-    parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
     parser.add_argument("-V", "--version", action="version", version=version)
-    return parser.parse_args(list(args))
+    namespace = parser.parse_args(list(args))
+
+    log_level = logging.INFO
+    if namespace.debug:
+        log_level = logging.DEBUG
+    if namespace.quiet:
+        log_level = logging.CRITICAL
+
+    return CLINamespace(
+        panic=namespace.panic,
+        input_path=namespace.input_path,
+        output_path=namespace.output_path,
+        toc_depth=namespace.toc_depth,
+        log_level=log_level,
+        exclude=namespace.exclude,
+        include=namespace.include,
+        source_code_url=namespace.source_code_url,
+        branch=namespace.branch,
+        project_name=namespace.project_name,
+        files=namespace.files,
+        cleanup=namespace.cleanup,
+    )
