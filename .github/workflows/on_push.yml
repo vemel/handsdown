@@ -57,10 +57,11 @@ jobs:
       - name: Lint
         run: |
           python -m flake8 handsdown
+          python -m pylint handsdown
       - name: Typing
         run: |
           python -m mypy handsdown
-          pyright handsdown
+          npx pyright
       - name: Test
         run: |
           python -m pytest
