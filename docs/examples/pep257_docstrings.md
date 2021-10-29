@@ -14,7 +14,7 @@
 
 ## ClassExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L11)
 
 ```python
 class ClassExample():
@@ -43,10 +43,10 @@ This is not a codeblock, test inside tildes rendered as it is
 
 ### ClassExample().method_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L35)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L34)
 
 ```python
-def method_example(text: Text = 'hello') -> int:
+def method_example(text: str = 'hello') -> int:
 ```
 
 Summary line.
@@ -87,7 +87,7 @@ Description of return value
 
 ## function_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L68)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py#L67)
 
 ```python
 def function_example(real=0.0, imag=0.0):

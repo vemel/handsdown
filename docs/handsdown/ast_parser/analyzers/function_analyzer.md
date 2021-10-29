@@ -4,7 +4,7 @@
 
 AST analyzer for `ast.FunctionDef` records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
     - [FunctionAnalyzer](#functionanalyzer)
         - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
         - [FunctionAnalyzer().visit_AsyncFunctionDef](#functionanalyzervisit_asyncfunctiondef)
@@ -13,7 +13,7 @@ AST analyzer for `ast.FunctionDef` records.
 
 ## FunctionAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L14)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
 
 ```python
 class FunctionAnalyzer(BaseAnalyzer):
@@ -28,10 +28,10 @@ AST analyzer for `ast.FunctionDef` records.
 
 ### FunctionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L168)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L161)
 
 ```python
-def generic_visit(_node: ast.AST) -> None:
+def generic_visit(node: ast.AST) -> None:
 ```
 
 Do nothing for unknown `ast.AST` nodes.
@@ -42,7 +42,7 @@ Do nothing for unknown `ast.AST` nodes.
 
 ### FunctionAnalyzer().visit_AsyncFunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L148)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
 
 ```python
 def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
@@ -68,7 +68,7 @@ async def my_func():
 
 ### FunctionAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L128)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -94,7 +94,7 @@ def my_func():
 
 ### FunctionAnalyzer().visit_arguments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L42)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
 
 ```python
 def visit_arguments(node: ast.arguments) -> None:
@@ -118,8 +118,8 @@ def my_func(
 
 # type annotated arguments
 def my_func_typed(
-    arg1: Text,
-    arg_default: Text="value",
+    arg1: str,
+    arg_default: str = "value",
 ):
     pass
 

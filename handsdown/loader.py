@@ -54,7 +54,7 @@ class Loader:
         if relative_source_path.stem == "__main__":
             relative_source_path = relative_source_path.parent / "module"
 
-        file_name = "{}.md".format(relative_source_path.stem)
+        file_name = f"{relative_source_path.stem}.md"
         relative_output_path = relative_source_path.parent / file_name
         return self._output_path / relative_output_path
 
@@ -86,9 +86,7 @@ class Loader:
             )
             module_record.build_children()
         except Exception as e:
-            raise LoaderError(
-                "{} while loading {}: {}".format(e.__class__.__name__, source_path, e)
-            ) from e
+            raise LoaderError(f"{e.__class__.__name__} while loading {source_path}: {e}") from e
 
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
@@ -118,7 +116,7 @@ class Loader:
             module_record.parse()
         except Exception as e:
             raise LoaderError(
-                "{} while parsing {}: {}".format(e.__class__.__name__, module_record.source_path, e)
+                f"{e.__class__.__name__} while parsing {module_record.source_path}: {e}"
             ) from e
 
     def get_import_string(self, source_path: Path) -> str:

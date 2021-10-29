@@ -10,10 +10,11 @@ from handsdown.settings import ASSETS_PATH
 def make_title(file_stem: str) -> str:
     """
     Convert `pathlib.Path` part or any other string to a human-readable title.
+
     Replace underscores with spaces and capitalize result.
 
-    Examples::
-
+    Examples:
+        ```python
         make_title(Path("my_module/my_path.py").stem)
         "My Path"
 
@@ -25,6 +26,7 @@ def make_title(file_stem: str) -> str:
 
         make_title(Path("my_module/__main__.py").stem)
         "Module"
+        ```
 
     Arguments:
         file_stem -- Stem from path.
@@ -61,18 +63,20 @@ def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> N
 
 
 def extract_md_title(content: str) -> Tuple[str, str]:
-    """
+    r"""
     Extract title from the first line of content.
-    If title is present -  return a title and a remnaing content.
+
+    If title is present - return a title and a remnaing content.
     if not - return an empty title and untouched content.
 
-    Examples::
-
-        extract_md_title('# Title\\ncontent')
+    Examples:
+        ```python
+        extract_md_title('# Title\ncontent')
         ('Title', 'content')
 
-        extract_md_title('no title\\ncontent')
-        ('', 'no title\\ncontent')
+        extract_md_title('no title\ncontent')
+        ('', 'no title\ncontent')
+        ```
 
     Returns:
         A tuple fo title and remaining content.
@@ -80,7 +84,7 @@ def extract_md_title(content: str) -> Tuple[str, str]:
     title = ""
     if content.startswith("# "):
         if "\n" not in content:
-            content = "{}\n".format(content)
+            content = f"{content}\n"
 
         title_line, content = content.split("\n", 1)
         title = title_line.split(" ", 1)[-1]

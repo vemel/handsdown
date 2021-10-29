@@ -1,5 +1,6 @@
+# pylint: disable=no-name-in-module
 """
-# Smart AST
+Smart AST.
 
 Provides compatibility between AST 2 and 3.
 """

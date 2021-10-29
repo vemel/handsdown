@@ -1,8 +1,10 @@
-# CLI Parser
+# Cli Parser
 
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py) module.
 
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / CLI Parser
+CLI Parser.
+
+- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Cli Parser
     - [abs_path](#abs_path)
     - [dir_abs_path](#dir_abs_path)
     - [existing_dir_abs_path](#existing_dir_abs_path)
@@ -11,10 +13,10 @@
 
 ## abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L48)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L38)
 
 ```python
-def abs_path(path_str: Text) -> Path:
+def abs_path(path_str: str) -> Path:
 ```
 
 Validate `path_str` and make it absolute.
@@ -29,10 +31,10 @@ An absolute path.
 
 ## dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L62)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L51)
 
 ```python
-def dir_abs_path(path_str: Text) -> Path:
+def dir_abs_path(path_str: str) -> Path:
 ```
 
 Validate directory `path_str` and make it absolute.
@@ -51,10 +53,10 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L82)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L70)
 
 ```python
-def existing_dir_abs_path(path_str: Text) -> Path:
+def existing_dir_abs_path(path_str: str) -> Path:
 ```
 
 Validate existing directory `path_str` and make it absolute.
@@ -73,10 +75,10 @@ An absolute path.
 
 ## git_repo
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L12)
 
 ```python
-def git_repo(git_repo_url: Text) -> Text:
+def git_repo(git_repo_url: str) -> str:
 ```
 
 Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
@@ -91,10 +93,10 @@ A GitHub URL.
 
 ## parse_args
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L104)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L91)
 
 ```python
-def parse_args(args: List[Text]) -> argparse.Namespace:
+def parse_args(args: Iterable[str]) -> argparse.Namespace:
 ```
 
 Get CLI arguments parser.

@@ -12,7 +12,7 @@ from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     import handsdown.ast_parser.smart_ast as ast
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import RenderExpr
@@ -26,13 +26,12 @@ class ClassRecord(NodeRecord):
         node -- AST node.
     """
 
-    def __init__(self, node):
-        # type: (ast.ClassDef) -> None
+    def __init__(self, node: ast.ClassDef) -> None:
         super().__init__(node)
-        self.method_records = []  # type: List[FunctionRecord]
-        self.decorator_records = []  # type: List[ExpressionRecord]
-        self.argument_records = []  # type: List[ArgumentRecord]
-        self.base_records = []  # type: List[ExpressionRecord]
+        self.method_records: List[FunctionRecord] = []
+        self.decorator_records: List[ExpressionRecord] = []
+        self.argument_records: List[ArgumentRecord] = []
+        self.base_records: List[ExpressionRecord] = []
         self.support_split = True
         self.name = node.name
         self.title = self.name
@@ -63,6 +62,9 @@ class ClassRecord(NodeRecord):
 
     @property
     def related_names(self) -> Set[str]:
+        """
+        Set of related names.
+        """
         result: Set[str] = set()
         for decorator in self.decorator_records:
             result.add(decorator.name)

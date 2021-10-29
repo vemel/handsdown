@@ -10,11 +10,11 @@ Translator of docstrings to Markdown format.
 
 ## DocstringFormatter
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/docstring_formatter.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/docstring_formatter.py#L9)
 
 ```python
 class DocstringFormatter():
-    def __init__(docstring: Text) -> None:
+    def __init__(docstring: str) -> None:
 ```
 
 Translator of docstrings to Markdown format.
@@ -25,10 +25,10 @@ Translator of docstrings to Markdown format.
 
 ### DocstringFormatter().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/docstring_formatter.py#L63)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/docstring_formatter.py#L57)
 
 ```python
-def render() -> Text:
+def render() -> str:
 ```
 
 Get Markdown-friendly docstring.

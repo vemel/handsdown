@@ -172,7 +172,7 @@ class MDDocument:
         Returns:
             A string with Markdown link.
         """
-        return "[{}]({})".format(title, link)
+        return f"[{title}]({link})"
 
     def render_md_doc_link(
         self, target_md_document: MDDocument, title: Optional[str] = None
@@ -228,17 +228,17 @@ class MDDocument:
         """
         link = ""
         if anchor:
-            link = "#{}".format(anchor)
+            link = f"#{anchor}"
         if target_path and target_path != self._path:
             link_path = self._path_finder.relative(target_path)
-            link = "{}{}".format(link_path, link)
+            link = f"{link_path}{link}"
 
         return self.render_link(title, link)
 
     def _build_content(self) -> str:
         sections = []
         if self._title:
-            sections.append("# {}".format(self._title))
+            sections.append(f"# {self._title}")
         if self._subtitle:
             sections.append(self._subtitle)
         if self._toc_section:
@@ -337,7 +337,8 @@ class MDDocument:
             title -- Title to add.
             level -- Title level, number of `#` symbols.
         """
-        section = "{} {}".format("#" * level, self._escape_title(title))
+        section_level = "#" * level
+        section = f"{section_level} {self._escape_title(title)}"
         self._sections.append(section)
         self._content = self._build_content()
 
@@ -401,7 +402,7 @@ class MDDocument:
             Ready to insert ToC line.
         """
         indent = cls.TOC_INDENT * level
-        return IndentTrimmer.indent_line("- {}".format(line), indent)
+        return IndentTrimmer.indent_line(f"- {line}", indent)
 
     @classmethod
     def _escape_title(cls, title: str) -> str:

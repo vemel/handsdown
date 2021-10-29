@@ -1,13 +1,11 @@
 """
 AST analyzer for `ast.ClassDef` records.
 """
-from typing import TYPE_CHECKING, List
+from typing import List
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
-
-if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import ASTFunctionDef
+from handsdown.ast_parser.type_defs import ASTFunctionDef
 
 
 class ClassAnalyzer(BaseAnalyzer):
@@ -15,16 +13,14 @@ class ClassAnalyzer(BaseAnalyzer):
     AST analyzer for `ast.ClassDef` records.
     """
 
-    def __init__(self):
-        # type: () -> None
+    def __init__(self) -> None:
         super().__init__()
-        self.base_nodes = []  # type: List[ast.expr]
-        self.decorator_nodes = []  # type: List[ast.expr]
-        self.method_nodes = []  # type: List[ASTFunctionDef]
-        self.attribute_nodes = []  # type: List[ast.Assign]
+        self.base_nodes: List[ast.expr] = []
+        self.decorator_nodes: List[ast.expr] = []
+        self.method_nodes: List[ASTFunctionDef] = []
+        self.attribute_nodes: List[ast.Assign] = []
 
-    def visit_ClassDef(self, node):
-        # type: (ast.ClassDef) -> None
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
         """
         Entrypoint for the analyzer.
 
@@ -49,8 +45,7 @@ class ClassAnalyzer(BaseAnalyzer):
         for element in node.body:
             self.visit(element)
 
-    def _visit_FunctionDef(self, node):
-        # type: (ASTFunctionDef) -> None
+    def _visit_FunctionDef(self, node: ASTFunctionDef) -> None:
         name = node.name
 
         # skip private methods
@@ -64,44 +59,43 @@ class ClassAnalyzer(BaseAnalyzer):
 
         self.method_nodes.append(node)
 
-    def visit_FunctionDef(self, node):
-        # type: (ast.FunctionDef) -> None
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         """
         Parse info about class method statements.
 
         Adds new `FunctionRecord` entry to `method_records`.
 
         Examples:
-
+            ```python
             class MyClass:
                 def my_method(self, arg):
                     return arg
+            ```
 
         Arguments:
             node -- AST node.
         """
         self._visit_FunctionDef(node)
 
-    def visit_AsyncFunctionDef(self, node):
-        # type: (ast.AsyncFunctionDef) -> None
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         """
         Parse info about class asynchronous method statements.
 
         Adds new `FunctionRecord` entry to `method_records`.
 
         Examples:
-
+            ```python
             class MyClass:
                 async def my_method(self, arg):
                     return await arg
+            ```
 
         Arguments:
             node -- AST node.
         """
         self._visit_FunctionDef(node)
 
-    def visit_Assign(self, node):
-        # type: (ast.Assign) -> None
+    def visit_Assign(self, node: ast.Assign) -> None:
         """
         Parse info about class attribute statements.
 
@@ -110,8 +104,8 @@ class ClassAnalyzer(BaseAnalyzer):
         Skips multiple assignments.
         Skips assignments with names starting with `_`.
 
-        Examples::
-
+        Examples:
+            ```python
             class MyClass:
                 MY_MODULE_ATTR = "value"
                 my_attr = "value"
@@ -120,6 +114,7 @@ class ClassAnalyzer(BaseAnalyzer):
                 _MY_MODULE_ATTR = "value"
                 multi_attr_1, multi_attr_2 = [1, 2]
                 my_object.name = "value"
+            ```
 
         Arguments:
             node -- AST node.
@@ -140,8 +135,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
         self.attribute_nodes.append(node)
 
-    def generic_visit(self, _node):
-        # type: (ast.AST) -> None
+    def generic_visit(self, node: ast.AST) -> None:
         """
         Do nothing for unknown `ast.AST` nodes.
 

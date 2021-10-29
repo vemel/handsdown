@@ -30,7 +30,7 @@ class MyValue():
 ```python
 class Typed():
     def __init__(
-        _value: Union[List[Text], Text, MyValue] = MyValue(
+        _value: Union[(List[str], str, MyValue)] = MyValue(
             {
                 'key1': 'value1',
                 'key2': 'value2',
@@ -40,8 +40,8 @@ class Typed():
                 'key6': 'value6',
             },
         ),
-        _name: Text = 'default',
-    ) -> Dict[Text, MyValue]:
+        _name: str = 'default',
+    ) -> Dict[(str, MyValue)]:
 ```
 
 ### Typed().async_method
@@ -49,7 +49,7 @@ class Typed():
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/typed.py#L38)
 
 ```python
-async def async_method(_value: Text) -> Text:
+async def async_method(_value: str) -> str:
 ```
 
 ### Typed.classmethod
@@ -58,7 +58,7 @@ async def async_method(_value: Text) -> Text:
 
 ```python
 @classmethod
-def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
+def classmethod(_my_value: MyValue, *_args: str, **_kwargs: Any) -> None:
 ```
 
 #### See also
@@ -72,7 +72,7 @@ def classmethod(_my_value: MyValue, *_args: Text, **_kwargs: Any) -> None:
 ```python
 @my_deco(key='value')
 def func(
-    _list: Tuple[List[Text], ...],
+    _list: Tuple[(List[str], ...)],
     _my_value_cls: Type[MyValue] = MyValue,
     **_kwargs: None,
 ) -> Any:

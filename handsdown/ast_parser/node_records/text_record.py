@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, List, Set
 
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     import handsdown.ast_parser.smart_ast as ast
     from handsdown.ast_parser.type_defs import RenderExpr
 

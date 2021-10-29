@@ -4,14 +4,14 @@
 
 Wrapper for an `ast.FunctionDef` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / FunctionRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / FunctionRecord
     - [FunctionRecord](#functionrecord)
         - [FunctionRecord().parse_type_comments](#functionrecordparse_type_comments)
         - [FunctionRecord().related_names](#functionrecordrelated_names)
 
 ## FunctionRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L19)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L21)
 
 ```python
 class FunctionRecord(NodeRecord):
@@ -31,10 +31,10 @@ Wrapper for an `ast.FunctionDef` and `ast.AsyncFunctionDef` node.
 
 ### FunctionRecord().parse_type_comments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L102)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L103)
 
 ```python
-def parse_type_comments(lines: List[Text]) -> None:
+def parse_type_comments(lines: Iterable[str]) -> None:
 ```
 
 Extract comment type annotations from a function definiition lines.
@@ -44,9 +44,11 @@ Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
 
 ### FunctionRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L45)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L46)
 
 ```python
 @property
-def related_names() -> Set[Text]:
+def related_names() -> Set[str]:
 ```
+
+Set of related names.

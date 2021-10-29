@@ -11,11 +11,13 @@
 
 ## Links
 
-[Google Python Style Guide](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings)
+[Google Python Style Guide](
+    http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
+)
 
 ## ClassExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L13)
 
 ```python
 class ClassExample():
@@ -30,10 +32,10 @@ Google-style class example
 
 ### ClassExample().method_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L21)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L22)
 
 ```python
-def method_example(text: Text = 'hello') -> int:
+def method_example(text: str = 'hello') -> int:
 ```
 
 Summary line.
@@ -74,7 +76,7 @@ to use the function
 
 ## function_example
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L55)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L56)
 
 ```python
 def function_example(arg1, arg2, arg3=None):
@@ -114,7 +116,7 @@ print result
 
 ## function_with_pep484_type_annotations
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L86)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py#L87)
 
 ```python
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:

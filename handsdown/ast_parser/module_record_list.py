@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Optional, Set
 
 from handsdown.utils.logger import get_logger
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.utils.import_string import ImportString
 

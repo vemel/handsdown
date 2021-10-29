@@ -99,7 +99,7 @@ Changed in version 1.4
 [[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L27)
 
 ```python
-def hello(name: Text) -> Text:
+def hello(name: str) -> str:
 ```
 
 This is module function and it is added to documentation even if it does

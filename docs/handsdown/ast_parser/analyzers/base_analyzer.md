@@ -4,12 +4,12 @@
 
 Base AST analyzer.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / BaseAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / BaseAnalyzer
     - [BaseAnalyzer](#baseanalyzer)
 
 ## BaseAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
 
 ```python
 class BaseAnalyzer(ast.NodeVisitor):

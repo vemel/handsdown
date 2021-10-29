@@ -55,10 +55,11 @@ class Section:
         return "\n\n".join(result)
 
 
-class SectionMap(dict):
+class SectionMap(dict):  # type: ignore
     """
-    Dict-based storage for parsed `Section` list for
-    `handsdown.processors.base.BaseDocstringProcessor`
+    Dict-based storage for parsed `Section` list.
+
+    Used for `handsdown.processors.base.BaseDocstringProcessor`.
 
     Key is a `Section` title.
     Value is a related `Section` instance.
@@ -87,6 +88,7 @@ class SectionMap(dict):
     def add_line(self, section_name: str, line: str) -> None:
         """
         Add new `line` to the last `SectionBlock` of section `section_name`.
+
         If line and section are empty - section is not created.
 
         Arguments:
@@ -123,6 +125,7 @@ class SectionMap(dict):
     def trim_block(self, section_name: str) -> None:
         """
         Delete last empty lines from the last `SectionBlock`.
+
         If `Section` does not exist - it is not created.
 
         Arguments:

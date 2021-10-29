@@ -9,7 +9,7 @@ import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import RenderExpr
 
 
@@ -32,6 +32,9 @@ class AttributeRecord(NodeRecord):
 
     @property
     def related_names(self) -> Set[str]:
+        """
+        Set of related names.
+        """
         result = set()
         if self.value:
             result.update(self.value.related_names)

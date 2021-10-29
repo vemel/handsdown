@@ -1,13 +1,11 @@
 """
 AST analyzer for `ast.Module` records.
 """
-from typing import TYPE_CHECKING, List
+from typing import List
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
-
-if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import ASTFunctionDef, ASTImport
+from handsdown.ast_parser.type_defs import ASTFunctionDef, ASTImport
 
 
 class ModuleAnalyzer(BaseAnalyzer):
@@ -41,8 +39,7 @@ class ModuleAnalyzer(BaseAnalyzer):
         """
         self.import_nodes.append(node)
 
-    def visit_ImportFrom(self, node):
-        # type: (ast.ImportFrom) -> None
+    def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
         """
         Parse info about module `import ... from ...` statements.
 
@@ -58,23 +55,22 @@ class ModuleAnalyzer(BaseAnalyzer):
         """
         self.import_nodes.append(node)
 
-    def visit_ClassDef(self, node):
-        # type: (ast.ClassDef) -> None
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
         """
         Parse info about module `class ...` statements.
 
         Adds `node` entry to `class_nodes`.
         Skips nodes with names starting with `_`.
 
-        Examples::
-
+        Examples:
+            ```python
             class MyClass():
                 pass
+            ```
 
         Arguments:
             node -- AST node.
         """
-
         name = node.name
 
         # skip private classes
@@ -83,8 +79,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 
         self.class_nodes.append(node)
 
-    def _visit_FunctionDef(self, node):
-        # type: (ASTFunctionDef) -> None
+    def _visit_FunctionDef(self, node: ASTFunctionDef) -> None:
         name = node.name
 
         # skip private functions
@@ -93,46 +88,43 @@ class ModuleAnalyzer(BaseAnalyzer):
 
         self.function_nodes.append(node)
 
-    def visit_FunctionDef(self, node):
-        # type: (ast.FunctionDef) -> None
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         """
         Parse info about module `def ...` statements.
 
         Adds `node` entry to `function_nodes`.
         Skips nodes with names starting with `_`.
 
-        Examples::
-
+        Examples:
+            ```python
             def my_func(arg1):
                 return arg1
+            ```
 
         Arguments:
             node -- AST node.
         """
-
         return self._visit_FunctionDef(node)
 
-    def visit_AsyncFunctionDef(self, node):
-        # type: (ast.AsyncFunctionDef) -> None
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         """
         Parse info about module `def ...` statements.
 
         Adds `node` entry to `function_nodes`.
         Skips nodes with names starting with `_`.
 
-        Examples::
-
+        Examples:
+            ```python
             async def my_func(arg1):
                 return await arg1
+            ```
 
         Arguments:
             node -- AST node.
         """
-
         return self._visit_FunctionDef(node)
 
-    def visit_Assign(self, node):
-        # type: (ast.Assign) -> None
+    def visit_Assign(self, node: ast.Assign) -> None:
         """
         Parse info about module attribute statements.
 
@@ -142,8 +134,8 @@ class ModuleAnalyzer(BaseAnalyzer):
         Skips assignments with names starting with `_`.
         Parses `__all__` and add all values to `all_names`
 
-        Examples::
-
+        Examples:
+            ```python
             MY_MODULE_ATTR = 'value'
                 my_attr = "value"
             __all__ = ['MyClass', 'my_func']
@@ -153,6 +145,7 @@ class ModuleAnalyzer(BaseAnalyzer):
             multi_attr_1, multi_attr_2 = [1, 2]
             my_object.name = "value"
             __all__ = all_list
+            ```
 
         Arguments:
             node -- AST node.

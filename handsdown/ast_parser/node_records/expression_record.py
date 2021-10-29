@@ -10,7 +10,7 @@ import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
 
 
@@ -31,6 +31,9 @@ class ExpressionRecord(NodeRecord):
 
     @property
     def related_names(self) -> Set[str]:
+        """
+        Set of related names.
+        """
         return set(self.analyzer.related_names)
 
     def _parse(self) -> None:

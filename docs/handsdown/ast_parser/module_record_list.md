@@ -4,7 +4,7 @@
 
 Aggregation of `ModuleRecord` objects.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / ModuleRecordList
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser.](index.md#ast-parser) / ModuleRecordList
     - [ModuleRecordList](#modulerecordlist)
         - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
         - [ModuleRecordList().add](#modulerecordlistadd)
@@ -24,10 +24,10 @@ Aggregation of `ModuleRecord` objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L70)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L66)
 
 ```python
-def __iter__() -> Generator[ModuleRecord, None, None]:
+def __iter__() -> Iterator[ModuleRecord]:
 ```
 
 Iterate over all added `ModuleRecord` entries.
@@ -36,13 +36,9 @@ Iterate over all added `ModuleRecord` entries.
 
 `ModuleRecord` entries.
 
-#### See also
-
-- [ModuleRecord](node_records/module_record.md#modulerecord)
-
 ### ModuleRecordList().add
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L59)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L56)
 
 ```python
 def add(module_record: ModuleRecord) -> None:
@@ -60,7 +56,7 @@ Add new `ModuleRecord`.
 
 ### ModuleRecordList().find_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L26)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L25)
 
 ```python
 def find_module_record(import_string: ImportString) -> Optional[ModuleRecord]:
@@ -79,14 +75,13 @@ Found `NodeRecord` instance or None.
 #### See also
 
 - [ImportString](../utils/import_string.md#importstring)
-- [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().get_package_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L49)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L47)
 
 ```python
-def get_package_names() -> Set[Text]:
+def get_package_names() -> Set[str]:
 ```
 
 Get top level import strings.

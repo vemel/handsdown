@@ -4,7 +4,7 @@
 
 Enums for AST parsing.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / Enums
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser.](index.md#ast-parser) / Enums
     - [RenderPart](#renderpart)
         - [RenderPart().is_line_break](#renderpartis_line_break)
 
@@ -16,8 +16,9 @@ Enums for AST parsing.
 class RenderPart(enum.Enum):
 ```
 
-Special render part for [render](node_records/node_record.md#render)
-function.
+Special render part.
+
+For [render](node_records/node_record.md#render) function.
 
 #### Attributes
 
@@ -32,7 +33,7 @@ function.
 
 ### RenderPart().is_line_break
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/enums.py#L37)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/enums.py#L38)
 
 ```python
 def is_line_break() -> bool:

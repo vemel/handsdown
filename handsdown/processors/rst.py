@@ -1,5 +1,5 @@
 """
-# reStructuredText Docstring Processor
+# reStructuredText Docstring Processor.
 
 Docstring processor for restructured text docstring format.
 
@@ -126,7 +126,7 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
                 self.current_section_name = "Notes"
                 line = self.version_directive_map[directive_name]
                 if body:
-                    line = "{} in version {}".format(line, body)
+                    line = f"{line} in version {body}"
                 self._add_line("")
                 self._add_line(line)
                 return
@@ -138,7 +138,7 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
                 self._codeblock_lines_count = 0
                 self._add_block()
                 self._add_line("")
-                self._add_line("```{}".format(body or "python"))
+                self._add_line(f"```{body or 'python'}")
                 return
 
             if body is None:

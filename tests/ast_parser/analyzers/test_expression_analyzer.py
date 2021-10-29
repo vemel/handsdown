@@ -1,13 +1,13 @@
 # pylint: disable=missing-docstring
 import unittest
-from unittest.mock import MagicMock, patch, ANY
+from unittest.mock import ANY, MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
-from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
+from handsdown.ast_parser.enums import RenderPart
 
 
-class TestClassAnalyzer(unittest.TestCase):
+class TestExpressionAnalyzer(unittest.TestCase):
     def test_init(self):
         analyzer = ExpressionAnalyzer()
         self.assertEqual(analyzer.parts, [])
@@ -397,9 +397,7 @@ class TestClassAnalyzer(unittest.TestCase):
 
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.visit_JoinedStr(node))
-        self.assertEqual(
-            analyzer.parts, ["f'", "node_value", "node_value_2", "not_str", "'"]
-        )
+        self.assertEqual(analyzer.parts, ["f'", "node_value", "node_value_2", "not_str", "'"])
 
     def test_visit_FormattedValue(self):
         node = MagicMock()
@@ -442,9 +440,7 @@ class TestClassAnalyzer(unittest.TestCase):
 
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.visit_ListComp(node))
-        self.assertEqual(
-            analyzer.parts, ["[", "elt", " ", "generator1", "generator2", "]"]
-        )
+        self.assertEqual(analyzer.parts, ["[", "elt", " ", "generator1", "generator2", "]"])
 
     def test_visit_SetComp(self):
         node = MagicMock()
@@ -453,9 +449,7 @@ class TestClassAnalyzer(unittest.TestCase):
 
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.visit_SetComp(node))
-        self.assertEqual(
-            analyzer.parts, ["{", "elt", " ", "generator1", "generator2", "}"]
-        )
+        self.assertEqual(analyzer.parts, ["{", "elt", " ", "generator1", "generator2", "}"])
 
     def test_visit_GeneratorExp(self):
         node = MagicMock()
@@ -464,9 +458,7 @@ class TestClassAnalyzer(unittest.TestCase):
 
         analyzer = ExpressionAnalyzer()
         self.assertIsNone(analyzer.visit_GeneratorExp(node))
-        self.assertEqual(
-            analyzer.parts, ["(", "elt", " ", "generator1", "generator2", ")"]
-        )
+        self.assertEqual(analyzer.parts, ["(", "elt", " ", "generator1", "generator2", ")"])
 
     def test_visit_IfExp(self):
         node = MagicMock()

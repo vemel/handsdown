@@ -1,17 +1,13 @@
 """
 AST analyzer for `ast.expr` records.
 """
-from typing import TYPE_CHECKING
+from typing import Dict, List, Type
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.type_defs import ASTIterable, DirtyRenderExpr
 from handsdown.utils.logger import get_logger
-
-if TYPE_CHECKING:  # pragma: no cover
-    from typing import List
-
-    from handsdown.ast_parser.type_defs import ASTIterable, DirtyRenderExpr
 
 
 class ExpressionAnalyzer(BaseAnalyzer):
@@ -21,17 +17,16 @@ class ExpressionAnalyzer(BaseAnalyzer):
     Prepares `parts` for `NodeRecord.render` method.
     """
 
-    def __init__(self):
-        # type: () -> None
+    def __init__(self) -> None:
         super().__init__()
         self._logger = get_logger()
-        self.parts = []  # type: List[DirtyRenderExpr]
+        self.parts: List[DirtyRenderExpr] = []
 
     # dummy value to replace unknown nodes and operators
     UNKNOWN = "..."
 
     # representation map for binary operators
-    BINOP_SYMBOLS = {
+    BINOP_SYMBOLS: Dict[Type[ast.AST], str] = {
         ast.Add: "+",
         ast.Sub: "-",
         ast.Mult: "*",
@@ -47,10 +42,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
     }
 
     # representation map for boolean operators
-    BOOLOP_SYMBOLS = {ast.And: "and", ast.Or: "or"}
+    BOOLOP_SYMBOLS: Dict[Type[ast.AST], str] = {ast.And: "and", ast.Or: "or"}
 
     # representation map for comparison operators
-    CMPOP_SYMBOLS = {
+    CMPOP_SYMBOLS: Dict[Type[ast.AST], str] = {
         ast.Eq: "==",
         ast.NotEq: "!=",
         ast.Lt: "<",
@@ -64,10 +59,14 @@ class ExpressionAnalyzer(BaseAnalyzer):
     }
 
     # representation map for unary operators
-    UNARYOP_SYMBOLS = {ast.Invert: "~", ast.Not: "not", ast.UAdd: "+", ast.USub: "-"}
+    UNARYOP_SYMBOLS: Dict[Type[ast.AST], str] = {
+        ast.Invert: "~",
+        ast.Not: "not",
+        ast.UAdd: "+",
+        ast.USub: "-",
+    }
 
-    def visit_Str(self, node):
-        # type: (ast.Str) -> None
+    def visit_Str(self, node: ast.Str) -> None:
         """
         Parse info from `ast.Str` node and put it to `parts`.
 
@@ -83,8 +82,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             value = value.decode("utf-8")
         self.parts.append(repr(value))
 
-    def visit_Bytes(self, node):
-        # type: (ast.Bytes) -> None
+    def visit_Bytes(self, node: ast.Bytes) -> None:
         """
         Parse info from `ast.Bytes` node and put it to `parts`.
 
@@ -98,8 +96,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         value = node.s
         self.parts.append(repr(value))
 
-    def visit_Num(self, node):
-        # type: (ast.Num) -> None
+    def visit_Num(self, node: ast.Num) -> None:
         """
         Parse info from `ast.Num` node and put it to `parts`.
 
@@ -114,8 +111,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         value = node.n
         self.parts.append(repr(value))
 
-    def visit_Name(self, node):
-        # type: (ast.Name) -> None
+    def visit_Name(self, node: ast.Name) -> None:
         """
         Parse info from `ast.Name` node and put it to `parts`.
 
@@ -129,8 +125,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(node.id)
         self.related_names.append(node.id)
 
-    def visit_NameConstant(self, node):
-        # type: (ast.NameConstant) -> None
+    def visit_NameConstant(self, node: ast.NameConstant) -> None:
         """
         Parse info from `ast.NameConstant` node and put it to `parts`.
 
@@ -144,8 +139,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(repr(node.value))
 
-    def visit_Subscript(self, node):
-        # type: (ast.Subscript) -> None
+    def visit_Subscript(self, node: ast.Subscript) -> None:
         """
         Parse info from `ast.Subscript` node and put it to `parts`.
 
@@ -167,8 +161,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(node.slice)
         self.parts.append("]")
 
-    def visit_Attribute(self, node):
-        # type: (ast.Attribute) -> None
+    def visit_Attribute(self, node: ast.Attribute) -> None:
         """
         Parse info from `ast.Attribute` node and put it to `parts`.
 
@@ -183,8 +176,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(".")
         self.parts.append(node.attr)
 
-    def _visit_iterable(self, node):
-        # type: (ASTIterable) -> None
+    def _visit_iterable(self, node: ASTIterable) -> None:
         """
         Parse info from an iterable node and put it to `parts`.
 
@@ -213,8 +205,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(RenderPart.MULTI_LINE_COMMA)
             self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
 
-    def visit_List(self, node):
-        # type: (ast.List) -> None
+    def visit_List(self, node: ast.List) -> None:
         """
         Parse info from `ast.List` node and put it to `parts`.
 
@@ -229,8 +220,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self._visit_iterable(node)
         self.parts.append("]")
 
-    def visit_Set(self, node):
-        # type: (ast.Set) -> None
+    def visit_Set(self, node: ast.Set) -> None:
         """
         Parse info from `ast.Set` node and put it to `parts`.
 
@@ -245,8 +235,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self._visit_iterable(node)
         self.parts.append("}")
 
-    def visit_Tuple(self, node):
-        # type: (ast.Tuple) -> None
+    def visit_Tuple(self, node: ast.Tuple) -> None:
         """
         Parse info from `ast.Tuple` node and put it to `parts`.
 
@@ -261,8 +250,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self._visit_iterable(node)
         self.parts.append(")")
 
-    def visit_Call(self, node):
-        # type: (ast.Call) -> None
+    def visit_Call(self, node: ast.Call) -> None:
         """
         Parse info from `ast.Call` node and put it to `parts`.
 
@@ -316,8 +304,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
         self.parts.append(")")
 
-    def visit_Starred(self, node):
-        # type: (ast.Starred) -> None
+    def visit_Starred(self, node: ast.Starred) -> None:
         """
         Parse info from `ast.Starred` node and put it to `parts`.
 
@@ -331,8 +318,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append("*")
         self.parts.append(node.value)
 
-    def visit_keyword(self, node):
-        # type: (ast.keyword) -> None
+    def visit_keyword(self, node: ast.keyword) -> None:
         """
         Parse info from `ast.keyword` node and put it to `parts`.
 
@@ -353,8 +339,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append("=")
         self.parts.append(node.value)
 
-    def visit_Dict(self, node):
-        # type: (ast.Dict) -> None
+    def visit_Dict(self, node: ast.Dict) -> None:
         """
         Parse info from `ast.Dict` node and put it to `parts`.
 
@@ -378,8 +363,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
         self.parts.append("}")
 
-    def visit_Compare(self, node):
-        # type: (ast.Compare) -> None
+    def visit_Compare(self, node: ast.Compare) -> None:
         """
         Parse info from `ast.Compare` node and put it to `parts`.
 
@@ -397,15 +381,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(" ")
             operator = self.CMPOP_SYMBOLS.get(operator_class, self.UNKNOWN)
             if operator == self.UNKNOWN:
-                self._logger.warning(
-                    "Unknown omparison operator: {}".format(operator_class.__name__)
-                )
+                self._logger.warning(f"Unknown comparison operator: {operator_class.__name__}")
             self.parts.append(operator)
             self.parts.append(" ")
             self.parts.append(right)
 
-    def visit_BinOp(self, node):
-        # type: (ast.BinOp) -> None
+    def visit_BinOp(self, node: ast.BinOp) -> None:
         """
         Parse info from `ast.BinOp` node and put it to `parts`.
 
@@ -421,13 +402,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(" ")
         operator = self.BINOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning("Unknown binary operator: {}".format(node.op.__class__.__name__))
+            self._logger.warning(f"Unknown binary operator: {node.op.__class__.__name__}")
         self.parts.append(operator)
         self.parts.append(" ")
         self.parts.append(node.right)
 
-    def visit_BoolOp(self, node):
-        # type: (ast.BoolOp) -> None
+    def visit_BoolOp(self, node: ast.BoolOp) -> None:
         """
         Parse info from `ast.BoolOp` node and put it to `parts`.
 
@@ -441,7 +421,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         operator = self.BOOLOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning("Unknown boolean operator: {}".format(node.op.__class__.__name__))
+            self._logger.warning(f"Unknown boolean operator: {node.op.__class__.__name__}")
         for index, value in enumerate(node.values):
             if index:
                 self.parts.append(" ")
@@ -449,8 +429,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append(" ")
             self.parts.append(value)
 
-    def visit_UnaryOp(self, node):
-        # type: (ast.UnaryOp) -> None
+    def visit_UnaryOp(self, node: ast.UnaryOp) -> None:
         """
         Parse info from `ast.UnaryOp` node and put it to `parts`.
 
@@ -466,14 +445,13 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         operator = self.UNARYOP_SYMBOLS.get(type(node.op), self.UNKNOWN)
         if operator == self.UNKNOWN:
-            self._logger.warning("Unknown unary operator: {}".format(node.op.__class__.__name__))
+            self._logger.warning(f"Unknown unary operator: {node.op.__class__.__name__}")
         self.parts.append(operator)
         if operator == "not":
             self.parts.append(" ")
         self.parts.append(node.operand)
 
-    def visit_Lambda(self, node):
-        # type: (ast.Lambda) -> None
+    def visit_Lambda(self, node: ast.Lambda) -> None:
         """
         Parse info from `ast.Lambda` node and put it to `parts`.
 
@@ -489,8 +467,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(": ")
         self.parts.append(node.body)
 
-    def visit_arguments(self, node):
-        # type: (ast.arguments) -> None
+    def visit_arguments(self, node: ast.arguments) -> None:
         """
         Parse info from `ast.arguments` node and put it to `parts`.
 
@@ -539,8 +516,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         if arg_count:
             self.parts.append(RenderPart.MULTI_LINE_COMMA)
 
-    def visit_arg(self, node):
-        # type: (ast.arg) -> None
+    def visit_arg(self, node: ast.arg) -> None:
         """
         Parse info from `ast.arg` node and put it to `parts`.
 
@@ -557,8 +533,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(": ")
             self.parts.append(node.annotation)
 
-    def visit_Index(self, node):
-        # type: (ast.Index) -> None
+    def visit_Index(self, node: ast.Index) -> None:
         """
         Parse info from `ast.Index` node and put it to `parts`.
 
@@ -575,8 +550,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             return
         self.parts.append(node.value)
 
-    def visit_Ellipsis(self, _node):
-        # type: (ast.ASTEllipsis) -> None
+    def visit_Ellipsis(self, _node: ast.ASTEllipsis) -> None:
         """
         Parse info from `ast.Ellipsis` node and put it to `parts`.
 
@@ -589,8 +563,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("...")
 
-    def visit_Slice(self, node):
-        # type: (ast.Slice) -> None
+    def visit_Slice(self, node: ast.Slice) -> None:
         """
         Parse info from `ast.Slice` node and put it to `parts`.
 
@@ -614,8 +587,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(":")
             self.parts.append(node.step)
 
-    def visit_JoinedStr(self, node):
-        # type: (ast.JoinedStr) -> None
+    def visit_JoinedStr(self, node: ast.JoinedStr) -> None:
         """
         Parse info from `ast.JoinedStr` node and put it to `parts`.
 
@@ -637,8 +609,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append(value)
         self.parts.append("'")
 
-    def visit_FormattedValue(self, node):
-        # type: (ast.FormattedValue) -> None
+    def visit_FormattedValue(self, node: ast.FormattedValue) -> None:
         """
         Parse info from `ast.FormattedValue` node and put it to `parts`.
 
@@ -653,8 +624,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(node.value)
         self.parts.append("}")
 
-    def visit_comprehension(self, node):
-        # type: (ast.comprehension) -> None
+    def visit_comprehension(self, node: ast.comprehension) -> None:
         """
         Parse info from `ast.comprehension` node and put it to `parts`.
 
@@ -673,8 +643,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(" if ")
             self.parts.append(expr)
 
-    def visit_DictComp(self, node):
-        # type: (ast.DictComp) -> None
+    def visit_DictComp(self, node: ast.DictComp) -> None:
         """
         Parse info from `ast.DictComp` node and put it to `parts`.
 
@@ -694,8 +663,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(comprehension)
         self.parts.append("}")
 
-    def visit_ListComp(self, node):
-        # type: (ast.ListComp) -> None
+    def visit_ListComp(self, node: ast.ListComp) -> None:
         """
         Parse info from `ast.ListComp` node and put it to `parts`.
 
@@ -713,8 +681,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(comprehension)
         self.parts.append("]")
 
-    def visit_SetComp(self, node):
-        # type: (ast.SetComp) -> None
+    def visit_SetComp(self, node: ast.SetComp) -> None:
         """
         Parse info from `ast.SetComp` node and put it to `parts`.
 
@@ -732,8 +699,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(comprehension)
         self.parts.append("}")
 
-    def visit_GeneratorExp(self, node):
-        # type: (ast.GeneratorExp) -> None
+    def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:
         """
         Parse info from `ast.GeneratorExp` node and put it to `parts`.
 
@@ -751,8 +717,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(comprehension)
         self.parts.append(")")
 
-    def visit_IfExp(self, node):
-        # type: (ast.IfExp) -> None
+    def visit_IfExp(self, node: ast.IfExp) -> None:
         """
         Parse info from `ast.IfExp` node and put it to `parts`.
 
@@ -769,8 +734,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append(" else ")
         self.parts.append(node.orelse)
 
-    def visit_Await(self, node):
-        # type: (ast.Await) -> None
+    def visit_Await(self, node: ast.Await) -> None:
         """
         Parse info from `ast.Await` node and put it to `parts`.
 
@@ -784,8 +748,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append("await ")
         self.parts.append(node.value)
 
-    def visit_Yield(self, node):
-        # type: (ast.Yield) -> None
+    def visit_Yield(self, node: ast.Yield) -> None:
         """
         Parse info from `ast.Yield` node and put it to `parts`.
 
@@ -802,8 +765,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             self.parts.append(" ")
             self.parts.append(node.value)
 
-    def visit_YieldFrom(self, node):
-        # type: (ast.YieldFrom) -> None
+    def visit_YieldFrom(self, node: ast.YieldFrom) -> None:
         """
         Parse info from `ast.YieldFrom` node and put it to `parts`.
 
@@ -817,8 +779,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append("yield from ")
         self.parts.append(node.value)
 
-    def generic_visit(self, node):
-        # type: (ast.AST) -> None
+    def generic_visit(self, node: ast.AST) -> None:
         """
         Parse info from an unknown `ast.AST` node and put `...` to `parts`.
 
@@ -828,8 +789,6 @@ class ExpressionAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         self._logger.warning(
-            "Could not render node {}, replaced with `{}`".format(
-                node.__class__.__name__, self.UNKNOWN
-            )
+            f"Could not render node {node.__class__.__name__}, replaced with `{self.UNKNOWN}`"
         )
         self.parts.append(self.UNKNOWN)

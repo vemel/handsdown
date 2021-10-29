@@ -36,13 +36,14 @@ class IndentTrimmer:
 
     @classmethod
     def trim_text(cls, text: str) -> str:
-        """
+        r"""
         Trim minimum indent from each line of text.
 
-        Examples::
-
-            IndentTrimmer.trim_text('  asd\\n asd\\n   asd\\n')
-            ' asd\\nasd\\n  asd\\n'
+        Examples:
+            ```python
+            IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
+            ' asd\nasd\n  asd\n'
+            ```
 
         Arguments:
             text -- Multiline text.
@@ -139,12 +140,13 @@ class IndentTrimmer:
     @staticmethod
     def indent_line(line: str, indent: int) -> str:
         """
-        Indent line with givent length `indent`
+        Indent line with givent length `indent`.
 
-        Examples::
-
+        Examples:
+            ```python
             IndentTrimmer.indent_line('test', 2)
             '  test'
+            ```
 
         Arguments:
             line -- Line to indent.
@@ -153,4 +155,5 @@ class IndentTrimmer:
         Returns:
             An indented line.
         """
-        return "{}{}".format(" " * indent, line)
+        line_indent = " " * indent
+        return f"{line_indent}{line}"

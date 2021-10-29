@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.arg` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
     - [ArgumentRecord](#argumentrecord)
         - [ArgumentRecord().default](#argumentrecorddefault)
         - [ArgumentRecord().related_names](#argumentrecordrelated_names)
@@ -12,15 +12,15 @@ Wrapper for an `ast.arg` node.
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L17)
 
 ```python
 class ArgumentRecord(NodeRecord):
     def __init__(
         node: ast.arg,
-        name: Text,
+        name: str,
         type_hint: Optional[ast.expr] = None,
-        prefix: Text = '',
+        prefix: str = '',
     ) -> None:
 ```
 
@@ -39,7 +39,7 @@ Wrapper for an `ast.arg` node.
 
 ### ArgumentRecord().default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L42)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L43)
 
 ```python
 @property
@@ -52,18 +52,16 @@ Default value of the argument.
 
 Default exression or None.
 
-#### See also
-
-- [ExpressionRecord](expression_record.md#expressionrecord)
-
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L66)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L65)
 
 ```python
 @property
-def related_names() -> Set[Text]:
+def related_names() -> Set[str]:
 ```
+
+Set of related names.
 
 ### ArgumentRecord().set_default
 

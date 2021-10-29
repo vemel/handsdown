@@ -6,8 +6,9 @@ import enum
 
 class RenderPart(enum.Enum):
     """
-    Special render part for `handsdown.ast_parser.node_records.node_record.NodeRecord.render`
-    function.
+    Special render part.
+
+    For `handsdown.ast_parser.node_records.node_record.NodeRecord.render` function.
     """
 
     # Replaced with a line break for a multi-line render, does not change indent

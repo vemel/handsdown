@@ -14,8 +14,7 @@ from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
 
 
-def create_external_configs(namespace):
-    # type: (argparse.Namespace) -> None
+def create_external_configs(namespace: argparse.Namespace) -> None:
     """
     Create `GitHub Pages` and `Read the Docs` configuration files.
     """
@@ -28,7 +27,7 @@ def create_external_configs(namespace):
     for asset_name, target_path in configs:
         if target_path.exists():
             continue
-        logger.info("Creating {} file".format(target_path))
+        logger.info(f"Creating {target_path} file")
         render_asset(
             asset_name,
             target_path,

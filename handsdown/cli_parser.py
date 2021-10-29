@@ -1,5 +1,5 @@
 """
-# CLI Parser
+CLI Parser.
 """
 import argparse
 import re
@@ -23,14 +23,14 @@ def git_repo(git_repo_url: str) -> str:
     ssh_repo_re = re.compile(r"^git@github\.com:(?P<user>[^/]+)/(?P<repo>[^/]+)\.git$")
     short_https_repo_re = re.compile(r"^https://github.com/(?P<user>[^/]+)/(?P<repo>[^/]+)/?$")
     match = https_repo_re.match(git_repo_url)
+    if not match:
+        match = ssh_repo_re.match(git_repo_url)
+    if not match:
+        match = short_https_repo_re.match(git_repo_url)
     if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
-    match = ssh_repo_re.match(git_repo_url)
-    if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
-    match = short_https_repo_re.match(git_repo_url)
-    if match:
-        return "https://github.com/{user}/{repo}/blob/master/".format(**match.groupdict())
+        user = match.groupdict()["user"]
+        repo = match.groupdict()["repo"]
+        return f"https://github.com/{user}/{repo}/blob/master/"
 
     return git_repo_url
 
@@ -63,7 +63,7 @@ def dir_abs_path(path_str: str) -> Path:
     """
     path = Path(path_str).absolute()
     if path.exists() and not path.is_dir():
-        raise argparse.ArgumentTypeError("Path {} is not a directory".format(path))
+        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
 
 

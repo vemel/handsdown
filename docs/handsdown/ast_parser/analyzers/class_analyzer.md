@@ -4,7 +4,7 @@
 
 AST analyzer for `ast.ClassDef` records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ClassAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ClassAnalyzer
     - [ClassAnalyzer](#classanalyzer)
         - [ClassAnalyzer().generic_visit](#classanalyzergeneric_visit)
         - [ClassAnalyzer().visit_Assign](#classanalyzervisit_assign)
@@ -14,7 +14,7 @@ AST analyzer for `ast.ClassDef` records.
 
 ## ClassAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L11)
 
 ```python
 class ClassAnalyzer(BaseAnalyzer):
@@ -29,10 +29,10 @@ AST analyzer for `ast.ClassDef` records.
 
 ### ClassAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L143)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L138)
 
 ```python
-def generic_visit(_node: ast.AST) -> None:
+def generic_visit(node: ast.AST) -> None:
 ```
 
 Do nothing for unknown `ast.AST` nodes.
@@ -43,7 +43,7 @@ Do nothing for unknown `ast.AST` nodes.
 
 ### ClassAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L103)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L98)
 
 ```python
 def visit_Assign(node: ast.Assign) -> None:
@@ -75,7 +75,7 @@ class MyClass:
 
 ### ClassAnalyzer().visit_AsyncFunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L85)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L80)
 
 ```python
 def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
@@ -87,9 +87,11 @@ Adds new `FunctionRecord` entry to `method_records`.
 
 #### Examples
 
+```python
 class MyClass:
     async def my_method(self, arg):
         return await arg
+```
 
 #### Arguments
 
@@ -97,7 +99,7 @@ class MyClass:
 
 ### ClassAnalyzer().visit_ClassDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L26)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L23)
 
 ```python
 def visit_ClassDef(node: ast.ClassDef) -> None:
@@ -124,7 +126,7 @@ def my_func():
 
 ### ClassAnalyzer().visit_FunctionDef
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L67)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/class_analyzer.py#L62)
 
 ```python
 def visit_FunctionDef(node: ast.FunctionDef) -> None:
@@ -136,9 +138,11 @@ Adds new `FunctionRecord` entry to `method_records`.
 
 #### Examples
 
+```python
 class MyClass:
     def my_method(self, arg):
         return arg
+```
 
 #### Arguments
 

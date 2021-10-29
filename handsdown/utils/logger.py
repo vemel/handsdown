@@ -7,8 +7,7 @@ from typing import Optional
 from handsdown.settings import LOGGER_NAME
 
 
-def get_logger(level=None):
-    # type: (Optional[int]) -> logging.Logger
+def get_logger(level: Optional[int] = None) -> logging.Logger:
     """
     Get stdout stream logger.
 

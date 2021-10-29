@@ -57,7 +57,7 @@ class ImportString:
             A new `ImportString` instance.
         """
         if self.value:
-            return ImportString("{}.{}".format(self.value, other))
+            return ImportString(f"{self.value}.{other}")
 
         return ImportString(other)
 
@@ -161,4 +161,4 @@ class ImportString:
         Returns:
             True if it is a child.
         """
-        return self.value.startswith("{}.".format(import_string))
+        return self.value.startswith(f"{import_string}.")

@@ -1,16 +1,12 @@
 """
 AST analyzer for `ast.FunctionDef` records.
 """
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, List, Optional
+from typing import Any, List, Optional, Sequence
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
-
-if TYPE_CHECKING:  # pragma: no cover
-    from handsdown.ast_parser.type_defs import ASTFunctionDef
+from handsdown.ast_parser.type_defs import ASTFunctionDef
 
 
 class FunctionAnalyzer(BaseAnalyzer):
@@ -20,9 +16,9 @@ class FunctionAnalyzer(BaseAnalyzer):
 
     def __init__(self) -> None:
         super().__init__()
-        self.argument_records = []  # type: List[ArgumentRecord]
-        self.decorator_nodes = []  # type: List[ast.expr]
-        self.return_type_hint = None  # type: Optional[ast.expr]
+        self.argument_records: List[ArgumentRecord] = []
+        self.decorator_nodes: List[ast.expr] = []
+        self.return_type_hint: Optional[ast.expr] = None
 
     @staticmethod
     def _get_argument_record(arg: ast.arg, prefix: str = "") -> ArgumentRecord:
@@ -96,12 +92,14 @@ class FunctionAnalyzer(BaseAnalyzer):
 
         # FIXME: `AST2` ast.args does not have `kwonlyargs` attribute
         if hasattr(node, "kwonlyargs"):
-            for arg in node.kwonlyargs:
+            kwonlyargs: Sequence[ast.arg] = node.kwonlyargs  # type: ignore
+            for arg in kwonlyargs:
                 record = self._get_argument_record(arg)
                 self.argument_records.append(record)
 
-            for index, default in enumerate(node.kw_defaults):
-                argument_index = len(self.argument_records) - len(node.kw_defaults) + index
+            kw_defaults: Sequence[Any] = node.kw_defaults  # type: ignore
+            for index, default in enumerate(kw_defaults):
+                argument_index = len(self.argument_records) - len(kw_defaults) + index
                 self.argument_records[argument_index].set_default(default)
 
         if node.vararg is not None:
@@ -118,8 +116,9 @@ class FunctionAnalyzer(BaseAnalyzer):
         self.visit(node.args)
 
         # FIXME: `AST2` FunctionDef has no `returns` attribute
-        if hasattr(node, "returns") and node.returns:
-            self.return_type_hint = node.returns
+        if hasattr(node, "returns") and node.returns:  # type: ignore
+            returns: ast.expr = node.returns  # type: ignore
+            self.return_type_hint = returns
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         """
@@ -159,7 +158,7 @@ class FunctionAnalyzer(BaseAnalyzer):
         """
         self._visit_FunctionDef(node)
 
-    def generic_visit(self, _node: ast.AST) -> None:
+    def generic_visit(self, node: ast.AST) -> None:
         """
         Do nothing for unknown `ast.AST` nodes.
 

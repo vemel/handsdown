@@ -17,14 +17,15 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L66)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L65)
 
 ```python
-def extract_md_title(content: Text) -> Tuple[Text, Text]:
+def extract_md_title(content: str) -> Tuple[(str, str)]:
 ```
 
 Extract title from the first line of content.
-If title is present -  return a title and a remnaing content.
+
+If title is present - return a title and a remnaing content.
 if not - return an empty title and untouched content.
 
 #### Examples
@@ -43,13 +44,14 @@ A tuple fo title and remaining content.
 
 ## make_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L10)
 
 ```python
-def make_title(file_stem: Text) -> Text:
+def make_title(file_stem: str) -> str:
 ```
 
 Convert `pathlib.Path` part or any other string to a human-readable title.
+
 Replace underscores with spaces and capitalize result.
 
 #### Examples
@@ -82,9 +84,9 @@ A human-readable title as a string.
 
 ```python
 def render_asset(
-    name: Text,
+    name: str,
     target_path: Path,
-    format_dict: Dict[Text, Text],
+    format_dict: Dict[(str, str)],
 ) -> None:
 ```
 

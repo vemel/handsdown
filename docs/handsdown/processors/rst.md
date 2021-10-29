@@ -1,10 +1,10 @@
-# reStructuredText Docstring Processor
+# reStructuredText Docstring Processor.
 
 > Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py) module.
 
 Docstring processor for restructured text docstring format.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / reStructuredText Docstring Processor
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / reStructuredText Docstring Processor.
     - [RSTDocstringProcessor](#rstdocstringprocessor)
 
 Supported features:
@@ -17,8 +17,10 @@ Supported features:
 - `.. seealso::` directive is added to `See also` section
 - `.. note::` directive is added to `Notes` section
 - `.. warning:: <version>` directive is added to `Warnings` section
-- `.. versionadded:: <version>` directive is formatted in Sphinx-style and added to `Notes` section
-- `.. versionchanged:: <version>` directive is formatted in Sphinx-style and added to `Notes` section
+- `.. versionadded:: <version>` directive is formatted in Sphinx-style and added
+  to `Notes` section
+- `.. versionchanged:: <version>` directive is formatted in Sphinx-style and added
+  to `Notes` section
 - `.. deprecated::` directive is formatted in Sphinx-style and added to `Notes` section
 - `.. code-block::` directive is formatted as Markdown Python codeblock
 - `.. code-block:: <language>` directive is formatted as Markdown codeblock
@@ -28,7 +30,7 @@ Supported features:
 
 ## RSTDocstringProcessor
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L32)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/processors/rst.py#L33)
 
 ```python
 class RSTDocstringProcessor(BaseDocstringProcessor):

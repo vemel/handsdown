@@ -1,7 +1,7 @@
 """
 Main module entrypoint.
 """
-from handsdown.main import main  # pragma: no cover
+from handsdown.main import main
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     main()

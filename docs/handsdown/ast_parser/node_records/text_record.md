@@ -4,17 +4,17 @@
 
 Wrapper for a text-only `ast.expr` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / TextRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / TextRecord
     - [TextRecord](#textrecord)
         - [TextRecord().related_names](#textrecordrelated_names)
 
 ## TextRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L14)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L16)
 
 ```python
 class TextRecord(ExpressionRecord):
-    def __init__(node: ast.AST, text: Text) -> None:
+    def __init__(node: ast.AST, text: str) -> None:
 ```
 
 Wrapper for a text-only `ast.expr` node.
@@ -30,11 +30,11 @@ Wrapper for a text-only `ast.expr` node.
 
 ### TextRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L31)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/text_record.py#L32)
 
 ```python
 @property
-def related_names() -> Set[Text]:
+def related_names() -> Set[str]:
 ```
 
 A list of fake `ast.Name.id` records inside the node.
@@ -42,8 +42,8 @@ A list of fake `ast.Name.id` records inside the node.
 #### Examples
 
 ```python
-TextRecord(ast_node, 'Union[Text, MyClass]').related_names
-{'Union', 'Text', 'MyClass'}
+TextRecord(ast_node, 'Union[str, MyClass]').related_names
+{'Union', 'str', 'MyClass'}
 ```
 
 #### Returns

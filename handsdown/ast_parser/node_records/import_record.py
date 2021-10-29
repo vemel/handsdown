@@ -9,7 +9,7 @@ import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.utils.import_string import ImportString
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import ASTImport, RenderExpr
 
 
@@ -48,20 +48,20 @@ class ImportRecord(NodeRecord):
     def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
         if self.source:
             if self.local_name != self.name:
-                return ["from {} import {} as {}".format(self.source, self.name, self.local_name)]
-            return ["from {} import {}".format(self.source, self.name)]
+                return [f"from {self.source} import {self.name} as {self.local_name}"]
+            return [f"from {self.source} import {self.name}"]
 
         if self.local_name != self.name:
-            return ["import {} as {}".format(self.name, self.local_name)]
+            return [f"import {self.name} as {self.local_name}"]
 
-        return ["import {}".format(self.name)]
+        return [f"import {self.name}"]
 
     def match(self, name: str) -> Optional[ImportString]:
         """
         Check if `name` matches or stats with a local name.
 
-        Examples::
-
+        Examples:
+            ```python
             import_node = ast.parse('from my_module import Name as LocalName')
             import_record = ImportRecord(import_node)
 
@@ -76,6 +76,7 @@ class ImportRecord(NodeRecord):
 
             import_record.match('LocalNameOther')
             False
+            ```
 
         Returns:
             True if name is imported object itself on one of his children.
@@ -83,14 +84,13 @@ class ImportRecord(NodeRecord):
         if name == self.local_name:
             return self.get_import_string()
 
-        lookup = "{}.".format(self.local_name)
+        lookup = f"{self.local_name}."
         if name.startswith(lookup):
             if self.source:
                 trailing_import = name[len(lookup) :]
-                return ImportString("{}.{}".format(self.get_import_string(), trailing_import))
+                return ImportString(f"{self.get_import_string()}.{trailing_import}")
 
         return None
 
-    def _parse(self):
-        # type: () -> None
+    def _parse(self) -> None:
         return

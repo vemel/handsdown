@@ -6,7 +6,7 @@
 
 [PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
 """
-from typing import List, Union, Any, Dict, Tuple, Type, Set
+from typing import Any, Dict, List, Set, Tuple, Type, Union
 
 
 class MyValue:

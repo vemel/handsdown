@@ -13,7 +13,7 @@ from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
     from handsdown.ast_parser.type_defs import ASTFunctionDef
 
@@ -45,6 +45,9 @@ class FunctionRecord(NodeRecord):
 
     @property
     def related_names(self) -> Set[str]:
+        """
+        Set of related names.
+        """
         result: Set[str] = set()
         for decorator_record in self.decorator_records:
             result.update(decorator_record.related_names)
@@ -92,7 +95,7 @@ class FunctionRecord(NodeRecord):
             if c == "]":
                 bracket_count -= 1
 
-            result[-1] = "{}{}".format(result[-1], c)
+            result[-1] = f"{result[-1]}{c}"
 
         result = [i.strip() for i in result if i.strip() and i.strip() != "..."]
         return result

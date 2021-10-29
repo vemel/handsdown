@@ -2,7 +2,9 @@
 
 > Auto-generated documentation for [handsdown.ast_parser.analyzers](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/__init__.py) module.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / Analyzers
+AST Analyzers.
+
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / Analyzers
     - Modules
         - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
         - [ClassAnalyzer](class_analyzer.md#classanalyzer)

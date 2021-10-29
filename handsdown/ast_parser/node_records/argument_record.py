@@ -10,7 +10,7 @@ from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.type_defs import Node, RenderExpr
 
 
@@ -33,16 +33,15 @@ class ArgumentRecord(NodeRecord):
         prefix: str = "",
     ) -> None:
         super().__init__(node)
-        self._default = None  # type: Optional[ExpressionRecord]
-        self.type_hint = None  # type: Optional[ExpressionRecord]
+        self._default: Optional[ExpressionRecord] = None
+        self.type_hint: Optional[ExpressionRecord] = None
         if type_hint:
             self.type_hint = ExpressionRecord(type_hint)
         self.prefix = prefix
         self.name = name
 
     @property
-    def default(self):
-        # type: () -> Optional[ExpressionRecord]
+    def default(self) -> Optional[ExpressionRecord]:
         """
         Default value of the argument.
 
@@ -65,6 +64,9 @@ class ArgumentRecord(NodeRecord):
 
     @property
     def related_names(self) -> Set[str]:
+        """
+        Set of related names.
+        """
         result = set()
         if self.default:
             result.update(self.default.related_names)

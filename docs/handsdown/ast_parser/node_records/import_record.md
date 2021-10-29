@@ -4,14 +4,14 @@
 
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ImportRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / ImportRecord
     - [ImportRecord](#importrecord)
         - [ImportRecord().get_import_string](#importrecordget_import_string)
         - [ImportRecord().match](#importrecordmatch)
 
 ## ImportRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L14)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L16)
 
 ```python
 class ImportRecord(NodeRecord):
@@ -32,7 +32,7 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ### ImportRecord().get_import_string
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L35)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L36)
 
 ```python
 def get_import_string() -> ImportString:
@@ -50,10 +50,10 @@ An absolute import string.
 
 ### ImportRecord().match
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L64)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L59)
 
 ```python
-def match(name: Text) -> Optional[ImportString]:
+def match(name: str) -> Optional[ImportString]:
 ```
 
 Check if `name` matches or stats with a local name.
@@ -80,7 +80,3 @@ False
 #### Returns
 
 True if name is imported object itself on one of his children.
-
-#### See also
-
-- [ImportString](../../utils/import_string.md#importstring)

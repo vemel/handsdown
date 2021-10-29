@@ -2,7 +2,7 @@
 Wrapper for an `ast.Module` node with corresponding node info.
 """
 from pathlib import Path
-from typing import Any, Dict, Generator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
@@ -62,8 +62,7 @@ class ModuleRecord(NodeRecord):
         record.source_lines = source_path.read_text().split("\n")
         return record
 
-    def find_record(self, import_string):
-        # type: (ImportString) -> Optional[NodeRecord]
+    def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
         """
         Find child in the Module by an absolute or relative import string.
 
@@ -82,8 +81,7 @@ class ModuleRecord(NodeRecord):
 
         return None
 
-    def iter_records(self):
-        # type: () -> Generator[NodeRecord, None, None]
+    def iter_records(self) -> Iterator[NodeRecord]:
         """
         Iterate over Module class, method and fucntion records.
 
@@ -105,8 +103,7 @@ class ModuleRecord(NodeRecord):
 
             yield function_record
 
-    def _set_import_strings(self):
-        # type: () -> None
+    def _set_import_strings(self) -> None:
         for class_record in self.class_records:
             class_record.import_string = self.import_string + class_record.name
             self.import_string_map[class_record.import_string] = class_record
@@ -192,9 +189,9 @@ class ModuleRecord(NodeRecord):
             for method_record in class_record.method_records:
                 method_record.parse()
                 if method_record.is_classmethod or method_record.is_staticmethod:
-                    method_record.title = "{}.{}".format(class_record.name, method_record.name)
+                    method_record.title = f"{class_record.name}.{method_record.name}"
                 else:
-                    method_record.title = "{}().{}".format(class_record.name, method_record.name)
+                    method_record.title = f"{class_record.name}().{method_record.name}"
                 function_lines = self._get_function_def_lines(method_record)
                 method_record.parse_type_comments(function_lines)
 
@@ -205,8 +202,7 @@ class ModuleRecord(NodeRecord):
 
     def _get_function_def_lines(self, function_record: FunctionRecord) -> List[str]:
         """
-        Get all function definition lines for comment type
-        hints lookup.
+        Get all function definition lines for comment type hints lookup.
 
         Removes indentation.
 
@@ -217,10 +213,11 @@ class ModuleRecord(NodeRecord):
             Function definition lines as an array.
         """
         assert isinstance(function_record.node, (ast.AsyncFunctionDef, ast.FunctionDef))
+        function_record_node: ast.FunctionDef = function_record.node  # type: ignore
 
         result: List[str] = []
         start_index = function_record.line_number - 1
-        end_index = function_record.node.body[0].lineno - 1
+        end_index = function_record_node.body[0].lineno - 1
         result = self.source_lines[start_index:end_index]
         result = [i.rstrip("\n") for i in result]
         result = IndentTrimmer.trim_lines(result)

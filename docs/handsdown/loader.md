@@ -14,7 +14,7 @@ Loader for python source code.
 
 ## Loader
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L24)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L21)
 
 ```python
 class Loader():
@@ -37,10 +37,10 @@ my_module_utils = loader.import_module('my_module.utils')
 
 ### Loader().get_import_string
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L133)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L122)
 
 ```python
-def get_import_string(source_path: Path) -> Text:
+def get_import_string(source_path: Path) -> str:
 ```
 
 Get Python import string for a source `source_path` relative to `root_path`.
@@ -66,7 +66,7 @@ A Python import string.
 
 ### Loader().get_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L66)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L61)
 
 ```python
 def get_module_record(source_path: Path) -> Optional[ModuleRecord]:
@@ -86,13 +86,9 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 - `LoaderError` - If python source cannot be loaded.
 
-#### See also
-
-- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
-
 ### Loader().get_output_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L45)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L41)
 
 ```python
 def get_output_path(source_path: Path) -> Path:
@@ -110,7 +106,7 @@ A path to the output `.md` file even if it does not exist yet.
 
 ### Loader.parse_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L115)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L107)
 
 ```python
 @staticmethod
@@ -129,7 +125,7 @@ Parse `ModuleRecord` children and fully load a tree for it.
 
 ## LoaderError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L18)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/loader.py#L15)
 
 ```python
 class LoaderError(Exception):

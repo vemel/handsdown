@@ -11,7 +11,7 @@ from handsdown.ast_parser.enums import RenderPart
 from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
     from handsdown.ast_parser.node_records.module_record import ModuleRecord
     from handsdown.ast_parser.type_defs import RenderExpr
@@ -49,7 +49,7 @@ class NodeRecord:
         self._line_number: Optional[int] = None
 
     def __repr__(self) -> str:
-        return "<{} name={}>".format(self.__class__.__name__, self.name)
+        return f"<{self.__class__.__name__} name={self.name}>"
 
     @property
     def line_number(self) -> int:
@@ -157,7 +157,7 @@ class NodeRecord:
     def _fit_single_line(self, line: str) -> str:
         if len(line) < self.SINGLE_LINE_LENGTH:
             return line
-        return "{}{}".format(line[: self.SINGLE_LINE_LENGTH - len(self.ELLIPSIS)], self.ELLIPSIS)
+        return f"{line[: self.SINGLE_LINE_LENGTH - len(self.ELLIPSIS)]}{self.ELLIPSIS}"
 
     def render(self, indent: int = 0, allow_multiline: bool = False) -> str:
         """
@@ -206,12 +206,12 @@ class NodeRecord:
 
             if part is RenderPart.LINE_INDENT:
                 current_indent += 1
-                lines.append("\n{}".format(self.render_indent(current_indent)))
+                lines.append(f"\n{self.render_indent(current_indent)}")
             if part is RenderPart.LINE_UNINDENT:
                 current_indent -= 1
-                lines.append("\n{}".format(self.render_indent(current_indent)))
+                lines.append(f"\n{self.render_indent(current_indent)}")
             if part is RenderPart.LINE_BREAK:
-                lines.append("\n{}".format(self.render_indent(current_indent)))
+                lines.append(f"\n{self.render_indent(current_indent)}")
 
         return "".join(lines).rstrip("\n")
 
@@ -268,13 +268,12 @@ class NodeRecord:
 
     def get_related_import_strings(self, module_record: ModuleRecord) -> Set[ImportString]:
         """
-        Get a set of `related_names` found in module class, function,
-        method and attribute records.
+        Get a set of `related_names` found in module class, function, method and attribute records.
 
         Returns:
             A set of absolute import strings found.
         """
-        result: Set[ImportString] = set()  # type: Set[ImportString]
+        result: Set[ImportString] = set()
         related_names = self.related_names
         if not related_names:
             return result
@@ -311,7 +310,7 @@ class NodeRecord:
             if not record.docstring:
                 continue
 
-            line = "`{}` - {}: `{}`".format(record.name, record.docstring, record.value.render())
+            line = f"`{record.name}` - {record.docstring}: `{record.value.render()}`"
             result.append(line)
 
         return result

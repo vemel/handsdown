@@ -4,7 +4,7 @@
 
 Base class for all node records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / NodeRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / NodeRecord
     - [NodeRecord](#noderecord)
         - [NodeRecord().get_documented_attribute_strings](#noderecordget_documented_attribute_strings)
         - [NodeRecord().get_related_import_strings](#noderecordget_related_import_strings)
@@ -18,10 +18,10 @@ Base class for all node records.
 
 ## NodeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L19)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L20)
 
 ```python
-class NodeRecord(object):
+class NodeRecord():
     def __init__(node: ast.AST) -> None:
 ```
 
@@ -37,10 +37,10 @@ Base class for all node records.
 
 ### NodeRecord().get_documented_attribute_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L314)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L299)
 
 ```python
-def get_documented_attribute_strings() -> List[Text]:
+def get_documented_attribute_strings() -> List[str]:
 ```
 
 Render each of `attribute_records` to a Markdown string.
@@ -55,7 +55,7 @@ A list of rendered strings.
 
 ### NodeRecord().get_related_import_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L282)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L269)
 
 ```python
 def get_related_import_strings(
@@ -63,8 +63,7 @@ def get_related_import_strings(
 ) -> Set[ImportString]:
 ```
 
-Get a set of [NodeRecord().related_names](#noderecordrelated_names) found in module class, function,
-method and attribute records.
+Get a set of [NodeRecord().related_names](#noderecordrelated_names) found in module class, function, method and attribute records.
 
 #### Returns
 
@@ -72,16 +71,15 @@ A set of absolute import strings found.
 
 #### See also
 
-- [ImportString](../../utils/import_string.md#importstring)
 - [ModuleRecord](module_record.md#modulerecord)
 
 ### NodeRecord.is_line_fit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L233)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L222)
 
 ```python
 @classmethod
-def is_line_fit(line: Text, indent: int) -> bool:
+def is_line_fit(line: str, indent: int) -> bool:
 ```
 
 Check if line fits to [LINE_LENGTH](#noderecord) with given `indent`.
@@ -108,7 +106,7 @@ A string representation of indent.
 
 ### NodeRecord().line_number
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L55)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L54)
 
 ```python
 @property
@@ -123,7 +121,7 @@ A line number startign with 1.
 
 ### NodeRecord().line_number
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L71)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L69)
 
 ```python
 @line_number.setter
@@ -132,7 +130,7 @@ def line_number(value: int) -> None:
 
 ### NodeRecord().parse
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L102)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L96)
 
 ```python
 def parse() -> None:
@@ -144,11 +142,11 @@ Executes only once if called multiple times.
 
 ### NodeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L84)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L80)
 
 ```python
 @property
-def related_names() -> Set[Text]:
+def related_names() -> Set[str]:
 ```
 
 Get a set of referenced object names in `node`.
@@ -161,10 +159,10 @@ A set of referenced object name.
 
 ### NodeRecord().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L169)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L162)
 
 ```python
-def render(indent: int = 0, allow_multiline: bool = False) -> Text:
+def render(indent: int = 0, allow_multiline: bool = False) -> str:
 ```
 
 Render node to a string.
@@ -183,11 +181,11 @@ A string representation of `node`.
 
 ### NodeRecord.render_indent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L258)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/node_record.py#L246)
 
 ```python
 @classmethod
-def render_indent(indent: int) -> Text:
+def render_indent(indent: int) -> str:
 ```
 
 Render indent to a string.

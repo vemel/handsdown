@@ -1,5 +1,5 @@
 """
-# Smart Docstring Processor
+Smart Docstring Processor.
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content:
 
@@ -15,7 +15,7 @@ from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.pep257 import PEP257DocstringProcessor
 from handsdown.processors.rst import RSTDocstringProcessor
 
-if TYPE_CHECKING:  # pragma: no cover
+if TYPE_CHECKING:
     from handsdown.processors.section_map import SectionMap
 
 

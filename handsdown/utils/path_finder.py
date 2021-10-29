@@ -1,6 +1,7 @@
 """
-Glob helper for matching paths inside `root` path with `.gitignore`-like
-`include` and `exclude` patterns.
+Glob helper for matching paths inside `root` path.
+
+Supports `.gitignore`-like `include` and `exclude` patterns.
 """
 
 import fnmatch
@@ -18,11 +19,12 @@ class PathFinderError(Exception):
 
 class PathFinder:
     """
-    Glob helper for matching paths inside `root` path with `.gitignore`-like
-    `include` and `exclude` patterns.
+    Glob helper for matching paths inside `root` path.
 
-    Examples::
+    With `.gitignore`-like `include` and `exclude` patterns.
 
+    Examples:
+        ```python
         path_finder = PathFinder(Path.cwd())
         list(path_finder.glob('*.txt'))
         ['my_new.txt', 'my.txt', 'new.txt']
@@ -32,6 +34,7 @@ class PathFinder:
 
         list(path_finder.exclude('*new*').glob('*.txt'))
         ['my.txt']
+        ```
 
     Arguments:
         root -- Path to root folder.
@@ -43,10 +46,10 @@ class PathFinder:
 
     def __init__(self, root: Path) -> None:
         if not root.is_absolute():
-            raise PathFinderError("Root path {} is not absolute".format(root))
+            raise PathFinderError(f"Root path {root} is not absolute")
         try:
             if root.exists() and not root.is_dir():
-                raise PathFinderError("Root path {} is not a directory".format(root))
+                raise PathFinderError(f"Root path {root} is not a directory")
         except OSError:
             pass
 
@@ -63,6 +66,7 @@ class PathFinder:
     def include(self, *fn_exrps: str) -> "PathFinder":
         """
         Add `fnmatch` expression to white list.
+
         If white list is empty - no white list filtration applied.
         If expression does not have `*` or `.` characters, appends `/*` to it.
 
@@ -76,13 +80,14 @@ class PathFinder:
         include_exprs.extend(self.include_exprs)
         for fn_exrp in fn_exrps:
             if "*" not in fn_exrp and "." not in fn_exrp:
-                fn_exrp = "{}/*".format(fn_exrp)
+                fn_exrp = f"{fn_exrp}/*"
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
 
     def exclude(self, *fn_exrps: str) -> "PathFinder":
         """
         Add `fnmatch` expression to black list.
+
         If black list is empty - no black list filtration applied.
         If expression does not have `*` or `.` characters, appends `/*` to it.
 
@@ -96,7 +101,7 @@ class PathFinder:
         exclude_exprs.extend(self.exclude_exprs)
         for fn_exrp in fn_exrps:
             if "*" not in fn_exrp and "." not in fn_exrp:
-                fn_exrp = "{}/*".format(fn_exrp)
+                fn_exrp = f"{fn_exrp}/*"
             exclude_exprs.append(fn_exrp)
         return self._copy(include_exprs=self.include_exprs, exclude_exprs=exclude_exprs)
 
@@ -124,8 +129,7 @@ class PathFinder:
 
     def glob(self, glob_expr: str) -> Iterator[Path]:
         """
-        Find all matching `Path` objects respecting `include` and
-        `exclude` patterns.
+        Find all matching `Path` objects respecting `include` and `exclude` patterns.
 
         Yields:
             Matching `Path` objects.
@@ -142,6 +146,7 @@ class PathFinder:
     def relative(self, target: Path) -> Path:
         """
         Find a relative path from `root` to `target`.
+
         `target` should be an absolute path.
 
         Arguments:
@@ -190,7 +195,7 @@ class PathFinder:
                 continue
 
             if not parent.is_dir():
-                raise PathFinderError("{} is not a directory, delete it manually".format(parent))
+                raise PathFinderError(f"{parent} is not a directory, delete it manually")
 
             break
 

@@ -75,9 +75,11 @@ isort = "5.9.3"
 codecov = "2.1.12"
 mypy = "0.910"
 flake8 = "4.0.1"
+flake8-docstrings = "1.6.0"
 pytest = "6.2.5"
 pytest-cov = "3.0.0"
 rope = "*"
+pylint = "2.11.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

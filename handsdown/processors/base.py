@@ -1,5 +1,5 @@
 """
-# Base Docstring Processor
+# Base Docstring Processor.
 
 Base class for all docstring processors:
 
@@ -25,7 +25,7 @@ from handsdown.processors.section_map import SectionMap
 from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
-class BaseDocstringProcessor(object):
+class BaseDocstringProcessor:
     """
     Base docstring processor. All docstring processors are based on top of it.
 
@@ -35,7 +35,7 @@ class BaseDocstringProcessor(object):
         replace_map -- Mapping of string to replace to replacer
     """
 
-    line_re_map: Tuple[Tuple[Pattern, str], ...] = tuple()
+    line_re_map: Tuple[Tuple[Pattern[str], str], ...] = tuple()
     section_name_map: Dict[str, str] = {}
     replace_map: Dict[str, str] = {}
 
@@ -162,7 +162,7 @@ class BaseDocstringProcessor(object):
 
         # escape MD-style codeblock end
         if line.startswith("```"):
-            line = "'{}".format(line[1:])
+            line = f"'{line[1:]}"
 
         # this is actually a doctest block as it starts with `>>>`
         if self._codeblock_lines_count == 0 and line.startswith(">>>"):
@@ -207,7 +207,7 @@ class BaseDocstringProcessor(object):
         if indent is not None:
             indent_str = " " * indent
 
-        self.section_map.add_line(self.current_section_name, "{}{}".format(indent_str, line))
+        self.section_map.add_line(self.current_section_name, f"{indent_str}{line}")
 
     def _add_block(self) -> None:
         self.section_map.add_block(self.current_section_name)
@@ -223,7 +223,7 @@ class BaseDocstringProcessor(object):
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line("```{}".format(line.replace("`", "")), indent=0)
+            self._add_line(f"```{line.replace('`', '')}", indent=0)
             return
 
         # Tilde block starts with triple tildes
@@ -233,7 +233,7 @@ class BaseDocstringProcessor(object):
             self._codeblock_indent = self._current_indent
             self._codeblock_lines_count = 0
             self._add_block()
-            self._add_line("~~~{}".format(line.replace("~", "")), indent=0)
+            self._add_line(f"~~~{line.replace('~', '')}", indent=0)
             return
 
         # Doctest line starts with `>>>` and continues with `...` and output lines

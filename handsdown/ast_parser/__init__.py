@@ -1,5 +1,5 @@
 """
-# AST Parser
+# AST Parser.
 
 Collection of tools for analyzing AST and also rendering it back to a valid Python code.
 

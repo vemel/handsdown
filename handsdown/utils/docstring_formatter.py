@@ -41,7 +41,8 @@ class DocstringFormatter:
                 next_line = lines[next_line_index]
 
             indent = IndentTrimmer.get_line_indent(next_line)
-            docstring = "\n{}{}".format(" " * indent, docstring)
+            line_indent = " " * indent
+            docstring = f"\n{line_indent}{docstring}"
 
         return IndentTrimmer.trim_text(docstring)
 
@@ -50,7 +51,7 @@ class DocstringFormatter:
         for index, line in enumerate(lines):
             if line.startswith("~~~~"):
                 if index:
-                    self._lines[index - 1] = "# {}".format(self._lines[index - 1])
+                    self._lines[index - 1] = f"# {self._lines[index - 1]}"
                 self._lines.pop(index)
 
     def render(self) -> str:

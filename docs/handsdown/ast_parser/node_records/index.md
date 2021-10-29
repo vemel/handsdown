@@ -2,7 +2,9 @@
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/__init__.py) module.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / Node Records
+Wrappers for AST nodes.
+
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / Node Records
     - Modules
         - [ArgumentRecord](argument_record.md#argumentrecord)
         - [AttributeRecord](attribute_record.md#attributerecord)
