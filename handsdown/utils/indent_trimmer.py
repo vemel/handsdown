@@ -14,14 +14,14 @@ class IndentTrimmer:
 
     @staticmethod
     def trim_empty_lines(text: str) -> str:
-        """
+        r"""
         Trim empty lines in the begging and the end of the text.
 
         Examples::
 
-            text = '\\n  \\n test\\ntest2\\n \\n '
+            text = '\n  \n test\ntest2\n \n '
             IndentTrimmer.trim_empty_lines(text)
-            ' test\\ntest2'
+            ' test\ntest2'
 
         Returns:
             A stripped string.

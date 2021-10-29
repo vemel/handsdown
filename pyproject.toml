@@ -5,6 +5,7 @@ target-version = [
     "py36",
     "py37",
     "py38",
+    "py39",
 ]
 
 [tool.isort]
@@ -64,18 +65,18 @@ handsdown = 'handsdown.main:main'
 "Bug Tracker" = "https://github.com/vemel/handsdown/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6.2"
+python = "^3.6.9"
 pip = "*"
 typed-ast = "*"
 
 [tool.poetry.dev-dependencies]
-black = "21.5b2"
-isort = "5.6.4"
-codecov = "2.1.11"
+black = "21.9b0"
+isort = "5.9.3"
+codecov = "2.1.12"
 mypy = "0.910"
-flake8 = "3.9.2"
-pytest = "6.2.4"
-pytest-cov = "2.12.1"
+flake8 = "4.0.1"
+pytest = "6.2.5"
+pytest-cov = "3.0.0"
 rope = "*"
 
 [build-system]

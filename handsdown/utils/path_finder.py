@@ -5,7 +5,7 @@ Glob helper for matching paths inside `root` path with `.gitignore`-like
 
 import fnmatch
 from pathlib import Path
-from typing import Iterator, Iterable, List
+from typing import Iterable, Iterator, List
 
 __all__ = ["PathFinder", "PathFinderError"]
 

@@ -1,7 +1,7 @@
 """
 Wrapper for python import strings.
 """
-from typing import List, Any
+from typing import Any, List
 
 
 class ImportStringError(Exception):

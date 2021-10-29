@@ -334,8 +334,9 @@ class Generator:
 
     def generate_index(self) -> None:
         """
-        Generate `<output>/README.md` file with title from `<root>/README.md` and `Modules`
-        section that contains a Tree of all modules in the project.
+        Generate `<output>/README.md` file with title from `<root>/README.md`.
+
+        Also `Modules` section that contains a Tree of all modules in the project.
         """
         self._logger.debug(
             "Generating {}".format(self._root_path_finder.relative(self.md_index.path))

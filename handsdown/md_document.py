@@ -7,7 +7,7 @@ import re
 import traceback
 from pathlib import Path
 from types import TracebackType
-from typing import List, Optional, Text, Type
+from typing import List, Optional, Type
 
 from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
@@ -174,8 +174,9 @@ class MDDocument:
         """
         return "[{}]({})".format(title, link)
 
-    def render_md_doc_link(self, target_md_document, title=None):
-        # type: (MDDocument, Optional[Text]) -> Text
+    def render_md_doc_link(
+        self, target_md_document: MDDocument, title: Optional[str] = None
+    ) -> str:
         """
         Render Markdown link to `target_md_document` header path with a correct title.
 
@@ -192,8 +193,9 @@ class MDDocument:
             target_path=target_md_document.path,
         )
 
-    def render_doc_link(self, title, anchor="", target_path=None):
-        # type: (Text, Text, Optional[Path]) -> Text
+    def render_doc_link(
+        self, title: str, anchor: str = "", target_path: Optional[Path] = None
+    ) -> str:
         """
         Render Markdown link to a local MD document, use relative path as a link.
 
@@ -233,8 +235,7 @@ class MDDocument:
 
         return self.render_link(title, link)
 
-    def _build_content(self):
-        # type: () -> Text
+    def _build_content(self) -> str:
         sections = []
         if self._title:
             sections.append("# {}".format(self._title))
@@ -246,8 +247,7 @@ class MDDocument:
         sections.extend(self._sections)
         return self._section_separator.join(sections) + "\n"
 
-    def write(self):
-        # type: () -> None
+    def write(self) -> None:
         """
         Write MD content to `path`.
         """
@@ -256,67 +256,59 @@ class MDDocument:
         self._path.write_text(content)
 
     @property
-    def title(self):
-        # type: () -> Text
+    def title(self) -> str:
         """
         `MDDocument` title or an empty string.
         """
         return self._title
 
     @title.setter
-    def title(self, title):
-        # type: (Text) -> None
+    def title(self, title: str) -> None:
         self._title = title
         self._content = self._build_content()
 
     @property
-    def subtitle(self):
-        # type: () -> Text
+    def subtitle(self) -> str:
         """
         `MDDocument` subtitle or an empty string.
         """
         return self._subtitle
 
     @subtitle.setter
-    def subtitle(self, subtitle):
-        # type: (Text) -> None
+    def subtitle(self, subtitle: str) -> None:
         self._subtitle = subtitle
         self._content = self._build_content()
 
     @property
-    def toc_section(self):
-        # type: () -> Text
+    def toc_section(self) -> str:
         """
         Document Tree of Contents section or an empty line.
         """
         return self._toc_section
 
     @toc_section.setter
-    def toc_section(self, toc_section):
-        # type: (Text) -> None
+    def toc_section(self, toc_section: str) -> None:
         self._toc_section = toc_section
         self._content = self._build_content()
 
     @property
-    def sections(self):
-        # type: () -> List[Text]
+    def sections(self) -> List[str]:
         """
         All non-special `sections` of the document.
         """
         return self._sections
 
     @property
-    def path(self):
-        # type: () -> Path
+    def path(self) -> Path:
         """
         Output path of the document.
         """
         return self._path
 
-    def append(self, content):
-        # type: (Text) -> None
+    def append(self, content: str) -> None:
         """
         Append `content` to the document.
+
         Handle trimming and sectioning the content and update
         `title` and `toc_section` fields.
 
@@ -334,10 +326,10 @@ class MDDocument:
 
         self._content = self._build_content()
 
-    def append_title(self, title, level):
-        # type: (Text, int) -> None
+    def append_title(self, title: str, level: int) -> None:
         """
         Append `title` of a given `level` to the document.
+
         Handle trimming and sectioning the content and update
         `title` and `toc_section` fields.
 
@@ -349,8 +341,7 @@ class MDDocument:
         self._sections.append(section)
         self._content = self._build_content()
 
-    def generate_toc_section(self, max_depth=3):
-        # type: (int) -> Text
+    def generate_toc_section(self, max_depth: int = 3) -> str:
         """
         Generate Table of Contents MD content.
 
@@ -398,8 +389,7 @@ class MDDocument:
         return "\n".join(toc_lines)
 
     @classmethod
-    def get_toc_line(cls, line, level=0):
-        # type: (Text, int) -> Text
+    def get_toc_line(cls, line: str, level: int = 0) -> str:
         """
         Get ToC `line` of given `level`.
 
@@ -414,8 +404,7 @@ class MDDocument:
         return IndentTrimmer.indent_line("- {}".format(line), indent)
 
     @classmethod
-    def _escape_title(cls, title):
-        # type: (Text) -> Text
+    def _escape_title(cls, title: str) -> str:
         for match in cls._escape_title_re.findall(title):
             title = title.replace(match, match.replace("_", "\\_"))
         return title

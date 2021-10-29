@@ -1,7 +1,7 @@
 """
 Module for splitting docstring into `Section` groups.
 """
-from typing import Iterator, List, Iterable
+from typing import Iterable, Iterator, List
 
 from handsdown.utils.indent_trimmer import IndentTrimmer
 
@@ -109,6 +109,7 @@ class SectionMap(dict):
     def add_block(self, section_name: str) -> None:
         """
         Add new `SectionBlock` to section `section_name`.
+
         If `Section` does not exist - it is not created.
 
         Arguments:
