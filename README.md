@@ -51,7 +51,7 @@ You definitely *do* if you:
 - prefer to automate documentation builds
 - work with a team and plan to simplify knowledge sharing
 - want to show your project without navigating through a source code
-- build `Django` or `Flask` applications, and even if you do not
+- build `Django` or `Flask` applications
 - are proud of your project and not afraid to show it
 - love Open Source
 
