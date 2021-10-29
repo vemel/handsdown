@@ -6,17 +6,10 @@ Docstring processor that selects a `DocstringProcessor` based on a docstring con
 - `handsdown.processors.pep257.PEP257DocstringProcessor`
 - `handsdown.processors.rst.RSTDocstringProcessor`
 """
-
-from __future__ import annotations
-
-from typing import TYPE_CHECKING
-
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.pep257 import PEP257DocstringProcessor
 from handsdown.processors.rst import RSTDocstringProcessor
-
-if TYPE_CHECKING:
-    from handsdown.processors.section_map import SectionMap
+from handsdown.processors.section_map import SectionMap
 
 
 class SmartDocstringProcessor(BaseDocstringProcessor):

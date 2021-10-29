@@ -12,7 +12,7 @@ Wrapper for an `ast.arg` node.
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L13)
 
 ```python
 class ArgumentRecord(NodeRecord):
@@ -39,7 +39,7 @@ Wrapper for an `ast.arg` node.
 
 ### ArgumentRecord().default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L43)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L39)
 
 ```python
 @property
@@ -54,7 +54,7 @@ Default exression or None.
 
 ### ArgumentRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L61)
 
 ```python
 @property
@@ -65,7 +65,7 @@ Set of related names.
 
 ### ArgumentRecord().set_default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L53)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/argument_record.py#L49)
 
 ```python
 def set_default(node: Node) -> None:

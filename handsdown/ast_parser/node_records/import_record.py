@@ -1,16 +1,12 @@
 """
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 """
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, List, Optional
+from typing import List, Optional
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.type_defs import ASTImport, RenderExpr
 from handsdown.utils.import_string import ImportString
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import ASTImport, RenderExpr
 
 
 class ImportRecord(NodeRecord):

@@ -435,6 +435,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "types-setuptools"
+version = "57.4.2"
+description = "Typing stubs for setuptools"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "typing-extensions"
 version = "3.10.0.2"
 description = "Backported and Experimental Type Hints for Python 3.5+"
@@ -478,7 +486,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.9"
-content-hash = "a0f601f9ba25d80aed3c7302685b5d27131fd3cfe85667684ee37da5b4e6f620"
+content-hash = "4e6a75eba12e105176cabe7cb5f3eef8b6bce5d24edb174482fd8a20e4640a42"
 
 [metadata.files]
 astroid = [
@@ -762,6 +770,10 @@ typed-ast = [
     {file = "typed_ast-1.4.3-cp39-cp39-win32.whl", hash = "sha256:209596a4ec71d990d71d5e0d312ac935d86930e6eecff6ccc7007fe54d703808"},
     {file = "typed_ast-1.4.3-cp39-cp39-win_amd64.whl", hash = "sha256:9c6d1a54552b5330bc657b7ef0eae25d00ba7ffe85d9ea8ae6540d2197a3788c"},
     {file = "typed_ast-1.4.3.tar.gz", hash = "sha256:fb1bbeac803adea29cedd70781399c99138358c26d05fcbd23c13016b7f5ec65"},
+]
+types-setuptools = [
+    {file = "types-setuptools-57.4.2.tar.gz", hash = "sha256:5499a0f429281d1a3aa9494c79b6599ab356dfe6d393825426bc749e48ea1bf8"},
+    {file = "types_setuptools-57.4.2-py3-none-any.whl", hash = "sha256:9c96aab47fdcf066fef83160b2b9ddbfab3d2c8fdc89053579d0b306837bf22a"},
 ]
 typing-extensions = [
     {file = "typing_extensions-3.10.0.2-py2-none-any.whl", hash = "sha256:d8226d10bc02a29bcc81df19a26e56a9647f8b0a6d4a83924139f4a8b01f17b7"},

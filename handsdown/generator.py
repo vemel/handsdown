@@ -1,28 +1,23 @@
 """
 Main handsdown documentation generator.
 """
-
-from __future__ import annotations
-
 import re
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterable, List, Optional, Set
+from typing import Iterable, List, Optional, Set
 
 from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
+from handsdown.ast_parser.node_records.module_record import ModuleRecord
+from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.loader import Loader, LoaderError
 from handsdown.md_document import MDDocument
+from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.settings import FIND_IN_SOURCE_LABEL
 from handsdown.utils import make_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.node_records.module_record import ModuleRecord
-    from handsdown.ast_parser.node_records.node_record import NodeRecord
-    from handsdown.processors.base import BaseDocstringProcessor
 
 
 class GeneratorError(Exception):
@@ -500,7 +495,7 @@ class Generator:
         for attrubute in record.get_documented_attribute_strings():
             section_map.add_line_indent("Attributes", f"- {attrubute}")
 
-        related_import_strings = record.get_related_import_strings(module_record)
+        related_import_strings = module_record.get_related_import_strings(record)
         links = []
         title = ""
         for import_string in related_import_strings:

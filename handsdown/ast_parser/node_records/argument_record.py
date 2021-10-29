@@ -1,17 +1,13 @@
 """
 Wrapper for an `ast.arg` node.
 """
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, List, Optional, Set
+from typing import List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import Node, RenderExpr
+from handsdown.ast_parser.type_defs import Node, RenderExpr
 
 
 class ArgumentRecord(NodeRecord):

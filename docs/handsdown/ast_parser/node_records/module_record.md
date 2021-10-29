@@ -9,6 +9,7 @@ Wrapper for an `ast.Module` node with corresponding node info.
         - [ModuleRecord().build_children](#modulerecordbuild_children)
         - [ModuleRecord.create_from_source](#modulerecordcreate_from_source)
         - [ModuleRecord().find_record](#modulerecordfind_record)
+        - [ModuleRecord().get_related_import_strings](#modulerecordget_related_import_strings)
         - [ModuleRecord().iter_records](#modulerecorditer_records)
 
 ## ModuleRecord
@@ -92,6 +93,24 @@ Found child record on None.
 #### See also
 
 - [ImportString](../../utils/import_string.md#importstring)
+
+### ModuleRecord().get_related_import_strings
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L258)
+
+```python
+def get_related_import_strings(node_record: NodeRecord) -> Set[ImportString]:
+```
+
+Get a set of `related_names` found in module class, function, method and attribute records.
+
+#### Returns
+
+A set of absolute import strings found.
+
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
 
 ### ModuleRecord().iter_records
 

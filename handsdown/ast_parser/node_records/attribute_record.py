@@ -1,16 +1,12 @@
 """
 Wrapper for an `ast.Assign` node of a module or class attribute.
 """
-from __future__ import annotations
-
-from typing import TYPE_CHECKING, List, Optional, Set
+from typing import List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import RenderExpr
+from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class AttributeRecord(NodeRecord):
@@ -51,3 +47,9 @@ class AttributeRecord(NodeRecord):
     def _parse(self) -> None:
         if self.value:
             self.value.parse()
+
+    def render(self, indent: int = 0, allow_multiline: bool = False) -> str:
+        """
+        Render attribute with docstring.
+        """
+        return f"`{self.name}` - {self.docstring}: `{self.value.render()}`"

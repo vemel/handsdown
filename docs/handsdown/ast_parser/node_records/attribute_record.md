@@ -7,10 +7,11 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / AttributeRecord
     - [AttributeRecord](#attributerecord)
         - [AttributeRecord().related_names](#attributerecordrelated_names)
+        - [AttributeRecord().render](#attributerecordrender)
 
 ## AttributeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L16)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L12)
 
 ```python
 class AttributeRecord(NodeRecord):
@@ -29,7 +30,7 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 ### AttributeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L33)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L29)
 
 ```python
 @property
@@ -37,3 +38,13 @@ def related_names() -> Set[str]:
 ```
 
 Set of related names.
+
+### AttributeRecord().render
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L51)
+
+```python
+def render(indent: int = 0, allow_multiline: bool = False) -> str:
+```
+
+Render attribute with docstring.

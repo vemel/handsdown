@@ -13,7 +13,7 @@ Aggregation of `ModuleRecord` objects.
 
 ## ModuleRecordList
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L11)
 
 ```python
 class ModuleRecordList():
@@ -24,7 +24,7 @@ Aggregation of `ModuleRecord` objects.
 
 ### ModuleRecordList().\_\_iter\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L66)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L62)
 
 ```python
 def __iter__() -> Iterator[ModuleRecord]:
@@ -38,7 +38,7 @@ Iterate over all added `ModuleRecord` entries.
 
 ### ModuleRecordList().add
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L56)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L52)
 
 ```python
 def add(module_record: ModuleRecord) -> None:
@@ -56,7 +56,7 @@ Add new `ModuleRecord`.
 
 ### ModuleRecordList().find_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L25)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L21)
 
 ```python
 def find_module_record(import_string: ImportString) -> Optional[ModuleRecord]:
@@ -78,7 +78,7 @@ Found `NodeRecord` instance or None.
 
 ### ModuleRecordList().get_package_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L47)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/module_record_list.py#L43)
 
 ```python
 def get_package_names() -> Set[str]:

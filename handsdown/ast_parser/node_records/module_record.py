@@ -2,7 +2,7 @@
 Wrapper for an `ast.Module` node with corresponding node info.
 """
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Optional
+from typing import Any, Dict, Iterator, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
@@ -254,3 +254,33 @@ class ModuleRecord(NodeRecord):
 
         result.reverse()
         return "\n  ".join(result)
+
+    def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportString]:
+        """
+        Get a set of `related_names` found in module class, function, method and attribute records.
+
+        Returns:
+            A set of absolute import strings found.
+        """
+        result: Set[ImportString] = set()
+        related_names = node_record.related_names
+        if not related_names:
+            return result
+        for related_name in related_names:
+            for class_record in self.class_records:
+                if node_record in class_record.get_public_methods():
+                    continue
+                if class_record.name == related_name:
+                    result.add(class_record.import_string)
+            for function_record in self.function_records:
+                if function_record.name == related_name:
+                    result.add(function_record.import_string)
+            for import_record in self.import_records:
+                match = import_record.match(related_name)
+                if match:
+                    result.add(match)
+            for attribute_record in self.attribute_records:
+                if attribute_record.name == related_name:
+                    result.add(attribute_record.import_string)
+
+        return result

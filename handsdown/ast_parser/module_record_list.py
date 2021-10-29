@@ -1,15 +1,11 @@
 """
 Aggregation of `ModuleRecord` objects.
 """
-from __future__ import annotations
+from typing import Any, Dict, Iterator, List, Optional, Set
 
-from typing import TYPE_CHECKING, Any, Dict, Iterator, List, Optional, Set
-
+from handsdown.ast_parser.node_records.module_record import ModuleRecord
+from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.node_records.module_record import ModuleRecord
-    from handsdown.utils.import_string import ImportString
 
 
 class ModuleRecordList:

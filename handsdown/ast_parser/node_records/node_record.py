@@ -1,20 +1,13 @@
 """
 Base class for all node records.
 """
-from __future__ import annotations
-
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Iterable, List, Optional, Set, Tuple
+from typing import Iterable, List, Optional, Set, Tuple, Union
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
 from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
-    from handsdown.ast_parser.node_records.module_record import ModuleRecord
-    from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class NodeRecord:
@@ -44,7 +37,7 @@ class NodeRecord:
         self.name = self.node.__class__.__name__
         self.title = ""
         self.is_method = False
-        self.attribute_records: List[AttributeRecord] = []
+        self.attribute_records: List["NodeRecord"] = []
         self.parsed = False
         self._line_number: Optional[int] = None
 
@@ -106,7 +99,9 @@ class NodeRecord:
         self.parsed = True
 
     @staticmethod
-    def _render_line(parts: Iterable[RenderExpr], indent: int, allow_multiline: bool) -> str:
+    def _render_line(
+        parts: Iterable[Union["NodeRecord", str, RenderPart]], indent: int, allow_multiline: bool
+    ) -> str:
         result = []
         for part in parts:
             if part is RenderPart.SINGLE_LINE_SPACE:
@@ -122,7 +117,7 @@ class NodeRecord:
 
     def _render_multi_line(
         self,
-        parts: Iterable[RenderExpr],
+        parts: Iterable[Union["NodeRecord", str, RenderPart]],
         indent: int,
         allow_multiline: bool,
     ) -> Tuple[List[str], int]:
@@ -180,7 +175,7 @@ class NodeRecord:
             return self.ELLIPSIS
 
         parts = self._render_parts(indent)
-        line_parts: List[RenderExpr] = []
+        line_parts: List[Union["NodeRecord", str, RenderPart]] = []
         lines = []
         current_indent = indent
         for part_index, part in enumerate(parts):
@@ -216,7 +211,7 @@ class NodeRecord:
         return "".join(lines).rstrip("\n")
 
     @abstractmethod
-    def _render_parts(self, indent: int) -> List[RenderExpr]:
+    def _render_parts(self, indent: int) -> List[Union["NodeRecord", str, RenderPart]]:
         pass
 
     @classmethod
@@ -266,43 +261,13 @@ class NodeRecord:
         """
         return " " * indent * cls.INDENT_SPACES
 
-    def get_related_import_strings(self, module_record: ModuleRecord) -> Set[ImportString]:
-        """
-        Get a set of `related_names` found in module class, function, method and attribute records.
-
-        Returns:
-            A set of absolute import strings found.
-        """
-        result: Set[ImportString] = set()
-        related_names = self.related_names
-        if not related_names:
-            return result
-        for related_name in related_names:
-            for class_record in module_record.class_records:
-                if self in class_record.get_public_methods():
-                    continue
-                if class_record.name == related_name:
-                    result.add(class_record.import_string)
-            for function_record in module_record.function_records:
-                if function_record.name == related_name:
-                    result.add(function_record.import_string)
-            for import_record in module_record.import_records:
-                match = import_record.match(related_name)
-                if match:
-                    result.add(match)
-            for attribute_record in module_record.attribute_records:
-                if attribute_record.name == related_name:
-                    result.add(attribute_record.import_string)
-
-        return result
-
     def get_documented_attribute_strings(self) -> List[str]:
         """
         Render each of `attribute_records` to a Markdown string.
 
         Includes `name`, `docstring` and `value` of an `ArgumentRecord`.
 
-        Returns::
+        Returns:
             A list of rendered strings.
         """
         result = []
@@ -310,7 +275,6 @@ class NodeRecord:
             if not record.docstring:
                 continue
 
-            line = f"`{record.name}` - {record.docstring}: `{record.value.render()}`"
-            result.append(line)
+            result.append(record.render())
 
         return result

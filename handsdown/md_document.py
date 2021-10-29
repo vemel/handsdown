@@ -1,19 +1,20 @@
 """
 Markdown file builder.
 """
-from __future__ import annotations
-
 import re
 import traceback
 from pathlib import Path
 from types import TracebackType
-from typing import List, Optional, Type
+from typing import List, Optional, Type, TypeVar
 
 from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.path_finder import PathFinder
 
 __all__ = ["MDDocument"]
+
+
+_MDDocument = TypeVar("_MDDocument", bound="MDDocument")
 
 
 class MDDocument:
@@ -175,7 +176,7 @@ class MDDocument:
         return f"[{title}]({link})"
 
     def render_md_doc_link(
-        self, target_md_document: MDDocument, title: Optional[str] = None
+        self: _MDDocument, target_md_document: _MDDocument, title: Optional[str] = None
     ) -> str:
         """
         Render Markdown link to `target_md_document` header path with a correct title.

@@ -1,21 +1,17 @@
 """
 Wrapper for an `ast.ClassDef` node.
 """
-from __future__ import annotations
+from typing import Iterator, List, Optional, Set
 
-from typing import TYPE_CHECKING, Iterator, List, Optional, Set
-
+import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-
-if TYPE_CHECKING:
-    import handsdown.ast_parser.smart_ast as ast
-    from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
-    from handsdown.ast_parser.type_defs import RenderExpr
+from handsdown.ast_parser.type_defs import RenderExpr
 
 
 class ClassRecord(NodeRecord):

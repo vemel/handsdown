@@ -1,17 +1,13 @@
 """
 Wrapper for an `ast.expr` node.
 """
-from __future__ import annotations
-
 import re
-from typing import TYPE_CHECKING, List, Set
+from typing import List, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-
-if TYPE_CHECKING:
-    from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
+from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
 
 
 class ExpressionRecord(NodeRecord):
