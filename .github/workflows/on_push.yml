@@ -12,17 +12,26 @@ jobs:
       PIP_NO_CACHE_DIR: false
       PIP_USER: 1
       PYTHONUSERBASE: ${{ github.workspace }}/.cache/py-user-base
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version:
+          - "3.6"
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
     steps:
       - name: Add PYTHONUSERBASE to PATH
         id: add-pythonuserbase
         run: |
           echo '${{ env.PYTHONUSERBASE }}/bin/' >> $GITHUB_PATH
       - uses: actions/checkout@v2
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         id: python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"
+          python-version: "${{ matrix.python-version }}"
       - name: Set up Node.js
         id: python
         uses: actions/setup-node@v2
