@@ -53,3 +53,9 @@ class AttributeRecord(NodeRecord):
         Render attribute with docstring.
         """
         return f"`{self.name}` - {self.docstring}: `{self.value.render()}`"
+
+    def append_to(self, node_record: NodeRecord) -> None:
+        """
+        Append AttributeRecord to NodeRecord.
+        """
+        node_record.attribute_records.append(self)

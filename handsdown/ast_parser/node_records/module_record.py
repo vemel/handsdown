@@ -159,7 +159,7 @@ class ModuleRecord(NodeRecord):
             self.function_records.append(FunctionRecord(function_node, is_method=False))
 
         for attribute_node in analyzer.attribute_nodes:
-            self.attribute_records.append(AttributeRecord(attribute_node))
+            AttributeRecord(attribute_node).append_to(self)
 
         for import_node in analyzer.import_nodes:
             for alias in import_node.names:

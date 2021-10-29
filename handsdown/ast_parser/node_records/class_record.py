@@ -118,7 +118,7 @@ class ClassRecord(NodeRecord):
             self.decorator_records.append(ExpressionRecord(decorator_node))
 
         for attribute_node in analyzer.attribute_nodes:
-            self.attribute_records.append(AttributeRecord(attribute_node))
+            AttributeRecord(attribute_node).append_to(self)
 
         self.method_records.sort(key=lambda x: x.name)
 
