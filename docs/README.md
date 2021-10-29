@@ -97,7 +97,7 @@ handsdown -o output_dir
 handsdown my_module --exclude my_module/migrations
 
 # generate documentation for deployment
-handsdown --external `git config --get remote.origin.url` -n ProjectName
+handsdown --external `git config --get remote.origin.url` -n ProjectName --branch main
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
