@@ -10,17 +10,17 @@
 
 Python docstring-based documentation generator for lazy perfectionists.
 
-- [🙌 Handsdown - Python documentation generator](#%f0%9f%99%8c-handsdown---python-documentation-generator)
+- [🙌 Handsdown - Python documentation generator](#-handsdown---python-documentation-generator)
   - [Features](#features)
   - [Do you need handsdown?](#do-you-need-handsdown)
   - [Examples](#examples)
   - [Usage](#usage)
-    - [💻 From command line](#%f0%9f%92%bb-from-command-line)
-    - [📦 As a Docker image](#%f0%9f%93%a6-as-a-docker-image)
-    - [📝 As a GitHub Pages manager](#%f0%9f%93%9d-as-a-github-pages-manager)
-    - [🐏 Deploy on Read the Docs](#%f0%9f%90%8f-deploy-on-read-the-docs)
-    - [📋 Build static HTML](#%f0%9f%93%8b-build-static-html)
-    - [🧩 As a module](#%f0%9f%a7%a9-as-a-module)
+    - [💻 From command line](#-from-command-line)
+    - [📦 As a Docker image](#-as-a-docker-image)
+    - [📝 As a GitHub Pages manager](#-as-a-github-pages-manager)
+    - [🐏 Deploy on Read the Docs](#-deploy-on-read-the-docs)
+    - [📋 Build static HTML](#-build-static-html)
+    - [🧩 As a module](#-as-a-module)
   - [Installation](#installation)
   - [Development](#development)
   - [Changelog](#changelog)
@@ -167,7 +167,7 @@ GitHub repository to `Read the Docs`.
 handsdown --external `git config --get remote.origin.url`
 
 # or specify GitHub url directly
-handsdown --external https://github.com/<user>/<project>/blob/master/
+handsdown --external https://github.com/<user>/<project>/
 ```
 
 - Generate documentation with `--external` flag as shown above, do not use `--output`

@@ -5,15 +5,40 @@
 CLI Parser.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Cli Parser
+    - [CLINamespace](#clinamespace)
     - [abs_path](#abs_path)
     - [dir_abs_path](#dir_abs_path)
     - [existing_dir_abs_path](#existing_dir_abs_path)
     - [git_repo](#git_repo)
     - [parse_args](#parse_args)
 
+## CLINamespace
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L13)
+
+```python
+class CLINamespace():
+    def __init__(
+        panic: bool,
+        input_path: Path,
+        output_path: Path,
+        toc_depth: int,
+        log_level: int,
+        include: Iterable[str],
+        exclude: Iterable[str],
+        source_code_url: str,
+        branch: str,
+        project_name: str,
+        files: Iterable[Path],
+        cleanup: bool,
+    ) -> None:
+```
+
+Main CLI Namespace.
+
 ## abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L38)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L75)
 
 ```python
 def abs_path(path_str: str) -> Path:
@@ -31,7 +56,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L51)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L88)
 
 ```python
 def dir_abs_path(path_str: str) -> Path:
@@ -53,7 +78,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L70)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L107)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> Path:
@@ -75,7 +100,7 @@ An absolute path.
 
 ## git_repo
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L47)
 
 ```python
 def git_repo(git_repo_url: str) -> str:
@@ -93,10 +118,10 @@ A GitHub URL.
 
 ## parse_args
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L91)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L128)
 
 ```python
-def parse_args(args: Iterable[str]) -> argparse.Namespace:
+def parse_args(args: Iterable[str]) -> CLINamespace:
 ```
 
 Get CLI arguments parser.
@@ -104,3 +129,7 @@ Get CLI arguments parser.
 #### Returns
 
 An `argparse.ArgumentParser` instance.
+
+#### See also
+
+- [CLINamespace](#clinamespace)
