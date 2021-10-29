@@ -53,6 +53,7 @@ packages = [
     { include = "handsdown" },
 ]
 include = [
+    "handsdown/py.typed",
     "handsdown/assets/*.yml",
 ]
 
