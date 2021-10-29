@@ -76,7 +76,7 @@ class ArgumentRecord(NodeRecord):
         return result
 
     def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
-        parts = []
+        parts: List[RenderExpr] = []
         if self.prefix:
             parts.append(self.prefix)
 
