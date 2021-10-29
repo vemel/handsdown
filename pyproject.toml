@@ -80,6 +80,7 @@ pytest-cov = "3.0.0"
 rope = "*"
 pylint = "2.11.1"
 types-setuptools = "*"
+twine = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
