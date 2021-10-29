@@ -93,7 +93,7 @@ if os.environ.get("PYTHON_VER", "3") == "3":
             stmt,
         )
     else:
-        from typed_ast.ast3 import Constant  # pylint: disable=no-name-in-module
+        from typed_ast.ast3 import Constant  # type: ignore
         from typed_ast.ast3 import (
             AST,
             Add,
