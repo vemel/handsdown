@@ -7,7 +7,7 @@ from pathlib import Path
 HANDSDOWN_PATH = Path(__file__)
 
 # Path to `assets` directory from root.
-ASSETS_PATH = HANDSDOWN_PATH / "assets"
+ASSETS_PATH = HANDSDOWN_PATH.parent / "assets"
 
 # Global `logging.Logger` name.
 LOGGER_NAME = "handsdown"
