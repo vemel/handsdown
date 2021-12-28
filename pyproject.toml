@@ -72,10 +72,10 @@ pip = "*"
 typed-ast = "*"
 
 [tool.poetry.dev-dependencies]
-black = "21.9b0"
-isort = "5.9.3"
+black = "21.12b0"
+isort = "5.10.1"
 codecov = "2.1.12"
-mypy = "0.910"
+mypy = "0.930"
 flake8 = "4.0.1"
 pytest = "6.2.5"
 pytest-cov = "3.0.0"

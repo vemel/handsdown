@@ -1,4 +1,4 @@
-FROM python:3.7.5-alpine3.10
+FROM python:3.10.1-alpine3.15
 
 RUN apk add --no-cache gcc libc-dev
 
