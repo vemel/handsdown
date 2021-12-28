@@ -24,7 +24,7 @@ def create_external_configs(namespace: CLINamespace) -> None:
     for asset_name, target_path in configs:
         if target_path.exists():
             continue
-        logger.info(f"Creating {target_path} file")
+        logger.info(f"Creating {target_path.as_posix()} file")
         render_asset(
             asset_name,
             target_path,

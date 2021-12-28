@@ -83,7 +83,7 @@ class Generator:
 
         # create output folder if it does not exist
         if not self._output_path.exists():
-            self._logger.info(f"Creating folder {self._output_path}")
+            self._logger.info(f"Creating folder {self._output_path.as_posix()}")
             PathFinder(self._output_path).mkdir()
 
         self._loader = loader or Loader(root_path=self._root_path, output_path=self._output_path)

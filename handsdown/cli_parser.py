@@ -100,7 +100,7 @@ def dir_abs_path(path_str: str) -> Path:
     """
     path = Path(path_str).absolute()
     if path.exists() and not path.is_dir():
-        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
+        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} is not a directory")
     return path
 
 
@@ -119,9 +119,9 @@ def existing_dir_abs_path(path_str: str) -> Path:
     """
     path = Path(path_str).absolute()
     if not path.exists():
-        raise argparse.ArgumentTypeError(f"Path {path} does not exist")
+        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} does not exist")
     if not path.is_dir():
-        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
+        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} is not a directory")
     return path
 
 

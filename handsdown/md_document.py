@@ -232,7 +232,7 @@ class MDDocument:
             link = f"#{anchor}"
         if target_path and target_path != self._path:
             link_path = self._path_finder.relative(target_path)
-            link = f"{link_path}{link}"
+            link = f"{link_path.as_posix()}{link}"
 
         return self.render_link(title, link)
 

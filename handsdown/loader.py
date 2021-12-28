@@ -86,7 +86,9 @@ class Loader:
             )
             module_record.build_children()
         except Exception as e:
-            raise LoaderError(f"{e.__class__.__name__} while loading {source_path}: {e}") from e
+            raise LoaderError(
+                f"{e.__class__.__name__} while loading {source_path.as_posix()}: {e}"
+            ) from e
 
         if module_record.docstring:
             docstring_parts.append(module_record.docstring)
@@ -116,7 +118,7 @@ class Loader:
             module_record.parse()
         except Exception as e:
             raise LoaderError(
-                f"{e.__class__.__name__} while parsing {module_record.source_path}: {e}"
+                f"{e.__class__.__name__} while parsing {module_record.source_path.as_posix()}: {e}"
             ) from e
 
     def get_import_string(self, source_path: Path) -> str:
