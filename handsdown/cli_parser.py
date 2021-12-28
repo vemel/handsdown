@@ -179,7 +179,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         default="",
         type=git_repo,
     )
-    parser.add_argument("--branch", help="Main branch name", default="master")
+    parser.add_argument("--branch", help="Main branch name", default="main")
     parser.add_argument(
         "--toc-depth", help="Maximum depth of child modules ToC", default=1, type=int
     )

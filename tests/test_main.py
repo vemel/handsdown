@@ -37,7 +37,7 @@ class TestMain(unittest.TestCase):
             output_path=Path("/output-path"),
             project_name="Handsdown",
             raise_errors=False,
-            source_code_url="blob/master/",
+            source_code_url="blob/main/",
             source_paths=path_finder_mock().exclude().include().glob(),
             toc_depth=1,
         )
