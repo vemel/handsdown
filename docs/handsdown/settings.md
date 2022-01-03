@@ -8,7 +8,7 @@ Various project constants.
 
 #### Attributes
 
-- `HANDSDOWN_PATH` - Path to handsdown root directory.: `Path(__file__)`
+- `HANDSDOWN_PATH` - Path to handsdown root directory.: `Path(__file__).parent`
 - `ASSETS_PATH` - Path to `assets` directory from root.: `HANDSDOWN_PATH / 'assets'`
 - `LOGGER_NAME` - Global `logging.Logger` name.: `'handsdown'`
 - `EXCLUDE_EXPRS` - Paths to exclude from docs generation.: `['build/*', 'tests/*', 'test/*', '*/__pycache__/*', '.*/*']`

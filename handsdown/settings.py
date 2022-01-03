@@ -4,7 +4,7 @@ Various project constants.
 from pathlib import Path
 
 # Path to handsdown root directory.
-HANDSDOWN_PATH = Path(__file__)
+HANDSDOWN_PATH = Path(__file__).parent
 
 # Path to `assets` directory from root.
 ASSETS_PATH = HANDSDOWN_PATH / "assets"
