@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple
 
 import importlib_resources as pkg_resources
 
-from handsdown import assets
+from handsdown import assets as assets_resource
 
 
 def make_title(file_stem: str) -> str:
@@ -59,7 +59,7 @@ def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> N
         target_path -- Path of output file.
         format_dict -- Format asset with values from the dict before writing.
     """
-    content = pkg_resources.read_text(assets, name)
+    content = pkg_resources.files(assets_resource).joinpath(name).read_text()
     content = content.format(**format_dict)
     target_path.write_text(content)
 
