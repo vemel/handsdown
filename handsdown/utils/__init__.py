@@ -4,7 +4,9 @@ Handful utils that do not deserve a separate module.
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-from handsdown.settings import ASSETS_PATH
+import importlib_resources as pkg_resources
+
+from handsdown import assets
 
 
 def make_title(file_stem: str) -> str:
@@ -57,7 +59,7 @@ def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> N
         target_path -- Path of output file.
         format_dict -- Format asset with values from the dict before writing.
     """
-    content = (Path(ASSETS_PATH) / name).read_text()
+    content = pkg_resources.read_text(assets, name)
     content = content.format(**format_dict)
     target_path.write_text(content)
 

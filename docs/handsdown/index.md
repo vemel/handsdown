@@ -14,6 +14,7 @@ Root of [Handsdown](#handsdown) source code.
     - [More examples](#more-examples)
     - Modules
         - [Module](module.md#module)
+        - [Assets](assets/index.md#assets)
         - [AST Parser.](ast_parser/index.md#ast-parser)
         - [Cli Parser](cli_parser.md#cli-parser)
         - [Generator](generator.md#generator)

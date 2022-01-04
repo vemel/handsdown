@@ -17,7 +17,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L67)
 
 ```python
 def extract_md_title(content: str) -> Tuple[(str, str)]:
@@ -44,7 +44,7 @@ A tuple fo title and remaining content.
 
 ## make_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L10)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L12)
 
 ```python
 def make_title(file_stem: str) -> str:
@@ -80,7 +80,7 @@ A human-readable title as a string.
 
 ## render_asset
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L51)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L53)
 
 ```python
 def render_asset(
