@@ -40,4 +40,5 @@ class TestMain(unittest.TestCase):
             source_code_url="blob/main/",
             source_paths=path_finder_mock().exclude().include().glob(),
             toc_depth=1,
+            encoding="utf-8",
         )

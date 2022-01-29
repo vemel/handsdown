@@ -30,6 +30,7 @@ class TestUtils(unittest.TestCase):
                     "project_name": "My title",
                     "source_code_url": "test",
                 },
+                encoding="utf-8",
             )
         )
         target_path.write_text.assert_called()

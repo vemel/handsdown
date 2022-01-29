@@ -1,7 +1,7 @@
 # pylint: disable=missing-docstring
 import unittest
-from unittest.mock import patch, MagicMock
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 from handsdown.generator import Generator, GeneratorError
 from handsdown.utils.import_string import ImportString
@@ -12,9 +12,7 @@ class TestGenerator(unittest.TestCase):
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
     @patch("handsdown.generator.PathFinder")
-    def test_init(
-        self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock
-    ):
+    def test_init(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
         generator = Generator(
             project_name="test",
@@ -24,20 +22,18 @@ class TestGenerator(unittest.TestCase):
         )
         self.assertIsInstance(generator, Generator)
         LoaderMock.assert_called_with(
-            output_path=Path("/output"), root_path=Path("/input")
+            output_path=Path("/output"), root_path=Path("/input"), encoding="utf-8"
         )
         ModuleRecordListMock.assert_called_with()
         ModuleRecordListMock().add.assert_called_with(LoaderMock().get_module_record())
         PathFinderMock.assert_called_with(Path("/output"))
-        MDDocumentMock.assert_called_with(Path("/output/MODULES.md"))
+        MDDocumentMock.assert_called_with(Path("/output/MODULES.md"), encoding="utf-8")
 
     @patch("handsdown.generator.Loader")
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
     @patch("handsdown.generator.PathFinder")
-    def test_generate_docs(
-        self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock
-    ):
+    def test_generate_docs(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
         generator = Generator(
             project_name="test",
@@ -53,14 +49,12 @@ class TestGenerator(unittest.TestCase):
         module_record_mock.title = "Title"
         module_record_mock.docstring = "Docstring"
         module_record_mock.import_string = ImportString("my.import.string")
-        ModuleRecordListMock().__iter__ = MagicMock(
-            return_value=iter([module_record_mock])
-        )
+        ModuleRecordListMock().__iter__ = MagicMock(return_value=iter([module_record_mock]))
 
         generator.generate_docs()
 
         LoaderMock.assert_called_with(
-            output_path=Path("/output"), root_path=Path("/input")
+            output_path=Path("/output"), root_path=Path("/input"), encoding="utf-8"
         )
         PathFinderMock.assert_called_with(Path("/output"))
 
@@ -68,9 +62,7 @@ class TestGenerator(unittest.TestCase):
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
     @patch("handsdown.generator.PathFinder")
-    def test_generate_doc(
-        self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock
-    ):
+    def test_generate_doc(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
         generator = Generator(
             project_name="test",
@@ -102,20 +94,16 @@ class TestGenerator(unittest.TestCase):
         generator.generate_doc(Path("/input/source2.py"))
 
         LoaderMock.assert_called_with(
-            output_path=Path("/output"), root_path=Path("/input")
+            output_path=Path("/output"), root_path=Path("/input"), encoding="utf-8"
         )
         PathFinderMock.assert_called_with(Path("/output"))
 
-        ModuleRecordListMock().__iter__ = MagicMock(
-            return_value=iter([module_record_mock])
-        )
+        ModuleRecordListMock().__iter__ = MagicMock(return_value=iter([module_record_mock]))
         with self.assertRaises(GeneratorError):
             generator.generate_doc(Path("/input/source2.py"))
 
         LoaderMock().parse_module_record.side_effect = ValueError("loader_error")
-        ModuleRecordListMock().__iter__ = MagicMock(
-            return_value=iter([module_record_mock2])
-        )
+        ModuleRecordListMock().__iter__ = MagicMock(return_value=iter([module_record_mock2]))
         with self.assertRaises(ValueError):
             generator.generate_doc(Path("/input/source2.py"))
 
