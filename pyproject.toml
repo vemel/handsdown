@@ -2,7 +2,6 @@
 line-length = 100
 include = "(handsdown|tests)/.*\\.pyi?$"
 target-version = [
-    "py36",
     "py37",
     "py38",
     "py39",
@@ -40,11 +39,11 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: Implementation :: CPython",
     "Typing :: Typed",
@@ -68,7 +67,7 @@ handsdown = 'handsdown.main:main'
 "Bug Tracker" = "https://github.com/vemel/handsdown/issues"
 
 [tool.poetry.dependencies]
-python = "^3.6.9"
+python = "^3.7"
 pip = "*"
 typed-ast = "*"
 importlib-resources = "*"
