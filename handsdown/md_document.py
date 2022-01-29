@@ -34,7 +34,7 @@ class MDDocument:
         md_doc.write()
 
         # output is indented for readability
-        Path('output.md').read_text()
+        Path('output.md').read_text(encoding=self._encoding)
         '''# My doc
 
         - [My doc](#my-doc)

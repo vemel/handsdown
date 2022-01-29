@@ -60,7 +60,7 @@ def render_asset(name: str, target_path: Path, format_dict: Dict[str, str], enco
         format_dict -- Format asset with values from the dict before writing.
         encoding -- File encoding.
     """
-    content = pkg_resources.files(assets_resource).joinpath(name).read_text()
+    content = pkg_resources.files(assets_resource).joinpath(name).read_text(encoding=encoding)
     content = content.format(**format_dict)
     target_path.write_text(content, encoding=encoding)
 
