@@ -12,6 +12,7 @@ from handsdown.ast_parser.node_records.class_record import ClassRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.settings import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.indent_trimmer import IndentTrimmer
 
@@ -41,25 +42,31 @@ class ModuleRecord(NodeRecord):
         self.docstring = self._get_docstring()
 
     @classmethod
-    def create_from_source(cls, source_path: Path, import_string: ImportString) -> "ModuleRecord":
+    def create_from_source(
+        cls,
+        source_path: Path,
+        import_string: ImportString,
+        encoding: str = ENCODING,
+    ) -> "ModuleRecord":
         """
         Create new `ModuleRecord` from path.
 
         Arguments:
             source_path -- Path to a Python source file.
             import_string -- File absolute import string.
+            encoding -- File encoding.
 
         Returns:
             New `ModuleRecord` instance.
         """
-        content = source_path.read_text()
+        content = source_path.read_text(encoding=encoding)
         node = ast.parse(content)
         assert isinstance(node, ast.Module)
         record = cls(node)
         record.import_string = import_string
         record.name = import_string.parts[-1]
         record.source_path = source_path
-        record.source_lines = source_path.read_text().split("\n")
+        record.source_lines = content.split("\n")
         return record
 
     def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:

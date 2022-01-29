@@ -12,3 +12,6 @@ SOURCES_GLOB = "**/*.py"
 
 # Find in code link label.
 FIND_IN_SOURCE_LABEL = "[find in source code]"
+
+# Default encoding for source files
+ENCODING = "utf-8"

@@ -9,6 +9,8 @@ from typing import Iterable, List
 
 import pkg_resources
 
+from handsdown.settings import ENCODING
+
 
 class CLINamespace:
     """
@@ -29,6 +31,7 @@ class CLINamespace:
         project_name: str,
         files: Iterable[Path],
         cleanup: bool,
+        encoding: str,
     ) -> None:
         self.panic = panic
         self.input_path = input_path
@@ -42,6 +45,7 @@ class CLINamespace:
         self.project_name = project_name
         self.files: List[Path] = list(files)
         self.cleanup = cleanup
+        self.encoding = encoding
 
 
 def git_repo(git_repo_url: str) -> str:
@@ -192,6 +196,9 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         help="Project name",
         default=Path.cwd().stem.capitalize(),
     )
+    parser.add_argument(
+        "-e", "--encoding", help=f"File encoding (default: {ENCODING})", default=ENCODING
+    )
     parser.add_argument("-V", "--version", action="version", version=version)
     namespace = parser.parse_args(list(args))
 
@@ -214,4 +221,5 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         project_name=namespace.project_name,
         files=namespace.files,
         cleanup=namespace.cleanup,
+        encoding=namespace.encoding,
     )

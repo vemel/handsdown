@@ -7,6 +7,7 @@ from pathlib import Path
 from types import TracebackType
 from typing import List, Optional, Type, TypeVar
 
+from handsdown.settings import ENCODING
 from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.path_finder import PathFinder
@@ -60,7 +61,7 @@ class MDDocument:
     _escape_title_re = re.compile(r"(_+\S+_+)$")
     _section_separator = "\n\n"
 
-    def __init__(self, path: Path) -> None:
+    def __init__(self, path: Path, encoding: str = ENCODING) -> None:
         self._sections: List[str] = []
         self._content = ""
         self._title = ""
@@ -68,6 +69,7 @@ class MDDocument:
         self._toc_section = ""
         self._path = path
         self._path_finder = PathFinder(self._path.parent)
+        self._encoding = encoding
 
     def __enter__(self) -> "MDDocument":
         return self
@@ -89,9 +91,10 @@ class MDDocument:
 
         Arguments:
             source_path -- Input file path. If not provided - `path` is used.
+            encoding -- File encoding.
         """
         path = source_path or self._path
-        self._content = path.read_text()
+        self._content = path.read_text(encoding=self._encoding)
         self._title = ""
         self._toc_section = ""
         title, content = extract_md_title(self._content)
@@ -254,7 +257,7 @@ class MDDocument:
         """
         content = self._build_content()
         self._path_finder.mkdir()
-        self._path.write_text(content)
+        self._path.write_text(content, encoding=self._encoding)
 
     @property
     def title(self) -> str:

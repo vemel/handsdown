@@ -50,7 +50,7 @@ def make_title(file_stem: str) -> str:
     return " ".join(name_parts)
 
 
-def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> None:
+def render_asset(name: str, target_path: Path, format_dict: Dict[str, str], encoding: str) -> None:
     """
     Render `assets/<name>` file to `target_path`.
 
@@ -58,10 +58,11 @@ def render_asset(name: str, target_path: Path, format_dict: Dict[str, str]) -> N
         name -- Asset file name.
         target_path -- Path of output file.
         format_dict -- Format asset with values from the dict before writing.
+        encoding -- File encoding.
     """
     content = pkg_resources.files(assets_resource).joinpath(name).read_text()
     content = content.format(**format_dict)
-    target_path.write_text(content)
+    target_path.write_text(content, encoding=encoding)
 
 
 def extract_md_title(content: str) -> Tuple[str, str]:

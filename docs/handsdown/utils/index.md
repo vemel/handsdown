@@ -17,7 +17,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L67)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L68)
 
 ```python
 def extract_md_title(content: str) -> Tuple[(str, str)]:
@@ -87,6 +87,7 @@ def render_asset(
     name: str,
     target_path: Path,
     format_dict: Dict[(str, str)],
+    encoding: str,
 ) -> None:
 ```
 
@@ -97,3 +98,4 @@ Render `assets/<name>` file to `target_path`.
 - `name` - Asset file name.
 - `target_path` - Path of output file.
 - `format_dict` - Format asset with values from the dict before writing.
+- `encoding` - File encoding.

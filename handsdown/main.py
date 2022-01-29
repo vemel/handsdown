@@ -35,6 +35,7 @@ def create_external_configs(namespace: CLINamespace) -> None:
                 .relative(namespace.output_path)
                 .as_posix(),
             ),
+            encoding=namespace.encoding,
         )
 
 
@@ -58,6 +59,7 @@ def main() -> None:
             raise_errors=args.panic,
             source_code_url=f"{args.source_code_url}blob/{args.branch}/",
             toc_depth=args.toc_depth,
+            encoding=args.encoding,
         )
         if args.files:
             for path in args.files:

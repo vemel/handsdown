@@ -13,7 +13,7 @@ from handsdown.loader import Loader, LoaderError
 from handsdown.md_document import MDDocument
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.smart import SmartDocstringProcessor
-from handsdown.settings import FIND_IN_SOURCE_LABEL
+from handsdown.settings import ENCODING, FIND_IN_SOURCE_LABEL
 from handsdown.utils import make_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
@@ -41,6 +41,7 @@ class Generator:
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
         toc_depth -- Maximum depth of child modules ToC
+        encoding -- File encoding
     """
 
     # Name of logger
@@ -71,6 +72,7 @@ class Generator:
         raise_errors: bool = False,
         source_code_url: Optional[str] = None,
         toc_depth: int = 1,
+        encoding: str = ENCODING,
     ) -> None:
         self._logger = get_logger()
         self._root_path = input_path
@@ -80,13 +82,18 @@ class Generator:
         self._source_code_url = source_code_url
         self._toc_depth = toc_depth
         self._raise_errors = raise_errors
+        self._encoding = encoding
 
         # create output folder if it does not exist
         if not self._output_path.exists():
             self._logger.info(f"Creating folder {self._output_path.as_posix()}")
             PathFinder(self._output_path).mkdir()
 
-        self._loader = loader or Loader(root_path=self._root_path, output_path=self._output_path)
+        self._loader = loader or Loader(
+            root_path=self._root_path,
+            output_path=self._output_path,
+            encoding=self._encoding,
+        )
         self._docstring_processor = docstring_processor or SmartDocstringProcessor()
 
         self._source_paths = sorted(source_paths)
@@ -101,8 +108,8 @@ class Generator:
         self._prepare_index()
 
     def _prepare_index(self) -> None:
-        self.md_index = MDDocument(self._output_path / self.INDEX_NAME)
-        self.md_modules = MDDocument(self._output_path / self.MODULES_NAME)
+        self.md_index = MDDocument(self._output_path / self.INDEX_NAME, encoding=self._encoding)
+        self.md_modules = MDDocument(self._output_path / self.MODULES_NAME, encoding=self._encoding)
 
         # copy `README.md` content from root dir if it exists
         readme_path = self._root_path / "README.md"
@@ -191,7 +198,7 @@ class Generator:
 
             output_path = self._loader.get_output_path(module_record.source_path)
 
-            md_document = MDDocument(output_path)
+            md_document = MDDocument(output_path, encoding=self._encoding)
             self._generate_doc(module_record, md_document)
             md_document.write()
 
@@ -309,7 +316,7 @@ class Generator:
 
         for module_record in self._module_records:
             output_path = self._loader.get_output_path(module_record.source_path)
-            md_document = MDDocument(output_path)
+            md_document = MDDocument(output_path, encoding=self._encoding)
             self._generate_doc(module_record, md_document)
             md_document.write()
 

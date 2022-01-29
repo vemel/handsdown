@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Optional
 
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
+from handsdown.settings import ENCODING
 from handsdown.utils import extract_md_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
@@ -30,13 +31,15 @@ class Loader:
     Arguments:
         root_path -- Root path of the project.
         output_path -- Docs output path.
+        encoding -- File encoding.
     """
 
-    def __init__(self, root_path: Path, output_path: Path) -> None:
+    def __init__(self, root_path: Path, output_path: Path, encoding: str = ENCODING) -> None:
         self._logger = get_logger()
         self._root_path = root_path
         self._root_path_finder = PathFinder(self._root_path)
         self._output_path = output_path
+        self._encoding = encoding
 
     def get_output_path(self, source_path: Path) -> Path:
         """
@@ -82,7 +85,9 @@ class Loader:
 
         try:
             module_record = ModuleRecord.create_from_source(
-                source_path, ImportString(import_string)
+                source_path=source_path,
+                import_string=ImportString(import_string),
+                encoding=self._encoding,
             )
             module_record.build_children()
         except Exception as e:
@@ -96,7 +101,7 @@ class Loader:
         if source_path.name == "__init__.py":
             readme_md_path = source_path.parent / "README.md"
             if readme_md_path.exists():
-                docstring_parts.append(readme_md_path.read_text())
+                docstring_parts.append(readme_md_path.read_text(encoding=self._encoding))
 
         docstring = "\n\n".join(docstring_parts)
         title, docstring = extract_md_title(docstring)

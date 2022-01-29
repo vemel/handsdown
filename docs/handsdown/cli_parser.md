@@ -14,7 +14,7 @@ CLI Parser.
 
 ## CLINamespace
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L15)
 
 ```python
 class CLINamespace():
@@ -31,6 +31,7 @@ class CLINamespace():
         project_name: str,
         files: Iterable[Path],
         cleanup: bool,
+        encoding: str,
     ) -> None:
 ```
 
@@ -38,7 +39,7 @@ Main CLI Namespace.
 
 ## abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L75)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L79)
 
 ```python
 def abs_path(path_str: str) -> Path:
@@ -56,7 +57,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L88)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L92)
 
 ```python
 def dir_abs_path(path_str: str) -> Path:
@@ -78,7 +79,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L107)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L111)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> Path:
@@ -100,7 +101,7 @@ An absolute path.
 
 ## git_repo
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L47)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L51)
 
 ```python
 def git_repo(git_repo_url: str) -> str:
@@ -118,7 +119,7 @@ A GitHub URL.
 
 ## parse_args
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L128)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/cli_parser.py#L132)
 
 ```python
 def parse_args(args: Iterable[str]) -> CLINamespace:

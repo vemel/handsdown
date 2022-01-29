@@ -24,7 +24,7 @@ Create `GitHub Pages` and `Read the Docs` configuration files.
 
 ## main
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L41)
+[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/main.py#L42)
 
 ```python
 def main() -> None:

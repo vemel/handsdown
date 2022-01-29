@@ -12,3 +12,4 @@ Various project constants.
 - `EXCLUDE_EXPRS` - Paths to exclude from docs generation.: `['build/*', 'tests/*', 'test/*', '*/__pycache__/*', '.*/*']`
 - `SOURCES_GLOB` - `glob.glob` expression to ind all Python sources in current directory.: `'**/*.py'`
 - `FIND_IN_SOURCE_LABEL` - Find in code link label.: `'[find in source code]'`
+- `ENCODING` - Default encoding for source files: `'utf-8'`
