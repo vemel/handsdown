@@ -24,7 +24,7 @@ Full Handsdown project documentation can be found in [Modules](MODULES.md#module
     - [🐏 Deploy on Read the Docs](#-deploy-on-read-the-docs)
     - [📋 Build static HTML](#-build-static-html)
     - [🧩 As a module](#-as-a-module)
-    - [CLI arguments](#cli-arguments)
+    - [⌨️ CLI arguments](#️-cli-arguments)
   - [Installation](#installation)
   - [Development](#development)
   - [Changelog](#changelog)
@@ -229,7 +229,7 @@ handsdown.generate_index()
 # navigate to `output` dir and check results
 ```
 
-### CLI arguments
+### ⌨️ CLI arguments
 
 ```bash
 handsdown [-h] [--exclude [EXCLUDE ...]] [-i INPUT_PATH] [-f [FILES ...]]
