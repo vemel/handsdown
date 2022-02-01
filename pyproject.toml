@@ -20,7 +20,7 @@ src_paths = []
 
 [tool.poetry]
 name = "handsdown"
-version = "0.6.0"
+version = "1.0.0"
 description = "Python docstring-based documentation generator for lazy perfectionists."
 authors = ["Vlad Emelianov <vlad.emelianov.nz@gmail.com>"]
 license = "MIT"
