@@ -21,6 +21,7 @@ Python docstring-based documentation generator for lazy perfectionists.
     - [🐏 Deploy on Read the Docs](#-deploy-on-read-the-docs)
     - [📋 Build static HTML](#-build-static-html)
     - [🧩 As a module](#-as-a-module)
+    - [CLI arguments](#cli-arguments)
   - [Installation](#installation)
   - [Development](#development)
   - [Changelog](#changelog)
@@ -223,6 +224,36 @@ handsdown.generate_index()
 
 # navigate to `output` dir and check results
 ```
+
+### CLI arguments
+
+```bash
+handsdown [-h] [--exclude [EXCLUDE ...]] [-i INPUT_PATH] [-f [FILES ...]]
+  [-o OUTPUT_PATH] [--external REPO_URL] [--source-code-path REPO_PATH]
+  [--branch BRANCH] [--toc-depth TOC_DEPTH] [--cleanup] [-n PROJECT_NAME]
+  [-e ENCODING] [--panic] [-d] [-q] [-V]
+  [include ...]
+```
+
+| Argument | Description | Default |
+|-|-|-|
+| `include` | Path expressions to include source files | |
+| `--exclude` | Path expressions to exclude source files | |
+| `-i` / `--input-path` | Path to project root folder | |
+| `-f` / `--files` | List of source files to use for generation. If empty - all are used. | |
+| `-o` / `--output-path` | Path to output folder | `<cwd>/docs` |
+| `--external` | Build docs and config for external hosting, GitHub Pages or Read the Docs. Provide the project GitHub .../blob/main/ URL here. | |
+| `--source-code-path` | Path to source code in the project. Overrides `--branch` CLI argument | |
+| `--branch` | Main branch name | `main` |
+| `--toc-depth` | Maximum depth of child modules ToC | `1` |
+| `--cleanup` | Remove orphaned auto-generated docs | |
+| `-n` / `--name` | Project name | `<cwd>` |
+| `-e` / `--encoding` | Input and output file encoding | `utf-8` |
+| `--panic` | Panic and die on import error | |
+| `--debug` | Show debug messages| |
+| `--quiet` | Hide log output | |
+| `-h` | Show help | |
+
 
 ## Installation
 
