@@ -28,7 +28,7 @@ class CLINamespace():
         include: Iterable[str],
         exclude: Iterable[str],
         source_code_url: str,
-        source_code_path: Path,
+        source_code_path: str,
         branch: str,
         project_name: str,
         files: Iterable[Path],

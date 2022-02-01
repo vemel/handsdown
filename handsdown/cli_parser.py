@@ -28,7 +28,7 @@ class CLINamespace:
         include: Iterable[str],
         exclude: Iterable[str],
         source_code_url: str,
-        source_code_path: Path,
+        source_code_path: str,
         branch: str,
         project_name: str,
         files: Iterable[Path],
@@ -57,9 +57,9 @@ class CLINamespace:
         Returns:
             URL as a string.
         """
-        if self.source_code_path:
-            return Path(self.source_code_path).as_posix()
         source_code_path = f"blob/{self.branch}"
+        if self.source_code_path:
+            source_code_path = Path(self.source_code_path).as_posix()
         result = f"{self.source_code_url}{source_code_path}"
         if not result.endswith("/"):
             result = f"{result}/"

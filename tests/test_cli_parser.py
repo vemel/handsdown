@@ -51,3 +51,19 @@ class TestCLIParser(unittest.TestCase):
 
     def test_parse_args(self):
         self.assertIsInstance(parse_args([]), CLINamespace)
+
+    def test_get_source_code_url(self):
+        namespace = parse_args([])
+        assert namespace.get_source_code_url() == "blob/main/"
+
+        namespace.branch = "master"
+        assert namespace.get_source_code_url() == "blob/master/"
+
+        namespace.source_code_path = "path/"
+        assert namespace.get_source_code_url() == "path/"
+
+        namespace.source_code_path = "path"
+        assert namespace.get_source_code_url() == "path/"
+
+        namespace.source_code_path = ""
+        assert namespace.get_source_code_url() == "blob/master/"
