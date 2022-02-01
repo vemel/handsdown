@@ -1,6 +1,6 @@
 # Node Records
 
-> Auto-generated documentation for [handsdown.ast_parser.node_records](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/__init__.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.node_records](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/__init__.py) module.
 
 Wrappers for AST nodes.
 

@@ -1,6 +1,6 @@
 # Settings
 
-> Auto-generated documentation for [handsdown.settings](https://github.com/vemel/handsdown/blob/master/handsdown/settings.py) module.
+> Auto-generated documentation for [handsdown.settings](https://github.com/vemel/handsdown/blob/main/handsdown/settings.py) module.
 
 Various project constants.
 

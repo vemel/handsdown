@@ -1,6 +1,6 @@
 # BaseAnalyzer
 
-> Auto-generated documentation for [handsdown.ast_parser.analyzers.base_analyzer](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.analyzers.base_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py) module.
 
 Base AST analyzer.
 
@@ -9,7 +9,7 @@ Base AST analyzer.
 
 ## BaseAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
 
 ```python
 class BaseAnalyzer(ast.NodeVisitor):

@@ -1,6 +1,6 @@
 # Enums
 
-> Auto-generated documentation for [handsdown.ast_parser.enums](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/enums.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.enums](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/enums.py) module.
 
 Enums for AST parsing.
 
@@ -10,7 +10,7 @@ Enums for AST parsing.
 
 ## RenderPart
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/enums.py#L7)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/enums.py#L7)
 
 ```python
 class RenderPart(enum.Enum):
@@ -33,7 +33,7 @@ For [render](node_records/node_record.md#render) function.
 
 ### RenderPart().is_line_break
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/enums.py#L38)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/enums.py#L38)
 
 ```python
 def is_line_break() -> bool:

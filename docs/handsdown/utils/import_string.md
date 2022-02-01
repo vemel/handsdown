@@ -1,6 +1,6 @@
 # ImportString
 
-> Auto-generated documentation for [handsdown.utils.import_string](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py) module.
+> Auto-generated documentation for [handsdown.utils.import_string](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py) module.
 
 Wrapper for python import strings.
 
@@ -18,7 +18,7 @@ Wrapper for python import strings.
 
 ## ImportString
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L13)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L13)
 
 ```python
 class ImportString():
@@ -33,7 +33,7 @@ Wrapper for python import strings.
 
 ### ImportString().\_\_add\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L41)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L41)
 
 ```python
 def __add__(other: str) -> 'ImportString':
@@ -61,7 +61,7 @@ A new [ImportString](#importstring) instance.
 
 ### ImportString().\_\_bool\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L64)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L64)
 
 ```python
 def __bool__() -> bool:
@@ -85,7 +85,7 @@ True if not empty.
 
 ### ImportString().\_\_eq\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L81)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L81)
 
 ```python
 def __eq__(other: Any) -> bool:
@@ -122,7 +122,7 @@ True if import strings are equal.
 
 ### ImportString().\_\_str\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L24)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L24)
 
 ```python
 def __str__() -> str:
@@ -143,7 +143,7 @@ Original import string.
 
 ### ImportString().is_top_level
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L134)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L134)
 
 ```python
 def is_top_level() -> bool:
@@ -157,7 +157,7 @@ True if it has no parents.
 
 ### ImportString().parent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L143)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L143)
 
 ```python
 @property
@@ -172,7 +172,7 @@ A new [ImportString](#importstring) instance.
 
 ### ImportString().parts
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L116)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L116)
 
 ```python
 @property
@@ -197,7 +197,7 @@ A list of import string parts.
 
 ### ImportString().startswith
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L157)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L157)
 
 ```python
 def startswith(import_string: 'ImportString') -> bool:
@@ -211,7 +211,7 @@ True if it is a child.
 
 ## ImportStringError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/import_string.py#L7)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L7)
 
 ```python
 class ImportStringError(Exception):

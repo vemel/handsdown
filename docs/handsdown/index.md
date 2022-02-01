@@ -1,6 +1,6 @@
 # Handsdown
 
-> Auto-generated documentation for [handsdown](https://github.com/vemel/handsdown/blob/master/handsdown/__init__.py) module.
+> Auto-generated documentation for [handsdown](https://github.com/vemel/handsdown/blob/main/handsdown/__init__.py) module.
 
 Root of [Handsdown](#handsdown) source code.
 
@@ -241,10 +241,10 @@ pip install handsdown
 ## More examples
 
 - All documentation in this project
-- [Main](https://github.com/vemel/handsdown/blob/master/examples/main_example.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/main_example.md)
-- [RST docstrings](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/rst_docstrings.md)
-- [Google docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/google_docstrings.md)
-- [PEP 257 docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/pep257_docstrings.md)
-- [Sphinx docstrings](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/sphinx_docstrings.md)
-- [Type annotations](https://github.com/vemel/handsdown/blob/master/examples/typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/typed.md)
-- [Comment-style type annotations](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/comment_typed.md)
+- [Main](https://github.com/vemel/handsdown/blob/main/examples/main_example.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/main_example.md)
+- [RST docstrings](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/rst_docstrings.md)
+- [Google docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/google_docstrings.md)
+- [PEP 257 docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/pep257_docstrings.md)
+- [Sphinx docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/sphinx_docstrings.md)
+- [Type annotations](https://github.com/vemel/handsdown/blob/main/examples/typed.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/typed.md)
+- [Comment-style type annotations](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/comment_typed.md)

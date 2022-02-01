@@ -1,6 +1,6 @@
 # Analyzers
 
-> Auto-generated documentation for [handsdown.ast_parser.analyzers](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/analyzers/__init__.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.analyzers](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/__init__.py) module.
 
 AST Analyzers.
 

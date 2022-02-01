@@ -1,6 +1,6 @@
 # Sphinx docstrings examples
 
-> Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py) module.
+> Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) module.
 
 - [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Sphinx docstrings examples
     - [Links](#links)
@@ -15,7 +15,7 @@
 
 ## RSTExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
 
 ```python
 class RSTExample():
@@ -23,7 +23,7 @@ class RSTExample():
 
 ### RSTExample.directives_test
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py#L34)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L34)
 
 ```python
 @staticmethod
@@ -55,7 +55,7 @@ modules :py:mod:`zipfile`, :py:mod:`tarfile`
 
 ### RSTExample.reference
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L12)
 
 ```python
 @staticmethod
@@ -91,7 +91,7 @@ Return statement
 
 ### RSTExample.version_directives_test
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py#L58)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L58)
 
 ```python
 @staticmethod

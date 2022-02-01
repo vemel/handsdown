@@ -1,6 +1,6 @@
 # Logger
 
-> Auto-generated documentation for [handsdown.utils.logger](https://github.com/vemel/handsdown/blob/master/handsdown/utils/logger.py) module.
+> Auto-generated documentation for [handsdown.utils.logger](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py) module.
 
 Utilities for stdout stream logger.
 
@@ -9,7 +9,7 @@ Utilities for stdout stream logger.
 
 ## get_logger
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/logger.py#L10)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py#L10)
 
 ```python
 def get_logger(level: Optional[int] = None) -> logging.Logger:

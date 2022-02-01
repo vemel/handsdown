@@ -1,6 +1,6 @@
 # Type Defs
 
-> Auto-generated documentation for [handsdown.ast_parser.type_defs](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/type_defs.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.type_defs](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/type_defs.py) module.
 
 Different AST-related types collection.
 

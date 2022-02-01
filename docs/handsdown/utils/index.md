@@ -1,6 +1,6 @@
 # Utils
 
-> Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py) module.
+> Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py) module.
 
 Handful utils that do not deserve a separate module.
 
@@ -17,7 +17,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L68)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L68)
 
 ```python
 def extract_md_title(content: str) -> Tuple[(str, str)]:
@@ -44,7 +44,7 @@ A tuple fo title and remaining content.
 
 ## make_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L12)
 
 ```python
 def make_title(file_stem: str) -> str:
@@ -80,7 +80,7 @@ A human-readable title as a string.
 
 ## render_asset
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/__init__.py#L53)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L53)
 
 ```python
 def render_asset(

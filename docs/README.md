@@ -6,7 +6,7 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/handsdown.svg?color=blue&style=for-the-badge)](https://pypi.org/project/handsdown)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/handsdown?color=blue&style=for-the-badge)
 [![Build Status](https://img.shields.io/travis/vemel/handsdown.svg?style=for-the-badge)](https://travis-ci.org/vemel/handsdown)
-[![Code Coverage](https://img.shields.io/codecov/c/gh/vemel/handsdown.svg?style=for-the-badge)](https://codecov.io/gh/vemel/handsdown/tree/master/handsdown)
+[![Code Coverage](https://img.shields.io/codecov/c/gh/vemel/handsdown.svg?style=for-the-badge)](https://codecov.io/gh/vemel/handsdown/tree/main/handsdown)
 [![Docs](https://img.shields.io/readthedocs/handsdown.svg?color=blue&style=for-the-badge)](https://handsdown.readthedocs.io/)
 
 Python docstring-based documentation generator for lazy perfectionists.
@@ -39,11 +39,11 @@ Full Handsdown project documentation can be found in [Modules](MODULES.md#module
   docstrings support. All of them are converted to a valid Markdown.
 - Works with [Django](https://www.djangoproject.com/) and [Flask](https://palletsprojects.com/p/flask/) apps
 - Can be used locally, or
-  [right on GitHub](https://github.com/vemel/handsdown/blob/master/docs/README.md) or even deployed on
+  [right on GitHub](https://github.com/vemel/handsdown/blob/main/docs/README.md) or even deployed on
   [GitHub Pages](https://vemel.github.io/handsdown/) and [Read the Docs](https://handsdown.readthedocs.io/)!
 - Signatures for every class, function, property and method.
 - Support for type annotations. Even for the ones from the `__future__`!
-- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/master/docs/MODULES.md)
+- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/main/docs/MODULES.md)
 - Gather all scattered `README.md` in submodules to one place
 - Find related source code from every doc section.
 - Make links by just adding `module.import.String` to docs.
@@ -70,13 +70,13 @@ And probably *do not* if you:
 ## Examples
 
 - [All documentation](https://vemel.github.io/handsdown/) in this project
-- [Main](https://github.com/vemel/handsdown/blob/master/examples/main_example.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/main_example.md)
-- [RST docstrings](https://github.com/vemel/handsdown/blob/master/examples/rst_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/rst_docstrings.md)
-- [Google docstrings](https://github.com/vemel/handsdown/blob/master/examples/google_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/google_docstrings.md)
-- [PEP 257 docstrings](https://github.com/vemel/handsdown/blob/master/examples/pep257_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/pep257_docstrings.md)
-- [Sphinx docstrings](https://github.com/vemel/handsdown/blob/master/examples/sphinx_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/sphinx_docstrings.md)
-- [Type annotations](https://github.com/vemel/handsdown/blob/master/examples/typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/typed.md)
-- [Comment-style type annotations](https://github.com/vemel/handsdown/blob/master/examples/comment_typed.py) with [generated output](https://github.com/vemel/handsdown/tree/master/docs/examples/comment_typed.md)
+- [Main](https://github.com/vemel/handsdown/blob/main/examples/main_example.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/main_example.md)
+- [RST docstrings](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/rst_docstrings.md)
+- [Google docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/google_docstrings.md)
+- [PEP 257 docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/pep257_docstrings.md)
+- [Sphinx docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/sphinx_docstrings.md)
+- [Type annotations](https://github.com/vemel/handsdown/blob/main/examples/typed.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/typed.md)
+- [Comment-style type annotations](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) with [generated output](https://github.com/vemel/handsdown/tree/main/docs/examples/comment_typed.md)
 
 ## Usage
 
@@ -133,19 +133,19 @@ for [GitHub Pages](https://pages.github.com/), so you just need to setup your
 GitHub repository.
 
 ```bash
-# Generate documentation that points to master branch
+# Generate documentation that points to main branch
 # do not use custom output location, as `GitHub Pages`
 # works only with `docs` directory
 handsdown --external `git config --get remote.origin.url`
 
 # or specify GitHub url directly
-handsdown --external https://github.com/<user>/<project>/blob/master/
+handsdown --external https://github.com/<user>/<project> --branch main
 ```
 
 - Generate documentation with `--external` flag as shown above, do not use `--output`
   flag, only `docs` folder is supported by `GitHub Pages`
-- Commit and push all changes a to `master` branch.
-- Set your GitHub project `Settings` > `GitHub Pages` > `Source` to `master branch /docs folder`
+- Commit and push all changes a to `main` branch.
+- Set your GitHub project `Settings` > `GitHub Pages` > `Source` to `main branch /docs folder`
 
 All set! You can change `docs/_config.yml` to add your own touch.
 
@@ -166,7 +166,7 @@ for [Read the Docs](https://readthedocs.org/), so you just need to to add your
 GitHub repository to `Read the Docs`.
 
 ```bash
-# Generate documentation that points to master branch
+# Generate documentation that points to main branch
 # do not use custom output location, as `GitHub Pages`
 # works only with `docs` directory
 handsdown --external `git config --get remote.origin.url`
@@ -177,7 +177,7 @@ handsdown --external https://github.com/<user>/<project>/
 
 - Generate documentation with `--external` flag as shown above, do not use `--output`
   flag, only `docs` folder is supported by `Read the Docs`
-- Commit and push all changes a to `master` branch.
+- Commit and push all changes a to `main` branch.
 - Add your repository on [Read the Docs](https://readthedocs.org/)
 
 All set! You can change `.readthedocs.yml` and `mkdocs.yml` to add your own touch.
@@ -185,7 +185,7 @@ All set! You can change `.readthedocs.yml` and `mkdocs.yml` to add your own touc
 ### 📋 Build static HTML
 
 ```bash
-# Generate documentation that points to master branch
+# Generate documentation that points to main branch
 # with source links pointing to your repository
 # this command also creates `mkdocs.yml`
 handsdown --external `git config --get remote.origin.url`

@@ -1,6 +1,6 @@
 # IndentTrimmer
 
-> Auto-generated documentation for [handsdown.utils.indent_trimmer](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py) module.
+> Auto-generated documentation for [handsdown.utils.indent_trimmer](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py) module.
 
 Utility for removing indentation for sections and lines.
 
@@ -15,7 +15,7 @@ Utility for removing indentation for sections and lines.
 
 ## IndentTrimmer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L10)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L10)
 
 ```python
 class IndentTrimmer():
@@ -25,7 +25,7 @@ Utility for removing indentation for sections and lines.
 
 ### IndentTrimmer.get_line_indent
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L119)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L119)
 
 ```python
 @staticmethod
@@ -54,7 +54,7 @@ A number of indentation characters in a beginning of the line.
 
 ### IndentTrimmer.indent_line
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L140)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L140)
 
 ```python
 @staticmethod
@@ -81,7 +81,7 @@ An indented line.
 
 ### IndentTrimmer.trim_empty_lines
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L15)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L15)
 
 ```python
 @staticmethod
@@ -104,7 +104,7 @@ A stripped string.
 
 ### IndentTrimmer.trim_line
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L92)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L92)
 
 ```python
 @staticmethod
@@ -136,7 +136,7 @@ A line with removed indent.
 
 ### IndentTrimmer.trim_lines
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L57)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L57)
 
 ```python
 @classmethod
@@ -170,7 +170,7 @@ A list of lines with trimmed indent.
 
 ### IndentTrimmer.trim_text
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/utils/indent_trimmer.py#L37)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L37)
 
 ```python
 @classmethod

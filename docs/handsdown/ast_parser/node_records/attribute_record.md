@@ -1,6 +1,6 @@
 # AttributeRecord
 
-> Auto-generated documentation for [handsdown.ast_parser.node_records.attribute_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.node_records.attribute_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py) module.
 
 Wrapper for an `ast.Assign` node of a module or class attribute.
 
@@ -12,7 +12,7 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 ## AttributeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L12)
 
 ```python
 class AttributeRecord(NodeRecord):
@@ -31,7 +31,7 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 ### AttributeRecord().append_to
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L57)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L57)
 
 ```python
 def append_to(node_record: NodeRecord) -> None:
@@ -45,7 +45,7 @@ Append AttributeRecord to NodeRecord.
 
 ### AttributeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L29)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L29)
 
 ```python
 @property
@@ -56,7 +56,7 @@ Set of related names.
 
 ### AttributeRecord().render
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/attribute_record.py#L51)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L51)
 
 ```python
 def render(indent: int = 0, allow_multiline: bool = False) -> str:

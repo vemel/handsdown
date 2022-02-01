@@ -1,6 +1,6 @@
 # FunctionRecord
 
-> Auto-generated documentation for [handsdown.ast_parser.node_records.function_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.node_records.function_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py) module.
 
 Wrapper for an `ast.FunctionDef` node.
 
@@ -11,7 +11,7 @@ Wrapper for an `ast.FunctionDef` node.
 
 ## FunctionRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L17)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L17)
 
 ```python
 class FunctionRecord(NodeRecord):
@@ -31,7 +31,7 @@ Wrapper for an `ast.FunctionDef` and `ast.AsyncFunctionDef` node.
 
 ### FunctionRecord().parse_type_comments
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L99)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L99)
 
 ```python
 def parse_type_comments(lines: Iterable[str]) -> None:
@@ -44,7 +44,7 @@ Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
 
 ### FunctionRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/function_record.py#L42)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L42)
 
 ```python
 @property

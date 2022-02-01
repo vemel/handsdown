@@ -1,6 +1,6 @@
 # ImportRecord
 
-> Auto-generated documentation for [handsdown.ast_parser.node_records.import_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.node_records.import_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/import_record.py) module.
 
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
@@ -11,7 +11,7 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ## ImportRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L12)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/import_record.py#L12)
 
 ```python
 class ImportRecord(NodeRecord):
@@ -32,7 +32,7 @@ Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
 ### ImportRecord().get_import_string
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L32)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/import_record.py#L32)
 
 ```python
 def get_import_string() -> ImportString:
@@ -50,7 +50,7 @@ An absolute import string.
 
 ### ImportRecord().match
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/import_record.py#L55)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/import_record.py#L55)
 
 ```python
 def match(name: str) -> Optional[ImportString]:

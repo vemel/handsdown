@@ -1,6 +1,6 @@
 # ModuleRecord
 
-> Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py) module.
+> Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py) module.
 
 Wrapper for an `ast.Module` node with corresponding node info.
 
@@ -14,7 +14,7 @@ Wrapper for an `ast.Module` node with corresponding node info.
 
 ## ModuleRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L20)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L20)
 
 ```python
 class ModuleRecord(NodeRecord):
@@ -35,7 +35,7 @@ Responsible for parsing Python source as well.
 
 ### ModuleRecord().build_children
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L151)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L151)
 
 ```python
 def build_children() -> None:
@@ -47,7 +47,7 @@ Used only when doc for this ModuleRecord is building.
 
 ### ModuleRecord.create_from_source
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L44)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L44)
 
 ```python
 @classmethod
@@ -77,7 +77,7 @@ New [ModuleRecord](#modulerecord) instance.
 
 ### ModuleRecord().find_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L72)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L72)
 
 ```python
 def find_record(import_string: ImportString) -> Optional[NodeRecord]:
@@ -99,7 +99,7 @@ Found child record on None.
 
 ### ModuleRecord().get_related_import_strings
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L265)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L265)
 
 ```python
 def get_related_import_strings(node_record: NodeRecord) -> Set[ImportString]:
@@ -117,7 +117,7 @@ A set of absolute import strings found.
 
 ### ModuleRecord().iter_records
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/handsdown/ast_parser/node_records/module_record.py#L91)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L91)
 
 ```python
 def iter_records() -> Iterator[NodeRecord]:

@@ -1,6 +1,6 @@
 # Supported expressions examples
 
-> Auto-generated documentation for [examples.expressions](https://github.com/vemel/handsdown/blob/master/examples/expressions.py) module.
+> Auto-generated documentation for [examples.expressions](https://github.com/vemel/handsdown/blob/main/examples/expressions.py) module.
 
 Test for [ExpressionAnalyzer](../handsdown/ast_parser/analyzers/expression_analyzer.md#expressionanalyzer) test.
 

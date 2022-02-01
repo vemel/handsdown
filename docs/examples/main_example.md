@@ -1,6 +1,6 @@
 # Main Example
 
-> Auto-generated documentation for [examples.main_example](https://github.com/vemel/handsdown/blob/master/examples/main_example.py) module.
+> Auto-generated documentation for [examples.main_example](https://github.com/vemel/handsdown/blob/main/examples/main_example.py) module.
 
 This is a module docstring. It will appear in documentation.
 
@@ -24,7 +24,7 @@ and it will be transformed to a link.
 
 ## MyClass
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L54)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
 
 ```python
 class MyClass(BaseClass):
@@ -43,7 +43,7 @@ This time we use RST docstrings format.
 
 ### MyClass().\_\_bool\_\_
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L92)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L92)
 
 ```python
 def __bool__() -> bool:
@@ -57,7 +57,7 @@ True if [STUFF_COUNT](#myclass) is not zero
 
 ### MyClass.do_something
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L65)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L65)
 
 ```python
 @classmethod
@@ -96,7 +96,7 @@ Changed in version 1.4
 
 ## hello
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/master/examples/main_example.py#L27)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L27)
 
 ```python
 def hello(name: str) -> str:
