@@ -104,7 +104,7 @@ class Generator:
 
         package_names = self._module_records.get_package_names()
         package_names_re_expr = "|".join(package_names)
-        self._docstring_links_re = re.compile(fr"`+(?:{package_names_re_expr})\.\S+`+")
+        self._docstring_links_re = re.compile(rf"`+(?:{package_names_re_expr})\.\S+`+")
         self._prepare_index()
 
     def _prepare_index(self) -> None:

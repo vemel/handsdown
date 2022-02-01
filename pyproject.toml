@@ -73,7 +73,7 @@ typed-ast = "*"
 importlib-resources = "*"
 
 [tool.poetry.dev-dependencies]
-black = "21.12b0"
+black = "22.1.0"
 isort = "5.10.1"
 codecov = "2.1.12"
 mypy = "0.931"
