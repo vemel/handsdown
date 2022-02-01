@@ -30,7 +30,7 @@ repository = "https://github.com/vemel/handsdown"
 documentation = "https://vemel.github.io/handsdown/"
 keywords = ["autodoc", "documentation", "generator", "markdown"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Framework :: Django",
     "Framework :: Flask",
