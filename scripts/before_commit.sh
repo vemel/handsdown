@@ -8,6 +8,7 @@ python -m black handsdown
 python -m isort handsdown
 python -m flake8 handsdown
 python -m pytest --cov-report term --cov=handsdown
+python -m mypy handsdown
 npx pyright
 python -m pylint handsdown
 

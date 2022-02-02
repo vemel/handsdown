@@ -60,3 +60,8 @@ jobs:
         run: |
           poetry build
           twine upload  --non-interactive dist/*
+      - name: Dockerize
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          scripts/dockerize.sh

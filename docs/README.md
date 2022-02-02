@@ -274,8 +274,8 @@ pip install git+https://github.com/vemel/handsdown.git
 
 ## Development
 
-- Install [pipenv](https://pypi.org/project/pipenv/)
-- Run `pipenv install -d`
+- Install [poetry](https://python-poetry.org/)
+- Run `poetry install`
 - Use `black` formatter in your IDE
 
 ## Changelog
