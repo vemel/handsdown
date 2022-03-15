@@ -17,7 +17,7 @@ Handful utils that do not deserve a separate module.
 
 ## extract_md_title
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L68)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L69)
 
 ```python
 def extract_md_title(content: str) -> Tuple[(str, str)]:
