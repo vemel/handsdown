@@ -4,7 +4,7 @@
 
 AST Analyzers.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / Analyzers
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / Analyzers
     - Modules
         - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
         - [ClassAnalyzer](class_analyzer.md#classanalyzer)

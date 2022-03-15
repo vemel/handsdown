@@ -4,7 +4,7 @@
 
 AST analyzer for `ast.expr` records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ExpressionAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ExpressionAnalyzer
     - [ExpressionAnalyzer](#expressionanalyzer)
         - [ExpressionAnalyzer().generic_visit](#expressionanalyzergeneric_visit)
         - [ExpressionAnalyzer().visit_Attribute](#expressionanalyzervisit_attribute)

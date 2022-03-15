@@ -4,7 +4,7 @@
 
 Enums for AST parsing.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser.](index.md#ast-parser) / Enums
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / Enums
     - [RenderPart](#renderpart)
         - [RenderPart().is_line_break](#renderpartis_line_break)
 

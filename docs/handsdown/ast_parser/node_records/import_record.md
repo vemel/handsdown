@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.Import` and `ast.ImportFrom` nodes.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / ImportRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ImportRecord
     - [ImportRecord](#importrecord)
         - [ImportRecord().get_import_string](#importrecordget_import_string)
         - [ImportRecord().match](#importrecordmatch)

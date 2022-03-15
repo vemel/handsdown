@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.Module` node with corresponding node info.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / ModuleRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ModuleRecord
     - [ModuleRecord](#modulerecord)
         - [ModuleRecord().build_children](#modulerecordbuild_children)
         - [ModuleRecord.create_from_source](#modulerecordcreate_from_source)

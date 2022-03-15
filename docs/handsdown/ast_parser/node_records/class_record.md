@@ -4,7 +4,7 @@
 
 Wrapper for an `ast.ClassDef` node.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Node Records](index.md#node-records) / ClassRecord
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ClassRecord
     - [ClassRecord](#classrecord)
         - [ClassRecord().find_record](#classrecordfind_record)
         - [ClassRecord().get_public_methods](#classrecordget_public_methods)

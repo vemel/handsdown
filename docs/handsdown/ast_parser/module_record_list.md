@@ -4,7 +4,7 @@
 
 Aggregation of `ModuleRecord` objects.
 
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser.](index.md#ast-parser) / ModuleRecordList
+- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / ModuleRecordList
     - [ModuleRecordList](#modulerecordlist)
         - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
         - [ModuleRecordList().add](#modulerecordlistadd)

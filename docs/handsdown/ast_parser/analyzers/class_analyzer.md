@@ -4,7 +4,7 @@
 
 AST analyzer for `ast.ClassDef` records.
 
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser.](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ClassAnalyzer
+- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ClassAnalyzer
     - [ClassAnalyzer](#classanalyzer)
         - [ClassAnalyzer().generic_visit](#classanalyzergeneric_visit)
         - [ClassAnalyzer().visit_Assign](#classanalyzervisit_assign)
