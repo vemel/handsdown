@@ -54,16 +54,17 @@ class TestCLIParser(unittest.TestCase):
 
     def test_get_source_code_url(self):
         namespace = parse_args([])
-        assert namespace.get_source_code_url() == "blob/main/"
+        assert namespace.get_source_code_url() == ""
 
         namespace.branch = "master"
-        assert namespace.get_source_code_url() == "blob/master/"
+        assert namespace.get_source_code_url() == ""
 
-        namespace.source_code_path = "path/"
-        assert namespace.get_source_code_url() == "path/"
+        namespace.source_code_url = "path/"
+        assert namespace.get_source_code_url() == "path/blob/master/"
 
-        namespace.source_code_path = "path"
-        assert namespace.get_source_code_url() == "path/"
+        namespace.source_code_url = "https://github.com/author/repo"
+        namespace.branch = "main"
+        assert namespace.get_source_code_url() == "https://github.com/author/repo/blob/main/"
 
-        namespace.source_code_path = ""
-        assert namespace.get_source_code_url() == "blob/master/"
+        namespace.source_code_url = ""
+        assert namespace.get_source_code_url() == ""

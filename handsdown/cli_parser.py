@@ -58,15 +58,16 @@ class CLINamespace:
             URL as a string.
         """
         if not self.source_code_url:
-            return ''
+            return ""
 
-        source_code_path = f"blob/{self.branch}"
+        source_code_path = Path("blob", self.branch)
         if self.source_code_path:
-            source_code_path = Path(self.source_code_path).as_posix()
-        result = f"{self.source_code_url}{source_code_path}"
-        if not result.endswith("/"):
-            result = f"{result}/"
-        return urlunparse(urlparse(result))
+            source_code_path = Path(self.source_code_path)
+
+        source_code_url = self.source_code_url.rstrip("/")
+        result = f"{source_code_url}/{source_code_path.as_posix()}".rstrip("/")
+        result = urlunparse(urlparse(result))
+        return f"{result}/"
 
 
 def git_repo(git_repo_url: str) -> str:
