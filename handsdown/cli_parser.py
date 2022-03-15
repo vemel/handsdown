@@ -57,6 +57,9 @@ class CLINamespace:
         Returns:
             URL as a string.
         """
+        if not self.source_code_url:
+            return ''
+
         source_code_path = f"blob/{self.branch}"
         if self.source_code_path:
             source_code_path = Path(self.source_code_path).as_posix()
