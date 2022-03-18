@@ -68,7 +68,7 @@ class MDDocument:
         self._subtitle = ""
         self._toc_section = ""
         self._path = path
-        self._path_finder = PathFinder(self._path.parent)
+        self.path_finder = PathFinder(self._path.parent)
         self._encoding = encoding
 
     def __enter__(self) -> "MDDocument":
@@ -234,7 +234,7 @@ class MDDocument:
         if anchor:
             link = f"#{anchor}"
         if target_path and target_path != self._path:
-            link_path = self._path_finder.relative(target_path)
+            link_path = self.path_finder.relative(target_path)
             link = f"{link_path.as_posix()}{link}"
 
         return self.render_link(title, link)
@@ -256,7 +256,7 @@ class MDDocument:
         Write MD content to `path`.
         """
         content = self._build_content()
-        self._path_finder.mkdir()
+        self.path_finder.mkdir()
         self._path.write_text(content, encoding=self._encoding)
 
     @property

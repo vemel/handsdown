@@ -206,9 +206,9 @@ class Generator:
 
         raise GeneratorError(f"Record not found for {source_path.name}")
 
-    def _get_source_code_url(self, module_record: ModuleRecord) -> str:
+    def _get_source_code_url(self, module_record: ModuleRecord, md_document: MDDocument) -> str:
         if not self._source_code_url:
-            return PathFinder(self._output_path).relative(module_record.source_path).as_posix()
+            return md_document.path_finder.relative(module_record.source_path).as_posix()
 
         relative_path_str = self._root_path_finder.relative(module_record.source_path).as_posix()
         return f"{self._source_code_url}{relative_path_str}"
@@ -226,15 +226,10 @@ class Generator:
             self._logger.warning(f"Skipping: {e}")
             return
 
-        source_link = md_document.render_doc_link(
+        source_link = md_document.render_link(
             title=module_record.import_string.value,
-            target_path=module_record.source_path,
+            link=self._get_source_code_url(module_record, md_document),
         )
-        if self._source_code_url:
-            source_link = md_document.render_link(
-                title=module_record.import_string.value,
-                link=self._get_source_code_url(module_record),
-            )
 
         md_document.title = module_record.title
 
@@ -398,18 +393,13 @@ class Generator:
 
             md_document.append_title(record.title, level=header_level)
 
-            source_path = module_record.source_path
             source_line_number = record.line_number
-            source_link = md_document.render_doc_link(
+            source_link = md_document.render_link(
                 title=FIND_IN_SOURCE_LABEL,
-                target_path=source_path,
-                anchor=f"L{source_line_number}",
+                link=(
+                    f"{self._get_source_code_url(module_record, md_document)}#L{source_line_number}"
+                ),
             )
-            if self._source_code_url:
-                source_link = md_document.render_link(
-                    title=FIND_IN_SOURCE_LABEL,
-                    link=f"{self._get_source_code_url(module_record)}#L{source_line_number}",
-                )
 
             md_document.append(source_link)
 
