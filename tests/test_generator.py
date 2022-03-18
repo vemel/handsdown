@@ -44,6 +44,7 @@ class TestGenerator(unittest.TestCase):
 
         MDDocumentMock().render_md_doc_link.return_value = "md_doc_link"
         MDDocumentMock().render_doc_link.return_value = "doc_link"
+        MDDocumentMock().path_finder.relative.return_value = Path('test')
 
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
@@ -74,6 +75,7 @@ class TestGenerator(unittest.TestCase):
 
         MDDocumentMock().render_md_doc_link.return_value = "md_doc_link"
         MDDocumentMock().render_doc_link.return_value = "doc_link"
+        MDDocumentMock().path_finder.relative.return_value = Path('test')
 
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
