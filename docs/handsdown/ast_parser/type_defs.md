@@ -8,9 +8,9 @@ Different AST-related types collection.
 
 #### Attributes
 
-- `RenderExpr` - Ready for render expression: `Union[(NodeRecord, str, RenderPart)]`
-- `Node` - AST node or text: `Union[(str, ast.AST)]`
-- `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[(ast.AST, str, RenderPart)]`
-- `ASTIterable` - Iterable AST types: `Union[(ast.List, ast.Set, ast.Tuple)]`
-- `ASTImport` - AST import node: `Union[(ast.Import, ast.ImportFrom)]`
-- `ASTFunctionDef` - AST import node: `Union[(ast.FunctionDef, ast.AsyncFunctionDef)]`
+- `RenderExpr` - Ready for render expression: `Union[NodeRecord, str, RenderPart]`
+- `Node` - AST node or text: `Union[str, ast.AST]`
+- `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, str, RenderPart]`
+- `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
+- `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
+- `ASTFunctionDef` - AST import node: `Union[ast.FunctionDef, ast.AsyncFunctionDef]`

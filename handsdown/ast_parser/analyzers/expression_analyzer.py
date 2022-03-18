@@ -157,8 +157,10 @@ class ExpressionAnalyzer(BaseAnalyzer):
         self.parts.append("[")
         if isinstance(node.slice, ast.Index) and isinstance(node.slice.value, ast.Tuple):
             self._visit_iterable(node.slice.value)
+        elif isinstance(node.slice, ast.Tuple):
+            self._visit_iterable(node.slice)
         else:
-            self.parts.append(node.slice)
+            self._analyze_child(node.slice)
         self.parts.append("]")
 
     def visit_Attribute(self, node: ast.Attribute) -> None:
@@ -201,9 +203,18 @@ class ExpressionAnalyzer(BaseAnalyzer):
                     self.parts.append(RenderPart.SINGLE_LINE_SPACE)
                     self.parts.append(RenderPart.MULTI_LINE_BREAK)
                 args_count += 1
-                self.parts.append(element)
+                self._analyze_child(element)
             self.parts.append(RenderPart.MULTI_LINE_COMMA)
             self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
+
+    def _analyze_child(self, node: ast.AST) -> None:
+        if isinstance(node, str):
+            self.parts.append(node)
+            return
+        analyzer = self.__class__()
+        analyzer.visit(node)
+        self.parts.extend(analyzer.parts)
+        self.related_names.extend(analyzer.related_names)
 
     def visit_List(self, node: ast.List) -> None:
         """

@@ -96,6 +96,7 @@ Found child record on None.
 #### See also
 
 - [ImportString](../../utils/import_string.md#importstring)
+- [NodeRecord](node_record.md#noderecord)
 
 ### ModuleRecord().get_related_import_strings
 
@@ -113,6 +114,7 @@ A set of absolute import strings found.
 
 #### See also
 
+- [ImportString](../../utils/import_string.md#importstring)
 - [NodeRecord](node_record.md#noderecord)
 
 ### ModuleRecord().iter_records
@@ -128,3 +130,7 @@ Iterate over Module class, method and fucntion records.
 #### Yields
 
 A child record.
+
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)

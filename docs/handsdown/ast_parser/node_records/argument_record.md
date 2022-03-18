@@ -52,6 +52,10 @@ Default value of the argument.
 
 Default exression or None.
 
+#### See also
+
+- [ExpressionRecord](expression_record.md#expressionrecord)
+
 ### ArgumentRecord().related_names
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L61)

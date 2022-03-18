@@ -48,6 +48,10 @@ Find child method or attribute record.
 
 Itself or None.
 
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
+
 ### ClassRecord().get_public_methods
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L89)
@@ -65,6 +69,10 @@ they have no docstring. Method `__init__` is always skipped.
 
 A list of child records.
 
+#### See also
+
+- [FunctionRecord](function_record.md#functionrecord)
+
 ### ClassRecord().iter_records
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L76)
@@ -78,6 +86,10 @@ Iterate over Class public methods.
 #### Yields
 
 A child record.
+
+#### See also
+
+- [NodeRecord](node_record.md#noderecord)
 
 ### ClassRecord().related_names
 

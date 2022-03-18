@@ -6,7 +6,7 @@
 
 [PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
 """
-from typing import List, Union, Any, Dict, Tuple, Type
+from typing import List, Union, Any, Dict, Tuple, Type, Optional
 
 
 class MyValue:
@@ -48,5 +48,5 @@ def func(
     _list: Tuple[List[str], ...],
     _my_value_cls: Type[MyValue] = MyValue,
     **_kwargs: None,
-) -> Any:
+) -> Optional[MyValue]:
     pass

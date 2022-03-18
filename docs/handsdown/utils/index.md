@@ -20,7 +20,7 @@ Handful utils that do not deserve a separate module.
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py#L69)
 
 ```python
-def extract_md_title(content: str) -> Tuple[(str, str)]:
+def extract_md_title(content: str) -> Tuple[str, str]:
 ```
 
 Extract title from the first line of content.
@@ -86,7 +86,7 @@ A human-readable title as a string.
 def render_asset(
     name: str,
     target_path: Path,
-    format_dict: Dict[(str, str)],
+    format_dict: Dict[str, str],
     encoding: str,
 ) -> None:
 ```

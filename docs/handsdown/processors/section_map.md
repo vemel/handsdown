@@ -32,6 +32,10 @@ Dataclass representing a section in a [SectionMap](#sectionmap).
 - `title` - Section title.
 - `blocks` - List of line blocks.
 
+#### See also
+
+- [SectionBlock](#sectionblock)
+
 ### Section().render
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L44)
@@ -153,6 +157,10 @@ Iterate over existing [Section](#section) objects.
 #### Yields
 
 [Section](#section) objects in order of appearance.
+
+#### See also
+
+- [Section](#section)
 
 ### SectionMap().trim_block
 

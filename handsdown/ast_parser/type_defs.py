@@ -1,11 +1,16 @@
 """
 Different AST-related types collection.
 """
-from typing import Union
+from typing import TYPE_CHECKING, Union
 
 import handsdown.ast_parser.smart_ast as ast
-from handsdown.ast_parser.enums import RenderPart
-from handsdown.ast_parser.node_records.node_record import NodeRecord
+
+if TYPE_CHECKING:
+    from handsdown.ast_parser.enums import RenderPart
+    from handsdown.ast_parser.node_records.node_record import NodeRecord
+else:
+    RenderPart = object
+    NodeRecord = object
 
 # Ready for render expression
 RenderExpr = Union[NodeRecord, str, RenderPart]

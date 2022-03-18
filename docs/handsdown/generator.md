@@ -59,7 +59,9 @@ Main documentation generator.
 
 #### See also
 
+- [BaseDocstringProcessor](processors/base.md#basedocstringprocessor)
 - [ENCODING](settings.md#encoding)
+- [Loader](loader.md#loader)
 
 ### Generator().cleanup_old_docs
 

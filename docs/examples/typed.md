@@ -30,7 +30,7 @@ class MyValue():
 ```python
 class Typed():
     def __init__(
-        _value: Union[(List[str], str, MyValue)] = MyValue(
+        _value: Union[List[str], str, MyValue] = MyValue(
             {
                 'key1': 'value1',
                 'key2': 'value2',
@@ -41,8 +41,12 @@ class Typed():
             },
         ),
         _name: str = 'default',
-    ) -> Dict[(str, MyValue)]:
+    ) -> Dict[str, MyValue]:
 ```
+
+#### See also
+
+- [MyValue](#myvalue)
 
 ### Typed().async_method
 
@@ -72,10 +76,10 @@ def classmethod(_my_value: MyValue, *_args: str, **_kwargs: Any) -> None:
 ```python
 @my_deco(key='value')
 def func(
-    _list: Tuple[(List[str], ...)],
+    _list: Tuple[List[str], ...],
     _my_value_cls: Type[MyValue] = MyValue,
     **_kwargs: None,
-) -> Any:
+) -> Optional[MyValue]:
 ```
 
 #### See also

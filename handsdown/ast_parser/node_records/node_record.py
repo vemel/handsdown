@@ -2,10 +2,11 @@
 Base class for all node records.
 """
 from abc import abstractmethod
-from typing import Iterable, List, Optional, Set, Tuple, Union
+from typing import Iterable, List, Optional, Set, Tuple
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.enums import RenderPart
+from handsdown.ast_parser.type_defs import RenderExpr
 from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
 
@@ -99,9 +100,7 @@ class NodeRecord:
         self.parsed = True
 
     @staticmethod
-    def _render_line(
-        parts: Iterable[Union["NodeRecord", str, RenderPart]], indent: int, allow_multiline: bool
-    ) -> str:
+    def _render_line(parts: Iterable[RenderExpr], indent: int, allow_multiline: bool) -> str:
         result = []
         for part in parts:
             if part is RenderPart.SINGLE_LINE_SPACE:
@@ -117,7 +116,7 @@ class NodeRecord:
 
     def _render_multi_line(
         self,
-        parts: Iterable[Union["NodeRecord", str, RenderPart]],
+        parts: Iterable[RenderExpr],
         indent: int,
         allow_multiline: bool,
     ) -> Tuple[List[str], int]:
@@ -175,7 +174,7 @@ class NodeRecord:
             return self.ELLIPSIS
 
         parts = self._render_parts(indent)
-        line_parts: List[Union["NodeRecord", str, RenderPart]] = []
+        line_parts: List[RenderExpr] = []
         lines = []
         current_indent = indent
         for part_index, part in enumerate(parts):
@@ -211,7 +210,7 @@ class NodeRecord:
         return "".join(lines).rstrip("\n")
 
     @abstractmethod
-    def _render_parts(self, indent: int) -> List[Union["NodeRecord", str, RenderPart]]:
+    def _render_parts(self, indent: int) -> List[RenderExpr]:
         pass
 
     @classmethod
