@@ -28,7 +28,7 @@ class CLINamespace:
         include: Iterable[str],
         exclude: Iterable[str],
         source_code_url: str,
-        source_code_path: str,
+        source_code_path: Path,
         branch: str,
         project_name: str,
         files: Iterable[Path],
@@ -64,8 +64,8 @@ class CLINamespace:
         if self.branch:
             result = f"{result}/blob/{self.branch}"
 
-        if self.source_code_path:
-            result = f"{result}/{self.source_code_path}".rstrip("/")
+        if self.source_code_path != Path():
+            result = f"{result}/{self.source_code_path.as_posix()}".rstrip("/")
 
         result = urlunparse(urlparse(result.rstrip("/")))
         return f"{result}/"
@@ -211,8 +211,8 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         help="Path to source code in the project.",
         dest="source_code_path",
         metavar="REPO_PATH",
-        default="",
-        type=str,
+        default=Path(),
+        type=Path,
     )
     parser.add_argument(
         "--branch",

@@ -38,6 +38,7 @@ class TestMain(unittest.TestCase):
             project_name="Handsdown",
             raise_errors=False,
             source_code_url="",
+            source_code_path=Path(),
             source_paths=path_finder_mock().exclude().include().glob(),
             toc_depth=1,
             encoding="utf-8",

@@ -40,6 +40,7 @@ class Generator:
         raise_errors -- Raise `LoaderError` instead of silencing in.
         source_code_url -- URL to source files to use instead of relative paths,
             useful for [GitHub Pages](https://pages.github.com/).
+        source_code_path -- Path to local source code
         toc_depth -- Maximum depth of child modules ToC
         encoding -- File encoding
     """
@@ -71,6 +72,7 @@ class Generator:
         loader: Optional[Loader] = None,
         raise_errors: bool = False,
         source_code_url: Optional[str] = None,
+        source_code_path: Optional[Path] = None,
         toc_depth: int = 1,
         encoding: str = ENCODING,
     ) -> None:
@@ -80,6 +82,7 @@ class Generator:
         self._project_name = project_name or make_title(input_path.name)
         self._root_path_finder = PathFinder(self._root_path)
         self._source_code_url = source_code_url
+        self._source_code_path: Path = source_code_path or Path()
         self._toc_depth = toc_depth
         self._raise_errors = raise_errors
         self._encoding = encoding
@@ -208,7 +211,8 @@ class Generator:
 
     def _get_source_code_url(self, module_record: ModuleRecord, md_document: MDDocument) -> str:
         if not self._source_code_url:
-            return md_document.path_finder.relative(module_record.source_path).as_posix()
+            relative_path = md_document.path_finder.relative(module_record.source_path)
+            return (self._source_code_path / relative_path).as_posix()
 
         relative_path_str = self._root_path_finder.relative(module_record.source_path).as_posix()
         return f"{self._source_code_url}{relative_path_str}"

@@ -58,6 +58,7 @@ def main() -> None:
             source_paths=path_finder.glob(SOURCES_GLOB),
             raise_errors=args.panic,
             source_code_url=args.get_source_code_url(),
+            source_code_path=args.source_code_path,
             toc_depth=args.toc_depth,
             encoding=args.encoding,
         )
