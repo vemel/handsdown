@@ -51,7 +51,7 @@ jobs:
           sudo npm install -g pyright
       - name: Code style
         run: |
-          python -m black --check handsdown
+          python -m black --check handsdown --preview
           python -m isort -c handsdown
       - name: Lint
         run: |

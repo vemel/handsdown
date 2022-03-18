@@ -60,13 +60,14 @@ class CLINamespace:
         if not self.source_code_url:
             return ""
 
-        source_code_path = Path("blob", self.branch)
-        if self.source_code_path:
-            source_code_path = Path(self.source_code_path)
+        result = self.source_code_url.rstrip("/")
+        if self.branch:
+            result = f"{result}/blob/{self.branch}"
 
-        source_code_url = self.source_code_url.rstrip("/")
-        result = f"{source_code_url}/{source_code_path.as_posix()}".rstrip("/")
-        result = urlunparse(urlparse(result))
+        if self.source_code_path:
+            result = f"{result}/{self.source_code_path}".rstrip("/")
+
+        result = urlunparse(urlparse(result.rstrip("/")))
         return f"{result}/"
 
 
@@ -198,7 +199,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "--external",
         help=(
             "Build docs and config for external hosting, GitHub Pages or Read the Docs."
-            " Provide the project GitHub .../blob/main/ URL here."
+            " Provide the project GitHub URL here."
         ),
         dest="source_code_url",
         metavar="REPO_URL",
@@ -207,13 +208,17 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
     )
     parser.add_argument(
         "--source-code-path",
-        help=("Path to source code in the project. Overrides `--branch` CLI argument."),
+        help="Path to source code in the project.",
         dest="source_code_path",
         metavar="REPO_PATH",
         default="",
         type=str,
     )
-    parser.add_argument("--branch", help="Main branch name (default: main)", default="main")
+    parser.add_argument(
+        "--branch",
+        help="Main branch name, extends external URL with `/blob/<branch>` (default: main)",
+        default="main",
+    )
     parser.add_argument(
         "--toc-depth", help="Maximum depth of child modules ToC (default: 1)", default=1, type=int
     )

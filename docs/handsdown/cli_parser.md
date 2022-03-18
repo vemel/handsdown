@@ -55,7 +55,7 @@ URL as a string.
 
 ## abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L101)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L102)
 
 ```python
 def abs_path(path_str: str) -> Path:
@@ -73,7 +73,7 @@ An absolute path.
 
 ## dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L114)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L115)
 
 ```python
 def dir_abs_path(path_str: str) -> Path:
@@ -95,7 +95,7 @@ An absolute path.
 
 ## existing_dir_abs_path
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L133)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L134)
 
 ```python
 def existing_dir_abs_path(path_str: str) -> Path:
@@ -117,7 +117,7 @@ An absolute path.
 
 ## git_repo
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L73)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L74)
 
 ```python
 def git_repo(git_repo_url: str) -> str:
@@ -135,7 +135,7 @@ A GitHub URL.
 
 ## parse_args
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L154)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L155)
 
 ```python
 def parse_args(args: Iterable[str]) -> CLINamespace:

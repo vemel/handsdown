@@ -206,6 +206,13 @@ class Generator:
 
         raise GeneratorError(f"Record not found for {source_path.name}")
 
+    def _get_source_code_url(self, module_record: ModuleRecord) -> str:
+        if not self._source_code_url:
+            return PathFinder(self._output_path).relative(module_record.source_path).as_posix()
+
+        relative_path_str = self._root_path_finder.relative(module_record.source_path).as_posix()
+        return f"{self._source_code_url}{relative_path_str}"
+
     def _generate_doc(self, module_record: ModuleRecord, md_document: MDDocument) -> None:
         md_document_path_str = self._root_path_finder.relative(md_document.path)
         source_path_str = self._root_path_finder.relative(md_document.path)
@@ -224,12 +231,9 @@ class Generator:
             target_path=module_record.source_path,
         )
         if self._source_code_url:
-            relative_path_str = self._root_path_finder.relative(
-                module_record.source_path
-            ).as_posix()
             source_link = md_document.render_link(
                 title=module_record.import_string.value,
-                link=f"{self._source_code_url}{relative_path_str}",
+                link=self._get_source_code_url(module_record),
             )
 
         md_document.title = module_record.title
@@ -402,10 +406,9 @@ class Generator:
                 anchor=f"L{source_line_number}",
             )
             if self._source_code_url:
-                relative_path_str = self._root_path_finder.relative(source_path).as_posix()
                 source_link = md_document.render_link(
                     title=FIND_IN_SOURCE_LABEL,
-                    link=f"{self._source_code_url}{relative_path_str}#L{source_line_number}",
+                    link=f"{self._get_source_code_url(module_record)}#L{source_line_number}",
                 )
 
             md_document.append(source_link)
