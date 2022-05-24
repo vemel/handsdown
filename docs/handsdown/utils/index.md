@@ -13,6 +13,7 @@ Handful utils that do not deserve a separate module.
         - [ImportString](import_string.md#importstring)
         - [IndentTrimmer](indent_trimmer.md#indenttrimmer)
         - [Logger](logger.md#logger)
+        - [NicePath](nice_path.md#nicepath)
         - [PathFinder](path_finder.md#pathfinder)
 
 ## extract_md_title
