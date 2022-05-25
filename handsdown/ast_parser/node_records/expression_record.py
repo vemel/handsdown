@@ -50,3 +50,20 @@ class ExpressionRecord(NodeRecord):
 
             result.append(part)
         return result
+
+    def render_str(self) -> str:
+        """
+        Render expression to a string.
+        """
+        self.parse()
+        result = []
+        for part in self.parts:
+            if isinstance(part, ast.AST):
+                result.append(ExpressionRecord(part).render())
+            if isinstance(part, str):
+                result.append(part)
+
+        return "".join(result)
+
+
+

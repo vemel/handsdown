@@ -1,0 +1,15 @@
+{{ "class " -}}{{ class.name -}}{{ "(" -}}
+{% for base_record in class.base_records %}
+{{ base_record.render_str() -}}
+{{ ",\n" if not loop.last else "\n" -}}
+{% endfor -%}
+{{ '):\n' -}}
+{% for method in class.method_records -%}
+{% if method.name in ['__init__'] -%}
+{% filter indent(4, True) -%}
+    {% with function = method -%}
+    {% include "common/function_signature.py.jinja2" with context -%}
+    {% endwith -%}
+{% endfilter -%}
+{% endif -%}
+{% endfor -%}

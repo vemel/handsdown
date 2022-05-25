@@ -1,0 +1,9 @@
+## {{ method.title }}
+
+[find in source code]({{ method._get_source_code_url(module_record, md_document) }}#L{{ method.line_number }})
+
+{% with function = method -%}
+```python
+{% include "common/function_signature.py.jinja2" with context %}
+```
+{% endwith -%}

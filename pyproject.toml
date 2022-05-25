@@ -56,6 +56,7 @@ include = [
     "LICENSE",
     "handsdown/py.typed",
     "handsdown/assets/*.yml",
+    "handsdown/templates/**/*.jinja2",
 ]
 
 [tool.poetry.scripts]
