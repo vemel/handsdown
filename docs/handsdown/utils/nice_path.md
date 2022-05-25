@@ -10,7 +10,7 @@ Path that represents it as relative to workdir.
 
 ## NicePath
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L10)
 
 ```python
 class NicePath(type(Path())):
@@ -20,7 +20,7 @@ Path that represents it as relative to workdir.
 
 ### NicePath().walk
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L33)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L32)
 
 ```python
 def walk(
