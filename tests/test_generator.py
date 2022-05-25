@@ -33,7 +33,10 @@ class TestGenerator(unittest.TestCase):
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
     @patch("handsdown.generator.PathFinder")
-    def test_generate_docs(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
+    @patch("handsdown.generator.NicePath")
+    def test_generate_docs(
+        self, NicePathMock, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock
+    ):
         source_path_mock = MagicMock()
         generator = Generator(
             project_name="test",
@@ -44,7 +47,7 @@ class TestGenerator(unittest.TestCase):
 
         MDDocumentMock().render_md_doc_link.return_value = "md_doc_link"
         MDDocumentMock().render_doc_link.return_value = "doc_link"
-        MDDocumentMock().path_finder.relative.return_value = Path('test')
+        MDDocumentMock().path_finder.relative.return_value = Path("test")
 
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
@@ -63,7 +66,10 @@ class TestGenerator(unittest.TestCase):
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
     @patch("handsdown.generator.PathFinder")
-    def test_generate_doc(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
+    @patch("handsdown.generator.NicePath")
+    def test_generate_doc(
+        self, NicePathMock, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock
+    ):
         source_path_mock = MagicMock()
         generator = Generator(
             project_name="test",
@@ -75,7 +81,7 @@ class TestGenerator(unittest.TestCase):
 
         MDDocumentMock().render_md_doc_link.return_value = "md_doc_link"
         MDDocumentMock().render_doc_link.return_value = "doc_link"
-        MDDocumentMock().path_finder.relative.return_value = Path('test')
+        MDDocumentMock().path_finder.relative.return_value = Path("test")
 
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
@@ -112,9 +118,10 @@ class TestGenerator(unittest.TestCase):
     @patch("handsdown.generator.Loader")
     @patch("handsdown.generator.ModuleRecordList")
     @patch("handsdown.generator.MDDocument")
+    @patch("handsdown.generator.NicePath")
     @patch("handsdown.generator.PathFinder")
     def test_cleanup_old_docs(
-        self, PathFinderMock, _MDDocumentMock, _ModuleRecordListMock, _LoaderMock
+        self, PathFinderMock, _NicePathMock, _MDDocumentMock, _ModuleRecordListMock, _LoaderMock
     ):
         doc_path_mock = MagicMock()
         doc_path_mock.read_text.return_value = "> Auto-generated documentation"
