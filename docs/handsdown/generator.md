@@ -95,7 +95,7 @@ Generate one module doc at once.
 
 ### Generator().generate_docs
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L313)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L312)
 
 ```python
 def generate_docs() -> None:
@@ -105,7 +105,7 @@ Generate all doc files at once.
 
 ### Generator().generate_index
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L325)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L326)
 
 ```python
 def generate_index() -> None:
@@ -117,7 +117,7 @@ Also `Modules` section that contains a Tree of all modules in the project.
 
 ### Generator().generate_modules
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L351)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L352)
 
 ```python
 def generate_modules() -> None:

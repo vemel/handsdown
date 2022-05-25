@@ -13,14 +13,14 @@ Path that represents it as relative to workdir.
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
 
 ```python
-class NicePath(Path):
+class NicePath(type(Path())):
 ```
 
 Path that represents it as relative to workdir.
 
 ### NicePath().walk
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L35)
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L33)
 
 ```python
 def walk(

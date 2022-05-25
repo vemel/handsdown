@@ -7,6 +7,7 @@ Wrapper for an `ast.expr` node.
 - [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ExpressionRecord
     - [ExpressionRecord](#expressionrecord)
         - [ExpressionRecord().related_names](#expressionrecordrelated_names)
+        - [ExpressionRecord().render_str](#expressionrecordrender_str)
 
 ## ExpressionRecord
 
@@ -37,3 +38,13 @@ def related_names() -> Set[str]:
 ```
 
 Set of related names.
+
+### ExpressionRecord().render_str
+
+[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L54)
+
+```python
+def render_str() -> str:
+```
+
+Render expression to a string.

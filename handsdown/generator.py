@@ -218,8 +218,7 @@ class Generator:
 
     def _generate_doc(self, module_record: ModuleRecord, md_document: MDDocument) -> None:
         self._logger.debug(
-            f"Generating doc {NicePath(md_document.path)}"
-            f" for {NicePath(module_record.source_path)}"
+            f"Generating doc {NicePath(md_document.path)} for {NicePath(module_record.source_path)}"
         )
         try:
             self._loader.parse_module_record(module_record)
@@ -314,7 +313,9 @@ class Generator:
         """
         Generate all doc files at once.
         """
-        self._logger.debug(f"Generating docs for {self._project_name} to {NicePath(self._output_path)}")
+        self._logger.debug(
+            f"Generating docs for {self._project_name} to {NicePath(self._output_path)}"
+        )
 
         for module_record in self._module_records:
             output_path = self._loader.get_output_path(module_record.source_path)

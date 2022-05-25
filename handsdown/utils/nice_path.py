@@ -8,12 +8,10 @@ from typing import TypeVar
 _R = TypeVar("_R", bound=Path)
 
 
-class NicePath(Path):
+class NicePath(type(Path())):  # type: ignore
     """
     Path that represents it as relative to workdir.
     """
-
-    _flavour = type(Path())._flavour  # type: ignore
 
     def __str__(self) -> str:
         path = Path(self)

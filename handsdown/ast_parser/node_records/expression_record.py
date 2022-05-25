@@ -64,6 +64,3 @@ class ExpressionRecord(NodeRecord):
                 result.append(part)
 
         return "".join(result)
-
-
-
