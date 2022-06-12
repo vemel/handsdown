@@ -95,10 +95,6 @@ A new `ModuleRecord` instance or None if there is ntohing to import.
 
 - `LoaderError` - If python source cannot be loaded.
 
-#### See also
-
-- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
-
 ### Loader().get_output_path
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L44)

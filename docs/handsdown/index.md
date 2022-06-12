@@ -18,6 +18,7 @@ Root of [Handsdown](#handsdown) source code.
         - [AST Parser](ast_parser/index.md#ast-parser)
         - [Cli Parser](cli_parser.md#cli-parser)
         - [Generator](generator.md#generator)
+        - [JinjaManager](jinja_manager.md#jinjamanager)
         - [Loader](loader.md#loader)
         - [Main](main.md#main)
         - [MDDocument](md_document.md#mddocument)

@@ -72,9 +72,10 @@ python = "^3.7"
 pip = "*"
 typed-ast = "*"
 importlib-resources = "*"
+jinja2 = "*"
+black = "*"
 
 [tool.poetry.dev-dependencies]
-black = "22.3.0"
 isort = "5.10.1"
 codecov = "2.1.12"
 mypy = "0.950"

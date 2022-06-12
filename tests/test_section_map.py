@@ -1,7 +1,7 @@
 # pylint: disable=missing-docstring
 import unittest
 
-from handsdown.processors.section_map import SectionBlock, SectionMap, Section
+from handsdown.processors.section_map import Section, SectionBlock, SectionMap
 
 
 class TestSectionBlock(unittest.TestCase):
@@ -33,9 +33,9 @@ class TestSectionMap(unittest.TestCase):
         section_map.trim_block("section3")
         section_map.add_block("section4")
 
-        self.assertEqual(section_map["section"].blocks[0].lines, ["one", "two"])
-        self.assertEqual(section_map["section"].blocks[1].lines, ["three"])
-        self.assertEqual(section_map["section2"].blocks[0].lines, ["one"])
+        self.assertEqual(section_map.sections["section"].blocks[0].lines, ["one", "two"])
+        self.assertEqual(section_map.sections["section"].blocks[1].lines, ["three"])
+        self.assertEqual(section_map.sections["section2"].blocks[0].lines, ["one"])
         self.assertNotIn("section3", section_map)
         self.assertNotIn("section4", section_map)
 

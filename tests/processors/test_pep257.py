@@ -12,8 +12,8 @@ class TestLoader(unittest.TestCase):
         ).read_text()
         processor = PEP257DocstringProcessor()
         sections = processor.build_sections(pep257_docstring)
-        self.assertEqual(sections[""].title, "")
+        self.assertEqual(sections.sections[""].title, "")
         self.assertEqual(
-            sections[""].render(),
+            sections.sections[""].render(),
             "Summary line.\n\nExtended description of method.\n\n",
         )

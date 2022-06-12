@@ -80,7 +80,3 @@ False
 #### Returns
 
 True if name is imported object itself on one of his children.
-
-#### See also
-
-- [ImportString](../../utils/import_string.md#importstring)

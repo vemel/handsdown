@@ -1,61 +1,14 @@
 """
 Module for splitting docstring into `Section` groups.
 """
-from typing import Iterable, Iterator, List
+from typing import Dict, Iterator, List
 
+from handsdown.processors.section import Section
+from handsdown.processors.section_block import SectionBlock
 from handsdown.utils.indent_trimmer import IndentTrimmer
 
 
-class SectionBlock:
-    """
-    Dataclass representing a `Section` block.
-
-    Arguments:
-        lines -- List of lines.
-    """
-
-    def __init__(self, lines: Iterable[str]) -> None:
-        self.lines = list(lines)
-
-    def render(self) -> str:
-        """
-        Render trimmed block lines.
-
-        Returns:
-            Block lines as a text.
-        """
-        lines = IndentTrimmer.trim_lines(self.lines)
-        return "\n".join(lines)
-
-
-class Section:
-    """
-    Dataclass representing a section in a `SectionMap`.
-
-    Arguments:
-        title -- Section title.
-        blocks -- List of line blocks.
-    """
-
-    def __init__(self, title: str, blocks: Iterable[SectionBlock]) -> None:
-        self.title = title
-        self.blocks = list(blocks)
-
-    def render(self) -> str:
-        """
-        Render all Section block lines.
-
-        Returns:
-            Section lines as a text.
-        """
-        result = []
-        for block in self.blocks:
-            result.append(block.render())
-
-        return "\n\n".join(result)
-
-
-class SectionMap(dict):  # type: ignore
+class SectionMap:
     """
     Dict-based storage for parsed `Section` list.
 
@@ -68,6 +21,7 @@ class SectionMap(dict):  # type: ignore
     def __init__(self) -> None:
         super().__init__()
         self._order: List[str] = []
+        self.sections: Dict[str, Section] = {}
 
     def add_line_indent(self, section_name: str, line: str) -> None:
         """
@@ -77,8 +31,8 @@ class SectionMap(dict):  # type: ignore
             section_name -- Target section title
             line -- Line to add
         """
-        if section_name in self:
-            section = self[section_name]
+        if section_name in self.sections:
+            section = self.sections[section_name]
             if section.blocks and section.blocks[-1].lines:
                 indent = IndentTrimmer.get_line_indent(section.blocks[-1].lines[-1])
                 line = IndentTrimmer.indent_line(line, indent)
@@ -95,18 +49,18 @@ class SectionMap(dict):  # type: ignore
             section_name -- Target section title
             line -- Line to add
         """
-        if section_name not in self:
+        if section_name not in self.sections:
             if not line:
                 return
 
             self._order.append(section_name)
-            self[section_name] = Section(title=section_name, blocks=[])
+            self.sections[section_name] = Section(title=section_name, blocks=[])
 
-        section = self[section_name]
+        section = self.sections[section_name]
         if not section.blocks:
             section.blocks.append(SectionBlock(lines=[]))
 
-        self[section_name].blocks[-1].lines.append(line)
+        self.sections[section_name].blocks[-1].lines.append(line)
 
     def add_block(self, section_name: str) -> None:
         """
@@ -117,10 +71,10 @@ class SectionMap(dict):  # type: ignore
         Arguments:
             section_name -- Target section title
         """
-        if section_name not in self:
+        if section_name not in self.sections:
             return
 
-        self[section_name].blocks.append(SectionBlock(lines=[]))
+        self.sections[section_name].blocks.append(SectionBlock(lines=[]))
 
     def trim_block(self, section_name: str) -> None:
         """
@@ -131,15 +85,14 @@ class SectionMap(dict):  # type: ignore
         Arguments:
             section_name -- Target section title.
         """
-        if section_name not in self:
+        if section_name not in self.sections:
             return
 
-        lines = self[section_name].blocks[-1].lines
+        lines = self.sections[section_name].blocks[-1].lines
         while lines and not lines[-1].strip():
             lines.pop()
 
-    @property
-    def sections(self) -> Iterator[Section]:
+    def __iter__(self) -> Iterator[Section]:
         """
         Iterate over existing `Section` objects.
 
@@ -147,4 +100,4 @@ class SectionMap(dict):  # type: ignore
             `Section` objects in order of appearance.
         """
         for section_name in self._order:
-            yield self[section_name]
+            yield self.sections[section_name]

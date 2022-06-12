@@ -9,6 +9,7 @@ from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.jinja_manager import JinjaManager
 from handsdown.loader import Loader, LoaderError
 from handsdown.md_document import MDDocument
 from handsdown.processors.base import BaseDocstringProcessor
@@ -87,6 +88,7 @@ class Generator:
         self._toc_depth = toc_depth
         self._raise_errors = raise_errors
         self._encoding = encoding
+        self._jinja_manager = JinjaManager()
 
         # create output folder if it does not exist
         if not self._output_path.exists():
@@ -526,7 +528,7 @@ class Generator:
             section_map.add_line("See also", f"- {link}")
             self._logger.debug(f"Adding link `{title}` to `{record.title}` `See also` section")
 
-        for section in section_map.sections:
+        for section in section_map:
             if section.title:
                 md_document.append_title(section.title, level=4)
             for block in section.blocks:

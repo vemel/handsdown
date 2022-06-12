@@ -36,10 +36,6 @@ Iterate over all added `ModuleRecord` entries.
 
 `ModuleRecord` entries.
 
-#### See also
-
-- [ModuleRecord](node_records/module_record.md#modulerecord)
-
 ### ModuleRecordList().add
 
 [[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L52)
@@ -79,7 +75,6 @@ Found `NodeRecord` instance or None.
 #### See also
 
 - [ImportString](../utils/import_string.md#importstring)
-- [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().get_package_names
 
