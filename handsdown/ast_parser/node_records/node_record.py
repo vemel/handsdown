@@ -277,3 +277,10 @@ class NodeRecord:
             result.append(record.render())
 
         return result
+
+    @property
+    def class_name(self) -> str:
+        """
+        Record class name.
+        """
+        return self.__class__.__name__

@@ -101,8 +101,8 @@ class ModuleRecord(NodeRecord):
 
             yield class_record
 
-            for class_child_record in class_record.iter_records():
-                yield class_child_record
+            # for class_child_record in class_record.iter_records():
+            #     yield class_child_record
 
         for function_record in self.function_records:
             if self.all_names and function_record.name not in self.all_names:

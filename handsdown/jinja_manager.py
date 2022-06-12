@@ -6,6 +6,8 @@ from typing import Any
 
 import jinja2
 
+from handsdown.utils.blackify import blackify
+
 
 class JinjaManager:
     """
@@ -42,6 +44,7 @@ class JinjaManager:
         Get `jinja2.Environment`.
         """
         cls._environment.filters["escape_md"] = cls.escape_md
+        cls._environment.filters["blackify"] = blackify
         return cls._environment
 
     def render(self, template_path: Path, **kwargs: Any) -> str:

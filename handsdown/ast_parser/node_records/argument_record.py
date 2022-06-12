@@ -46,6 +46,16 @@ class ArgumentRecord(NodeRecord):
         """
         return self._default
 
+    @property
+    def required(self) -> bool:
+        """
+        Whether the argument is required.
+
+        Returns:
+            True if required, False otherwise.
+        """
+        return self._default is None
+
     def set_default(self, node: Node) -> None:
         """
         Set default expression from test or `ast.AST` node.

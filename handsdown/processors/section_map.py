@@ -100,4 +100,5 @@ class SectionMap:
             `Section` objects in order of appearance.
         """
         for section_name in self._order:
-            yield self.sections[section_name]
+            section = self.sections[section_name]
+            yield section

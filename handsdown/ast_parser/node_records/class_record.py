@@ -152,3 +152,12 @@ class ClassRecord(NodeRecord):
                 parts.append(RenderPart.LINE_UNINDENT)
 
         return parts
+
+    @property
+    def init_method(self) -> Optional[FunctionRecord]:
+        """
+        Get the `__init__` method.
+        """
+        for method in self.method_records:
+            if method.name == "__init__":
+                return method

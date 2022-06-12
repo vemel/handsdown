@@ -70,6 +70,7 @@ class MDDocument:
         self._path = path
         self.path_finder = PathFinder(self._path.parent)
         self._encoding = encoding
+        self.source_code_url = ""
 
     def __enter__(self) -> "MDDocument":
         return self

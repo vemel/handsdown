@@ -1,9 +1,23 @@
-# {{ document.title }}
+# {{ module_record.title }}
 
-> Auto-generated documentation for {{ document.source_link }} module.
+> Auto-generated documentation for [{{ module_record.import_string.value }}]({{ md_document.source_code_url }}) module.
 
-{{ document.subtitle }}
+{{ md_document.subtitle }}
 
-{% for section in document.sections %}
+{% for record in module_record.iter_records() -%}
+    {% if record.class_name == "ClassRecord" -%}
+        {% with class=record -%}
+            {% include "common/class.md.jinja2" with context -%}
+        {% endwith -%}
+    {% endif -%}
+    {% if record.class_name == "FunctionRecord" -%}
+        {% with function=record -%}
+            {% include "common/function.md.jinja2" with context -%}
+        {% endwith -%}
+    {% endif -%}
+    {{ '\n\n' -}}
+{% endfor -%}
+
+{% for section in md_document.sections %}
 {{ section }}
 {% endfor %}

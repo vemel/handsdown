@@ -2,6 +2,7 @@
 Main handsdown documentation generator.
 """
 import re
+from calendar import c
 from pathlib import Path
 from typing import Iterable, List, Optional, Set
 
@@ -18,6 +19,7 @@ from handsdown.settings import ENCODING, FIND_IN_SOURCE_LABEL
 from handsdown.utils import make_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
+from handsdown.utils.markdown import insert_md_toc
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder
 
@@ -230,6 +232,22 @@ class Generator:
 
             self._logger.warning(f"Skipping: {e}")
             return
+
+        md_document.source_code_url = self._get_source_code_url(module_record, md_document)
+        output_path = self._loader.get_output_path(module_record.source_path)
+        if output_path.name != "path_finder.md":
+            return
+
+        content = self._jinja_manager.render(
+            template_path=Path("mkdocs") / "module.md.jinja2",
+            module_record=module_record,
+            md_document=md_document,
+            docstring_processor=self._docstring_processor,
+        )
+        content = insert_md_toc(content)
+        output_path.write_text(content, encoding=self._encoding)
+        print(output_path, content)
+        return
 
         source_link = md_document.render_link(
             title=module_record.import_string.value,

@@ -1,4 +1,4 @@
-{% for decorator in function.decorators -%}
+{% for decorator in function.decorator_records -%}
 {{ '@' -}}
 {{ decorator.render_str() -}}
 {{ '\n' -}}
@@ -6,14 +6,16 @@
 {% if function.is_async -%}{{ 'async ' -}}{% endif -%}{{ 'def ' -}}{{ function.name -}}{{ '(' -}}
 {{ '\n' -}}
 {% filter indent(4, True) -%}
-    {% for argument in function.arguments -%}
+    {% for argument in function.argument_records -%}
         {% include "common/argument.py.jinja2" with context -%}
         {{ ",\n" if not loop.last else "\n" -}}
     {% endfor -%}
 {% endfilter -%}
-{{ ') -> ' -}}
-
+{{ ')' -}}
+{% if function.return_type_hint -%}
+{{ ' -> ' -}}
 {{ function.return_type_hint.render_str() -}}
+{% endif -%}
 
 {{ ':\n' -}}
 {{ '    ...' -}}

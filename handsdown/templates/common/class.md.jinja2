@@ -1,7 +1,18 @@
-# {{ class.name }}
+## {{ class.name }}
 
-[find in source code]({{ class._get_source_code_url(module_record, md_document) }}#L{{ class.line_number}})
+[find in source code]({{ md_document.source_code_url }}#L{{ class.line_number }})
+
+{% with docstring=class.docstring -%}
+{% include "common/docstring.md.jinja2" -%}
+{% endwith -%}
+
 
 ```python
-{% include "common/class_signature.py.jinja2" %}
+{% filter blackify %}{% include "common/class_signature.py.jinja2" %}{% endfilter %}
 ```
+
+{% for record in class.get_public_methods() %}
+{% with method=record %}
+{% include "common/method.md.jinja2" %}
+{% endwith %}
+{% endfor %}
