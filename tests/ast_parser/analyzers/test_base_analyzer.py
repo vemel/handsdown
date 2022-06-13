@@ -1,6 +1,4 @@
-# pylint: disable=missing-docstring
 import unittest
-
 
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 

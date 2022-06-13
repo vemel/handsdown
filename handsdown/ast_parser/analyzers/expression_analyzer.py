@@ -148,7 +148,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Examples::
 
             Union[Name, bool]
-            list[1:4]
+            List[1:4]
 
         Arguments:
             node -- AST node.

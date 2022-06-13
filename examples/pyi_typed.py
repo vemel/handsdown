@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 """
 # Stub file type annotations examples
 

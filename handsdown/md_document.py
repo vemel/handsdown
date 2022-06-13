@@ -331,22 +331,6 @@ class MDDocument:
 
         self._content = self._build_content()
 
-    def append_title(self, title: str, level: int) -> None:
-        """
-        Append `title` of a given `level` to the document.
-
-        Handle trimming and sectioning the content and update
-        `title` and `toc_section` fields.
-
-        Arguments:
-            title -- Title to add.
-            level -- Title level, number of `#` symbols.
-        """
-        section_level = "#" * level
-        section = f"{section_level} {self._escape_title(title)}"
-        self._sections.append(section)
-        self._content = self._build_content()
-
     def generate_toc_section(self, max_depth: int = 3) -> str:
         """
         Generate Table of Contents MD content.

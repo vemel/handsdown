@@ -41,7 +41,7 @@ class ExpressionRecord(NodeRecord):
             self.parts = self.analyzer.parts
             return
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         result: List[RenderExpr] = []
         for part in self.parts:
             if isinstance(part, ast.AST):
@@ -57,9 +57,9 @@ class ExpressionRecord(NodeRecord):
         """
         self.parse()
         result = []
-        for part in self.parts:
-            if isinstance(part, ast.AST):
-                result.append(ExpressionRecord(part).render())
+        for part in self._render_parts():
+            if isinstance(part, NodeRecord):
+                result.append(part.render())
             if isinstance(part, str):
                 result.append(part)
 

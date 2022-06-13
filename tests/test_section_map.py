@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.processors.section_map import Section, SectionBlock, SectionMap

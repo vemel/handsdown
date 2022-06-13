@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring,no-self-use,dangerous-default-value
 """
 # PEP 484 - comment-based type annotations examples
 

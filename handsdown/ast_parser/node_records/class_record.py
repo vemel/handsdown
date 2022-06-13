@@ -28,7 +28,6 @@ class ClassRecord(NodeRecord):
         self.decorator_records: List[ExpressionRecord] = []
         self.argument_records: List[ArgumentRecord] = []
         self.base_records: List[ExpressionRecord] = []
-        self.support_split = True
         self.name = node.name
         self.title = self.name
         self.docstring = self._get_docstring()
@@ -122,7 +121,7 @@ class ClassRecord(NodeRecord):
 
         self.method_records.sort(key=lambda x: x.name)
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         parts: List[RenderExpr] = []
         for decorator_record in self.decorator_records:
             parts.append(decorator_record)
@@ -161,3 +160,4 @@ class ClassRecord(NodeRecord):
         for method in self.method_records:
             if method.name == "__init__":
                 return method
+        return None

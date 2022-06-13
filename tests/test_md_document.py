@@ -1,8 +1,7 @@
-# pylint: disable=missing-docstring
 import unittest
-from unittest.mock import MagicMock, patch
-from tempfile import NamedTemporaryFile
 from pathlib import Path
+from tempfile import NamedTemporaryFile
+from unittest.mock import MagicMock, patch
 
 from handsdown.md_document import MDDocument
 
@@ -116,12 +115,6 @@ class TestMDDocument(unittest.TestCase):
         self.assertEqual(md_doc.subtitle, "subtitle")
         self.assertEqual(md_doc.sections[0], "test")
 
-    def test_append_title(self):
-        md_doc = MDDocument(Path("/test.md"))
-        md_doc.append_title("title", level=1)
-        md_doc.append_title("_subtitle_", level=3)
-        self.assertEqual(md_doc.sections, ["# title", "### \\_subtitle\\_"])
-
     def test_get_anchor(self):
         self.assertEqual(MDDocument.get_anchor("s T_e-s%t"), "s-t_e-st")
         self.assertEqual(MDDocument.get_anchor("test"), "test")
@@ -148,15 +141,11 @@ class TestMDDocument(unittest.TestCase):
         md_doc = MDDocument(Path("/root/test.md"))
         self.assertEqual(md_doc.render_doc_link("title", anchor="tag"), "[title](#tag)")
         self.assertEqual(
-            md_doc.render_doc_link(
-                "title", anchor="tag", target_path=Path("/root/test.md")
-            ),
+            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test.md")),
             "[title](#tag)",
         )
         self.assertEqual(
-            md_doc.render_doc_link(
-                "title", anchor="tag", target_path=Path("/root/test2.md")
-            ),
+            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test2.md")),
             "[title](test2.md#tag)",
         )
         self.assertEqual(
@@ -177,19 +166,3 @@ class TestMDDocument(unittest.TestCase):
         self.assertTrue(MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)"))
         self.assertFalse(MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)\nTOC3"))
         self.assertFalse(MDDocument.is_toc("- [TOC](#toc)\n"))
-
-    def test_generate_toc_section(self):
-        md_doc = MDDocument(Path("/root/test.md"))
-        md_doc.append_title("header", level=1)
-        md_doc.append_title("header2", level=2)
-        md_doc.append("line")
-        md_doc.append("```\n\n## no header\n\n```")
-        md_doc.append_title("header3", level=3)
-        md_doc.append_title("header4", level=4)
-        md_doc.append("#no header")
-        md_doc.append("# no header\nasdd")
-        self.assertEqual(
-            md_doc.generate_toc_section(),
-            "- [header](#header)\n    - [header2](#header2)\n        - [header3](#header3)",
-        )
-        # raise ValueError()

@@ -1,8 +1,20 @@
 # {{ module_record.title }}
 
+{{ breadcrumbs|safe }}
+
 > Auto-generated documentation for [{{ module_record.import_string.value }}]({{ md_document.source_code_url }}) module.
 
-{{ md_document.subtitle }}
+{% if md_document.subtitle -%}
+{{ md_document.subtitle -}}
+{% endif -%}
+
+{% if module_record.get_documented_attribute_strings() -%}
+#### Attributes
+{% for attrubute in module_record.get_documented_attribute_strings() -%}
+{{ "\n- " }}{{ attrubute }}
+{% endfor -%}
+{{ "\n\n" -}}
+{% endif -%}
 
 {% for record in module_record.iter_records() -%}
     {% if record.class_name == "ClassRecord" -%}

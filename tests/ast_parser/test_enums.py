@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.ast_parser.enums import RenderPart

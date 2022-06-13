@@ -31,7 +31,6 @@ class FunctionRecord(NodeRecord):
         self.is_method = is_method
         self.return_type_hint: Optional[ExpressionRecord] = None
         self.decorator_records: List[ExpressionRecord] = []
-        self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
         self.is_async = isinstance(node, ast.AsyncFunctionDef)
@@ -100,8 +99,8 @@ class FunctionRecord(NodeRecord):
         """
         Extract comment type annotations from a function definiition lines.
 
-        Sets `arguemnts_record` to a new `TextRecord` for each found type annotaiton.
-        Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
+        Sets `arguments_record` to a new `TextRecord` for each found type annotaiton.
+        Also sets `return_type_hint` to a `TextRecord` if function return type found.
         """
         start_line_number = self.line_number
         for relative_line_number, line in enumerate(lines):
@@ -136,7 +135,7 @@ class FunctionRecord(NodeRecord):
                     argument = self.argument_records[argument_index]
                     argument.type_hint = TextRecord(argument.node, arg_type.strip())
 
-    def _render_parts(self, indent: int) -> List[Any]:
+    def _render_parts(self) -> List[Any]:
         parts: List[Any] = []
         for decorator in self.decorator_records:
             parts.append("@")

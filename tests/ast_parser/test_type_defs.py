@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.ast_parser import type_defs

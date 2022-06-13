@@ -37,7 +37,7 @@ class AttributeRecord(NodeRecord):
 
         return result
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         parts: List[RenderExpr] = []
         parts.append(self.name)
         parts.append(" = ")
@@ -48,7 +48,7 @@ class AttributeRecord(NodeRecord):
         if self.value:
             self.value.parse()
 
-    def render(self, indent: int = 0, allow_multiline: bool = False) -> str:
+    def render(self) -> str:
         """
         Render attribute with docstring.
         """

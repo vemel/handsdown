@@ -1,3 +1,4 @@
+# pylint: disable=no-name-in-module
 from black import format_file_contents
 from black.mode import Mode
 from black.parsing import InvalidInput
@@ -25,4 +26,4 @@ def blackify(content: str) -> str:
     except (IndentationError, InvalidInput) as e:
         raise ValueError(f"Cannot parse {content}: {e}") from e
 
-    return content
+    return content.rstrip("\n")

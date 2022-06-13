@@ -41,7 +41,7 @@ class ImportRecord(NodeRecord):
 
         return ImportString(self.name)
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         if self.source:
             if self.local_name != self.name:
                 return [f"from {self.source} import {self.name} as {self.local_name}"]

@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring,no-self-use
 """
 # PEP 257 - PEP 257 and Google docstrings examples
 

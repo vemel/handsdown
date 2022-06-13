@@ -1,1 +1,59 @@
+# FunctionRecord
+
+[Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / FunctionRecord
+
+> Auto-generated documentation for [handsdown.ast_parser.node_records.function_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py) module.
+
+- [FunctionRecord](#functionrecord)
+
+## FunctionRecord
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L17)
+
+Wrapper for an `ast.FunctionDef` and `ast.AsyncFunctionDef` node.
+
+#### Arguments
+
+- `node` - AST node.
+
+#### Signature
+
+```python
+class FunctionRecord(NodeRecord):
+    def __init__(self, node: ASTFunctionDef, is_method: bool) -> None:
+        ...
+```
+
+#### See also
+- [ASTFunctionDef](../type_defs.md#astfunctiondef)
+- [NodeRecord](node_record.md#noderecord)
+
+### FunctionRecord().parse_type_comments
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L98)
+
+Extract comment type annotations from a function definiition lines.Sets `arguments_record` to a new `TextRecord` for each found type annotaiton.
+Also sets `return_type_hint` to a `TextRecord` if function return type found.
+
+#### Signature
+
+```python
+def parse_type_comments(self, lines: Iterable[str]) -> None:
+    ...
+```
+
+### FunctionRecord().related_names
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L41)
+
+Set of related names.
+
+#### Signature
+
+```python
+@property
+def related_names(self) -> Set[str]:
+    ...
+```
+
 

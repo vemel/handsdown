@@ -130,7 +130,7 @@ class ModuleRecord(NodeRecord):
             attribute_record.import_string = self.import_string + attribute_record.name
             self.import_string_map[attribute_record.import_string] = attribute_record
 
-    def _render_parts(self, indent: int = 0) -> List[Any]:
+    def _render_parts(self) -> List[Any]:
         parts: List[Any] = []
         if self.import_records:
             for import_record in self.import_records:

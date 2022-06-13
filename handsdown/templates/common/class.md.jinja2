@@ -2,17 +2,30 @@
 
 [find in source code]({{ md_document.source_code_url }}#L{{ class.line_number }})
 
+{% for attrubute in class.get_documented_attribute_strings() -%}
+{% if loop.first -%}{{ "#### Attributes\n" -}}{% endif -%}
+{{ "\n- " }}{{ attrubute }}
+{% if loop.last -%}{{ "\n\n" -}}{% endif -%}
+{% endfor -%}
+
 {% with docstring=class.docstring -%}
 {% include "common/docstring.md.jinja2" -%}
 {% endwith -%}
 
+#### Signature
 
 ```python
 {% filter blackify %}{% include "common/class_signature.py.jinja2" %}{% endfilter %}
-```
+```{{ "\n\n" -}}
 
-{% for record in class.get_public_methods() %}
-{% with method=record %}
-{% include "common/method.md.jinja2" %}
-{% endwith %}
-{% endfor %}
+{% for link in generator.get_see_also_links(class, module_record, md_document) -%}
+{% if loop.first -%}{{ "#### See also\n" -}}{% endif -%}
+- {{ link -}}{{ "\n" -}}
+{% if loop.last -%}{{ "\n" -}}{% endif -%}
+{% endfor -%}
+
+{% for record in class.get_public_methods() -%}
+    {% with method=record -%}
+        {% include "common/method.md.jinja2" -%}
+    {% endwith -%}
+{% endfor -%}

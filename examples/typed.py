@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 """
 # PEP 484 - type annotations examples
 
@@ -6,7 +5,7 @@
 
 [PEP 484 - Type Hints](https://www.python.org/dev/peps/pep-0484/)
 """
-from typing import List, Union, Any, Dict, Tuple, Type, Optional
+from typing import Any, Dict, List, Optional, Tuple, Type, Union
 
 
 class MyValue:

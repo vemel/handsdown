@@ -1,7 +1,7 @@
 """
 Utils for markdown rendering.
 """
-from typing import Iterable, Type, TypeVar
+from typing import Iterable, List, Type, TypeVar
 
 _R = TypeVar("_R", bound="TableOfContents")
 
@@ -50,7 +50,7 @@ class TableOfContents:
     """
 
     def __init__(self, headers: Iterable[Header]) -> None:
-        self.headers: list[Header] = list(headers)
+        self.headers: List[Header] = list(headers)
 
     @classmethod
     def parse(cls: Type[_R], text: str) -> _R:
@@ -60,7 +60,7 @@ class TableOfContents:
         Arguments:
             text -- MarkDown text.
         """
-        headers: list[Header] = []
+        headers: List[Header] = []
         in_codeblock = False
         for line in text.splitlines():
             if line.startswith("```"):
@@ -79,7 +79,7 @@ class TableOfContents:
         """
         Render ToC to string.
         """
-        result: list[str] = []
+        result: List[str] = []
         for header in self.headers:
             if header.level > max_level:
                 continue
@@ -87,42 +87,14 @@ class TableOfContents:
         return "\n".join(result)
 
 
-def fix_pypi_headers(text: str) -> str:
-    """
-    Parse table of Contents for MarkDown text.
-
-    Arguments:
-        text -- MarkDown text.
-    """
-    result: list[str] = []
-    in_codeblock = False
-    for line in text.splitlines():
-        if line.startswith("```"):
-            in_codeblock = not in_codeblock
-        if in_codeblock:
-            result.append(line)
-            continue
-        if not line.startswith("#"):
-            result.append(line)
-            continue
-
-        level, title = line.split(" ", 1)
-        header = Header(title.strip(), len(level))
-        result.append(f'<a id="{header.anchor}"></a>')
-        result.append("")
-        result.append(line)
-
-    return "\n".join(result)
-
-
-def insert_md_toc(text: str) -> str:
+def insert_md_toc(text: str, depth: int = 3) -> str:
     """
     Insert Table of Contents before the first second-level header.
     """
     toc = TableOfContents.parse(text)
-    toc_lines = toc.render(2).splitlines()
+    toc_lines = toc.render(depth).splitlines()
     lines = text.splitlines()
-    result: list[str] = []
+    result: List[str] = []
     inserted = False
     for line in lines:
         if not inserted and line.startswith("## "):

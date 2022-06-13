@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 """
 # PEP 287 - reStructuredText docstrings examples
 

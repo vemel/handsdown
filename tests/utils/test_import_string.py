@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.utils.import_string import ImportString, ImportStringError
@@ -18,9 +17,7 @@ class TestImportString(unittest.TestCase):
         self.assertNotEqual(ImportString("value"), ImportString("value1"))
         self.assertNotEqual(ImportString("value"), "value1")
         self.assertNotEqual(ImportString("value"), b"value")
-        self.assertEqual(
-            ImportString("parent.parent2.value").parent.value, "parent.parent2"
-        )
+        self.assertEqual(ImportString("parent.parent2.value").parent.value, "parent.parent2")
 
         with self.assertRaises(ImportStringError):
             _ = ImportString("value").parent
@@ -31,19 +28,11 @@ class TestImportString(unittest.TestCase):
         self.assertFalse(ImportString("parent.value").is_top_level())
 
     def test_startswith(self):
+        self.assertTrue(ImportString("parent.parent2.value").startswith(ImportString("parent")))
         self.assertTrue(
-            ImportString("parent.parent2.value").startswith(ImportString("parent"))
+            ImportString("parent.parent2.value").startswith(ImportString("parent.parent2"))
         )
-        self.assertTrue(
-            ImportString("parent.parent2.value").startswith(
-                ImportString("parent.parent2")
-            )
-        )
+        self.assertFalse(ImportString("parent.parent2.value").startswith(ImportString("parent2")))
         self.assertFalse(
-            ImportString("parent.parent2.value").startswith(ImportString("parent2"))
-        )
-        self.assertFalse(
-            ImportString("parent.parent2.value").startswith(
-                ImportString("parent.parent2value")
-            )
+            ImportString("parent.parent2.value").startswith(ImportString("parent.parent2value"))
         )
