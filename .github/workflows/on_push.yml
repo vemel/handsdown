@@ -53,7 +53,7 @@ jobs:
       - name: Typing
         run: |
           poetry run mypy handsdown
-          npx pyright
+          poetry run npx pyright
       - name: Test
         run: |
           poetry run pytest
