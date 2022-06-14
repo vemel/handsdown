@@ -36,7 +36,7 @@ class Typed:
     def __init__(
         self,
         my_bool: bool = one & ~two == "three" and not -4,
-        my_lambda=lambda x, y, *args, **kwargs: x + y,
+        my_lambda=lambda x, y, *args, **kwargs,: x + y,
         my_set: Set = {1, 2, [3, 4], {5: 6}, (7, 8)},
         _value: Union[List[str], str, MyValue] = MyValue(
             "asd", *args, kwarg=123, **extras

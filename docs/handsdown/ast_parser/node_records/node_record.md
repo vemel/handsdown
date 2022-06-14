@@ -8,7 +8,7 @@
 
 ## NodeRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L14)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L13)
 
 Base class for all node records.
 
@@ -22,7 +22,7 @@ class NodeRecord:
 
 ### NodeRecord().class_name
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L151)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L146)
 
 Record class name.
 
@@ -36,7 +36,7 @@ def class_name(self) -> str:
 
 ### NodeRecord().get_documented_attribute_strings
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L133)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L128)
 
 Render each of `attribute_records` to a Markdown string.Includes `name`, `docstring` and `value` of an `ArgumentRecord`.
 
@@ -53,7 +53,7 @@ def get_documented_attribute_strings(self) -> List[str]:
 
 ### NodeRecord().line_number
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L33)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L32)
 
 Return node line number in source.
 
@@ -71,7 +71,7 @@ def line_number(self) -> int:
 
 ### NodeRecord().line_number
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L48)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L47)
 
 #### Signature
 
@@ -83,7 +83,7 @@ def line_number(self, value: int) -> None:
 
 ### NodeRecord().parse
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L75)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L74)
 
 Get all information from a node.Executes only once if called multiple times.
 
@@ -96,7 +96,7 @@ def parse(self) -> None:
 
 ### NodeRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L59)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L58)
 
 Get a set of referenced object names in `node`.Returns an empty set, should be overriden by a child class.
 
@@ -114,7 +114,7 @@ def related_names(self) -> Set[str]:
 
 ### NodeRecord().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L102)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L98)
 
 Render node to a string.
 

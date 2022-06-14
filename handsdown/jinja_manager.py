@@ -42,11 +42,11 @@ class JinjaManager:
         return value.replace("_", r"\_")
 
     @property
-    def env(cls) -> jinja2.Environment:
+    def env(self) -> jinja2.Environment:
         """
         Get `jinja2.Environment`.
         """
-        return cls._env
+        return self._env
 
     def render(self, template_path: Path, **kwargs: Any) -> str:
         template_full_path = self.TEMPLATES_PATH / template_path

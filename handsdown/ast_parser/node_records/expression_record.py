@@ -7,7 +7,7 @@ from typing import List, Set
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
+from handsdown.ast_parser.type_defs import Node, RenderExpr
 
 
 class ExpressionRecord(NodeRecord):
@@ -22,7 +22,7 @@ class ExpressionRecord(NodeRecord):
 
     def __init__(self, node: ast.AST) -> None:
         super().__init__(node)
-        self.parts: List[DirtyRenderExpr] = []
+        self.parts: List[Node] = []
         self.analyzer = ExpressionAnalyzer()
 
     @property

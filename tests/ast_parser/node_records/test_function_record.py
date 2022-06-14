@@ -125,14 +125,8 @@ class TestFunctionRecord(unittest.TestCase):
         FunctionAnalyzerMock().argument_records = [argument_1, argument_2, argument_3]
         FunctionAnalyzerMock().decorator_nodes = [decorator_1, decorator_2]
         FunctionAnalyzerMock().return_type_hint = "return_type_hint"
-        self.assertEqual(
-            record.render(),
-            "@my_deco@classmethoddef name(, ) -> :",
-        )
+        self.assertEqual(record.render(), "def name()")
 
         node.mock_add_spec(ast.AsyncFunctionDef)
         record = FunctionRecord(node, is_method=True)
-        self.assertEqual(
-            record.render(),
-            "@my_deco@classmethodasync def name(, ) -> :",
-        )
+        self.assertEqual(record.render(), "def name()")

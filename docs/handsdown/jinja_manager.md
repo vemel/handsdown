@@ -30,7 +30,7 @@ Get `jinja2.Environment`.
 
 ```python
 @property
-def env(cls) -> jinja2.Environment:
+def env(self) -> jinja2.Environment:
     ...
 ```
 

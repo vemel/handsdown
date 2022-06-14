@@ -5,7 +5,6 @@ from abc import abstractmethod
 from typing import Iterable, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
-from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.type_defs import RenderExpr
 from handsdown.utils.docstring_formatter import DocstringFormatter
 from handsdown.utils.import_string import ImportString
@@ -88,9 +87,6 @@ class NodeRecord:
     def _render_line(parts: Iterable[RenderExpr]) -> str:
         result = []
         for part in parts:
-            if part is RenderPart.SINGLE_LINE_SPACE:
-                result.append(" ")
-
             if isinstance(part, NodeRecord):
                 result.append(part.render())
 
@@ -113,10 +109,9 @@ class NodeRecord:
         line_parts: List[RenderExpr] = []
         lines = []
         for part_index, part in enumerate(parts):
-            if not isinstance(part, RenderPart) or not part.is_line_break():
-                line_parts.append(part)
-                if part_index < len(parts) - 1:
-                    continue
+            line_parts.append(part)
+            if part_index < len(parts) - 1:
+                continue
 
             result_lines = [self._render_line(line_parts)]
 

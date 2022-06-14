@@ -6,11 +6,9 @@
 
 #### Attributes
 
-- `RenderExpr` - Ready for render expression: `Union[NodeRecord, str, RenderPart]`
+- `RenderExpr` - Ready for render expression: `Union[NodeRecord, str]`
 
 - `Node` - AST node or text: `Union[str, ast.AST]`
-
-- `DirtyRenderExpr` - Not ready for render expression, AST has to be wrapped: `Union[ast.AST, str, RenderPart]`
 
 - `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
 

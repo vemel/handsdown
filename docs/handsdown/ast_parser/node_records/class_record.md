@@ -8,7 +8,7 @@
 
 ## ClassRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L17)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L16)
 
 Wrapper for an `ast.ClassDef` node.
 
@@ -29,7 +29,7 @@ class ClassRecord(NodeRecord):
 
 ### ClassRecord().find_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L35)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L34)
 
 Find child method or attribute record.
 
@@ -50,7 +50,7 @@ def find_record(self, name: str) -> Optional[NodeRecord]:
 
 ### ClassRecord().get_public_methods
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L88)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L87)
 
 Get Class public methods.Skips methods with names starting with `_` and magic methods  `__` if
 they have no docstring. Method `__init__` is always skipped.
@@ -68,7 +68,7 @@ def get_public_methods(self) -> List[FunctionRecord]:
 
 ### ClassRecord().init_method
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L155)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L126)
 
 Get the `__init__` method.
 
@@ -82,7 +82,7 @@ def init_method(self) -> Optional[FunctionRecord]:
 
 ### ClassRecord().iter_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L75)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L74)
 
 Iterate over Class public methods.
 
@@ -99,7 +99,7 @@ def iter_records(self) -> Iterator[NodeRecord]:
 
 ### ClassRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L58)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L57)
 
 Set of related names.
 

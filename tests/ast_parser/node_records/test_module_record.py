@@ -220,4 +220,4 @@ class TestFunctionRecord(unittest.TestCase):
         record.function_records = ["function_record"]
         record.import_records = ["import_record"]
 
-        self.assertEqual(record.render(), "import_recordclass_recordfunction_record")
+        self.assertEqual(record.render(), "module module")
