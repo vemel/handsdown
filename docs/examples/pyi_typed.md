@@ -8,7 +8,7 @@
 
 ## MyValue
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L10)
 
 #### Signature
 
@@ -21,7 +21,7 @@ class MyValue:
 
 ## func
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L15)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L14)
 
 #### Signature
 
@@ -37,7 +37,7 @@ def func(_list, _my_value_cls=MyValue, **_kwargs):
 
 ## func_any
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L19)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L18)
 
 #### Signature
 

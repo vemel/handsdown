@@ -8,7 +8,7 @@
 
 ## MyValue
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L12)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L11)
 
 #### Signature
 
@@ -22,7 +22,7 @@ class MyValue:
 
 ## Typed
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L18)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L17)
 
 #### Attributes
 
@@ -51,7 +51,7 @@ class Typed:
 
 ### Typed.classmethod
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L37)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L36)
 
 #### Signature
 
@@ -68,7 +68,7 @@ def classmethod(cls, _my_value: MyValue, *_args: str, **_kwargs: Any) -> Typed:
 
 ## func
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L43)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L42)
 
 #### Signature
 
@@ -86,7 +86,7 @@ def func(
 
 ## func_any
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L48)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L47)
 
 #### Signature
 

@@ -16,10 +16,13 @@ class JinjaManager:
 
     TEMPLATES_PATH = Path(__file__).parent / "templates"
 
-    _environment = jinja2.Environment(
+    _env = jinja2.Environment(
         loader=jinja2.FileSystemLoader(TEMPLATES_PATH.as_posix()),
         undefined=jinja2.StrictUndefined,
     )
+
+    def __init__(self) -> None:
+        self._env.filters.update({"escape_md": self.escape_md, "blackify": blackify})
 
     @classmethod
     def update_globals(cls, **kwargs: object) -> None:
@@ -29,7 +32,7 @@ class JinjaManager:
         Arguments:
             kwargs -- Globals to set.
         """
-        cls._environment.globals.update(kwargs)
+        cls._env.globals.update(kwargs)
 
     @staticmethod
     def escape_md(value: str) -> str:
@@ -38,14 +41,12 @@ class JinjaManager:
         """
         return value.replace("_", r"\_")
 
-    @classmethod
-    def get_environment(cls) -> jinja2.Environment:
+    @property
+    def env(cls) -> jinja2.Environment:
         """
         Get `jinja2.Environment`.
         """
-        cls._environment.filters["escape_md"] = cls.escape_md
-        cls._environment.filters["blackify"] = blackify
-        return cls._environment
+        return cls._env
 
     def render(self, template_path: Path, **kwargs: Any) -> str:
         template_full_path = self.TEMPLATES_PATH / template_path
@@ -53,5 +54,5 @@ class JinjaManager:
         if not template_full_path.exists():
             raise ValueError(f"Template {template_full_path} not found")
 
-        template = self.get_environment().get_template(template_path.as_posix())
+        template = self.env.get_template(template_path.as_posix())
         return template.render(**kwargs)

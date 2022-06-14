@@ -8,7 +8,7 @@
 
 ## MyValue
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L12)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L11)
 
 #### Signature
 
@@ -21,7 +21,7 @@ class MyValue:
 
 ## Typed
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L16)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L15)
 
 #### Signature
 
@@ -49,7 +49,7 @@ class Typed:
 
 ### Typed().async_method
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L38)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L37)
 
 #### Signature
 
@@ -60,7 +60,7 @@ async def async_method(self, _value: str) -> str:
 
 ### Typed.classmethod
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L34)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L33)
 
 #### Signature
 
@@ -77,7 +77,7 @@ def classmethod(cls, _my_value: MyValue, *_args: str, **_kwargs: Any) -> None:
 
 ## func
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L46)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L45)
 
 #### Signature
 
@@ -96,7 +96,7 @@ def func(
 
 ## my_deco
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L42)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L41)
 
 #### Signature
 

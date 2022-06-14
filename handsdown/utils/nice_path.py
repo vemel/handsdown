@@ -52,7 +52,7 @@ class NicePath(type(Path())):  # type: ignore
         """
         Write content to file if it's changed.
         """
-        if self.read_text(encoding) == content:
+        if self.exists() and self.read_text(encoding) == content:
             return False
 
         self.write_text(content, encoding)

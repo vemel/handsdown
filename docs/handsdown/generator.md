@@ -8,7 +8,7 @@
 
 ## Generator
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L33)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L32)
 
 #### Attributes
 
@@ -66,7 +66,7 @@ class Generator:
 
 ### Generator().cleanup_old_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L156)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L155)
 
 Remove old docs generated for this module.
 
@@ -79,7 +79,7 @@ def cleanup_old_docs(self) -> None:
 
 ### Generator().generate_doc
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L187)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L186)
 
 Generate one module doc at once.
 
@@ -162,7 +162,7 @@ def get_see_also_links(
 
 ## GeneratorError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L27)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L26)
 
 Main error for `Generator`.
 

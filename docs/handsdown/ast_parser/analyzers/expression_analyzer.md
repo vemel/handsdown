@@ -651,7 +651,7 @@ Parse info from `ast.Subscript` node and put it to `parts`.Type annotations are 
 
 ```python
 Union[Name, bool]
-list[1:4]
+List[1:4]
 ```
 
 #### Arguments

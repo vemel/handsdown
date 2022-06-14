@@ -8,7 +8,7 @@
 
 ## ClassExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L10)
 
 PEP257-style class example
 
@@ -34,7 +34,7 @@ class ClassExample:
 
 ### ClassExample().method_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L34)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L33)
 
 Summary line.Extended description of method.
 
@@ -77,7 +77,7 @@ def method_example(self, text: str = "hello") -> int:
 
 ## function_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L67)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L66)
 
 Form a complex number.
 

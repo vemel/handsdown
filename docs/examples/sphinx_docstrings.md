@@ -8,7 +8,7 @@
 
 ## RSTExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L10)
 
 #### Signature
 
@@ -19,7 +19,7 @@ class RSTExample:
 
 ### RSTExample.directives_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L34)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L33)
 
 Test for some random Sphinx directives
 ```ruby
@@ -52,7 +52,7 @@ def directives_test():
 
 ### RSTExample.reference
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L12)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
 
 This is a reference for ``Sphinx-style RST-style`` docstrings. Check `source` code
 to see how it works.Code example```python
@@ -87,7 +87,7 @@ def reference():
 
 ### RSTExample.version_directives_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L58)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L57)
 
 Test for Version-related directives
 

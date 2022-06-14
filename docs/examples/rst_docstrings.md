@@ -8,7 +8,7 @@
 
 ## RSTExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L10)
 
 #### Signature
 
@@ -19,7 +19,7 @@ class RSTExample:
 
 ### RSTExample.reference
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L12)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L11)
 
 This is a reference for ``RST-style`` docstrings. Check `source` code
 to see how it works.
@@ -54,7 +54,7 @@ def reference():
 
 ### RSTExample.replace_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L41)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L40)
 
 Check if all attribute `attributes`, ``data`` and exception `Exception` in
 class ``RSTExample`` and class `RSTExample` look good.
@@ -69,7 +69,7 @@ def replace_test():
 
 ### RSTExample.rtype_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L32)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L31)
 
 `:rtype:` test.
 
