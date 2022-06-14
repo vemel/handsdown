@@ -5,6 +5,8 @@
 > Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/main/handsdown/main.py) module.
 
 - [Main](#main)
+  - [create_external_configs](#create_external_configs)
+  - [main](#main)
 
 ## create_external_configs
 
@@ -20,6 +22,7 @@ def create_external_configs(namespace: CLINamespace) -> None:
 ```
 
 #### See also
+
 - [CLINamespace](cli_parser.md#clinamespace)
 
 

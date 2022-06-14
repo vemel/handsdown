@@ -5,6 +5,14 @@
 > Auto-generated documentation for [handsdown.generator](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py) module.
 
 - [Generator](#generator)
+  - [Generator](#generator-1)
+    - [Generator().cleanup_old_docs](#generator()cleanup_old_docs)
+    - [Generator().generate_doc](#generator()generate_doc)
+    - [Generator().generate_docs](#generator()generate_docs)
+    - [Generator().generate_index](#generator()generate_index)
+    - [Generator().generate_modules](#generator()generate_modules)
+    - [Generator().get_see_also_links](#generator()get_see_also_links)
+  - [GeneratorError](#generatorerror)
 
 ## Generator
 
@@ -62,6 +70,7 @@ class Generator:
 ```
 
 #### See also
+
 - [ENCODING](settings.md#encoding)
 
 ### Generator().cleanup_old_docs
@@ -154,6 +163,7 @@ def get_see_also_links(
 ```
 
 #### See also
+
 - [MDDocument](md_document.md#mddocument)
 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
 - [NodeRecord](ast_parser/node_records/node_record.md#noderecord)

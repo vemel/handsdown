@@ -5,6 +5,8 @@
 > Auto-generated documentation for [handsdown.processors.section](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py) module.
 
 - [Section](#section)
+  - [Section](#section-1)
+    - [Section().render](#section()render)
 
 ## Section
 

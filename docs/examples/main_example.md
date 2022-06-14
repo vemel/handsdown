@@ -11,6 +11,10 @@
 
 
 - [Main Example](#main-example)
+  - [MyClass](#myclass)
+    - [MyClass().__bool__](#myclass()__bool__)
+    - [MyClass.do_something](#myclassdo_something)
+  - [hello](#hello)
 
 ## MyClass
 

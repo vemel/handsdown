@@ -5,6 +5,7 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.base_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py) module.
 
 - [BaseAnalyzer](#baseanalyzer)
+  - [BaseAnalyzer](#baseanalyzer-1)
 
 ## BaseAnalyzer
 

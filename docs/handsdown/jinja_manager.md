@@ -5,6 +5,11 @@
 > Auto-generated documentation for [handsdown.jinja_manager](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py) module.
 
 - [JinjaManager](#jinjamanager)
+  - [JinjaManager](#jinjamanager-1)
+    - [JinjaManager().env](#jinjamanager()env)
+    - [JinjaManager.escape_md](#jinjamanagerescape_md)
+    - [JinjaManager().render](#jinjamanager()render)
+    - [JinjaManager.update_globals](#jinjamanagerupdate_globals)
 
 ## JinjaManager
 

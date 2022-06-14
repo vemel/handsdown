@@ -5,6 +5,7 @@
 > Auto-generated documentation for [handsdown.utils.blackify](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py) module.
 
 - [Blackify](#blackify)
+  - [blackify](#blackify)
 
 ## blackify
 

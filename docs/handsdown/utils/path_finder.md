@@ -5,6 +5,13 @@
 > Auto-generated documentation for [handsdown.utils.path_finder](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py) module.
 
 - [PathFinder](#pathfinder)
+  - [PathFinder](#pathfinder-1)
+    - [PathFinder().exclude](#pathfinder()exclude)
+    - [PathFinder().glob](#pathfinder()glob)
+    - [PathFinder().include](#pathfinder()include)
+    - [PathFinder().mkdir](#pathfinder()mkdir)
+    - [PathFinder().relative](#pathfinder()relative)
+  - [PathFinderError](#pathfindererror)
 
 ## PathFinder
 

@@ -5,6 +5,11 @@
 > Auto-generated documentation for [handsdown.ast_parser.module_record_list](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py) module.
 
 - [ModuleRecordList](#modulerecordlist)
+  - [ModuleRecordList](#modulerecordlist-1)
+    - [ModuleRecordList().__iter__](#modulerecordlist()__iter__)
+    - [ModuleRecordList().add](#modulerecordlist()add)
+    - [ModuleRecordList().find_module_record](#modulerecordlist()find_module_record)
+    - [ModuleRecordList().get_package_names](#modulerecordlist()get_package_names)
 
 ## ModuleRecordList
 
@@ -55,6 +60,7 @@ def add(self, module_record: ModuleRecord) -> None:
 ```
 
 #### See also
+
 - [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().find_module_record
@@ -79,6 +85,7 @@ def find_module_record(self, import_string: ImportString) -> Optional[ModuleReco
 ```
 
 #### See also
+
 - [ImportString](../utils/import_string.md#importstring)
 
 ### ModuleRecordList().get_package_names

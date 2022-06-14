@@ -19,7 +19,7 @@
 ```{{ "\n\n" -}}
 
 {% for link in generator.get_see_also_links(class, module_record, md_document) -%}
-{% if loop.first -%}{{ "#### See also\n" -}}{% endif -%}
+{% if loop.first -%}{{ "#### See also\n\n" -}}{% endif -%}
 - {{ link -}}{{ "\n" -}}
 {% if loop.last -%}{{ "\n" -}}{% endif -%}
 {% endfor -%}

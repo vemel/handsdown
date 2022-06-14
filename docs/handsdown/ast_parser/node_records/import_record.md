@@ -5,6 +5,9 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.import_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/import_record.py) module.
 
 - [ImportRecord](#importrecord)
+  - [ImportRecord](#importrecord-1)
+    - [ImportRecord().get_import_string](#importrecord()get_import_string)
+    - [ImportRecord().match](#importrecord()match)
 
 ## ImportRecord
 
@@ -26,6 +29,7 @@ class ImportRecord(NodeRecord):
 ```
 
 #### See also
+
 - [ASTImport](../type_defs.md#astimport)
 - [NodeRecord](node_record.md#noderecord)
 
@@ -47,6 +51,7 @@ def get_import_string(self) -> ImportString:
 ```
 
 #### See also
+
 - [ImportString](../../utils/import_string.md#importstring)
 
 ### ImportRecord().match

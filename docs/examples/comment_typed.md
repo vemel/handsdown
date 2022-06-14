@@ -5,6 +5,11 @@
 > Auto-generated documentation for [examples.comment_typed](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) module.
 
 - [PEP 484 - comment-based type annotations examples](#pep-484---comment-based-type-annotations-examples)
+  - [MyValue](#myvalue)
+  - [Typed](#typed)
+    - [Typed.classmethod](#typedclassmethod)
+  - [func](#func)
+  - [func_any](#func_any)
 
 ## MyValue
 
@@ -47,6 +52,7 @@ class Typed:
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 ### Typed.classmethod
@@ -62,6 +68,7 @@ def classmethod(cls, _my_value: MyValue, *_args: str, **_kwargs: Any) -> Typed:
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 
@@ -80,6 +87,7 @@ def func(
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 
@@ -98,6 +106,7 @@ def func_any(
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 

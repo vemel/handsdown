@@ -5,6 +5,12 @@
 > Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py) module.
 
 - [Loader](#loader)
+  - [Loader](#loader-1)
+    - [Loader().get_import_string](#loader()get_import_string)
+    - [Loader().get_module_record](#loader()get_module_record)
+    - [Loader().get_output_path](#loader()get_output_path)
+    - [Loader.parse_module_record](#loaderparse_module_record)
+  - [LoaderError](#loadererror)
 
 ## Loader
 
@@ -36,6 +42,7 @@ class Loader:
 ```
 
 #### See also
+
 - [ENCODING](settings.md#encoding)
 
 ### Loader().get_import_string
@@ -135,6 +142,7 @@ def parse_module_record(module_record: ModuleRecord) -> None:
 ```
 
 #### See also
+
 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
 
 

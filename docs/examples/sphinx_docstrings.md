@@ -5,6 +5,9 @@
 > Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) module.
 
 - [Sphinx docstrings examples](#sphinx-docstrings-examples)
+  - [RSTExample](#rstexample)
+    - [RSTExample.directives_test](#rstexampledirectives_test)
+    - [RSTExample.reference](#rstexamplereference)
 
 ## RSTExample
 

@@ -5,6 +5,12 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.class_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py) module.
 
 - [ClassAnalyzer](#classanalyzer)
+  - [ClassAnalyzer](#classanalyzer-1)
+    - [ClassAnalyzer().generic_visit](#classanalyzer()generic_visit)
+    - [ClassAnalyzer().visit_Assign](#classanalyzer()visit_assign)
+    - [ClassAnalyzer().visit_AsyncFunctionDef](#classanalyzer()visit_asyncfunctiondef)
+    - [ClassAnalyzer().visit_ClassDef](#classanalyzer()visit_classdef)
+    - [ClassAnalyzer().visit_FunctionDef](#classanalyzer()visit_functiondef)
 
 ## ClassAnalyzer
 
@@ -21,6 +27,7 @@ class ClassAnalyzer(BaseAnalyzer):
 ```
 
 #### See also
+
 - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
 
 ### ClassAnalyzer().generic_visit

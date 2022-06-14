@@ -1,7 +1,7 @@
 """
 Utils for markdown rendering.
 """
-from typing import Iterable, List, Type, TypeVar
+from typing import Dict, Iterable, List, Type, TypeVar
 
 _R = TypeVar("_R", bound="TableOfContents")
 
@@ -13,25 +13,13 @@ class Header:
     Arguments:
         title -- Header title
         level -- Header level, 1-6
+        anchor -- Anchor link
     """
 
-    def __init__(self, title: str, level: int) -> None:
+    def __init__(self, title: str, level: int, anchor: str) -> None:
         self.title: str = title
         self.level: int = level
-
-    @staticmethod
-    def get_anchor_link(text: str) -> str:
-        """
-        Convert header to markdown anchor link.
-        """
-        return text.strip().replace(" ", "-").replace(".", "").lower()
-
-    @property
-    def anchor(self) -> str:
-        """
-        Anchor link for title.
-        """
-        return self.get_anchor_link(self.title)
+        self.anchor: str = anchor
 
     def render(self) -> str:
         """
@@ -62,6 +50,7 @@ class TableOfContents:
         """
         headers: List[Header] = []
         in_codeblock = False
+        title_counter: Dict[str, int] = {}
         for line in text.splitlines():
             if line.startswith("```"):
                 in_codeblock = not in_codeblock
@@ -71,8 +60,12 @@ class TableOfContents:
                 continue
 
             level, title = line.split(" ", 1)
-            headers.append(Header(title.strip(), len(level)))
-
+            title = title.strip()
+            title_counter[title] = title_counter.get(title, 0) + 1
+            anchor_link = cls._get_anchor_link(title)
+            if title_counter[title] > 1:
+                anchor_link = f"{anchor_link}-{title_counter[title] - 1}"
+            headers.append(Header(title, len(level), anchor_link))
         return cls(headers)
 
     def render(self, max_level: int = 3) -> str:
@@ -85,6 +78,10 @@ class TableOfContents:
                 continue
             result.append(header.render())
         return "\n".join(result)
+
+    @staticmethod
+    def _get_anchor_link(text: str) -> str:
+        return text.strip().replace(" ", "-").replace(".", "").lower()
 
 
 def insert_md_toc(text: str, depth: int = 3) -> str:

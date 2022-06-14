@@ -5,6 +5,11 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.argument_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py) module.
 
 - [ArgumentRecord](#argumentrecord)
+  - [ArgumentRecord](#argumentrecord-1)
+    - [ArgumentRecord().default](#argumentrecord()default)
+    - [ArgumentRecord().related_names](#argumentrecord()related_names)
+    - [ArgumentRecord().required](#argumentrecord()required)
+    - [ArgumentRecord().set_default](#argumentrecord()set_default)
 
 ## ArgumentRecord
 
@@ -34,6 +39,7 @@ class ArgumentRecord(NodeRecord):
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### ArgumentRecord().default
@@ -104,6 +110,7 @@ def set_default(self, node: Node) -> None:
 ```
 
 #### See also
+
 - [Node](../type_defs.md#node)
 
 

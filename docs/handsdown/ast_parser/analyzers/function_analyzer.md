@@ -5,6 +5,11 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.function_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py) module.
 
 - [FunctionAnalyzer](#functionanalyzer)
+  - [FunctionAnalyzer](#functionanalyzer-1)
+    - [FunctionAnalyzer().generic_visit](#functionanalyzer()generic_visit)
+    - [FunctionAnalyzer().visit_AsyncFunctionDef](#functionanalyzer()visit_asyncfunctiondef)
+    - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzer()visit_functiondef)
+    - [FunctionAnalyzer().visit_arguments](#functionanalyzer()visit_arguments)
 
 ## FunctionAnalyzer
 
@@ -21,6 +26,7 @@ class FunctionAnalyzer(BaseAnalyzer):
 ```
 
 #### See also
+
 - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
 
 ### FunctionAnalyzer().generic_visit

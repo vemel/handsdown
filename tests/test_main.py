@@ -39,6 +39,6 @@ class TestMain(unittest.TestCase):
             source_code_url="",
             source_code_path=Path(),
             source_paths=path_finder_mock().exclude().include().glob(),
-            toc_depth=1,
+            toc_depth=3,
             encoding="utf-8",
         )

@@ -5,6 +5,7 @@
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) module.
 
 - [PEP 257 - PEP 257 and Google docstrings examples](#pep-257---pep-257-and-google-docstrings-examples)
+  - [ClassExample](#classexample)
 
 ## ClassExample
 

@@ -5,6 +5,26 @@
 > Auto-generated documentation for [handsdown.md_document](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py) module.
 
 - [MDDocument](#mddocument)
+  - [MDDocument](#mddocument-1)
+    - [MDDocument().add_toc_if_not_exists](#mddocument()add_toc_if_not_exists)
+    - [MDDocument().append](#mddocument()append)
+    - [MDDocument().generate_toc_section](#mddocument()generate_toc_section)
+    - [MDDocument.get_anchor](#mddocumentget_anchor)
+    - [MDDocument.get_toc_line](#mddocumentget_toc_line)
+    - [MDDocument.is_toc](#mddocumentis_toc)
+    - [MDDocument().path](#mddocument()path)
+    - [MDDocument().read](#mddocument()read)
+    - [MDDocument().render_doc_link](#mddocument()render_doc_link)
+    - [MDDocument.render_link](#mddocumentrender_link)
+    - [MDDocument().render_md_doc_link](#mddocument()render_md_doc_link)
+    - [MDDocument().sections](#mddocument()sections)
+    - [MDDocument().subtitle](#mddocument()subtitle)
+    - [MDDocument().subtitle](#mddocument()subtitle-1)
+    - [MDDocument().title](#mddocument()title)
+    - [MDDocument().title](#mddocument()title-1)
+    - [MDDocument().toc_section](#mddocument()toc_section)
+    - [MDDocument().toc_section](#mddocument()toc_section-1)
+    - [MDDocument().write](#mddocument()write)
 
 ## MDDocument
 
@@ -58,6 +78,7 @@ class MDDocument:
 ```
 
 #### See also
+
 - [ENCODING](settings.md#encoding)
 
 ### MDDocument().add_toc_if_not_exists

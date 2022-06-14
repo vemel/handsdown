@@ -5,6 +5,12 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py) module.
 
 - [ModuleRecord](#modulerecord)
+  - [ModuleRecord](#modulerecord-1)
+    - [ModuleRecord().build_children](#modulerecord()build_children)
+    - [ModuleRecord.create_from_source](#modulerecordcreate_from_source)
+    - [ModuleRecord().find_record](#modulerecord()find_record)
+    - [ModuleRecord().get_related_import_strings](#modulerecord()get_related_import_strings)
+    - [ModuleRecord().iter_records](#modulerecord()iter_records)
 
 ## ModuleRecord
 
@@ -25,6 +31,7 @@ class ModuleRecord(NodeRecord):
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### ModuleRecord().build_children
@@ -67,6 +74,7 @@ def create_from_source(
 ```
 
 #### See also
+
 - [ENCODING](../../settings.md#encoding)
 - [ImportString](../../utils/import_string.md#importstring)
 
@@ -92,6 +100,7 @@ def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
 ```
 
 #### See also
+
 - [ImportString](../../utils/import_string.md#importstring)
 
 ### ModuleRecord().get_related_import_strings
@@ -112,6 +121,7 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### ModuleRecord().iter_records

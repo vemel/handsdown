@@ -5,6 +5,10 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.attribute_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py) module.
 
 - [AttributeRecord](#attributerecord)
+  - [AttributeRecord](#attributerecord-1)
+    - [AttributeRecord().append_to](#attributerecord()append_to)
+    - [AttributeRecord().related_names](#attributerecord()related_names)
+    - [AttributeRecord().render](#attributerecord()render)
 
 ## AttributeRecord
 
@@ -25,6 +29,7 @@ class AttributeRecord(NodeRecord):
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### AttributeRecord().append_to
@@ -41,6 +46,7 @@ def append_to(self, node_record: NodeRecord) -> None:
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### AttributeRecord().related_names

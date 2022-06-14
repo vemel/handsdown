@@ -5,6 +5,9 @@
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) module.
 
 - [Google docstrings examples](#google-docstrings-examples)
+  - [ClassExample](#classexample)
+    - [ClassExample().method_example](#classexample()method_example)
+  - [function_example](#function_example)
 
 ## ClassExample
 

@@ -5,6 +5,13 @@
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py) module.
 
 - [Cli Parser](#cli-parser)
+  - [CLINamespace](#clinamespace)
+    - [CLINamespace().get_source_code_url](#clinamespace()get_source_code_url)
+  - [abs_path](#abs_path)
+  - [dir_abs_path](#dir_abs_path)
+  - [existing_dir_abs_path](#existing_dir_abs_path)
+  - [git_repo](#git_repo)
+  - [parse_args](#parse_args)
 
 ## CLINamespace
 
@@ -173,6 +180,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
 ```
 
 #### See also
+
 - [CLINamespace](#clinamespace)
 
 

@@ -5,6 +5,12 @@
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/main/examples/typed.py) module.
 
 - [PEP 484 - type annotations examples](#pep-484---type-annotations-examples)
+  - [MyValue](#myvalue)
+  - [Typed](#typed)
+    - [Typed().async_method](#typed()async_method)
+    - [Typed.classmethod](#typedclassmethod)
+  - [func](#func)
+  - [my_deco](#my_deco)
 
 ## MyValue
 
@@ -45,6 +51,7 @@ class Typed:
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 ### Typed().async_method
@@ -71,6 +78,7 @@ def classmethod(cls, _my_value: MyValue, *_args: str, **_kwargs: Any) -> None:
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 
@@ -90,6 +98,7 @@ def func(
 ```
 
 #### See also
+
 - [MyValue](#myvalue)
 
 

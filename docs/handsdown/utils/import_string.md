@@ -5,6 +5,16 @@
 > Auto-generated documentation for [handsdown.utils.import_string](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py) module.
 
 - [ImportString](#importstring)
+  - [ImportString](#importstring-1)
+    - [ImportString().__add__](#importstring()__add__)
+    - [ImportString().__bool__](#importstring()__bool__)
+    - [ImportString().__eq__](#importstring()__eq__)
+    - [ImportString().__str__](#importstring()__str__)
+    - [ImportString().is_top_level](#importstring()is_top_level)
+    - [ImportString().parent](#importstring()parent)
+    - [ImportString().parts](#importstring()parts)
+    - [ImportString().startswith](#importstring()startswith)
+  - [ImportStringError](#importstringerror)
 
 ## ImportString
 

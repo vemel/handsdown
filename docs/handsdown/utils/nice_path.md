@@ -5,6 +5,9 @@
 > Auto-generated documentation for [handsdown.utils.nice_path](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py) module.
 
 - [NicePath](#nicepath)
+  - [NicePath](#nicepath-1)
+    - [NicePath().walk](#nicepath()walk)
+    - [NicePath().write_changed](#nicepath()write_changed)
 
 ## NicePath
 

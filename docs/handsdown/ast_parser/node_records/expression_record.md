@@ -5,6 +5,9 @@
 > Auto-generated documentation for [handsdown.ast_parser.node_records.expression_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py) module.
 
 - [ExpressionRecord](#expressionrecord)
+  - [ExpressionRecord](#expressionrecord-1)
+    - [ExpressionRecord().related_names](#expressionrecord()related_names)
+    - [ExpressionRecord().render_str](#expressionrecord()render_str)
 
 ## ExpressionRecord
 
@@ -25,6 +28,7 @@ class ExpressionRecord(NodeRecord):
 ```
 
 #### See also
+
 - [NodeRecord](node_record.md#noderecord)
 
 ### ExpressionRecord().related_names

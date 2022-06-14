@@ -5,6 +5,13 @@
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.module_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py) module.
 
 - [ModuleAnalyzer](#moduleanalyzer)
+  - [ModuleAnalyzer](#moduleanalyzer-1)
+    - [ModuleAnalyzer().visit_Assign](#moduleanalyzer()visit_assign)
+    - [ModuleAnalyzer().visit_AsyncFunctionDef](#moduleanalyzer()visit_asyncfunctiondef)
+    - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzer()visit_classdef)
+    - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzer()visit_functiondef)
+    - [ModuleAnalyzer().visit_Import](#moduleanalyzer()visit_import)
+    - [ModuleAnalyzer().visit_ImportFrom](#moduleanalyzer()visit_importfrom)
 
 ## ModuleAnalyzer
 
@@ -21,6 +28,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 ```
 
 #### See also
+
 - [BaseAnalyzer](base_analyzer.md#baseanalyzer)
 
 ### ModuleAnalyzer().visit_Assign
