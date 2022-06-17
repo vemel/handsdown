@@ -252,13 +252,7 @@ class Generator:
         md_document: MDDocument,
     ) -> str:
         import_string_breadcrumbs: List[str] = []
-        parent_import_strings = []
-        import_string = module_record.import_string
-        while not import_string.is_top_level():
-            import_string = import_string.parent
-            parent_import_strings.append(import_string)
-
-        parent_import_strings.reverse()
+        parent_import_strings = module_record.import_string.get_parents()
 
         for parent_import_string in parent_import_strings:
             parent_module_record = self._module_records.find_module_record(parent_import_string)

@@ -1,38 +1,47 @@
-import unittest
+import pytest
 
 from handsdown.utils.import_string import ImportString, ImportStringError
 
 
-class TestImportString(unittest.TestCase):
+class TestImportString:
     def test_init(self):
-        self.assertEqual(ImportString("value").value, "value")
-        self.assertEqual(str(ImportString("value")), "value")
-        self.assertTrue(hash(ImportString("value")))
-        self.assertTrue(ImportString("value"))
-        self.assertFalse(ImportString(""))
-        self.assertEqual((ImportString("value") + "add").value, "value.add")
-        self.assertEqual((ImportString("") + "add").value, "add")
-        self.assertEqual(ImportString("value"), ImportString("value"))
-        self.assertEqual(ImportString("value"), "value")
-        self.assertNotEqual(ImportString("value"), ImportString("value1"))
-        self.assertNotEqual(ImportString("value"), "value1")
-        self.assertNotEqual(ImportString("value"), b"value")
-        self.assertEqual(ImportString("parent.parent2.value").parent.value, "parent.parent2")
+        assert ImportString("value").value == "value"
+        assert str(ImportString("value")) == "value"
+        assert hash(ImportString("value"))
+        assert ImportString("value")
+        assert not ImportString("")
+        assert (ImportString("value") + "add").value == "value.add"
+        assert (ImportString("") + "add").value == "add"
+        assert ImportString("value") == ImportString("value")
+        assert ImportString("value") == "value"
+        assert ImportString("value") != ImportString("value1")
+        assert ImportString("value") != "value1"
+        assert ImportString("value") != b"value"
+        assert ImportString("parent.parent2.value").parent.value == "parent.parent2"
 
-        with self.assertRaises(ImportStringError):
+        with pytest.raises(ImportStringError):
             _ = ImportString("value").parent
 
     def test_is_top_level(self):
-        self.assertTrue(ImportString("value").is_top_level())
-        self.assertTrue(ImportString("").is_top_level())
-        self.assertFalse(ImportString("parent.value").is_top_level())
+        assert ImportString("value").is_top_level()
+        assert ImportString("").is_top_level()
+        assert not ImportString("parent.value").is_top_level()
 
     def test_startswith(self):
-        self.assertTrue(ImportString("parent.parent2.value").startswith(ImportString("parent")))
-        self.assertTrue(
-            ImportString("parent.parent2.value").startswith(ImportString("parent.parent2"))
+        assert ImportString("parent.parent2.value").startswith(ImportString("parent"))
+        assert ImportString("parent.parent2.value").startswith(ImportString("parent.parent2"))
+        assert not ImportString("parent.parent2.value").startswith(ImportString("parent2"))
+        assert not ImportString("parent.parent2.value").startswith(
+            ImportString("parent.parent2value")
         )
-        self.assertFalse(ImportString("parent.parent2.value").startswith(ImportString("parent2")))
-        self.assertFalse(
-            ImportString("parent.parent2.value").startswith(ImportString("parent.parent2value"))
-        )
+
+    def test_get_parents(self):
+        assert not ImportString("value").get_parents()
+        assert not ImportString("").get_parents()
+
+        actual = ImportString("parent1.parent2.value").get_parents()
+        expected = [
+            ImportString("parent1"),
+            ImportString("parent1.parent2"),
+        ]
+        assert all([a == b for a, b in zip(actual, expected)])
