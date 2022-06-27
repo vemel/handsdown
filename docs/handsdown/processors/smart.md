@@ -1,6 +1,10 @@
 # Smart
 
-[Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Smart
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Processors](index.md#processors) /
+Smart
 
 > Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py) module.
 

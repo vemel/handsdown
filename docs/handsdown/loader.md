@@ -1,6 +1,9 @@
 # Loader
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Loader
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Handsdown](index.md#handsdown) /
+Loader
 
 > Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py) module.
 
@@ -8,7 +11,6 @@
   - [Loader](#loader-1)
     - [Loader().get_import_string](#loader()get_import_string)
     - [Loader().get_module_record](#loader()get_module_record)
-    - [Loader().get_output_path](#loader()get_output_path)
     - [Loader.parse_module_record](#loaderparse_module_record)
   - [LoaderError](#loadererror)
 
@@ -47,7 +49,7 @@ class Loader:
 
 ### Loader().get_import_string
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L129)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L130)
 
 Get Python import string for a source `source_path` relative to `root_path`.
 
@@ -102,30 +104,9 @@ def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
     ...
 ```
 
-### Loader().get_output_path
-
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L44)
-
-Get output MD document path based on `source_path`.
-
-#### Arguments
-
-- `source_path` - Path to source code file.
-
-#### Returns
-
-A path to the output `.md` file even if it does not exist yet.
-
-#### Signature
-
-```python
-def get_output_path(self, source_path: Path) -> Path:
-    ...
-```
-
 ### Loader.parse_module_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L114)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L115)
 
 Parse `ModuleRecord` children and fully load a tree for it.
 

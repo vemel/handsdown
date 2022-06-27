@@ -1,10 +1,14 @@
-# reStructuredText Docstring Processor.
+# reStructuredText Docstring Processor
 
-[Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / reStructuredText Docstring Processor.
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Processors](index.md#processors) /
+reStructuredText Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py) module.
 
-- [reStructuredText Docstring Processor.](#restructuredtext-docstring-processor)
+- [reStructuredText Docstring Processor](#restructuredtext-docstring-processor)
   - [RSTDocstringProcessor](#rstdocstringprocessor)
 
 ## RSTDocstringProcessor

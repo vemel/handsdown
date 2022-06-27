@@ -1,6 +1,9 @@
 # Utils
 
-[Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / Utils
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+Utils
 
 > Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py) module.
 

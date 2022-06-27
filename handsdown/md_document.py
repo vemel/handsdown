@@ -232,13 +232,32 @@ class MDDocument:
             A string with Markdown link.
         """
         link = ""
-        if anchor:
-            link = f"#{anchor}"
         if target_path and target_path != self._path:
             link_path = self.path_finder.relative(target_path)
-            link = f"{link_path.as_posix()}{link}"
+            link = f"{link}{link_path.as_posix()}"
+        if anchor:
+            link = f"{link}#{anchor}"
 
         return self.render_link(title, link)
+
+    def get_doc_link(self, path: Path, anchor: str = "") -> str:
+        """
+        Get Markdown link to a local MD document, use relative path as a link.
+
+        Arguments:
+            path -- Path to local MDDocument
+            anchor -- Unescaped or escaped anchor tag
+
+        Returns:
+            A string with Markdown link.
+        """
+        link = ""
+        if path and path != self.path:
+            link_path = self.path_finder.relative(path)
+            link = f"{link}{link_path.as_posix()}"
+        if anchor:
+            link = f"{link}#{anchor}"
+        return link
 
     def _build_content(self) -> str:
         sections = []

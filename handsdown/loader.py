@@ -41,7 +41,7 @@ class Loader:
         self._output_path = output_path
         self._encoding = encoding
 
-    def get_output_path(self, source_path: Path) -> Path:
+    def _get_output_path(self, source_path: Path) -> Path:
         """
         Get output MD document path based on `source_path`.
 
@@ -87,6 +87,7 @@ class Loader:
             module_record = ModuleRecord.create_from_source(
                 source_path=source_path,
                 import_string=ImportString(import_string),
+                output_path=self._get_output_path(source_path),
                 encoding=self._encoding,
             )
             module_record.build_children()

@@ -1,5 +1,5 @@
 """
-# reStructuredText Docstring Processor.
+# reStructuredText Docstring Processor
 
 Docstring processor for restructured text docstring format.
 

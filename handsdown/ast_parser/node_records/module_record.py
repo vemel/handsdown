@@ -40,12 +40,14 @@ class ModuleRecord(NodeRecord):
         self.import_string = ImportString("")
         self.import_string_map: Dict[ImportString, NodeRecord] = {}
         self.docstring = self._get_docstring()
+        self.output_path = Path("")
 
     @classmethod
     def create_from_source(
         cls,
         source_path: Path,
         import_string: ImportString,
+        output_path: Path,
         encoding: str = ENCODING,
     ) -> "ModuleRecord":
         """
@@ -67,6 +69,7 @@ class ModuleRecord(NodeRecord):
         record.name = import_string.parts[-1]
         record.source_path = source_path
         record.source_lines = content.split("\n")
+        record.output_path = output_path
         return record
 
     def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:

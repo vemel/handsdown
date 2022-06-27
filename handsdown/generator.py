@@ -105,10 +105,10 @@ class Generator:
 
         self._source_paths = sorted(source_paths)
         self._logger.debug(f"Generating source map for {len(self._source_paths)} source files")
-        self._module_records = self._build_module_record_list()
+        self.module_records = self._build_module_record_list()
         self._logger.debug("Source map generated")
 
-        package_names = self._module_records.get_package_names()
+        package_names = self.module_records.get_package_names()
         package_names_re_expr = "|".join(package_names)
         self._docstring_links_re = re.compile(rf"`+(?:{package_names_re_expr})\.\S+`+")
         self._prepare_index()
@@ -157,7 +157,7 @@ class Generator:
         Remove old docs generated for this module.
         """
         self._logger.debug("Removing orphaned docs")
-        preserve_paths = {self._loader.get_output_path(i.source_path) for i in self._module_records}
+        preserve_paths = {i.output_path for i in self.module_records}
         orphaned_dirs = []
         preserve_paths.add(self.md_index.path)
         preserve_paths.add(self.md_modules.path)
@@ -193,13 +193,11 @@ class Generator:
         Raises:
             GeneratorError -- If `source_path` not found in current repo.
         """
-        for module_record in self._module_records:
+        for module_record in self.module_records:
             if module_record.source_path != source_path:
                 continue
 
-            output_path = self._loader.get_output_path(module_record.source_path)
-
-            md_document = MDDocument(output_path, encoding=self._encoding)
+            md_document = MDDocument(module_record.output_path, encoding=self._encoding)
             self._generate_doc(module_record, md_document)
 
             return
@@ -235,9 +233,6 @@ class Generator:
             md_document=md_document,
             docstring_processor=self._docstring_processor,
             generator=self,
-            breadcrumbs=self._build_breadcrumbs_string(
-                module_record=module_record, md_document=md_document
-            ),
         )
         content = insert_md_toc(content, self._toc_depth)
         if NicePath(md_document.path).write_changed(content, encoding=self._encoding):
@@ -245,38 +240,6 @@ class Generator:
                 f"Updated doc {NicePath(md_document.path)} for"
                 f" {NicePath(module_record.source_path)}"
             )
-
-    def _build_breadcrumbs_string(
-        self,
-        module_record: ModuleRecord,
-        md_document: MDDocument,
-    ) -> str:
-        import_string_breadcrumbs: List[str] = []
-        parent_import_strings = module_record.import_string.get_parents()
-
-        for parent_import_string in parent_import_strings:
-            parent_module_record = self._module_records.find_module_record(parent_import_string)
-            if not parent_module_record:
-                import_string_breadcrumbs.append(f"`{make_title(parent_import_string.parts[-1])}`")
-                continue
-
-            output_path = self._loader.get_output_path(parent_module_record.source_path)
-            import_string_breadcrumbs.append(
-                md_document.render_doc_link(
-                    parent_module_record.title,
-                    target_path=output_path,
-                    anchor=md_document.get_anchor(parent_module_record.title),
-                )
-            )
-
-        breadcrumbs = [
-            md_document.render_md_doc_link(self.md_index, title=self._project_name),
-            md_document.render_md_doc_link(self.md_modules, title=self.MODULES_TITLE),
-            *import_string_breadcrumbs,
-            module_record.title,
-        ]
-
-        return " / ".join(breadcrumbs)
 
     def generate_docs(self) -> None:
         """
@@ -286,9 +249,8 @@ class Generator:
             f"Generating docs for {self._project_name} to {NicePath(self._output_path)}"
         )
 
-        for module_record in self._module_records:
-            output_path = self._loader.get_output_path(module_record.source_path)
-            md_document = MDDocument(output_path, encoding=self._encoding)
+        for module_record in self.module_records:
+            md_document = MDDocument(module_record.output_path, encoding=self._encoding)
             self._generate_doc(module_record, md_document)
 
     def generate_index(self) -> None:
@@ -381,12 +343,12 @@ class Generator:
             # find record globally
             if not related_record:
                 related_import_string = ImportString(related_record_name)
-                related_module_record = self._module_records.find_module_record(
+                related_module_record = self.module_records.find_module_record(
                     related_import_string
                 )
                 if related_module_record:
                     related_record = related_module_record.find_record(related_import_string)
-                    target_path = self._loader.get_output_path(related_module_record.source_path)
+                    target_path = related_module_record.output_path
 
             if not related_record:
                 continue
@@ -421,7 +383,7 @@ class Generator:
         related_import_strings = module_record.get_related_import_strings(record)
         links = set()
         for import_string in related_import_strings:
-            related_module_record = self._module_records.find_module_record(import_string)
+            related_module_record = self.module_records.find_module_record(import_string)
             if not related_module_record:
                 continue
 
@@ -433,9 +395,10 @@ class Generator:
                 continue
 
             title = related_record.title
-            target_path = self._loader.get_output_path(related_module_record.source_path)
             link = md_document.render_doc_link(
-                title, target_path=target_path, anchor=md_document.get_anchor(title)
+                title,
+                target_path=related_module_record.output_path,
+                anchor=md_document.get_anchor(title),
             )
             links.add(link)
 
@@ -448,8 +411,7 @@ class Generator:
         parts = import_string.parts
 
         last_import_string_parts: List[str] = []
-        for module_record in self._module_records:
-            output_path = self._loader.get_output_path(module_record.source_path)
+        for module_record in self.module_records:
             if module_record.import_string == import_string:
                 continue
 
@@ -477,7 +439,7 @@ class Generator:
             last_import_string_parts = import_string_parts
             link = md_document.render_doc_link(
                 title=module_record.title,
-                target_path=output_path,
+                target_path=module_record.output_path,
                 anchor=md_document.get_anchor(module_record.title),
             )
             toc_line = md_document.get_toc_line(

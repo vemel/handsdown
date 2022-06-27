@@ -1,6 +1,9 @@
 # Settings
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Settings
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Handsdown](index.md#handsdown) /
+Settings
 
 > Auto-generated documentation for [handsdown.settings](https://github.com/vemel/handsdown/blob/main/handsdown/settings.py) module.
 

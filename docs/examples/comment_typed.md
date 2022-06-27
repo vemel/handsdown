@@ -1,6 +1,9 @@
 # PEP 484 - comment-based type annotations examples
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 484 - comment-based type annotations examples
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+PEP 484 - comment-based type annotations examples
 
 > Auto-generated documentation for [examples.comment_typed](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) module.
 

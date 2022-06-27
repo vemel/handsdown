@@ -1,5 +1,5 @@
 """
-# Base Docstring Processor.
+# Base Docstring Processor
 
 Base class for all docstring processors:
 

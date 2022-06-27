@@ -1,6 +1,10 @@
 # Blackify
 
-[Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Utils](index.md#utils) / Blackify
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Utils](index.md#utils) /
+Blackify
 
 > Auto-generated documentation for [handsdown.utils.blackify](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py) module.
 

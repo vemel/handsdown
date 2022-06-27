@@ -1,6 +1,9 @@
 # Generator
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Handsdown](index.md#handsdown) / Generator
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Handsdown](index.md#handsdown) /
+Generator
 
 > Auto-generated documentation for [handsdown.generator](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py) module.
 
@@ -109,7 +112,7 @@ def generate_doc(self, source_path: Path) -> None:
 
 ### Generator().generate_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L287)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L244)
 
 Generate all doc files at once.
 
@@ -122,7 +125,7 @@ def generate_docs(self) -> None:
 
 ### Generator().generate_index
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L300)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L256)
 
 Generate `<output>/README.md` file with title from `<root>/README.md`.Also `Modules` section that contains a Tree of all modules in the project.
 
@@ -135,7 +138,7 @@ def generate_index(self) -> None:
 
 ### Generator().generate_modules
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L326)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L282)
 
 Generate `<output>/README.md` file.Title from `<root>/README.md` and `Modules`
 section that contains a Tree of all modules in the project.
@@ -149,7 +152,7 @@ def generate_modules(self) -> None:
 
 ### Generator().get_see_also_links
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L417)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L373)
 
 Get links to other modules that are referenced in the docstring.
 

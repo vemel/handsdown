@@ -1,6 +1,9 @@
 # Supported expressions examples
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Supported expressions examples
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+Supported expressions examples
 
 > Auto-generated documentation for [examples.expressions](https://github.com/vemel/handsdown/blob/main/examples/expressions.py) module.
 

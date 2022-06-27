@@ -1,6 +1,17 @@
 # {{ module_record.title }}
 
-{{ breadcrumbs|safe }}
+[{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}#{{ md_document.get_anchor(generator.md_index.title) }}) /
+[{{ generator.md_modules.title }}]({{ md_document.get_doc_link(generator.md_modules.path) }}#{{ md_document.get_anchor(generator.md_modules.title) }}) /
+{% for parent_import_string in module_record.import_string.get_parents() -%}
+    {% set parent_module_record = generator.module_records.find_module_record(parent_import_string) -%}
+    {%- if parent_module_record -%}
+        [{{ parent_module_record.title }}]({{ md_document.get_doc_link(parent_module_record.output_path) }}#{{ md_document.get_anchor(parent_module_record.title) }}) /
+    {%- else -%}
+        `{{ parent_module_record.title }}` /
+    {%- endif -%}
+    {{ '\n' -}}
+{% endfor -%}
+{{ module_record.title }}
 
 > Auto-generated documentation for [{{ module_record.import_string.value }}]({{ md_document.source_code_url }}) module.
 

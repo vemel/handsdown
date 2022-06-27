@@ -1,6 +1,9 @@
 # Sphinx docstrings examples
 
-[Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Sphinx docstrings examples
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+Sphinx docstrings examples
 
 > Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) module.
 
