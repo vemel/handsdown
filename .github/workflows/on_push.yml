@@ -49,10 +49,8 @@ jobs:
       - name: Lint
         run: |
           poetry run flake8 handsdown
-          poetry run pylint handsdown
       - name: Typing
         run: |
-          poetry run mypy handsdown
           poetry run npx pyright
       - name: Test
         run: |
