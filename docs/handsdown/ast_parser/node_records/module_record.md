@@ -1,10 +1,9 @@
 # ModuleRecord
 
-[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../../MODULES.md#modules) /
+[Handsdown API Index](../../../README.md#handsdown-api-index) /
 [Handsdown](../../index.md#handsdown) /
 [AST Parser](../index.md#ast-parser) /
-[Node Records](index.md#node-records) /
+[Node Records](./index.md#node-records) /
 ModuleRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py) module.
@@ -19,7 +18,7 @@ ModuleRecord
 
 ## ModuleRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L20)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L21)
 
 Wrapper for an `ast.Module` node with corresponding node info.Responsible for parsing Python source as well.
 
@@ -37,11 +36,11 @@ class ModuleRecord(NodeRecord):
 
 #### See also
 
-- [NodeRecord](node_record.md#noderecord)
+- [NodeRecord](./node_record.md#noderecord)
 
 ### ModuleRecord().build_children
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L136)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L137)
 
 Collect full information about Module child records.Used only when doc for this ModuleRecord is building.
 
@@ -54,7 +53,7 @@ def build_children(self) -> None:
 
 ### ModuleRecord.create_from_source
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L44)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L45)
 
 Create new `ModuleRecord` from path.
 
@@ -85,7 +84,7 @@ def create_from_source(
 
 ### ModuleRecord().find_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L72)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L73)
 
 Find child in the Module by an absolute or relative import string.
 
@@ -110,7 +109,7 @@ def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
 
 ### ModuleRecord().get_related_import_strings
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L250)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L251)
 
 Get a set of `related_names` found in module class, function, method and attribute records.
 
@@ -127,11 +126,11 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 
 #### See also
 
-- [NodeRecord](node_record.md#noderecord)
+- [NodeRecord](./node_record.md#noderecord)
 
 ### ModuleRecord().iter_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L91)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L92)
 
 Iterate over Module class, method and fucntion records.
 

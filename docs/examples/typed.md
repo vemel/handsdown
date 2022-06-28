@@ -1,8 +1,7 @@
 # PEP 484 - type annotations examples
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Examples](index.md#examples) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Examples](./index.md#examples) /
 PEP 484 - type annotations examples
 
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/main/examples/typed.py) module.

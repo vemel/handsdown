@@ -6,7 +6,11 @@ Supports `.gitignore`-like `include` and `exclude` patterns.
 
 import fnmatch
 from pathlib import Path
-from typing import Iterable, Iterator, List
+from typing import Iterable, Iterator, List, TypeVar
+
+from handsdown.utils.nice_path import NicePath
+
+_R = TypeVar("_R", bound="PathFinder")
 
 __all__ = ["PathFinder", "PathFinderError"]
 
@@ -57,13 +61,13 @@ class PathFinder:
         self.include_exprs: List[str] = []
         self.exclude_exprs: List[str] = []
 
-    def _copy(self, include_exprs: Iterable[str], exclude_exprs: Iterable[str]) -> "PathFinder":
-        new_copy = PathFinder(self._root)
+    def _copy(self: _R, include_exprs: Iterable[str], exclude_exprs: Iterable[str]) -> _R:
+        new_copy = self.__class__(self._root)
         new_copy.include_exprs = list(include_exprs)
         new_copy.exclude_exprs = list(exclude_exprs)
         return new_copy
 
-    def include(self, *fn_exrps: str) -> "PathFinder":
+    def include(self: _R, *fn_exrps: str) -> _R:
         """
         Add `fnmatch` expression to white list.
 
@@ -84,7 +88,7 @@ class PathFinder:
             include_exprs.append(fn_exrp)
         return self._copy(include_exprs=include_exprs, exclude_exprs=self.exclude_exprs)
 
-    def exclude(self, *fn_exrps: str) -> "PathFinder":
+    def exclude(self: _R, *fn_exrps: str) -> _R:
         """
         Add `fnmatch` expression to black list.
 
@@ -127,7 +131,7 @@ class PathFinder:
 
         return False
 
-    def glob(self, glob_expr: str) -> Iterator[Path]:
+    def glob(self, glob_expr: str) -> Iterator[NicePath]:
         """
         Find all matching `Path` objects respecting `include` and `exclude` patterns.
 
@@ -141,9 +145,9 @@ class PathFinder:
             if self._match_exclude(relative_path):
                 continue
 
-            yield path
+            yield NicePath(path)
 
-    def relative(self, target: Path) -> Path:
+    def relative(self, target: Path) -> NicePath:
         """
         Find a relative path from `root` to `target`.
 
@@ -170,7 +174,7 @@ class PathFinder:
             else:
                 break
 
-        return up_path / relative_target
+        return NicePath(up_path) / relative_target
 
     def mkdir(self, force: bool = False) -> None:
         """

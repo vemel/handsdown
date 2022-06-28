@@ -1,8 +1,7 @@
 # Google docstrings examples
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Examples](index.md#examples) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Examples](./index.md#examples) /
 Google docstrings examples
 
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) module.

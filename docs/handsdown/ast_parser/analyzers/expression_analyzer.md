@@ -1,10 +1,9 @@
 # ExpressionAnalyzer
 
-[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../../MODULES.md#modules) /
+[Handsdown API Index](../../../README.md#handsdown-api-index) /
 [Handsdown](../../index.md#handsdown) /
 [AST Parser](../index.md#ast-parser) /
-[Analyzers](index.md#analyzers) /
+[Analyzers](./index.md#analyzers) /
 ExpressionAnalyzer
 
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.expression_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py) module.
@@ -69,7 +68,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
 #### See also
 
-- [BaseAnalyzer](base_analyzer.md#baseanalyzer)
+- [BaseAnalyzer](./base_analyzer.md#baseanalyzer)
 
 ### ExpressionAnalyzer().generic_visit
 

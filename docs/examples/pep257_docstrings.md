@@ -1,8 +1,7 @@
 # PEP 257 - PEP 257 and Google docstrings examples
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Examples](index.md#examples) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Examples](./index.md#examples) /
 PEP 257 - PEP 257 and Google docstrings examples
 
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) module.

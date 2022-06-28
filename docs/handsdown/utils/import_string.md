@@ -1,9 +1,8 @@
 # ImportString
 
-[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../MODULES.md#modules) /
+[Handsdown API Index](../../README.md#handsdown-api-index) /
 [Handsdown](../index.md#handsdown) /
-[Utils](index.md#utils) /
+[Utils](./index.md#utils) /
 ImportString
 
 > Auto-generated documentation for [handsdown.utils.import_string](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py) module.

@@ -1,8 +1,7 @@
 # Loader
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Handsdown](index.md#handsdown) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Handsdown](./index.md#handsdown) /
 Loader
 
 > Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py) module.
@@ -45,7 +44,7 @@ class Loader:
 
 #### See also
 
-- [ENCODING](settings.md#encoding)
+- [ENCODING](./settings.md#encoding)
 
 ### Loader().get_import_string
 

@@ -1,9 +1,8 @@
 # Smart
 
-[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../MODULES.md#modules) /
+[Handsdown API Index](../../README.md#handsdown-api-index) /
 [Handsdown](../index.md#handsdown) /
-[Processors](index.md#processors) /
+[Processors](./index.md#processors) /
 Smart
 
 > Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py) module.
@@ -28,7 +27,7 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
 
 #### See also
 
-- [BaseDocstringProcessor](base.md#basedocstringprocessor)
+- [BaseDocstringProcessor](./base.md#basedocstringprocessor)
 
 ### SmartDocstringProcessor().build_sections
 
@@ -54,6 +53,6 @@ def build_sections(self, content: str) -> SectionMap:
 
 #### See also
 
-- [SectionMap](section_map.md#sectionmap)
+- [SectionMap](./section_map.md#sectionmap)
 
 

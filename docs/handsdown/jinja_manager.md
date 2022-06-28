@@ -1,8 +1,7 @@
 # JinjaManager
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Handsdown](index.md#handsdown) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Handsdown](./index.md#handsdown) /
 JinjaManager
 
 > Auto-generated documentation for [handsdown.jinja_manager](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py) module.

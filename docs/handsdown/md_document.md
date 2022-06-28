@@ -1,8 +1,7 @@
 # MDDocument
 
-[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
-[Modules](../MODULES.md#modules) /
-[Handsdown](index.md#handsdown) /
+[Handsdown API Index](../README.md#handsdown-api-index) /
+[Handsdown](./index.md#handsdown) /
 MDDocument
 
 > Auto-generated documentation for [handsdown.md_document](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py) module.
@@ -32,7 +31,7 @@ MDDocument
 
 ## MDDocument
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L21)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L22)
 
 #### Attributes
 
@@ -83,11 +82,11 @@ class MDDocument:
 
 #### See also
 
-- [ENCODING](settings.md#encoding)
+- [ENCODING](./settings.md#encoding)
 
 ### MDDocument().add_toc_if_not_exists
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L124)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L125)
 
 Check if ToC exists in the document or create one.
 
@@ -100,7 +99,7 @@ def add_toc_if_not_exists(self) -> None:
 
 ### MDDocument().append
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L330)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L331)
 
 Append `content` to the document.Handle trimming and sectioning the content and update
 `title` and `toc_section` fields.
@@ -118,7 +117,7 @@ def append(self, content: str) -> None:
 
 ### MDDocument().generate_toc_section
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L351)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L352)
 
 Generate Table of Contents MD content.
 
@@ -139,7 +138,7 @@ def generate_toc_section(self, max_depth: int = 3) -> str:
 
 ### MDDocument.get_anchor
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L131)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L132)
 
 Convert title to a GitHub-friendly anchor link.
 
@@ -157,7 +156,7 @@ def get_anchor(cls, title: str) -> str:
 
 ### MDDocument().get_doc_link
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L241)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L242)
 
 Get Markdown link to a local MD document, use relative path as a link.
 
@@ -179,7 +178,7 @@ def get_doc_link(self, path: Path, anchor: str = "") -> str:
 
 ### MDDocument.get_toc_line
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L398)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L399)
 
 Get ToC `line` of given `level`.
 
@@ -202,7 +201,7 @@ def get_toc_line(cls, line: str, level: int = 0) -> str:
 
 ### MDDocument.is_toc
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L143)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L144)
 
 Check if the section is Tree of Contents.
 
@@ -220,7 +219,7 @@ def is_toc(section: str) -> bool:
 
 ### MDDocument().path
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L323)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L324)
 
 Output path of the document.
 
@@ -228,13 +227,17 @@ Output path of the document.
 
 ```python
 @property
-def path(self) -> Path:
+def path(self) -> NicePath:
     ...
 ```
 
+#### See also
+
+- [NicePath](utils/nice_path.md#nicepath)
+
 ### MDDocument().read
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L89)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L90)
 
 Read and parse content from `source_path`.
 
@@ -252,7 +255,7 @@ def read(self, source_path: Optional[Path] = None) -> None:
 
 ### MDDocument().render_doc_link
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L199)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L200)
 
 Render Markdown link to a local MD document, use relative path as a link.
 
@@ -298,7 +301,7 @@ def render_doc_link(
 
 ### MDDocument.render_link
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L160)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L161)
 
 Render Markdown link wih escaped title.
 
@@ -331,7 +334,7 @@ def render_link(cls, title: str, link: str) -> str:
 
 ### MDDocument().render_md_doc_link
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L182)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L183)
 
 Render Markdown link to `target_md_document` header path with a correct title.
 
@@ -355,7 +358,7 @@ def render_md_doc_link(
 
 ### MDDocument().sections
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L316)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L317)
 
 All non-special `sections` of the document.
 
@@ -369,7 +372,7 @@ def sections(self) -> List[str]:
 
 ### MDDocument().subtitle
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L292)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L293)
 
 `MDDocument` subtitle or an empty string.
 
@@ -383,7 +386,7 @@ def subtitle(self) -> str:
 
 ### MDDocument().subtitle
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L299)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L300)
 
 #### Signature
 
@@ -395,7 +398,7 @@ def subtitle(self, subtitle: str) -> None:
 
 ### MDDocument().title
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L280)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L281)
 
 `MDDocument` title or an empty string.
 
@@ -409,7 +412,7 @@ def title(self) -> str:
 
 ### MDDocument().title
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L287)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L288)
 
 #### Signature
 
@@ -421,7 +424,7 @@ def title(self, title: str) -> None:
 
 ### MDDocument().toc_section
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L304)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L305)
 
 Document Tree of Contents section or an empty line.
 
@@ -435,7 +438,7 @@ def toc_section(self) -> str:
 
 ### MDDocument().toc_section
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L311)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L312)
 
 #### Signature
 
@@ -447,7 +450,7 @@ def toc_section(self, toc_section: str) -> None:
 
 ### MDDocument().write
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L272)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L273)
 
 Write MD content to `path`.
 

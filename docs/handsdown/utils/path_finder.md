@@ -1,9 +1,8 @@
 # PathFinder
 
-[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../MODULES.md#modules) /
+[Handsdown API Index](../../README.md#handsdown-api-index) /
 [Handsdown](../index.md#handsdown) /
-[Utils](index.md#utils) /
+[Utils](./index.md#utils) /
 PathFinder
 
 > Auto-generated documentation for [handsdown.utils.path_finder](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py) module.
@@ -19,7 +18,7 @@ PathFinder
 
 ## PathFinder
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L20)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L24)
 
 Glob helper for matching paths inside `root` path.With `.gitignore`-like `include` and `exclude` patterns.
 
@@ -56,7 +55,7 @@ class PathFinder:
 
 ### PathFinder().exclude
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L87)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L91)
 
 Add `fnmatch` expression to black list.If black list is empty - no black list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
@@ -72,13 +71,13 @@ A copy of itself.
 #### Signature
 
 ```python
-def exclude(self, *fn_exrps: str) -> "PathFinder":
+def exclude(self: _R, *fn_exrps: str) -> _R:
     ...
 ```
 
 ### PathFinder().glob
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L130)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L134)
 
 Find all matching `Path` objects respecting `include` and `exclude` patterns.
 
@@ -89,13 +88,13 @@ Matching `Path` objects.
 #### Signature
 
 ```python
-def glob(self, glob_expr: str) -> Iterator[Path]:
+def glob(self, glob_expr: str) -> Iterator[NicePath]:
     ...
 ```
 
 ### PathFinder().include
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L66)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L70)
 
 Add `fnmatch` expression to white list.If white list is empty - no white list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
@@ -111,13 +110,13 @@ A copy of itself.
 #### Signature
 
 ```python
-def include(self, *fn_exrps: str) -> "PathFinder":
+def include(self: _R, *fn_exrps: str) -> _R:
     ...
 ```
 
 ### PathFinder().mkdir
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L175)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L179)
 
 Create directories up to `root` if they do not exist.
 
@@ -138,7 +137,7 @@ def mkdir(self, force: bool = False) -> None:
 
 ### PathFinder().relative
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L146)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L150)
 
 Find a relative path from `root` to `target`.`target` should be an absolute path.
 
@@ -153,15 +152,19 @@ A relative path to `target`.
 #### Signature
 
 ```python
-def relative(self, target: Path) -> Path:
+def relative(self, target: Path) -> NicePath:
     ...
 ```
+
+#### See also
+
+- [NicePath](./nice_path.md#nicepath)
 
 
 
 ## PathFinderError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L14)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L18)
 
 Main error for `PathFinder`.
 

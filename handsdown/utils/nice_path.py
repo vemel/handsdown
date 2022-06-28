@@ -55,5 +55,6 @@ class NicePath(type(Path())):  # type: ignore
         if self.exists() and self.read_text(encoding) == content:
             return False
 
+        self.parent.mkdir(exist_ok=True, parents=True)
         self.write_text(content, encoding)
         return True

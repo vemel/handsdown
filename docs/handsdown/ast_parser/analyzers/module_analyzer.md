@@ -1,10 +1,9 @@
 # ModuleAnalyzer
 
-[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../../MODULES.md#modules) /
+[Handsdown API Index](../../../README.md#handsdown-api-index) /
 [Handsdown](../../index.md#handsdown) /
 [AST Parser](../index.md#ast-parser) /
-[Analyzers](index.md#analyzers) /
+[Analyzers](./index.md#analyzers) /
 ModuleAnalyzer
 
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.module_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py) module.
@@ -34,7 +33,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 
 #### See also
 
-- [BaseAnalyzer](base_analyzer.md#baseanalyzer)
+- [BaseAnalyzer](./base_analyzer.md#baseanalyzer)
 
 ### ModuleAnalyzer().visit_Assign
 

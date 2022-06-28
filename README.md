@@ -39,7 +39,7 @@ Python docstring-based documentation generator for lazy perfectionists.
   [GitHub Pages](https://vemel.github.io/handsdown/) and [Read the Docs](https://handsdown.readthedocs.io/)!
 - Signatures for every class, function, property and method.
 - Support for type annotations. Even for the ones from the `__future__`!
-- Nice list of all modules in [Modules](https://github.com/vemel/handsdown/blob/main/docs/MODULES.md)
+- Nice list of all modules in [Index](https://github.com/vemel/handsdown/blob/main/docs/README.md)
 - Gather all scattered `README.md` in submodules to one place
 - Find related source code from every doc section.
 - Make links by just adding `module.import.String` to docs.

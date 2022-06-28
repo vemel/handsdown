@@ -1,9 +1,8 @@
 # Base Docstring Processor
 
-[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../MODULES.md#modules) /
+[Handsdown API Index](../../README.md#handsdown-api-index) /
 [Handsdown](../index.md#handsdown) /
-[Processors](index.md#processors) /
+[Processors](./index.md#processors) /
 Base Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.base](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py) module.
@@ -56,6 +55,6 @@ def build_sections(self, content: str) -> SectionMap:
 
 #### See also
 
-- [SectionMap](section_map.md#sectionmap)
+- [SectionMap](./section_map.md#sectionmap)
 
 

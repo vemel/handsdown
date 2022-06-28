@@ -1,12 +1,7 @@
 """
 Handful utils that do not deserve a separate module.
 """
-from pathlib import Path
-from typing import Dict, List, Tuple
-
-import importlib_resources as pkg_resources
-
-from handsdown import assets as assets_resource
+from typing import List, Tuple
 
 
 def make_title(file_stem: str) -> str:
@@ -50,22 +45,6 @@ def make_title(file_stem: str) -> str:
     return " ".join(name_parts)
 
 
-def render_asset(name: str, target_path: Path, format_dict: Dict[str, str], encoding: str) -> None:
-    """
-    Render `assets/<name>` file to `target_path`.
-
-    Arguments:
-        name -- Asset file name.
-        target_path -- Path of output file.
-        format_dict -- Format asset with values from the dict before writing.
-        encoding -- File encoding.
-    """
-    path: Path = pkg_resources.files(assets_resource).joinpath(name)  # type: ignore
-    content = path.read_text()
-    content = content.format(**format_dict)
-    target_path.write_text(content, encoding=encoding)
-
-
 def extract_md_title(content: str) -> Tuple[str, str]:
     r"""
     Extract title from the first line of content.
@@ -91,6 +70,6 @@ def extract_md_title(content: str) -> Tuple[str, str]:
             content = f"{content}\n"
 
         title_line, content = content.split("\n", 1)
-        title = title_line.split(" ", 1)[-1]
+        title = title_line.split(" ", 1)[-1].strip()
 
     return title, content

@@ -1,9 +1,8 @@
 # Markdown
 
-[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
-[Modules](../../MODULES.md#modules) /
+[Handsdown API Index](../../README.md#handsdown-api-index) /
 [Handsdown](../index.md#handsdown) /
-[Utils](index.md#utils) /
+[Utils](./index.md#utils) /
 Markdown
 
 > Auto-generated documentation for [handsdown.utils.markdown](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py) module.

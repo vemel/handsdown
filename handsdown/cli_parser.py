@@ -34,6 +34,7 @@ class CLINamespace:
         files: Iterable[Path],
         cleanup: bool,
         encoding: str,
+        overwrite_configs: bool,
     ) -> None:
         self.panic = panic
         self.input_path = input_path
@@ -49,6 +50,7 @@ class CLINamespace:
         self.files: List[Path] = list(files)
         self.cleanup = cleanup
         self.encoding = encoding
+        self.overwrite_configs = overwrite_configs
 
     def get_source_code_url(self) -> str:
         """
@@ -238,6 +240,11 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         help=f"Input and output file encoding (default: {ENCODING})",
         default=ENCODING,
     )
+    parser.add_argument(
+        "--overwrite-configs",
+        help="Overwrite config files if they exist",
+        action="store_true",
+    )
     parser.add_argument("--panic", action="store_true", help="Panic and die on import error")
     parser.add_argument("-d", "--debug", action="store_true", help="Show debug messages")
     parser.add_argument("-q", "--quiet", action="store_true", help="Hide log output")
@@ -265,4 +272,5 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         files=namespace.files,
         cleanup=namespace.cleanup,
         encoding=namespace.encoding,
+        overwrite_configs=namespace.overwrite_configs,
     )
