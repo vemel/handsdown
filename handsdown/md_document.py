@@ -15,7 +15,7 @@ from handsdown.utils.path_finder import PathFinder
 __all__ = ["MDDocument"]
 
 
-_MDDocument = TypeVar("_MDDocument", bound="MDDocument")
+_R = TypeVar("_R", bound="MDDocument")
 
 
 class MDDocument:
@@ -179,9 +179,7 @@ class MDDocument:
         """
         return f"[{title}]({link})"
 
-    def render_md_doc_link(
-        self: _MDDocument, target_md_document: _MDDocument, title: Optional[str] = None
-    ) -> str:
+    def render_md_doc_link(self: _R, target_md_document: _R, title: Optional[str] = None) -> str:
         """
         Render Markdown link to `target_md_document` header path with a correct title.
 
