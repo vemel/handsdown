@@ -156,7 +156,7 @@ class ImportString:
         parent_import_string_parts = self.value.split(".")[:-1]
         return self.__class__(".".join(parent_import_string_parts))
 
-    def startswith(self, import_string: "ImportString") -> bool:
+    def startswith(self: _R, import_string: _R) -> bool:
         """
         Check if it starts with `import_string`.
 
@@ -183,3 +183,13 @@ class ImportString:
 
         parents.reverse()
         return parents
+
+    @property
+    def length(self) -> int:
+        """
+        Length of import string parts.
+
+        Returns:
+            Length of import string.
+        """
+        return len(self.parts)

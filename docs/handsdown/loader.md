@@ -49,7 +49,7 @@ class Loader:
 
 ### Loader().get_import_string
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L130)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L129)
 
 Get Python import string for a source `source_path` relative to `root_path`.
 
@@ -106,7 +106,7 @@ def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
 
 ### Loader.parse_module_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L115)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L114)
 
 Parse `ModuleRecord` children and fully load a tree for it.
 

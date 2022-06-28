@@ -1,0 +1,17 @@
+# {{ md_document.title }}
+
+> Auto-generated documentation modules index.
+
+Full list of [{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}) project modules.
+
+{% if md_document.subtitle -%}
+{{ md_document.subtitle -}}
+{% endif -%}
+
+{% for section in md_document._sections %}
+{{ section }}
+{% endfor %}
+
+{% for module_record in generator.module_records -%}
+{{ '  ' * (module_record.import_string.length - 1) }}- [{{ module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(module_record).path) }}#{{ md_document.get_anchor(module_record.title) }})
+{% endfor -%}

@@ -28,16 +28,13 @@ class TestFunctionRecord(unittest.TestCase):
         node.body = ["body"]
         node.mock_add_spec(ast.Module)
         parse_mock.return_value = node
-        record = ModuleRecord.create_from_source(
-            source_path, import_string, output_path=Path("output_path")
-        )
+        record = ModuleRecord.create_from_source(source_path, import_string)
         self.assertIsInstance(record, ModuleRecord)
         self.assertEqual(record.import_string, import_string)
         self.assertEqual(record.name, "my_module")
         self.assertEqual(record.title, "")
         self.assertEqual(record.source_path, source_path)
         self.assertEqual(record.source_lines, ["line1", "line2"])
-        self.assertEqual(record.output_path, Path("output_path"))
 
     def test_find_record(self):
         node = MagicMock()

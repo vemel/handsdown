@@ -14,6 +14,7 @@ Generator
     - [Generator().generate_docs](#generator()generate_docs)
     - [Generator().generate_index](#generator()generate_index)
     - [Generator().generate_modules](#generator()generate_modules)
+    - [Generator().get_md_document](#generator()get_md_document)
     - [Generator().get_see_also_links](#generator()get_see_also_links)
   - [GeneratorError](#generatorerror)
 
@@ -78,7 +79,7 @@ class Generator:
 
 ### Generator().cleanup_old_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L155)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L156)
 
 Remove old docs generated for this module.
 
@@ -91,7 +92,7 @@ def cleanup_old_docs(self) -> None:
 
 ### Generator().generate_doc
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L186)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L187)
 
 Generate one module doc at once.
 
@@ -112,7 +113,7 @@ def generate_doc(self, source_path: Path) -> None:
 
 ### Generator().generate_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L244)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L256)
 
 Generate all doc files at once.
 
@@ -125,7 +126,7 @@ def generate_docs(self) -> None:
 
 ### Generator().generate_index
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L256)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L267)
 
 Generate `<output>/README.md` file with title from `<root>/README.md`.Also `Modules` section that contains a Tree of all modules in the project.
 
@@ -138,7 +139,7 @@ def generate_index(self) -> None:
 
 ### Generator().generate_modules
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L282)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L293)
 
 Generate `<output>/README.md` file.Title from `<root>/README.md` and `Modules`
 section that contains a Tree of all modules in the project.
@@ -150,9 +151,27 @@ def generate_modules(self) -> None:
     ...
 ```
 
+### Generator().get_md_document
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L215)
+
+Get or create MDDocument for module record.
+
+#### Signature
+
+```python
+def get_md_document(self, module_record: ModuleRecord) -> MDDocument:
+    ...
+```
+
+#### See also
+
+- [MDDocument](md_document.md#mddocument)
+- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
+
 ### Generator().get_see_also_links
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L373)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generator.py#L370)
 
 Get links to other modules that are referenced in the docstring.
 

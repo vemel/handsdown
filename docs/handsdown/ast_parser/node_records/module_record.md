@@ -41,7 +41,7 @@ class ModuleRecord(NodeRecord):
 
 ### ModuleRecord().build_children
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L139)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L136)
 
 Collect full information about Module child records.Used only when doc for this ModuleRecord is building.
 
@@ -54,7 +54,7 @@ def build_children(self) -> None:
 
 ### ModuleRecord.create_from_source
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L45)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L44)
 
 Create new `ModuleRecord` from path.
 
@@ -73,11 +73,7 @@ New `ModuleRecord` instance.
 ```python
 @classmethod
 def create_from_source(
-    cls,
-    source_path: Path,
-    import_string: ImportString,
-    output_path: Path,
-    encoding: str = ENCODING,
+    cls, source_path: Path, import_string: ImportString, encoding: str = ENCODING
 ) -> "ModuleRecord":
     ...
 ```
@@ -89,7 +85,7 @@ def create_from_source(
 
 ### ModuleRecord().find_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L75)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L72)
 
 Find child in the Module by an absolute or relative import string.
 
@@ -114,7 +110,7 @@ def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
 
 ### ModuleRecord().get_related_import_strings
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L253)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L250)
 
 Get a set of `related_names` found in module class, function, method and attribute records.
 
@@ -135,7 +131,7 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 
 ### ModuleRecord().iter_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L94)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L91)
 
 Iterate over Module class, method and fucntion records.
 

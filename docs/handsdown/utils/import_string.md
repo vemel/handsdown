@@ -16,6 +16,7 @@ ImportString
     - [ImportString().__str__](#importstring()__str__)
     - [ImportString().get_parents](#importstring()get_parents)
     - [ImportString().is_top_level](#importstring()is_top_level)
+    - [ImportString().length](#importstring()length)
     - [ImportString().parent](#importstring()parent)
     - [ImportString().parts](#importstring()parts)
     - [ImportString().startswith](#importstring()startswith)
@@ -195,6 +196,24 @@ def is_top_level(self) -> bool:
     ...
 ```
 
+### ImportString().length
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L187)
+
+Length of import string parts.
+
+#### Returns
+
+Length of import string.
+
+#### Signature
+
+```python
+@property
+def length(self) -> int:
+    ...
+```
+
 ### ImportString().parent
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L145)
@@ -254,7 +273,7 @@ True if it is a child.
 #### Signature
 
 ```python
-def startswith(self, import_string: "ImportString") -> bool:
+def startswith(self: _R, import_string: _R) -> bool:
     ...
 ```
 
