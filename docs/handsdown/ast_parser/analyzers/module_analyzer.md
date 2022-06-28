@@ -1,28 +1,36 @@
 # ModuleAnalyzer
 
+[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../../MODULES.md#modules) /
+[Handsdown](../../index.md#handsdown) /
+[AST Parser](../index.md#ast-parser) /
+[Analyzers](index.md#analyzers) /
+ModuleAnalyzer
+
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.module_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py) module.
 
-AST analyzer for `ast.Module` records.
-
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / ModuleAnalyzer
-    - [ModuleAnalyzer](#moduleanalyzer)
-        - [ModuleAnalyzer().visit_Assign](#moduleanalyzervisit_assign)
-        - [ModuleAnalyzer().visit_AsyncFunctionDef](#moduleanalyzervisit_asyncfunctiondef)
-        - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzervisit_classdef)
-        - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzervisit_functiondef)
-        - [ModuleAnalyzer().visit_Import](#moduleanalyzervisit_import)
-        - [ModuleAnalyzer().visit_ImportFrom](#moduleanalyzervisit_importfrom)
+- [ModuleAnalyzer](#moduleanalyzer)
+  - [ModuleAnalyzer](#moduleanalyzer-1)
+    - [ModuleAnalyzer().visit_Assign](#moduleanalyzer()visit_assign)
+    - [ModuleAnalyzer().visit_AsyncFunctionDef](#moduleanalyzer()visit_asyncfunctiondef)
+    - [ModuleAnalyzer().visit_ClassDef](#moduleanalyzer()visit_classdef)
+    - [ModuleAnalyzer().visit_FunctionDef](#moduleanalyzer()visit_functiondef)
+    - [ModuleAnalyzer().visit_Import](#moduleanalyzer()visit_import)
+    - [ModuleAnalyzer().visit_ImportFrom](#moduleanalyzer()visit_importfrom)
 
 ## ModuleAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11)
+
+AST analyzer for `ast.Module` records.
+
+#### Signature
 
 ```python
 class ModuleAnalyzer(BaseAnalyzer):
-    def __init__() -> None:
+    def __init__(self) -> None:
+        ...
 ```
-
-AST analyzer for `ast.Module` records.
 
 #### See also
 
@@ -30,15 +38,9 @@ AST analyzer for `ast.Module` records.
 
 ### ModuleAnalyzer().visit_Assign
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
 
-```python
-def visit_Assign(node: ast.Assign) -> None:
-```
-
-Parse info about module attribute statements.
-
-Adds new `ast.Assign` entry to `attribute_nodes`.
+Parse info about module attribute statements.Adds new `ast.Assign` entry to `attribute_nodes`.
 Skips assignments to anything pther that a new variable.
 Skips multiple assignments.
 Skips assignments with names starting with `_`.
@@ -62,17 +64,18 @@ __all__ = all_list
 
 - `node` - AST node.
 
-### ModuleAnalyzer().visit_AsyncFunctionDef
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
+#### Signature
 
 ```python
-def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
+def visit_Assign(self, node: ast.Assign) -> None:
+    ...
 ```
 
-Parse info about module `def ...` statements.
+### ModuleAnalyzer().visit_AsyncFunctionDef
 
-Adds `node` entry to `function_nodes`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
+
+Parse info about module `def ...` statements.Adds `node` entry to `function_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -86,17 +89,18 @@ async def my_func(arg1):
 
 - `node` - AST node.
 
-### ModuleAnalyzer().visit_ClassDef
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58)
+#### Signature
 
 ```python
-def visit_ClassDef(node: ast.ClassDef) -> None:
+def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+    ...
 ```
 
-Parse info about module `class ...` statements.
+### ModuleAnalyzer().visit_ClassDef
 
-Adds `node` entry to `class_nodes`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58)
+
+Parse info about module `class ...` statements.Adds `node` entry to `class_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -110,17 +114,18 @@ class MyClass():
 
 - `node` - AST node.
 
-### ModuleAnalyzer().visit_FunctionDef
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
+#### Signature
 
 ```python
-def visit_FunctionDef(node: ast.FunctionDef) -> None:
+def visit_ClassDef(self, node: ast.ClassDef) -> None:
+    ...
 ```
 
-Parse info about module `def ...` statements.
+### ModuleAnalyzer().visit_FunctionDef
 
-Adds `node` entry to `function_nodes`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
+
+Parse info about module `def ...` statements.Adds `node` entry to `function_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -134,17 +139,18 @@ def my_func(arg1):
 
 - `node` - AST node.
 
-### ModuleAnalyzer().visit_Import
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
+#### Signature
 
 ```python
-def visit_Import(node: ast.Import) -> None:
+def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+    ...
 ```
 
-Parse info about module `import ...` statements.
+### ModuleAnalyzer().visit_Import
 
-Adds `node` to `import_nodes`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
+
+Parse info about module `import ...` statements.Adds `node` to `import_nodes`.
 
 #### Examples
 
@@ -159,17 +165,18 @@ import my_module.my_class as my_class
 
 - `node` - AST node.
 
-### ModuleAnalyzer().visit_ImportFrom
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42)
+#### Signature
 
 ```python
-def visit_ImportFrom(node: ast.ImportFrom) -> None:
+def visit_Import(self, node: ast.Import) -> None:
+    ...
 ```
 
-Parse info about module `import ... from ...` statements.
+### ModuleAnalyzer().visit_ImportFrom
 
-Adds `node` to `import_nodes`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42)
+
+Parse info about module `import ... from ...` statements.Adds `node` to `import_nodes`.
 
 #### Examples
 
@@ -181,3 +188,12 @@ from my_module import my_class as new_class
 #### Arguments
 
 - `node` - AST node.
+
+#### Signature
+
+```python
+def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
+    ...
+```
+
+

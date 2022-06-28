@@ -1,21 +1,20 @@
 # Section
 
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Processors](index.md#processors) /
+Section
+
 > Auto-generated documentation for [handsdown.processors.section](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py) module.
 
-Section in a `SectionMap`.
-
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / Section
-    - [Section](#section)
-        - [Section().render](#sectionrender)
+- [Section](#section)
+  - [Section](#section-1)
+    - [Section().render](#section()render)
 
 ## Section
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L9)
-
-```python
-class Section():
-    def __init__(title: str, blocks: Iterable[SectionBlock]) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L9)
 
 Section in a `SectionMap`.
 
@@ -24,16 +23,29 @@ Section in a `SectionMap`.
 - `title` - Section title.
 - `blocks` - List of line blocks.
 
-### Section().render
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L22)
+#### Signature
 
 ```python
-def render() -> str:
+class Section:
+    def __init__(self, title: str, blocks: Iterable[SectionBlock]) -> None:
+        ...
 ```
+
+### Section().render
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L22)
 
 Render all Section block lines.
 
 #### Returns
 
 Section lines as a text.
+
+#### Signature
+
+```python
+def render(self) -> str:
+    ...
+```
+
+

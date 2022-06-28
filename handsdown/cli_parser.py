@@ -220,7 +220,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         default="main",
     )
     parser.add_argument(
-        "--toc-depth", help="Maximum depth of child modules ToC (default: 1)", default=1, type=int
+        "--toc-depth", help="Maximum depth of child modules ToC (default: 3)", default=3, type=int
     )
     parser.add_argument(
         "--cleanup", action="store_true", help="Remove orphaned auto-generated docs"

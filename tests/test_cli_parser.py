@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import argparse
 import unittest
 from pathlib import Path

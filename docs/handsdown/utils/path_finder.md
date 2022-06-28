@@ -1,32 +1,27 @@
 # PathFinder
 
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Utils](index.md#utils) /
+PathFinder
+
 > Auto-generated documentation for [handsdown.utils.path_finder](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py) module.
 
-Glob helper for matching paths inside `root` path.
-
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Utils](index.md#utils) / PathFinder
-    - [PathFinder](#pathfinder)
-        - [PathFinder().exclude](#pathfinderexclude)
-        - [PathFinder().glob](#pathfinderglob)
-        - [PathFinder().include](#pathfinderinclude)
-        - [PathFinder().mkdir](#pathfindermkdir)
-        - [PathFinder().relative](#pathfinderrelative)
-    - [PathFinderError](#pathfindererror)
-
-Supports `.gitignore`-like `include` and `exclude` patterns.
+- [PathFinder](#pathfinder)
+  - [PathFinder](#pathfinder-1)
+    - [PathFinder().exclude](#pathfinder()exclude)
+    - [PathFinder().glob](#pathfinder()glob)
+    - [PathFinder().include](#pathfinder()include)
+    - [PathFinder().mkdir](#pathfinder()mkdir)
+    - [PathFinder().relative](#pathfinder()relative)
+  - [PathFinderError](#pathfindererror)
 
 ## PathFinder
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L20)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L20)
 
-```python
-class PathFinder():
-    def __init__(root: Path) -> None:
-```
-
-Glob helper for matching paths inside `root` path.
-
-With `.gitignore`-like `include` and `exclude` patterns.
+Glob helper for matching paths inside `root` path.With `.gitignore`-like `include` and `exclude` patterns.
 
 #### Examples
 
@@ -51,17 +46,19 @@ list(path_finder.exclude('*new*').glob('*.txt'))
 
 - `PathFinderError` - If `root` is not absolute or not a directory.
 
-### PathFinder().exclude
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L87)
+#### Signature
 
 ```python
-def exclude(*fn_exrps: str) -> 'PathFinder':
+class PathFinder:
+    def __init__(self, root: Path) -> None:
+        ...
 ```
 
-Add `fnmatch` expression to black list.
+### PathFinder().exclude
 
-If black list is empty - no black list filtration applied.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L87)
+
+Add `fnmatch` expression to black list.If black list is empty - no black list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
@@ -72,31 +69,35 @@ If expression does not have `*` or `.` characters, appends `/*` to it.
 
 A copy of itself.
 
-### PathFinder().glob
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L130)
+#### Signature
 
 ```python
-def glob(glob_expr: str) -> Iterator[Path]:
+def exclude(self, *fn_exrps: str) -> "PathFinder":
+    ...
 ```
 
-Find all matching `Path` objects respecting [PathFinder().include](#pathfinderinclude) and [PathFinder().exclude](#pathfinderexclude) patterns.
+### PathFinder().glob
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L130)
+
+Find all matching `Path` objects respecting `include` and `exclude` patterns.
 
 #### Yields
 
 Matching `Path` objects.
 
-### PathFinder().include
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L66)
+#### Signature
 
 ```python
-def include(*fn_exrps: str) -> 'PathFinder':
+def glob(self, glob_expr: str) -> Iterator[Path]:
+    ...
 ```
 
-Add `fnmatch` expression to white list.
+### PathFinder().include
 
-If white list is empty - no white list filtration applied.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L66)
+
+Add `fnmatch` expression to white list.If white list is empty - no white list filtration applied.
 If expression does not have `*` or `.` characters, appends `/*` to it.
 
 #### Arguments
@@ -107,13 +108,16 @@ If expression does not have `*` or `.` characters, appends `/*` to it.
 
 A copy of itself.
 
-### PathFinder().mkdir
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L175)
+#### Signature
 
 ```python
-def mkdir(force: bool = False) -> None:
+def include(self, *fn_exrps: str) -> "PathFinder":
+    ...
 ```
+
+### PathFinder().mkdir
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L175)
 
 Create directories up to `root` if they do not exist.
 
@@ -125,17 +129,18 @@ Create directories up to `root` if they do not exist.
 
 - `PathFinderError` - If any existing parent is not a directory and not in `force` mode.
 
-### PathFinder().relative
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L146)
+#### Signature
 
 ```python
-def relative(target: Path) -> Path:
+def mkdir(self, force: bool = False) -> None:
+    ...
 ```
 
-Find a relative path from `root` to `target`.
+### PathFinder().relative
 
-`target` should be an absolute path.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L146)
+
+Find a relative path from `root` to `target`.`target` should be an absolute path.
 
 #### Arguments
 
@@ -145,12 +150,26 @@ Find a relative path from `root` to `target`.
 
 A relative path to `target`.
 
+#### Signature
+
+```python
+def relative(self, target: Path) -> Path:
+    ...
+```
+
+
+
 ## PathFinderError
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L14)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L14)
+
+Main error for `PathFinder`.
+
+#### Signature
 
 ```python
 class PathFinderError(Exception):
+    ...
 ```
 
-Main error for [PathFinder](#pathfinder).
+

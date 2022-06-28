@@ -5,8 +5,8 @@ from typing import Dict, List, Type
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
-from handsdown.ast_parser.enums import RenderPart
-from handsdown.ast_parser.type_defs import ASTIterable, DirtyRenderExpr
+from handsdown.ast_parser.type_defs import ASTIterable, Node
+from handsdown.settings import ENCODING
 from handsdown.utils.logger import get_logger
 
 
@@ -20,7 +20,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
     def __init__(self) -> None:
         super().__init__()
         self._logger = get_logger()
-        self.parts: List[DirtyRenderExpr] = []
+        self.parts: List[Node] = []
 
     # dummy value to replace unknown nodes and operators
     UNKNOWN = "..."
@@ -79,7 +79,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         value = node.s
         if isinstance(value, bytes):
-            value = value.decode("utf-8")
+            value = value.decode(ENCODING)
         self.parts.append(repr(value))
 
     def visit_Bytes(self, node: ast.Bytes) -> None:
@@ -148,7 +148,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Examples::
 
             Union[Name, bool]
-            list[1:4]
+            List[1:4]
 
         Arguments:
             node -- AST node.
@@ -194,18 +194,11 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        args_count = 0
         if node.elts:
-            self.parts.append(RenderPart.MULTI_LINE_INDENT)
-            for element in node.elts:
-                if args_count:
-                    self.parts.append(",")
-                    self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                    self.parts.append(RenderPart.MULTI_LINE_BREAK)
-                args_count += 1
+            for index, element in enumerate(node.elts):
+                if index:
+                    self.parts.append(", ")
                 self._analyze_child(element)
-            self.parts.append(RenderPart.MULTI_LINE_COMMA)
-            self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
 
     def _analyze_child(self, node: ast.AST) -> None:
         if isinstance(node, str):
@@ -270,49 +263,29 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.func)
         self.parts.append("(")
-        self.parts.append(RenderPart.MULTI_LINE_INDENT)
-        args_count = 0
-        for element in node.args:
-            if args_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
-            args_count += 1
+
+        # FIXME: `AST2` ast.Call stores args argument in `starargs`
+        starargs = getattr(node, "starargs", None)
+
+        # FIXME: `AST2` ast.Call stores kwargs argument in `kwargs`
+        kwargs = getattr(node, "kwargs", None)
+
+        elements = [
+            *node.args,
+            *node.keywords,
+            *([starargs] if starargs else []),
+            *([kwargs] if kwargs else []),
+        ]
+        for index, element in enumerate(elements):
+            if index:
+                self.parts.append(", ")
+            if element is starargs:
+                self.parts.append("*")
+            if element is kwargs:
+                self.parts.append("**")
+
             self.parts.append(element)
 
-        # FIXME: `AST2` ast.Call stores star argument in `starargs`
-        starargs = getattr(node, "starargs", None)
-        if starargs:
-            if args_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
-            args_count += 1
-            self.parts.append("*")
-            self.parts.append(starargs)
-
-        for kwelement in node.keywords:
-            if args_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
-            args_count += 1
-            self.parts.append(kwelement)
-
-        # FIXME: `AST2` ast.Call stores kwarg argument in `kwargs`
-        kwargs = getattr(node, "kwargs", None)
-        if kwargs:
-            if args_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
-            args_count += 1
-            self.parts.append("**")
-            self.parts.append(kwargs)
-
-        if args_count:
-            self.parts.append(RenderPart.MULTI_LINE_COMMA)
-        self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
         self.parts.append(")")
 
     def visit_Starred(self, node: ast.Starred) -> None:
@@ -358,20 +331,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         self.parts.append("{")
-        if node.keys:
-            self.parts.append(RenderPart.MULTI_LINE_INDENT)
-            key_count = 0
-            for index, key in enumerate(node.keys):
-                if key_count:
-                    self.parts.append(",")
-                    self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                    self.parts.append(RenderPart.MULTI_LINE_BREAK)
-                key_count += 1
-                self.parts.append(key)
-                self.parts.append(": ")
-                self.parts.append(node.values[index])
-            self.parts.append(RenderPart.MULTI_LINE_COMMA)
-            self.parts.append(RenderPart.MULTI_LINE_UNINDENT)
+        for index, key in enumerate(node.keys or []):
+            if index:
+                self.parts.append(", ")
+            self.parts.append(key)
+            self.parts.append(": ")
+            self.parts.append(node.values[index])
         self.parts.append("}")
 
     def visit_Compare(self, node: ast.Compare) -> None:
@@ -492,9 +457,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         arg_count = 0
         for index, arg in enumerate(node.args):
             if arg_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
+                self.parts.append(", ")
             arg_count += 1
             default = None
             default_index = len(node.args) - len(node.defaults) + index
@@ -507,25 +470,21 @@ class ExpressionAnalyzer(BaseAnalyzer):
                 self.parts.append(default)
         if node.vararg is not None:
             if arg_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
+                self.parts.append(", ")
 
             arg_count += 1
             self.parts.append("*")
             self.parts.append(node.vararg)
         if node.kwarg is not None:
             if arg_count:
-                self.parts.append(",")
-                self.parts.append(RenderPart.SINGLE_LINE_SPACE)
-                self.parts.append(RenderPart.MULTI_LINE_BREAK)
+                self.parts.append(", ")
 
             arg_count += 1
             self.parts.append("**")
             self.parts.append(node.kwarg)
 
         if arg_count:
-            self.parts.append(RenderPart.MULTI_LINE_COMMA)
+            self.parts.append(",")
 
     def visit_arg(self, node: ast.arg) -> None:
         """
@@ -614,7 +573,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
             if isinstance(value, (ast.Str, ast.Constant)):
                 str_value = value.s
                 if isinstance(str_value, bytes):
-                    str_value = str_value.decode("utf-8")
+                    str_value = str_value.decode(ENCODING)
                 self.parts.append(str_value)
             else:
                 self.parts.append(value)

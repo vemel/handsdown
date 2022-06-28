@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring
 import unittest
 
 from handsdown.utils.indent_trimmer import IndentTrimmer
@@ -6,22 +5,14 @@ from handsdown.utils.indent_trimmer import IndentTrimmer
 
 class TestIndentTrimmer(unittest.TestCase):
     def test_trim_empty_lines(self):
-        self.assertEqual(
-            IndentTrimmer.trim_empty_lines("\n  \n test\ntest2\n \n "), " test\ntest2"
-        )
+        self.assertEqual(IndentTrimmer.trim_empty_lines("\n  \n test\ntest2\n \n "), " test\ntest2")
         self.assertEqual(IndentTrimmer.trim_empty_lines("\n  \n\n "), "")
         self.assertEqual(IndentTrimmer.trim_empty_lines("\n  \n  test \n "), "  test ")
 
     def test_trim_text(self):
-        self.assertEqual(
-            IndentTrimmer.trim_text("  asd\n asd\n   asd\n"), " asd\nasd\n  asd\n"
-        )
-        self.assertEqual(
-            IndentTrimmer.trim_text("  asd\nasd\n   asd\n"), "  asd\nasd\n   asd\n"
-        )
-        self.assertEqual(
-            IndentTrimmer.trim_text(" asd\n asd\n  asd\n"), "asd\nasd\n asd\n"
-        )
+        self.assertEqual(IndentTrimmer.trim_text("  asd\n asd\n   asd\n"), " asd\nasd\n  asd\n")
+        self.assertEqual(IndentTrimmer.trim_text("  asd\nasd\n   asd\n"), "  asd\nasd\n   asd\n")
+        self.assertEqual(IndentTrimmer.trim_text(" asd\n asd\n  asd\n"), "asd\nasd\n asd\n")
 
     def test_trim_lines(self):
         self.assertEqual(

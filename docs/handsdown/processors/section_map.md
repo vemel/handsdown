@@ -1,40 +1,39 @@
 # SectionMap
 
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Processors](index.md#processors) /
+SectionMap
+
 > Auto-generated documentation for [handsdown.processors.section_map](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py) module.
 
-Module for splitting docstring into `Section` groups.
-
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Processors](index.md#processors) / SectionMap
-    - [SectionMap](#sectionmap)
-        - [SectionMap().\_\_iter\_\_](#sectionmap__iter__)
-        - [SectionMap().add_block](#sectionmapadd_block)
-        - [SectionMap().add_line](#sectionmapadd_line)
-        - [SectionMap().add_line_indent](#sectionmapadd_line_indent)
-        - [SectionMap().trim_block](#sectionmaptrim_block)
+- [SectionMap](#sectionmap)
+  - [SectionMap](#sectionmap-1)
+    - [SectionMap().__iter__](#sectionmap()__iter__)
+    - [SectionMap().add_block](#sectionmap()add_block)
+    - [SectionMap().add_line](#sectionmap()add_line)
+    - [SectionMap().add_line_indent](#sectionmap()add_line_indent)
+    - [SectionMap().trim_block](#sectionmap()trim_block)
 
 ## SectionMap
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L11)
 
-```python
-class SectionMap():
-    def __init__() -> None:
-```
-
-Dict-based storage for parsed `Section` list.
-
-Used for [BaseDocstringProcessor](base.md#basedocstringprocessor).
-
-Key is a `Section` title.
+Dict-based storage for parsed `Section` list.Used for `handsdown.processors.base.BaseDocstringProcessor`.Key is a `Section` title.
 Value is a related `Section` instance.
 
-### SectionMap().\_\_iter\_\_
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L95)
+#### Signature
 
 ```python
-def __iter__() -> Iterator[Section]:
+class SectionMap:
+    def __init__(self) -> None:
+        ...
 ```
+
+### SectionMap().__iter__
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L95)
 
 Iterate over existing `Section` objects.
 
@@ -42,46 +41,51 @@ Iterate over existing `Section` objects.
 
 `Section` objects in order of appearance.
 
-### SectionMap().add_block
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L65)
+#### Signature
 
 ```python
-def add_block(section_name: str) -> None:
+def __iter__(self) -> Iterator[Section]:
+    ...
 ```
 
-Add new `SectionBlock` to section `section_name`.
+### SectionMap().add_block
 
-If `Section` does not exist - it is not created.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L65)
+
+Add new `SectionBlock` to section `section_name`.If `Section` does not exist - it is not created.
 
 #### Arguments
 
 - `section_name` - Target section title
 
-### SectionMap().add_line
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L42)
+#### Signature
 
 ```python
-def add_line(section_name: str, line: str) -> None:
+def add_block(self, section_name: str) -> None:
+    ...
 ```
 
-Add new `line` to the last `SectionBlock` of section `section_name`.
+### SectionMap().add_line
 
-If line and section are empty - section is not created.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L42)
+
+Add new `line` to the last `SectionBlock` of section `section_name`.If line and section are empty - section is not created.
 
 #### Arguments
 
 - `section_name` - Target section title
 - `line` - Line to add
 
-### SectionMap().add_line_indent
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L26)
+#### Signature
 
 ```python
-def add_line_indent(section_name: str, line: str) -> None:
+def add_line(self, section_name: str, line: str) -> None:
+    ...
 ```
+
+### SectionMap().add_line_indent
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L26)
 
 Add line respecting indent of the current section block.
 
@@ -90,18 +94,28 @@ Add line respecting indent of the current section block.
 - `section_name` - Target section title
 - `line` - Line to add
 
-### SectionMap().trim_block
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L79)
+#### Signature
 
 ```python
-def trim_block(section_name: str) -> None:
+def add_line_indent(self, section_name: str, line: str) -> None:
+    ...
 ```
 
-Delete last empty lines from the last `SectionBlock`.
+### SectionMap().trim_block
 
-If `Section` does not exist - it is not created.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L79)
+
+Delete last empty lines from the last `SectionBlock`.If `Section` does not exist - it is not created.
 
 #### Arguments
 
 - `section_name` - Target section title.
+
+#### Signature
+
+```python
+def trim_block(self, section_name: str) -> None:
+    ...
+```
+
+

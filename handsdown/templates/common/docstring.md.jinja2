@@ -1,0 +1,8 @@
+{% for section in  docstring_processor.build_sections(docstring) -%}
+{% if section.title -%}#### {{ section.title }}{{ '\n\n' -}}{% endif -%}
+
+{% for block in section.blocks -%}
+{{ block.render() -}}
+{% endfor -%}
+{{ '\n\n' -}}
+{% endfor -%}

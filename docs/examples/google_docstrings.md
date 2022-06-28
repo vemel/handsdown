@@ -1,27 +1,20 @@
 # Google docstrings examples
 
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+Google docstrings examples
+
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) module.
 
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Google docstrings examples
-    - [Links](#links)
-    - [ClassExample](#classexample)
-        - [ClassExample().method_example](#classexamplemethod_example)
-    - [function_example](#function_example)
-    - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
-
-## Links
-
-[Google Python Style Guide](
-    http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings
-)
+- [Google docstrings examples](#google-docstrings-examples)
+  - [ClassExample](#classexample)
+    - [ClassExample().method_example](#classexample()method_example)
+  - [function_example](#function_example)
 
 ## ClassExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L13)
-
-```python
-class ClassExample():
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L13)
 
 Google-style class example
 
@@ -30,33 +23,30 @@ Google-style class example
 - `attr1` *str* - Description of `attr1`.
 - `attr2` *:obj:`int`, optional* - Description of `attr2`.
 
-### ClassExample().method_example
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L22)
+#### Signature
 
 ```python
-def method_example(text: str = 'hello') -> int:
+class ClassExample:
+    ...
 ```
 
-Summary line.
+### ClassExample().method_example
 
-Extended description of method.
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L22)
+
+Summary line.Extended description of method.
 
 #### Examples
 
 Examples should be written in doctest format, and should illustrate how
-to use the function
-
-```python
+to use the function```python
 >>> print([i for i in
 ... example_generator(2)])
 [
     'one',
     'two',
 ]
-```
-
-```python
+``````python
 >>> setup_env()
 >>> func_call(
 ...     first_name='test',
@@ -74,20 +64,21 @@ to use the function
 
 - `int` - Description of return value
 
-## function_example
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L56)
+#### Signature
 
 ```python
-def function_example(arg1, arg2, arg3=None):
+def method_example(self, text: str = "hello") -> int:
+    ...
 ```
 
-Summary line.
 
-Extended description of function.
-You can use this function like
 
-```python
+## function_example
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L56)
+
+Summary line.Extended description of function.
+You can use this function like```python
 result = function_example(
     {
         'key': 'value',
@@ -114,13 +105,18 @@ print result
     that are relevant to the interface.
 - `ValueError` - If `param2` is equal to `param1`.
 
-## function_with_pep484_type_annotations
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L87)
+#### Signature
 
 ```python
-def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
+def function_example(arg1, arg2, arg3=None):
+    ...
 ```
+
+
+
+## function_with_pep484_type_annotations
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L87)
 
 Example function with PEP 484 type annotations.
 
@@ -132,3 +128,12 @@ Example function with PEP 484 type annotations.
 #### Returns
 
 The return value. True for success, False otherwise.
+
+#### Signature
+
+```python
+def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
+    ...
+```
+
+

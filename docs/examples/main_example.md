@@ -1,34 +1,33 @@
 # Main Example
 
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+Main Example
+
 > Auto-generated documentation for [examples.main_example](https://github.com/vemel/handsdown/blob/main/examples/main_example.py) module.
-
-This is a module docstring. It will appear in documentation.
-
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / Main Example
-    - [Notes](#notes)
-    - [MyClass](#myclass)
-        - [MyClass().\_\_bool\_\_](#myclass__bool__)
-        - [MyClass.do_something](#myclassdo_something)
-    - [hello](#hello)
-
-## Notes
-
-You can use Markdown here to make it nicer. Also, in any docstring you
-can put a global object import string in backticks, like `other_module.OtherClass`,
-and it will be transformed to a link.
 
 #### Attributes
 
 - `MODULE_NAME` - This is a comment-style documented global variable, so it is added to
   `main_example` module attributes with this comment as a documentation for it: `'My Module'`
 
+
+- [Main Example](#main-example)
+  - [MyClass](#myclass)
+    - [MyClass().__bool__](#myclass()__bool__)
+    - [MyClass.do_something](#myclassdo_something)
+  - [hello](#hello)
+
 ## MyClass
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
 
-```python
-class MyClass(BaseClass):
-```
+#### Attributes
+
+- `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to
+  `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
+
 
 MyClass documentation here.
 
@@ -36,39 +35,38 @@ MyClass documentation here.
 
 This time we use RST docstrings format.
 
-#### Attributes
-
-- `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to
-  `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
-
-### MyClass().\_\_bool\_\_
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L92)
+#### Signature
 
 ```python
-def __bool__() -> bool:
+class MyClass(BaseClass):
+    ...
 ```
+
+### MyClass().__bool__
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L92)
 
 Magic methods are added to docs only if they have docstrings.
 
 #### Returns
 
-True if [STUFF_COUNT](#myclass) is not zero
+True if `STUFF_COUNT` is not zero
+
+#### Signature
+
+```python
+def __bool__(self) -> bool:
+    ...
+```
 
 ### MyClass.do_something
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L65)
-
-```python
-@classmethod
-def do_something(stuff: StuffCallable) -> bool:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L65)
 
 This is a public method that uses comment-style type annotations. If decorators
 or types from annotations are from your project, links to them will be added
-to `See also` section. Since this function depends on [STUFF_COUNT](#myclass), we can add
+to `See also` section. Since this function depends on `STUFF_COUNT`, we can add
 it to a docstring in backticks and it will be transformed to a link.
-
 ```python
 # usage example
 def my_stuff(amount):
@@ -94,13 +92,19 @@ Changed in version 1.4
 
 `stuff` result.
 
-## hello
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L27)
+#### Signature
 
 ```python
-def hello(name: str) -> str:
+@classmethod
+def do_something(cls, stuff: StuffCallable) -> bool:
+    ...
 ```
+
+
+
+## hello
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L27)
 
 This is module function and it is added to documentation even if it does
 not have a docstring. Function signature will be also generated respecting
@@ -124,3 +128,12 @@ regular and comment-style type annotations. Let's use PEP 257 format here.
 #### Returns
 
 A greeting. No need to put types here if you use type annotations.
+
+#### Signature
+
+```python
+def hello(name: str) -> str:
+    ...
+```
+
+

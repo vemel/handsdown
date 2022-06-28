@@ -1,9 +1,7 @@
-# pylint: disable=missing-docstring
 import unittest
 from unittest.mock import MagicMock, patch
+
 from handsdown.ast_parser import smart_ast as ast
-
-
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
 
 

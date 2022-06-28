@@ -1,36 +1,38 @@
 # IndentTrimmer
 
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[Utils](index.md#utils) /
+IndentTrimmer
+
 > Auto-generated documentation for [handsdown.utils.indent_trimmer](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py) module.
 
-Utility for removing indentation for sections and lines.
-
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [Utils](index.md#utils) / IndentTrimmer
-    - [IndentTrimmer](#indenttrimmer)
-        - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
-        - [IndentTrimmer.indent_line](#indenttrimmerindent_line)
-        - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
-        - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
-        - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
-        - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
+- [IndentTrimmer](#indenttrimmer)
+  - [IndentTrimmer](#indenttrimmer-1)
+    - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
+    - [IndentTrimmer.indent_line](#indenttrimmerindent_line)
+    - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
+    - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
+    - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
+    - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
 
 ## IndentTrimmer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L10)
-
-```python
-class IndentTrimmer():
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L10)
 
 Utility for removing indentation for sections and lines.
 
-### IndentTrimmer.get_line_indent
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L119)
+#### Signature
 
 ```python
-@staticmethod
-def get_line_indent(line: str) -> int:
+class IndentTrimmer:
+    ...
 ```
+
+### IndentTrimmer.get_line_indent
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L119)
 
 Get indent length of the line.
 
@@ -52,14 +54,17 @@ IndentTrimmer.get_line_indent('test')
 
 A number of indentation characters in a beginning of the line.
 
-### IndentTrimmer.indent_line
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L140)
+#### Signature
 
 ```python
 @staticmethod
-def indent_line(line: str, indent: int) -> str:
+def get_line_indent(line: str) -> int:
+    ...
 ```
+
+### IndentTrimmer.indent_line
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L140)
 
 Indent line with givent length `indent`.
 
@@ -79,14 +84,17 @@ IndentTrimmer.indent_line('test', 2)
 
 An indented line.
 
-### IndentTrimmer.trim_empty_lines
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L15)
+#### Signature
 
 ```python
 @staticmethod
-def trim_empty_lines(text: str) -> str:
+def indent_line(line: str, indent: int) -> str:
+    ...
 ```
+
+### IndentTrimmer.trim_empty_lines
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L15)
 
 Trim empty lines in the begging and the end of the text.
 
@@ -102,14 +110,17 @@ IndentTrimmer.trim_empty_lines(text)
 
 A stripped string.
 
-### IndentTrimmer.trim_line
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L92)
+#### Signature
 
 ```python
 @staticmethod
-def trim_line(line: str, indent: int) -> str:
+def trim_empty_lines(text: str) -> str:
+    ...
 ```
+
+### IndentTrimmer.trim_line
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L92)
 
 Trim indent from line if it is empty.
 
@@ -134,14 +145,17 @@ IndentTrimmer.trim_line('     test', 1)
 
 A line with removed indent.
 
-### IndentTrimmer.trim_lines
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L57)
+#### Signature
 
 ```python
-@classmethod
-def trim_lines(lines: Iterable[str]) -> List[str]:
+@staticmethod
+def trim_line(line: str, indent: int) -> str:
+    ...
 ```
+
+### IndentTrimmer.trim_lines
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L57)
 
 Trim minimum indent from each line of text.
 
@@ -168,14 +182,17 @@ IndentTrimmer.trim_lines([
 
 A list of lines with trimmed indent.
 
-### IndentTrimmer.trim_text
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L37)
+#### Signature
 
 ```python
 @classmethod
-def trim_text(text: str) -> str:
+def trim_lines(cls, lines: Iterable[str]) -> List[str]:
+    ...
 ```
+
+### IndentTrimmer.trim_text
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L37)
 
 Trim minimum indent from each line of text.
 
@@ -193,3 +210,13 @@ IndentTrimmer.trim_text('  asd\n asd\n   asd\n')
 #### Returns
 
 A text with trimmed indent.
+
+#### Signature
+
+```python
+@classmethod
+def trim_text(cls, text: str) -> str:
+    ...
+```
+
+

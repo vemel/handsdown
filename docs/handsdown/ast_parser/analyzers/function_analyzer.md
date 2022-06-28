@@ -1,26 +1,34 @@
 # FunctionAnalyzer
 
+[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../../MODULES.md#modules) /
+[Handsdown](../../index.md#handsdown) /
+[AST Parser](../index.md#ast-parser) /
+[Analyzers](index.md#analyzers) /
+FunctionAnalyzer
+
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.function_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py) module.
 
-AST analyzer for `ast.FunctionDef` records.
-
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](index.md#analyzers) / FunctionAnalyzer
-    - [FunctionAnalyzer](#functionanalyzer)
-        - [FunctionAnalyzer().generic_visit](#functionanalyzergeneric_visit)
-        - [FunctionAnalyzer().visit_AsyncFunctionDef](#functionanalyzervisit_asyncfunctiondef)
-        - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzervisit_functiondef)
-        - [FunctionAnalyzer().visit_arguments](#functionanalyzervisit_arguments)
+- [FunctionAnalyzer](#functionanalyzer)
+  - [FunctionAnalyzer](#functionanalyzer-1)
+    - [FunctionAnalyzer().generic_visit](#functionanalyzer()generic_visit)
+    - [FunctionAnalyzer().visit_AsyncFunctionDef](#functionanalyzer()visit_asyncfunctiondef)
+    - [FunctionAnalyzer().visit_FunctionDef](#functionanalyzer()visit_functiondef)
+    - [FunctionAnalyzer().visit_arguments](#functionanalyzer()visit_arguments)
 
 ## FunctionAnalyzer
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
+
+AST analyzer for `ast.FunctionDef` records.
+
+#### Signature
 
 ```python
 class FunctionAnalyzer(BaseAnalyzer):
-    def __init__() -> None:
+    def __init__(self) -> None:
+        ...
 ```
-
-AST analyzer for `ast.FunctionDef` records.
 
 #### See also
 
@@ -28,11 +36,7 @@ AST analyzer for `ast.FunctionDef` records.
 
 ### FunctionAnalyzer().generic_visit
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161)
-
-```python
-def generic_visit(node: ast.AST) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161)
 
 Do nothing for unknown `ast.AST` nodes.
 
@@ -40,17 +44,18 @@ Do nothing for unknown `ast.AST` nodes.
 
 - `node` - AST node.
 
-### FunctionAnalyzer().visit_AsyncFunctionDef
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
+#### Signature
 
 ```python
-def visit_AsyncFunctionDef(node: ast.AsyncFunctionDef) -> None:
+def generic_visit(self, node: ast.AST) -> None:
+    ...
 ```
 
-Entrypoint for the analyzer for asynchronous functions.
+### FunctionAnalyzer().visit_AsyncFunctionDef
 
-Visits each node from `node.args`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
+
+Entrypoint for the analyzer for asynchronous functions.Visits each node from `node.args`.
 Adds new `ast.expr` entry to `decorator_nodes` for each node
 from `node.decorator_list`.
 Sets `return_type_hint` to `node.returns` if it defined.
@@ -66,17 +71,18 @@ async def my_func():
 
 - `node` - AST node.
 
-### FunctionAnalyzer().visit_FunctionDef
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
+#### Signature
 
 ```python
-def visit_FunctionDef(node: ast.FunctionDef) -> None:
+def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
+    ...
 ```
 
-Entrypoint for the analyzer.
+### FunctionAnalyzer().visit_FunctionDef
 
-Visits each node from `node.args`.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
+
+Entrypoint for the analyzer.Visits each node from `node.args`.
 Adds new `ast.expr` entry to `decorator_nodes` for each node
 from `node.decorator_list`.
 Sets `return_type_hint` to `node.returns` if it defined.
@@ -92,17 +98,18 @@ def my_func():
 
 - `node` - AST node.
 
-### FunctionAnalyzer().visit_arguments
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
+#### Signature
 
 ```python
-def visit_arguments(node: ast.arguments) -> None:
+def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+    ...
 ```
 
-Parse info about class method statements.
+### FunctionAnalyzer().visit_arguments
 
-Adds new `ArgumentRecord` entry to `argument_records` for each argument.
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
+
+Parse info about class method statements.Adds new `ArgumentRecord` entry to `argument_records` for each argument.
 
 #### Examples
 
@@ -141,3 +148,12 @@ def my_func_kw_only(
 #### Arguments
 
 - `node` - AST node.
+
+#### Signature
+
+```python
+def visit_arguments(self, node: ast.arguments) -> None:
+    ...
+```
+
+

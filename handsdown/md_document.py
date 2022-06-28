@@ -15,7 +15,7 @@ from handsdown.utils.path_finder import PathFinder
 __all__ = ["MDDocument"]
 
 
-_MDDocument = TypeVar("_MDDocument", bound="MDDocument")
+_R = TypeVar("_R", bound="MDDocument")
 
 
 class MDDocument:
@@ -70,6 +70,7 @@ class MDDocument:
         self._path = path
         self.path_finder = PathFinder(self._path.parent)
         self._encoding = encoding
+        self.source_code_url = ""
 
     def __enter__(self) -> "MDDocument":
         return self
@@ -178,9 +179,7 @@ class MDDocument:
         """
         return f"[{title}]({link})"
 
-    def render_md_doc_link(
-        self: _MDDocument, target_md_document: _MDDocument, title: Optional[str] = None
-    ) -> str:
+    def render_md_doc_link(self: _R, target_md_document: _R, title: Optional[str] = None) -> str:
         """
         Render Markdown link to `target_md_document` header path with a correct title.
 
@@ -231,13 +230,32 @@ class MDDocument:
             A string with Markdown link.
         """
         link = ""
-        if anchor:
-            link = f"#{anchor}"
         if target_path and target_path != self._path:
             link_path = self.path_finder.relative(target_path)
-            link = f"{link_path.as_posix()}{link}"
+            link = f"{link}{link_path.as_posix()}"
+        if anchor:
+            link = f"{link}#{anchor}"
 
         return self.render_link(title, link)
+
+    def get_doc_link(self, path: Path, anchor: str = "") -> str:
+        """
+        Get Markdown link to a local MD document, use relative path as a link.
+
+        Arguments:
+            path -- Path to local MDDocument
+            anchor -- Unescaped or escaped anchor tag
+
+        Returns:
+            A string with Markdown link.
+        """
+        link = ""
+        if path and path != self.path:
+            link_path = self.path_finder.relative(path)
+            link = f"{link}{link_path.as_posix()}"
+        if anchor:
+            link = f"{link}#{anchor}"
+        return link
 
     def _build_content(self) -> str:
         sections = []
@@ -328,22 +346,6 @@ class MDDocument:
         else:
             self._sections.append(content)
 
-        self._content = self._build_content()
-
-    def append_title(self, title: str, level: int) -> None:
-        """
-        Append `title` of a given `level` to the document.
-
-        Handle trimming and sectioning the content and update
-        `title` and `toc_section` fields.
-
-        Arguments:
-            title -- Title to add.
-            level -- Title level, number of `#` symbols.
-        """
-        section_level = "#" * level
-        section = f"{section_level} {self._escape_title(title)}"
-        self._sections.append(section)
         self._content = self._build_content()
 
     def generate_toc_section(self, max_depth: int = 3) -> str:

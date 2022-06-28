@@ -1,9 +1,21 @@
-## {{ method.title }}
+### {{ method.title }}
 
-[find in source code]({{ method._get_source_code_url(module_record, md_document) }}#L{{ method.line_number }})
+[find in source code]({{ md_document.source_code_url }}#L{{ method.line_number }})
+
+{% with docstring=method.docstring -%}
+{% include "common/docstring.md.jinja2" -%}
+{% endwith -%}
+
+#### Signature
 
 {% with function = method -%}
 ```python
-{% include "common/function_signature.py.jinja2" with context %}
-```
+{% filter blackify %}{% include "common/function_signature.py.jinja2" %}{% endfilter %}
+```{{ "\n\n" -}}
 {% endwith -%}
+
+{% for link in generator.get_see_also_links(method, module_record, md_document) -%}
+{% if loop.first -%}{{ "#### See also\n\n" -}}{% endif -%}
+- {{ link -}}{{ "\n" -}}
+{% if loop.last -%}{{ "\n" -}}{% endif -%}
+{% endfor -%}

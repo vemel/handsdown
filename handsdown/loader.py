@@ -41,7 +41,7 @@ class Loader:
         self._output_path = output_path
         self._encoding = encoding
 
-    def get_output_path(self, source_path: Path) -> Path:
+    def _get_output_path(self, source_path: Path) -> Path:
         """
         Get output MD document path based on `source_path`.
 

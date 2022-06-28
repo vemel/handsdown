@@ -1,24 +1,25 @@
 # ClassRecord
 
+[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../../MODULES.md#modules) /
+[Handsdown](../../index.md#handsdown) /
+[AST Parser](../index.md#ast-parser) /
+[Node Records](index.md#node-records) /
+ClassRecord
+
 > Auto-generated documentation for [handsdown.ast_parser.node_records.class_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py) module.
 
-Wrapper for an `ast.ClassDef` node.
-
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ClassRecord
-    - [ClassRecord](#classrecord)
-        - [ClassRecord().find_record](#classrecordfind_record)
-        - [ClassRecord().get_public_methods](#classrecordget_public_methods)
-        - [ClassRecord().iter_records](#classrecorditer_records)
-        - [ClassRecord().related_names](#classrecordrelated_names)
+- [ClassRecord](#classrecord)
+  - [ClassRecord](#classrecord-1)
+    - [ClassRecord().find_record](#classrecord()find_record)
+    - [ClassRecord().get_public_methods](#classrecord()get_public_methods)
+    - [ClassRecord().init_method](#classrecord()init_method)
+    - [ClassRecord().iter_records](#classrecord()iter_records)
+    - [ClassRecord().related_names](#classrecord()related_names)
 
 ## ClassRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L17)
-
-```python
-class ClassRecord(NodeRecord):
-    def __init__(node: ast.ClassDef) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L16)
 
 Wrapper for an `ast.ClassDef` node.
 
@@ -26,17 +27,21 @@ Wrapper for an `ast.ClassDef` node.
 
 - `node` - AST node.
 
+#### Signature
+
+```python
+class ClassRecord(NodeRecord):
+    def __init__(self, node: ast.ClassDef) -> None:
+        ...
+```
+
 #### See also
 
 - [NodeRecord](node_record.md#noderecord)
 
 ### ClassRecord().find_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L36)
-
-```python
-def find_record(name: str) -> Optional[NodeRecord]:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L34)
 
 Find child method or attribute record.
 
@@ -48,30 +53,48 @@ Find child method or attribute record.
 
 Itself or None.
 
-### ClassRecord().get_public_methods
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L89)
+#### Signature
 
 ```python
-def get_public_methods() -> List[FunctionRecord]:
+def find_record(self, name: str) -> Optional[NodeRecord]:
+    ...
 ```
 
-Get Class public methods.
+### ClassRecord().get_public_methods
 
-Skips methods with names starting with `_` and magic methods  `__` if
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L87)
+
+Get Class public methods.Skips methods with names starting with `_` and magic methods  `__` if
 they have no docstring. Method `__init__` is always skipped.
 
 #### Returns
 
 A list of child records.
 
-### ClassRecord().iter_records
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L76)
+#### Signature
 
 ```python
-def iter_records() -> Iterator[NodeRecord]:
+def get_public_methods(self) -> List[FunctionRecord]:
+    ...
 ```
+
+### ClassRecord().init_method
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L126)
+
+Get the `__init__` method.
+
+#### Signature
+
+```python
+@property
+def init_method(self) -> Optional[FunctionRecord]:
+    ...
+```
+
+### ClassRecord().iter_records
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L74)
 
 Iterate over Class public methods.
 
@@ -79,13 +102,25 @@ Iterate over Class public methods.
 
 A child record.
 
+#### Signature
+
+```python
+def iter_records(self) -> Iterator[NodeRecord]:
+    ...
+```
+
 ### ClassRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L59)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L57)
+
+Set of related names.
+
+#### Signature
 
 ```python
 @property
-def related_names() -> Set[str]:
+def related_names(self) -> Set[str]:
+    ...
 ```
 
-Set of related names.
+

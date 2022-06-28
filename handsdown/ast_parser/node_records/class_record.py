@@ -5,7 +5,6 @@ from typing import Iterator, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.class_analyzer import ClassAnalyzer
-from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
@@ -28,7 +27,6 @@ class ClassRecord(NodeRecord):
         self.decorator_records: List[ExpressionRecord] = []
         self.argument_records: List[ArgumentRecord] = []
         self.base_records: List[ExpressionRecord] = []
-        self.support_split = True
         self.name = node.name
         self.title = self.name
         self.docstring = self._get_docstring()
@@ -122,33 +120,15 @@ class ClassRecord(NodeRecord):
 
         self.method_records.sort(key=lambda x: x.name)
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
-        parts: List[RenderExpr] = []
-        for decorator_record in self.decorator_records:
-            parts.append(decorator_record)
-            parts.append(RenderPart.LINE_BREAK)
+    def _render_parts(self) -> List[RenderExpr]:
+        return [f"class {self.name}"]
 
-        parts.append("class ")
-        parts.append(self.name)
-        parts.append("(")
-        if self.base_records:
-            parts.append(RenderPart.MULTI_LINE_INDENT)
-            base_count = 0
-            for base_record in self.base_records:
-                if base_count > 0:
-                    parts.append(",")
-                    parts.append(RenderPart.SINGLE_LINE_SPACE)
-                    parts.append(RenderPart.MULTI_LINE_BREAK)
-                base_count += 1
-                parts.append(base_record)
-            parts.append(RenderPart.MULTI_LINE_COMMA)
-            parts.append(RenderPart.MULTI_LINE_UNINDENT)
-        parts.append("):")
-
+    @property
+    def init_method(self) -> Optional[FunctionRecord]:
+        """
+        Get the `__init__` method.
+        """
         for method in self.method_records:
             if method.name == "__init__":
-                parts.append(RenderPart.LINE_INDENT)
-                parts.append(method)
-                parts.append(RenderPart.LINE_UNINDENT)
-
-        return parts
+                return method
+        return None

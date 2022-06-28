@@ -1,34 +1,37 @@
 # ModuleRecordList
 
+[🙌 Handsdown - Python documentation generator](../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../MODULES.md#modules) /
+[Handsdown](../index.md#handsdown) /
+[AST Parser](index.md#ast-parser) /
+ModuleRecordList
+
 > Auto-generated documentation for [handsdown.ast_parser.module_record_list](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py) module.
 
-Aggregation of `ModuleRecord` objects.
-
-- [Handsdown](../../README.md#-handsdown---python-documentation-generator) / [Modules](../../MODULES.md#modules) / [Handsdown](../index.md#handsdown) / [AST Parser](index.md#ast-parser) / ModuleRecordList
-    - [ModuleRecordList](#modulerecordlist)
-        - [ModuleRecordList().\_\_iter\_\_](#modulerecordlist__iter__)
-        - [ModuleRecordList().add](#modulerecordlistadd)
-        - [ModuleRecordList().find_module_record](#modulerecordlistfind_module_record)
-        - [ModuleRecordList().get_package_names](#modulerecordlistget_package_names)
+- [ModuleRecordList](#modulerecordlist)
+  - [ModuleRecordList](#modulerecordlist-1)
+    - [ModuleRecordList().__iter__](#modulerecordlist()__iter__)
+    - [ModuleRecordList().add](#modulerecordlist()add)
+    - [ModuleRecordList().find_module_record](#modulerecordlist()find_module_record)
+    - [ModuleRecordList().get_package_names](#modulerecordlist()get_package_names)
 
 ## ModuleRecordList
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L11)
-
-```python
-class ModuleRecordList():
-    def __init__() -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L11)
 
 Aggregation of `ModuleRecord` objects.
 
-### ModuleRecordList().\_\_iter\_\_
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L62)
+#### Signature
 
 ```python
-def __iter__() -> Iterator[ModuleRecord]:
+class ModuleRecordList:
+    def __init__(self) -> None:
+        ...
 ```
+
+### ModuleRecordList().__iter__
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L62)
 
 Iterate over all added `ModuleRecord` entries.
 
@@ -36,13 +39,16 @@ Iterate over all added `ModuleRecord` entries.
 
 `ModuleRecord` entries.
 
-### ModuleRecordList().add
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L52)
+#### Signature
 
 ```python
-def add(module_record: ModuleRecord) -> None:
+def __iter__(self) -> Iterator[ModuleRecord]:
+    ...
 ```
+
+### ModuleRecordList().add
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L52)
 
 Add new `ModuleRecord`.
 
@@ -50,17 +56,20 @@ Add new `ModuleRecord`.
 
 - `module_record` - A new `ModuleRecord`
 
+#### Signature
+
+```python
+def add(self, module_record: ModuleRecord) -> None:
+    ...
+```
+
 #### See also
 
 - [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().find_module_record
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L21)
-
-```python
-def find_module_record(import_string: ImportString) -> Optional[ModuleRecord]:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L21)
 
 Find `ModuleRecord` by it's import string.
 
@@ -72,20 +81,32 @@ Find `ModuleRecord` by it's import string.
 
 Found `NodeRecord` instance or None.
 
+#### Signature
+
+```python
+def find_module_record(self, import_string: ImportString) -> Optional[ModuleRecord]:
+    ...
+```
+
 #### See also
 
 - [ImportString](../utils/import_string.md#importstring)
 
 ### ModuleRecordList().get_package_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L43)
-
-```python
-def get_package_names() -> Set[str]:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L43)
 
 Get top level import strings.
 
 #### Returns
 
 A set of top level imports as strings.
+
+#### Signature
+
+```python
+def get_package_names(self) -> Set[str]:
+    ...
+```
+
+

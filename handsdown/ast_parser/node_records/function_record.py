@@ -2,16 +2,15 @@
 Wrapper for an `ast.FunctionDef` node.
 """
 import re
-from typing import Any, Iterable, List, Optional, Set
+from typing import Iterable, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.function_analyzer import FunctionAnalyzer
-from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.node_records.argument_record import ArgumentRecord
 from handsdown.ast_parser.node_records.expression_record import ExpressionRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.node_records.text_record import TextRecord
-from handsdown.ast_parser.type_defs import ASTFunctionDef
+from handsdown.ast_parser.type_defs import ASTFunctionDef, RenderExpr
 
 
 class FunctionRecord(NodeRecord):
@@ -31,7 +30,6 @@ class FunctionRecord(NodeRecord):
         self.is_method = is_method
         self.return_type_hint: Optional[ExpressionRecord] = None
         self.decorator_records: List[ExpressionRecord] = []
-        self.support_split = True
         self.is_staticmethod = False
         self.is_classmethod = False
         self.is_async = isinstance(node, ast.AsyncFunctionDef)
@@ -100,8 +98,8 @@ class FunctionRecord(NodeRecord):
         """
         Extract comment type annotations from a function definiition lines.
 
-        Sets `arguemnts_record` to a new `TextRecord` for each found type annotaiton.
-        Also sets `return_type_hint` to a `TextRecord` if fucntion return type found.
+        Sets `arguments_record` to a new `TextRecord` for each found type annotaiton.
+        Also sets `return_type_hint` to a `TextRecord` if function return type found.
         """
         start_line_number = self.line_number
         for relative_line_number, line in enumerate(lines):
@@ -136,38 +134,5 @@ class FunctionRecord(NodeRecord):
                     argument = self.argument_records[argument_index]
                     argument.type_hint = TextRecord(argument.node, arg_type.strip())
 
-    def _render_parts(self, indent: int) -> List[Any]:
-        parts: List[Any] = []
-        for decorator in self.decorator_records:
-            parts.append("@")
-            parts.append(decorator)
-            parts.append(RenderPart.LINE_BREAK)
-
-        if self.is_async:
-            parts.append("async ")
-
-        parts.append("def ")
-        parts.append(self.name)
-        parts.append("(")
-        if self.argument_records:
-            start_index = 0
-            if self.is_method and not self.is_staticmethod:
-                start_index = 1
-            arguments = self.argument_records[start_index:]
-            if arguments:
-                parts.append(RenderPart.MULTI_LINE_INDENT)
-                for argument in arguments[:-1]:
-                    parts.append(argument)
-                    parts.append(",")
-                    parts.append(RenderPart.SINGLE_LINE_SPACE)
-                    parts.append(RenderPart.MULTI_LINE_BREAK)
-                parts.append(arguments[-1])
-                parts.append(RenderPart.MULTI_LINE_COMMA)
-                parts.append(RenderPart.MULTI_LINE_UNINDENT)
-        parts.append(")")
-        if self.return_type_hint:
-            parts.append(" -> ")
-            parts.append(self.return_type_hint)
-
-        parts.append(":")
-        return parts
+    def _render_parts(self) -> List[RenderExpr]:
+        return [f"def {self.name}()"]

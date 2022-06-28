@@ -7,7 +7,7 @@ from typing import List, Set
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 from handsdown.ast_parser.node_records.node_record import NodeRecord
-from handsdown.ast_parser.type_defs import DirtyRenderExpr, RenderExpr
+from handsdown.ast_parser.type_defs import Node, RenderExpr
 
 
 class ExpressionRecord(NodeRecord):
@@ -22,7 +22,7 @@ class ExpressionRecord(NodeRecord):
 
     def __init__(self, node: ast.AST) -> None:
         super().__init__(node)
-        self.parts: List[DirtyRenderExpr] = []
+        self.parts: List[Node] = []
         self.analyzer = ExpressionAnalyzer()
 
     @property
@@ -41,7 +41,7 @@ class ExpressionRecord(NodeRecord):
             self.parts = self.analyzer.parts
             return
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         result: List[RenderExpr] = []
         for part in self.parts:
             if isinstance(part, ast.AST):
@@ -57,9 +57,9 @@ class ExpressionRecord(NodeRecord):
         """
         self.parse()
         result = []
-        for part in self.parts:
-            if isinstance(part, ast.AST):
-                result.append(ExpressionRecord(part).render())
+        for part in self._render_parts():
+            if isinstance(part, NodeRecord):
+                result.append(part.render())
             if isinstance(part, str):
                 result.append(part)
 

@@ -1,28 +1,24 @@
 # ArgumentRecord
 
+[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../../MODULES.md#modules) /
+[Handsdown](../../index.md#handsdown) /
+[AST Parser](../index.md#ast-parser) /
+[Node Records](index.md#node-records) /
+ArgumentRecord
+
 > Auto-generated documentation for [handsdown.ast_parser.node_records.argument_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py) module.
 
-Wrapper for an `ast.arg` node.
-
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / ArgumentRecord
-    - [ArgumentRecord](#argumentrecord)
-        - [ArgumentRecord().default](#argumentrecorddefault)
-        - [ArgumentRecord().related_names](#argumentrecordrelated_names)
-        - [ArgumentRecord().set_default](#argumentrecordset_default)
+- [ArgumentRecord](#argumentrecord)
+  - [ArgumentRecord](#argumentrecord-1)
+    - [ArgumentRecord().default](#argumentrecord()default)
+    - [ArgumentRecord().related_names](#argumentrecord()related_names)
+    - [ArgumentRecord().required](#argumentrecord()required)
+    - [ArgumentRecord().set_default](#argumentrecord()set_default)
 
 ## ArgumentRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L13)
-
-```python
-class ArgumentRecord(NodeRecord):
-    def __init__(
-        node: ast.arg,
-        name: str,
-        type_hint: Optional[ast.expr] = None,
-        prefix: str = '',
-    ) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L13)
 
 Wrapper for an `ast.arg` node.
 
@@ -33,18 +29,27 @@ Wrapper for an `ast.arg` node.
 - `type_hint` - Argument type hint.
 - `prefix` - Prefix for arguemnt name, used for starargs.
 
+#### Signature
+
+```python
+class ArgumentRecord(NodeRecord):
+    def __init__(
+        self,
+        node: ast.arg,
+        name: str,
+        type_hint: Optional[ast.expr] = None,
+        prefix: str = "",
+    ) -> None:
+        ...
+```
+
 #### See also
 
 - [NodeRecord](node_record.md#noderecord)
 
 ### ArgumentRecord().default
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L39)
-
-```python
-@property
-def default() -> Optional[ExpressionRecord]:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L39)
 
 Default value of the argument.
 
@@ -52,24 +57,49 @@ Default value of the argument.
 
 Default exression or None.
 
-### ArgumentRecord().related_names
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L61)
+#### Signature
 
 ```python
 @property
-def related_names() -> Set[str]:
+def default(self) -> Optional[ExpressionRecord]:
+    ...
 ```
+
+### ArgumentRecord().related_names
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L71)
 
 Set of related names.
 
-### ArgumentRecord().set_default
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L49)
+#### Signature
 
 ```python
-def set_default(node: Node) -> None:
+@property
+def related_names(self) -> Set[str]:
+    ...
 ```
+
+### ArgumentRecord().required
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L49)
+
+Whether the argument is required.
+
+#### Returns
+
+True if required, False otherwise.
+
+#### Signature
+
+```python
+@property
+def required(self) -> bool:
+    ...
+```
+
+### ArgumentRecord().set_default
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L59)
 
 Set default expression from test or `ast.AST` node.
 
@@ -77,6 +107,15 @@ Set default expression from test or `ast.AST` node.
 
 - `node` - Text or AST node.
 
+#### Signature
+
+```python
+def set_default(self, node: Node) -> None:
+    ...
+```
+
 #### See also
 
 - [Node](../type_defs.md#node)
+
+

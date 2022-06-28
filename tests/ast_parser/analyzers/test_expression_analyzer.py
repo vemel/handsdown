@@ -1,10 +1,8 @@
-# pylint: disable=missing-docstring
 import unittest
 from unittest.mock import ANY, MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
-from handsdown.ast_parser.enums import RenderPart
 
 
 class TestExpressionAnalyzer(unittest.TestCase):
@@ -69,14 +67,9 @@ class TestExpressionAnalyzer(unittest.TestCase):
             [
                 "node_value",
                 "[",
-                RenderPart.MULTI_LINE_INDENT,
                 "el1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "el2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
                 "]",
             ],
         )
@@ -103,14 +96,9 @@ class TestExpressionAnalyzer(unittest.TestCase):
             analyzer.parts,
             [
                 "[",
-                RenderPart.MULTI_LINE_INDENT,
                 "el1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "el2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
                 "]",
             ],
         )
@@ -124,14 +112,9 @@ class TestExpressionAnalyzer(unittest.TestCase):
             analyzer.parts,
             [
                 "{",
-                RenderPart.MULTI_LINE_INDENT,
                 "el1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "el2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
                 "}",
             ],
         )
@@ -145,14 +128,9 @@ class TestExpressionAnalyzer(unittest.TestCase):
             analyzer.parts,
             [
                 "(",
-                RenderPart.MULTI_LINE_INDENT,
                 "el1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "el2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
                 ")",
             ],
         )
@@ -191,18 +169,13 @@ class TestExpressionAnalyzer(unittest.TestCase):
             analyzer.parts,
             [
                 "{",
-                RenderPart.MULTI_LINE_INDENT,
                 "key1",
                 ": ",
                 "value1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "key2",
                 ": ",
                 "value2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
                 "}",
             ],
         )
@@ -341,14 +314,9 @@ class TestExpressionAnalyzer(unittest.TestCase):
             analyzer.parts,
             [
                 "value",
-                RenderPart.MULTI_LINE_INDENT,
                 "el1",
-                ",",
-                RenderPart.SINGLE_LINE_SPACE,
-                RenderPart.MULTI_LINE_BREAK,
+                ", ",
                 "el2",
-                RenderPart.MULTI_LINE_COMMA,
-                RenderPart.MULTI_LINE_UNINDENT,
             ],
         )
 

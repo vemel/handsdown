@@ -1,39 +1,27 @@
 # PEP 257 - PEP 257 and Google docstrings examples
 
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+PEP 257 - PEP 257 and Google docstrings examples
+
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) module.
 
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 257 - PEP 257 and Google docstrings examples
-    - [Links](#links)
-    - [ClassExample](#classexample)
-        - [ClassExample().method_example](#classexamplemethod_example)
-    - [function_example](#function_example)
-
-## Links
-
-[PEP 257 - Docstring Conventions](https://www.python.org/dev/peps/pep-0287/)
+- [PEP 257 - PEP 257 and Google docstrings examples](#pep-257---pep-257-and-google-docstrings-examples)
+  - [ClassExample](#classexample)
 
 ## ClassExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L11)
-
-```python
-class ClassExample():
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L10)
 
 PEP257-style class example
 
 #### Attributes
 
 - `attr1` - Description of `attr1`.
-- `attr2` - Description of `attr2`.
-
-```python
+- `attr2` - Description of `attr2`.```python
 Example of a code block
-```
-
-You can use `~~~` to start a block as well
-
-~~~
+```You can use `~~~` to start a block as well~~~
 MD block example inside a tilde block
 
 ```python
@@ -41,33 +29,30 @@ This is not a codeblock, test inside tildes rendered as it is
 ```
 ~~~
 
-### ClassExample().method_example
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L34)
+#### Signature
 
 ```python
-def method_example(text: str = 'hello') -> int:
+class ClassExample:
+    ...
 ```
 
-Summary line.
+### ClassExample().method_example
 
-Extended description of method.
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L33)
+
+Summary line.Extended description of method.
 
 #### Examples
 
 Examples should be written in doctest format, and should illustrate how
-to use the function.
-
-```python
+to use the function.```python
 >>> print([i for i in
 ... example_generator(2)])
 [
     'one',
     'two',
 ]
-```
-
-```python
+``````python
 >>> setup_env()
 >>> func_call(
 ...     first_name='test',
@@ -85,13 +70,18 @@ to use the function.
 
 Description of return value
 
-## function_example
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L67)
+#### Signature
 
 ```python
-def function_example(real=0.0, imag=0.0):
+def method_example(self, text: str = "hello") -> int:
+    ...
 ```
+
+
+
+## function_example
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L66)
 
 Form a complex number.
 
@@ -99,3 +89,12 @@ Form a complex number.
 
 - `real` - the real part (default 0.0)
 - `imag` - the imaginary part (default 0.0)
+
+#### Signature
+
+```python
+def function_example(real=0.0, imag=0.0):
+    ...
+```
+
+

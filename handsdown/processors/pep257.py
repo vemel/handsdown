@@ -1,5 +1,5 @@
 """
-# PEP 257 Docstring Processor.
+# PEP 257 Docstring Processor
 
 Docstring processor for PEP 257 and Google docstring format.
 

@@ -2,16 +2,16 @@
 Wrapper for an `ast.Module` node with corresponding node info.
 """
 from pathlib import Path
-from typing import Any, Dict, Iterator, List, Optional, Set
+from typing import Dict, Iterator, List, Optional, Set
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.module_analyzer import ModuleAnalyzer
-from handsdown.ast_parser.enums import RenderPart
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.class_record import ClassRecord
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.ast_parser.type_defs import RenderExpr
 from handsdown.settings import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.indent_trimmer import IndentTrimmer
@@ -101,8 +101,8 @@ class ModuleRecord(NodeRecord):
 
             yield class_record
 
-            for class_child_record in class_record.iter_records():
-                yield class_child_record
+            # for class_child_record in class_record.iter_records():
+            #     yield class_child_record
 
         for function_record in self.function_records:
             if self.all_names and function_record.name not in self.all_names:
@@ -130,23 +130,8 @@ class ModuleRecord(NodeRecord):
             attribute_record.import_string = self.import_string + attribute_record.name
             self.import_string_map[attribute_record.import_string] = attribute_record
 
-    def _render_parts(self, indent: int = 0) -> List[Any]:
-        parts: List[Any] = []
-        if self.import_records:
-            for import_record in self.import_records:
-                parts.append(import_record)
-                parts.append(RenderPart.LINE_BREAK)
-            parts.append(RenderPart.LINE_BREAK)
-        if self.class_records:
-            for class_record in self.class_records:
-                parts.append(class_record)
-                parts.append(RenderPart.LINE_BREAK)
-            parts.append(RenderPart.LINE_BREAK)
-        for function_record in self.function_records:
-            parts.append(function_record)
-            parts.append(RenderPart.LINE_BREAK)
-
-        return parts
+    def _render_parts(self) -> List[RenderExpr]:
+        return [f"module {self.name}"]
 
     def build_children(self) -> None:
         """

@@ -47,5 +47,5 @@ class TextRecord(ExpressionRecord):
     def _parse(self) -> None:
         return
 
-    def _render_parts(self, indent: int = 0) -> List[RenderExpr]:
+    def _render_parts(self) -> List[RenderExpr]:
         return [self.name]

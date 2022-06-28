@@ -1,7 +1,9 @@
 """
 Wrapper for python import strings.
 """
-from typing import Any, List
+from typing import Any, List, TypeVar
+
+_R = TypeVar("_R", bound="ImportString")
 
 
 class ImportStringError(Exception):
@@ -141,7 +143,7 @@ class ImportString:
         return "." not in self.value
 
     @property
-    def parent(self) -> "ImportString":
+    def parent(self: _R) -> _R:
         """
         Parent import string.
 
@@ -152,9 +154,9 @@ class ImportString:
             raise ImportStringError("Import string is top level and has no parents.")
 
         parent_import_string_parts = self.value.split(".")[:-1]
-        return ImportString(".".join(parent_import_string_parts))
+        return self.__class__(".".join(parent_import_string_parts))
 
-    def startswith(self, import_string: "ImportString") -> bool:
+    def startswith(self: _R, import_string: _R) -> bool:
         """
         Check if it starts with `import_string`.
 
@@ -162,3 +164,32 @@ class ImportString:
             True if it is a child.
         """
         return self.value.startswith(f"{import_string}.")
+
+    def get_parents(self: _R) -> List[_R]:
+        """
+        Get all parents.
+
+        Returns:
+            A list of `ImportString` instances.
+        """
+        if self.is_top_level():
+            return []
+
+        parents = []
+        import_string = self
+        while not import_string.is_top_level():
+            parents.append(import_string.parent)
+            import_string = import_string.parent
+
+        parents.reverse()
+        return parents
+
+    @property
+    def length(self) -> int:
+        """
+        Length of import string parts.
+
+        Returns:
+            Length of import string.
+        """
+        return len(self.parts)

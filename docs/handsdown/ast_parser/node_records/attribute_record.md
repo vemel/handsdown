@@ -1,23 +1,23 @@
 # AttributeRecord
 
+[🙌 Handsdown - Python documentation generator](../../../README.md#-handsdown---python-documentation-generator) /
+[Modules](../../../MODULES.md#modules) /
+[Handsdown](../../index.md#handsdown) /
+[AST Parser](../index.md#ast-parser) /
+[Node Records](index.md#node-records) /
+AttributeRecord
+
 > Auto-generated documentation for [handsdown.ast_parser.node_records.attribute_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py) module.
 
-Wrapper for an `ast.Assign` node of a module or class attribute.
-
-- [Handsdown](../../../README.md#-handsdown---python-documentation-generator) / [Modules](../../../MODULES.md#modules) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](index.md#node-records) / AttributeRecord
-    - [AttributeRecord](#attributerecord)
-        - [AttributeRecord().append_to](#attributerecordappend_to)
-        - [AttributeRecord().related_names](#attributerecordrelated_names)
-        - [AttributeRecord().render](#attributerecordrender)
+- [AttributeRecord](#attributerecord)
+  - [AttributeRecord](#attributerecord-1)
+    - [AttributeRecord().append_to](#attributerecord()append_to)
+    - [AttributeRecord().related_names](#attributerecord()related_names)
+    - [AttributeRecord().render](#attributerecord()render)
 
 ## AttributeRecord
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L12)
-
-```python
-class AttributeRecord(NodeRecord):
-    def __init__(node: ast.Assign) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L12)
 
 Wrapper for an `ast.Assign` node of a module or class attribute.
 
@@ -25,19 +25,30 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 - `node` - AST node.
 
+#### Signature
+
+```python
+class AttributeRecord(NodeRecord):
+    def __init__(self, node: ast.Assign) -> None:
+        ...
+```
+
 #### See also
 
 - [NodeRecord](node_record.md#noderecord)
 
 ### AttributeRecord().append_to
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L57)
-
-```python
-def append_to(node_record: NodeRecord) -> None:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L57)
 
 Append AttributeRecord to NodeRecord.
+
+#### Signature
+
+```python
+def append_to(self, node_record: NodeRecord) -> None:
+    ...
+```
 
 #### See also
 
@@ -45,21 +56,29 @@ Append AttributeRecord to NodeRecord.
 
 ### AttributeRecord().related_names
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L29)
-
-```python
-@property
-def related_names() -> Set[str]:
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L29)
 
 Set of related names.
 
-### AttributeRecord().render
-
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L51)
+#### Signature
 
 ```python
-def render(indent: int = 0, allow_multiline: bool = False) -> str:
+@property
+def related_names(self) -> Set[str]:
+    ...
 ```
 
+### AttributeRecord().render
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L51)
+
 Render attribute with docstring.
+
+#### Signature
+
+```python
+def render(self) -> str:
+    ...
+```
+
+

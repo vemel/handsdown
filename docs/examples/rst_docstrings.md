@@ -1,34 +1,30 @@
 # PEP 287 - reStructuredText docstrings examples
 
+[🙌 Handsdown - Python documentation generator](../README.md#-handsdown---python-documentation-generator) /
+[Modules](../MODULES.md#modules) /
+[Examples](index.md#examples) /
+PEP 287 - reStructuredText docstrings examples
+
 > Auto-generated documentation for [examples.rst_docstrings](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py) module.
 
-- [Handsdown](../README.md#-handsdown---python-documentation-generator) / [Modules](../MODULES.md#modules) / [Examples](index.md#examples) / PEP 287 - reStructuredText docstrings examples
-    - [Links](#links)
-    - [RSTExample](#rstexample)
-        - [RSTExample.reference](#rstexamplereference)
-        - [RSTExample.replace_test](#rstexamplereplace_test)
-        - [RSTExample.rtype_test](#rstexamplertype_test)
-
-## Links
-
-[PEP 287 - reStructuredText Docstring Format](https://www.python.org/dev/peps/pep-0287/)
+- [PEP 287 - reStructuredText docstrings examples](#pep-287---restructuredtext-docstrings-examples)
+  - [RSTExample](#rstexample)
+    - [RSTExample.reference](#rstexamplereference)
 
 ## RSTExample
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L11)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L10)
+
+#### Signature
 
 ```python
-class RSTExample():
+class RSTExample:
+    ...
 ```
 
 ### RSTExample.reference
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L12)
-
-```python
-@staticmethod
-def reference():
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L11)
 
 This is a reference for ``RST-style`` docstrings. Check `source` code
 to see how it works.
@@ -45,11 +41,7 @@ Return statement
 
 #### Raises
 
-- `ValueError` -  Raises example
-
-Code example
-
-```python
+- `ValueError` -  Raises exampleCode example```python
 data = {
     'key': 'value',
 }
@@ -57,26 +49,32 @@ data = {
 print(data)
 ```
 
+#### Signature
+
+```python
+@staticmethod
+def reference():
+    ...
+```
+
 ### RSTExample.replace_test
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L41)
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L40)
+
+Check if all attribute `attributes`, ``data`` and exception `Exception` in
+class ``RSTExample`` and class `RSTExample` look good.
+
+#### Signature
 
 ```python
 @staticmethod
 def replace_test():
+    ...
 ```
-
-Check if all attribute `attributes`, ``data`` and exception `Exception` in
-:class:[RSTExample](#rstexample) and :class:[RSTExample](#rstexample) look good.
 
 ### RSTExample.rtype_test
 
-[[find in source code]](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L32)
-
-```python
-@staticmethod
-def rtype_test():
-```
+[find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L31)
 
 `:rtype:` test.
 
@@ -84,3 +82,13 @@ def rtype_test():
 
 Return statement
 Type: *bool*
+
+#### Signature
+
+```python
+@staticmethod
+def rtype_test():
+    ...
+```
+
+

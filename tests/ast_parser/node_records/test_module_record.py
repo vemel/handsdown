@@ -1,5 +1,5 @@
-# pylint: disable=missing-docstring
 import unittest
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
@@ -74,18 +74,14 @@ class TestFunctionRecord(unittest.TestCase):
             list(record.iter_records()),
             [
                 class_record,
-                "class_method",
                 private_class_record,
-                "private_class_method",
                 function_record,
                 private_function_record,
             ],
         )
 
         record.all_names = ["class_record", "function_record"]
-        self.assertEqual(
-            list(record.iter_records()), [class_record, "class_method", function_record]
-        )
+        self.assertEqual(list(record.iter_records()), [class_record, function_record])
 
     @patch("handsdown.ast_parser.node_records.module_record.ModuleAnalyzer")
     def test_build_children(self, ModuleAnalyzerMock):
@@ -138,16 +134,12 @@ class TestFunctionRecord(unittest.TestCase):
         self.assertEqual(record.import_records[0].name, "import_name")
         self.assertEqual(record.import_records[1].node, import_node)
         self.assertEqual(record.import_records[1].name, "import_name_2")
-        self.assertEqual(
-            record.class_records[0].import_string.value, "my_module.ClassNode"
-        )
+        self.assertEqual(record.class_records[0].import_string.value, "my_module.ClassNode")
         self.assertEqual(
             record.class_records[0].method_records[0].import_string.value,
             "my_module.ClassNode.class_method",
         )
-        self.assertEqual(
-            record.function_records[0].import_string.value, "my_module.function_node"
-        )
+        self.assertEqual(record.function_records[0].import_string.value, "my_module.function_node")
 
     def test_parse(self):
         node = MagicMock()
@@ -208,15 +200,11 @@ class TestFunctionRecord(unittest.TestCase):
         record.function_records = [function_record]
 
         self.assertIsNone(record.parse())
-        self.assertEqual(
-            attribute_record.docstring, "attribute docstring\n  attribute docstring 2"
-        )
+        self.assertEqual(attribute_record.docstring, "attribute docstring\n  attribute docstring 2")
         self.assertEqual(class_attribute_record.docstring, "")
 
         self.assertEqual(method_record.title, "class_record().method_record")
-        self.assertEqual(
-            static_method_record.title, "class_record.static_method_record"
-        )
+        self.assertEqual(static_method_record.title, "class_record.static_method_record")
 
         function_record.parse_type_comments.assert_called_once_with(
             ["function_line 1", "function_line 2"]
@@ -233,8 +221,4 @@ class TestFunctionRecord(unittest.TestCase):
         record.function_records = ["function_record"]
         record.import_records = ["import_record"]
 
-        self.assertEqual(record.render(), "import_record")
-        self.assertEqual(
-            record.render(allow_multiline=True),
-            "import_record\n\nclass_record\n\nfunction_record",
-        )
+        self.assertEqual(record.render(), "module module")

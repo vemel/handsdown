@@ -47,3 +47,13 @@ class NicePath(type(Path())):  # type: ignore
                 continue
 
             yield self.__class__(path)
+
+    def write_changed(self, content: str, encoding: str) -> bool:
+        """
+        Write content to file if it's changed.
+        """
+        if self.exists() and self.read_text(encoding) == content:
+            return False
+
+        self.write_text(content, encoding)
+        return True
