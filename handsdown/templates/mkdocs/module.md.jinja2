@@ -6,7 +6,7 @@
     {%- if parent_module_record -%}
         [{{ parent_module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(parent_module_record).path) }}#{{ md_document.get_anchor(parent_module_record.title) }}) /
     {%- else -%}
-        `{{ parent_import_string.parts[-1] }}` /
+        `{{ parent_import_string.name }}` /
     {%- endif -%}
     {{ '\n' -}}
 {% endfor -%}

@@ -136,3 +136,9 @@ class FunctionRecord(NodeRecord):
 
     def _render_parts(self) -> List[RenderExpr]:
         return [f"def {self.name}()"]
+
+    def is_init(self) -> bool:
+        """
+        Returns True if function is an __init__ method.
+        """
+        return self.name == "__init__"

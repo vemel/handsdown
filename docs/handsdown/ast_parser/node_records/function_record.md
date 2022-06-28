@@ -10,6 +10,7 @@ FunctionRecord
 
 - [FunctionRecord](#functionrecord)
   - [FunctionRecord](#functionrecord-1)
+    - [FunctionRecord().is_init](#functionrecord()is_init)
     - [FunctionRecord().parse_type_comments](#functionrecord()parse_type_comments)
     - [FunctionRecord().related_names](#functionrecord()related_names)
 
@@ -35,6 +36,19 @@ class FunctionRecord(NodeRecord):
 
 - [ASTFunctionDef](../type_defs.md#astfunctiondef)
 - [NodeRecord](./node_record.md#noderecord)
+
+### FunctionRecord().is_init
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L140)
+
+Returns True if function is an __init__ method.
+
+#### Signature
+
+```python
+def is_init(self) -> bool:
+    ...
+```
 
 ### FunctionRecord().parse_type_comments
 

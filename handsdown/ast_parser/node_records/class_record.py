@@ -67,7 +67,7 @@ class ClassRecord(NodeRecord):
             result.add(base.name)
             result.update(base.related_names)
         for method_record in self.method_records:
-            if method_record.name == "__init__":
+            if method_record.is_init():
                 result.update(method_record.related_names)
         return result
 
@@ -96,7 +96,7 @@ class ClassRecord(NodeRecord):
         """
         result = []
         for method_record in self.method_records:
-            if method_record.name == "__init__":
+            if method_record.is_init():
                 continue
 
             result.append(method_record)
@@ -129,6 +129,6 @@ class ClassRecord(NodeRecord):
         Get the `__init__` method.
         """
         for method in self.method_records:
-            if method.name == "__init__":
+            if method.is_init():
                 return method
         return None

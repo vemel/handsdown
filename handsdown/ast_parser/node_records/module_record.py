@@ -65,7 +65,7 @@ class ModuleRecord(NodeRecord):
         assert isinstance(node, ast.Module)
         record = cls(node)
         record.import_string = import_string
-        record.name = import_string.parts[-1]
+        record.name = import_string.name
         record.source_path = NicePath(source_path)
         record.source_lines = content.split("\n")
         return record

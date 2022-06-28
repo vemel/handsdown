@@ -193,3 +193,10 @@ class ImportString:
             Length of import string.
         """
         return len(self.parts)
+
+    @property
+    def name(self) -> str:
+        """
+        Last part of the import string.
+        """
+        return self.parts[-1] if self.parts else "empty"

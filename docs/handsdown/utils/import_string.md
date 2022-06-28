@@ -16,6 +16,7 @@ ImportString
     - [ImportString().get_parents](#importstring()get_parents)
     - [ImportString().is_top_level](#importstring()is_top_level)
     - [ImportString().length](#importstring()length)
+    - [ImportString().name](#importstring()name)
     - [ImportString().parent](#importstring()parent)
     - [ImportString().parts](#importstring()parts)
     - [ImportString().startswith](#importstring()startswith)
@@ -210,6 +211,20 @@ Length of import string.
 ```python
 @property
 def length(self) -> int:
+    ...
+```
+
+### ImportString().name
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L197)
+
+Last part of the import string.
+
+#### Signature
+
+```python
+@property
+def name(self) -> str:
     ...
 ```
 
