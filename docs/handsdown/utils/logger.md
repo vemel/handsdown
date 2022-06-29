@@ -7,9 +7,6 @@ Logger
 
 > Auto-generated documentation for [handsdown.utils.logger](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py) module.
 
-- [Logger](#logger)
-  - [get_logger](#get_logger)
-
 ## get_logger
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py#L10)
@@ -30,5 +27,6 @@ A `logging.Logger` instance.
 def get_logger(level: Optional[int] = None) -> logging.Logger:
     ...
 ```
+
 
 

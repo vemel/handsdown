@@ -7,10 +7,6 @@ Strings
 
 > Auto-generated documentation for [handsdown.utils.strings](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py) module.
 
-- [Strings](#strings)
-  - [extract_md_title](#extract_md_title)
-  - [make_title](#make_title)
-
 ## extract_md_title
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L48)
@@ -81,5 +77,6 @@ A human-readable title as a string.
 def make_title(file_stem: str) -> str:
     ...
 ```
+
 
 

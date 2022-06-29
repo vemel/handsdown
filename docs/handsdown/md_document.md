@@ -6,25 +6,6 @@ MDDocument
 
 > Auto-generated documentation for [handsdown.md_document](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py) module.
 
-- [MDDocument](#mddocument)
-  - [MDDocument](#mddocument-1)
-    - [MDDocument().append](#mddocument()append)
-    - [MDDocument.get_anchor](#mddocumentget_anchor)
-    - [MDDocument().get_doc_link](#mddocument()get_doc_link)
-    - [MDDocument.is_toc](#mddocumentis_toc)
-    - [MDDocument().path](#mddocument()path)
-    - [MDDocument().read](#mddocument()read)
-    - [MDDocument().render_doc_link](#mddocument()render_doc_link)
-    - [MDDocument.render_link](#mddocumentrender_link)
-    - [MDDocument().sections](#mddocument()sections)
-    - [MDDocument().subtitle](#mddocument()subtitle)
-    - [MDDocument().subtitle](#mddocument()subtitle-1)
-    - [MDDocument().title](#mddocument()title)
-    - [MDDocument().title](#mddocument()title-1)
-    - [MDDocument().toc_section](#mddocument()toc_section)
-    - [MDDocument().toc_section](#mddocument()toc_section-1)
-    - [MDDocument().write](#mddocument()write)
-
 ## MDDocument
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L22)
@@ -373,5 +354,6 @@ Write MD content to [MDDocument().path](#mddocumentpath).
 def write(self) -> None:
     ...
 ```
+
 
 

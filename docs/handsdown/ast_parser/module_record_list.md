@@ -7,13 +7,6 @@ ModuleRecordList
 
 > Auto-generated documentation for [handsdown.ast_parser.module_record_list](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py) module.
 
-- [ModuleRecordList](#modulerecordlist)
-  - [ModuleRecordList](#modulerecordlist-1)
-    - [ModuleRecordList().__iter__](#modulerecordlist()__iter__)
-    - [ModuleRecordList().add](#modulerecordlist()add)
-    - [ModuleRecordList().find_module_record](#modulerecordlist()find_module_record)
-    - [ModuleRecordList().get_package_names](#modulerecordlist()get_package_names)
-
 ## ModuleRecordList
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L11)
@@ -107,5 +100,6 @@ A set of top level imports as strings.
 def get_package_names(self) -> Set[str]:
     ...
 ```
+
 
 

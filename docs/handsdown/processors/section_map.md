@@ -7,14 +7,6 @@ SectionMap
 
 > Auto-generated documentation for [handsdown.processors.section_map](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py) module.
 
-- [SectionMap](#sectionmap)
-  - [SectionMap](#sectionmap-1)
-    - [SectionMap().__iter__](#sectionmap()__iter__)
-    - [SectionMap().add_block](#sectionmap()add_block)
-    - [SectionMap().add_line](#sectionmap()add_line)
-    - [SectionMap().add_line_indent](#sectionmap()add_line_indent)
-    - [SectionMap().trim_block](#sectionmap()trim_block)
-
 ## SectionMap
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L11)
@@ -126,5 +118,6 @@ If `Section` does not exist - it is not created.
 def trim_block(self, section_name: str) -> None:
     ...
 ```
+
 
 

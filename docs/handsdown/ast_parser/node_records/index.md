@@ -7,9 +7,6 @@ Node Records
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/__init__.py) module.
 
-- [Node Records](#node-records)
-  - [Modules](#modules)
-
 ## Modules
 
 - [ArgumentRecord](./argument_record.md)

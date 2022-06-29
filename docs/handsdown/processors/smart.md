@@ -7,10 +7,6 @@ Smart
 
 > Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py) module.
 
-- [Smart](#smart)
-  - [SmartDocstringProcessor](#smartdocstringprocessor)
-    - [SmartDocstringProcessor().build_sections](#smartdocstringprocessor()build_sections)
-
 ## SmartDocstringProcessor
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py#L15)
@@ -54,5 +50,6 @@ def build_sections(self, content: str) -> SectionMap:
 #### See also
 
 - [SectionMap](./section_map.md#sectionmap)
+
 
 

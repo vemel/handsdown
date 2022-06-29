@@ -6,13 +6,6 @@ Exceptions
 
 > Auto-generated documentation for [handsdown.exceptions](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py) module.
 
-- [Exceptions](#exceptions)
-  - [GeneratorError](#generatorerror)
-  - [ImportStringError](#importstringerror)
-  - [LoaderError](#loadererror)
-  - [ParserError](#parsererror)
-  - [PathFinderError](#pathfindererror)
-
 ## GeneratorError
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L6)
@@ -85,5 +78,6 @@ Main error for `PathFinder`.
 class PathFinderError(Exception):
     ...
 ```
+
 
 

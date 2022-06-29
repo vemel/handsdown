@@ -56,6 +56,9 @@ class BaseGenerator:
     index_template_path = common_templates_path / "index.md.jinja2"
     module_template_path = templates_path / "module.md.jinja2"
 
+    # Whether to add ToC to generated module docs
+    insert_toc = False
+
     def __init__(
         self,
         input_path: Path,
@@ -224,7 +227,8 @@ class BaseGenerator:
             docstring_processor=self._docstring_processor,
             generator=self,
         )
-        content = insert_md_toc(content, self._toc_depth)
+        if self.insert_toc:
+            content = insert_md_toc(content, self._toc_depth)
         if NicePath(md_document.path).write_changed(content, encoding=self._encoding):
             self._logger.info(f"Updated doc {md_document.path} for {module_record.source_path}")
 
@@ -250,6 +254,7 @@ class BaseGenerator:
             md_document=md_document,
             generator=self,
             project_name=self._project_name,
+            source_code_url=self._source_code_url,
         )
         if md_document.path.write_changed(content, encoding=self._encoding):
             self._logger.info(f"Updated index {md_document.path}")

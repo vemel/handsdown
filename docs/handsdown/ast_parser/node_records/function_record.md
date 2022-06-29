@@ -8,12 +8,6 @@ FunctionRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.function_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py) module.
 
-- [FunctionRecord](#functionrecord)
-  - [FunctionRecord](#functionrecord-1)
-    - [FunctionRecord().is_init](#functionrecord()is_init)
-    - [FunctionRecord().parse_type_comments](#functionrecord()parse_type_comments)
-    - [FunctionRecord().related_names](#functionrecord()related_names)
-
 ## FunctionRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L16)
@@ -79,5 +73,6 @@ Set of related names.
 def related_names(self) -> Set[str]:
     ...
 ```
+
 
 

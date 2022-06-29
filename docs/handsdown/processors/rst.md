@@ -7,9 +7,6 @@ reStructuredText Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py) module.
 
-- [reStructuredText Docstring Processor](#restructuredtext-docstring-processor)
-  - [RSTDocstringProcessor](#rstdocstringprocessor)
-
 ## RSTDocstringProcessor
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py#L33)
@@ -26,5 +23,6 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
 #### See also
 
 - [BaseDocstringProcessor](./base.md#basedocstringprocessor)
+
 
 

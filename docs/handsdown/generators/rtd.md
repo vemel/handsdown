@@ -7,9 +7,6 @@ Rtd
 
 > Auto-generated documentation for [handsdown.generators.rtd](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py) module.
 
-- [Rtd](#rtd)
-  - [RTDGenerator](#rtdgenerator)
-
 ## RTDGenerator
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py#L8)
@@ -26,5 +23,6 @@ class RTDGenerator(BaseGenerator):
 #### See also
 
 - [BaseGenerator](./base.md#basegenerator)
+
 
 

@@ -7,12 +7,6 @@ NicePath
 
 > Auto-generated documentation for [handsdown.utils.nice_path](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py) module.
 
-- [NicePath](#nicepath)
-  - [NicePath](#nicepath-1)
-    - [NicePath().rmtree](#nicepath()rmtree)
-    - [NicePath().walk](#nicepath()walk)
-    - [NicePath().write_changed](#nicepath()write_changed)
-
 ## NicePath
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
@@ -70,5 +64,6 @@ Write content to file if it's changed.
 def write_changed(self, content: str, encoding: str) -> bool:
     ...
 ```
+
 
 

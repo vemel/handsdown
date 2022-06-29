@@ -5,9 +5,6 @@ Examples
 
 > Auto-generated documentation for [examples](https://github.com/vemel/handsdown/blob/main/examples/__init__.py) module.
 
-- [Examples](#examples)
-  - [Modules](#modules)
-
 ## Modules
 
 - [PEP 484 - comment-based type annotations examples](./comment_typed.md)

@@ -6,10 +6,6 @@ Main
 
 > Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/main/handsdown/main.py) module.
 
-- [Main](#main)
-  - [api](#api)
-  - [main](#main)
-
 ## api
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L15)
@@ -39,5 +35,6 @@ Main entrypoint for CLI.
 def main() -> None:
     ...
 ```
+
 
 

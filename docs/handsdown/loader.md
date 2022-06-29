@@ -6,12 +6,6 @@ Loader
 
 > Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py) module.
 
-- [Loader](#loader)
-  - [Loader](#loader-1)
-    - [Loader().get_import_string](#loader()get_import_string)
-    - [Loader().get_module_record](#loader()get_module_record)
-    - [Loader.parse_module_record](#loaderparse_module_record)
-
 ## Loader
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L17)
@@ -123,5 +117,6 @@ def parse_module_record(module_record: ModuleRecord) -> None:
 #### See also
 
 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
+
 
 

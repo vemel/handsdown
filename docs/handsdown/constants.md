@@ -17,9 +17,6 @@ Constants
 - `ENCODING` - Default encoding for source files: `'utf-8'`
 
 
-- [Constants](#constants)
-  - [Theme](#theme)
-
 ## Theme
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L19)
@@ -30,5 +27,6 @@ Constants
 class Theme(enum.Enum):
     ...
 ```
+
 
 

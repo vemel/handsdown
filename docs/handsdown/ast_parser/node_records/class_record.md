@@ -8,14 +8,6 @@ ClassRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.class_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py) module.
 
-- [ClassRecord](#classrecord)
-  - [ClassRecord](#classrecord-1)
-    - [ClassRecord().find_record](#classrecord()find_record)
-    - [ClassRecord().get_public_methods](#classrecord()get_public_methods)
-    - [ClassRecord().init_method](#classrecord()init_method)
-    - [ClassRecord().iter_records](#classrecord()iter_records)
-    - [ClassRecord().related_names](#classrecord()related_names)
-
 ## ClassRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L16)
@@ -123,5 +115,6 @@ Set of related names.
 def related_names(self) -> Set[str]:
     ...
 ```
+
 
 

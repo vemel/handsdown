@@ -20,4 +20,3 @@ Type Defs
 - `ASTFunctionDef` - AST import node: `Union[ast.FunctionDef, ast.AsyncFunctionDef]`
 
 
-- [Type Defs](#type-defs)

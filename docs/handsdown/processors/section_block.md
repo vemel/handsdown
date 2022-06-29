@@ -7,10 +7,6 @@ SectionBlock
 
 > Auto-generated documentation for [handsdown.processors.section_block](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py) module.
 
-- [SectionBlock](#sectionblock)
-  - [SectionBlock](#sectionblock-1)
-    - [SectionBlock().render](#sectionblock()render)
-
 ## SectionBlock
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py#L9)
@@ -45,5 +41,6 @@ Block lines as a text.
 def render(self) -> str:
     ...
 ```
+
 
 

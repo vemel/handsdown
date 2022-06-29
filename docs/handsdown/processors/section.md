@@ -7,11 +7,6 @@ Section
 
 > Auto-generated documentation for [handsdown.processors.section](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py) module.
 
-- [Section](#section)
-  - [Section](#section-1)
-    - [Section().iterate_blocks](#section()iterate_blocks)
-    - [Section().render](#section()render)
-
 ## Section
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L9)
@@ -64,5 +59,6 @@ Section lines as a text.
 def render(self) -> str:
     ...
 ```
+
 
 

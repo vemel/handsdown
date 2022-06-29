@@ -8,11 +8,6 @@ ExpressionRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.expression_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py) module.
 
-- [ExpressionRecord](#expressionrecord)
-  - [ExpressionRecord](#expressionrecord-1)
-    - [ExpressionRecord().related_names](#expressionrecord()related_names)
-    - [ExpressionRecord().render_str](#expressionrecord()render_str)
-
 ## ExpressionRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L13)
@@ -61,5 +56,6 @@ Render expression to a string.
 def render_str(self) -> str:
     ...
 ```
+
 
 

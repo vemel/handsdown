@@ -6,11 +6,6 @@ PEP 257 - PEP 257 and Google docstrings examples
 
 > Auto-generated documentation for [examples.pep257_docstrings](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py) module.
 
-- [PEP 257 - PEP 257 and Google docstrings examples](#pep-257---pep-257-and-google-docstrings-examples)
-  - [ClassExample](#classexample)
-    - [ClassExample().method_example](#classexample()method_example)
-  - [function_example](#function_example)
-
 ## ClassExample
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L10)
@@ -109,5 +104,6 @@ Form a complex number.
 def function_example(real=0.0, imag=0.0):
     ...
 ```
+
 
 

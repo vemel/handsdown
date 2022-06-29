@@ -8,12 +8,6 @@ AttributeRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.attribute_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py) module.
 
-- [AttributeRecord](#attributerecord)
-  - [AttributeRecord](#attributerecord-1)
-    - [AttributeRecord().append_to](#attributerecord()append_to)
-    - [AttributeRecord().related_names](#attributerecord()related_names)
-    - [AttributeRecord().render](#attributerecord()render)
-
 ## AttributeRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L12)
@@ -79,5 +73,6 @@ Render attribute with docstring.
 def render(self) -> str:
     ...
 ```
+
 
 

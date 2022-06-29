@@ -7,15 +7,6 @@ IndentTrimmer
 
 > Auto-generated documentation for [handsdown.utils.indent_trimmer](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py) module.
 
-- [IndentTrimmer](#indenttrimmer)
-  - [IndentTrimmer](#indenttrimmer-1)
-    - [IndentTrimmer.get_line_indent](#indenttrimmerget_line_indent)
-    - [IndentTrimmer.indent_line](#indenttrimmerindent_line)
-    - [IndentTrimmer.trim_empty_lines](#indenttrimmertrim_empty_lines)
-    - [IndentTrimmer.trim_line](#indenttrimmertrim_line)
-    - [IndentTrimmer.trim_lines](#indenttrimmertrim_lines)
-    - [IndentTrimmer.trim_text](#indenttrimmertrim_text)
-
 ## IndentTrimmer
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/indent_trimmer.py#L10)
@@ -217,5 +208,6 @@ A text with trimmed indent.
 def trim_text(cls, text: str) -> str:
     ...
 ```
+
 
 

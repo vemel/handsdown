@@ -7,14 +7,6 @@ PathFinder
 
 > Auto-generated documentation for [handsdown.utils.path_finder](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py) module.
 
-- [PathFinder](#pathfinder)
-  - [PathFinder](#pathfinder-1)
-    - [PathFinder().exclude](#pathfinder()exclude)
-    - [PathFinder().glob](#pathfinder()glob)
-    - [PathFinder().include](#pathfinder()include)
-    - [PathFinder().mkdir](#pathfinder()mkdir)
-    - [PathFinder().relative](#pathfinder()relative)
-
 ## PathFinder
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L19)
@@ -166,5 +158,6 @@ def relative(self, target: Path) -> NicePath:
 #### See also
 
 - [NicePath](./nice_path.md#nicepath)
+
 
 

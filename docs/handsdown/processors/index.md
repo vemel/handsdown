@@ -6,9 +6,6 @@ Processors
 
 > Auto-generated documentation for [handsdown.processors](https://github.com/vemel/handsdown/blob/main/handsdown/processors/__init__.py) module.
 
-- [Processors](#processors)
-  - [Modules](#modules)
-
 ## Modules
 
 - [Base Docstring Processor](./base.md)

@@ -6,9 +6,6 @@ AST Parser
 
 > Auto-generated documentation for [handsdown.ast_parser](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/__init__.py) module.
 
-- [AST Parser](#ast-parser)
-  - [Modules](#modules)
-
 ## Modules
 
 - [Analyzers](analyzers/index.md)

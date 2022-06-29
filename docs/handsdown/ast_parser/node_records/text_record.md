@@ -8,10 +8,6 @@ TextRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.text_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py) module.
 
-- [TextRecord](#textrecord)
-  - [TextRecord](#textrecord-1)
-    - [TextRecord().related_names](#textrecord()related_names)
-
 ## TextRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py#L12)
@@ -59,5 +55,6 @@ A set of related names.
 def related_names(self) -> Set[str]:
     ...
 ```
+
 
 

@@ -6,11 +6,6 @@ Stub file type annotations examples
 
 > Auto-generated documentation for [examples.pyi_typed](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py) module.
 
-- [Stub file type annotations examples](#stub-file-type-annotations-examples)
-  - [MyValue](#myvalue)
-  - [func](#func)
-  - [func_any](#func_any)
-
 ## MyValue
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L10)
@@ -55,5 +50,6 @@ def func_any(_list, _my_value_cls=MyValue, **_kwargs):
 #### See also
 
 - [MyValue](#myvalue)
+
 
 

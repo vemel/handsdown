@@ -6,9 +6,6 @@ Utils
 
 > Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py) module.
 
-- [Utils](#utils)
-  - [Modules](#modules)
-
 ## Modules
 
 - [Blackify](./blackify.md)

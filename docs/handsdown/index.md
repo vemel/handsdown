@@ -5,9 +5,6 @@ Handsdown
 
 > Auto-generated documentation for [handsdown](https://github.com/vemel/handsdown/blob/main/handsdown/__init__.py) module.
 
-- [Handsdown](#handsdown)
-  - [Modules](#modules)
-
 ## Modules
 
 - [Module](./module.md)

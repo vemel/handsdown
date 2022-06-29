@@ -7,14 +7,6 @@ Markdown
 
 > Auto-generated documentation for [handsdown.utils.markdown](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py) module.
 
-- [Markdown](#markdown)
-  - [Header](#header)
-    - [Header().render](#header()render)
-  - [TableOfContents](#tableofcontents)
-    - [TableOfContents.parse](#tableofcontentsparse)
-    - [TableOfContents().render](#tableofcontents()render)
-  - [insert_md_toc](#insert_md_toc)
-
 ## Header
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L9)
@@ -113,5 +105,6 @@ Insert Table of Contents before the first second-level header.
 def insert_md_toc(text: str, depth: int = 3) -> str:
     ...
 ```
+
 
 

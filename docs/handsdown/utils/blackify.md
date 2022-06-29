@@ -7,9 +7,6 @@ Blackify
 
 > Auto-generated documentation for [handsdown.utils.blackify](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py) module.
 
-- [Blackify](#blackify)
-  - [blackify](#blackify)
-
 ## blackify
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py#L10)
@@ -34,5 +31,6 @@ Formatted python code.
 def blackify(content: str) -> str:
     ...
 ```
+
 
 

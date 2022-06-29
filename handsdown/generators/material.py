@@ -12,3 +12,5 @@ class MaterialGenerator(BaseGenerator):
 
     templates_path = NicePath("material")
     module_template_path = templates_path / "module.md.jinja2"
+
+    insert_toc = False

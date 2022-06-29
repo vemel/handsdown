@@ -12,3 +12,5 @@ class RTDGenerator(BaseGenerator):
 
     templates_path = NicePath("readthedocs")
     module_template_path = templates_path / "module.md.jinja2"
+
+    insert_toc = True

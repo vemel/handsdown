@@ -8,45 +8,6 @@ ExpressionAnalyzer
 
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.expression_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py) module.
 
-- [ExpressionAnalyzer](#expressionanalyzer)
-  - [ExpressionAnalyzer](#expressionanalyzer-1)
-    - [ExpressionAnalyzer().generic_visit](#expressionanalyzer()generic_visit)
-    - [ExpressionAnalyzer().visit_Attribute](#expressionanalyzer()visit_attribute)
-    - [ExpressionAnalyzer().visit_Await](#expressionanalyzer()visit_await)
-    - [ExpressionAnalyzer().visit_BinOp](#expressionanalyzer()visit_binop)
-    - [ExpressionAnalyzer().visit_BoolOp](#expressionanalyzer()visit_boolop)
-    - [ExpressionAnalyzer().visit_Bytes](#expressionanalyzer()visit_bytes)
-    - [ExpressionAnalyzer().visit_Call](#expressionanalyzer()visit_call)
-    - [ExpressionAnalyzer().visit_Compare](#expressionanalyzer()visit_compare)
-    - [ExpressionAnalyzer().visit_Dict](#expressionanalyzer()visit_dict)
-    - [ExpressionAnalyzer().visit_DictComp](#expressionanalyzer()visit_dictcomp)
-    - [ExpressionAnalyzer().visit_Ellipsis](#expressionanalyzer()visit_ellipsis)
-    - [ExpressionAnalyzer().visit_FormattedValue](#expressionanalyzer()visit_formattedvalue)
-    - [ExpressionAnalyzer().visit_GeneratorExp](#expressionanalyzer()visit_generatorexp)
-    - [ExpressionAnalyzer().visit_IfExp](#expressionanalyzer()visit_ifexp)
-    - [ExpressionAnalyzer().visit_Index](#expressionanalyzer()visit_index)
-    - [ExpressionAnalyzer().visit_JoinedStr](#expressionanalyzer()visit_joinedstr)
-    - [ExpressionAnalyzer().visit_Lambda](#expressionanalyzer()visit_lambda)
-    - [ExpressionAnalyzer().visit_List](#expressionanalyzer()visit_list)
-    - [ExpressionAnalyzer().visit_ListComp](#expressionanalyzer()visit_listcomp)
-    - [ExpressionAnalyzer().visit_Name](#expressionanalyzer()visit_name)
-    - [ExpressionAnalyzer().visit_NameConstant](#expressionanalyzer()visit_nameconstant)
-    - [ExpressionAnalyzer().visit_Num](#expressionanalyzer()visit_num)
-    - [ExpressionAnalyzer().visit_Set](#expressionanalyzer()visit_set)
-    - [ExpressionAnalyzer().visit_SetComp](#expressionanalyzer()visit_setcomp)
-    - [ExpressionAnalyzer().visit_Slice](#expressionanalyzer()visit_slice)
-    - [ExpressionAnalyzer().visit_Starred](#expressionanalyzer()visit_starred)
-    - [ExpressionAnalyzer().visit_Str](#expressionanalyzer()visit_str)
-    - [ExpressionAnalyzer().visit_Subscript](#expressionanalyzer()visit_subscript)
-    - [ExpressionAnalyzer().visit_Tuple](#expressionanalyzer()visit_tuple)
-    - [ExpressionAnalyzer().visit_UnaryOp](#expressionanalyzer()visit_unaryop)
-    - [ExpressionAnalyzer().visit_Yield](#expressionanalyzer()visit_yield)
-    - [ExpressionAnalyzer().visit_YieldFrom](#expressionanalyzer()visit_yieldfrom)
-    - [ExpressionAnalyzer().visit_arg](#expressionanalyzer()visit_arg)
-    - [ExpressionAnalyzer().visit_arguments](#expressionanalyzer()visit_arguments)
-    - [ExpressionAnalyzer().visit_comprehension](#expressionanalyzer()visit_comprehension)
-    - [ExpressionAnalyzer().visit_keyword](#expressionanalyzer()visit_keyword)
-
 ## ExpressionAnalyzer
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L13)
@@ -902,5 +863,6 @@ my_func(kwarg="value")
 def visit_keyword(self, node: ast.keyword) -> None:
     ...
 ```
+
 
 

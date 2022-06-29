@@ -8,16 +8,6 @@ NodeRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.node_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py) module.
 
-- [NodeRecord](#noderecord)
-  - [NodeRecord](#noderecord-1)
-    - [NodeRecord().class_name](#noderecord()class_name)
-    - [NodeRecord().get_documented_attribute_strings](#noderecord()get_documented_attribute_strings)
-    - [NodeRecord().line_number](#noderecord()line_number)
-    - [NodeRecord().line_number](#noderecord()line_number-1)
-    - [NodeRecord().parse](#noderecord()parse)
-    - [NodeRecord().related_names](#noderecord()related_names)
-    - [NodeRecord().render](#noderecord()render)
-
 ## NodeRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L13)
@@ -146,5 +136,6 @@ A string representation of `node`.
 def render(self) -> str:
     ...
 ```
+
 
 

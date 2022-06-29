@@ -6,12 +6,6 @@ Google docstrings examples
 
 > Auto-generated documentation for [examples.google_docstrings](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py) module.
 
-- [Google docstrings examples](#google-docstrings-examples)
-  - [ClassExample](#classexample)
-    - [ClassExample().method_example](#classexample()method_example)
-  - [function_example](#function_example)
-  - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
-
 ## ClassExample
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L13)
@@ -145,5 +139,6 @@ The return value. True for success, False otherwise.
 def function_with_pep484_type_annotations(param1: int, param2: str) -> bool:
     ...
 ```
+
 
 

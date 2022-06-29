@@ -7,9 +7,6 @@ Material
 
 > Auto-generated documentation for [handsdown.generators.material](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py) module.
 
-- [Material](#material)
-  - [MaterialGenerator](#materialgenerator)
-
 ## MaterialGenerator
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py#L8)
@@ -26,5 +23,6 @@ class MaterialGenerator(BaseGenerator):
 #### See also
 
 - [BaseGenerator](./base.md#basegenerator)
+
 
 

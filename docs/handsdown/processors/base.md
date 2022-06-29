@@ -7,10 +7,6 @@ Base Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.base](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py) module.
 
-- [Base Docstring Processor](#base-docstring-processor)
-  - [BaseDocstringProcessor](#basedocstringprocessor)
-    - [BaseDocstringProcessor().build_sections](#basedocstringprocessor()build_sections)
-
 ## BaseDocstringProcessor
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py#L28)
@@ -56,5 +52,6 @@ def build_sections(self, content: str) -> SectionMap:
 #### See also
 
 - [SectionMap](./section_map.md#sectionmap)
+
 
 

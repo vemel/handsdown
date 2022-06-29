@@ -8,15 +8,6 @@ ModuleRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py) module.
 
-- [ModuleRecord](#modulerecord)
-  - [ModuleRecord](#modulerecord-1)
-    - [ModuleRecord().build_children](#modulerecord()build_children)
-    - [ModuleRecord.create_from_source](#modulerecordcreate_from_source)
-    - [ModuleRecord().find_record](#modulerecord()find_record)
-    - [ModuleRecord().get_related_import_strings](#modulerecord()get_related_import_strings)
-    - [ModuleRecord().is_init](#modulerecord()is_init)
-    - [ModuleRecord().iter_records](#modulerecord()iter_records)
-
 ## ModuleRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L21)
@@ -166,5 +157,6 @@ A child record.
 def iter_records(self) -> Iterator[NodeRecord]:
     ...
 ```
+
 
 

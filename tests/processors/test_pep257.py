@@ -11,6 +11,4 @@ class TestLoader:
         processor = PEP257DocstringProcessor()
         sections = processor.build_sections(pep257_docstring)
         assert sections.sections[""].title == ""
-        assert (
-            sections.sections[""].render() == "Summary line.\n\nExtended description of method.\n\n"
-        )
+        assert sections.sections[""].render() == "Summary line.\n\nExtended description of method."

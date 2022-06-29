@@ -12,12 +12,6 @@ Main Example
   `main_example` module attributes with this comment as a documentation for it: `'My Module'`
 
 
-- [Main Example](#main-example)
-  - [MyClass](#myclass)
-    - [MyClass().__bool__](#myclass()__bool__)
-    - [MyClass.do_something](#myclassdo_something)
-  - [hello](#hello)
-
 ## MyClass
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
@@ -136,5 +130,6 @@ A greeting. No need to put types here if you use type annotations.
 def hello(name: str) -> str:
     ...
 ```
+
 
 

@@ -6,12 +6,6 @@ Sphinx docstrings examples
 
 > Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) module.
 
-- [Sphinx docstrings examples](#sphinx-docstrings-examples)
-  - [RSTExample](#rstexample)
-    - [RSTExample.directives_test](#rstexampledirectives_test)
-    - [RSTExample.reference](#rstexamplereference)
-    - [RSTExample.version_directives_test](#rstexampleversion_directives_test)
-
 ## RSTExample
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L10)
@@ -125,5 +119,6 @@ Deprecated in version 3.1
 def version_directives_test():
     ...
 ```
+
 
 

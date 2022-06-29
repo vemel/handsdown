@@ -6,14 +6,6 @@ PEP 484 - type annotations examples
 
 > Auto-generated documentation for [examples.typed](https://github.com/vemel/handsdown/blob/main/examples/typed.py) module.
 
-- [PEP 484 - type annotations examples](#pep-484---type-annotations-examples)
-  - [MyValue](#myvalue)
-  - [Typed](#typed)
-    - [Typed().async_method](#typed()async_method)
-    - [Typed.classmethod](#typedclassmethod)
-  - [func](#func)
-  - [my_deco](#my_deco)
-
 ## MyValue
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/typed.py#L11)
@@ -115,5 +107,6 @@ def func(
 def my_deco(key):
     ...
 ```
+
 
 

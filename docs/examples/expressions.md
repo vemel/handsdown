@@ -41,4 +41,3 @@ Supported expressions examples
 - `AWAIT` - await example: `await STRING`
 
 
-- [Supported expressions examples](#supported-expressions-examples)

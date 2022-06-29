@@ -7,10 +7,6 @@ DocstringFormatter
 
 > Auto-generated documentation for [handsdown.utils.docstring_formatter](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py) module.
 
-- [DocstringFormatter](#docstringformatter)
-  - [DocstringFormatter](#docstringformatter-1)
-    - [DocstringFormatter().render](#docstringformatter()render)
-
 ## DocstringFormatter
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L9)
@@ -45,5 +41,6 @@ A cleaned up docstring.
 def render(self) -> str:
     ...
 ```
+
 
 

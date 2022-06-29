@@ -2,16 +2,27 @@
 
 > Auto-generated documentation index.
 
+{{- '\n\n' -}}
+
+{%- if source_code_url -%}
+A full list of [{{ project_name }}]({{ source_code_url }}) project modules.
+{%- else -%}
 A full list of `{{ project_name }}` project modules.
+{%- endif -%}
 
-{% if md_document.subtitle -%}
-{{ md_document.subtitle -}}
-{% endif -%}
+{{- '\n\n' -}}
 
-{% for section in md_document._sections %}
-{{ section }}
-{% endfor %}
+{%- if md_document.subtitle -%}
+{{- md_document.subtitle -}}
+{{- '\n\n' -}}
+{%- endif -%}
 
-{% for module_record in generator.module_records -%}
+{%- for section in md_document._sections -%}
+{{ section -}}
+{{- '\n\n' -}}
+{%- endfor -%}
+
+{%- for module_record in generator.module_records -%}
 {{ '  ' * (module_record.import_string.length - 1) }}- [{{ module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(module_record).path) }}#{{ md_document.get_anchor(module_record.title) }})
-{% endfor -%}
+{{- '\n' -}}
+{%- endfor -%}

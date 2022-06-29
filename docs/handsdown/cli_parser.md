@@ -6,16 +6,6 @@ Cli Parser
 
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py) module.
 
-- [Cli Parser](#cli-parser)
-  - [CLINamespace](#clinamespace)
-    - [CLINamespace().get_source_code_url](#clinamespace()get_source_code_url)
-  - [abs_path](#abs_path)
-  - [dir_abs_path](#dir_abs_path)
-  - [existing_dir_abs_path](#existing_dir_abs_path)
-  - [git_repo](#git_repo)
-  - [parse_args](#parse_args)
-  - [parse_theme](#parse_theme)
-
 ## CLINamespace
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L18)
@@ -195,5 +185,6 @@ def parse_theme(name: str) -> Theme:
 #### See also
 
 - [Theme](./constants.md#theme)
+
 
 

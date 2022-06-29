@@ -6,13 +6,6 @@ PEP 484 - comment-based type annotations examples
 
 > Auto-generated documentation for [examples.comment_typed](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) module.
 
-- [PEP 484 - comment-based type annotations examples](#pep-484---comment-based-type-annotations-examples)
-  - [MyValue](#myvalue)
-  - [Typed](#typed)
-    - [Typed.classmethod](#typedclassmethod)
-  - [func](#func)
-  - [func_any](#func_any)
-
 ## MyValue
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py#L11)
@@ -110,5 +103,6 @@ def func_any(
 #### See also
 
 - [MyValue](#myvalue)
+
 
 
