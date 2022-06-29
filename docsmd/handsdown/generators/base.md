@@ -137,7 +137,7 @@ def generate_index(self) -> None:
 
 ### BaseGenerator().get_children_module_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L379)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L380)
 
 Get all module records that are children of this module.
 

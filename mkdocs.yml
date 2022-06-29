@@ -1,7 +1,7 @@
 site_name: "Handsdown"
 repo_url: "https://github.com/vemel/handsdown/blob/main/"
-site_dir: "site"
-docs_dir: "docs"
+site_dir: "docs"
+docs_dir: "docsmd"
 
 theme:
   name: material
@@ -20,6 +20,7 @@ theme:
         icon: material/toggle-switch
         name: Switch to light mode
   features:
+    - navigation.expand
     - navigation.instant
     - navigation.tracking
     - content.code.annotate

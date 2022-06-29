@@ -372,6 +372,7 @@ class BaseGenerator:
                 template_path=template_path,
                 project_name=self._project_name,
                 source_code_url=self._source_code_url,
+                output_path=self._output_path.name,
             )
             if output_path.write_changed(content, encoding=self._encoding):
                 self._logger.info(f"Updated config {output_path}")
