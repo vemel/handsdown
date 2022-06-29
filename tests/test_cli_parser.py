@@ -1,6 +1,7 @@
 import argparse
-import unittest
 from pathlib import Path
+
+import pytest
 
 from handsdown.cli_parser import (
     CLINamespace,
@@ -12,44 +13,38 @@ from handsdown.cli_parser import (
 )
 
 
-class TestCLIParser(unittest.TestCase):
+class TestCLIParser:
     def test_git_repo(self):
-        self.assertEqual(
-            git_repo("git@github.com:myuser/project.git"),
-            "https://github.com/myuser/project/",
+        assert git_repo("git@github.com:myuser/project.git") == "https://github.com/myuser/project/"
+        assert (
+            git_repo("https://github.com/myuser/project.git")
+            == "https://github.com/myuser/project/"
         )
-        self.assertEqual(
-            git_repo("https://github.com/myuser/project.git"),
-            "https://github.com/myuser/project/",
-        )
-        self.assertEqual(
-            git_repo("https://github.com/myuser/project"),
-            "https://github.com/myuser/project/",
-        )
-        with self.assertRaises(argparse.ArgumentTypeError):
+        assert git_repo("https://github.com/myuser/project") == "https://github.com/myuser/project/"
+        with pytest.raises(argparse.ArgumentTypeError):
             git_repo("https://test.test")
 
     def test_abs_path(self):
-        self.assertTrue(abs_path(Path("test.py").as_posix()).absolute())
+        assert abs_path(Path("test.py").as_posix()).absolute()
 
     def test_dir_abs_path(self):
-        self.assertTrue(dir_abs_path(Path(__file__).parent.as_posix()).absolute())
-        self.assertTrue(dir_abs_path(Path("/non/existing").as_posix()).absolute())
+        assert dir_abs_path(Path(__file__).parent.as_posix()).absolute()
+        assert dir_abs_path(Path("/non/existing").as_posix()).absolute()
 
-        with self.assertRaises(argparse.ArgumentTypeError):
+        with pytest.raises(argparse.ArgumentTypeError):
             dir_abs_path(Path(__file__).as_posix())
 
     def test_existing_dir_abs_path(self):
-        self.assertTrue(existing_dir_abs_path(Path(__file__).parent.as_posix()).absolute())
+        assert existing_dir_abs_path(Path(__file__).parent.as_posix()).absolute()
 
-        with self.assertRaises(argparse.ArgumentTypeError):
-            self.assertTrue(existing_dir_abs_path(Path("/non/existing").as_posix()).absolute())
+        with pytest.raises(argparse.ArgumentTypeError):
+            assert existing_dir_abs_path(Path("/non/existing").as_posix()).absolute()
 
-        with self.assertRaises(argparse.ArgumentTypeError):
+        with pytest.raises(argparse.ArgumentTypeError):
             existing_dir_abs_path(Path(__file__).as_posix())
 
     def test_parse_args(self):
-        self.assertIsInstance(parse_args([]), CLINamespace)
+        assert isinstance(parse_args([]), CLINamespace)
 
     def test_get_source_code_url(self):
         namespace = parse_args([])

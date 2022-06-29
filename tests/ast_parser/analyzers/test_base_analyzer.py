@@ -1,9 +1,7 @@
-import unittest
-
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 
 
-class TestBaseAnalyzer(unittest.TestCase):
+class TestBaseAnalyzer:
     def test_init(self):
         analyzer = BaseAnalyzer()
-        self.assertEqual(analyzer.related_names, [])
+        assert analyzer.related_names == []

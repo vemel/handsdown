@@ -1,11 +1,12 @@
-import unittest
 from pathlib import Path
 from tempfile import NamedTemporaryFile
+
+import pytest
 
 from handsdown.md_document import MDDocument
 
 
-class TestMDDocument(unittest.TestCase):
+class TestMDDocument:
     def test_init(self):
         with NamedTemporaryFile(mode="w+") as temp_f:
             temp_f.write(
@@ -33,15 +34,15 @@ class TestMDDocument(unittest.TestCase):
             md_doc = MDDocument(Path(temp_f.name))
             md_doc.read()
 
-        self.assertEqual(md_doc.path, Path(temp_f.name))
-        self.assertEqual(md_doc.title, "my title")
-        self.assertEqual(md_doc.subtitle, "subtitle\n\nsubtitle2")
-        self.assertEqual(md_doc.toc_section, "- [TOC](#toc)\n- [TOC2](#toc2)")
-        self.assertEqual(md_doc.sections[0], "## my title 2")
-        self.assertEqual(md_doc.sections[1], "some content\nnew line")
+        assert md_doc.path == Path(temp_f.name)
+        assert md_doc.title == "my title"
+        assert md_doc.subtitle == "subtitle\n\nsubtitle2"
+        assert md_doc.toc_section == "- [TOC](#toc)\n- [TOC2](#toc2)"
+        assert md_doc.sections[0] == "## my title 2"
+        assert md_doc.sections[1] == "some content\nnew line"
 
         md_doc.subtitle = "my subtitle"
-        self.assertEqual(md_doc.subtitle, "my subtitle")
+        assert md_doc.subtitle == "my subtitle"
 
         with NamedTemporaryFile(mode="w+") as temp_f:
             temp_f.write(
@@ -61,16 +62,16 @@ class TestMDDocument(unittest.TestCase):
             md_doc = MDDocument(Path(temp_f.name))
             md_doc.read()
 
-        self.assertEqual(md_doc.subtitle, "some content")
+        assert md_doc.subtitle == "some content"
 
     def test_context_manager(self):
         with NamedTemporaryFile(mode="w+") as temp_f:
             with MDDocument(Path(temp_f.name)) as md_doc:
                 md_doc.title = "test"
 
-            self.assertEqual(temp_f.read(), "# test\n")
+            assert temp_f.read() == "# test\n"
 
-        with self.assertRaises(ValueError):
+        with pytest.raises(ValueError):
             with MDDocument(Path(temp_f.name)):
                 raise ValueError("test")
 
@@ -79,39 +80,36 @@ class TestMDDocument(unittest.TestCase):
         md_doc.append("subtitle")
         md_doc.append("test")
         md_doc.append("")
-        self.assertEqual(md_doc.subtitle, "subtitle")
-        self.assertEqual(md_doc.sections[0], "test")
+        assert md_doc.subtitle == "subtitle"
+        assert md_doc.sections[0] == "test"
 
     def test_get_anchor(self):
-        self.assertEqual(MDDocument.get_anchor("s T_e-s%t"), "s-t_e-st")
-        self.assertEqual(MDDocument.get_anchor("test"), "test")
+        assert MDDocument.get_anchor("s T_e-s%t") == "s-t_e-st"
+        assert MDDocument.get_anchor("test") == "test"
 
     def test_render_doc_link(self):
         md_doc = MDDocument(Path("/root/test.md"))
-        self.assertEqual(md_doc.render_doc_link("title", anchor="tag"), "[title](#tag)")
-        self.assertEqual(
-            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test.md")),
-            "[title](#tag)",
+        assert md_doc.render_doc_link("title", anchor="tag") == "[title](#tag)"
+        assert (
+            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test.md"))
+            == "[title](#tag)"
         )
-        self.assertEqual(
-            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test2.md")),
-            "[title](./test2.md#tag)",
+        assert (
+            md_doc.render_doc_link("title", anchor="tag", target_path=Path("/root/test2.md"))
+            == "[title](./test2.md#tag)"
         )
-        self.assertEqual(
-            md_doc.render_doc_link("title", target_path=Path("/root/test.md")),
-            "[title]()",
+        assert md_doc.render_doc_link("title", target_path=Path("/root/test.md")) == "[title]()"
+        assert (
+            md_doc.render_doc_link("title", target_path=Path("/root/test2.md"))
+            == "[title](./test2.md)"
         )
-        self.assertEqual(
-            md_doc.render_doc_link("title", target_path=Path("/root/test2.md")),
-            "[title](./test2.md)",
-        )
-        self.assertEqual(md_doc.render_doc_link("title"), "[title]()")
+        assert md_doc.render_doc_link("title") == "[title]()"
 
     def test_render_link(self):
-        self.assertEqual(MDDocument.render_link("title", link="#tag"), "[title](#tag)")
-        self.assertEqual(MDDocument.render_link("title", link=""), "[title]()")
+        assert MDDocument.render_link("title", link="#tag") == "[title](#tag)"
+        assert MDDocument.render_link("title", link="") == "[title]()"
 
     def test_is_toc(self):
-        self.assertTrue(MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)"))
-        self.assertFalse(MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)\nTOC3"))
-        self.assertFalse(MDDocument.is_toc("- [TOC](#toc)\n"))
+        assert MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)")
+        assert not MDDocument.is_toc("- [TOC](#toc)\n- [TOC2](#toc2)\nTOC3")
+        assert not MDDocument.is_toc("- [TOC](#toc)\n")

@@ -1,57 +1,57 @@
-import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder, PathFinderError
 
 
-class TestPathFinder(unittest.TestCase):
+class TestPathFinder:
     @patch("handsdown.utils.path_finder.Path")
     def test_init(self, PathMock):
         path = PathMock()
-        self.assertIsInstance(PathFinder(path), PathFinder)
+        assert isinstance(PathFinder(path), PathFinder)
 
         path.is_absolute.return_value = False
-        with self.assertRaises(PathFinderError):
-            self.assertIsInstance(PathFinder(path), PathFinder)
+        with pytest.raises(PathFinderError):
+            assert isinstance(PathFinder(path), PathFinder)
 
         path.is_absolute.return_value = True
         path.exists.return_value = True
         path.is_dir.return_value = False
-        with self.assertRaises(PathFinderError):
-            self.assertIsInstance(PathFinder(path), PathFinder)
+        with pytest.raises(PathFinderError):
+            assert isinstance(PathFinder(path), PathFinder)
 
         path.is_dir.return_value = True
-        self.assertIsInstance(PathFinder(path), PathFinder)
+        assert isinstance(PathFinder(path), PathFinder)
 
     def test_relative(self):
         path_finder = PathFinder(Path("/root/parent/"))
-        self.assertEqual(path_finder.relative(Path("/root/target.py")), Path("../target.py"))
-        self.assertEqual(path_finder.relative(Path("/root/parent/target.py")), Path("target.py"))
-        self.assertEqual(
-            path_finder.relative(Path("/root2/other/target.py")),
-            Path("../../root2/other/target.py"),
+        assert path_finder.relative(Path("/root/target.py")) == Path("../target.py")
+        assert path_finder.relative(Path("/root/parent/target.py")) == Path("target.py")
+        assert path_finder.relative(Path("/root2/other/target.py")) == Path(
+            "../../root2/other/target.py"
         )
-        self.assertEqual(path_finder.relative(Path("/root/parent/source.py")), Path("source.py"))
-        with self.assertRaises(PathFinderError):
+        assert path_finder.relative(Path("/root/parent/source.py")) == Path("source.py")
+        with pytest.raises(PathFinderError):
             path_finder.relative(Path("second/source.py"))
 
     @patch("handsdown.utils.path_finder.Path")
     def test_include(self, PathMock):
         path = PathMock()
         path_finder = PathFinder(path)
-        self.assertEqual(path_finder.include_exprs, [])
+        assert path_finder.include_exprs == []
         path_finder = path_finder.include("my_dir", "expr/**/*")
-        self.assertEqual(path_finder.include_exprs, ["my_dir/*", "expr/**/*"])
+        assert path_finder.include_exprs == ["my_dir/*", "expr/**/*"]
 
     @patch("handsdown.utils.path_finder.Path")
     def test_exclude(self, PathMock):
         path = PathMock()
         path_finder = PathFinder(path)
-        self.assertEqual(path_finder.exclude_exprs, [])
+        assert path_finder.exclude_exprs == []
         path_finder = path_finder.exclude("my_dir", "expr/**/*")
-        self.assertEqual(path_finder.exclude_exprs, ["my_dir/*", "expr/**/*"])
+        assert path_finder.exclude_exprs == ["my_dir/*", "expr/**/*"]
 
     def test_glob(self):
         path = NicePath("/root")
@@ -61,15 +61,15 @@ class TestPathFinder(unittest.TestCase):
             NicePath("/root/exclude/file.py"),
         ]
         path_finder = PathFinder(path)
-        self.assertEqual(
-            list(path_finder.glob("glob_expr")),
-            [NicePath("/root/include/file.py"), NicePath("/root/exclude/file.py")],
-        )
+        assert list(path_finder.glob("glob_expr")) == [
+            NicePath("/root/include/file.py"),
+            NicePath("/root/exclude/file.py"),
+        ]
         path_finder.exclude_exprs = ["exclude/*"]
-        self.assertEqual(list(path_finder.glob("glob_expr")), [NicePath("/root/include/file.py")])
+        assert list(path_finder.glob("glob_expr")) == [NicePath("/root/include/file.py")]
 
         path_finder.include_exprs = ["include/*"]
-        self.assertEqual(list(path_finder.glob("glob_expr")), [NicePath("/root/include/file.py")])
+        assert list(path_finder.glob("glob_expr")) == [NicePath("/root/include/file.py")]
 
     @patch("handsdown.utils.path_finder.Path")
     def test_mkdir(self, _PathMock):
@@ -89,5 +89,5 @@ class TestPathFinder(unittest.TestCase):
         parent_path.mkdir.assert_called_with()
         path.mkdir.assert_called_with()
 
-        with self.assertRaises(PathFinderError):
+        with pytest.raises(PathFinderError):
             path_finder.mkdir(force=False)

@@ -1,26 +1,25 @@
-import unittest
 from unittest.mock import MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.function_record import FunctionRecord
 
 
-class TestFunctionRecord(unittest.TestCase):
+class TestFunctionRecord:
     def test_init(self):
         node = MagicMock()
         node.name = "name"
         node.body = ["body"]
         node.mock_add_spec(ast.FunctionDef)
         record = FunctionRecord(node, is_method=True)
-        self.assertEqual(record.name, "name")
-        self.assertEqual(record.title, "name")
-        self.assertTrue(record.is_method)
-        self.assertFalse(record.is_classmethod)
-        self.assertFalse(record.is_staticmethod)
-        self.assertEqual(record.line_number, 1)
+        assert record.name == "name"
+        assert record.title == "name"
+        assert record.is_method
+        assert not record.is_classmethod
+        assert not record.is_staticmethod
+        assert record.line_number == 1
 
         record.line_number = 10
-        self.assertEqual(record.line_number, 10)
+        assert record.line_number == 10
 
     @patch("handsdown.ast_parser.node_records.function_record.FunctionAnalyzer")
     def test_parse(self, FunctionAnalyzerMock):
@@ -48,12 +47,13 @@ class TestFunctionRecord(unittest.TestCase):
         FunctionAnalyzerMock().decorator_nodes = [decorator_1, decorator_2, decorator_3]
         FunctionAnalyzerMock().return_type_hint = "return_type_hint"
         record.parse()
-        self.assertEqual(
-            record.related_names,
-            {"argument_1_related", "argument_1_related_2", "argument_2_related"},
-        )
-        self.assertTrue(record.is_classmethod)
-        self.assertTrue(record.is_staticmethod)
+        assert record.related_names == {
+            "argument_1_related",
+            "argument_1_related_2",
+            "argument_2_related",
+        }
+        assert record.is_classmethod
+        assert record.is_staticmethod
 
     @patch("handsdown.ast_parser.node_records.function_record.FunctionAnalyzer")
     def test_parse_type_comments(self, FunctionAnalyzerMock):
@@ -85,9 +85,9 @@ class TestFunctionRecord(unittest.TestCase):
             "): # type: (...) -> return",
         ]
         record.parse_type_comments(lines)
-        self.assertEqual(argument_1.type_hint.name, "arg1")
-        self.assertEqual(argument_2.type_hint.name, "arg2[type, type2]")
-        self.assertEqual(record.return_type_hint.name, "return")
+        assert argument_1.type_hint.name == "arg1"
+        assert argument_2.type_hint.name == "arg2[type, type2]"
+        assert record.return_type_hint.name == "return"
 
         lines = [
             "",
@@ -95,9 +95,9 @@ class TestFunctionRecord(unittest.TestCase):
             "line # type: (extra_arg, new_arg1[type, type2], new_arg2) -> new_return",
         ]
         record.parse_type_comments(lines)
-        self.assertEqual(argument_1.type_hint.name, "new_arg1[type, type2]")
-        self.assertEqual(argument_2.type_hint.name, "new_arg2")
-        self.assertEqual(record.return_type_hint.name, "new_return")
+        assert argument_1.type_hint.name == "new_arg1[type, type2]"
+        assert argument_2.type_hint.name == "new_arg2"
+        assert record.return_type_hint.name == "new_return"
 
     @patch("handsdown.ast_parser.node_records.function_record.FunctionAnalyzer")
     def test_render(self, FunctionAnalyzerMock):
@@ -125,8 +125,8 @@ class TestFunctionRecord(unittest.TestCase):
         FunctionAnalyzerMock().argument_records = [argument_1, argument_2, argument_3]
         FunctionAnalyzerMock().decorator_nodes = [decorator_1, decorator_2]
         FunctionAnalyzerMock().return_type_hint = "return_type_hint"
-        self.assertEqual(record.render(), "def name()")
+        assert record.render() == "def name()"
 
         node.mock_add_spec(ast.AsyncFunctionDef)
         record = FunctionRecord(node, is_method=True)
-        self.assertEqual(record.render(), "def name()")
+        assert record.render() == "def name()"

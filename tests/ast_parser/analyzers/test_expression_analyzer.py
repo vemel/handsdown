@@ -1,54 +1,53 @@
-import unittest
 from unittest.mock import ANY, MagicMock, patch
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.expression_analyzer import ExpressionAnalyzer
 
 
-class TestExpressionAnalyzer(unittest.TestCase):
+class TestExpressionAnalyzer:
     def test_init(self):
         analyzer = ExpressionAnalyzer()
-        self.assertEqual(analyzer.parts, [])
+        assert analyzer.parts == []
 
     def test_visit_Str(self):
         node = MagicMock()
         node.s = "value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Str(node))
-        self.assertEqual(analyzer.parts, ["'value'"])
+        assert analyzer.visit_Str(node) is None
+        assert analyzer.parts == ["'value'"]
 
         node.s = b"value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Str(node))
-        self.assertEqual(analyzer.parts, ["'value'"])
+        assert analyzer.visit_Str(node) is None
+        assert analyzer.parts == ["'value'"]
 
     def test_visit_Bytes(self):
         node = MagicMock()
         node.s = b"value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Bytes(node))
-        self.assertEqual(analyzer.parts, ["b'value'"])
+        assert analyzer.visit_Bytes(node) is None
+        assert analyzer.parts == ["b'value'"]
 
     def test_visit_Num(self):
         node = MagicMock()
         node.n = 123.456
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Num(node))
-        self.assertEqual(analyzer.parts, ["123.456"])
+        assert analyzer.visit_Num(node) is None
+        assert analyzer.parts == ["123.456"]
 
     def test_visit_Name(self):
         node = MagicMock()
         node.id = "name"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Name(node))
-        self.assertEqual(analyzer.parts, ["name"])
+        assert analyzer.visit_Name(node) is None
+        assert analyzer.parts == ["name"]
 
     def test_visit_NameConstant(self):
         node = MagicMock()
         node.value = "node_value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_NameConstant(node))
-        self.assertEqual(analyzer.parts, ["'node_value'"])
+        assert analyzer.visit_NameConstant(node) is None
+        assert analyzer.parts == ["'node_value'"]
 
     def test_visit_Subscript(self):
         node = MagicMock()
@@ -61,79 +60,67 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node_slice.value = node_slice_value
         node.slice = node_slice
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Subscript(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "node_value",
-                "[",
-                "el1",
-                ", ",
-                "el2",
-                "]",
-            ],
-        )
+        assert analyzer.visit_Subscript(node) is None
+        assert analyzer.parts == [
+            "node_value",
+            "[",
+            "el1",
+            ", ",
+            "el2",
+            "]",
+        ]
 
         node.slice = "node_slice"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Subscript(node))
-        self.assertEqual(analyzer.parts, ["node_value", "[", "node_slice", "]"])
+        assert analyzer.visit_Subscript(node) is None
+        assert analyzer.parts == ["node_value", "[", "node_slice", "]"]
 
     def test_visit_Attribute(self):
         node = MagicMock()
         node.value = "node_value"
         node.attr = "node_attr"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Attribute(node))
-        self.assertEqual(analyzer.parts, ["node_value", ".", "node_attr"])
+        assert analyzer.visit_Attribute(node) is None
+        assert analyzer.parts == ["node_value", ".", "node_attr"]
 
     def test_visit_List(self):
         node = MagicMock()
         node.elts = ["el1", "el2"]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_List(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "[",
-                "el1",
-                ", ",
-                "el2",
-                "]",
-            ],
-        )
+        assert analyzer.visit_List(node) is None
+        assert analyzer.parts == [
+            "[",
+            "el1",
+            ", ",
+            "el2",
+            "]",
+        ]
 
     def test_visit_Set(self):
         node = MagicMock()
         node.elts = ["el1", "el2"]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Set(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "{",
-                "el1",
-                ", ",
-                "el2",
-                "}",
-            ],
-        )
+        assert analyzer.visit_Set(node) is None
+        assert analyzer.parts == [
+            "{",
+            "el1",
+            ", ",
+            "el2",
+            "}",
+        ]
 
     def test_visit_Tuple(self):
         node = MagicMock()
         node.elts = ["el1", "el2"]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Tuple(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "(",
-                "el1",
-                ", ",
-                "el2",
-                ")",
-            ],
-        )
+        assert analyzer.visit_Tuple(node) is None
+        assert analyzer.parts == [
+            "(",
+            "el1",
+            ", ",
+            "el2",
+            ")",
+        ]
 
     def test_visit_Call(self):
         # TODO: add test
@@ -143,42 +130,39 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node = MagicMock()
         node.value = "node_value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Starred(node))
-        self.assertEqual(analyzer.parts, ["*", "node_value"])
+        assert analyzer.visit_Starred(node) is None
+        assert analyzer.parts == ["*", "node_value"]
 
     def test_visit_keyword(self):
         node = MagicMock()
         node.arg = "node_arg"
         node.value = "node_value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_keyword(node))
-        self.assertEqual(analyzer.parts, ["node_arg", "=", "node_value"])
+        assert analyzer.visit_keyword(node) is None
+        assert analyzer.parts == ["node_arg", "=", "node_value"]
 
         node.arg = None
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_keyword(node))
-        self.assertEqual(analyzer.parts, ["**", "node_value"])
+        assert analyzer.visit_keyword(node) is None
+        assert analyzer.parts == ["**", "node_value"]
 
     def test_visit_Dict(self):
         node = MagicMock()
         node.keys = ["key1", "key2"]
         node.values = ["value1", "value2"]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Dict(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "{",
-                "key1",
-                ": ",
-                "value1",
-                ", ",
-                "key2",
-                ": ",
-                "value2",
-                "}",
-            ],
-        )
+        assert analyzer.visit_Dict(node) is None
+        assert analyzer.parts == [
+            "{",
+            "key1",
+            ": ",
+            "value1",
+            ", ",
+            "key2",
+            ": ",
+            "value2",
+            "}",
+        ]
 
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
     def test_visit_Compare(self, get_logger_mock):
@@ -187,18 +171,13 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.comparators = ["middle", "right"]
         node.ops = [ast.LtE(), ast.IsNot()]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Compare(node))
-        self.assertEqual(
-            analyzer.parts,
-            ["left", " ", "<=", " ", "middle", " ", "is not", " ", "right"],
-        )
+        assert analyzer.visit_Compare(node) is None
+        assert analyzer.parts == ["left", " ", "<=", " ", "middle", " ", "is not", " ", "right"]
 
         node.ops = [ast.LtE(), ast.Import]
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Compare(node))
-        self.assertEqual(
-            analyzer.parts, ["left", " ", "<=", " ", "middle", " ", "...", " ", "right"]
-        )
+        assert analyzer.visit_Compare(node) is None
+        assert analyzer.parts == ["left", " ", "<=", " ", "middle", " ", "...", " ", "right"]
         get_logger_mock().warning.assert_called_once_with(ANY)
 
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
@@ -209,13 +188,13 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.op = ast.LShift()
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_BinOp(node))
-        self.assertEqual(analyzer.parts, ["left", " ", "<<", " ", "right"])
+        assert analyzer.visit_BinOp(node) is None
+        assert analyzer.parts == ["left", " ", "<<", " ", "right"]
 
         node.op = ast.Import()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_BinOp(node))
-        self.assertEqual(analyzer.parts, ["left", " ", "...", " ", "right"])
+        assert analyzer.visit_BinOp(node) is None
+        assert analyzer.parts == ["left", " ", "...", " ", "right"]
         get_logger_mock().warning.assert_called_once_with(ANY)
 
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
@@ -225,18 +204,18 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.op = ast.And()
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_BoolOp(node))
-        self.assertEqual(analyzer.parts, ["left", " ", "and", " ", "right"])
+        assert analyzer.visit_BoolOp(node) is None
+        assert analyzer.parts == ["left", " ", "and", " ", "right"]
 
         node.op = ast.Or()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_BoolOp(node))
-        self.assertEqual(analyzer.parts, ["left", " ", "or", " ", "right"])
+        assert analyzer.visit_BoolOp(node) is None
+        assert analyzer.parts == ["left", " ", "or", " ", "right"]
 
         node.op = ast.Import()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_BoolOp(node))
-        self.assertEqual(analyzer.parts, ["left", " ", "...", " ", "right"])
+        assert analyzer.visit_BoolOp(node) is None
+        assert analyzer.parts == ["left", " ", "...", " ", "right"]
         get_logger_mock().warning.assert_called_once_with(ANY)
 
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
@@ -246,28 +225,28 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.op = ast.Not()
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_UnaryOp(node))
-        self.assertEqual(analyzer.parts, ["not", " ", "operand"])
+        assert analyzer.visit_UnaryOp(node) is None
+        assert analyzer.parts == ["not", " ", "operand"]
 
         node.op = ast.Invert()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_UnaryOp(node))
-        self.assertEqual(analyzer.parts, ["~", "operand"])
+        assert analyzer.visit_UnaryOp(node) is None
+        assert analyzer.parts == ["~", "operand"]
 
         node.op = ast.UAdd()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_UnaryOp(node))
-        self.assertEqual(analyzer.parts, ["+", "operand"])
+        assert analyzer.visit_UnaryOp(node) is None
+        assert analyzer.parts == ["+", "operand"]
 
         node.op = ast.USub()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_UnaryOp(node))
-        self.assertEqual(analyzer.parts, ["-", "operand"])
+        assert analyzer.visit_UnaryOp(node) is None
+        assert analyzer.parts == ["-", "operand"]
 
         node.op = ast.Import()
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_UnaryOp(node))
-        self.assertEqual(analyzer.parts, ["...", "operand"])
+        assert analyzer.visit_UnaryOp(node) is None
+        assert analyzer.parts == ["...", "operand"]
         get_logger_mock().warning.assert_called_once_with(ANY)
 
     def test_visit_Lambda(self):
@@ -276,8 +255,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.body = "body"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Lambda(node))
-        self.assertEqual(analyzer.parts, ["lambda ", "args", ": ", "body"])
+        assert analyzer.visit_Lambda(node) is None
+        assert analyzer.parts == ["lambda ", "args", ": ", "body"]
 
     def test_visit_arguments(self):
         # TODO: add test
@@ -289,41 +268,38 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.annotation = "annotation"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_arg(node))
-        self.assertEqual(analyzer.parts, ["arg", ": ", "annotation"])
+        assert analyzer.visit_arg(node) is None
+        assert analyzer.parts == ["arg", ": ", "annotation"]
 
         node.annotation = None
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_arg(node))
-        self.assertEqual(analyzer.parts, ["arg"])
+        assert analyzer.visit_arg(node) is None
+        assert analyzer.parts == ["arg"]
 
     def test_visit_Index(self):
         node = MagicMock()
         node.value = "value"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Index(node))
-        self.assertEqual(analyzer.parts, ["value"])
+        assert analyzer.visit_Index(node) is None
+        assert analyzer.parts == ["value"]
 
         node_value = MagicMock()
         node_value.mock_add_spec(ast.Tuple)
         node_value.elts = ["el1", "el2"]
         node.value = node_value
-        self.assertIsNone(analyzer.visit_Index(node))
-        self.assertEqual(
-            analyzer.parts,
-            [
-                "value",
-                "el1",
-                ", ",
-                "el2",
-            ],
-        )
+        assert analyzer.visit_Index(node) is None
+        assert analyzer.parts == [
+            "value",
+            "el1",
+            ", ",
+            "el2",
+        ]
 
     def test_visit_Ellipsis(self):
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Ellipsis("node"))
-        self.assertEqual(analyzer.parts, ["..."])
+        assert analyzer.visit_Ellipsis("node") is None
+        assert analyzer.parts == ["..."]
 
     def test_visit_Slice(self):
         node = MagicMock()
@@ -332,25 +308,25 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.step = "step"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Slice(node))
-        self.assertEqual(analyzer.parts, ["lower", ":", "upper", ":", "step"])
+        assert analyzer.visit_Slice(node) is None
+        assert analyzer.parts == ["lower", ":", "upper", ":", "step"]
 
         node.upper = None
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Slice(node))
-        self.assertEqual(analyzer.parts, ["lower", ":", ":", "step"])
+        assert analyzer.visit_Slice(node) is None
+        assert analyzer.parts == ["lower", ":", ":", "step"]
 
         node.step = None
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Slice(node))
-        self.assertEqual(analyzer.parts, ["lower", ":"])
+        assert analyzer.visit_Slice(node) is None
+        assert analyzer.parts == ["lower", ":"]
 
         node.lower = None
         node.upper = None
         node.step = "step"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Slice(node))
-        self.assertEqual(analyzer.parts, [":", ":", "step"])
+        assert analyzer.visit_Slice(node) is None
+        assert analyzer.parts == [":", ":", "step"]
 
     def test_visit_JoinedStr(self):
         node = MagicMock()
@@ -364,16 +340,16 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.values = [node_value, node_value_2, node_value_3]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_JoinedStr(node))
-        self.assertEqual(analyzer.parts, ["f'", "node_value", "node_value_2", "not_str", "'"])
+        assert analyzer.visit_JoinedStr(node) is None
+        assert analyzer.parts == ["f'", "node_value", "node_value_2", "not_str", "'"]
 
     def test_visit_FormattedValue(self):
         node = MagicMock()
         node.value = "value"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_FormattedValue(node))
-        self.assertEqual(analyzer.parts, ["{", "value", "}"])
+        assert analyzer.visit_FormattedValue(node) is None
+        assert analyzer.parts == ["{", "value", "}"]
 
     def test_visit_comprehension(self):
         node = MagicMock()
@@ -382,11 +358,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.ifs = ["if1", "if2"]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_comprehension(node))
-        self.assertEqual(
-            analyzer.parts,
-            ["for ", "target", " in ", "iter", " if ", "if1", " if ", "if2"],
-        )
+        assert analyzer.visit_comprehension(node) is None
+        assert analyzer.parts == ["for ", "target", " in ", "iter", " if ", "if1", " if ", "if2"]
 
     def test_visit_DictComp(self):
         node = MagicMock()
@@ -395,11 +368,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.generators = ["generator1", "generator2"]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_DictComp(node))
-        self.assertEqual(
-            analyzer.parts,
-            ["{", "key", ": ", "value", " ", "generator1", "generator2", "}"],
-        )
+        assert analyzer.visit_DictComp(node) is None
+        assert analyzer.parts == ["{", "key", ": ", "value", " ", "generator1", "generator2", "}"]
 
     def test_visit_ListComp(self):
         node = MagicMock()
@@ -407,8 +377,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.generators = ["generator1", "generator2"]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_ListComp(node))
-        self.assertEqual(analyzer.parts, ["[", "elt", " ", "generator1", "generator2", "]"])
+        assert analyzer.visit_ListComp(node) is None
+        assert analyzer.parts == ["[", "elt", " ", "generator1", "generator2", "]"]
 
     def test_visit_SetComp(self):
         node = MagicMock()
@@ -416,8 +386,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.generators = ["generator1", "generator2"]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_SetComp(node))
-        self.assertEqual(analyzer.parts, ["{", "elt", " ", "generator1", "generator2", "}"])
+        assert analyzer.visit_SetComp(node) is None
+        assert analyzer.parts == ["{", "elt", " ", "generator1", "generator2", "}"]
 
     def test_visit_GeneratorExp(self):
         node = MagicMock()
@@ -425,8 +395,8 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.generators = ["generator1", "generator2"]
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_GeneratorExp(node))
-        self.assertEqual(analyzer.parts, ["(", "elt", " ", "generator1", "generator2", ")"])
+        assert analyzer.visit_GeneratorExp(node) is None
+        assert analyzer.parts == ["(", "elt", " ", "generator1", "generator2", ")"]
 
     def test_visit_IfExp(self):
         node = MagicMock()
@@ -435,37 +405,37 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.orelse = "orelse"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_IfExp(node))
-        self.assertEqual(analyzer.parts, ["body", " if ", "test", " else ", "orelse"])
+        assert analyzer.visit_IfExp(node) is None
+        assert analyzer.parts == ["body", " if ", "test", " else ", "orelse"]
 
     def test_visit_Await(self):
         node = MagicMock()
         node.value = "value"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Await(node))
-        self.assertEqual(analyzer.parts, ["await ", "value"])
+        assert analyzer.visit_Await(node) is None
+        assert analyzer.parts == ["await ", "value"]
 
     def test_visit_Yield(self):
         node = MagicMock()
         node.value = None
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Yield(node))
-        self.assertEqual(analyzer.parts, ["yield"])
+        assert analyzer.visit_Yield(node) is None
+        assert analyzer.parts == ["yield"]
 
         node.value = "value"
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_Yield(node))
-        self.assertEqual(analyzer.parts, ["yield", " ", "value"])
+        assert analyzer.visit_Yield(node) is None
+        assert analyzer.parts == ["yield", " ", "value"]
 
     def test_visit_YieldFrom(self):
         node = MagicMock()
         node.value = "value"
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.visit_YieldFrom(node))
-        self.assertEqual(analyzer.parts, ["yield from ", "value"])
+        assert analyzer.visit_YieldFrom(node) is None
+        assert analyzer.parts == ["yield from ", "value"]
 
     @patch("handsdown.ast_parser.analyzers.expression_analyzer.get_logger")
     def test_generic_visit(self, get_logger_mock):
@@ -473,6 +443,6 @@ class TestExpressionAnalyzer(unittest.TestCase):
         node.mock_add_spec(ast.Import)
 
         analyzer = ExpressionAnalyzer()
-        self.assertIsNone(analyzer.generic_visit(node))
-        self.assertEqual(analyzer.parts, ["..."])
+        assert analyzer.generic_visit(node) is None
+        assert analyzer.parts == ["..."]
         get_logger_mock().warning.assert_called_once_with(ANY)

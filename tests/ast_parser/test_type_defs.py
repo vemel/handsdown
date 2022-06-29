@@ -1,11 +1,9 @@
-import unittest
-
 from handsdown.ast_parser import type_defs
 
 
-class TestTypeDefs(unittest.TestCase):
+class TestTypeDefs:
     def test_init(self):
-        self.assertTrue(type_defs.RenderExpr)
-        self.assertTrue(type_defs.Node)
-        self.assertTrue(type_defs.ASTIterable)
-        self.assertTrue(type_defs.ASTImport)
+        assert type_defs.RenderExpr
+        assert type_defs.Node
+        assert type_defs.ASTIterable
+        assert type_defs.ASTImport

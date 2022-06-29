@@ -1,11 +1,10 @@
-import unittest
 from pathlib import Path
 from unittest.mock import patch
 
 from handsdown.main import main
 
 
-class TestMain(unittest.TestCase):
+class TestMain:
     @patch("handsdown.main.get_logger")
     @patch("handsdown.main.PathFinder")
     @patch("handsdown.main.MkdocsGenerator")
@@ -24,7 +23,7 @@ class TestMain(unittest.TestCase):
                 "exclude",
             ],
         ):
-            self.assertIsNone(main())
+            assert main() is None
 
         path_finder_mock.assert_called_once_with(Path("/"))
         path_finder_mock().exclude.assert_called_once_with(
