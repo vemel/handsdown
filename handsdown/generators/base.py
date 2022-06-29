@@ -9,8 +9,9 @@ from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.exceptions import GeneratorError, LoaderError
 from handsdown.jinja_manager import JinjaManager
-from handsdown.loader import Loader, LoaderError
+from handsdown.loader import Loader
 from handsdown.md_document import MDDocument
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.smart import SmartDocstringProcessor
@@ -21,12 +22,6 @@ from handsdown.utils.markdown import insert_md_toc
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder
 from handsdown.utils.strings import make_title
-
-
-class GeneratorError(Exception):
-    """
-    Main error for `BaseGenerator`.
-    """
 
 
 class BaseGenerator:

@@ -6,6 +6,7 @@ from typing import Any
 
 import jinja2
 
+from handsdown.exceptions import LoaderError
 from handsdown.utils.blackify import blackify
 
 
@@ -52,7 +53,7 @@ class JinjaManager:
         template_full_path = self.TEMPLATES_PATH / template_path
 
         if not template_full_path.exists():
-            raise ValueError(f"Template {template_full_path} not found")
+            raise LoaderError(f"Template {template_full_path} not found")
 
         template = self.env.get_template(template_path.as_posix())
         return template.render(**kwargs)

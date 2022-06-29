@@ -8,17 +8,12 @@ import fnmatch
 from pathlib import Path
 from typing import Iterable, Iterator, List, TypeVar
 
+from handsdown.exceptions import PathFinderError
 from handsdown.utils.nice_path import NicePath
 
 _R = TypeVar("_R", bound="PathFinder")
 
-__all__ = ["PathFinder", "PathFinderError"]
-
-
-class PathFinderError(Exception):
-    """
-    Main error for `PathFinder`.
-    """
+__all__ = ["PathFinder"]
 
 
 class PathFinder:

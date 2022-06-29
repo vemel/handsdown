@@ -1,6 +1,7 @@
 import pytest
 
-from handsdown.utils.import_string import ImportString, ImportStringError
+from handsdown.exceptions import ImportStringError
+from handsdown.utils.import_string import ImportString
 
 
 class TestImportString:

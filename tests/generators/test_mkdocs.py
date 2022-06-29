@@ -5,7 +5,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from handsdown.generators.base import GeneratorError
-from handsdown.generators.mkdocs import MkdocsGenerator
+from handsdown.generators.rtd import RTDGenerator
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.nice_path import NicePath
 
@@ -28,13 +28,13 @@ class TestGenerator:
     @patch("handsdown.generators.base.PathFinder")
     def test_init(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
-        generator = MkdocsGenerator(
+        generator = RTDGenerator(
             project_name="test",
             input_path=self.input_path,
             output_path=self.output_path,
             source_paths=[source_path_mock],
         )
-        assert isinstance(generator, MkdocsGenerator)
+        assert isinstance(generator, RTDGenerator)
         LoaderMock.assert_called_with(
             output_path=self.output_path, root_path=self.input_path, encoding="utf-8"
         )
@@ -49,7 +49,7 @@ class TestGenerator:
     @patch("handsdown.generators.base.PathFinder")
     def test_generate_docs(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
-        generator = MkdocsGenerator(
+        generator = RTDGenerator(
             project_name="test",
             input_path=self.input_path,
             output_path=self.output_path,
@@ -79,7 +79,7 @@ class TestGenerator:
     @patch("handsdown.generators.base.PathFinder")
     def test_generate_doc(self, PathFinderMock, MDDocumentMock, ModuleRecordListMock, LoaderMock):
         source_path_mock = MagicMock()
-        generator = MkdocsGenerator(
+        generator = RTDGenerator(
             project_name="test",
             input_path=self.input_path,
             output_path=self.output_path,
@@ -126,7 +126,7 @@ class TestGenerator:
     def test_cleanup_old_docs(self):
         (self.output_path / "auto.md").write_text("> Auto-generated documentation")
         (self.output_path / "manual.md").write_text("other file")
-        generator = MkdocsGenerator(
+        generator = RTDGenerator(
             project_name="test",
             input_path=self.input_path,
             output_path=self.output_path,

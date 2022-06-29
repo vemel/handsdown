@@ -4,6 +4,8 @@ from black.mode import Mode
 from black.parsing import InvalidInput
 from black.report import NothingChanged
 
+from handsdown.exceptions import ParserError
+
 
 def blackify(content: str) -> str:
     """
@@ -24,6 +26,6 @@ def blackify(content: str) -> str:
     except NothingChanged:
         pass
     except (IndentationError, InvalidInput) as e:
-        raise ValueError(f"Cannot parse {content}: {e}") from e
+        raise ParserError(f"Cannot parse {content}: {e}") from e
 
     return content.rstrip("\n")

@@ -7,7 +7,7 @@ from handsdown.main import main
 class TestMain:
     @patch("handsdown.main.get_logger")
     @patch("handsdown.main.PathFinder")
-    @patch("handsdown.main.MkdocsGenerator")
+    @patch("handsdown.main.RTDGenerator")
     def test_main(self, generator_mock, path_finder_mock, _get_logger_mock):
 
         with patch(

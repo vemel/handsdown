@@ -3,13 +3,9 @@ Wrapper for python import strings.
 """
 from typing import Any, List, TypeVar
 
+from handsdown.exceptions import ImportStringError
+
 _R = TypeVar("_R", bound="ImportString")
-
-
-class ImportStringError(Exception):
-    """
-    Main error for `ImportString`.
-    """
 
 
 class ImportString:
