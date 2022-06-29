@@ -1,7 +1,6 @@
 import unittest
-from unittest.mock import patch
 
-from handsdown.utils import extract_md_title, make_title, render_asset
+from handsdown.utils.strings import extract_md_title, make_title
 
 
 class TestUtils(unittest.TestCase):
@@ -16,20 +15,3 @@ class TestUtils(unittest.TestCase):
         self.assertEqual(extract_md_title("# test\n\ncontent"), ("test", "\ncontent"))
         self.assertEqual(extract_md_title("## test\n\ncontent"), ("", "## test\n\ncontent"))
         self.assertEqual(extract_md_title("# test"), ("test", ""))
-
-    @patch("handsdown.utils.Path")
-    def test_render_asset(self, PathMock):
-        target_path = PathMock("target")
-        PathMock().__truediv__().read_text.return_value = "this is {title}"
-        self.assertIsNone(
-            render_asset(
-                "mkdocs.yml",
-                target_path,
-                {
-                    "project_name": "My title",
-                    "source_code_url": "test",
-                },
-                encoding="utf-8",
-            )
-        )
-        target_path.write_text.assert_called()

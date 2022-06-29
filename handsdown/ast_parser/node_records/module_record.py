@@ -277,3 +277,12 @@ class ModuleRecord(NodeRecord):
                     result.add(attribute_record.import_string)
 
         return result
+
+    def is_init(self) -> bool:
+        """
+        Check if this module is the __init__.py file.
+
+        Returns:
+            True if this module is the __init__.py file.
+        """
+        return self.source_path.name == "__init__.py"

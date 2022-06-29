@@ -1,6 +1,7 @@
 """
 Path that represents it as relative to workdir.
 """
+import shutil
 from pathlib import Path
 from typing import Iterable, Iterator, TypeVar
 
@@ -58,3 +59,11 @@ class NicePath(type(Path())):  # type: ignore
         self.parent.mkdir(exist_ok=True, parents=True)
         self.write_text(content, encoding)
         return True
+
+    def rmtree(self, ignore_errors: bool = True) -> None:
+        """
+        Remove directory and all its contents.
+        """
+        if not self.exists():
+            return
+        shutil.rmtree(self.as_posix(), ignore_errors=ignore_errors)

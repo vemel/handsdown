@@ -2,6 +2,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
+from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder, PathFinderError
 
 
@@ -52,23 +53,23 @@ class TestPathFinder(unittest.TestCase):
         path_finder = path_finder.exclude("my_dir", "expr/**/*")
         self.assertEqual(path_finder.exclude_exprs, ["my_dir/*", "expr/**/*"])
 
-    @patch("handsdown.utils.path_finder.Path")
-    def test_glob(self, PathMock):
-        path = PathMock()
-        include_file_mock = MagicMock()
-        include_file_mock.relative_to().as_posix.return_value = "include/file.py"
-        exclude_file_mock = MagicMock()
-        exclude_file_mock.relative_to().as_posix.return_value = "exclude/file.py"
-        path.glob.return_value = [include_file_mock, exclude_file_mock]
+    def test_glob(self):
+        path = NicePath("/root")
+        path.glob = MagicMock()
+        path.glob.return_value = [
+            NicePath("/root/include/file.py"),
+            NicePath("/root/exclude/file.py"),
+        ]
         path_finder = PathFinder(path)
         self.assertEqual(
-            list(path_finder.glob("glob_expr")), [include_file_mock, exclude_file_mock]
+            list(path_finder.glob("glob_expr")),
+            [NicePath("/root/include/file.py"), NicePath("/root/exclude/file.py")],
         )
         path_finder.exclude_exprs = ["exclude/*"]
-        self.assertEqual(list(path_finder.glob("glob_expr")), [include_file_mock])
+        self.assertEqual(list(path_finder.glob("glob_expr")), [NicePath("/root/include/file.py")])
 
         path_finder.include_exprs = ["include/*"]
-        self.assertEqual(list(path_finder.glob("glob_expr")), [include_file_mock])
+        self.assertEqual(list(path_finder.glob("glob_expr")), [NicePath("/root/include/file.py")])
 
     @patch("handsdown.utils.path_finder.Path")
     def test_mkdir(self, _PathMock):

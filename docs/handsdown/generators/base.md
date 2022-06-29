@@ -14,6 +14,7 @@ Base
     - [BaseGenerator().generate_docs](#basegenerator()generate_docs)
     - [BaseGenerator().generate_external_configs](#basegenerator()generate_external_configs)
     - [BaseGenerator().generate_index](#basegenerator()generate_index)
+    - [BaseGenerator().get_children_module_records](#basegenerator()get_children_module_records)
     - [BaseGenerator().get_md_document](#basegenerator()get_md_document)
     - [BaseGenerator().get_see_also_links](#basegenerator()get_see_also_links)
   - [GeneratorError](#generatorerror)
@@ -141,6 +142,23 @@ Generate `<output>/README.md` file.Contains a Tree of all modules in the project
 def generate_index(self) -> None:
     ...
 ```
+
+### BaseGenerator().get_children_module_records
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L370)
+
+Get all module records that are children of this module.
+
+#### Signature
+
+```python
+def get_children_module_records(self, parent: ModuleRecord) -> List[ModuleRecord]:
+    ...
+```
+
+#### See also
+
+- [ModuleRecord](../ast_parser/node_records/module_record.md#modulerecord)
 
 ### BaseGenerator().get_md_document
 

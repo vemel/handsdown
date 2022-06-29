@@ -8,10 +8,10 @@ from types import TracebackType
 from typing import List, Optional, Type, TypeVar
 
 from handsdown.settings import ENCODING
-from handsdown.utils import extract_md_title
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder
+from handsdown.utils.strings import extract_md_title
 
 __all__ = ["MDDocument"]
 
@@ -31,7 +31,6 @@ class MDDocument:
         md_doc.append('## New section')
         md_doc.append('some content')
         md_doc.title = 'My doc'
-        md_doc.add_toc_if_not_exists()
         md_doc.write()
 
         # output is indented for readability
@@ -54,9 +53,6 @@ class MDDocument:
     Arguments:
         path -- Path to store document.
     """
-
-    # Indent in spaces for nested ToC lines
-    TOC_INDENT = 4
 
     _anchor_re = re.compile(r"[^a-z0-9_-]+")
     _escape_title_re = re.compile(r"(_+\S+_+)$")
@@ -122,13 +118,6 @@ class MDDocument:
         if not self._subtitle and self._sections and not self._sections[0].startswith("#"):
             self._subtitle = self._sections.pop(0)
 
-    def add_toc_if_not_exists(self) -> None:
-        """
-        Check if ToC exists in the document or create one.
-        """
-        if not self._toc_section:
-            self._toc_section = self.generate_toc_section()
-
     @classmethod
     def get_anchor(cls, title: str) -> str:
         """
@@ -179,23 +168,6 @@ class MDDocument:
             A string with Markdown link.
         """
         return f"[{title}]({link})"
-
-    def render_md_doc_link(self: _R, target_md_document: _R, title: Optional[str] = None) -> str:
-        """
-        Render Markdown link to `target_md_document` header path with a correct title.
-
-        Arguments:
-            target_md_document -- Target `MDDocument`.
-            title -- Link text. If not provided `target_md_document.title` is used.
-
-        Returns:
-            A string with Markdown link.
-        """
-        return self.render_doc_link(
-            title=title or target_md_document.title,
-            anchor=self.get_anchor(target_md_document.title),
-            target_path=target_md_document.path,
-        )
 
     def render_doc_link(
         self, title: str, anchor: str = "", target_path: Optional[Path] = None
@@ -348,68 +320,6 @@ class MDDocument:
             self._sections.append(content)
 
         self._content = self._build_content()
-
-    def generate_toc_section(self, max_depth: int = 3) -> str:
-        """
-        Generate Table of Contents MD content.
-
-        Arguments:
-            max_depth -- Add headers to ToC only up to this level.
-
-        Returns:
-            A string with ToC.
-        """
-        toc_lines = []
-        if self.title:
-            link = self.render_doc_link(self.title, anchor=self.get_anchor(self.title))
-            toc_line = self.get_toc_line(link, level=0)
-            toc_lines.append(toc_line)
-
-        sections = [self.title, self.subtitle] + self.sections
-        for section in sections:
-            if not section.startswith("#"):
-                continue
-
-            if "\n" in section:
-                continue
-
-            if "# " not in section:
-                continue
-
-            section = section.rstrip()
-
-            header_symbols, title = section.split(" ", 1)
-            title = title.strip()
-            if not title:
-                continue
-
-            if header_symbols.replace("#", ""):
-                continue
-
-            header_level = len(header_symbols)
-            if header_level > max_depth:
-                continue
-
-            link = self.render_doc_link(title, anchor=self.get_anchor(title))
-            toc_line = self.get_toc_line(link, level=header_level - 1)
-            toc_lines.append(toc_line)
-
-        return "\n".join(toc_lines)
-
-    @classmethod
-    def get_toc_line(cls, line: str, level: int = 0) -> str:
-        """
-        Get ToC `line` of given `level`.
-
-        Arguments:
-            line -- Line to prepare.
-            level -- Line level, starts with `0`.
-
-        Returns:
-            Ready to insert ToC line.
-        """
-        indent = cls.TOC_INDENT * level
-        return IndentTrimmer.indent_line(f"- {line}", indent)
 
     @classmethod
     def _escape_title(cls, title: str) -> str:

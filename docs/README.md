@@ -65,3 +65,4 @@ To add custom content to this file, create `HANDSDOWN.md` in your project root.
     - [Markdown](handsdown/utils/markdown.md#markdown)
     - [NicePath](handsdown/utils/nice_path.md#nicepath)
     - [PathFinder](handsdown/utils/path_finder.md#pathfinder)
+    - [Strings](handsdown/utils/strings.md#strings)

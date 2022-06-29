@@ -15,12 +15,12 @@ from handsdown.md_document import MDDocument
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.smart import SmartDocstringProcessor
 from handsdown.settings import ENCODING
-from handsdown.utils import make_title
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
 from handsdown.utils.markdown import insert_md_toc
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder
+from handsdown.utils.strings import make_title
 
 
 class GeneratorError(Exception):
@@ -87,7 +87,7 @@ class BaseGenerator:
 
         # create output folder if it does not exist
         if not self._output_path.exists():
-            self._logger.info(f"Creating folder {self._output_path.as_posix()}")
+            self._logger.info(f"Creating folder {self._output_path}")
             PathFinder(self._output_path).mkdir()
 
         self._loader = loader or Loader(
@@ -366,3 +366,18 @@ class BaseGenerator:
             )
             if output_path.write_changed(content, encoding=self._encoding):
                 self._logger.info(f"Updated config {output_path}")
+
+    def get_children_module_records(self, parent: ModuleRecord) -> List[ModuleRecord]:
+        """
+        Get all module records that are children of this module.
+        """
+        result = []
+        for module_record in self.module_records:
+            if module_record.import_string.is_top_level():
+                continue
+            if module_record.import_string.parent != parent.import_string:
+                continue
+
+            result.append(module_record)
+
+        return result

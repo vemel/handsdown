@@ -14,6 +14,7 @@ ModuleRecord
     - [ModuleRecord.create_from_source](#modulerecordcreate_from_source)
     - [ModuleRecord().find_record](#modulerecord()find_record)
     - [ModuleRecord().get_related_import_strings](#modulerecord()get_related_import_strings)
+    - [ModuleRecord().is_init](#modulerecord()is_init)
     - [ModuleRecord().iter_records](#modulerecord()iter_records)
 
 ## ModuleRecord
@@ -127,6 +128,23 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 #### See also
 
 - [NodeRecord](./node_record.md#noderecord)
+
+### ModuleRecord().is_init
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L281)
+
+Check if this module is the __init__.py file.
+
+#### Returns
+
+True if this module is the __init__.py file.
+
+#### Signature
+
+```python
+def is_init(self) -> bool:
+    ...
+```
 
 ### ModuleRecord().iter_records
 

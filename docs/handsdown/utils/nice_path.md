@@ -9,12 +9,13 @@ NicePath
 
 - [NicePath](#nicepath)
   - [NicePath](#nicepath-1)
+    - [NicePath().rmtree](#nicepath()rmtree)
     - [NicePath().walk](#nicepath()walk)
     - [NicePath().write_changed](#nicepath()write_changed)
 
 ## NicePath
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L10)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
 
 Path that represents it as relative to workdir.
 
@@ -25,9 +26,22 @@ class NicePath(type(Path())):
     ...
 ```
 
+### NicePath().rmtree
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L63)
+
+Remove directory and all its contents.
+
+#### Signature
+
+```python
+def rmtree(self, ignore_errors: bool = True) -> None:
+    ...
+```
+
 ### NicePath().walk
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L32)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L33)
 
 Walk files except for `exclude`.
 
@@ -46,7 +60,7 @@ def walk(
 
 ### NicePath().write_changed
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L51)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L52)
 
 Write content to file if it's changed.
 

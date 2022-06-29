@@ -1,40 +1,47 @@
 import unittest
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.utils.import_string import ImportString
+from handsdown.utils.nice_path import NicePath
 
 
-class TestFunctionRecord(unittest.TestCase):
+class TestFunctionRecord:
+    source_path: NicePath
+
+    @pytest.fixture
+    def set_source_path(self):
+        self.source_path = NicePath(TemporaryDirectory().name)
+        self.source_path.mkdir(exist_ok=True, parents=True)
+        yield
+        self.source_path.rmtree()
+
     def test_init(self):
         node = MagicMock()
         node.name = "name"
         node.body = ["body"]
         node.mock_add_spec(ast.Module)
         record = ModuleRecord(node)
-        self.assertEqual(record.name, "module")
-        self.assertEqual(record.title, "")
-        self.assertEqual(record.import_string.value, "")
+        assert record.name == "module"
+        assert record.title == ""
+        assert record.import_string.value == ""
 
-    @patch("handsdown.ast_parser.node_records.module_record.ast.parse")
-    def test_create_from_source(self, parse_mock):
-        source_path = MagicMock()
-        source_path.read_text.return_value = "line1\nline2"
-        import_string = MagicMock()
-        import_string.parts = ["my_dir", "my_module"]
-        node = MagicMock()
-        node.body = ["body"]
-        node.mock_add_spec(ast.Module)
-        parse_mock.return_value = node
+    def test_create_from_source(self, set_source_path):
+        source_path = self.source_path / "path.py"
+        source_path.write_text("a = 5\nb = 7")
+        import_string = ImportString("my_dir.my_module")
         record = ModuleRecord.create_from_source(source_path, import_string)
-        self.assertIsInstance(record, ModuleRecord)
-        self.assertEqual(record.import_string, import_string)
-        self.assertEqual(record.name, "my_module")
-        self.assertEqual(record.title, "")
-        self.assertEqual(record.source_path, source_path)
-        self.assertEqual(record.source_lines, ["line1", "line2"])
+        assert isinstance(record, ModuleRecord)
+        assert record.import_string == import_string
+        assert record.name == "my_module"
+        assert record.title == ""
+        assert record.source_path == source_path
+        assert record.source_lines == ["a = 5", "b = 7"]
 
     def test_find_record(self):
         node = MagicMock()
@@ -44,9 +51,9 @@ class TestFunctionRecord(unittest.TestCase):
         record = ModuleRecord(node)
         record.import_string = "module_import"
         record.import_string_map = {"test": "test_object"}
-        self.assertEqual(record.find_record("test"), "test_object")
-        self.assertEqual(record.find_record("module_import"), record)
-        self.assertIsNone(record.find_record("non_existing"))
+        assert record.find_record("test") == "test_object"
+        assert record.find_record("module_import") == record
+        assert record.find_record("non_existing") is None
 
     def test_iter_records(self):
         node = MagicMock()
@@ -54,7 +61,7 @@ class TestFunctionRecord(unittest.TestCase):
         node.body = ["body"]
         node.mock_add_spec(ast.Module)
         record = ModuleRecord(node)
-        self.assertEqual(list(record.iter_records()), [])
+        assert list(record.iter_records()) == []
 
         class_record = MagicMock()
         class_record.name = "class_record"
@@ -70,18 +77,15 @@ class TestFunctionRecord(unittest.TestCase):
         record.function_records = [function_record, private_function_record]
         attribute_record = MagicMock()
         record.attribute_records = [attribute_record]
-        self.assertEqual(
-            list(record.iter_records()),
-            [
-                class_record,
-                private_class_record,
-                function_record,
-                private_function_record,
-            ],
-        )
+        assert list(record.iter_records()) == [
+            class_record,
+            private_class_record,
+            function_record,
+            private_function_record,
+        ]
 
         record.all_names = ["class_record", "function_record"]
-        self.assertEqual(list(record.iter_records()), [class_record, function_record])
+        assert list(record.iter_records()) == [class_record, function_record]
 
     @patch("handsdown.ast_parser.node_records.module_record.ModuleAnalyzer")
     def test_build_children(self, ModuleAnalyzerMock):
@@ -125,21 +129,21 @@ class TestFunctionRecord(unittest.TestCase):
         ModuleAnalyzerMock().function_nodes = [function_node]
         ModuleAnalyzerMock().attribute_nodes = [attribute_node]
         ModuleAnalyzerMock().import_nodes = [import_node]
-        self.assertIsNone(record.build_children())
-        self.assertEqual(record.title, "ClassNode")
-        self.assertEqual(record.class_records[0].node, class_node)
-        self.assertEqual(record.function_records[0].node, function_node)
-        self.assertEqual(record.attribute_records[0].node, attribute_node)
-        self.assertEqual(record.import_records[0].node, import_node)
-        self.assertEqual(record.import_records[0].name, "import_name")
-        self.assertEqual(record.import_records[1].node, import_node)
-        self.assertEqual(record.import_records[1].name, "import_name_2")
-        self.assertEqual(record.class_records[0].import_string.value, "my_module.ClassNode")
-        self.assertEqual(
-            record.class_records[0].method_records[0].import_string.value,
-            "my_module.ClassNode.class_method",
+        assert record.build_children() is None
+        assert record.title == "ClassNode"
+        assert record.class_records[0].node == class_node
+        assert record.function_records[0].node == function_node
+        assert record.attribute_records[0].node == attribute_node
+        assert record.import_records[0].node == import_node
+        assert record.import_records[0].name == "import_name"
+        assert record.import_records[1].node == import_node
+        assert record.import_records[1].name == "import_name_2"
+        assert record.class_records[0].import_string.value == "my_module.ClassNode"
+        assert (
+            record.class_records[0].method_records[0].import_string.value
+            == "my_module.ClassNode.class_method"
         )
-        self.assertEqual(record.function_records[0].import_string.value, "my_module.function_node")
+        assert record.function_records[0].import_string.value == "my_module.function_node"
 
     def test_parse(self):
         node = MagicMock()
@@ -199,12 +203,12 @@ class TestFunctionRecord(unittest.TestCase):
         function_record.node.mock_add_spec(ast.FunctionDef)
         record.function_records = [function_record]
 
-        self.assertIsNone(record.parse())
-        self.assertEqual(attribute_record.docstring, "attribute docstring\n  attribute docstring 2")
-        self.assertEqual(class_attribute_record.docstring, "")
+        assert record.parse() is None
+        assert attribute_record.docstring == "attribute docstring\n  attribute docstring 2"
+        assert class_attribute_record.docstring == ""
 
-        self.assertEqual(method_record.title, "class_record().method_record")
-        self.assertEqual(static_method_record.title, "class_record.static_method_record")
+        assert method_record.title == "class_record().method_record"
+        assert static_method_record.title == "class_record.static_method_record"
 
         function_record.parse_type_comments.assert_called_once_with(
             ["function_line 1", "function_line 2"]
@@ -221,4 +225,4 @@ class TestFunctionRecord(unittest.TestCase):
         record.function_records = ["function_record"]
         record.import_records = ["import_record"]
 
-        self.assertEqual(record.render(), "module module")
+        assert record.render() == "module module"

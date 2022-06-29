@@ -40,6 +40,15 @@
     {{ '\n\n' -}}
 {% endfor -%}
 
-{% for section in md_document.sections %}
-{{ section }}
-{% endfor %}
+{%- for section in md_document.sections -%}
+{{- section -}}
+{{- '\n\n' -}}
+{%- endfor -%}
+
+{%- if module_record.is_init() -%}
+{%- for child_record in generator.get_children_module_records(module_record) -%}
+{% if loop.first -%}{{ "## Modules\n\n" -}}{% endif -%}
+- [{{ child_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(child_record).path) }})
+{{- '\n' -}}
+{%- endfor -%}
+{%- endif -%}

@@ -160,7 +160,7 @@ class PathFinder:
             A relative path to `target`.
         """
         if not target.is_absolute():
-            raise PathFinderError("Target path should be absolute")
+            raise PathFinderError(f"Target path should be absolute, got {target}")
 
         relative_target = Path()
         up_path = Path()
