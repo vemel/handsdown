@@ -29,7 +29,7 @@ Python docstring-based documentation generator for lazy perfectionists.
 
 ## Features
 
-- [Material design](#-use-a-new-material-design) support!!!
+- [Material design](#-use-a-new-material-design) support!
 - [PEP 257](https://www.python.org/dev/peps/pep-0257/),
   [Google](http://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings),
   [Sphinx](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html)
