@@ -1,6 +1,8 @@
 """
 Various project constants.
 """
+import enum
+
 # Global `logging.Logger` name.
 LOGGER_NAME = "handsdown"
 
@@ -12,3 +14,8 @@ SOURCES_GLOB = "**/*.py"
 
 # Default encoding for source files
 ENCODING = "utf-8"
+
+
+class Theme(enum.Enum):
+    RTD = "readthedocs"
+    MD = "material"

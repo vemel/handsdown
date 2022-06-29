@@ -10,6 +10,7 @@ Google docstrings examples
   - [ClassExample](#classexample)
     - [ClassExample().method_example](#classexample()method_example)
   - [function_example](#function_example)
+  - [function_with_pep484_type_annotations](#function_with_pep484_type_annotations)
 
 ## ClassExample
 
@@ -33,19 +34,25 @@ class ClassExample:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L22)
 
-Summary line.Extended description of method.
+Summary line.
+
+Extended description of method.
 
 #### Examples
 
 Examples should be written in doctest format, and should illustrate how
-to use the function```python
+to use the function
+
+```python
 >>> print([i for i in
 ... example_generator(2)])
 [
     'one',
     'two',
 ]
-``````python
+```
+
+```python
 >>> setup_env()
 >>> func_call(
 ...     first_name='test',
@@ -76,8 +83,12 @@ def method_example(self, text: str = "hello") -> int:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L56)
 
-Summary line.Extended description of function.
-You can use this function like```python
+Summary line.
+
+Extended description of function.
+You can use this function like
+
+```python
 result = function_example(
     {
         'key': 'value',

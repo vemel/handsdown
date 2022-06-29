@@ -27,7 +27,18 @@ class Section:
             Section lines as a text.
         """
         result = []
-        for block in self.blocks:
+        for block in self.iterate_blocks():
             result.append(block.render())
 
         return "\n\n".join(result)
+
+    def iterate_blocks(self) -> Iterable[SectionBlock]:
+        """
+        Iterate over all non-empty Section block lines.
+
+        Returns:
+            Section block lines.
+        """
+        for block in self.blocks:
+            if block.lines:
+                yield block

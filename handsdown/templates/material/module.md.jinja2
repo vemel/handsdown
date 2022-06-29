@@ -1,0 +1,54 @@
+# {{ module_record.title }}
+
+[{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}#{{ md_document.get_anchor(generator.md_index.title) }}) /
+{% for parent_import_string in module_record.import_string.get_parents() -%}
+    {% set parent_module_record = generator.module_records.find_module_record(parent_import_string) -%}
+    {%- if parent_module_record -%}
+        [{{ parent_module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(parent_module_record).path) }}#{{ md_document.get_anchor(parent_module_record.title) }}) /
+    {%- else -%}
+        `{{ parent_import_string.name }}` /
+    {%- endif -%}
+    {{ '\n' -}}
+{% endfor -%}
+{{ module_record.title }}
+
+> Auto-generated documentation for [{{ module_record.import_string.value }}]({{ md_document.source_code_url }}) module.
+
+{% if md_document.subtitle -%}
+{{ md_document.subtitle -}}
+{% endif -%}
+
+{% if module_record.get_documented_attribute_strings() -%}
+#### Attributes
+{% for attrubute in module_record.get_documented_attribute_strings() -%}
+{{ "\n- " }}{{ attrubute }}
+{% endfor -%}
+{{ "\n\n" -}}
+{% endif -%}
+
+{% for record in module_record.iter_records() -%}
+    {% if record.class_name == "ClassRecord" -%}
+        {% with class=record -%}
+            {% include "common/class.md.jinja2" with context -%}
+        {% endwith -%}
+    {% endif -%}
+    {% if record.class_name == "FunctionRecord" -%}
+        {% with function=record -%}
+            {% include "common/function.md.jinja2" with context -%}
+        {% endwith -%}
+    {% endif -%}
+    {{ '\n\n' -}}
+{% endfor -%}
+
+{%- for section in md_document.sections -%}
+{{- section -}}
+{{- '\n\n' -}}
+{%- endfor -%}
+
+{%- if module_record.is_init() -%}
+{%- for child_record in generator.get_children_module_records(module_record) -%}
+{% if loop.first -%}{{ "## Modules\n\n" -}}{% endif -%}
+- [{{ child_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(child_record).path) }})
+{{- '\n' -}}
+{%- endfor -%}
+{%- endif -%}

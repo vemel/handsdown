@@ -55,7 +55,9 @@ def generic_visit(self, node: ast.AST) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L98)
 
-Parse info about class attribute statements.Adds new `ast.Assign` entry to `attribute_nodes`.
+Parse info about class attribute statements.
+
+Adds new `ast.Assign` entry to `attribute_nodes`.
 Skips assignments to anything pther that a new variable.
 Skips multiple assignments.
 Skips assignments with names starting with `_`.
@@ -88,7 +90,9 @@ def visit_Assign(self, node: ast.Assign) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L80)
 
-Parse info about class asynchronous method statements.Adds new `FunctionRecord` entry to `method_records`.
+Parse info about class asynchronous method statements.
+
+Adds new `FunctionRecord` entry to `method_records`.
 
 #### Examples
 
@@ -113,7 +117,9 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L23)
 
-Entrypoint for the analyzer.Adds new `ast.expr` entry to `decorator_nodes` for each node
+Entrypoint for the analyzer.
+
+Adds new `ast.expr` entry to `decorator_nodes` for each node
 from `node.decorator_list`.
 Adds new `ast.expr` entry to `base_nodes` for each node
 from `node.bases`.
@@ -141,7 +147,9 @@ def visit_ClassDef(self, node: ast.ClassDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L62)
 
-Parse info about class method statements.Adds new `FunctionRecord` entry to `method_records`.
+Parse info about class method statements.
+
+Adds new `FunctionRecord` entry to `method_records`.
 
 #### Examples
 

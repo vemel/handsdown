@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Optional
 
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
+from handsdown.constants import ENCODING
 from handsdown.exceptions import LoaderError
-from handsdown.settings import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder

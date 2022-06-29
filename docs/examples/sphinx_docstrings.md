@@ -10,6 +10,7 @@ Sphinx docstrings examples
   - [RSTExample](#rstexample)
     - [RSTExample.directives_test](#rstexampledirectives_test)
     - [RSTExample.reference](#rstexamplereference)
+    - [RSTExample.version_directives_test](#rstexampleversion_directives_test)
 
 ## RSTExample
 
@@ -27,6 +28,8 @@ class RSTExample:
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L33)
 
 Test for some random Sphinx directives
+
+
 ```ruby
 def sum_eq_n?(arr, n)
     return true if arr.empty? && n == 0
@@ -37,6 +40,8 @@ end
 #### Notes
 
 short note
+
+
 ```python
 (a + b)^2 = a^2 + 2ab + b^2
 
@@ -60,7 +65,11 @@ def directives_test():
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
 
 This is a reference for ``Sphinx-style RST-style`` docstrings. Check `source` code
-to see how it works.Code example```python
+to see how it works.
+
+Code example
+
+```python
 data = {
     'key': 'value',
 }
@@ -100,8 +109,12 @@ Test for Version-related directives
 
 Added in version 2.5
     The *spam* parameter.
+
+
 Changed in version 2.7
     Mandatory *spam* parameter.
+
+
 Deprecated in version 3.1
     Use :func:`spam` instead.
 

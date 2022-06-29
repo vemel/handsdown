@@ -29,7 +29,9 @@ MDDocument
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L22)
 
-Markdown file builder.Can be used as a context manager, on exit context is written to `path`.
+Markdown file builder.
+
+Can be used as a context manager, on exit context is written to `path`.
 
 #### Examples
 
@@ -72,14 +74,16 @@ class MDDocument:
 
 #### See also
 
-- [ENCODING](./settings.md#encoding)
+- [ENCODING](./constants.md#encoding)
 
 ### MDDocument().append
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L303)
 
-Append `content` to the document.Handle trimming and sectioning the content and update
-`title` and `toc_section` fields.
+Append `content` to the document.
+
+Handle trimming and sectioning the content and update
+[MDDocument().title](#mddocumenttitle) and [MDDocument().toc_section](#mddocumenttoc_section) fields.
 
 #### Arguments
 
@@ -118,7 +122,7 @@ Get Markdown link to a local MD document, use relative path as a link.
 
 #### Arguments
 
-- `path` - Path to local MDDocument
+- [MDDocument().path](#mddocumentpath) - Path to local MDDocument
 - `anchor` - Unescaped or escaped anchor tag
 
 #### Returns
@@ -176,7 +180,7 @@ Read and parse content from `source_path`.
 
 #### Arguments
 
-- `source_path` - Input file path. If not provided - `path` is used.
+- `source_path` - Input file path. If not provided - [MDDocument().path](#mddocumentpath) is used.
 - `encoding` - File encoding.
 
 #### Signature
@@ -215,7 +219,7 @@ MDDocument.render_doc_link('my title', anchor='my-anchor')
 
 #### Arguments
 
-- `title` - Link text.
+- [MDDocument().title](#mddocumenttitle) - Link text.
 - `anchor` - Unescaped or escaped anchor tag.
 - `target_path` - Target MDDocument path.
 
@@ -250,7 +254,7 @@ MDDocument.render_link('MyClass.__init__', 'my.md')
 
 #### Arguments
 
-- `title` - Link text.
+- [MDDocument().title](#mddocumenttitle) - Link text.
 - `link` - Link target.
 
 #### Returns
@@ -283,7 +287,7 @@ def sections(self) -> List[str]:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L265)
 
-`MDDocument` subtitle or an empty string.
+[MDDocument](#mddocument) subtitle or an empty string.
 
 #### Signature
 
@@ -309,7 +313,7 @@ def subtitle(self, subtitle: str) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L253)
 
-`MDDocument` title or an empty string.
+[MDDocument](#mddocument) title or an empty string.
 
 #### Signature
 
@@ -361,7 +365,7 @@ def toc_section(self, toc_section: str) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py#L245)
 
-Write MD content to `path`.
+Write MD content to [MDDocument().path](#mddocumentpath).
 
 #### Signature
 

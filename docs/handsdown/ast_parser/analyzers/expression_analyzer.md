@@ -56,7 +56,9 @@ ExpressionAnalyzer
 - `UNKNOWN` - dummy value to replace unknown nodes and operators: `'...'`
 
 
-AST analyzer for `ast.expr` records.Prepares `parts` for `NodeRecord.render` method.
+AST analyzer for `ast.expr` records.
+
+Prepares `parts` for `NodeRecord.render` method.
 
 #### Signature
 
@@ -74,7 +76,9 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L752)
 
-Parse info from an unknown `ast.AST` node and put `...` to `parts`.Logs warning with node class.
+Parse info from an unknown `ast.AST` node and put `...` to `parts`.
+
+Logs warning with node class.
 
 #### Arguments
 
@@ -687,7 +691,9 @@ def visit_Str(self, node: ast.Str) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L142)
 
-Parse info from `ast.Subscript` node and put it to `parts`.Type annotations are also matched by this method.
+Parse info from `ast.Subscript` node and put it to `parts`.
+
+Type annotations are also matched by this method.
 
 #### Examples
 

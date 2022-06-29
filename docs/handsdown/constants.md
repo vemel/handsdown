@@ -1,10 +1,10 @@
-# Settings
+# Constants
 
 [Handsdown API Index](../README.md#handsdown-api-index) /
 [Handsdown](./index.md#handsdown) /
-Settings
+Constants
 
-> Auto-generated documentation for [handsdown.settings](https://github.com/vemel/handsdown/blob/main/handsdown/settings.py) module.
+> Auto-generated documentation for [handsdown.constants](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py) module.
 
 #### Attributes
 
@@ -17,4 +17,18 @@ Settings
 - `ENCODING` - Default encoding for source files: `'utf-8'`
 
 
-- [Settings](#settings)
+- [Constants](#constants)
+  - [Theme](#theme)
+
+## Theme
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L19)
+
+#### Signature
+
+```python
+class Theme(enum.Enum):
+    ...
+```
+
+

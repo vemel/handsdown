@@ -12,7 +12,7 @@ Main
 
 ## api
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L14)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L15)
 
 #### Signature
 
@@ -29,7 +29,7 @@ def api(args: CLINamespace) -> None:
 
 ## main
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L42)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L48)
 
 Main entrypoint for CLI.
 

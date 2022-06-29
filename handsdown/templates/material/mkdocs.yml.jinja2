@@ -1,5 +1,5 @@
-site_name: "Handsdown"
-repo_url: "https://github.com/vemel/handsdown/blob/main/"
+site_name: "{{ project_name }}"
+repo_url: "{{ source_code_url }}"
 site_dir: "site"
 docs_dir: "docs"
 
@@ -37,3 +37,4 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+{{- '\n' -}}

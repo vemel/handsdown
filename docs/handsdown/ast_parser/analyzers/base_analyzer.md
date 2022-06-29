@@ -15,7 +15,9 @@ BaseAnalyzer
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
 
-Base AST analyzer.Has lists for all objects for different analyzers.
+Base AST analyzer.
+
+Has lists for all objects for different analyzers.
 
 #### Signature
 

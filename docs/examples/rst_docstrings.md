@@ -9,6 +9,8 @@ PEP 287 - reStructuredText docstrings examples
 - [PEP 287 - reStructuredText docstrings examples](#pep-287---restructuredtext-docstrings-examples)
   - [RSTExample](#rstexample)
     - [RSTExample.reference](#rstexamplereference)
+    - [RSTExample.replace_test](#rstexamplereplace_test)
+    - [RSTExample.rtype_test](#rstexamplertype_test)
 
 ## RSTExample
 
@@ -40,7 +42,11 @@ Return statement
 
 #### Raises
 
-- `ValueError` -  Raises exampleCode example```python
+- `ValueError` -  Raises example
+
+Code example
+
+```python
 data = {
     'key': 'value',
 }
@@ -61,7 +67,7 @@ def reference():
 [find in source code](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py#L40)
 
 Check if all attribute `attributes`, ``data`` and exception `Exception` in
-class ``RSTExample`` and class `RSTExample` look good.
+class [RSTExample](#rstexample) and class [RSTExample](#rstexample) look good.
 
 #### Signature
 

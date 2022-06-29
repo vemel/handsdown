@@ -54,7 +54,9 @@ def generic_visit(self, node: ast.AST) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
 
-Entrypoint for the analyzer for asynchronous functions.Visits each node from `node.args`.
+Entrypoint for the analyzer for asynchronous functions.
+
+Visits each node from `node.args`.
 Adds new `ast.expr` entry to `decorator_nodes` for each node
 from `node.decorator_list`.
 Sets `return_type_hint` to `node.returns` if it defined.
@@ -81,7 +83,9 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
 
-Entrypoint for the analyzer.Visits each node from `node.args`.
+Entrypoint for the analyzer.
+
+Visits each node from `node.args`.
 Adds new `ast.expr` entry to `decorator_nodes` for each node
 from `node.decorator_list`.
 Sets `return_type_hint` to `node.returns` if it defined.
@@ -108,7 +112,9 @@ def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
 
-Parse info about class method statements.Adds new `ArgumentRecord` entry to `argument_records` for each argument.
+Parse info about class method statements.
+
+Adds new `ArgumentRecord` entry to `argument_records` for each argument.
 
 #### Examples
 

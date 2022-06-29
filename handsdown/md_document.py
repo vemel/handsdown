@@ -7,7 +7,7 @@ from pathlib import Path
 from types import TracebackType
 from typing import List, Optional, Type, TypeVar
 
-from handsdown.settings import ENCODING
+from handsdown.constants import ENCODING
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder

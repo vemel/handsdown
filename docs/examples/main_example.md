@@ -49,7 +49,7 @@ Magic methods are added to docs only if they have docstrings.
 
 #### Returns
 
-True if `STUFF_COUNT` is not zero
+True if [STUFF_COUNT](#myclass) is not zero
 
 #### Signature
 
@@ -64,8 +64,10 @@ def __bool__(self) -> bool:
 
 This is a public method that uses comment-style type annotations. If decorators
 or types from annotations are from your project, links to them will be added
-to `See also` section. Since this function depends on `STUFF_COUNT`, we can add
+to `See also` section. Since this function depends on [STUFF_COUNT](#myclass), we can add
 it to a docstring in backticks and it will be transformed to a link.
+
+
 ```python
 # usage example
 def my_stuff(amount):

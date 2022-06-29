@@ -19,7 +19,11 @@ SectionMap
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L11)
 
-Dict-based storage for parsed `Section` list.Used for `handsdown.processors.base.BaseDocstringProcessor`.Key is a `Section` title.
+Dict-based storage for parsed `Section` list.
+
+Used for [BaseDocstringProcessor](./base.md#basedocstringprocessor).
+
+Key is a `Section` title.
 Value is a related `Section` instance.
 
 #### Signature
@@ -51,7 +55,9 @@ def __iter__(self) -> Iterator[Section]:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L65)
 
-Add new `SectionBlock` to section `section_name`.If `Section` does not exist - it is not created.
+Add new `SectionBlock` to section `section_name`.
+
+If `Section` does not exist - it is not created.
 
 #### Arguments
 
@@ -68,7 +74,9 @@ def add_block(self, section_name: str) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L42)
 
-Add new `line` to the last `SectionBlock` of section `section_name`.If line and section are empty - section is not created.
+Add new `line` to the last `SectionBlock` of section `section_name`.
+
+If line and section are empty - section is not created.
 
 #### Arguments
 
@@ -104,7 +112,9 @@ def add_line_indent(self, section_name: str, line: str) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L79)
 
-Delete last empty lines from the last `SectionBlock`.If `Section` does not exist - it is not created.
+Delete last empty lines from the last `SectionBlock`.
+
+If `Section` does not exist - it is not created.
 
 #### Arguments
 

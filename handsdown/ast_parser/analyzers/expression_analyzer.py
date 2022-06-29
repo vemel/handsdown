@@ -6,7 +6,7 @@ from typing import Dict, List, Type
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
 from handsdown.ast_parser.type_defs import ASTIterable, Node
-from handsdown.settings import ENCODING
+from handsdown.constants import ENCODING
 from handsdown.utils.logger import get_logger
 
 

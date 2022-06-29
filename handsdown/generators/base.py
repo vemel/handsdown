@@ -9,13 +9,13 @@ from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
+from handsdown.constants import ENCODING
 from handsdown.exceptions import GeneratorError, LoaderError
 from handsdown.jinja_manager import JinjaManager
 from handsdown.loader import Loader
 from handsdown.md_document import MDDocument
 from handsdown.processors.base import BaseDocstringProcessor
 from handsdown.processors.smart import SmartDocstringProcessor
-from handsdown.settings import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.logger import get_logger
 from handsdown.utils.markdown import insert_md_toc
@@ -51,7 +51,10 @@ class BaseGenerator:
 
     _short_link_re = re.compile(r"`+[A-Za-z]\S+`+")
 
+    common_templates_path = NicePath("common")
     templates_path = NicePath("mkdocs")
+    index_template_path = common_templates_path / "index.md.jinja2"
+    module_template_path = templates_path / "module.md.jinja2"
 
     def __init__(
         self,
@@ -215,7 +218,7 @@ class BaseGenerator:
         md_document.source_code_url = self._get_source_code_url(module_record, md_document)
 
         content = self._jinja_manager.render(
-            template_path=self.templates_path / "module.md.jinja2",
+            template_path=self.module_template_path,
             module_record=module_record,
             md_document=md_document,
             docstring_processor=self._docstring_processor,
@@ -243,7 +246,7 @@ class BaseGenerator:
         self._logger.debug(f"Generating {self.md_index.path}")
         md_document = self.md_index
         content = self._jinja_manager.render(
-            template_path=self.templates_path / "index.md.jinja2",
+            template_path=self.index_template_path,
             md_document=md_document,
             generator=self,
             project_name=self._project_name,
@@ -251,7 +254,7 @@ class BaseGenerator:
         if md_document.path.write_changed(content, encoding=self._encoding):
             self._logger.info(f"Updated index {md_document.path}")
 
-    def _replace_links(
+    def replace_links(
         self,
         module_record: ModuleRecord,
         record: NodeRecord,
@@ -347,15 +350,21 @@ class BaseGenerator:
 
     def generate_external_configs(self, overwrite: bool) -> None:
         configs = (
-            ("gh_pages_config.yml", self._output_path / "_config.yml"),
-            ("mkdocs.yml", self._output_path.parent / "mkdocs.yml"),
-            ("readthedocs.yml", self._output_path.parent / ".readthedocs.yml"),
+            (
+                self.common_templates_path / "gh_pages_config.yml.jinja2",
+                self._output_path / "_config.yml",
+            ),
+            (self.templates_path / "mkdocs.yml.jinja2", self._output_path.parent / "mkdocs.yml"),
+            (
+                self.common_templates_path / "readthedocs.yml.jinja2",
+                self._output_path.parent / ".readthedocs.yml",
+            ),
         )
-        for template_name, output_path in configs:
+        for template_path, output_path in configs:
             if not overwrite and output_path.exists():
                 continue
             content = self._jinja_manager.render(
-                template_path=self.templates_path / template_name,
+                template_path=template_path,
                 project_name=self._project_name,
                 source_code_url=self._source_code_url,
             )

@@ -54,7 +54,9 @@ def is_init(self) -> bool:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L97)
 
-Extract comment type annotations from a function definiition lines.Sets `arguments_record` to a new `TextRecord` for each found type annotaiton.
+Extract comment type annotations from a function definiition lines.
+
+Sets `arguments_record` to a new `TextRecord` for each found type annotaiton.
 Also sets `return_type_hint` to a `TextRecord` if function return type found.
 
 #### Signature

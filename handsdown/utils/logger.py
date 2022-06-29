@@ -4,7 +4,7 @@ Utilities for stdout stream logger.
 import logging
 from typing import Optional
 
-from handsdown.settings import LOGGER_NAME
+from handsdown.constants import LOGGER_NAME
 
 
 def get_logger(level: Optional[int] = None) -> logging.Logger:

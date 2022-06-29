@@ -4,53 +4,39 @@ CLI Parser.
 import argparse
 import logging
 import re
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable, List
 from urllib.parse import urlparse, urlunparse
 
 import pkg_resources
 
-from handsdown.settings import ENCODING
+from handsdown.constants import ENCODING, Theme
+from handsdown.utils.nice_path import NicePath
 
 
+@dataclass
 class CLINamespace:
     """
     Main CLI Namespace.
     """
 
-    def __init__(
-        self,
-        panic: bool,
-        input_path: Path,
-        output_path: Path,
-        toc_depth: int,
-        log_level: int,
-        include: Iterable[str],
-        exclude: Iterable[str],
-        source_code_url: str,
-        source_code_path: Path,
-        branch: str,
-        project_name: str,
-        files: Iterable[Path],
-        cleanup: bool,
-        encoding: str,
-        overwrite_configs: bool,
-    ) -> None:
-        self.panic = panic
-        self.input_path = input_path
-        self.output_path = output_path
-        self.log_level = log_level
-        self.toc_depth = toc_depth
-        self.include: List[str] = list(include)
-        self.exclude: List[str] = list(exclude)
-        self.source_code_url = source_code_url
-        self.source_code_path = source_code_path
-        self.branch = branch
-        self.project_name = project_name
-        self.files: List[Path] = list(files)
-        self.cleanup = cleanup
-        self.encoding = encoding
-        self.overwrite_configs = overwrite_configs
+    panic: bool
+    input_path: NicePath
+    output_path: NicePath
+    toc_depth: int
+    log_level: int
+    include: List[str]
+    exclude: List[str]
+    source_code_url: str
+    source_code_path: NicePath
+    branch: str
+    project_name: str
+    files: List[NicePath]
+    cleanup: bool
+    encoding: str
+    overwrite_configs: bool
+    theme: Theme
 
     def get_source_code_url(self) -> str:
         """
@@ -114,7 +100,7 @@ def abs_path(path_str: str) -> Path:
     return Path(path_str).absolute()
 
 
-def dir_abs_path(path_str: str) -> Path:
+def dir_abs_path(path_str: str) -> NicePath:
     """
     Validate directory `path_str` and make it absolute.
 
@@ -127,13 +113,13 @@ def dir_abs_path(path_str: str) -> Path:
     Raises:
         argparse.ArgumentTypeError -- If path is not a directory.
     """
-    path = Path(path_str).absolute()
+    path = NicePath(path_str).absolute()
     if path.exists() and not path.is_dir():
-        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} is not a directory")
+        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
 
 
-def existing_dir_abs_path(path_str: str) -> Path:
+def existing_dir_abs_path(path_str: str) -> NicePath:
     """
     Validate existing directory `path_str` and make it absolute.
 
@@ -146,12 +132,23 @@ def existing_dir_abs_path(path_str: str) -> Path:
     Raises:
         argparse.ArgumentTypeError -- If path does not exist or is not a directory.
     """
-    path = Path(path_str).absolute()
+    path = NicePath(path_str).absolute()
     if not path.exists():
-        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} does not exist")
+        raise argparse.ArgumentTypeError(f"Path {path} does not exist")
     if not path.is_dir():
-        raise argparse.ArgumentTypeError(f"Path {path.as_posix()} is not a directory")
+        raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
+
+
+def parse_theme(name: str) -> Theme:
+    """
+    Cast theme name to `Theme`.
+    """
+    try:
+        return Theme(name)
+    except ValueError:
+        choices = ", ".join([i.value for i in Theme])
+        raise argparse.ArgumentTypeError(f"Invalid theme {name}, choices are: {choices}")
 
 
 def parse_args(args: Iterable[str]) -> CLINamespace:
@@ -179,7 +176,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "-i",
         "--input-path",
         help="Path to project root folder",
-        default=Path.cwd(),
+        default=NicePath.cwd(),
         type=existing_dir_abs_path,
     )
     parser.add_argument(
@@ -194,7 +191,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "-o",
         "--output-path",
         help="Path to output folder (default: <cwd>/docs)",
-        default=Path.cwd() / "docs",
+        default=NicePath.cwd() / "docs",
         type=dir_abs_path,
     )
     parser.add_argument(
@@ -213,8 +210,8 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         help="Path to source code in the project.",
         dest="source_code_path",
         metavar="REPO_PATH",
-        default=Path(),
-        type=Path,
+        default=NicePath(),
+        type=NicePath,
     )
     parser.add_argument(
         "--branch",
@@ -232,7 +229,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "--name",
         dest="project_name",
         help="Project name",
-        default=Path.cwd().stem.capitalize(),
+        default=NicePath.cwd().stem.capitalize(),
     )
     parser.add_argument(
         "-e",
@@ -244,6 +241,14 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "--overwrite-configs",
         help="Overwrite config files if they exist",
         action="store_true",
+    )
+    parser.add_argument(
+        "-t",
+        "--theme",
+        choices=list(Theme),
+        default=Theme.RTD,
+        type=parse_theme,
+        help=f"Overwrite config files if they exist (default: {Theme.RTD.value})",
     )
     parser.add_argument("--panic", action="store_true", help="Panic and die on import error")
     parser.add_argument("-d", "--debug", action="store_true", help="Show debug messages")
@@ -263,14 +268,15 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         output_path=namespace.output_path,
         toc_depth=namespace.toc_depth,
         log_level=log_level,
-        exclude=namespace.exclude,
-        include=namespace.include,
+        exclude=list(namespace.exclude),
+        include=list(namespace.include),
         source_code_url=namespace.source_code_url,
         source_code_path=namespace.source_code_path,
         branch=namespace.branch,
         project_name=namespace.project_name,
-        files=namespace.files,
+        files=list(namespace.files),
         cleanup=namespace.cleanup,
         encoding=namespace.encoding,
         overwrite_configs=namespace.overwrite_configs,
+        theme=namespace.theme,
     )

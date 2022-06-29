@@ -39,7 +39,9 @@ class ModuleAnalyzer(BaseAnalyzer):
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
 
-Parse info about module attribute statements.Adds new `ast.Assign` entry to `attribute_nodes`.
+Parse info about module attribute statements.
+
+Adds new `ast.Assign` entry to `attribute_nodes`.
 Skips assignments to anything pther that a new variable.
 Skips multiple assignments.
 Skips assignments with names starting with `_`.
@@ -74,7 +76,9 @@ def visit_Assign(self, node: ast.Assign) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
 
-Parse info about module `def ...` statements.Adds `node` entry to `function_nodes`.
+Parse info about module `def ...` statements.
+
+Adds `node` entry to `function_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -99,7 +103,9 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58)
 
-Parse info about module `class ...` statements.Adds `node` entry to `class_nodes`.
+Parse info about module `class ...` statements.
+
+Adds `node` entry to `class_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -124,7 +130,9 @@ def visit_ClassDef(self, node: ast.ClassDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
 
-Parse info about module `def ...` statements.Adds `node` entry to `function_nodes`.
+Parse info about module `def ...` statements.
+
+Adds `node` entry to `function_nodes`.
 Skips nodes with names starting with `_`.
 
 #### Examples
@@ -149,7 +157,9 @@ def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
 
-Parse info about module `import ...` statements.Adds `node` to `import_nodes`.
+Parse info about module `import ...` statements.
+
+Adds `node` to `import_nodes`.
 
 #### Examples
 
@@ -175,7 +185,9 @@ def visit_Import(self, node: ast.Import) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42)
 
-Parse info about module `import ... from ...` statements.Adds `node` to `import_nodes`.
+Parse info about module `import ... from ...` statements.
+
+Adds `node` to `import_nodes`.
 
 #### Examples
 

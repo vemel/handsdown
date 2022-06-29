@@ -15,7 +15,9 @@ Strings
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L48)
 
-Extract title from the first line of content.If title is present - return a title and a remnaing content.
+Extract title from the first line of content.
+
+If title is present - return a title and a remnaing content.
 if not - return an empty title and untouched content.
 
 #### Examples
@@ -45,7 +47,9 @@ def extract_md_title(content: str) -> Tuple[str, str]:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L7)
 
-Convert `pathlib.Path` part or any other string to a human-readable title.Replace underscores with spaces and capitalize result.
+Convert `pathlib.Path` part or any other string to a human-readable title.
+
+Replace underscores with spaces and capitalize result.
 
 #### Examples
 

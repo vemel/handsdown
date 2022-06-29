@@ -9,6 +9,7 @@ Section
 
 - [Section](#section)
   - [Section](#section-1)
+    - [Section().iterate_blocks](#section()iterate_blocks)
     - [Section().render](#section()render)
 
 ## Section
@@ -28,6 +29,23 @@ Section in a `SectionMap`.
 class Section:
     def __init__(self, title: str, blocks: Iterable[SectionBlock]) -> None:
         ...
+```
+
+### Section().iterate_blocks
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L35)
+
+Iterate over all non-empty Section block lines.
+
+#### Returns
+
+Section block lines.
+
+#### Signature
+
+```python
+def iterate_blocks(self) -> Iterable[SectionBlock]:
+    ...
 ```
 
 ### Section().render

@@ -14,10 +14,11 @@ Cli Parser
   - [existing_dir_abs_path](#existing_dir_abs_path)
   - [git_repo](#git_repo)
   - [parse_args](#parse_args)
+  - [parse_theme](#parse_theme)
 
 ## CLINamespace
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L16)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L18)
 
 Main CLI Namespace.
 
@@ -25,30 +26,12 @@ Main CLI Namespace.
 
 ```python
 class CLINamespace:
-    def __init__(
-        self,
-        panic: bool,
-        input_path: Path,
-        output_path: Path,
-        toc_depth: int,
-        log_level: int,
-        include: Iterable[str],
-        exclude: Iterable[str],
-        source_code_url: str,
-        source_code_path: Path,
-        branch: str,
-        project_name: str,
-        files: Iterable[Path],
-        cleanup: bool,
-        encoding: str,
-        overwrite_configs: bool,
-    ) -> None:
-        ...
+    ...
 ```
 
 ### CLINamespace().get_source_code_url
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L55)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L41)
 
 Get URL to source code.
 
@@ -67,7 +50,7 @@ def get_source_code_url(self) -> str:
 
 ## abs_path
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L104)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L90)
 
 Validate `path_str` and make it absolute.
 
@@ -90,7 +73,7 @@ def abs_path(path_str: str) -> Path:
 
 ## dir_abs_path
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L117)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L103)
 
 Validate directory `path_str` and make it absolute.
 
@@ -109,15 +92,19 @@ An absolute path.
 #### Signature
 
 ```python
-def dir_abs_path(path_str: str) -> Path:
+def dir_abs_path(path_str: str) -> NicePath:
     ...
 ```
+
+#### See also
+
+- [NicePath](utils/nice_path.md#nicepath)
 
 
 
 ## existing_dir_abs_path
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L136)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L122)
 
 Validate existing directory `path_str` and make it absolute.
 
@@ -136,15 +123,19 @@ An absolute path.
 #### Signature
 
 ```python
-def existing_dir_abs_path(path_str: str) -> Path:
+def existing_dir_abs_path(path_str: str) -> NicePath:
     ...
 ```
+
+#### See also
+
+- [NicePath](utils/nice_path.md#nicepath)
 
 
 
 ## git_repo
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L76)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L62)
 
 Validate `git_repo_url` to be a GitHub repo and converts SSH urls to HTTPS.
 
@@ -167,7 +158,7 @@ def git_repo(git_repo_url: str) -> str:
 
 ## parse_args
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L157)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L154)
 
 Get CLI arguments parser.
 
@@ -185,5 +176,24 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
 #### See also
 
 - [CLINamespace](#clinamespace)
+
+
+
+## parse_theme
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L143)
+
+Cast theme name to `Theme`.
+
+#### Signature
+
+```python
+def parse_theme(name: str) -> Theme:
+    ...
+```
+
+#### See also
+
+- [Theme](./constants.md#theme)
 
 

@@ -21,7 +21,9 @@ ModuleRecord
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L21)
 
-Wrapper for an `ast.Module` node with corresponding node info.Responsible for parsing Python source as well.
+Wrapper for an `ast.Module` node with corresponding node info.
+
+Responsible for parsing Python source as well.
 
 #### Arguments
 
@@ -43,7 +45,9 @@ class ModuleRecord(NodeRecord):
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L137)
 
-Collect full information about Module child records.Used only when doc for this ModuleRecord is building.
+Collect full information about Module child records.
+
+Used only when doc for this ModuleRecord is building.
 
 #### Signature
 
@@ -56,7 +60,7 @@ def build_children(self) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L45)
 
-Create new `ModuleRecord` from path.
+Create new [ModuleRecord](#modulerecord) from path.
 
 #### Arguments
 
@@ -66,7 +70,7 @@ Create new `ModuleRecord` from path.
 
 #### Returns
 
-New `ModuleRecord` instance.
+New [ModuleRecord](#modulerecord) instance.
 
 #### Signature
 
@@ -80,7 +84,7 @@ def create_from_source(
 
 #### See also
 
-- [ENCODING](../../settings.md#encoding)
+- [ENCODING](../../constants.md#encoding)
 - [ImportString](../../utils/import_string.md#importstring)
 
 ### ModuleRecord().find_record

@@ -1,0 +1,30 @@
+# Rtd
+
+[Handsdown API Index](../../README.md#handsdown-api-index) /
+[Handsdown](../index.md#handsdown) /
+[Generators](./index.md#generators) /
+Rtd
+
+> Auto-generated documentation for [handsdown.generators.rtd](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py) module.
+
+- [Rtd](#rtd)
+  - [RTDGenerator](#rtdgenerator)
+
+## RTDGenerator
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py#L8)
+
+Read the Docs documentation generator.
+
+#### Signature
+
+```python
+class RTDGenerator(BaseGenerator):
+    ...
+```
+
+#### See also
+
+- [BaseGenerator](./base.md#basegenerator)
+
+

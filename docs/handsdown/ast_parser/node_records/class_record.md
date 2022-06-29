@@ -63,7 +63,9 @@ def find_record(self, name: str) -> Optional[NodeRecord]:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L87)
 
-Get Class public methods.Skips methods with names starting with `_` and magic methods  `__` if
+Get Class public methods.
+
+Skips methods with names starting with `_` and magic methods  `__` if
 they have no docstring. Method `__init__` is always skipped.
 
 #### Returns

@@ -12,4 +12,5 @@ Generators
 ## Modules
 
 - [Base](./base.md)
-- [Mkdocs](./mkdocs.md)
+- [Material](./material.md)
+- [Rtd](./rtd.md)

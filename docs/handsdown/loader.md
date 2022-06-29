@@ -11,11 +11,10 @@ Loader
     - [Loader().get_import_string](#loader()get_import_string)
     - [Loader().get_module_record](#loader()get_module_record)
     - [Loader.parse_module_record](#loaderparse_module_record)
-  - [LoaderError](#loadererror)
 
 ## Loader
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L22)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L17)
 
 Loader for python source code.
 
@@ -44,11 +43,11 @@ class Loader:
 
 #### See also
 
-- [ENCODING](./settings.md#encoding)
+- [ENCODING](./constants.md#encoding)
 
 ### Loader().get_import_string
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L129)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L124)
 
 Get Python import string for a source `source_path` relative to `root_path`.
 
@@ -80,7 +79,7 @@ def get_import_string(self, source_path: Path) -> str:
 
 ### Loader().get_module_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L64)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L59)
 
 Build `ModuleRecord` for given `source_path`.
 
@@ -105,7 +104,7 @@ def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
 
 ### Loader.parse_module_record
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L114)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L109)
 
 Parse `ModuleRecord` children and fully load a tree for it.
 
@@ -124,20 +123,5 @@ def parse_module_record(module_record: ModuleRecord) -> None:
 #### See also
 
 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
-
-
-
-## LoaderError
-
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L16)
-
-Main error for `Loader` class.
-
-#### Signature
-
-```python
-class LoaderError(Exception):
-    ...
-```
 
 

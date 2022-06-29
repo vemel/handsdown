@@ -12,7 +12,7 @@ from handsdown.ast_parser.node_records.function_record import FunctionRecord
 from handsdown.ast_parser.node_records.import_record import ImportRecord
 from handsdown.ast_parser.node_records.node_record import NodeRecord
 from handsdown.ast_parser.type_defs import RenderExpr
-from handsdown.settings import ENCODING
+from handsdown.constants import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.indent_trimmer import IndentTrimmer
 from handsdown.utils.nice_path import NicePath

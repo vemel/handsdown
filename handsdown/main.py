@@ -4,9 +4,10 @@ Main CLI entrypoint for `handsdown`.
 import sys
 
 from handsdown.cli_parser import CLINamespace, parse_args
+from handsdown.constants import EXCLUDE_EXPRS, SOURCES_GLOB, Theme
 from handsdown.exceptions import GeneratorError
+from handsdown.generators.material import MaterialGenerator
 from handsdown.generators.rtd import RTDGenerator
-from handsdown.settings import EXCLUDE_EXPRS, SOURCES_GLOB
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
 
@@ -15,7 +16,12 @@ def api(args: CLINamespace) -> None:
     path_finder = (
         PathFinder(args.input_path).exclude(*(EXCLUDE_EXPRS + args.exclude)).include(*args.include)
     )
-    generator = RTDGenerator(
+    generator_cls = {
+        Theme.RTD: RTDGenerator,
+        Theme.MD: MaterialGenerator,
+    }[args.theme]
+
+    generator = generator_cls(
         project_name=args.project_name,
         input_path=args.input_path,
         output_path=args.output_path,

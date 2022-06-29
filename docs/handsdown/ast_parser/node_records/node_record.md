@@ -50,7 +50,9 @@ def class_name(self) -> str:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L128)
 
-Render each of `attribute_records` to a Markdown string.Includes `name`, `docstring` and `value` of an `ArgumentRecord`.
+Render each of `attribute_records` to a Markdown string.
+
+Includes `name`, `docstring` and `value` of an `ArgumentRecord`.
 
 #### Returns
 
@@ -97,7 +99,9 @@ def line_number(self, value: int) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L74)
 
-Get all information from a node.Executes only once if called multiple times.
+Get all information from a node.
+
+Executes only once if called multiple times.
 
 #### Signature
 
@@ -110,7 +114,9 @@ def parse(self) -> None:
 
 [find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/node_record.py#L58)
 
-Get a set of referenced object names in `node`.Returns an empty set, should be overriden by a child class.
+Get a set of referenced object names in `node`.
+
+Returns an empty set, should be overriden by a child class.
 
 #### Returns
 
