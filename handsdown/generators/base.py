@@ -254,7 +254,7 @@ class BaseGenerator:
             md_document=md_document,
             generator=self,
             project_name=self._project_name,
-            source_code_url=self._source_code_url,
+            source_code_url=self._get_main_source_code_url(),
         )
         if md_document.path.write_changed(content, encoding=self._encoding):
             self._logger.info(f"Updated index {md_document.path}")
@@ -369,16 +369,26 @@ class BaseGenerator:
             ),
         )
 
-    def generate_external_configs(self, overwrite: bool) -> None:
+    def _get_output_path_str(self) -> str:
+        result = str(self._output_path.relative_to(self._root_path))
+        if result.startswith("./"):
+            result = result[2:]
+        return result
+
+    def _get_main_source_code_url(self) -> str:
+        result = self._source_code_url or ""
+        if "/blob/" in result:
+            result = result.split("/blob/")[0]
+        return result
+
+    def generate_external_configs(self) -> None:
         configs = self.get_external_configs_templates()
         for template_path, output_path in configs:
-            if not overwrite and output_path.exists():
-                continue
             content = self._jinja_manager.render(
                 template_path=template_path,
                 project_name=self._project_name,
-                source_code_url=self._source_code_url,
-                output_path=self._output_path.name,
+                source_code_url=self._get_main_source_code_url(),
+                output_path=self._get_output_path_str(),
             )
             if output_path.write_changed(content, encoding=self._encoding):
                 self._logger.info(f"Updated config {output_path}")

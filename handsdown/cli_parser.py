@@ -34,7 +34,7 @@ class CLINamespace:
     files: List[NicePath]
     cleanup: bool
     encoding: str
-    overwrite_configs: bool
+    create_configs: bool
     theme: Theme
 
     def get_source_code_url(self) -> str:
@@ -237,8 +237,8 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         default=ENCODING,
     )
     parser.add_argument(
-        "--overwrite-configs",
-        help="Overwrite config files if they exist",
+        "--create-configs",
+        help="Create config files for deployment to RtD and GitHub Pages",
         action="store_true",
     )
     parser.add_argument(
@@ -247,7 +247,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         choices=list(Theme),
         default=Theme.RTD,
         type=parse_theme,
-        help=f"Overwrite config files if they exist (default: {Theme.RTD.value})",
+        help=f"Output mkdocs theme (default: {Theme.RTD.value})",
     )
     parser.add_argument("--panic", action="store_true", help="Panic and die on import error")
     parser.add_argument("-d", "--debug", action="store_true", help="Show debug messages")
@@ -276,6 +276,6 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         files=list(namespace.files),
         cleanup=namespace.cleanup,
         encoding=namespace.encoding,
-        overwrite_configs=namespace.overwrite_configs,
+        create_configs=namespace.create_configs,
         theme=namespace.theme,
     )

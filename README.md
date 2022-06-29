@@ -96,7 +96,7 @@ handsdown -o output_dir
 handsdown my_module --exclude my_module/migrations
 
 # generate documentation for deployment
-handsdown --external `git config --get remote.origin.url` -n ProjectName --branch main
+handsdown --external `git config --get remote.origin.url` -n ProjectName --branch main --create-configs
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
@@ -107,7 +107,7 @@ Navigate to `docs/README.md` to check your new documentation!
 
 ```bash
 # generate MarkDown documentation in docsmd folder
-handsdown --external `git config --get remote.origin.url` -o docsmd -n <project_name> --theme=material
+handsdown --external `git config --get remote.origin.url` -o docsmd -n <project_name> --theme=material --create-configs
 
 # generate html files to docs folder
 python -m mkdocs build
@@ -133,7 +133,7 @@ docker run -v `pwd`:/app handsdown -n ProjectName
 PYTHON_VER=2 docker run -v `pwd`:/app handsdown -n ProjectName
 
 # generate documentation for deployment
-docker run -v `pwd`:/app handsdown --external `git config --get remote.origin.url` -n ProjectName
+docker run -v `pwd`:/app handsdown --external `git config --get remote.origin.url` -n ProjectName --create-configs
 ```
 
 ### 📝 As a GitHub Pages manager
@@ -146,10 +146,10 @@ GitHub repository.
 # Generate documentation that points to main branch
 # do not use custom output location, as `GitHub Pages`
 # works only with `docs` directory
-handsdown --external `git config --get remote.origin.url`
+handsdown --external `git config --get remote.origin.url` --create-configs
 
 # or specify GitHub url directly
-handsdown --external https://github.com/<user>/<project> --branch main
+handsdown --external https://github.com/<user>/<project> --create-configs
 ```
 
 - Generate documentation with `--external` flag as shown above, do not use `--output`
@@ -179,10 +179,10 @@ GitHub repository to `Read the Docs`.
 # Generate documentation that points to main branch
 # do not use custom output location, as `GitHub Pages`
 # works only with `docs` directory
-handsdown --external `git config --get remote.origin.url`
+handsdown --external `git config --get remote.origin.url` --create-configs
 
 # or specify GitHub url directly
-handsdown --external https://github.com/<user>/<project>/
+handsdown --external https://github.com/<user>/<project>/ --create-configs
 ```
 
 - Generate documentation with `--external` flag as shown above, do not use `--output`
@@ -198,7 +198,7 @@ All set! You can change `.readthedocs.yml` and `mkdocs.yml` to add your own touc
 # Generate documentation that points to main branch
 # with source links pointing to your repository
 # this command also creates `mkdocs.yml`
-handsdown --external `git config --get remote.origin.url`
+handsdown --external `git config --get remote.origin.url` --create-configs
 
 # Run mkdocs to build HTML
 python -m mkdocs build
@@ -233,8 +233,11 @@ handsdown.generate_docs()
 # or generate just for one doc
 handsdown.generate_doc(repo_path / 'my_module' / 'source.py')
 
-# and generate index.md file
+# generate index.md file
 handsdown.generate_index()
+
+# and generate GitHub Pages and Read the Docs config files
+handsdown.generate_configs()
 
 # navigate to `output` dir and check results
 ```
@@ -259,13 +262,15 @@ handsdown [-h] [--exclude [EXCLUDE ...]] [-i INPUT_PATH] [-f [FILES ...]]
 | `--external` | Build docs and config for external hosting, GitHub Pages or Read the Docs. Provide the project GitHub .../blob/main/ URL here. | |
 | `--source-code-path` | Path to source code in the project. Overrides `--branch` CLI argument | |
 | `--branch` | Main branch name | `main` |
-| `--toc-depth` | Maximum depth of child modules ToC | `1` |
+| `--toc-depth` | Maximum depth of child modules ToC | `3` |
 | `--cleanup` | Remove orphaned auto-generated docs | |
 | `-n` / `--name` | Project name | `<cwd>` |
 | `-e` / `--encoding` | Input and output file encoding | `utf-8` |
 | `--panic` | Panic and die on import error | |
 | `--debug` | Show debug messages| |
 | `--quiet` | Hide log output | |
+| `--create-configs` | Create config files for deployment to RtD and GitHub Pages | |
+| `-t` / `--theme` | Output mkdocs theme | `readthedocs` |
 | `-h` | Show help | |
 
 

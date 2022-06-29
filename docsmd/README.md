@@ -2,7 +2,7 @@
 
 > Auto-generated documentation index.
 
-A full list of [Handsdown](https://github.com/vemel/handsdown/blob/main/) project modules.
+A full list of [Handsdown](https://github.com/vemel/handsdown) project modules.
 
 To add custom content to this file, create `HANDSDOWN.md` in your project root.
 

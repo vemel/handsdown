@@ -111,12 +111,12 @@ def generate_docs(self) -> None:
 
 ### BaseGenerator().generate_external_configs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L372)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L384)
 
 #### Signature
 
 ```python
-def generate_external_configs(self, overwrite: bool) -> None:
+def generate_external_configs(self) -> None:
     ...
 ```
 
@@ -137,7 +137,7 @@ def generate_index(self) -> None:
 
 ### BaseGenerator().get_children_module_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L386)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L396)
 
 Get all module records that are children of this module.
 

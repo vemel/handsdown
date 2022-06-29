@@ -50,8 +50,8 @@ def api(args: CLINamespace) -> None:
         if args.cleanup:
             generator.cleanup_old_docs()
 
-    if args.source_code_url:
-        generator.generate_external_configs(args.overwrite_configs)
+    if args.create_configs:
+        generator.generate_external_configs()
 
 
 def main() -> None:
