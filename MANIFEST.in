@@ -1,3 +1,4 @@
-include handsdown/assets/*.yml
+include handsdown/templates/**/*.jinja2
+include py.typed
 include README.md
 include LICENSE

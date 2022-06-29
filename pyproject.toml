@@ -55,7 +55,6 @@ packages = [
 include = [
     "LICENSE",
     "handsdown/py.typed",
-    "handsdown/assets/*.yml",
     "handsdown/templates/**/*.jinja2",
 ]
 
