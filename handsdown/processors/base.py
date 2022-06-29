@@ -107,7 +107,7 @@ class BaseDocstringProcessor:
 
             self._parse_line(line)
 
-        if self._in_indent_codeblock:
+        if self._in_indent_codeblock or self._in_doctest_block:
             self._trim_empty_lines()
             self._add_line("```", indent=0)
 
