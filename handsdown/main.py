@@ -2,24 +2,33 @@
 Main CLI entrypoint for `handsdown`.
 """
 import sys
+from typing import Type
 
 from handsdown.cli_parser import CLINamespace, parse_args
 from handsdown.constants import EXCLUDE_EXPRS, SOURCES_GLOB, Theme
 from handsdown.exceptions import GeneratorError
+from handsdown.generators.base import BaseGenerator
 from handsdown.generators.material import MaterialGenerator
 from handsdown.generators.rtd import RTDGenerator
 from handsdown.utils.logger import get_logger
 from handsdown.utils.path_finder import PathFinder
 
 
+def select_generator_cls(theme: Theme) -> Type[BaseGenerator]:
+    """
+    Select a generator based on the theme.
+    """
+    return {
+        Theme.RTD: RTDGenerator,
+        Theme.MD: MaterialGenerator,
+    }[theme]
+
+
 def api(args: CLINamespace) -> None:
     path_finder = (
         PathFinder(args.input_path).exclude(*(EXCLUDE_EXPRS + args.exclude)).include(*args.include)
     )
-    generator_cls = {
-        Theme.RTD: RTDGenerator,
-        Theme.MD: MaterialGenerator,
-    }[args.theme]
+    generator_cls = select_generator_cls(args.theme)
 
     generator = generator_cls(
         project_name=args.project_name,
