@@ -568,6 +568,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -610,7 +617,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
+  <a href="#see-also_1" class="md-nav__link">
     See also
   </a>
   
@@ -658,7 +665,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_1" class="md-nav__link">
+  <a href="#see-also_2" class="md-nav__link">
     See also
   </a>
   
@@ -726,7 +733,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_2" class="md-nav__link">
+  <a href="#see-also_3" class="md-nav__link">
     See also
   </a>
   
@@ -753,7 +760,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_3" class="md-nav__link">
+  <a href="#see-also_4" class="md-nav__link">
     See also
   </a>
   
@@ -1765,6 +1772,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#see-also" class="md-nav__link">
+    See also
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1807,7 +1821,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
+  <a href="#see-also_1" class="md-nav__link">
     See also
   </a>
   
@@ -1855,7 +1869,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_1" class="md-nav__link">
+  <a href="#see-also_2" class="md-nav__link">
     See also
   </a>
   
@@ -1923,7 +1937,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_2" class="md-nav__link">
+  <a href="#see-also_3" class="md-nav__link">
     See also
   </a>
   
@@ -1950,7 +1964,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#see-also_3" class="md-nav__link">
+  <a href="#see-also_4" class="md-nav__link">
     See also
   </a>
   
@@ -1987,14 +2001,14 @@ Cli Parser</p>
 <p>Auto-generated documentation for <a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py">handsdown.cli_parser</a> module.</p>
 </blockquote>
 <h2 id="clinamespace">CLINamespace</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L18">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L17">find in source code</a></p>
 <p>Main CLI Namespace.</p>
 <h4 id="signature">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">CLINamespace</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="clinamespaceget_source_code_url">CLINamespace().get_source_code_url</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L41">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L40">find in source code</a></p>
 <p>Get URL to source code.</p>
 <h4 id="returns">Returns</h4>
 <p>URL as a string.</p>
@@ -2003,7 +2017,7 @@ Cli Parser</p>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h2 id="abs_path">abs_path</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L90">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L89">find in source code</a></p>
 <p>Validate <code>path_str</code> and make it absolute.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
@@ -2012,11 +2026,15 @@ Cli Parser</p>
 <h4 id="returns_1">Returns</h4>
 <p>An absolute path.</p>
 <h4 id="signature_2">Signature</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">abs_path</span><span class="p">(</span><span class="n">path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span> <span class="nf">abs_path</span><span class="p">(</span><span class="n">path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NicePath</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span>
 </code></pre></div>
+<h4 id="see-also">See also</h4>
+<ul>
+<li><a href="../utils/nice_path/#nicepath">NicePath</a></li>
+</ul>
 <h2 id="dir_abs_path">dir_abs_path</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L103">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L102">find in source code</a></p>
 <p>Validate directory <code>path_str</code> and make it absolute.</p>
 <h4 id="arguments_1">Arguments</h4>
 <ul>
@@ -2032,12 +2050,12 @@ Cli Parser</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">dir_abs_path</span><span class="p">(</span><span class="n">path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NicePath</span><span class="p">:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also">See also</h4>
+<h4 id="see-also_1">See also</h4>
 <ul>
 <li><a href="../utils/nice_path/#nicepath">NicePath</a></li>
 </ul>
 <h2 id="existing_dir_abs_path">existing_dir_abs_path</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L122">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L121">find in source code</a></p>
 <p>Validate existing directory <code>path_str</code> and make it absolute.</p>
 <h4 id="arguments_2">Arguments</h4>
 <ul>
@@ -2053,12 +2071,12 @@ Cli Parser</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span> <span class="nf">existing_dir_abs_path</span><span class="p">(</span><span class="n">path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NicePath</span><span class="p">:</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also_1">See also</h4>
+<h4 id="see-also_2">See also</h4>
 <ul>
 <li><a href="../utils/nice_path/#nicepath">NicePath</a></li>
 </ul>
 <h2 id="git_repo">git_repo</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L62">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L61">find in source code</a></p>
 <p>Validate <code>git_repo_url</code> to be a GitHub repo and converts SSH urls to HTTPS.</p>
 <h4 id="arguments_3">Arguments</h4>
 <ul>
@@ -2071,7 +2089,7 @@ Cli Parser</p>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h2 id="parse_args">parse_args</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L154">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L153">find in source code</a></p>
 <p>Get CLI arguments parser.</p>
 <h4 id="returns_5">Returns</h4>
 <p>An <code>argparse.ArgumentParser</code> instance.</p>
@@ -2079,18 +2097,18 @@ Cli Parser</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">CLINamespace</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also_2">See also</h4>
+<h4 id="see-also_3">See also</h4>
 <ul>
 <li><a href="#clinamespace">CLINamespace</a></li>
 </ul>
 <h2 id="parse_theme">parse_theme</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L143">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L142">find in source code</a></p>
 <p>Cast theme name to <code>Theme</code>.</p>
 <h4 id="signature_7">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span> <span class="nf">parse_theme</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Theme</span><span class="p">:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also_3">See also</h4>
+<h4 id="see-also_4">See also</h4>
 <ul>
 <li><a href="../constants/#theme">Theme</a></li>
 </ul>

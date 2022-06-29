@@ -5,7 +5,6 @@ import argparse
 import logging
 import re
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Iterable, List
 from urllib.parse import urlparse, urlunparse
 
@@ -52,7 +51,7 @@ class CLINamespace:
         if self.branch:
             result = f"{result}/blob/{self.branch}"
 
-        if self.source_code_path != Path():
+        if self.source_code_path != NicePath():
             result = f"{result}/{self.source_code_path.as_posix()}".rstrip("/")
 
         result = urlunparse(urlparse(result.rstrip("/")))
@@ -87,7 +86,7 @@ def git_repo(git_repo_url: str) -> str:
     return f"https://github.com/{user}/{repo}/"
 
 
-def abs_path(path_str: str) -> Path:
+def abs_path(path_str: str) -> NicePath:
     """
     Validate `path_str` and make it absolute.
 
@@ -97,7 +96,7 @@ def abs_path(path_str: str) -> Path:
     Returns:
         An absolute path.
     """
-    return Path(path_str).absolute()
+    return NicePath(path_str).absolute()
 
 
 def dir_abs_path(path_str: str) -> NicePath:
