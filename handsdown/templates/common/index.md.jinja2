@@ -23,6 +23,6 @@ A full list of `{{ project_name }}` project modules.
 {%- endfor -%}
 
 {%- for module_record in generator.module_records -%}
-{{ '  ' * (module_record.import_string.length - 1) }}- [{{ module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(module_record).path) }}#{{ md_document.get_anchor(module_record.title) }})
+{{ '    ' * (module_record.import_string.length - 1) }}- [{{ module_record.title }}]({{ md_document.get_doc_link(generator.get_md_document(module_record).path) }}#{{ md_document.get_anchor(module_record.title) }})
 {{- '\n' -}}
 {%- endfor -%}
