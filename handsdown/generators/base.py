@@ -3,7 +3,7 @@ Main handsdown documentation generator.
 """
 import re
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from handsdown.ast_parser.module_record_list import ModuleRecordList
 from handsdown.ast_parser.node_records.attribute_record import AttributeRecord
@@ -353,18 +353,24 @@ class BaseGenerator:
 
         return sorted(links)
 
-    def generate_external_configs(self, overwrite: bool) -> None:
-        configs = (
+    def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...]:
+        """
+        Get a tuple with pairs of template path to project path
+        """
+        return (
             (
                 self.common_templates_path / "gh_pages_config.yml.jinja2",
                 self._output_path / "_config.yml",
             ),
             (self.templates_path / "mkdocs.yml.jinja2", self._output_path.parent / "mkdocs.yml"),
             (
-                self.common_templates_path / "readthedocs.yml.jinja2",
+                self.templates_path / "readthedocs.yml.jinja2",
                 self._output_path.parent / ".readthedocs.yml",
             ),
         )
+
+    def generate_external_configs(self, overwrite: bool) -> None:
+        configs = self.get_external_configs_templates()
         for template_path, output_path in configs:
             if not overwrite and output_path.exists():
                 continue

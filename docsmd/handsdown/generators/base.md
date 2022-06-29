@@ -111,7 +111,7 @@ def generate_docs(self) -> None:
 
 ### BaseGenerator().generate_external_configs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L356)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L372)
 
 #### Signature
 
@@ -137,7 +137,7 @@ def generate_index(self) -> None:
 
 ### BaseGenerator().get_children_module_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L380)
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L386)
 
 Get all module records that are children of this module.
 
@@ -151,6 +151,23 @@ def get_children_module_records(self, parent: ModuleRecord) -> List[ModuleRecord
 #### See also
 
 - [ModuleRecord](../ast_parser/node_records/module_record.md#modulerecord)
+
+### BaseGenerator().get_external_configs_templates
+
+[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L356)
+
+Get a tuple with pairs of template path to project path
+
+#### Signature
+
+```python
+def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...]:
+    ...
+```
+
+#### See also
+
+- [NicePath](../utils/nice_path.md#nicepath)
 
 ### BaseGenerator().get_md_document
 

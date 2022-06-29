@@ -16,6 +16,7 @@ Python docstring-based documentation generator for lazy perfectionists.
   - [Examples](#examples)
   - [Usage](#usage)
     - [💻 From command line](#-from-command-line)
+    - [🚀 Use a new Material design](#-use-a-new-material-design)
     - [📦 As a Docker image](#-as-a-docker-image)
     - [📝 As a GitHub Pages manager](#-as-a-github-pages-manager)
     - [🐏 Deploy on Read the Docs](#-deploy-on-read-the-docs)
@@ -98,6 +99,18 @@ handsdown --external `git config --get remote.origin.url` -n ProjectName --branc
 ```
 
 Navigate to `docs/README.md` to check your new documentation!
+
+### 🚀 Use a new Material design
+
+- Add `mkdocs` and `mkdocs-material` to your dev dependencies or just install them
+
+```bash
+# generate MarkDown documentation in docsmd folder
+handsdown --external `git config --get remote.origin.url` -o docsmd -n <project_name> --theme=material
+
+# generate html files to docs folder
+python -m mkdocs build
+```
 
 ### 📦 As a Docker image
 
@@ -187,7 +200,7 @@ All set! You can change `.readthedocs.yml` and `mkdocs.yml` to add your own touc
 handsdown --external `git config --get remote.origin.url`
 
 # Run mkdocs to build HTML
-mkdocs build
+python -m mkdocs build
 ```
 
 ### 🧩 As a module
