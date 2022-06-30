@@ -32,7 +32,7 @@ class TestMDDocument:
             )
             temp_f.flush()
             md_doc = MDDocument(Path(temp_f.name))
-            md_doc.read()
+            md_doc.read(Path(temp_f.name))
 
         assert md_doc.path == Path(temp_f.name)
         assert md_doc.title == "my title"
@@ -60,7 +60,7 @@ class TestMDDocument:
             )
             temp_f.flush()
             md_doc = MDDocument(Path(temp_f.name))
-            md_doc.read()
+            md_doc.read(Path(temp_f.name))
 
         assert md_doc.subtitle == "some content"
 
