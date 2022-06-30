@@ -9,7 +9,7 @@ Base Docstring Processor
 
 ## BaseDocstringProcessor
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py#L28)
+[Show source in base.py:28](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py#L28)
 
 Base docstring processor. All docstring processors are based on top of it.
 
@@ -29,7 +29,7 @@ class BaseDocstringProcessor:
 
 ### BaseDocstringProcessor().build_sections
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py#L66)
+[Show source in base.py:66](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py#L66)
 
 Parse docstring and split it to sections with arrays of strings.
 

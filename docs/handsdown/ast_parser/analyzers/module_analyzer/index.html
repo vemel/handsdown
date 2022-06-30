@@ -1911,7 +1911,7 @@ ModuleAnalyzer</p>
 <p>Auto-generated documentation for <a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py">handsdown.ast_parser.analyzers.module_analyzer</a> module.</p>
 </blockquote>
 <h2 id="moduleanalyzer_1">ModuleAnalyzer</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11">Show source in module_analyzer.py:11</a></p>
 <p>AST analyzer for <code>ast.Module</code> records.</p>
 <h4 id="signature">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">ModuleAnalyzer</span><span class="p">(</span><span class="n">BaseAnalyzer</span><span class="p">):</span>
@@ -1923,7 +1923,7 @@ ModuleAnalyzer</p>
 <li><a href="../base_analyzer/#baseanalyzer">BaseAnalyzer</a></li>
 </ul>
 <h3 id="moduleanalyzervisit_assign">ModuleAnalyzer().visit_Assign</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127">Show source in module_analyzer.py:127</a></p>
 <p>Parse info about module attribute statements.</p>
 <p>Adds new <code>ast.Assign</code> entry to <code>attribute_nodes</code>.
 Skips assignments to anything pther that a new variable.
@@ -1950,7 +1950,7 @@ Parses <code>__all__</code> and add all values to <code>all_names</code></p>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="moduleanalyzervisit_asyncfunctiondef">ModuleAnalyzer().visit_AsyncFunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109">Show source in module_analyzer.py:109</a></p>
 <p>Parse info about module <code>def ...</code> statements.</p>
 <p>Adds <code>node</code> entry to <code>function_nodes</code>.
 Skips nodes with names starting with <code>_</code>.</p>
@@ -1967,7 +1967,7 @@ Skips nodes with names starting with <code>_</code>.</p>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="moduleanalyzervisit_classdef">ModuleAnalyzer().visit_ClassDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58">Show source in module_analyzer.py:58</a></p>
 <p>Parse info about module <code>class ...</code> statements.</p>
 <p>Adds <code>node</code> entry to <code>class_nodes</code>.
 Skips nodes with names starting with <code>_</code>.</p>
@@ -1984,7 +1984,7 @@ Skips nodes with names starting with <code>_</code>.</p>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="moduleanalyzervisit_functiondef">ModuleAnalyzer().visit_FunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91">Show source in module_analyzer.py:91</a></p>
 <p>Parse info about module <code>def ...</code> statements.</p>
 <p>Adds <code>node</code> entry to <code>function_nodes</code>.
 Skips nodes with names starting with <code>_</code>.</p>
@@ -2001,7 +2001,7 @@ Skips nodes with names starting with <code>_</code>.</p>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="moduleanalyzervisit_import">ModuleAnalyzer().visit_Import</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24">Show source in module_analyzer.py:24</a></p>
 <p>Parse info about module <code>import ...</code> statements.</p>
 <p>Adds <code>node</code> to <code>import_nodes</code>.</p>
 <h4 id="examples_4">Examples</h4>
@@ -2019,7 +2019,7 @@ Skips nodes with names starting with <code>_</code>.</p>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="moduleanalyzervisit_importfrom">ModuleAnalyzer().visit_ImportFrom</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42">Show source in module_analyzer.py:42</a></p>
 <p>Parse info about module <code>import ... from ...</code> statements.</p>
 <p>Adds <code>node</code> to <code>import_nodes</code>.</p>
 <h4 id="examples_5">Examples</h4>

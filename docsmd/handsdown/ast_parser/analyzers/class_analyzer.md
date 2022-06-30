@@ -10,7 +10,7 @@ ClassAnalyzer
 
 ## ClassAnalyzer
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L11)
+[Show source in class_analyzer.py:11](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L11)
 
 AST analyzer for `ast.ClassDef` records.
 
@@ -28,7 +28,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
 ### ClassAnalyzer().generic_visit
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L138)
+[Show source in class_analyzer.py:138](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L138)
 
 Do nothing for unknown `ast.AST` nodes.
 
@@ -45,7 +45,7 @@ def generic_visit(self, node: ast.AST) -> None:
 
 ### ClassAnalyzer().visit_Assign
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L98)
+[Show source in class_analyzer.py:98](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L98)
 
 Parse info about class attribute statements.
 
@@ -80,7 +80,7 @@ def visit_Assign(self, node: ast.Assign) -> None:
 
 ### ClassAnalyzer().visit_AsyncFunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L80)
+[Show source in class_analyzer.py:80](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L80)
 
 Parse info about class asynchronous method statements.
 
@@ -107,7 +107,7 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 ### ClassAnalyzer().visit_ClassDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L23)
+[Show source in class_analyzer.py:23](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L23)
 
 Entrypoint for the analyzer.
 
@@ -137,7 +137,7 @@ def visit_ClassDef(self, node: ast.ClassDef) -> None:
 
 ### ClassAnalyzer().visit_FunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L62)
+[Show source in class_analyzer.py:62](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L62)
 
 Parse info about class method statements.
 

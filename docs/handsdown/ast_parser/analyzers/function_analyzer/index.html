@@ -1761,7 +1761,7 @@ FunctionAnalyzer</p>
 <p>Auto-generated documentation for <a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py">handsdown.ast_parser.analyzers.function_analyzer</a> module.</p>
 </blockquote>
 <h2 id="functionanalyzer_1">FunctionAnalyzer</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12">Show source in function_analyzer.py:12</a></p>
 <p>AST analyzer for <code>ast.FunctionDef</code> records.</p>
 <h4 id="signature">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">FunctionAnalyzer</span><span class="p">(</span><span class="n">BaseAnalyzer</span><span class="p">):</span>
@@ -1773,7 +1773,7 @@ FunctionAnalyzer</p>
 <li><a href="../base_analyzer/#baseanalyzer">BaseAnalyzer</a></li>
 </ul>
 <h3 id="functionanalyzergeneric_visit">FunctionAnalyzer().generic_visit</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161">Show source in function_analyzer.py:161</a></p>
 <p>Do nothing for unknown <code>ast.AST</code> nodes.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
@@ -1784,7 +1784,7 @@ FunctionAnalyzer</p>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="functionanalyzervisit_asyncfunctiondef">FunctionAnalyzer().visit_AsyncFunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142">Show source in function_analyzer.py:142</a></p>
 <p>Entrypoint for the analyzer for asynchronous functions.</p>
 <p>Visits each node from <code>node.args</code>.
 Adds new <code>ast.expr</code> entry to <code>decorator_nodes</code> for each node
@@ -1803,7 +1803,7 @@ Sets <code>return_type_hint</code> to <code>node.returns</code> if it defined.</
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="functionanalyzervisit_functiondef">FunctionAnalyzer().visit_FunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123">Show source in function_analyzer.py:123</a></p>
 <p>Entrypoint for the analyzer.</p>
 <p>Visits each node from <code>node.args</code>.
 Adds new <code>ast.expr</code> entry to <code>decorator_nodes</code> for each node
@@ -1822,7 +1822,7 @@ Sets <code>return_type_hint</code> to <code>node.returns</code> if it defined.</
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="functionanalyzervisit_arguments">FunctionAnalyzer().visit_arguments</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38">find in source code</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38">Show source in function_analyzer.py:38</a></p>
 <p>Parse info about class method statements.</p>
 <p>Adds new <code>ArgumentRecord</code> entry to <code>argument_records</code> for each argument.</p>
 <h4 id="examples_2">Examples</h4>

@@ -10,7 +10,7 @@ ArgumentRecord
 
 ## ArgumentRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L13)
+[Show source in argument_record.py:13](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L13)
 
 Wrapper for an `ast.arg` node.
 
@@ -41,7 +41,7 @@ class ArgumentRecord(NodeRecord):
 
 ### ArgumentRecord().default
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L39)
+[Show source in argument_record.py:39](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L39)
 
 Default value of the argument.
 
@@ -59,7 +59,7 @@ def default(self) -> Optional[ExpressionRecord]:
 
 ### ArgumentRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L71)
+[Show source in argument_record.py:71](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L71)
 
 Set of related names.
 
@@ -73,7 +73,7 @@ def related_names(self) -> Set[str]:
 
 ### ArgumentRecord().required
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L49)
+[Show source in argument_record.py:49](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L49)
 
 Whether the argument is required.
 
@@ -91,7 +91,7 @@ def required(self) -> bool:
 
 ### ArgumentRecord().set_default
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L59)
+[Show source in argument_record.py:59](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L59)
 
 Set default expression from test or `ast.AST` node.
 

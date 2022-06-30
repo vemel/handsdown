@@ -9,7 +9,7 @@ PathFinder
 
 ## PathFinder
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L19)
+[Show source in path_finder.py:19](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L19)
 
 Glob helper for matching paths inside `root` path.
 
@@ -48,7 +48,7 @@ class PathFinder:
 
 ### PathFinder().exclude
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L86)
+[Show source in path_finder.py:86](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L86)
 
 Add `fnmatch` expression to black list.
 
@@ -72,7 +72,7 @@ def exclude(self: _R, *fn_exrps: str) -> _R:
 
 ### PathFinder().glob
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L129)
+[Show source in path_finder.py:129](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L129)
 
 Find all matching `Path` objects respecting [PathFinder().include](#pathfinderinclude) and [PathFinder().exclude](#pathfinderexclude) patterns.
 
@@ -89,7 +89,7 @@ def glob(self, glob_expr: str) -> Iterator[NicePath]:
 
 ### PathFinder().include
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L65)
+[Show source in path_finder.py:65](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L65)
 
 Add `fnmatch` expression to white list.
 
@@ -113,7 +113,7 @@ def include(self: _R, *fn_exrps: str) -> _R:
 
 ### PathFinder().mkdir
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L174)
+[Show source in path_finder.py:174](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L174)
 
 Create directories up to `root` if they do not exist.
 
@@ -134,7 +134,7 @@ def mkdir(self, force: bool = False) -> None:
 
 ### PathFinder().relative
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L145)
+[Show source in path_finder.py:145](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L145)
 
 Find a relative path from `root` to `target`.
 

@@ -10,7 +10,7 @@ ExpressionRecord
 
 ## ExpressionRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L13)
+[Show source in expression_record.py:13](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L13)
 
 Wrapper for an `ast.expr` node.
 
@@ -32,7 +32,7 @@ class ExpressionRecord(NodeRecord):
 
 ### ExpressionRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L28)
+[Show source in expression_record.py:28](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L28)
 
 Set of related names.
 
@@ -46,7 +46,7 @@ def related_names(self) -> Set[str]:
 
 ### ExpressionRecord().render_str
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L54)
+[Show source in expression_record.py:54](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/expression_record.py#L54)
 
 Render expression to a string.
 

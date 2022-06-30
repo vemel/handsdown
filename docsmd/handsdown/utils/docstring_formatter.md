@@ -9,7 +9,7 @@ DocstringFormatter
 
 ## DocstringFormatter
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L9)
+[Show source in docstring_formatter.py:9](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L9)
 
 Translator of docstrings to Markdown format.
 
@@ -27,7 +27,7 @@ class DocstringFormatter:
 
 ### DocstringFormatter().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L57)
+[Show source in docstring_formatter.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L57)
 
 Get Markdown-friendly docstring.
 

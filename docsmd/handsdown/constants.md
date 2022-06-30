@@ -19,7 +19,7 @@ Constants
 
 ## Theme
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L19)
+[Show source in constants.py:19](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L19)
 
 #### Signature
 

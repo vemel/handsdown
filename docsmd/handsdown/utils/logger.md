@@ -9,7 +9,7 @@ Logger
 
 ## get_logger
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py#L10)
+[Show source in logger.py:10](https://github.com/vemel/handsdown/blob/main/handsdown/utils/logger.py#L10)
 
 Get stdout stream logger.
 

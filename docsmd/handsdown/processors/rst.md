@@ -9,7 +9,7 @@ reStructuredText Docstring Processor
 
 ## RSTDocstringProcessor
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py#L33)
+[Show source in rst.py:33](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py#L33)
 
 Docstring processor for restructured text docstring format.
 

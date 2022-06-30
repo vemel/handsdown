@@ -8,7 +8,7 @@ Stub file type annotations examples
 
 ## MyValue
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L10)
+[Show source in pyi_typed.py:10](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L10)
 
 #### Signature
 
@@ -21,7 +21,7 @@ class MyValue:
 
 ## func
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L14)
+[Show source in pyi_typed.py:14](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L14)
 
 #### Signature
 
@@ -38,7 +38,7 @@ def func(_list, _my_value_cls=MyValue, **_kwargs):
 
 ## func_any
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L18)
+[Show source in pyi_typed.py:18](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L18)
 
 #### Signature
 

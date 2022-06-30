@@ -9,7 +9,7 @@ SectionBlock
 
 ## SectionBlock
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py#L9)
+[Show source in section_block.py:9](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py#L9)
 
 `Section` block.
 
@@ -27,7 +27,7 @@ class SectionBlock:
 
 ### SectionBlock().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py#L20)
+[Show source in section_block.py:20](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py#L20)
 
 Render trimmed block lines.
 

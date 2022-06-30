@@ -1,6 +1,6 @@
 ## {{ class.name }}
 
-[find in source code]({{ md_document.source_code_url }}#L{{ class.line_number }})
+[Show source in {{ md_document.source_file_name }}:{{ class.line_number }}]({{ md_document.source_code_url }}#L{{ class.line_number }})
 
 {% for attrubute in class.get_documented_attribute_strings() -%}
 {% if loop.first -%}{{ "#### Attributes\n" -}}{% endif -%}

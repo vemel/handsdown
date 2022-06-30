@@ -8,7 +8,7 @@ Google docstrings examples
 
 ## ClassExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L13)
+[Show source in google_docstrings.py:13](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L13)
 
 Google-style class example
 
@@ -26,7 +26,7 @@ class ClassExample:
 
 ### ClassExample().method_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L22)
+[Show source in google_docstrings.py:22](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L22)
 
 Summary line.
 
@@ -75,7 +75,7 @@ def method_example(self, text: str = "hello") -> int:
 
 ## function_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L56)
+[Show source in google_docstrings.py:56](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L56)
 
 Summary line.
 
@@ -120,7 +120,7 @@ def function_example(arg1, arg2, arg3=None):
 
 ## function_with_pep484_type_annotations
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L87)
+[Show source in google_docstrings.py:87](https://github.com/vemel/handsdown/blob/main/examples/google_docstrings.py#L87)
 
 Example function with PEP 484 type annotations.
 

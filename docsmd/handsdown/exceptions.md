@@ -8,7 +8,7 @@ Exceptions
 
 ## GeneratorError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L6)
+[Show source in exceptions.py:6](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L6)
 
 Main error for `BaseGenerator`.
 
@@ -23,7 +23,7 @@ class GeneratorError(Exception):
 
 ## ImportStringError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L18)
+[Show source in exceptions.py:18](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L18)
 
 Main error for `ImportString`.
 
@@ -38,7 +38,7 @@ class ImportStringError(Exception):
 
 ## LoaderError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L12)
+[Show source in exceptions.py:12](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L12)
 
 Main error for `Loader`.
 
@@ -53,7 +53,7 @@ class LoaderError(Exception):
 
 ## ParserError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L30)
+[Show source in exceptions.py:30](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L30)
 
 Main error for source code parsing issues.
 
@@ -68,7 +68,7 @@ class ParserError(Exception):
 
 ## PathFinderError
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L24)
+[Show source in exceptions.py:24](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py#L24)
 
 Main error for `PathFinder`.
 

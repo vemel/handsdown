@@ -9,7 +9,7 @@ Material
 
 ## MaterialGenerator
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py#L10)
+[Show source in material.py:10](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py#L10)
 
 Read the Docs documentation generator.
 
@@ -26,7 +26,7 @@ class MaterialGenerator(BaseGenerator):
 
 ### MaterialGenerator().get_external_configs_templates
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py#L20)
+[Show source in material.py:20](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py#L20)
 
 Get a tuple with pairs of template path to project path
 

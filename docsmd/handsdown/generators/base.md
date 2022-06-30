@@ -9,7 +9,7 @@ Base
 
 ## BaseGenerator
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L27)
+[Show source in base.py:27](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L27)
 
 #### Attributes
 
@@ -64,7 +64,7 @@ class BaseGenerator:
 
 ### BaseGenerator().cleanup_old_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L141)
+[Show source in base.py:141](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L141)
 
 Remove old docs generated for this module.
 
@@ -77,7 +77,7 @@ def cleanup_old_docs(self) -> None:
 
 ### BaseGenerator().generate_doc
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L171)
+[Show source in base.py:171](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L171)
 
 Generate one module doc at once.
 
@@ -98,7 +98,7 @@ def generate_doc(self, source_path: Path) -> None:
 
 ### BaseGenerator().generate_docs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L235)
+[Show source in base.py:235](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L235)
 
 Generate all doc files at once.
 
@@ -111,7 +111,7 @@ def generate_docs(self) -> None:
 
 ### BaseGenerator().generate_external_configs
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L384)
+[Show source in base.py:384](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L384)
 
 #### Signature
 
@@ -122,7 +122,7 @@ def generate_external_configs(self) -> None:
 
 ### BaseGenerator().generate_index
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L244)
+[Show source in base.py:244](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L244)
 
 Generate `<output>/README.md` file.
 
@@ -137,7 +137,7 @@ def generate_index(self) -> None:
 
 ### BaseGenerator().get_children_module_records
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L396)
+[Show source in base.py:396](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L396)
 
 Get all module records that are children of this module.
 
@@ -154,7 +154,7 @@ def get_children_module_records(self, parent: ModuleRecord) -> List[ModuleRecord
 
 ### BaseGenerator().get_external_configs_templates
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L356)
+[Show source in base.py:356](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L356)
 
 Get a tuple with pairs of template path to project path
 
@@ -171,7 +171,7 @@ def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...
 
 ### BaseGenerator().get_md_document
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L199)
+[Show source in base.py:199](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L199)
 
 Get or create MDDocument for module record.
 
@@ -189,7 +189,7 @@ def get_md_document(self, module_record: ModuleRecord) -> MDDocument:
 
 ### BaseGenerator().get_see_also_links
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L321)
+[Show source in base.py:321](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L321)
 
 Get links to other modules that are referenced in the docstring.
 
@@ -210,7 +210,7 @@ def get_see_also_links(
 
 ### BaseGenerator().replace_links
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L262)
+[Show source in base.py:262](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py#L262)
 
 #### Signature
 

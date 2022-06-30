@@ -9,7 +9,7 @@ ImportString
 
 ## ImportString
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L11)
+[Show source in import_string.py:11](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L11)
 
 Wrapper for python import strings.
 
@@ -27,7 +27,7 @@ class ImportString:
 
 ### ImportString().__add__
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L39)
+[Show source in import_string.py:39](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L39)
 
 Add new import part.
 
@@ -58,7 +58,7 @@ def __add__(self, other: str) -> "ImportString":
 
 ### ImportString().__bool__
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L62)
+[Show source in import_string.py:62](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L62)
 
 Check if not empty.
 
@@ -85,7 +85,7 @@ def __bool__(self) -> bool:
 
 ### ImportString().__eq__
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L79)
+[Show source in import_string.py:79](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L79)
 
 Compare to another [ImportString](#importstring) or a string.
 
@@ -125,7 +125,7 @@ def __eq__(self, other: Any) -> bool:
 
 ### ImportString().__str__
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L22)
+[Show source in import_string.py:22](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L22)
 
 Get string value.
 
@@ -149,7 +149,7 @@ def __str__(self) -> str:
 
 ### ImportString().get_parents
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L164)
+[Show source in import_string.py:164](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L164)
 
 Get all parents.
 
@@ -166,7 +166,7 @@ def get_parents(self: _R) -> List[_R]:
 
 ### ImportString().is_top_level
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L132)
+[Show source in import_string.py:132](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L132)
 
 Check if import string has no parents.
 
@@ -183,7 +183,7 @@ def is_top_level(self) -> bool:
 
 ### ImportString().length
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L183)
+[Show source in import_string.py:183](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L183)
 
 Length of import string parts.
 
@@ -201,7 +201,7 @@ def length(self) -> int:
 
 ### ImportString().name
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L193)
+[Show source in import_string.py:193](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L193)
 
 Last part of the import string.
 
@@ -215,7 +215,7 @@ def name(self) -> str:
 
 ### ImportString().parent
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L141)
+[Show source in import_string.py:141](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L141)
 
 Parent import string.
 
@@ -233,7 +233,7 @@ def parent(self: _R) -> _R:
 
 ### ImportString().parts
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L114)
+[Show source in import_string.py:114](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L114)
 
 Parts of import string splitted by dots.
 
@@ -261,7 +261,7 @@ def parts(self) -> List[str]:
 
 ### ImportString().startswith
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L155)
+[Show source in import_string.py:155](https://github.com/vemel/handsdown/blob/main/handsdown/utils/import_string.py#L155)
 
 Check if it starts with `import_string`.
 

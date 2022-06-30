@@ -1,6 +1,6 @@
 site_name: "{{ project_name }}"
 repo_url: "{{ source_code_url }}"
-site_dir: "docs"
+site_dir: "{% if output_path == "docs" %}site{% else %}docs{% endif %}"
 docs_dir: "{{ output_path }}"
 
 theme:

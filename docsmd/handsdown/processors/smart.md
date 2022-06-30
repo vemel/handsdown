@@ -9,7 +9,7 @@ Smart
 
 ## SmartDocstringProcessor
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py#L15)
+[Show source in smart.py:15](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py#L15)
 
 Docstring processor that selects a `DocstringProcessor` based on a docstring content.
 
@@ -27,7 +27,7 @@ class SmartDocstringProcessor(BaseDocstringProcessor):
 
 ### SmartDocstringProcessor().build_sections
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py#L28)
+[Show source in smart.py:28](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py#L28)
 
 Parse docstring and split it to sections with arrays of strings.
 

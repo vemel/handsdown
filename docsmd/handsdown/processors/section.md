@@ -9,7 +9,7 @@ Section
 
 ## Section
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L9)
+[Show source in section.py:9](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L9)
 
 Section in a `SectionMap`.
 
@@ -28,7 +28,7 @@ class Section:
 
 ### Section().iterate_blocks
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L35)
+[Show source in section.py:35](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L35)
 
 Iterate over all non-empty Section block lines.
 
@@ -45,7 +45,7 @@ def iterate_blocks(self) -> Iterable[SectionBlock]:
 
 ### Section().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L22)
+[Show source in section.py:22](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L22)
 
 Render all Section block lines.
 

@@ -10,7 +10,7 @@ FunctionRecord
 
 ## FunctionRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L16)
+[Show source in function_record.py:16](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L16)
 
 Wrapper for an `ast.FunctionDef` and `ast.AsyncFunctionDef` node.
 
@@ -33,7 +33,7 @@ class FunctionRecord(NodeRecord):
 
 ### FunctionRecord().is_init
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L140)
+[Show source in function_record.py:140](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L140)
 
 Returns True if function is an __init__ method.
 
@@ -46,7 +46,7 @@ def is_init(self) -> bool:
 
 ### FunctionRecord().parse_type_comments
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L97)
+[Show source in function_record.py:97](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L97)
 
 Extract comment type annotations from a function definiition lines.
 
@@ -62,7 +62,7 @@ def parse_type_comments(self, lines: Iterable[str]) -> None:
 
 ### FunctionRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L40)
+[Show source in function_record.py:40](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/function_record.py#L40)
 
 Set of related names.
 

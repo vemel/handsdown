@@ -8,7 +8,7 @@ Main
 
 ## api
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L27)
+[Show source in main.py:27](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L27)
 
 #### Signature
 
@@ -25,7 +25,7 @@ def api(args: CLINamespace) -> None:
 
 ## main
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L57)
+[Show source in main.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L57)
 
 Main entrypoint for CLI.
 
@@ -40,7 +40,7 @@ def main() -> None:
 
 ## select_generator_cls
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L17)
+[Show source in main.py:17](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L17)
 
 Select a generator based on the theme.
 

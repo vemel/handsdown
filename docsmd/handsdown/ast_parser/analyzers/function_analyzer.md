@@ -10,7 +10,7 @@ FunctionAnalyzer
 
 ## FunctionAnalyzer
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
+[Show source in function_analyzer.py:12](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L12)
 
 AST analyzer for `ast.FunctionDef` records.
 
@@ -28,7 +28,7 @@ class FunctionAnalyzer(BaseAnalyzer):
 
 ### FunctionAnalyzer().generic_visit
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161)
+[Show source in function_analyzer.py:161](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L161)
 
 Do nothing for unknown `ast.AST` nodes.
 
@@ -45,7 +45,7 @@ def generic_visit(self, node: ast.AST) -> None:
 
 ### FunctionAnalyzer().visit_AsyncFunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
+[Show source in function_analyzer.py:142](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L142)
 
 Entrypoint for the analyzer for asynchronous functions.
 
@@ -74,7 +74,7 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 ### FunctionAnalyzer().visit_FunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
+[Show source in function_analyzer.py:123](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L123)
 
 Entrypoint for the analyzer.
 
@@ -103,7 +103,7 @@ def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
 
 ### FunctionAnalyzer().visit_arguments
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
+[Show source in function_analyzer.py:38](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/function_analyzer.py#L38)
 
 Parse info about class method statements.
 

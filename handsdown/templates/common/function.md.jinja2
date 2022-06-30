@@ -1,6 +1,6 @@
 ## {{ function.title }}
 
-[find in source code]({{ md_document.source_code_url }}#L{{ function.line_number }})
+[Show source in {{ md_document.source_file_name }}:{{ function.line_number }}]({{ md_document.source_code_url }}#L{{ function.line_number }})
 
 {% with docstring=function.docstring -%}
 {% include "common/docstring.md.jinja2" -%}

@@ -9,7 +9,7 @@ Rtd
 
 ## RTDGenerator
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py#L8)
+[Show source in rtd.py:8](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py#L8)
 
 Read the Docs documentation generator.
 

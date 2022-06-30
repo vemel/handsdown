@@ -83,7 +83,14 @@ class MDDocument:
             raise exc_value
         return self.write()
 
-    def read(self, source_path: Optional[Path] = None) -> None:
+    @property
+    def source_file_name(self) -> str:
+        """
+        Source cide file name.
+        """
+        return self.source_code_url.split("/")[-1]
+
+    def read(self, path: Path) -> None:
         """
         Read and parse content from `source_path`.
 
@@ -91,7 +98,6 @@ class MDDocument:
             source_path -- Input file path. If not provided - `path` is used.
             encoding -- File encoding.
         """
-        path = source_path or self._path
         self._content = path.read_text(encoding=self._encoding)
         self._title = ""
         self._toc_section = ""

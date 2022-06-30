@@ -8,7 +8,7 @@ JinjaManager
 
 ## JinjaManager
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L13)
+[Show source in jinja_manager.py:13](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L13)
 
 Jinja2 `Environment` manager.
 
@@ -22,7 +22,7 @@ class JinjaManager:
 
 ### JinjaManager().env
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L45)
+[Show source in jinja_manager.py:45](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L45)
 
 Get `jinja2.Environment`.
 
@@ -36,7 +36,7 @@ def env(self) -> jinja2.Environment:
 
 ### JinjaManager.escape_md
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L38)
+[Show source in jinja_manager.py:38](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L38)
 
 Escape underscore characters.
 
@@ -50,7 +50,7 @@ def escape_md(value: str) -> str:
 
 ### JinjaManager().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L52)
+[Show source in jinja_manager.py:52](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L52)
 
 #### Signature
 
@@ -61,7 +61,7 @@ def render(self, template_path: Path, **kwargs: Any) -> str:
 
 ### JinjaManager.update_globals
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L28)
+[Show source in jinja_manager.py:28](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L28)
 
 Update global variables in `jinja2.Environment`.
 

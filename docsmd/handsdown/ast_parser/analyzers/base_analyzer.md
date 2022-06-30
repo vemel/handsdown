@@ -10,7 +10,7 @@ BaseAnalyzer
 
 ## BaseAnalyzer
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
+[Show source in base_analyzer.py:9](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py#L9)
 
 Base AST analyzer.
 

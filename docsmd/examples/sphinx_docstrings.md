@@ -8,7 +8,7 @@ Sphinx docstrings examples
 
 ## RSTExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L10)
+[Show source in sphinx_docstrings.py:10](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L10)
 
 #### Signature
 
@@ -19,7 +19,7 @@ class RSTExample:
 
 ### RSTExample.directives_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L33)
+[Show source in sphinx_docstrings.py:33](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L33)
 
 Test for some random Sphinx directives
 
@@ -56,7 +56,7 @@ def directives_test():
 
 ### RSTExample.reference
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
+[Show source in sphinx_docstrings.py:11](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L11)
 
 This is a reference for ``Sphinx-style RST-style`` docstrings. Check `source` code
 to see how it works.
@@ -95,7 +95,7 @@ def reference():
 
 ### RSTExample.version_directives_test
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L57)
+[Show source in sphinx_docstrings.py:57](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py#L57)
 
 Test for Version-related directives
 

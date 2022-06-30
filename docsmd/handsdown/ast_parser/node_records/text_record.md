@@ -10,7 +10,7 @@ TextRecord
 
 ## TextRecord
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py#L12)
+[Show source in text_record.py:12](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py#L12)
 
 Wrapper for a text-only `ast.expr` node.
 
@@ -33,7 +33,7 @@ class TextRecord(ExpressionRecord):
 
 ### TextRecord().related_names
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py#L28)
+[Show source in text_record.py:28](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py#L28)
 
 A list of fake `ast.Name.id` records inside the node.
 

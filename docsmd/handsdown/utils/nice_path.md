@@ -9,7 +9,7 @@ NicePath
 
 ## NicePath
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
+[Show source in nice_path.py:11](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L11)
 
 Path that represents it as relative to workdir.
 
@@ -22,7 +22,7 @@ class NicePath(type(Path())):
 
 ### NicePath().rmtree
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L63)
+[Show source in nice_path.py:63](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L63)
 
 Remove directory and all its contents.
 
@@ -35,7 +35,7 @@ def rmtree(self, ignore_errors: bool = True) -> None:
 
 ### NicePath().walk
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L33)
+[Show source in nice_path.py:33](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L33)
 
 Walk files except for `exclude`.
 
@@ -54,7 +54,7 @@ def walk(
 
 ### NicePath().write_changed
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L52)
+[Show source in nice_path.py:52](https://github.com/vemel/handsdown/blob/main/handsdown/utils/nice_path.py#L52)
 
 Write content to file if it's changed.
 

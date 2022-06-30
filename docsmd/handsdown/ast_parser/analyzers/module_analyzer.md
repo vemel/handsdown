@@ -10,7 +10,7 @@ ModuleAnalyzer
 
 ## ModuleAnalyzer
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11)
+[Show source in module_analyzer.py:11](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L11)
 
 AST analyzer for `ast.Module` records.
 
@@ -28,7 +28,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 
 ### ModuleAnalyzer().visit_Assign
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
+[Show source in module_analyzer.py:127](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
 
 Parse info about module attribute statements.
 
@@ -65,7 +65,7 @@ def visit_Assign(self, node: ast.Assign) -> None:
 
 ### ModuleAnalyzer().visit_AsyncFunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
+[Show source in module_analyzer.py:109](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
 
 Parse info about module `def ...` statements.
 
@@ -92,7 +92,7 @@ def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
 
 ### ModuleAnalyzer().visit_ClassDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58)
+[Show source in module_analyzer.py:58](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L58)
 
 Parse info about module `class ...` statements.
 
@@ -119,7 +119,7 @@ def visit_ClassDef(self, node: ast.ClassDef) -> None:
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
+[Show source in module_analyzer.py:91](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
 
 Parse info about module `def ...` statements.
 
@@ -146,7 +146,7 @@ def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
 
 ### ModuleAnalyzer().visit_Import
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
+[Show source in module_analyzer.py:24](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L24)
 
 Parse info about module `import ...` statements.
 
@@ -174,7 +174,7 @@ def visit_Import(self, node: ast.Import) -> None:
 
 ### ModuleAnalyzer().visit_ImportFrom
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42)
+[Show source in module_analyzer.py:42](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L42)
 
 Parse info about module `import ... from ...` statements.
 

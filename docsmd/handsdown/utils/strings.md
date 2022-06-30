@@ -9,7 +9,7 @@ Strings
 
 ## extract_md_title
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L48)
+[Show source in strings.py:48](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L48)
 
 Extract title from the first line of content.
 
@@ -41,7 +41,7 @@ def extract_md_title(content: str) -> Tuple[str, str]:
 
 ## make_title
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L7)
+[Show source in strings.py:7](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py#L7)
 
 Convert `pathlib.Path` part or any other string to a human-readable title.
 

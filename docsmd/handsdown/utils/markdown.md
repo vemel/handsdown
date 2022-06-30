@@ -9,7 +9,7 @@ Markdown
 
 ## Header
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L9)
+[Show source in markdown.py:9](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L9)
 
 Markdown header.
 
@@ -29,7 +29,7 @@ class Header:
 
 ### Header().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L24)
+[Show source in markdown.py:24](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L24)
 
 Render menu item to string.
 
@@ -44,7 +44,7 @@ def render(self) -> str:
 
 ## TableOfContents
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L32)
+[Show source in markdown.py:32](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L32)
 
 MarkDown Table of Contents.
 
@@ -62,7 +62,7 @@ class TableOfContents:
 
 ### TableOfContents.parse
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L43)
+[Show source in markdown.py:43](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L43)
 
 Parse table of Contents for MarkDown text.
 
@@ -80,7 +80,7 @@ def parse(cls: Type[_R], text: str) -> _R:
 
 ### TableOfContents().render
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L71)
+[Show source in markdown.py:71](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L71)
 
 Render ToC to string.
 
@@ -95,7 +95,7 @@ def render(self, max_level: int = 3) -> str:
 
 ## insert_md_toc
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L87)
+[Show source in markdown.py:87](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L87)
 
 Insert Table of Contents before the first second-level header.
 

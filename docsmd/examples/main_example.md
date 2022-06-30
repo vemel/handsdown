@@ -14,7 +14,7 @@ Main Example
 
 ## MyClass
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
+[Show source in main_example.py:54](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L54)
 
 #### Attributes
 
@@ -37,7 +37,7 @@ class MyClass(BaseClass):
 
 ### MyClass().__bool__
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L92)
+[Show source in main_example.py:92](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L92)
 
 Magic methods are added to docs only if they have docstrings.
 
@@ -54,7 +54,7 @@ def __bool__(self) -> bool:
 
 ### MyClass.do_something
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L65)
+[Show source in main_example.py:65](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L65)
 
 This is a public method that uses comment-style type annotations. If decorators
 or types from annotations are from your project, links to them will be added
@@ -99,7 +99,7 @@ def do_something(cls, stuff: StuffCallable) -> bool:
 
 ## hello
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L27)
+[Show source in main_example.py:27](https://github.com/vemel/handsdown/blob/main/examples/main_example.py#L27)
 
 This is module function and it is added to documentation even if it does
 not have a docstring. Function signature will be also generated respecting

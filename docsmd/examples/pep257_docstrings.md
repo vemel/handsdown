@@ -8,7 +8,7 @@ PEP 257 - PEP 257 and Google docstrings examples
 
 ## ClassExample
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L10)
+[Show source in pep257_docstrings.py:10](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L10)
 
 PEP257-style class example
 
@@ -40,7 +40,7 @@ class ClassExample:
 
 ### ClassExample().method_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L33)
+[Show source in pep257_docstrings.py:33](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L33)
 
 Summary line.
 
@@ -89,7 +89,7 @@ def method_example(self, text: str = "hello") -> int:
 
 ## function_example
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L66)
+[Show source in pep257_docstrings.py:66](https://github.com/vemel/handsdown/blob/main/examples/pep257_docstrings.py#L66)
 
 Form a complex number.
 

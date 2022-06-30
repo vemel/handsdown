@@ -9,7 +9,7 @@ Blackify
 
 ## blackify
 
-[find in source code](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py#L10)
+[Show source in blackify.py:10](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py#L10)
 
 Format `content` with `black`.
 
