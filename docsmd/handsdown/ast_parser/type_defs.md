@@ -18,5 +18,3 @@ Type Defs
 - `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
 
 - `ASTFunctionDef` - AST import node: `Union[ast.FunctionDef, ast.AsyncFunctionDef]`
-
-

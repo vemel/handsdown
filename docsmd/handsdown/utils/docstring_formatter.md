@@ -41,6 +41,3 @@ A cleaned up docstring.
 def render(self) -> str:
     ...
 ```
-
-
-

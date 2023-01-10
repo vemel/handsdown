@@ -96,6 +96,10 @@ def get_module_record(self, source_path: Path) -> Optional[ModuleRecord]:
     ...
 ```
 
+#### See also
+
+- [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
+
 ### Loader.parse_module_record
 
 [Show source in loader.py:109](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L109)
@@ -117,6 +121,3 @@ def parse_module_record(module_record: ModuleRecord) -> None:
 #### See also
 
 - [ModuleRecord](ast_parser/node_records/module_record.md#modulerecord)
-
-
-

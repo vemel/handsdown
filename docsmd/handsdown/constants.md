@@ -27,6 +27,3 @@ Constants
 class Theme(enum.Enum):
     ...
 ```
-
-
-

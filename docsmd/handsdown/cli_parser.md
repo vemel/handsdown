@@ -8,7 +8,7 @@ Cli Parser
 
 ## CLINamespace
 
-[Show source in cli_parser.py:17](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L17)
+[Show source in cli_parser.py:18](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L18)
 
 Main CLI Namespace.
 
@@ -189,6 +189,3 @@ def parse_theme(name: str) -> Theme:
 #### See also
 
 - [Theme](./constants.md#theme)
-
-
-

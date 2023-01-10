@@ -73,6 +73,3 @@ Render attribute with docstring.
 def render(self) -> str:
     ...
 ```
-
-
-

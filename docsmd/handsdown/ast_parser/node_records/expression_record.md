@@ -56,6 +56,3 @@ Render expression to a string.
 def render_str(self) -> str:
     ...
 ```
-
-
-

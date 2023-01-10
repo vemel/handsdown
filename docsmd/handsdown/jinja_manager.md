@@ -50,12 +50,26 @@ def escape_md(value: str) -> str:
 
 ### JinjaManager().render
 
-[Show source in jinja_manager.py:52](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L52)
+[Show source in jinja_manager.py:59](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L59)
 
 #### Signature
 
 ```python
 def render(self, template_path: Path, **kwargs: Any) -> str:
+    ...
+```
+
+### JinjaManager.trim_eof
+
+[Show source in jinja_manager.py:52](https://github.com/vemel/handsdown/blob/main/handsdown/jinja_manager.py#L52)
+
+Trim EOF newlines and add one newline.
+
+#### Signature
+
+```python
+@staticmethod
+def trim_eof(value: str) -> str:
     ...
 ```
 
@@ -76,6 +90,3 @@ Update global variables in `jinja2.Environment`.
 def update_globals(cls, **kwargs: object) -> None:
     ...
 ```
-
-
-

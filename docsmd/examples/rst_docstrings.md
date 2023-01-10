@@ -89,6 +89,3 @@ Type: *bool*
 def rtype_test():
     ...
 ```
-
-
-

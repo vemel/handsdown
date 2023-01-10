@@ -863,6 +863,3 @@ my_func(kwarg="value")
 def visit_keyword(self, node: ast.keyword) -> None:
     ...
 ```
-
-
-

@@ -31,6 +31,3 @@ Formatted python code.
 def blackify(content: str) -> str:
     ...
 ```
-
-
-

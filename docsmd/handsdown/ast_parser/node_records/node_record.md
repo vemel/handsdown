@@ -136,6 +136,3 @@ A string representation of `node`.
 def render(self) -> str:
     ...
 ```
-
-
-

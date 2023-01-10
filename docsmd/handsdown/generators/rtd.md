@@ -23,6 +23,3 @@ class RTDGenerator(BaseGenerator):
 #### See also
 
 - [BaseGenerator](./base.md#basegenerator)
-
-
-

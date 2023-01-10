@@ -102,6 +102,7 @@ def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
 #### See also
 
 - [ImportString](../../utils/import_string.md#importstring)
+- [NodeRecord](./node_record.md#noderecord)
 
 ### ModuleRecord().get_related_import_strings
 
@@ -122,6 +123,7 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 
 #### See also
 
+- [ImportString](../../utils/import_string.md#importstring)
 - [NodeRecord](./node_record.md#noderecord)
 
 ### ModuleRecord().is_init
@@ -158,5 +160,6 @@ def iter_records(self) -> Iterator[NodeRecord]:
     ...
 ```
 
+#### See also
 
-
+- [NodeRecord](./node_record.md#noderecord)

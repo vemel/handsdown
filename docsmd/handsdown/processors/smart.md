@@ -50,6 +50,3 @@ def build_sections(self, content: str) -> SectionMap:
 #### See also
 
 - [SectionMap](./section_map.md#sectionmap)
-
-
-

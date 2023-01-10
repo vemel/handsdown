@@ -103,6 +103,3 @@ def func_any(
 #### See also
 
 - [MyValue](#myvalue)
-
-
-

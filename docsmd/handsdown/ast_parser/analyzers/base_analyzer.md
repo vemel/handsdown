@@ -23,6 +23,3 @@ class BaseAnalyzer(ast.NodeVisitor):
     def __init__(self) -> None:
         ...
 ```
-
-
-

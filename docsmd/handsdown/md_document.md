@@ -368,6 +368,3 @@ Write MD content to [MDDocument().path](#mddocumentpath).
 def write(self) -> None:
     ...
 ```
-
-
-

@@ -53,7 +53,5 @@ def select_generator_cls(theme: Theme) -> Type[BaseGenerator]:
 
 #### See also
 
+- [BaseGenerator](generators/base.md#basegenerator)
 - [Theme](./constants.md#theme)
-
-
-

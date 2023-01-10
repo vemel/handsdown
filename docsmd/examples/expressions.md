@@ -39,5 +39,3 @@ Supported expressions examples
 - `IF_EXPR` - if expression example: `5 if STRING else 6`
 
 - `AWAIT` - await example: `await STRING`
-
-

@@ -43,6 +43,10 @@ def __iter__(self) -> Iterator[Section]:
     ...
 ```
 
+#### See also
+
+- [Section](./section.md#section)
+
 ### SectionMap().add_block
 
 [Show source in section_map.py:65](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py#L65)
@@ -118,6 +122,3 @@ If `Section` does not exist - it is not created.
 def trim_block(self, section_name: str) -> None:
     ...
 ```
-
-
-

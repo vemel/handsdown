@@ -57,6 +57,10 @@ def default(self) -> Optional[ExpressionRecord]:
     ...
 ```
 
+#### See also
+
+- [ExpressionRecord](./expression_record.md#expressionrecord)
+
 ### ArgumentRecord().related_names
 
 [Show source in argument_record.py:71](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/argument_record.py#L71)
@@ -109,6 +113,3 @@ def set_default(self, node: Node) -> None:
 #### See also
 
 - [Node](../type_defs.md#node)
-
-
-

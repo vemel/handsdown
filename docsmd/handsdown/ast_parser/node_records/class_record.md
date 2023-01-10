@@ -51,6 +51,10 @@ def find_record(self, name: str) -> Optional[NodeRecord]:
     ...
 ```
 
+#### See also
+
+- [NodeRecord](./node_record.md#noderecord)
+
 ### ClassRecord().get_public_methods
 
 [Show source in class_record.py:87](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L87)
@@ -71,6 +75,10 @@ def get_public_methods(self) -> List[FunctionRecord]:
     ...
 ```
 
+#### See also
+
+- [FunctionRecord](./function_record.md#functionrecord)
+
 ### ClassRecord().init_method
 
 [Show source in class_record.py:126](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L126)
@@ -84,6 +92,10 @@ Get the `__init__` method.
 def init_method(self) -> Optional[FunctionRecord]:
     ...
 ```
+
+#### See also
+
+- [FunctionRecord](./function_record.md#functionrecord)
 
 ### ClassRecord().iter_records
 
@@ -102,6 +114,10 @@ def iter_records(self) -> Iterator[NodeRecord]:
     ...
 ```
 
+#### See also
+
+- [NodeRecord](./node_record.md#noderecord)
+
 ### ClassRecord().related_names
 
 [Show source in class_record.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py#L57)
@@ -115,6 +131,3 @@ Set of related names.
 def related_names(self) -> Set[str]:
     ...
 ```
-
-
-

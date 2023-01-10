@@ -38,6 +38,10 @@ def __iter__(self) -> Iterator[ModuleRecord]:
     ...
 ```
 
+#### See also
+
+- [ModuleRecord](node_records/module_record.md#modulerecord)
+
 ### ModuleRecordList().add
 
 [Show source in module_record_list.py:52](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/module_record_list.py#L52)
@@ -83,6 +87,7 @@ def find_module_record(self, import_string: ImportString) -> Optional[ModuleReco
 #### See also
 
 - [ImportString](../utils/import_string.md#importstring)
+- [ModuleRecord](node_records/module_record.md#modulerecord)
 
 ### ModuleRecordList().get_package_names
 
@@ -100,6 +105,3 @@ A set of top level imports as strings.
 def get_package_names(self) -> Set[str]:
     ...
 ```
-
-
-

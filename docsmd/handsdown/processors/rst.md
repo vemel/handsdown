@@ -23,6 +23,3 @@ class RSTDocstringProcessor(BaseDocstringProcessor):
 #### See also
 
 - [BaseDocstringProcessor](./base.md#basedocstringprocessor)
-
-
-

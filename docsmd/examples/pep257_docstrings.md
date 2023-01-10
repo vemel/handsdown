@@ -104,6 +104,3 @@ Form a complex number.
 def function_example(real=0.0, imag=0.0):
     ...
 ```
-
-
-

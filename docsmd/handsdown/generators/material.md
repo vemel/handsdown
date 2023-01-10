@@ -40,6 +40,3 @@ def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...
 #### See also
 
 - [NicePath](../utils/nice_path.md#nicepath)
-
-
-

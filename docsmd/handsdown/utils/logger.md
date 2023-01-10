@@ -27,6 +27,3 @@ A `logging.Logger` instance.
 def get_logger(level: Optional[int] = None) -> logging.Logger:
     ...
 ```
-
-
-

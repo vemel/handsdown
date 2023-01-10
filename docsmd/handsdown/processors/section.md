@@ -26,6 +26,10 @@ class Section:
         ...
 ```
 
+#### See also
+
+- [SectionBlock](./section_block.md#sectionblock)
+
 ### Section().iterate_blocks
 
 [Show source in section.py:35](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L35)
@@ -43,6 +47,10 @@ def iterate_blocks(self) -> Iterable[SectionBlock]:
     ...
 ```
 
+#### See also
+
+- [SectionBlock](./section_block.md#sectionblock)
+
 ### Section().render
 
 [Show source in section.py:22](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section.py#L22)
@@ -59,6 +67,3 @@ Section lines as a text.
 def render(self) -> str:
     ...
 ```
-
-
-

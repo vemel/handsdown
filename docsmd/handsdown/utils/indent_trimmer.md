@@ -208,6 +208,3 @@ A text with trimmed indent.
 def trim_text(cls, text: str) -> str:
     ...
 ```
-
-
-

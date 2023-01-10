@@ -130,6 +130,3 @@ A greeting. No need to put types here if you use type annotations.
 def hello(name: str) -> str:
     ...
 ```
-
-
-

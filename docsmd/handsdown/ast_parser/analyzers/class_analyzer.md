@@ -161,6 +161,3 @@ class MyClass:
 def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
     ...
 ```
-
-
-

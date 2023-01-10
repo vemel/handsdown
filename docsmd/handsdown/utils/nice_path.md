@@ -64,6 +64,3 @@ Write content to file if it's changed.
 def write_changed(self, content: str, encoding: str) -> bool:
     ...
 ```
-
-
-

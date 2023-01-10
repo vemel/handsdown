@@ -41,6 +41,3 @@ Block lines as a text.
 def render(self) -> str:
     ...
 ```
-
-
-

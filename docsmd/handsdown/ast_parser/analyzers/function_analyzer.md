@@ -153,6 +153,3 @@ def my_func_kw_only(
 def visit_arguments(self, node: ast.arguments) -> None:
     ...
 ```
-
-
-

@@ -77,6 +77,3 @@ A human-readable title as a string.
 def make_title(file_stem: str) -> str:
     ...
 ```
-
-
-

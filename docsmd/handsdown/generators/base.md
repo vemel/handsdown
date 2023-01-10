@@ -60,7 +60,9 @@ class BaseGenerator:
 
 #### See also
 
+- [BaseDocstringProcessor](../processors/base.md#basedocstringprocessor)
 - [ENCODING](../constants.md#encoding)
+- [Loader](../loader.md#loader)
 
 ### BaseGenerator().cleanup_old_docs
 
@@ -230,6 +232,3 @@ def replace_links(
 - [MDDocument](../md_document.md#mddocument)
 - [ModuleRecord](../ast_parser/node_records/module_record.md#modulerecord)
 - [NodeRecord](../ast_parser/node_records/node_record.md#noderecord)
-
-
-

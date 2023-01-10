@@ -119,6 +119,3 @@ Deprecated in version 3.1
 def version_directives_test():
     ...
 ```
-
-
-

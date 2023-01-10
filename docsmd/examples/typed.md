@@ -107,6 +107,3 @@ def func(
 def my_deco(key):
     ...
 ```
-
-
-

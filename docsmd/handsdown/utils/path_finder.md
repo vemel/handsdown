@@ -87,6 +87,10 @@ def glob(self, glob_expr: str) -> Iterator[NicePath]:
     ...
 ```
 
+#### See also
+
+- [NicePath](./nice_path.md#nicepath)
+
 ### PathFinder().include
 
 [Show source in path_finder.py:65](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L65)
@@ -158,6 +162,3 @@ def relative(self, target: Path) -> NicePath:
 #### See also
 
 - [NicePath](./nice_path.md#nicepath)
-
-
-

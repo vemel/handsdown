@@ -60,6 +60,10 @@ class TableOfContents:
         ...
 ```
 
+#### See also
+
+- [Header](#header)
+
 ### TableOfContents.parse
 
 [Show source in markdown.py:43](https://github.com/vemel/handsdown/blob/main/handsdown/utils/markdown.py#L43)
@@ -105,6 +109,3 @@ Insert Table of Contents before the first second-level header.
 def insert_md_toc(text: str, depth: int = 3) -> str:
     ...
 ```
-
-
-

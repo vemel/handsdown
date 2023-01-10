@@ -50,6 +50,3 @@ def func_any(_list, _my_value_cls=MyValue, **_kwargs):
 #### See also
 
 - [MyValue](#myvalue)
-
-
-

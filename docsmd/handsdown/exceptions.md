@@ -78,6 +78,3 @@ Main error for `PathFinder`.
 class PathFinderError(Exception):
     ...
 ```
-
-
-

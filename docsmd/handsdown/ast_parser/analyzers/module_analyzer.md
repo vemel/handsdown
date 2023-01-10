@@ -197,6 +197,3 @@ from my_module import my_class as new_class
 def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
     ...
 ```
-
-
-
