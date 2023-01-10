@@ -49,6 +49,13 @@ class JinjaManager:
         """
         return self._env
 
+    @staticmethod
+    def trim_eof(value: str) -> str:
+        """
+        Trim EOF newlines and add one newline.
+        """
+        return value.rstrip("\n") + "\n"
+
     def render(self, template_path: Path, **kwargs: Any) -> str:
         template_full_path = self.TEMPLATES_PATH / template_path
 
@@ -56,4 +63,6 @@ class JinjaManager:
             raise LoaderError(f"Template {template_full_path} not found")
 
         template = self.env.get_template(template_path.as_posix())
-        return template.render(**kwargs)
+        result = template.render(**kwargs)
+
+        return self.trim_eof(result)
