@@ -75,15 +75,17 @@ jinja2 = "*"
 black = "*"
 
 [tool.poetry.dev-dependencies]
-isort = "*"
-codecov = "*"
-flake8 = "*"
-pytest = "*"
-pytest-cov = "*"
+isort = { version = "*", python = ">=3.10" }
+black = { version = "*", python = ">=3.10" }
+mypy = { version = "*", python = ">=3.10" }
+flake8 = { version = "*", python = ">=3.10" }
+twine = { version = "*", python = ">=3.10" }
+pytest = { version = "*", python = ">=3.10" }
+pytest-cov = { version = "*", python = ">=3.10" }
+vulture = { version = "*", python = ">=3.10" }
+codecov = { version = "*", python = ">=3.10" }
 rope = "*"
 types-setuptools = "*"
-twine = "*"
-vulture = "*"
 mkdocs = "*"
 mkdocs-material = "*"
 

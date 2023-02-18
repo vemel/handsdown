@@ -5,11 +5,11 @@ ROOT_PATH=$(dirname $(dirname $(realpath $0)))
 cd $ROOT_PATH
 
 # vulture handsdown --make-whitelist > vulture_whitelist.txt
-vulture handsdown vulture_whitelist.txt
-python -m black handsdown --preview
-python -m isort handsdown
-python -m flake8 handsdown
-npx pyright
-python -m pytest --cov-report term --cov=handsdown
+poetry run vulture handsdown vulture_whitelist.txt
+poetry run black handsdown --preview
+poetry run isort handsdown
+poetry run flake8 handsdown
+poetry run npx pyright
+poetry run pytest --cov-report term --cov=handsdown
 
 ./scripts/update_docs.sh
