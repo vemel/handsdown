@@ -119,8 +119,8 @@ python -m mkdocs build
 - Pull latest `handsdown` version and tag it
 
 ```bash
-docker pull docker.pkg.github.com/vemel/handsdown/handsdown:latest
-docker tag docker.pkg.github.com/vemel/handsdown/handsdown:latest handsdown
+docker pull ghcr.io/vemel/handsdown/handsdown:latest
+docker tag ghcr.io/vemel/handsdown/handsdown:latest handsdown
 ```
 
 - Generate docs for `ProjectName` in current directory
