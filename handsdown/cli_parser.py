@@ -13,7 +13,7 @@ from handsdown.constants import ENCODING, EXCLUDE_EXPRS, PACKAGE_NAME, Theme
 from handsdown.utils.nice_path import NicePath
 
 try:
-    import importlib.metadata as metadata
+    import importlib.metadata as metadata  # type: ignore
 except ModuleNotFoundError:
     import importlib_metadata as metadata
 
