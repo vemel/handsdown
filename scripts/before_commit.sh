@@ -10,6 +10,6 @@ poetry run black handsdown --preview
 poetry run isort handsdown
 poetry run flake8 handsdown
 poetry run npx pyright
-poetry run pytest --cov-report term --cov=handsdown
+poetry run pytest
 
 ./scripts/update_docs.sh

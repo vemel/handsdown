@@ -3,7 +3,6 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from handsdown.utils.nice_path import NicePath
 from handsdown.utils.path_finder import PathFinder, PathFinderError
 
 
@@ -54,25 +53,27 @@ class TestPathFinder:
         assert path_finder.exclude_exprs == ["my_dir/*", "expr/**/*"]
 
     def test_glob(self):
-        path = NicePath("/root")
-        path.glob = MagicMock()
-        path.glob.return_value = [
-            NicePath("/root/include/file.py"),
-            NicePath("/root/exclude/file.py"),
-        ]
-        path_finder = PathFinder(path)
-        assert list(path_finder.glob("glob_expr")) == [
-            NicePath("/root/include/file.py"),
-            NicePath("/root/exclude/file.py"),
-        ]
-        path_finder.exclude_exprs = ["exclude/*"]
-        assert list(path_finder.glob("glob_expr")) == [NicePath("/root/include/file.py")]
+        import tempfile
 
-        path_finder.include_exprs = ["include/*"]
-        assert list(path_finder.glob("glob_expr")) == [NicePath("/root/include/file.py")]
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_dir = Path(temp_dir)
+            temp_dir.joinpath("include").mkdir()
+            temp_dir.joinpath("exclude").mkdir()
+            temp_dir.joinpath("include/file.py").touch()
+            temp_dir.joinpath("exclude/file.py").touch()
 
-    @patch("handsdown.utils.path_finder.Path")
-    def test_mkdir(self, _PathMock):
+            path_finder = PathFinder(temp_dir)
+            assert list(path_finder.glob("*/*.py")) == [
+                temp_dir.joinpath("include/file.py"),
+                temp_dir.joinpath("exclude/file.py"),
+            ]
+            path_finder.exclude_exprs = ["exclude/*"]
+            assert list(path_finder.glob("*/*.py")) == [temp_dir.joinpath("include/file.py")]
+
+            path_finder.include_exprs = ["include/*"]
+            assert list(path_finder.glob("*/*.py")) == [temp_dir.joinpath("include/file.py")]
+
+    def test_mkdir(self):
         path = MagicMock()
         path.exists.return_value = False
         parent_path = MagicMock()

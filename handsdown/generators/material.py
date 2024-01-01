@@ -1,10 +1,10 @@
 """
 Read the Docs documentation generator.
 """
+from pathlib import Path
 from typing import Tuple
 
 from handsdown.generators.base import BaseGenerator
-from handsdown.utils.nice_path import NicePath
 
 
 class MaterialGenerator(BaseGenerator):
@@ -12,12 +12,12 @@ class MaterialGenerator(BaseGenerator):
     Read the Docs documentation generator.
     """
 
-    templates_path = NicePath("material")
+    templates_path = Path("material")
     module_template_path = templates_path / "module.md.jinja2"
 
     insert_toc = False
 
-    def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...]:
+    def get_external_configs_templates(self) -> Tuple[Tuple[Path, Path], ...]:
         """
         Get a tuple with pairs of template path to project path
         """

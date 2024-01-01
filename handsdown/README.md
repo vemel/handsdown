@@ -160,7 +160,7 @@ handsdown
 handsdown -o output_dir
 
 # generate docs only for my_module, but exclude migrations
-handsdown my_module --exclude my_module/migrations
+handsdown my_module --exclude 'build/*' 'tests/*' 'test/*' '*/__pycache__/*' '.*/*' 'my_module/migrations'
 
 # generate documentation for deployment
 handsdown --external `git config --get remote.origin.url` -n ProjectName

@@ -1,3 +1,4 @@
+import shutil
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from unittest.mock import MagicMock, patch
@@ -7,20 +8,19 @@ import pytest
 from handsdown.generators.base import GeneratorError
 from handsdown.generators.rtd import RTDGenerator
 from handsdown.utils.import_string import ImportString
-from handsdown.utils.nice_path import NicePath
 
 
 class TestGenerator:
     input_path: Path
-    output_path: NicePath
+    output_path: Path
 
     @pytest.fixture(autouse=True)
     def _tmp_path(self):
         self.input_path = Path("/input")
-        self.output_path = NicePath(TemporaryDirectory().name)
+        self.output_path = Path(TemporaryDirectory().name)
         self.output_path.mkdir(exist_ok=True, parents=True)
         yield
-        self.output_path.rmtree()
+        shutil.rmtree(self.output_path, ignore_errors=True)
 
     @patch("handsdown.generators.base.Loader")
     @patch("handsdown.generators.base.ModuleRecordList")
@@ -53,7 +53,7 @@ class TestGenerator:
             project_name="test",
             input_path=self.input_path,
             output_path=self.output_path,
-            source_paths=[source_path_mock],
+            source_paths=[self.input_path / "source.py"],
         )
 
         MDDocumentMock().render_doc_link.return_value = "doc_link"
@@ -63,6 +63,7 @@ class TestGenerator:
         module_record_mock = MagicMock()
         module_record_mock.title = "Title"
         module_record_mock.docstring = "Docstring"
+        module_record_mock.source_path = self.input_path / "source.py"
         module_record_mock.import_string = ImportString("my.import.string")
         ModuleRecordListMock().__iter__ = MagicMock(return_value=iter([module_record_mock]))
 
@@ -133,4 +134,4 @@ class TestGenerator:
             source_paths=[],
         )
         generator.cleanup_old_docs()
-        assert list(self.output_path.walk()) == [self.output_path / "manual.md"]
+        assert list(self.output_path.glob("*")) == [self.output_path / "manual.md"]

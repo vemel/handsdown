@@ -1,3 +1,4 @@
+import shutil
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -8,18 +9,17 @@ import pytest
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.node_records.module_record import ModuleRecord
 from handsdown.utils.import_string import ImportString
-from handsdown.utils.nice_path import NicePath
 
 
 class TestFunctionRecord:
-    source_path: NicePath
+    source_path: Path
 
     @pytest.fixture
     def set_source_path(self):
-        self.source_path = NicePath(TemporaryDirectory().name)
+        self.source_path = Path(TemporaryDirectory().name)
         self.source_path.mkdir(exist_ok=True, parents=True)
         yield
-        self.source_path.rmtree()
+        shutil.rmtree(self.source_path, ignore_errors=True)
 
     def test_init(self):
         node = MagicMock()

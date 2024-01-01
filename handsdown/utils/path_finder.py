@@ -9,7 +9,6 @@ from pathlib import Path
 from typing import Iterable, Iterator, List, TypeVar
 
 from handsdown.exceptions import PathFinderError
-from handsdown.utils.nice_path import NicePath
 
 _R = TypeVar("_R", bound="PathFinder")
 
@@ -126,7 +125,7 @@ class PathFinder:
 
         return False
 
-    def glob(self, glob_expr: str) -> Iterator[NicePath]:
+    def glob(self, glob_expr: str) -> Iterator[Path]:
         """
         Find all matching `Path` objects respecting `include` and `exclude` patterns.
 
@@ -140,9 +139,9 @@ class PathFinder:
             if self._match_exclude(relative_path):
                 continue
 
-            yield NicePath(path)
+            yield Path(path)
 
-    def relative(self, target: Path) -> NicePath:
+    def relative(self, target: Path) -> Path:
         """
         Find a relative path from `root` to `target`.
 
@@ -169,7 +168,7 @@ class PathFinder:
             else:
                 break
 
-        return NicePath(up_path) / relative_target
+        return Path(up_path) / relative_target
 
     def mkdir(self, force: bool = False) -> None:
         """

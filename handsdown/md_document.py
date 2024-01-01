@@ -9,7 +9,7 @@ from typing import List, Optional, Type, TypeVar
 
 from handsdown.constants import ENCODING
 from handsdown.utils.indent_trimmer import IndentTrimmer
-from handsdown.utils.nice_path import NicePath
+from handsdown.utils.path import print_path
 from handsdown.utils.path_finder import PathFinder
 from handsdown.utils.strings import extract_md_title
 
@@ -64,7 +64,7 @@ class MDDocument:
         self._title = ""
         self._subtitle = ""
         self._toc_section = ""
-        self._path = NicePath(path)
+        self._path = Path(path)
         self.path_finder = PathFinder(self._path.parent)
         self._encoding = encoding
         self.source_code_url = ""
@@ -211,7 +211,7 @@ class MDDocument:
         link = ""
         if target_path and target_path != self._path:
             link_path = self.path_finder.relative(target_path)
-            link = f"{link}{link_path.as_posix()}"
+            link = f"{link}{print_path(link_path)}"
         if anchor:
             link = f"{link}#{anchor}"
 
@@ -300,7 +300,7 @@ class MDDocument:
         return self._sections
 
     @property
-    def path(self) -> NicePath:
+    def path(self) -> Path:
         """
         Output path of the document.
         """

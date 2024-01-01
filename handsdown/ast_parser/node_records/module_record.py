@@ -15,7 +15,6 @@ from handsdown.ast_parser.type_defs import RenderExpr
 from handsdown.constants import ENCODING
 from handsdown.utils.import_string import ImportString
 from handsdown.utils.indent_trimmer import IndentTrimmer
-from handsdown.utils.nice_path import NicePath
 
 
 class ModuleRecord(NodeRecord):
@@ -34,7 +33,7 @@ class ModuleRecord(NodeRecord):
         self.class_records: List[ClassRecord] = []
         self.function_records: List[FunctionRecord] = []
         self.import_records: List[ImportRecord] = []
-        self.source_path = NicePath("")
+        self.source_path = Path("")
         self.source_lines: List[str] = []
         self.name = "module"
         self.title = ""
@@ -66,7 +65,7 @@ class ModuleRecord(NodeRecord):
         record = cls(node)
         record.import_string = import_string
         record.name = import_string.name
-        record.source_path = NicePath(source_path)
+        record.source_path = Path(source_path)
         record.source_lines = content.split("\n")
         return record
 

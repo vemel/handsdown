@@ -6,11 +6,11 @@ import contextlib
 import logging
 import re
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Iterable, List
 from urllib.parse import urlparse, urlunparse
 
 from handsdown.constants import ENCODING, EXCLUDE_EXPRS, PACKAGE_NAME, Theme
-from handsdown.utils.nice_path import NicePath
 
 try:
     import importlib.metadata as metadata  # type: ignore
@@ -25,17 +25,17 @@ class CLINamespace:
     """
 
     panic: bool
-    input_path: NicePath
-    output_path: NicePath
+    input_path: Path
+    output_path: Path
     toc_depth: int
     log_level: int
     include: List[str]
     exclude: List[str]
     source_code_url: str
-    source_code_path: NicePath
+    source_code_path: Path
     branch: str
     project_name: str
-    files: List[NicePath]
+    files: List[Path]
     cleanup: bool
     encoding: str
     create_configs: bool
@@ -55,7 +55,7 @@ class CLINamespace:
         if self.branch:
             result = f"{result}/blob/{self.branch}"
 
-        if self.source_code_path != NicePath():
+        if self.source_code_path != Path():
             result = f"{result}/{self.source_code_path.as_posix()}".rstrip("/")
 
         result = urlunparse(urlparse(result.rstrip("/")))
@@ -90,7 +90,7 @@ def git_repo(git_repo_url: str) -> str:
     return f"https://github.com/{user}/{repo}/"
 
 
-def abs_path(path_str: str) -> NicePath:
+def abs_path(path_str: str) -> Path:
     """
     Validate `path_str` and make it absolute.
 
@@ -100,10 +100,10 @@ def abs_path(path_str: str) -> NicePath:
     Returns:
         An absolute path.
     """
-    return NicePath(path_str).absolute()
+    return Path(path_str).absolute()
 
 
-def dir_abs_path(path_str: str) -> NicePath:
+def dir_abs_path(path_str: str) -> Path:
     """
     Validate directory `path_str` and make it absolute.
 
@@ -116,13 +116,13 @@ def dir_abs_path(path_str: str) -> NicePath:
     Raises:
         argparse.ArgumentTypeError -- If path is not a directory.
     """
-    path = NicePath(path_str).absolute()
+    path = Path(path_str).absolute()
     if path.exists() and not path.is_dir():
         raise argparse.ArgumentTypeError(f"Path {path} is not a directory")
     return path
 
 
-def existing_dir_abs_path(path_str: str) -> NicePath:
+def existing_dir_abs_path(path_str: str) -> Path:
     """
     Validate existing directory `path_str` and make it absolute.
 
@@ -135,7 +135,7 @@ def existing_dir_abs_path(path_str: str) -> NicePath:
     Raises:
         argparse.ArgumentTypeError -- If path does not exist or is not a directory.
     """
-    path = NicePath(path_str).absolute()
+    path = Path(path_str).absolute()
     if not path.exists():
         raise argparse.ArgumentTypeError(f"Path {path} does not exist")
     if not path.is_dir():
@@ -186,7 +186,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "-i",
         "--input-path",
         help="Path to project root folder",
-        default=NicePath.cwd(),
+        default=Path.cwd(),
         type=existing_dir_abs_path,
     )
     parser.add_argument(
@@ -201,7 +201,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "-o",
         "--output-path",
         help="Path to output folder (default: <cwd>/docs)",
-        default=NicePath.cwd() / "docs",
+        default=Path.cwd() / "docs",
         type=dir_abs_path,
     )
     parser.add_argument(
@@ -220,8 +220,8 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         help="Path to source code in the project.",
         dest="source_code_path",
         metavar="REPO_PATH",
-        default=NicePath(),
-        type=NicePath,
+        default=Path(),
+        type=Path,
     )
     parser.add_argument(
         "--branch",
@@ -239,7 +239,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         "--name",
         dest="project_name",
         help="Project name",
-        default=NicePath.cwd().stem.capitalize(),
+        default=Path.cwd().stem.capitalize(),
     )
     parser.add_argument(
         "-e",
