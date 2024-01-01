@@ -3,7 +3,6 @@ CLI Parser.
 """
 import argparse
 import contextlib
-import importlib.metadata
 import logging
 import re
 from dataclasses import dataclass
@@ -12,6 +11,11 @@ from urllib.parse import urlparse, urlunparse
 
 from handsdown.constants import ENCODING, EXCLUDE_EXPRS, PACKAGE_NAME, Theme
 from handsdown.utils.nice_path import NicePath
+
+try:
+    import importlib.metadata as metadata
+except ModuleNotFoundError:
+    import importlib_metadata as metadata
 
 
 @dataclass
@@ -151,8 +155,8 @@ def parse_theme(name: str) -> Theme:
 
 
 def _get_package_version() -> str:
-    with contextlib.suppress(importlib.metadata.PackageNotFoundError):
-        return importlib.metadata.version(PACKAGE_NAME)
+    with contextlib.suppress(metadata.PackageNotFoundError):
+        return metadata.version(PACKAGE_NAME)
 
     return "0.0.0"
 
