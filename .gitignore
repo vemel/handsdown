@@ -106,3 +106,4 @@ venv.bak/
 .vscode
 
 docs_local
+docs_examples

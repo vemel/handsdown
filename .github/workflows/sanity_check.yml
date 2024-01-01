@@ -1,0 +1,33 @@
+name: Sanity check
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  sanity:
+    name: Sanity check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python for Poetry
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+      - name: Install poetry
+        run: |
+          python -m pip install poetry pip
+      - name: Set up Python
+        id: python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+      - name: Install dependencies
+        run: |
+          poetry install -n
+      - name: Python 3 check
+        run: |
+          PYTHON_VER=3 poetry run handsdown -i examples -o docs_examples -d --panic --exclude 'py2.py'
+      - name: Python 2 check
+        run: |
+          PYTHON_VER=2 poetry run handsdown -i examples -o docs_examples --exclude -d '*/py2.py' --panic
