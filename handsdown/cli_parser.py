@@ -2,15 +2,15 @@
 CLI Parser.
 """
 import argparse
+import contextlib
+import importlib.metadata
 import logging
 import re
 from dataclasses import dataclass
 from typing import Iterable, List
 from urllib.parse import urlparse, urlunparse
 
-import pkg_resources
-
-from handsdown.constants import ENCODING, Theme
+from handsdown.constants import ENCODING, EXCLUDE_EXPRS, PACKAGE_NAME, Theme
 from handsdown.utils.nice_path import NicePath
 
 
@@ -150,6 +150,13 @@ def parse_theme(name: str) -> Theme:
         raise argparse.ArgumentTypeError(f"Invalid theme {name}, choices are: {choices}")
 
 
+def _get_package_version() -> str:
+    with contextlib.suppress(importlib.metadata.PackageNotFoundError):
+        return importlib.metadata.version(PACKAGE_NAME)
+
+    return "0.0.0"
+
+
 def parse_args(args: Iterable[str]) -> CLINamespace:
     """
     Get CLI arguments parser.
@@ -157,19 +164,19 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
     Returns:
         An `argparse.ArgumentParser` instance.
     """
-    try:
-        version = pkg_resources.get_distribution("handsdown").version
-    except pkg_resources.DistributionNotFound:
-        version = "0.0.0"
+    version = _get_package_version()
 
     parser = argparse.ArgumentParser(
-        "handsdown", description="Docstring-based python documentation generator."
+        PACKAGE_NAME, description="Docstring-based python documentation generator."
     )
     parser.add_argument(
         "include", nargs="*", help="Path expressions to include source files", default=[]
     )
     parser.add_argument(
-        "--exclude", nargs="*", help="Path expressions to exclude source files", default=[]
+        "--exclude",
+        nargs="*",
+        help="Path expressions to exclude source files",
+        default=EXCLUDE_EXPRS,
     )
     parser.add_argument(
         "-i",

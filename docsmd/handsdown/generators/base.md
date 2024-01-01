@@ -1,9 +1,6 @@
 # Base
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Generators](./index.md#generators) /
-Base
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Generators](./index.md#generators) / Base
 
 > Auto-generated documentation for [handsdown.generators.base](https://github.com/vemel/handsdown/blob/main/handsdown/generators/base.py) module.
 

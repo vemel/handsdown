@@ -1,10 +1,6 @@
 # TextRecord
 
-[Handsdown API Index](../../../README.md#handsdown-api-index) /
-[Handsdown](../../index.md#handsdown) /
-[AST Parser](../index.md#ast-parser) /
-[Node Records](./index.md#node-records) /
-TextRecord
+[Handsdown API Index](../../../README.md#handsdown-api-index) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](./index.md#node-records) / TextRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.text_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/text_record.py) module.
 

@@ -1,9 +1,6 @@
 # Strings
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Utils](./index.md#utils) /
-Strings
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Utils](./index.md#utils) / Strings
 
 > Auto-generated documentation for [handsdown.utils.strings](https://github.com/vemel/handsdown/blob/main/handsdown/utils/strings.py) module.
 

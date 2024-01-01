@@ -1,6 +1,6 @@
 # {{ module_record.title }}
 
-[{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}#{{ md_document.get_anchor(generator.md_index.title) }}) /
+[{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}#{{ md_document.get_anchor(generator.md_index.title) }}) /{{ ' ' -}}
 {% for parent_import_string in module_record.import_string.get_parents() -%}
     {% set parent_module_record = generator.module_records.find_module_record(parent_import_string) -%}
     {%- if parent_module_record -%}
@@ -8,8 +8,8 @@
     {%- else -%}
         `{{ parent_import_string.name }}` /
     {%- endif -%}
-    {{ '\n' -}}
-{% endfor -%}
+    {{ ' ' -}}
+{%- endfor -%}
 {{ module_record.title }}
 
 > Auto-generated documentation for [{{ module_record.import_string.value }}]({{ md_document.source_code_url }}) module.

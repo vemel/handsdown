@@ -1,9 +1,6 @@
 # Material
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Generators](./index.md#generators) /
-Material
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Generators](./index.md#generators) / Material
 
 > Auto-generated documentation for [handsdown.generators.material](https://github.com/vemel/handsdown/blob/main/handsdown/generators/material.py) module.
 

@@ -1,9 +1,6 @@
 # Type Defs
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[AST Parser](./index.md#ast-parser) /
-Type Defs
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [AST Parser](./index.md#ast-parser) / Type Defs
 
 > Auto-generated documentation for [handsdown.ast_parser.type_defs](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/type_defs.py) module.
 

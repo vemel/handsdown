@@ -1,10 +1,6 @@
 # ModuleRecord
 
-[Handsdown API Index](../../../README.md#handsdown-api-index) /
-[Handsdown](../../index.md#handsdown) /
-[AST Parser](../index.md#ast-parser) /
-[Node Records](./index.md#node-records) /
-ModuleRecord
+[Handsdown API Index](../../../README.md#handsdown-api-index) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](./index.md#node-records) / ModuleRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.module_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py) module.
 

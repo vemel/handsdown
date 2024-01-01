@@ -1,9 +1,6 @@
 # SectionMap
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Processors](./index.md#processors) /
-SectionMap
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Processors](./index.md#processors) / SectionMap
 
 > Auto-generated documentation for [handsdown.processors.section_map](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_map.py) module.
 

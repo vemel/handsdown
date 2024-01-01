@@ -1,9 +1,6 @@
 # SectionBlock
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Processors](./index.md#processors) /
-SectionBlock
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Processors](./index.md#processors) / SectionBlock
 
 > Auto-generated documentation for [handsdown.processors.section_block](https://github.com/vemel/handsdown/blob/main/handsdown/processors/section_block.py) module.
 

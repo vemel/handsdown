@@ -1,8 +1,6 @@
 # Stub file type annotations examples
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-Stub file type annotations examples
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / Stub file type annotations examples
 
 > Auto-generated documentation for [examples.pyi_typed](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py) module.
 

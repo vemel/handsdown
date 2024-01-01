@@ -1,8 +1,6 @@
 # MDDocument
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-MDDocument
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / MDDocument
 
 > Auto-generated documentation for [handsdown.md_document](https://github.com/vemel/handsdown/blob/main/handsdown/md_document.py) module.
 

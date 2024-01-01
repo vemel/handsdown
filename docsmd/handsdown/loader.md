@@ -1,8 +1,6 @@
 # Loader
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-Loader
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / Loader
 
 > Auto-generated documentation for [handsdown.loader](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py) module.
 

@@ -1,8 +1,6 @@
 # PEP 484 - comment-based type annotations examples
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-PEP 484 - comment-based type annotations examples
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / PEP 484 - comment-based type annotations examples
 
 > Auto-generated documentation for [examples.comment_typed](https://github.com/vemel/handsdown/blob/main/examples/comment_typed.py) module.
 

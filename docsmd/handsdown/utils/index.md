@@ -1,8 +1,6 @@
 # Utils
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-Utils
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / Utils
 
 > Auto-generated documentation for [handsdown.utils](https://github.com/vemel/handsdown/blob/main/handsdown/utils/__init__.py) module.
 

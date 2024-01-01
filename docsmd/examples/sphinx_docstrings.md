@@ -1,8 +1,6 @@
 # Sphinx docstrings examples
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-Sphinx docstrings examples
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / Sphinx docstrings examples
 
 > Auto-generated documentation for [examples.sphinx_docstrings](https://github.com/vemel/handsdown/blob/main/examples/sphinx_docstrings.py) module.
 

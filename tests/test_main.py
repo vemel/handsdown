@@ -9,7 +9,6 @@ class TestMain:
     @patch("handsdown.main.PathFinder")
     @patch("handsdown.main.RTDGenerator")
     def test_main(self, generator_mock, path_finder_mock, _get_logger_mock):
-
         with patch(
             "handsdown.main.sys.argv",
             [
@@ -26,9 +25,7 @@ class TestMain:
             assert main() is None
 
         path_finder_mock.assert_called_once_with(Path("/"))
-        path_finder_mock().exclude.assert_called_once_with(
-            "build/*", "tests/*", "test/*", "*/__pycache__/*", ".*/*", "exclude"
-        )
+        path_finder_mock().exclude.assert_called_once_with("exclude")
         path_finder_mock().exclude().include.assert_called_once_with("include")
         generator_mock.assert_called_once_with(
             input_path=Path("/"),

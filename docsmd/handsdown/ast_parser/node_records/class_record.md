@@ -1,10 +1,6 @@
 # ClassRecord
 
-[Handsdown API Index](../../../README.md#handsdown-api-index) /
-[Handsdown](../../index.md#handsdown) /
-[AST Parser](../index.md#ast-parser) /
-[Node Records](./index.md#node-records) /
-ClassRecord
+[Handsdown API Index](../../../README.md#handsdown-api-index) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Node Records](./index.md#node-records) / ClassRecord
 
 > Auto-generated documentation for [handsdown.ast_parser.node_records.class_record](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/class_record.py) module.
 

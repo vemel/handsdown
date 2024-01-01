@@ -1,8 +1,6 @@
 # Exceptions
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-Exceptions
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / Exceptions
 
 > Auto-generated documentation for [handsdown.exceptions](https://github.com/vemel/handsdown/blob/main/handsdown/exceptions.py) module.
 

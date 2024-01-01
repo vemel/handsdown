@@ -1,8 +1,6 @@
 # Supported expressions examples
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-Supported expressions examples
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / Supported expressions examples
 
 > Auto-generated documentation for [examples.expressions](https://github.com/vemel/handsdown/blob/main/examples/expressions.py) module.
 

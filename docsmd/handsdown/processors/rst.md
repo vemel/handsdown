@@ -1,9 +1,6 @@
 # reStructuredText Docstring Processor
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Processors](./index.md#processors) /
-reStructuredText Docstring Processor
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Processors](./index.md#processors) / reStructuredText Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.rst](https://github.com/vemel/handsdown/blob/main/handsdown/processors/rst.py) module.
 

@@ -1,9 +1,6 @@
 # Base Docstring Processor
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Processors](./index.md#processors) /
-Base Docstring Processor
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Processors](./index.md#processors) / Base Docstring Processor
 
 > Auto-generated documentation for [handsdown.processors.base](https://github.com/vemel/handsdown/blob/main/handsdown/processors/base.py) module.
 

@@ -1,8 +1,6 @@
 # Main Example
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-Main Example
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / Main Example
 
 > Auto-generated documentation for [examples.main_example](https://github.com/vemel/handsdown/blob/main/examples/main_example.py) module.
 

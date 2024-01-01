@@ -1,8 +1,6 @@
 # PEP 287 - reStructuredText docstrings examples
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Examples](./index.md#examples) /
-PEP 287 - reStructuredText docstrings examples
+[Handsdown API Index](../README.md#handsdown-api-index) / [Examples](./index.md#examples) / PEP 287 - reStructuredText docstrings examples
 
 > Auto-generated documentation for [examples.rst_docstrings](https://github.com/vemel/handsdown/blob/main/examples/rst_docstrings.py) module.
 

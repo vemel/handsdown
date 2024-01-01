@@ -155,8 +155,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append(node.value)
         self.parts.append("[")
-        if isinstance(node.slice, ast.Index) and isinstance(node.slice.value, ast.Tuple):
-            self._visit_iterable(node.slice.value)
+        if isinstance(node.slice, ast.Index) and isinstance(node.slice.value, ast.Tuple):  # type: ignore
+            self._visit_iterable(node.slice.value)  # type: ignore
         elif isinstance(node.slice, ast.Tuple):
             self._visit_iterable(node.slice)
         else:
@@ -332,6 +332,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("{")
         for index, key in enumerate(node.keys or []):
+            if key is None:
+                continue
             if index:
                 self.parts.append(", ")
             self.parts.append(key)
@@ -515,12 +517,12 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        if isinstance(node.value, ast.Tuple):
-            self._visit_iterable(node.value)
+        if isinstance(node.value, ast.Tuple):  # type: ignore
+            self._visit_iterable(node.value)  # type: ignore
             return
-        self.parts.append(node.value)
+        self.parts.append(node.value)  # type: ignore
 
-    def visit_Ellipsis(self, _node: ast.ASTEllipsis) -> None:
+    def visit_Ellipsis(self, node: ast.ASTEllipsis) -> None:
         """
         Parse info from `ast.Ellipsis` node and put it to `parts`.
 

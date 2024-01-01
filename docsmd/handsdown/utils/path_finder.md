@@ -1,9 +1,6 @@
 # PathFinder
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Utils](./index.md#utils) /
-PathFinder
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Utils](./index.md#utils) / PathFinder
 
 > Auto-generated documentation for [handsdown.utils.path_finder](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py) module.
 

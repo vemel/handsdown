@@ -1,8 +1,6 @@
 # Main
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-Main
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / Main
 
 > Auto-generated documentation for [handsdown.main](https://github.com/vemel/handsdown/blob/main/handsdown/main.py) module.
 
@@ -25,7 +23,7 @@ def api(args: CLINamespace) -> None:
 
 ## main
 
-[Show source in main.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L57)
+[Show source in main.py:55](https://github.com/vemel/handsdown/blob/main/handsdown/main.py#L55)
 
 Main entrypoint for CLI.
 

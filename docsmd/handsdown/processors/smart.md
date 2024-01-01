@@ -1,9 +1,6 @@
 # Smart
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Processors](./index.md#processors) /
-Smart
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Processors](./index.md#processors) / Smart
 
 > Auto-generated documentation for [handsdown.processors.smart](https://github.com/vemel/handsdown/blob/main/handsdown/processors/smart.py) module.
 

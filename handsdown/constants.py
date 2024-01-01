@@ -3,6 +3,9 @@ Various project constants.
 """
 import enum
 
+# Package name.
+PACKAGE_NAME = "handsdown"
+
 # Global `logging.Logger` name.
 LOGGER_NAME = "handsdown"
 

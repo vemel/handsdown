@@ -1,9 +1,6 @@
 # Blackify
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Utils](./index.md#utils) /
-Blackify
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Utils](./index.md#utils) / Blackify
 
 > Auto-generated documentation for [handsdown.utils.blackify](https://github.com/vemel/handsdown/blob/main/handsdown/utils/blackify.py) module.
 

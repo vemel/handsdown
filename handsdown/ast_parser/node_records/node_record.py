@@ -49,6 +49,16 @@ class NodeRecord:
         self._line_number = value
 
     def _get_docstring(self) -> str:
+        if not isinstance(
+            self.node,
+            (
+                ast.FunctionDef,
+                ast.AsyncFunctionDef,
+                ast.Module,
+                ast.ClassDef,
+            ),
+        ):
+            return ""
         docstring = ast.get_docstring(self.node, clean=False) or ""
         if isinstance(docstring, bytes):
             docstring = docstring.decode("utf-8")

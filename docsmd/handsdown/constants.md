@@ -1,12 +1,12 @@
 # Constants
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-Constants
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / Constants
 
 > Auto-generated documentation for [handsdown.constants](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py) module.
 
 #### Attributes
+
+- `PACKAGE_NAME` - Package name.: `'handsdown'`
 
 - `LOGGER_NAME` - Global `logging.Logger` name.: `'handsdown'`
 
@@ -19,7 +19,7 @@ Constants
 
 ## Theme
 
-[Show source in constants.py:19](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L19)
+[Show source in constants.py:22](https://github.com/vemel/handsdown/blob/main/handsdown/constants.py#L22)
 
 #### Signature
 

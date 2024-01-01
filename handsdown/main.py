@@ -5,7 +5,7 @@ import sys
 from typing import Type
 
 from handsdown.cli_parser import CLINamespace, parse_args
-from handsdown.constants import EXCLUDE_EXPRS, SOURCES_GLOB, Theme
+from handsdown.constants import SOURCES_GLOB, Theme
 from handsdown.exceptions import GeneratorError
 from handsdown.generators.base import BaseGenerator
 from handsdown.generators.material import MaterialGenerator
@@ -25,9 +25,7 @@ def select_generator_cls(theme: Theme) -> Type[BaseGenerator]:
 
 
 def api(args: CLINamespace) -> None:
-    path_finder = (
-        PathFinder(args.input_path).exclude(*(EXCLUDE_EXPRS + args.exclude)).include(*args.include)
-    )
+    path_finder = PathFinder(args.input_path).exclude(*args.exclude).include(*args.include)
     generator_cls = select_generator_cls(args.theme)
 
     generator = generator_cls(

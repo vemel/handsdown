@@ -1,10 +1,6 @@
 # ExpressionAnalyzer
 
-[Handsdown API Index](../../../README.md#handsdown-api-index) /
-[Handsdown](../../index.md#handsdown) /
-[AST Parser](../index.md#ast-parser) /
-[Analyzers](./index.md#analyzers) /
-ExpressionAnalyzer
+[Handsdown API Index](../../../README.md#handsdown-api-index) / [Handsdown](../../index.md#handsdown) / [AST Parser](../index.md#ast-parser) / [Analyzers](./index.md#analyzers) / ExpressionAnalyzer
 
 > Auto-generated documentation for [handsdown.ast_parser.analyzers.expression_analyzer](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py) module.
 
@@ -35,7 +31,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
 ### ExpressionAnalyzer().generic_visit
 
-[Show source in expression_analyzer.py:752](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L752)
+[Show source in expression_analyzer.py:754](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L754)
 
 Parse info from an unknown `ast.AST` node and put `...` to `parts`.
 
@@ -77,7 +73,7 @@ def visit_Attribute(self, node: ast.Attribute) -> None:
 
 ### ExpressionAnalyzer().visit_Await
 
-[Show source in expression_analyzer.py:707](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L707)
+[Show source in expression_analyzer.py:709](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L709)
 
 Parse info from `ast.Await` node and put it to `parts`.
 
@@ -100,7 +96,7 @@ def visit_Await(self, node: ast.Await) -> None:
 
 ### ExpressionAnalyzer().visit_BinOp
 
-[Show source in expression_analyzer.py:365](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L365)
+[Show source in expression_analyzer.py:367](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L367)
 
 Parse info from `ast.BinOp` node and put it to `parts`.
 
@@ -124,7 +120,7 @@ def visit_BinOp(self, node: ast.BinOp) -> None:
 
 ### ExpressionAnalyzer().visit_BoolOp
 
-[Show source in expression_analyzer.py:386](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L386)
+[Show source in expression_analyzer.py:388](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L388)
 
 Parse info from `ast.BoolOp` node and put it to `parts`.
 
@@ -188,7 +184,7 @@ def visit_Call(self, node: ast.Call) -> None:
 
 ### ExpressionAnalyzer().visit_Compare
 
-[Show source in expression_analyzer.py:342](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L342)
+[Show source in expression_analyzer.py:344](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L344)
 
 Parse info from `ast.Compare` node and put it to `parts`.
 
@@ -229,7 +225,7 @@ def visit_Dict(self, node: ast.Dict) -> None:
 
 ### ExpressionAnalyzer().visit_DictComp
 
-[Show source in expression_analyzer.py:616](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L616)
+[Show source in expression_analyzer.py:618](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L618)
 
 Parse info from `ast.DictComp` node and put it to `parts`.
 
@@ -252,7 +248,7 @@ def visit_DictComp(self, node: ast.DictComp) -> None:
 
 ### ExpressionAnalyzer().visit_Ellipsis
 
-[Show source in expression_analyzer.py:523](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L523)
+[Show source in expression_analyzer.py:525](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L525)
 
 Parse info from `ast.Ellipsis` node and put it to `parts`.
 
@@ -269,13 +265,13 @@ Parse info from `ast.Ellipsis` node and put it to `parts`.
 #### Signature
 
 ```python
-def visit_Ellipsis(self, _node: ast.ASTEllipsis) -> None:
+def visit_Ellipsis(self, node: ast.ASTEllipsis) -> None:
     ...
 ```
 
 ### ExpressionAnalyzer().visit_FormattedValue
 
-[Show source in expression_analyzer.py:582](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L582)
+[Show source in expression_analyzer.py:584](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L584)
 
 Parse info from `ast.FormattedValue` node and put it to `parts`.
 
@@ -298,7 +294,7 @@ def visit_FormattedValue(self, node: ast.FormattedValue) -> None:
 
 ### ExpressionAnalyzer().visit_GeneratorExp
 
-[Show source in expression_analyzer.py:672](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L672)
+[Show source in expression_analyzer.py:674](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L674)
 
 Parse info from `ast.GeneratorExp` node and put it to `parts`.
 
@@ -321,7 +317,7 @@ def visit_GeneratorExp(self, node: ast.GeneratorExp) -> None:
 
 ### ExpressionAnalyzer().visit_IfExp
 
-[Show source in expression_analyzer.py:690](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L690)
+[Show source in expression_analyzer.py:692](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L692)
 
 Parse info from `ast.IfExp` node and put it to `parts`.
 
@@ -344,7 +340,7 @@ def visit_IfExp(self, node: ast.IfExp) -> None:
 
 ### ExpressionAnalyzer().visit_Index
 
-[Show source in expression_analyzer.py:506](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L506)
+[Show source in expression_analyzer.py:508](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L508)
 
 Parse info from `ast.Index` node and put it to `parts`.
 
@@ -368,7 +364,7 @@ def visit_Index(self, node: ast.Index) -> None:
 
 ### ExpressionAnalyzer().visit_JoinedStr
 
-[Show source in expression_analyzer.py:560](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L560)
+[Show source in expression_analyzer.py:562](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L562)
 
 Parse info from `ast.JoinedStr` node and put it to `parts`.
 
@@ -391,7 +387,7 @@ def visit_JoinedStr(self, node: ast.JoinedStr) -> None:
 
 ### ExpressionAnalyzer().visit_Lambda
 
-[Show source in expression_analyzer.py:430](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L430)
+[Show source in expression_analyzer.py:432](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L432)
 
 Parse info from `ast.Lambda` node and put it to `parts`.
 
@@ -437,7 +433,7 @@ def visit_List(self, node: ast.List) -> None:
 
 ### ExpressionAnalyzer().visit_ListComp
 
-[Show source in expression_analyzer.py:636](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L636)
+[Show source in expression_analyzer.py:638](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L638)
 
 Parse info from `ast.ListComp` node and put it to `parts`.
 
@@ -554,7 +550,7 @@ def visit_Set(self, node: ast.Set) -> None:
 
 ### ExpressionAnalyzer().visit_SetComp
 
-[Show source in expression_analyzer.py:654](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L654)
+[Show source in expression_analyzer.py:656](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L656)
 
 Parse info from `ast.SetComp` node and put it to `parts`.
 
@@ -577,7 +573,7 @@ def visit_SetComp(self, node: ast.SetComp) -> None:
 
 ### ExpressionAnalyzer().visit_Slice
 
-[Show source in expression_analyzer.py:536](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L536)
+[Show source in expression_analyzer.py:538](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L538)
 
 Parse info from `ast.Slice` node and put it to `parts`.
 
@@ -699,7 +695,7 @@ def visit_Tuple(self, node: ast.Tuple) -> None:
 
 ### ExpressionAnalyzer().visit_UnaryOp
 
-[Show source in expression_analyzer.py:408](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L408)
+[Show source in expression_analyzer.py:410](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L410)
 
 Parse info from `ast.UnaryOp` node and put it to `parts`.
 
@@ -725,7 +721,7 @@ def visit_UnaryOp(self, node: ast.UnaryOp) -> None:
 
 ### ExpressionAnalyzer().visit_Yield
 
-[Show source in expression_analyzer.py:721](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L721)
+[Show source in expression_analyzer.py:723](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L723)
 
 Parse info from `ast.Yield` node and put it to `parts`.
 
@@ -749,7 +745,7 @@ def visit_Yield(self, node: ast.Yield) -> None:
 
 ### ExpressionAnalyzer().visit_YieldFrom
 
-[Show source in expression_analyzer.py:738](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L738)
+[Show source in expression_analyzer.py:740](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L740)
 
 Parse info from `ast.YieldFrom` node and put it to `parts`.
 
@@ -772,7 +768,7 @@ def visit_YieldFrom(self, node: ast.YieldFrom) -> None:
 
 ### ExpressionAnalyzer().visit_arg
 
-[Show source in expression_analyzer.py:489](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L489)
+[Show source in expression_analyzer.py:491](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L491)
 
 Parse info from `ast.arg` node and put it to `parts`.
 
@@ -796,7 +792,7 @@ def visit_arg(self, node: ast.arg) -> None:
 
 ### ExpressionAnalyzer().visit_arguments
 
-[Show source in expression_analyzer.py:446](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L446)
+[Show source in expression_analyzer.py:448](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L448)
 
 Parse info from `ast.arguments` node and put it to `parts`.
 
@@ -819,7 +815,7 @@ def visit_arguments(self, node: ast.arguments) -> None:
 
 ### ExpressionAnalyzer().visit_comprehension
 
-[Show source in expression_analyzer.py:597](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L597)
+[Show source in expression_analyzer.py:599](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L599)
 
 Parse info from `ast.comprehension` node and put it to `parts`.
 

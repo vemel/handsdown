@@ -1,8 +1,6 @@
 # Cli Parser
 
-[Handsdown API Index](../README.md#handsdown-api-index) /
-[Handsdown](./index.md#handsdown) /
-Cli Parser
+[Handsdown API Index](../README.md#handsdown-api-index) / [Handsdown](./index.md#handsdown) / Cli Parser
 
 > Auto-generated documentation for [handsdown.cli_parser](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py) module.
 
@@ -152,7 +150,7 @@ def git_repo(git_repo_url: str) -> str:
 
 ## parse_args
 
-[Show source in cli_parser.py:153](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L153)
+[Show source in cli_parser.py:160](https://github.com/vemel/handsdown/blob/main/handsdown/cli_parser.py#L160)
 
 Get CLI arguments parser.
 

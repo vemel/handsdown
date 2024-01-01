@@ -1,9 +1,6 @@
 # Rtd
 
-[Handsdown API Index](../../README.md#handsdown-api-index) /
-[Handsdown](../index.md#handsdown) /
-[Generators](./index.md#generators) /
-Rtd
+[Handsdown API Index](../../README.md#handsdown-api-index) / [Handsdown](../index.md#handsdown) / [Generators](./index.md#generators) / Rtd
 
 > Auto-generated documentation for [handsdown.generators.rtd](https://github.com/vemel/handsdown/blob/main/handsdown/generators/rtd.py) module.
 
