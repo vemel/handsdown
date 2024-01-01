@@ -12,8 +12,15 @@ jobs:
       max-parallel: 4
       matrix:
         python-version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
           - "3.10"
           - "3.11"
+          - "3.12"
+        include:
+          - version: "3.11"
+            check-formatting: "true"
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python for Poetry
@@ -37,10 +44,12 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install -n
+          poetry run pip install flake8 pytest
       - name: Install Node.js dependencies
         run: |
           npm install -g pyright
       - name: Code style
+        if: ${{ matrix.check-formatting }}
         run: |
           poetry run black --check handsdown --preview
           poetry run isort -c handsdown

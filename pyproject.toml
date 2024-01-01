@@ -83,7 +83,6 @@ twine = { version = "*", python = ">=3.10" }
 pytest = { version = "*", python = ">=3.10" }
 pytest-cov = { version = "*", python = ">=3.10" }
 vulture = { version = "*", python = ">=3.10" }
-codecov = { version = "*", python = ">=3.10" }
 rope = "*"
 types-setuptools = "*"
 mkdocs = "*"
