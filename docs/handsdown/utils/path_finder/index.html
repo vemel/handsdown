@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../nice_path/">
+        <link rel="prev" href="../path/">
       
       
         <link rel="next" href="../strings/">
@@ -1764,11 +1764,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../nice_path/" class="md-nav__link">
+      <a href="../path/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    NicePath
+    Path
   </span>
   
 
@@ -1921,13 +1921,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2026,13 +2019,6 @@
           <li class="md-nav__item">
   <a href="#signature_5" class="md-nav__link">
     Signature
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#see-also_1" class="md-nav__link">
-    See also
   </a>
   
 </li>
@@ -2209,13 +2195,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2318,13 +2297,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#see-also_1" class="md-nav__link">
-    See also
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2359,7 +2331,7 @@
 <p>Auto-generated documentation for <a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py">handsdown.utils.path_finder</a> module.</p>
 </blockquote>
 <h2 id="pathfinder_1">PathFinder</h2>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L19">Show source in path_finder.py:19</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L18">Show source in path_finder.py:18</a></p>
 <p>Glob helper for matching paths inside <code>root</code> path.</p>
 <p>With <code>.gitignore</code>-like <code>include</code> and <code>exclude</code> patterns.</p>
 <h4 id="examples">Examples</h4>
@@ -2388,7 +2360,7 @@
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        <span class="o">...</span>
 </code></pre></div>
 <h3 id="pathfinderexclude">PathFinder().exclude</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L86">Show source in path_finder.py:86</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L85">Show source in path_finder.py:85</a></p>
 <p>Add <code>fnmatch</code> expression to black list.</p>
 <p>If black list is empty - no black list filtration applied.
 If expression does not have <code>*</code> or <code>.</code> characters, appends <code>/*</code> to it.</p>
@@ -2403,20 +2375,16 @@ If expression does not have <code>*</code> or <code>.</code> characters, appends
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="pathfinderglob">PathFinder().glob</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L129">Show source in path_finder.py:129</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L128">Show source in path_finder.py:128</a></p>
 <p>Find all matching <code>Path</code> objects respecting <a href="#pathfinderinclude">PathFinder().include</a> and <a href="#pathfinderexclude">PathFinder().exclude</a> patterns.</p>
 <h4 id="yields">Yields</h4>
 <p>Matching <code>Path</code> objects.</p>
 <h4 id="signature_2">Signature</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">glob_expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">NicePath</span><span class="p">]:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">glob_expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also">See also</h4>
-<ul>
-<li><a href="../nice_path/#nicepath">NicePath</a></li>
-</ul>
 <h3 id="pathfinderinclude">PathFinder().include</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L65">Show source in path_finder.py:65</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L64">Show source in path_finder.py:64</a></p>
 <p>Add <code>fnmatch</code> expression to white list.</p>
 <p>If white list is empty - no white list filtration applied.
 If expression does not have <code>*</code> or <code>.</code> characters, appends <code>/*</code> to it.</p>
@@ -2431,7 +2399,7 @@ If expression does not have <code>*</code> or <code>.</code> characters, appends
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="pathfindermkdir">PathFinder().mkdir</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L174">Show source in path_finder.py:174</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L173">Show source in path_finder.py:173</a></p>
 <p>Create directories up to <code>root</code> if they do not exist.</p>
 <h4 id="arguments_3">Arguments</h4>
 <ul>
@@ -2446,7 +2414,7 @@ If expression does not have <code>*</code> or <code>.</code> characters, appends
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="pathfinderrelative">PathFinder().relative</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L145">Show source in path_finder.py:145</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L144">Show source in path_finder.py:144</a></p>
 <p>Find a relative path from <code>root</code> to <code>target</code>.</p>
 <p><code>target</code> should be an absolute path.</p>
 <h4 id="arguments_4">Arguments</h4>
@@ -2456,13 +2424,9 @@ If expression does not have <code>*</code> or <code>.</code> characters, appends
 <h4 id="returns_2">Returns</h4>
 <p>A relative path to <code>target</code>.</p>
 <h4 id="signature_5">Signature</h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NicePath</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="o">...</span>
 </code></pre></div>
-<h4 id="see-also_1">See also</h4>
-<ul>
-<li><a href="../nice_path/#nicepath">NicePath</a></li>
-</ul>
 
 
 

@@ -231,7 +231,7 @@ class MDDocument:
         link = ""
         if path and path != self.path:
             link_path = self.path_finder.relative(path)
-            link = f"{link}{link_path.as_posix()}"
+            link = f"{link}{print_path(link_path)}"
         if anchor:
             link = f"{link}#{anchor}"
         return link

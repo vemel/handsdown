@@ -6,7 +6,7 @@
 
 ## PathFinder
 
-[Show source in path_finder.py:19](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L19)
+[Show source in path_finder.py:18](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L18)
 
 Glob helper for matching paths inside `root` path.
 
@@ -45,7 +45,7 @@ class PathFinder:
 
 ### PathFinder().exclude
 
-[Show source in path_finder.py:86](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L86)
+[Show source in path_finder.py:85](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L85)
 
 Add `fnmatch` expression to black list.
 
@@ -69,7 +69,7 @@ def exclude(self: _R, *fn_exrps: str) -> _R:
 
 ### PathFinder().glob
 
-[Show source in path_finder.py:129](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L129)
+[Show source in path_finder.py:128](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L128)
 
 Find all matching `Path` objects respecting [PathFinder().include](#pathfinderinclude) and [PathFinder().exclude](#pathfinderexclude) patterns.
 
@@ -80,17 +80,13 @@ Matching `Path` objects.
 #### Signature
 
 ```python
-def glob(self, glob_expr: str) -> Iterator[NicePath]:
+def glob(self, glob_expr: str) -> Iterator[Path]:
     ...
 ```
 
-#### See also
-
-- [NicePath](./nice_path.md#nicepath)
-
 ### PathFinder().include
 
-[Show source in path_finder.py:65](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L65)
+[Show source in path_finder.py:64](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L64)
 
 Add `fnmatch` expression to white list.
 
@@ -114,7 +110,7 @@ def include(self: _R, *fn_exrps: str) -> _R:
 
 ### PathFinder().mkdir
 
-[Show source in path_finder.py:174](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L174)
+[Show source in path_finder.py:173](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L173)
 
 Create directories up to `root` if they do not exist.
 
@@ -135,7 +131,7 @@ def mkdir(self, force: bool = False) -> None:
 
 ### PathFinder().relative
 
-[Show source in path_finder.py:145](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L145)
+[Show source in path_finder.py:144](https://github.com/vemel/handsdown/blob/main/handsdown/utils/path_finder.py#L144)
 
 Find a relative path from `root` to `target`.
 
@@ -152,10 +148,6 @@ A relative path to `target`.
 #### Signature
 
 ```python
-def relative(self, target: Path) -> NicePath:
+def relative(self, target: Path) -> Path:
     ...
 ```
-
-#### See also
-
-- [NicePath](./nice_path.md#nicepath)

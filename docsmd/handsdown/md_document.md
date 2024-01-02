@@ -143,13 +143,9 @@ Output path of the document.
 
 ```python
 @property
-def path(self) -> NicePath:
+def path(self) -> Path:
     ...
 ```
-
-#### See also
-
-- [NicePath](utils/nice_path.md#nicepath)
 
 ### MDDocument().read
 

@@ -19,3 +19,24 @@ class BaseAnalyzer(ast.NodeVisitor):
     def __init__(self) -> None:
         ...
 ```
+
+### BaseAnalyzer().get_docstring
+
+[Show source in base_analyzer.py:19](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/base_analyzer.py#L19)
+
+Get docstring from node.
+
+#### Arguments
+
+- `node` - AST node.
+
+#### Returns
+
+Docstring.
+
+#### Signature
+
+```python
+def get_docstring(self, node: ast.AST) -> str:
+    ...
+```

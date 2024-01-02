@@ -22,6 +22,28 @@ class DocstringFormatter:
         ...
 ```
 
+### DocstringFormatter._cleanup
+
+[Show source in docstring_formatter.py:24](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L24)
+
+Fix multiline docstrings starting with no newline after quotes.
+
+#### Arguments
+
+- `docstring` - Raw docstring.
+
+#### Returns
+
+Aligned docstring.
+
+#### Signature
+
+```python
+@staticmethod
+def _cleanup(docstring: str) -> str:
+    ...
+```
+
 ### DocstringFormatter().render
 
 [Show source in docstring_formatter.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/utils/docstring_formatter.py#L57)

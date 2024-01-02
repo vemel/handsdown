@@ -169,6 +169,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
         An `argparse.ArgumentParser` instance.
     """
     version = _get_package_version()
+    exclude_exprs_str = " ".join([f"'{i}'" for i in EXCLUDE_EXPRS])
 
     parser = argparse.ArgumentParser(
         PACKAGE_NAME, description="Docstring-based python documentation generator."
@@ -179,7 +180,7 @@ def parse_args(args: Iterable[str]) -> CLINamespace:
     parser.add_argument(
         "--exclude",
         nargs="*",
-        help="Path expressions to exclude source files",
+        help=f"Path expressions to exclude source files (default: {exclude_exprs_str})",
         default=EXCLUDE_EXPRS,
     )
     parser.add_argument(

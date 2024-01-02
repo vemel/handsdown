@@ -12,6 +12,6 @@
 - [IndentTrimmer](./indent_trimmer.md)
 - [Logger](./logger.md)
 - [Markdown](./markdown.md)
-- [NicePath](./nice_path.md)
+- [Path](./path.md)
 - [PathFinder](./path_finder.md)
 - [Strings](./strings.md)

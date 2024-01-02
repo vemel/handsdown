@@ -24,7 +24,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 
 ### ModuleAnalyzer().visit_Assign
 
-[Show source in module_analyzer.py:127](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L127)
+[Show source in module_analyzer.py:130](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L130)
 
 Parse info about module attribute statements.
 
@@ -61,7 +61,7 @@ def visit_Assign(self, node: ast.Assign) -> None:
 
 ### ModuleAnalyzer().visit_AsyncFunctionDef
 
-[Show source in module_analyzer.py:109](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L109)
+[Show source in module_analyzer.py:112](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L112)
 
 Parse info about module `def ...` statements.
 
@@ -115,7 +115,7 @@ def visit_ClassDef(self, node: ast.ClassDef) -> None:
 
 ### ModuleAnalyzer().visit_FunctionDef
 
-[Show source in module_analyzer.py:91](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L91)
+[Show source in module_analyzer.py:94](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L94)
 
 Parse info about module `def ...` statements.
 

@@ -64,6 +64,6 @@ To add custom content to this file, create `HANDSDOWN.md` in your project root.
         - [IndentTrimmer](handsdown/utils/indent_trimmer.md#indenttrimmer)
         - [Logger](handsdown/utils/logger.md#logger)
         - [Markdown](handsdown/utils/markdown.md#markdown)
-        - [NicePath](handsdown/utils/nice_path.md#nicepath)
+        - [Path](handsdown/utils/path.md#path)
         - [PathFinder](handsdown/utils/path_finder.md#pathfinder)
         - [Strings](handsdown/utils/strings.md#strings)

@@ -53,13 +53,9 @@ An absolute path.
 #### Signature
 
 ```python
-def abs_path(path_str: str) -> NicePath:
+def abs_path(path_str: str) -> Path:
     ...
 ```
-
-#### See also
-
-- [NicePath](utils/nice_path.md#nicepath)
 
 
 
@@ -84,13 +80,9 @@ An absolute path.
 #### Signature
 
 ```python
-def dir_abs_path(path_str: str) -> NicePath:
+def dir_abs_path(path_str: str) -> Path:
     ...
 ```
-
-#### See also
-
-- [NicePath](utils/nice_path.md#nicepath)
 
 
 
@@ -115,13 +107,9 @@ An absolute path.
 #### Signature
 
 ```python
-def existing_dir_abs_path(path_str: str) -> NicePath:
+def existing_dir_abs_path(path_str: str) -> Path:
     ...
 ```
-
-#### See also
-
-- [NicePath](utils/nice_path.md#nicepath)
 
 
 

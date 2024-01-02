@@ -72,9 +72,10 @@ class ModuleAnalyzer(BaseAnalyzer):
             node -- AST node.
         """
         name = node.name
+        docstring = self.get_docstring(node)
 
-        # skip private classes
-        if name.startswith("_"):
+        # skip private classes with no docstring
+        if name.startswith("_") and not docstring:
             return
 
         self.class_nodes.append(node)
@@ -82,8 +83,10 @@ class ModuleAnalyzer(BaseAnalyzer):
     def _visit_FunctionDef(self, node: ASTFunctionDef) -> None:
         name = node.name
 
-        # skip private functions
-        if name.startswith("_"):
+        docstring = self.get_docstring(node)
+
+        # skip private functions with no docstring
+        if name.startswith("_") and not docstring:
             return
 
         self.function_nodes.append(node)

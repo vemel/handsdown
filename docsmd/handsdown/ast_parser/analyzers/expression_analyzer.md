@@ -29,6 +29,38 @@ class ExpressionAnalyzer(BaseAnalyzer):
 
 - [BaseAnalyzer](./base_analyzer.md#baseanalyzer)
 
+### ExpressionAnalyzer()._visit_iterable
+
+[Show source in expression_analyzer.py:181](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L181)
+
+Parse info from an iterable node and put it to `parts`.
+
+Used for `ast.Tuple`, `ast.Subscript`, `ast.List`, `ast.Set`
+
+#### Examples
+
+```python
+[1, 2, 3]
+{1, 2, 3}
+(1, 2, 3)
+Union[str, bool]
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+#### Signature
+
+```python
+def _visit_iterable(self, node: ASTIterable) -> None:
+    ...
+```
+
+#### See also
+
+- [ASTIterable](../type_defs.md#astiterable)
+
 ### ExpressionAnalyzer().generic_visit
 
 [Show source in expression_analyzer.py:754](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L754)

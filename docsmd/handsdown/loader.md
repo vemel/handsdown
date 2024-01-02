@@ -37,6 +37,27 @@ class Loader:
 
 - [ENCODING](./constants.md#encoding)
 
+### Loader()._get_output_path
+
+[Show source in loader.py:39](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L39)
+
+Get output MD document path based on `source_path`.
+
+#### Arguments
+
+- `source_path` - Path to source code file.
+
+#### Returns
+
+A path to the output `.md` file even if it does not exist yet.
+
+#### Signature
+
+```python
+def _get_output_path(self, source_path: Path) -> Path:
+    ...
+```
+
 ### Loader().get_import_string
 
 [Show source in loader.py:124](https://github.com/vemel/handsdown/blob/main/handsdown/loader.py#L124)

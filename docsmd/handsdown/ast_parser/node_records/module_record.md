@@ -6,7 +6,7 @@
 
 ## ModuleRecord
 
-[Show source in module_record.py:21](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L21)
+[Show source in module_record.py:20](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L20)
 
 Wrapper for an `ast.Module` node with corresponding node info.
 
@@ -28,9 +28,63 @@ class ModuleRecord(NodeRecord):
 
 - [NodeRecord](./node_record.md#noderecord)
 
+### ModuleRecord()._get_comment_docstring
+
+[Show source in module_record.py:218](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L218)
+
+Get comment docstring preceding the object from the source code.
+
+Returns only lines starting with `#`, lines joined with a single space.
+
+#### Arguments
+
+- `node_record` - Node record for source lookup.
+
+#### Returns
+
+A docstring as a string.
+
+#### Signature
+
+```python
+def _get_comment_docstring(self, node_record: NodeRecord) -> str:
+    ...
+```
+
+#### See also
+
+- [NodeRecord](./node_record.md#noderecord)
+
+### ModuleRecord()._get_function_def_lines
+
+[Show source in module_record.py:195](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L195)
+
+Get all function definition lines for comment type hints lookup.
+
+Removes indentation.
+
+#### Arguments
+
+- `function_record` - Function record for source lookup.
+
+#### Returns
+
+Function definition lines as an array.
+
+#### Signature
+
+```python
+def _get_function_def_lines(self, function_record: FunctionRecord) -> List[str]:
+    ...
+```
+
+#### See also
+
+- [FunctionRecord](./function_record.md#functionrecord)
+
 ### ModuleRecord().build_children
 
-[Show source in module_record.py:137](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L137)
+[Show source in module_record.py:136](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L136)
 
 Collect full information about Module child records.
 
@@ -45,7 +99,7 @@ def build_children(self) -> None:
 
 ### ModuleRecord.create_from_source
 
-[Show source in module_record.py:45](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L45)
+[Show source in module_record.py:44](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L44)
 
 Create new [ModuleRecord](#modulerecord) from path.
 
@@ -76,7 +130,7 @@ def create_from_source(
 
 ### ModuleRecord().find_record
 
-[Show source in module_record.py:73](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L73)
+[Show source in module_record.py:72](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L72)
 
 Find child in the Module by an absolute or relative import string.
 
@@ -102,7 +156,7 @@ def find_record(self, import_string: ImportString) -> Optional[NodeRecord]:
 
 ### ModuleRecord().get_related_import_strings
 
-[Show source in module_record.py:251](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L251)
+[Show source in module_record.py:250](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L250)
 
 Get a set of `related_names` found in module class, function, method and attribute records.
 
@@ -124,7 +178,7 @@ def get_related_import_strings(self, node_record: NodeRecord) -> Set[ImportStrin
 
 ### ModuleRecord().is_init
 
-[Show source in module_record.py:281](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L281)
+[Show source in module_record.py:280](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L280)
 
 Check if this module is the __init__.py file.
 
@@ -141,7 +195,7 @@ def is_init(self) -> bool:
 
 ### ModuleRecord().iter_records
 
-[Show source in module_record.py:92](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L92)
+[Show source in module_record.py:91](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/module_record.py#L91)
 
 Iterate over Module class, method and fucntion records.
 

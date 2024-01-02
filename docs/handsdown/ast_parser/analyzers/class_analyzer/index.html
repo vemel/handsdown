@@ -1994,11 +1994,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../utils/nice_path/" class="md-nav__link">
+      <a href="../../../utils/path/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    NicePath
+    Path
   </span>
   
 
@@ -2315,7 +2315,7 @@
 <li><a href="../base_analyzer/#baseanalyzer">BaseAnalyzer</a></li>
 </ul>
 <h3 id="classanalyzergeneric_visit">ClassAnalyzer().generic_visit</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L138">Show source in class_analyzer.py:138</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L141">Show source in class_analyzer.py:141</a></p>
 <p>Do nothing for unknown <code>ast.AST</code> nodes.</p>
 <h4 id="arguments">Arguments</h4>
 <ul>
@@ -2326,7 +2326,7 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="classanalyzervisit_assign">ClassAnalyzer().visit_Assign</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L98">Show source in class_analyzer.py:98</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L101">Show source in class_analyzer.py:101</a></p>
 <p>Parse info about class attribute statements.</p>
 <p>Adds new <code>ast.Assign</code> entry to <code>attribute_nodes</code>.
 Skips assignments to anything pther that a new variable.
@@ -2351,7 +2351,7 @@ Skips assignments with names starting with <code>_</code>.</p>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="classanalyzervisit_asyncfunctiondef">ClassAnalyzer().visit_AsyncFunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L80">Show source in class_analyzer.py:80</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L83">Show source in class_analyzer.py:83</a></p>
 <p>Parse info about class asynchronous method statements.</p>
 <p>Adds new <code>FunctionRecord</code> entry to <code>method_records</code>.</p>
 <h4 id="examples_1">Examples</h4>
@@ -2388,7 +2388,7 @@ Visits each node from <code>node.body</code> list to parse methods.</p>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="classanalyzervisit_functiondef">ClassAnalyzer().visit_FunctionDef</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L62">Show source in class_analyzer.py:62</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L65">Show source in class_analyzer.py:65</a></p>
 <p>Parse info about class method statements.</p>
 <p>Adds new <code>FunctionRecord</code> entry to <code>method_records</code>.</p>
 <h4 id="examples_3">Examples</h4>

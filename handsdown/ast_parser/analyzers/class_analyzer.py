@@ -48,13 +48,16 @@ class ClassAnalyzer(BaseAnalyzer):
     def _visit_FunctionDef(self, node: ASTFunctionDef) -> None:
         name = node.name
 
-        # skip private methods
-        if name.startswith("_") and not name.startswith("__"):
-            return
+        docstring = self.get_docstring(node)
+
+        # skip private methods with no docstrings
+        if name.startswith("_"):
+            if not name.startswith("__") and not docstring:
+                return
 
         # skip magic methods with no docstrings
-        if name != "__init__":
-            if name.startswith("__") and not ast.get_docstring(node, clean=False):
+        if name.startswith("__"):
+            if name != "__init__" and not docstring:
                 return
 
         self.method_nodes.append(node)

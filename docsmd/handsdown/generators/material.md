@@ -30,10 +30,6 @@ Get a tuple with pairs of template path to project path
 #### Signature
 
 ```python
-def get_external_configs_templates(self) -> Tuple[Tuple[NicePath, NicePath], ...]:
+def get_external_configs_templates(self) -> Tuple[Tuple[Path, Path], ...]:
     ...
 ```
-
-#### See also
-
-- [NicePath](../utils/nice_path.md#nicepath)
