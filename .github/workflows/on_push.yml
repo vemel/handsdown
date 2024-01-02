@@ -22,23 +22,18 @@ jobs:
           - version: "3.11"
             check-formatting: "true"
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python for Poetry
-        uses: actions/setup-python@v4
-        with:
-          python-version: "${{ matrix.version }}"
+      - uses: actions/checkout@v4
       - name: Install poetry
-        run: |
-          python -m pip install poetry pip
+        run: pipx install poetry
       - name: Set up Python
         id: python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "${{ matrix.version }}"
           cache: "poetry"
       - name: Set up Node.js
         id: node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
       - name: Install dependencies
@@ -62,54 +57,3 @@ jobs:
       - name: Test
         run: |
           poetry run pytest
-
-  update-docs:
-    name: Update docs
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: docs
-      - name: Setup git
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "github-actions"
-      - name: Reset branch to main
-        run: |
-          git fetch origin main:main
-          git reset --hard main
-          git rebase main
-      - name: Set up Python for Poetry
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-      - name: Install poetry
-        run: |
-          python -m pip install poetry pip
-      - name: Set up Python
-        id: python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-          cache: "poetry"
-      - name: Install dependencies
-        run: |
-          poetry install -n
-          poetry run pip install -r requirements.mkdocs.txt
-      - name: Build docs
-        run: |
-          poetry run handsdown --external `git config --get remote.origin.url` -o docsmd --cleanup --theme material --branch main
-      - name: Build html docs
-        run: |
-          rm -rf docs
-          poetry run mkdocs build
-      - name: Commit docs
-        run: |
-          git add docs docsmd
-          git commit -m "Update docs"
-          git push -f
-      - name: Update Read the docs
-        env:
-          TOKEN: ${{ secrets.RTD_TOKEN }}
-        run: |
-          curl -X POST -H "Authorization: Token ${TOKEN}" https://readthedocs.org/api/v3/projects/handsdown/versions/latest/builds/

@@ -1,21 +1,12 @@
 [tool.black]
 line-length = 100
 include = "(handsdown|tests)/.*\\.pyi?$"
-target-version = [
-    "py37",
-    "py38",
-    "py39",
-    "py310",
-    "py311",
-]
+target-version = ["py37", "py38", "py39", "py310", "py311"]
 
 [tool.isort]
 profile = "black"
 line_length = 100
-known_first_party = [
-    "handsdown",
-    "tests",
-]
+known_first_party = ["handsdown", "tests"]
 src_paths = []
 
 
@@ -52,13 +43,8 @@ classifiers = [
     "Typing :: Typed",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-packages = [
-    { include = "handsdown" },
-]
-include = [
-    "handsdown/py.typed",
-    "handsdown/templates/**/*.jinja2",
-]
+packages = [{ include = "handsdown" }]
+include = ["handsdown/py.typed", "handsdown/templates/**/*.jinja2"]
 
 [tool.poetry.scripts]
 handsdown = 'handsdown.main:main'
@@ -81,15 +67,12 @@ isort = { version = "*", python = ">=3.10" }
 black = { version = "*", python = ">=3.10" }
 mypy = { version = "*", python = ">=3.10" }
 flake8 = { version = "*", python = ">=3.10" }
-twine = { version = "*", python = ">=3.10" }
 pytest = { version = "*", python = ">=3.10" }
 pytest-cov = { version = "*", python = ">=3.10" }
 vulture = { version = "*", python = ">=3.10" }
 importlib-metadata = { version = "*", python = "<3.8" }
-rope = "*"
+rope = { version = "*", python = ">=3.10" }
 types-setuptools = "*"
-mkdocs = "*"
-mkdocs-material = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -105,19 +88,11 @@ exclude_lines = [
     "@overload",
 ]
 ignore_errors = true
-omit = [
-    "tests/*",
-]
+omit = ["tests/*"]
 
 [tool.pyright]
-include = [
-    "handsdown",
-]
-exclude = [
-    "**/__pycache__",
-    "tests",
-    "typestubs",
-]
+include = ["handsdown"]
+exclude = ["**/__pycache__", "tests", "typestubs"]
 reportMissingImports = true
 reportMissingTypeStubs = true
 reportMissingTypeArgument = "error"
