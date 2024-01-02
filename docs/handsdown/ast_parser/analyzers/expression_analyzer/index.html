@@ -4482,7 +4482,21 @@
 <p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/expression_analyzer.py#L13">Show source in expression_analyzer.py:13</a></p>
 <h4 id="attributes">Attributes</h4>
 <ul>
-<li><code>UNKNOWN</code> - dummy value to replace unknown nodes and operators: <code>'...'</code></li>
+<li>
+<p><code>UNKNOWN</code> - dummy value to replace unknown nodes and operators: '...'</p>
+</li>
+<li>
+<p><code>BINOP_SYMBOLS</code>: <code>Dict[Type[ast.AST], str]</code> - representation map for binary operators: {ast.Add: '+', ast.Sub: '-', ast.Mult: '<em>', ast.Div: '/', ast.Mod: '%', ast.Pow: '</em>*', ast.LShift: '&lt;&lt;', ast.RShift: '&gt;&gt;', ast.BitOr: '|', ast.BitXor: '^', ast.BitAnd: '&amp;', ast.FloorDiv: '//'}</p>
+</li>
+<li>
+<p><code>BOOLOP_SYMBOLS</code>: <code>Dict[Type[ast.AST], str]</code> - representation map for boolean operators: {ast.And: 'and', ast.Or: 'or'}</p>
+</li>
+<li>
+<p><code>CMPOP_SYMBOLS</code>: <code>Dict[Type[ast.AST], str]</code> - representation map for comparison operators: {ast.Eq: '==', ast.NotEq: '!=', ast.Lt: '&lt;', ast.LtE: '&lt;=', ast.Gt: '&gt;', ast.GtE: '&gt;=', ast.Is: 'is', ast.IsNot: 'is not', ast.In: 'in', ast.NotIn: 'not in'}</p>
+</li>
+<li>
+<p><code>UNARYOP_SYMBOLS</code>: <code>Dict[Type[ast.AST], str]</code> - representation map for unary operators: {ast.Invert: '~', ast.Not: 'not', ast.UAdd: '+', ast.USub: '-'}</p>
+</li>
 </ul>
 <p>AST analyzer for <code>ast.expr</code> records.</p>
 <p>Prepares <code>parts</code> for <code>NodeRecord.render</code> method.</p>

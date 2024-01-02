@@ -24,7 +24,7 @@ class ClassAnalyzer(BaseAnalyzer):
 
 ### ClassAnalyzer().generic_visit
 
-[Show source in class_analyzer.py:141](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L141)
+[Show source in class_analyzer.py:170](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L170)
 
 Do nothing for unknown `ast.AST` nodes.
 
@@ -36,6 +36,34 @@ Do nothing for unknown `ast.AST` nodes.
 
 ```python
 def generic_visit(self, node: ast.AST) -> None:
+    ...
+```
+
+### ClassAnalyzer().visit_AnnAssign
+
+[Show source in class_analyzer.py:141](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/class_analyzer.py#L141)
+
+Parse info about class annotated attribute statements.
+
+Adds new `ast.AnnAssign` entry to `attribute_nodes`.
+Skips assignments with names starting with `_`.
+
+#### Examples
+
+```python
+class MyClass:
+    my_attr: int
+    my_value: int = 5
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+#### Signature
+
+```python
+def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
     ...
 ```
 

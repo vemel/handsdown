@@ -18,7 +18,7 @@ Wrapper for an `ast.Assign` node of a module or class attribute.
 
 ```python
 class AttributeRecord(NodeRecord):
-    def __init__(self, node: ast.Assign) -> None:
+    def __init__(self, node: Union[ast.Assign, ast.AnnAssign]) -> None:
         ...
 ```
 
@@ -28,7 +28,7 @@ class AttributeRecord(NodeRecord):
 
 ### AttributeRecord().append_to
 
-[Show source in attribute_record.py:57](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L57)
+[Show source in attribute_record.py:69](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L69)
 
 Append AttributeRecord to NodeRecord.
 
@@ -45,7 +45,7 @@ def append_to(self, node_record: NodeRecord) -> None:
 
 ### AttributeRecord().related_names
 
-[Show source in attribute_record.py:29](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L29)
+[Show source in attribute_record.py:32](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L32)
 
 Set of related names.
 
@@ -59,7 +59,7 @@ def related_names(self) -> Set[str]:
 
 ### AttributeRecord().render
 
-[Show source in attribute_record.py:51](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L51)
+[Show source in attribute_record.py:55](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L55)
 
 Render attribute with docstring.
 

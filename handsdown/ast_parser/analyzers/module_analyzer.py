@@ -1,7 +1,7 @@
 """
 AST analyzer for `ast.Module` records.
 """
-from typing import List
+from typing import List, Union
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
@@ -18,7 +18,7 @@ class ModuleAnalyzer(BaseAnalyzer):
         self.all_names: List[str] = []
         self.import_nodes: List[ASTImport] = []
         self.function_nodes: List[ASTFunctionDef] = []
-        self.attribute_nodes: List[ast.Assign] = []
+        self.attribute_nodes: List[Union[ast.Assign, ast.AnnAssign]] = []
         self.class_nodes: List[ast.ClassDef] = []
 
     def visit_Import(self, node: ast.Import) -> None:
@@ -132,7 +132,7 @@ class ModuleAnalyzer(BaseAnalyzer):
         Parse info about module attribute statements.
 
         Adds new `ast.Assign` entry to `attribute_nodes`.
-        Skips assignments to anything pther that a new variable.
+        Skips assignments to anything other than a new variable.
         Skips multiple assignments.
         Skips assignments with names starting with `_`.
         Parses `__all__` and add all values to `all_names`
@@ -170,6 +170,34 @@ class ModuleAnalyzer(BaseAnalyzer):
                     if isinstance(value, bytes):
                         value = value.decode("utf-8")
                     self.all_names.append(value)
+
+        # skip private attributes
+        if name.startswith("_"):
+            return
+
+        self.attribute_nodes.append(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        """
+        Parse info about module attribute statements.
+
+        Adds new `ast.AnnAssign` entry to `attribute_nodes`.
+        Skips assignments with names starting with `_`.
+
+        Examples:
+            ```python
+            MY_MODULE_INT: int
+            MY_MODULE_ATTR: str = 'value'
+            ```
+
+        Arguments:
+            node -- AST node.
+        """
+        # skip complex assignments
+        if not isinstance(node.target, ast.Name):
+            return
+
+        name = node.target.id
 
         # skip private attributes
         if name.startswith("_"):

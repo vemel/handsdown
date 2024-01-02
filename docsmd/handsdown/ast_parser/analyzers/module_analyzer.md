@@ -22,6 +22,33 @@ class ModuleAnalyzer(BaseAnalyzer):
 
 - [BaseAnalyzer](./base_analyzer.md#baseanalyzer)
 
+### ModuleAnalyzer().visit_AnnAssign
+
+[Show source in module_analyzer.py:180](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L180)
+
+Parse info about module attribute statements.
+
+Adds new `ast.AnnAssign` entry to `attribute_nodes`.
+Skips assignments with names starting with `_`.
+
+#### Examples
+
+```python
+MY_MODULE_INT: int
+MY_MODULE_ATTR: str = 'value'
+```
+
+#### Arguments
+
+- `node` - AST node.
+
+#### Signature
+
+```python
+def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+    ...
+```
+
 ### ModuleAnalyzer().visit_Assign
 
 [Show source in module_analyzer.py:130](https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/analyzers/module_analyzer.py#L130)
@@ -29,7 +56,7 @@ class ModuleAnalyzer(BaseAnalyzer):
 Parse info about module attribute statements.
 
 Adds new `ast.Assign` entry to `attribute_nodes`.
-Skips assignments to anything pther that a new variable.
+Skips assignments to anything other than a new variable.
 Skips multiple assignments.
 Skips assignments with names starting with `_`.
 Parses `__all__` and add all values to `all_names`

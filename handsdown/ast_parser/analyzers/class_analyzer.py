@@ -1,7 +1,7 @@
 """
 AST analyzer for `ast.ClassDef` records.
 """
-from typing import List
+from typing import List, Union
 
 import handsdown.ast_parser.smart_ast as ast
 from handsdown.ast_parser.analyzers.base_analyzer import BaseAnalyzer
@@ -18,7 +18,7 @@ class ClassAnalyzer(BaseAnalyzer):
         self.base_nodes: List[ast.expr] = []
         self.decorator_nodes: List[ast.expr] = []
         self.method_nodes: List[ASTFunctionDef] = []
-        self.attribute_nodes: List[ast.Assign] = []
+        self.attribute_nodes: List[Union[ast.Assign, ast.AnnAssign]] = []
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         """
@@ -131,6 +131,35 @@ class ClassAnalyzer(BaseAnalyzer):
             return
 
         name = node.targets[0].id
+
+        # skip private attributes
+        if name.startswith("_"):
+            return
+
+        self.attribute_nodes.append(node)
+
+    def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
+        """
+        Parse info about class annotated attribute statements.
+
+        Adds new `ast.AnnAssign` entry to `attribute_nodes`.
+        Skips assignments with names starting with `_`.
+
+        Examples:
+            ```python
+            class MyClass:
+                my_attr: int
+                my_value: int = 5
+            ```
+
+        Arguments:
+            node -- AST node.
+        """
+        # skip complex assignments
+        if not isinstance(node.target, ast.Name):
+            return
+
+        name = node.target.id
 
         # skip private attributes
         if name.startswith("_"):

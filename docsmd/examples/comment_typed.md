@@ -24,7 +24,7 @@ class MyValue:
 
 #### Attributes
 
-- `two` - comment here: `2`
+- `two` - comment here: 2
 
 
 #### Signature

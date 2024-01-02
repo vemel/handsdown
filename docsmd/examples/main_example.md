@@ -7,7 +7,7 @@
 #### Attributes
 
 - `MODULE_NAME` - This is a comment-style documented global variable, so it is added to
-  `main_example` module attributes with this comment as a documentation for it: `'My Module'`
+  `main_example` module attributes with this comment as a documentation for it: 'My Module'
 
 
 ## MyClass
@@ -17,7 +17,7 @@
 #### Attributes
 
 - `STUFF_COUNT` - This is a comment-style documented class attribute, so it is added to
-  `main_example.MyClass` attributes with this comment as a documentation for it.: `3`
+  `main_example.MyClass` attributes with this comment as a documentation for it.: 3
 
 
 MyClass documentation here.

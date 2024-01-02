@@ -10,11 +10,11 @@
 
 #### Attributes
 
-- `INDEX_NAME` - Index filename: `'README.md'`
+- `INDEX_NAME` - Index filename: 'README.md'
 
-- `INDEX_TITLE` - Index title: `'Index'`
+- `INDEX_TITLE` - Index title: 'Index'
 
-- `insert_toc` - Whether to add ToC to generated module docs: `False`
+- `insert_toc` - Whether to add ToC to generated module docs: False
 
 
 Base documentation generator.

@@ -4,9 +4,29 @@
 
 > Auto-generated documentation for [examples.pyi_typed](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py) module.
 
+## Aasdas
+
+[Show source in pyi_typed.py:25](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L25)
+
+#### Attributes
+
+- `c`: `str` - This comment should also appear in the docs
+
+
+Test class.
+
+#### Signature
+
+```python
+class Aasdas:
+    ...
+```
+
+
+
 ## MyValue
 
-[Show source in pyi_typed.py:10](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L10)
+[Show source in pyi_typed.py:13](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L13)
 
 #### Signature
 
@@ -19,7 +39,7 @@ class MyValue:
 
 ## func
 
-[Show source in pyi_typed.py:14](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L14)
+[Show source in pyi_typed.py:17](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L17)
 
 #### Signature
 
@@ -34,14 +54,14 @@ def func(_list, _my_value_cls=MyValue, **_kwargs):
 
 
 
-## func_any
+## func_an
 
-[Show source in pyi_typed.py:18](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L18)
+[Show source in pyi_typed.py:21](https://github.com/vemel/handsdown/blob/main/examples/pyi_typed.py#L21)
 
 #### Signature
 
 ```python
-def func_any(_list, _my_value_cls=MyValue, **_kwargs):
+def func_an(_list, _my_value_cls=MyValue, **_kwargs):
     ...
 ```
 

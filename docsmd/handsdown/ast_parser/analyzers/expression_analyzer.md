@@ -10,7 +10,15 @@
 
 #### Attributes
 
-- `UNKNOWN` - dummy value to replace unknown nodes and operators: `'...'`
+- `UNKNOWN` - dummy value to replace unknown nodes and operators: '...'
+
+- `BINOP_SYMBOLS`: `Dict[Type[ast.AST], str]` - representation map for binary operators: {ast.Add: '+', ast.Sub: '-', ast.Mult: '*', ast.Div: '/', ast.Mod: '%', ast.Pow: '**', ast.LShift: '<<', ast.RShift: '>>', ast.BitOr: '|', ast.BitXor: '^', ast.BitAnd: '&', ast.FloorDiv: '//'}
+
+- `BOOLOP_SYMBOLS`: `Dict[Type[ast.AST], str]` - representation map for boolean operators: {ast.And: 'and', ast.Or: 'or'}
+
+- `CMPOP_SYMBOLS`: `Dict[Type[ast.AST], str]` - representation map for comparison operators: {ast.Eq: '==', ast.NotEq: '!=', ast.Lt: '<', ast.LtE: '<=', ast.Gt: '>', ast.GtE: '>=', ast.Is: 'is', ast.IsNot: 'is not', ast.In: 'in', ast.NotIn: 'not in'}
+
+- `UNARYOP_SYMBOLS`: `Dict[Type[ast.AST], str]` - representation map for unary operators: {ast.Invert: '~', ast.Not: 'not', ast.UAdd: '+', ast.USub: '-'}
 
 
 AST analyzer for `ast.expr` records.

@@ -9,6 +9,7 @@ from ast import (
     AST,
     Add,
     And,
+    AnnAssign,
     Assign,
     AsyncFunctionDef,
     Attribute,
@@ -238,6 +239,7 @@ def stub_with_ast27() -> None:
     globals()["YieldFrom"] = object
     globals()["AsyncFunctionDef"] = object
     globals()["Await"] = object
+    globals()["AnnAssign"] = object
 
 
 if os.environ.get("PYTHON_VER", "3") == "2":
@@ -247,6 +249,7 @@ __all__ = [
     "Add",
     "alias",
     "And",
+    "AnnAssign",
     "arg",
     "arguments",
     "Assign",

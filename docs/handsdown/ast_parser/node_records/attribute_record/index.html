@@ -2133,7 +2133,7 @@
 </ul>
 <h4 id="signature">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span> <span class="nc">AttributeRecord</span><span class="p">(</span><span class="n">NodeRecord</span><span class="p">):</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">ast</span><span class="o">.</span><span class="n">Assign</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ast</span><span class="o">.</span><span class="n">Assign</span><span class="p">,</span> <span class="n">ast</span><span class="o">.</span><span class="n">AnnAssign</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="o">...</span>
 </code></pre></div>
 <h4 id="see-also">See also</h4>
@@ -2141,7 +2141,7 @@
 <li><a href="../node_record/#noderecord">NodeRecord</a></li>
 </ul>
 <h3 id="attributerecordappend_to">AttributeRecord().append_to</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L57">Show source in attribute_record.py:57</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L69">Show source in attribute_record.py:69</a></p>
 <p>Append AttributeRecord to NodeRecord.</p>
 <h4 id="signature_1">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span> <span class="nf">append_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_record</span><span class="p">:</span> <span class="n">NodeRecord</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -2152,7 +2152,7 @@
 <li><a href="../node_record/#noderecord">NodeRecord</a></li>
 </ul>
 <h3 id="attributerecordrelated_names">AttributeRecord().related_names</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L29">Show source in attribute_record.py:29</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L32">Show source in attribute_record.py:32</a></p>
 <p>Set of related names.</p>
 <h4 id="signature_2">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@property</span>
@@ -2160,7 +2160,7 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="o">...</span>
 </code></pre></div>
 <h3 id="attributerecordrender">AttributeRecord().render</h3>
-<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L51">Show source in attribute_record.py:51</a></p>
+<p><a href="https://github.com/vemel/handsdown/blob/main/handsdown/ast_parser/node_records/attribute_record.py#L55">Show source in attribute_record.py:55</a></p>
 <p>Render attribute with docstring.</p>
 <h4 id="signature_3">Signature</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span> <span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

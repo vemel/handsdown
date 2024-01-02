@@ -227,7 +227,7 @@ class ModuleRecord(NodeRecord):
         Returns:
             A docstring as a string.
         """
-        assert isinstance(node_record.node, ast.Assign)
+        assert isinstance(node_record.node, (ast.Assign, ast.AnnAssign))
 
         result: List[str] = []
         start_index = node_record.node.lineno - 2

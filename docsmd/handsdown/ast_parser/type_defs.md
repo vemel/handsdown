@@ -6,12 +6,12 @@
 
 #### Attributes
 
-- `RenderExpr` - Ready for render expression: `Union[NodeRecord, str]`
+- `RenderExpr` - Ready for render expression: Union[NodeRecord, str]
 
-- `Node` - AST node or text: `Union[str, ast.AST]`
+- `Node` - AST node or text: Union[str, ast.AST]
 
-- `ASTIterable` - Iterable AST types: `Union[ast.List, ast.Set, ast.Tuple]`
+- `ASTIterable` - Iterable AST types: Union[ast.List, ast.Set, ast.Tuple]
 
-- `ASTImport` - AST import node: `Union[ast.Import, ast.ImportFrom]`
+- `ASTImport` - AST import node: Union[ast.Import, ast.ImportFrom]
 
-- `ASTFunctionDef` - AST import node: `Union[ast.FunctionDef, ast.AsyncFunctionDef]`
+- `ASTFunctionDef` - AST import node: Union[ast.FunctionDef, ast.AsyncFunctionDef]
