@@ -15,7 +15,7 @@ from handsdown.constants import ENCODING, EXCLUDE_EXPRS, PACKAGE_NAME, Theme
 try:
     import importlib.metadata as metadata  # type: ignore
 except ModuleNotFoundError:
-    import importlib_metadata as metadata
+    import importlib_metadata as metadata  # type: ignore
 
 
 @dataclass
