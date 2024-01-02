@@ -11,5 +11,3 @@ poetry run isort handsdown
 poetry run flake8 handsdown
 poetry run npx pyright
 poetry run pytest
-
-./scripts/update_docs.sh
