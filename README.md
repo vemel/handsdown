@@ -254,8 +254,8 @@ handsdown [-h] [--exclude [EXCLUDE ...]] [-i INPUT_PATH] [-f [FILES ...]]
 | Argument | Description | Default |
 |-|-|-|
 | `include` | Path expressions to include source files | |
-| `--exclude` | Path expressions to exclude source files | |
-| `-i` / `--input-path` | Path to project root folder | |
+| `--exclude` | Path expressions to exclude source files | `'build/*' 'tests/*' 'test/*' '*/__pycache__/*' '.*/*'` |
+| `-i` / `--input-path` | Path to project root folder | `<cwd>` |
 | `-f` / `--files` | List of source files to use for generation. If empty - all are used. | |
 | `-o` / `--output-path` | Path to output folder | `<cwd>/docs` |
 | `--external` | Build docs and config for external hosting, GitHub Pages or Read the Docs. Provide the project GitHub .../blob/main/ URL here. | |
@@ -263,13 +263,13 @@ handsdown [-h] [--exclude [EXCLUDE ...]] [-i INPUT_PATH] [-f [FILES ...]]
 | `--branch` | Main branch name | `main` |
 | `--toc-depth` | Maximum depth of child modules ToC | `3` |
 | `--cleanup` | Remove orphaned auto-generated docs | |
-| `-n` / `--name` | Project name | `<cwd>` |
+| `-n` / `--name` | Project name | `<cwd>.name` |
 | `-e` / `--encoding` | Input and output file encoding | `utf-8` |
 | `--panic` | Panic and die on import error | |
 | `--debug` | Show debug messages| |
 | `--quiet` | Hide log output | |
 | `--create-configs` | Create config files for deployment to RtD and GitHub Pages | |
-| `-t` / `--theme` | Output mkdocs theme | `readthedocs` |
+| `-t` / `--theme` | Output mkdocs theme: `readthedocs` or `material` | `readthedocs` |
 | `-h` | Show help | |
 
 

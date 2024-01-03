@@ -22,7 +22,7 @@ jobs:
           poetry install -n
       - name: Python 3 check
         run: |
-          PYTHON_VER=3 poetry run handsdown -i examples -o docs_examples -d --panic --exclude 'py2.py'
+          PYTHON_VER=3 poetry run handsdown -i examples -o docs_examples -d --exclude 'py2.py' --panic
       - name: Python 2 check
         run: |
           PYTHON_VER=2 poetry run handsdown -i examples -o docs_examples --exclude -d '*/py2.py' --panic
