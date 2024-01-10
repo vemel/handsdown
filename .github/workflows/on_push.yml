@@ -34,9 +34,6 @@ jobs:
         run: |
           poetry install -n
           poetry run pip install flake8 pytest
-      - name: Install Node.js dependencies
-        run: |
-          npm install -g pyright
       - name: Code style
         if: ${{ matrix.check-formatting }}
         run: |
