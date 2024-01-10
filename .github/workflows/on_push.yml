@@ -30,11 +30,6 @@ jobs:
         with:
           python-version: "${{ matrix.version }}"
           cache: "poetry"
-      - name: Set up Node.js
-        id: node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
       - name: Install dependencies
         run: |
           poetry install -n
@@ -50,9 +45,9 @@ jobs:
       - name: Lint
         run: |
           poetry run flake8 handsdown
+      - run: echo "$(poetry env info --path)/bin" >> $GITHUB_PATH
       - name: Typing
-        run: |
-          poetry run npx pyright
+        uses: jakebailey/pyright-action@v1
       - name: Test
         run: |
           poetry run pytest
