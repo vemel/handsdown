@@ -63,9 +63,9 @@ class TestPathFinder:
             temp_dir.joinpath("exclude/file.py").touch()
 
             path_finder = PathFinder(temp_dir)
-            assert list(path_finder.glob("*/*.py")) == [
-                temp_dir.joinpath("include/file.py"),
+            assert list(sorted(path_finder.glob("*/*.py"))) == [
                 temp_dir.joinpath("exclude/file.py"),
+                temp_dir.joinpath("include/file.py"),
             ]
             path_finder.exclude_exprs = ["exclude/*"]
             assert list(path_finder.glob("*/*.py")) == [temp_dir.joinpath("include/file.py")]
