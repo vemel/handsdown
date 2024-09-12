@@ -1,5 +1,7 @@
 # {{ module_record.title }}
 
+{{ module_record.docstring }}
+
 [{{ generator.md_index.title }}]({{ md_document.get_doc_link(generator.md_index.path) }}#{{ md_document.get_anchor(generator.md_index.title) }}) /{{ ' ' -}}
 {% for parent_import_string in module_record.import_string.get_parents() -%}
     {% set parent_module_record = generator.module_records.find_module_record(parent_import_string) -%}
