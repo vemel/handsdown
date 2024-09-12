@@ -20,8 +20,8 @@
 
 {% if module_record.get_documented_attribute_strings() -%}
 #### Attributes
-{% for attrubute in module_record.get_documented_attribute_strings() -%}
-{{ "\n- " }}{{ attrubute }}
+{% for attribute in module_record.get_documented_attribute_strings() -%}
+{{ "\n- " }}{{ attribute }}
 {% endfor -%}
 {{ "\n\n" -}}
 {% endif -%}
