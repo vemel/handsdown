@@ -1,6 +1,7 @@
 """
 Markdown file builder.
 """
+
 import re
 import traceback
 from pathlib import Path
@@ -86,7 +87,7 @@ class MDDocument:
     @property
     def source_file_name(self) -> str:
         """
-        Source cide file name.
+        Source code file name.
         """
         return self.source_code_url.split("/")[-1]
 
