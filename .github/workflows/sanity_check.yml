@@ -20,9 +20,6 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install -n
-      - name: Python 3 check
+      - name: Parser sanity check
         run: |
-          PYTHON_VER=3 poetry run handsdown -i examples -o docs_examples -d --exclude 'py2.py' --panic
-      - name: Python 2 check
-        run: |
-          PYTHON_VER=2 poetry run handsdown -i examples -o docs_examples --exclude -d '*/py2.py' --panic
+          poetry run handsdown -i examples -o docs_examples -d --exclude 'py2.py' --panic

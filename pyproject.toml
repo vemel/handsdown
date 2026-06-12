@@ -1,7 +1,7 @@
 [tool.black]
 line-length = 100
 include = "(handsdown|tests)/.*\\.pyi?$"
-target-version = ["py37", "py38", "py39", "py310", "py311"]
+target-version = ["py38", "py39", "py310", "py311", "py312", "py313", "py314"]
 
 [tool.isort]
 profile = "black"
@@ -31,7 +31,6 @@ classifiers = [
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -55,9 +54,8 @@ handsdown = 'handsdown.main:main'
 "Bug Tracker" = "https://github.com/vemel/handsdown/issues"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = ">=3.8"
 pip = "*"
-typed-ast = "*"
 importlib-resources = "*"
 jinja2 = "*"
 black = "*"
@@ -99,4 +97,4 @@ reportMissingTypeArgument = "error"
 reportIncompatibleMethodOverride = "error"
 reportIncompatibleVariableOverride = "error"
 reportUnknownParameterType = "error"
-pythonVersion = "3.7"
+pythonVersion = "3.8"

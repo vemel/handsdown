@@ -25,6 +25,5 @@ RUN python -m pip install --no-cache-dir .
 
 WORKDIR /app
 
-ENV PYTHON_VER "3"
 
 ENTRYPOINT ["handsdown"]

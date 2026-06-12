@@ -92,11 +92,11 @@ class TestModuleAnalyzer:
         target.id = "__all__"
         node.targets = [target]
         name_1 = MagicMock()
-        name_1.mock_add_spec(ast.Str)
-        name_1.s = "MyClass"
+        name_1.mock_add_spec(ast.Constant)
+        name_1.value = "MyClass"
         name_2 = MagicMock()
-        name_2.mock_add_spec(ast.Str)
-        name_2.s = b"my_func"
+        name_2.mock_add_spec(ast.Constant)
+        name_2.value = b"my_func"
         value = MagicMock()
         value.mock_add_spec(ast.List)
         value.elts = [name_1, name_2, "not_name"]

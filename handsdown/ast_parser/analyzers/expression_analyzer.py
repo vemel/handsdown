@@ -66,6 +66,21 @@ class ExpressionAnalyzer(BaseAnalyzer):
         ast.USub: "-",
     }
 
+    def _append_constant(self, value: object) -> None:
+        if value is Ellipsis:
+            self.parts.append("...")
+            return
+        if isinstance(value, str):
+            self.parts.append(repr(value))
+            return
+        self.parts.append(repr(value))
+
+    def visit_Constant(self, node: ast.Constant) -> None:
+        """
+        Parse info from `ast.Constant` node and put it to `parts`.
+        """
+        self._append_constant(node.value)
+
     def visit_Str(self, node: ast.Str) -> None:
         """
         Parse info from `ast.Str` node and put it to `parts`.
@@ -77,10 +92,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        value = node.s
-        if isinstance(value, bytes):
-            value = value.decode(ENCODING)
-        self.parts.append(repr(value))
+        self.visit_Constant(node)  # pragma: no cover
 
     def visit_Bytes(self, node: ast.Bytes) -> None:
         """
@@ -93,8 +105,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        value = node.s
-        self.parts.append(repr(value))
+        self.visit_Constant(node)  # pragma: no cover
 
     def visit_Num(self, node: ast.Num) -> None:
         """
@@ -108,8 +119,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        value = node.n
-        self.parts.append(repr(value))
+        self.visit_Constant(node)  # pragma: no cover
 
     def visit_Name(self, node: ast.Name) -> None:
         """
@@ -137,7 +147,7 @@ class ExpressionAnalyzer(BaseAnalyzer):
         Arguments:
             node -- AST node.
         """
-        self.parts.append(repr(node.value))
+        self.visit_Constant(node)  # pragma: no cover
 
     def visit_Subscript(self, node: ast.Subscript) -> None:
         """
@@ -572,8 +582,8 @@ class ExpressionAnalyzer(BaseAnalyzer):
         """
         self.parts.append("f'")
         for value in node.values:
-            if isinstance(value, (ast.Str, ast.Constant)):
-                str_value = value.s
+            if isinstance(value, ast.Constant) and isinstance(value.value, (str, bytes)):
+                str_value = value.value
                 if isinstance(str_value, bytes):
                     str_value = str_value.decode(ENCODING)
                 self.parts.append(str_value)
