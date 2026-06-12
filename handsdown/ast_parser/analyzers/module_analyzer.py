@@ -165,8 +165,8 @@ class ModuleAnalyzer(BaseAnalyzer):
         # gather public names from `__all__` directive
         if name == "__all__" and isinstance(node.value, (ast.List, ast.Tuple, ast.Set)):
             for element in node.value.elts:
-                if isinstance(element, (ast.Str, ast.Constant)):
-                    value = element.s
+                if isinstance(element, ast.Constant) and isinstance(element.value, (str, bytes)):
+                    value = element.value
                     if isinstance(value, bytes):
                         value = value.decode("utf-8")
                     self.all_names.append(value)

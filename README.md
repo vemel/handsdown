@@ -125,11 +125,8 @@ docker tag ghcr.io/vemel/handsdown/handsdown:latest handsdown
 - Generate docs for `ProjectName` in current directory
 
 ```bash
-# for Python 3 project
 docker run -v `pwd`:/app handsdown -n ProjectName
 
-# for Python 2 project
-PYTHON_VER=2 docker run -v `pwd`:/app handsdown -n ProjectName
 
 # generate documentation for deployment
 docker run -v `pwd`:/app handsdown --external `git config --get remote.origin.url` -n ProjectName --create-configs

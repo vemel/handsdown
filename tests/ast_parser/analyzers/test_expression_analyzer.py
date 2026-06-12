@@ -9,30 +9,21 @@ class TestExpressionAnalyzer:
         analyzer = ExpressionAnalyzer()
         assert analyzer.parts == []
 
-    def test_visit_Str(self):
+    def test_visit_Constant(self):
         node = MagicMock()
-        node.s = "value"
+        node.value = "value"
         analyzer = ExpressionAnalyzer()
-        assert analyzer.visit_Str(node) is None
+        assert analyzer.visit_Constant(node) is None
         assert analyzer.parts == ["'value'"]
 
-        node.s = b"value"
+        node.value = b"value"
         analyzer = ExpressionAnalyzer()
-        assert analyzer.visit_Str(node) is None
-        assert analyzer.parts == ["'value'"]
-
-    def test_visit_Bytes(self):
-        node = MagicMock()
-        node.s = b"value"
-        analyzer = ExpressionAnalyzer()
-        assert analyzer.visit_Bytes(node) is None
+        assert analyzer.visit_Constant(node) is None
         assert analyzer.parts == ["b'value'"]
 
-    def test_visit_Num(self):
-        node = MagicMock()
-        node.n = 123.456
+        node.value = 123.456
         analyzer = ExpressionAnalyzer()
-        assert analyzer.visit_Num(node) is None
+        assert analyzer.visit_Constant(node) is None
         assert analyzer.parts == ["123.456"]
 
     def test_visit_Name(self):
@@ -331,11 +322,11 @@ class TestExpressionAnalyzer:
     def test_visit_JoinedStr(self):
         node = MagicMock()
         node_value = MagicMock()
-        node_value.mock_add_spec(ast.Str)
-        node_value.s = "node_value"
+        node_value.mock_add_spec(ast.Constant)
+        node_value.value = "node_value"
         node_value_2 = MagicMock()
-        node_value_2.s = b"node_value_2"
-        node_value_2.mock_add_spec(ast.Str)
+        node_value_2.value = b"node_value_2"
+        node_value_2.mock_add_spec(ast.Constant)
         node_value_3 = "not_str"
         node.values = [node_value, node_value_2, node_value_3]
 
